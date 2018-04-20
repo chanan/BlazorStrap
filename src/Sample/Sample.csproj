@@ -14,6 +14,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <BlazorGenerate Remove="Pages\Layout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Layout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Layout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
   </ItemGroup>
 

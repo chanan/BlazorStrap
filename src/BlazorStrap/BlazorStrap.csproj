@@ -8,16 +8,39 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- .js/.css files will be referenced via <script>/<link> tags; other content files will just be included in the app's 'dist' directory without any tags referencing them -->
-    <EmbeddedResource Include="content\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
-    <EmbeddedResource Include="content\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
-    <EmbeddedResource Include="content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.0-preview2-final" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Container.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Container.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Col.cshtml" />
+    <None Include="Container.cshtml" />
+    <None Include="Row.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Row.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Row.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Col.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Col.cshtml" />
   </ItemGroup>
 
 </Project>

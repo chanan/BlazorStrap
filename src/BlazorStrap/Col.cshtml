@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<div class="@className">
+    @ChildContent
+</div>
+
+@functions {
+    private string className
+    {
+        get
+        {
+            return "col";
+        }
+    }
+
+    public RenderFragment ChildContent { get; set; }
+    }
