@@ -2,12 +2,10 @@
 
 Port of https://reactstrap.github.io to Blazor
 
-## Done:
-Container
-Row
+**Note:** Currently Col will not work correctly due to an issue in Blazor: https://github.com/aspnet/Blazor/issues/643. This will be fixed in the next version of Blazor.
 
-## In Progress 
-Col
+## Done:
+ * Layout (Container, Row, Col)
 
 ## Not Done
 

@@ -1,14 +1,22 @@
 ﻿@addTagHelper *, BlazorStrap
 @page "/layout"
 
-<Container>
+
     <Row>
-        <Col>This is 1</Col>
+        <Col XSOrder="last">This is 1</Col>
         <Col>This is 2</Col>
     </Row>
-    <Row NoGutters=true>
-        <Col>This is 1</Col>
-        <Col>This is 2</Col>
+    <Row>
+        <Col XS="1">This is 1</Col>
+        <Col XS="auto">This is 2</Col>
     </Row>
-</Container>
+    <Row>
+        <Col XS="6">This is 1</Col>
+        <Col XS="6">This is 2</Col>
+    </Row>
+    <Row>
+        <Col LG="6">This is 1</Col>
+        <Col LG="6">This is 2</Col>
+    </Row>
+
 
