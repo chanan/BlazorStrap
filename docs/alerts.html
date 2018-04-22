@@ -1,0 +1,294 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blazor Strap - Alerts</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+    <link href="site.css" rel="stylesheet">
+</head>
+
+<body>
+  <main role="main" class="container">
+      <blazor-component>
+          <h1>Alerts</h1>
+          
+          <div class="docs-example">
+              <blazor-component>
+              <div role="alert" class="alert alert-primary">
+                  
+                  This is a primary alert — check it out!
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-secondary">
+                  
+                  This is a secondary alert — check it out!
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-success">
+                  
+                  This is a success alert — check it out!
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-danger">
+                  
+                  This is a danger alert — check it out!
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-warning">
+                  
+                  This is a warning alert — check it out!
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-info">
+                  
+                  This is a info alert — check it out!
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-light">
+                  
+                  This is a light alert — check it out!
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-dark">
+                  
+                  This is a dark alert — check it out!
+              
+              </div>
+          
+          </blazor-component>
+          </div>
+          
+          <pre style="background:#000;color:#f8f8f8"><span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Primary</span>&gt;</span>
+                  This is a primary alert — check it out!
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Secondary</span>&gt;</span>
+                  This is a secondary alert — check it out!
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Success</span>&gt;</span>
+                  This is a success alert — check it out!
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Danger</span>&gt;</span>
+                  This is a danger alert — check it out!
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Warning</span>&gt;</span>
+                  This is a warning alert — check it out!
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Info</span>&gt;</span>
+                  This is a info alert — check it out!
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Light</span>&gt;</span>
+                  This is a light alert — check it out!
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Dark</span>&gt;</span>
+                  This is a dark alert — check it out!
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          </pre>
+          
+          <h4>Properties</h4>
+          
+          <table class="table table-striped table-bordered">
+              <thead>
+                  <tr>
+                      <th>Property</th>
+                      <th>Type</th>
+                      <th>Description</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>Color</td>
+                      <td>Color enum</td>
+                      <td>Applies the selected color to the alert</td>
+                  </tr>
+                  <tr>
+                      <td>IsDismissible</td>
+                      <td>bool</td>
+                      <td>Adds the ability to dismiss the alert</td>
+                  </tr>
+              </tbody>
+          </table>
+          
+          
+          <h4>Link color</h4>
+          <div class="docs-example">
+              <blazor-component>
+              <div role="alert" class="alert alert-primary">
+                  
+                  This is a primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-secondary">
+                  
+                  This is a secondary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-success">
+                  
+                  This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-danger">
+                  
+                  This is a danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-warning">
+                  
+                  This is a warning alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-info">
+                  
+                  This is a info alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-light">
+                  
+                  This is a light alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+              
+              </div>
+          
+          </blazor-component>
+              <blazor-component>
+              <div role="alert" class="alert alert-dark">
+                  
+                  This is a dark alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+              
+              </div>
+          
+          </blazor-component>
+          </div>
+          <pre style="background:#000;color:#f8f8f8"><span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Primary</span>&gt;</span>
+                  This is a primary alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>&gt;</span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>&gt;</span>. Give it a click if you like.
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Secondary</span>&gt;</span>
+                  This is a secondary alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>&gt;</span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>&gt;</span>. Give it a click if you like.
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Success</span>&gt;</span>
+                  This is a success alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>&gt;</span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>&gt;</span>. Give it a click if you like.
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Danger</span>&gt;</span>
+                  This is a danger alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>&gt;</span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>&gt;</span>. Give it a click if you like.
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Warning</span>&gt;</span>
+                  This is a warning alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>&gt;</span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>&gt;</span>. Give it a click if you like.
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Info</span>&gt;</span>
+                  This is a info alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>&gt;</span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>&gt;</span>. Give it a click if you like.
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Light</span>&gt;</span>
+                  This is a light alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>&gt;</span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>&gt;</span>. Give it a click if you like.
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Dark</span>&gt;</span>
+                  This is a dark alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>&gt;</span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>&gt;</span>. Give it a click if you like.
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          </pre>
+          
+          <h4>Additional content</h4>
+          
+          <div class="docs-example">
+              <blazor-component>
+              <div role="alert" class="alert alert-success">
+                  
+                  <h4 classname="alert-heading">Well done!</h4>
+                  <p>
+                      Aww yeah, you successfully read this important alert message. This example text is going
+                      to run a bit longer so that you can see how spacing within an alert works with this kind
+                      of content.
+                  </p>
+                  <hr>
+                  <p classname="mb-0">
+                      Whenever you need to, be sure to use margin utilities to keep things nice and tidy.
+                  </p>
+              
+              </div>
+          
+          </blazor-component>
+          </div>
+          <pre style="background:#000;color:#f8f8f8"><span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Success</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">h4</span> <span style="color:#89bdff">className</span>=<span style="color:#65b042">"alert-heading"</span>&gt;</span>Well done!<span style="color:#89bdff">&lt;/<span style="color:#89bdff">h4</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">p</span>&gt;</span>
+                      Aww yeah, you successfully read this important alert message. This example text is going
+                      to run a bit longer so that you can see how spacing within an alert works with this kind
+                      of content.
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">p</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">hr</span> /&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">p</span> <span style="color:#89bdff">className</span>=<span style="color:#65b042">"mb-0"</span>&gt;</span>
+                      Whenever you need to, be sure to use margin utilities to keep things nice and tidy.
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">p</span>&gt;</span>
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          </pre>
+          
+          <h4>Dismissing</h4>
+          
+          <div class="docs-example">
+              <blazor-component>
+              <div role="alert" class="alert alert-info">
+                  
+                  I am an alert and I can be dismissed!
+              
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                      </button>
+              </div>
+          
+          </blazor-component>
+          </div>
+          
+          <pre style="background:#000;color:#f8f8f8"><span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Info</span> <span style="color:#89bdff">IsDismissible</span>=<span style="color:#65b042">true</span>&gt;</span>
+                  I am an alert and I can be dismissed!
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>&gt;</span>
+          </pre>
+          
+          
+          </blazor-component>
+  </main>
+</body>
+</html>

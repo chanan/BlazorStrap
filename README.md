@@ -9,6 +9,7 @@ https://chanan.github.io/BlazorStrap/
 
 ## Done:
  * Layout (Container, Row, Col)
+ * Alerts
 
 ## Not Done
 

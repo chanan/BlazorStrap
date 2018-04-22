@@ -22,11 +22,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\Alerts.cshtml" />
     <None Include="Pages\Layout.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Alerts.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Alerts.cshtml" />
   </ItemGroup>
 
 </Project>

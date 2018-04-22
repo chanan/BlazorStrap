@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Alert.cshtml" />
     <None Include="Col.cshtml" />
     <None Include="Container.cshtml" />
     <None Include="Row.cshtml" />
@@ -49,6 +50,14 @@
 
   <ItemGroup>
     <Content Remove="Col.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Alert.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Alert.cshtml" />
   </ItemGroup>
 
 </Project>
