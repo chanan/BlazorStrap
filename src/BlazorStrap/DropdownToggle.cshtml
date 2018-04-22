@@ -1,0 +1,10 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+<button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    @ChildContent
+</button>
+
+@functions {
+    public RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,20 @@
+﻿@addTagHelper *, BlazorStrap
+@page "/dropdowns"
+
+<h1>Dropdowns</h1>
+
+<Alert Color=Color.Info>
+    Dropdown menu won't work right without the concept of context. See: <a href="https://github.com/aspnet/Blazor/issues/650">https://github.com/aspnet/Blazor/issues/650</a>
+</Alert>
+
+<div class="docs-example">
+    <Dropdown>
+        <DropdownToggle>Dropdown</DropdownToggle>
+        <DropdownMenu>
+            <DropdownItem Href="#">Header</DropdownItem>
+            <DropdownItem Href="#">Action</DropdownItem>
+            <DropdownItem Href="#">Another Action</DropdownItem>
+            <DropdownItem Href="#">Yet Another Action</DropdownItem>
+        </DropdownMenu>
+    </Dropdown>
+</div>

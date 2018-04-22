@@ -17,6 +17,7 @@ https://chanan.github.io/BlazorStrap/
 ## Not Done
 
 * ButtonGroup, Checkboxes and Radio buttons
+* Dropdowns - https://github.com/aspnet/Blazor/issues/650
 * Standard way to add classes to the elements
 * Standard way to add styles to an element
 * Everything else...

@@ -26,6 +26,7 @@
     <None Include="Pages\Alerts.cshtml" />
     <None Include="Pages\Badges.cshtml" />
     <None Include="Pages\Breadcrumbs.cshtml" />
+    <None Include="Pages\Dropdowns.cshtml" />
     <None Include="Pages\Layout.cshtml" />
   </ItemGroup>
 
@@ -59,6 +60,14 @@
 
   <ItemGroup>
     <Content Remove="Buttons.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Dropdowns.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Dropdowns.cshtml" />
   </ItemGroup>
 
 </Project>

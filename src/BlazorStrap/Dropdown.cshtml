@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+<div class="dropdown">
+    @ChildContent
+</div>
+
+@functions {
+    public bool IsOpen { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}

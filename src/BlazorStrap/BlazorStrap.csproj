@@ -38,6 +38,10 @@
     <None Include="ButtonGroup.cshtml" />
     <None Include="Col.cshtml" />
     <None Include="Container.cshtml" />
+    <None Include="Dropdown.cshtml" />
+    <None Include="DropdownItem.cshtml" />
+    <None Include="DropdownMenu.cshtml" />
+    <None Include="DropdownToggle.cshtml" />
     <None Include="Row.cshtml" />
   </ItemGroup>
 
@@ -99,6 +103,38 @@
 
   <ItemGroup>
     <Content Remove="ButtonGroup.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Dropdown.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Dropdown.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="DropdownToggle.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="DropdownToggle.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="DropdownMenu.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="DropdownMenu.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="DropdownItem.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="DropdownItem.cshtml" />
   </ItemGroup>
 
 </Project>

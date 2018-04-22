@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+<a class="dropdown-item" href="@Href">
+   @ChildContent
+</a>
+
+@functions {
+    public string Href { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}
