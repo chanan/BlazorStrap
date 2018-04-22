@@ -4,6 +4,7 @@ namespace BlazorStrap
 {
     public enum Color
     {
+        None,
         [Description("primary")]
         Primary,
         [Description("secondary")]

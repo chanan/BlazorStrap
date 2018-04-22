@@ -1,17 +1,47 @@
 ﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
 
-<li class="@classname">
-    @ChildContent
-</li>
+@if (ListGroupType == ListGroupType.Button)
+{
+    <button type="button" onclick="@_onclick" class="@classname" disabled="@IsDisabled">
+        @ChildContent
+    </button>
+}
+@if (ListGroupType == ListGroupType.Link)
+{
+    <a href="@Href" onclick="@_onclick" class="@classname">
+        @ChildContent
+    </a>
+}
+@if (ListGroupType == ListGroupType.List)
+{
+    <li onclick="@_onclick" class="@classname">
+        @ChildContent
+    </li>
+}
+
 
 @functions {
     private string classname
     {
         get
         {
-            return IsActive ? "list-group-item active" : "list-group-item";
+            var disabled = IsDisabled && ListGroupType != ListGroupType.Button ? "disabled" : null;
+            var active = IsActive ? "active" : null;
+            var action = ListGroupType == ListGroupType.Button || ListGroupType == ListGroupType.Link ? "list-group-item-action" : null;
+            var color = Color != Color.None ? $"list-group-item-{Color.ToDescriptionString()}" : null;
+            return $"list-group-item {color} {action} {active} {disabled}";
         }
     }
     public bool IsActive { get; set; }
+    public bool IsDisabled { get; set; }
+    public ListGroupType ListGroupType { get; set; } = ListGroupType.List;
+    public string Href { get; set; }
+    public Action<UIMouseEventArgs> OnClick { get; set; }
+    public Color Color { get; set; } = Color.None;
     public RenderFragment ChildContent { get; set; }
+    private void _onclick(UIMouseEventArgs e)
+    {
+        if (OnClick != null) OnClick(e);
+    }
 }

@@ -45,6 +45,8 @@
     <None Include="Jumbotron.cshtml" />
     <None Include="ListGroup.cshtml" />
     <None Include="ListGroupItem.cshtml" />
+    <None Include="ListGroupItemHeading.cshtml" />
+    <None Include="ListGroupItemText.cshtml" />
     <None Include="Row.cshtml" />
   </ItemGroup>
 
@@ -162,6 +164,22 @@
 
   <ItemGroup>
     <Content Remove="ListGroupItem.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="ListGroupItemHeading.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="ListGroupItemHeading.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="ListGroupItemText.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="ListGroupItemText.cshtml" />
   </ItemGroup>
 
 </Project>
