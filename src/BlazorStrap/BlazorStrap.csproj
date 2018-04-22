@@ -10,7 +10,7 @@
     <Authors>Chanan Braunstein</Authors>
     <Title>Blazor BootStrap</Title>
     <Description>A bootstrap4 component library for Blazor</Description>
-    <PackageProjectUrl>https://github.com/chanan/BlazorStrap</PackageProjectUrl>
+    <PackageProjectUrl>https://chanan.github.io/BlazorStrap/</PackageProjectUrl>
     <PackageTags>blazor;bootstrap;bootstrap4</PackageTags>
     <RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
   </PropertyGroup>
