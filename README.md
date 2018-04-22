@@ -8,8 +8,9 @@ Port of https://reactstrap.github.io to Blazor
 https://chanan.github.io/BlazorStrap/
 
 ## Done:
- * Layout (Container, Row, Col)
  * Alerts
+ * Badges
+ * Layout (Container, Row, Col)
 
 ## Not Done
 

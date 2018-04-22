@@ -6,7 +6,7 @@
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <PackageId>BlazorStrap</PackageId>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <Authors>Chanan Braunstein</Authors>
     <Title>Blazor BootStrap</Title>
     <Description>A bootstrap4 component library for Blazor</Description>
@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <None Include="Alert.cshtml" />
+    <None Include="Badge.cshtml" />
     <None Include="Col.cshtml" />
     <None Include="Container.cshtml" />
     <None Include="Row.cshtml" />
@@ -58,6 +59,14 @@
 
   <ItemGroup>
     <Content Remove="Alert.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Badge.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Badge.cshtml" />
   </ItemGroup>
 
 </Project>

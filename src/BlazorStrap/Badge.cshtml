@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+@if (Href == null)
+{
+    <span class="@className">
+        @ChildContent
+    </span>
+}
+@if (Href != null)
+{
+    <a href="@Href" class="@className">
+        @ChildContent
+    </a>
+}
+
+
+@functions {
+private string className
+{
+    get
+    {
+        var pill = IsPill ? "badge-pill" : "";
+        return $"badge {pill} badge-{Color.ToDescriptionString()}";
+    }
+}
+
+public Color Color { get; set; } = Color.Primary;
+public bool IsPill { get; set; }
+public string Href { get; set; }
+public RenderFragment ChildContent { get; set; }
+}
