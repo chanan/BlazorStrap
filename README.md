@@ -11,8 +11,12 @@ https://chanan.github.io/BlazorStrap/
  * Alerts
  * Badges
  * Breadcrumbs
+ * Buttons (excluding ButtonGroup, Checkboxes and Radio buttons)
  * Layout (Container, Row, Col)
 
 ## Not Done
 
-Everything else
+* ButtonGroup, Checkboxes and Radio buttons
+* Standard way to add classes to the elements
+* Standard way to add styles to an element
+* Everything else...

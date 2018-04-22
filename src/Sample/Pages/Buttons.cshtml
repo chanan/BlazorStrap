@@ -1,0 +1,151 @@
+﻿@addTagHelper *, BlazorStrap
+@page "/buttons"
+
+<Alert Color=Color.Info>
+    Currently Blazor doesnt allow for components to be named the same name as html elements.
+    See: <a class="alert-link" href="https://github.com/aspnet/Blazor/issues/647">https://github.com/aspnet/Blazor/issues/647</a>. Therefore the component is currently named <strong>BlazorButton</strong>.
+</Alert>
+
+<div class="docs-example">
+    <BlazorButton Color=Color.Primary>primary</BlazorButton>
+    <BlazorButton Color=Color.Secondary>secondary</BlazorButton>
+    <BlazorButton Color=Color.Success>success</BlazorButton>
+    <BlazorButton Color=Color.Info>info</BlazorButton>
+    <BlazorButton Color=Color.Warning>warning</BlazorButton>
+    <BlazorButton Color=Color.Danger>danger</BlazorButton>
+    <BlazorButton Color=Color.Light>light</BlazorButton>
+    <BlazorButton Color=Color.Dark>dark</BlazorButton>
+    <BlazorButton Color=Color.Link>link</BlazorButton>
+</div>
+
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Primary</span>></span>primary<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Secondary</span>></span>secondary<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Success</span>></span>success<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Info</span>></span>info<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Warning</span>></span>warning<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Danger</span>></span>danger<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Light</span>></span>light<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Dark</span>></span>Dark<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+</pre>
+
+<h3>Supplying on Click Handler</h3>
+<BlazorButton OnClick="@onclick">Click Me</BlazorButton>
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"<span>@@</span>onclick"</span>></span>Click Me<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span>@@</span>functions {
+    void onclick(UIMouseEventArgs e)
+    {
+        Console.WriteLine(<span style="color:#65b042">"Button was clicked!"</span>);
+    }
+}
+</pre>
+
+<h3>Button tags</h3>
+
+<div class="docs-example">
+    <BlazorButton ButtonType=ButtonType.Link Href="#">Link</BlazorButton>
+    <BlazorButton ButtonType=ButtonType.Button>Button</BlazorButton>
+    <BlazorButton ButtonType=ButtonType.Input Value="Input" />
+    <BlazorButton ButtonType=ButtonType.Submit Value="Submit" />
+    <BlazorButton ButtonType=ButtonType.Reset Value="Reset" />
+</div>
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">ButtonType</span>.<span style="color:#65b042">Link</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">ButtonType</span>.<span style="color:#65b042">Button</span>></span>Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">ButtonType</span>.<span style="color:#65b042">Input</span> <span style="color:#89bdff">Value</span>=<span style="color:#65b042">"Input"</span> /></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">ButtonType</span>.<span style="color:#65b042">Submit</span> <span style="color:#89bdff">Value</span>=<span style="color:#65b042">"Submit"</span> /></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">ButtonType</span>.<span style="color:#65b042">Reset</span> <span style="color:#89bdff">Value</span>=<span style="color:#65b042">"Reset"</span> /></span>
+</pre>
+
+<h3>Outline Buttons</h3>
+
+<div class="docs-example">
+    <BlazorButton IsOutline=true Color=Color.Primary>primary</BlazorButton>
+    <BlazorButton IsOutline=true Color=Color.Secondary>secondary</BlazorButton>
+    <BlazorButton IsOutline=true Color=Color.Success>success</BlazorButton>
+    <BlazorButton IsOutline=true Color=Color.Info>info</BlazorButton>
+    <BlazorButton IsOutline=true Color=Color.Warning>warning</BlazorButton>
+    <BlazorButton IsOutline=true Color=Color.Danger>danger</BlazorButton>
+    <BlazorButton IsOutline=true Color=Color.Light>light</BlazorButton>
+    <BlazorButton IsOutline=true Color=Color.Dark>dark</BlazorButton>
+</div>
+
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">true</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Primary</span>></span>primary<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">true</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Secondary</span>></span>secondary<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">true</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Success</span>></span>success<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">true</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Info</span>></span>info<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">true</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Warning</span>></span>warning<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">true</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Danger</span>></span>danger<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">true</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Light</span>></span>light<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">true</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Dark</span>></span>Dark<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+</pre>
+
+<h3>Sizes</h3>
+
+<div class="docs-example">
+    <BlazorButton Color=Color.Primary Size=Size.Large>Large Button</BlazorButton>
+    <BlazorButton Color=Color.Secondary Size=Size.Large>Large Button</BlazorButton>
+</div>
+
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Primary</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">Size</span>.<span style="color:#65b042">Large</span>></span>Large Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Secondary</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">Size</span>.<span style="color:#65b042">Large</span>></span>Large Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+</pre>
+
+<div class="docs-example">
+    <BlazorButton Color=Color.Primary Size=Size.Small>Small Button</BlazorButton>
+    <BlazorButton Color=Color.Secondary Size=Size.Small>Small Button</BlazorButton>
+</div>
+
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Primary</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">Size</span>.<span style="color:#65b042">Small</span>></span>Small Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Secondary</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">Size</span>.<span style="color:#65b042">Small</span>></span>Small Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+</pre>
+
+<div class="docs-example">
+    <BlazorButton Color=Color.Primary Size=Size.Large IsBlock=true>Block Level Button</BlazorButton>
+    <BlazorButton Color=Color.Secondary Size=Size.Large IsBlock=true>Block Level Button</BlazorButton>
+</div>
+
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Primary</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">Size</span>.<span style="color:#65b042">Large</span> <span style="color:#89bdff">IsBlock</span>=<span style="color:#65b042">true</span>></span>Block Level Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Secondary</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">Size</span>.<span style="color:#65b042">Large</span> <span style="color:#89bdff">IsBlock</span>=<span style="color:#65b042">true</span>></span>Block Level Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+</pre>
+
+<h3>Active State</h3>
+<div class="docs-example">
+    <BlazorButton ButtonType=ButtonType.Link Href="#" Color=Color.Primary Size=Size.Large IsActive=true>Primary Link</BlazorButton>
+    <BlazorButton ButtonType=ButtonType.Link Href="#" Color=Color.Secondary Size=Size.Large IsActive=true>Link</BlazorButton>
+</div>
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">ButtonType</span>.<span style="color:#65b042">Link</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Primary</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">Size</span>.<span style="color:#65b042">Large</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">true</span>></span>Primary Link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">ButtonType</span>.<span style="color:#65b042">Link</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Secondary</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">Size</span>.<span style="color:#65b042">Large</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">true</span>></span>Link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+</pre>
+
+<h3>Disabled State</h3>
+<div class="docs-example">
+    <BlazorButton Color=Color.Primary Size=Size.Large IsDisabled=true>Primary Button</BlazorButton>
+    <BlazorButton Color=Color.Secondary Size=Size.Large IsDisabled=true>Button</BlazorButton>
+    <BlazorButton ButtonType=ButtonType.Link Href="#" Color=Color.Primary Size=Size.Large IsDisabled=true>Primary Link</BlazorButton>
+    <BlazorButton ButtonType=ButtonType.Link Href="#" Color=Color.Secondary Size=Size.Large IsDisabled=true>Link</BlazorButton>
+</div>
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Primary</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">Size</span>.<span style="color:#65b042">Large</span> <span style="color:#89bdff">IsDisabled</span>=<span style="color:#65b042">true</span>></span>Primary Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Secondary</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">Size</span>.<span style="color:#65b042">Large</span> <span style="color:#89bdff">IsDisabled</span>=<span style="color:#65b042">true</span>></span>Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">ButtonType</span>.<span style="color:#65b042">Link</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Primary</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">Size</span>.<span style="color:#65b042">Large</span> <span style="color:#89bdff">IsDisabled</span>=<span style="color:#65b042">true</span>></span>Primary Link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">ButtonType</span>.<span style="color:#65b042">Link</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">Color</span>.<span style="color:#65b042">Secondary</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">Size</span>.<span style="color:#65b042">Large</span> <span style="color:#89bdff">IsDisabled</span>=<span style="color:#65b042">true</span>></span>Link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+</pre>
+
+<h3>Checkbox and radio buttons</h3>
+
+<Alert Color=Color.Info>Checkboxes and Radio aren't support yet by BlazorStrap</Alert>
+
+
+    @functions {
+    void onclick(UIMouseEventArgs e)
+    {
+        Console.WriteLine("Button was clicked!");
+    }
+    }

@@ -1,0 +1,95 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+@if (ButtonType == ButtonType.Button)
+{
+    <button onclick="@_onclick" type="button" class="@className" disabled="@disabled">@ChildContent</button>
+}
+@if (ButtonType == ButtonType.Link)
+{
+    <a href="@Href" onclick="@_onclick" class="@className" role="button" aria-pressed="@pressed" aria-disabled="@disabled" tabindex="@tab">@ChildContent</a>
+}
+@if (ButtonType == ButtonType.Input)
+{
+    <input onclick="@_onclick" class="@className" type="button" value="@Value" disabled="@disabled" />
+}
+@if (ButtonType == ButtonType.Submit)
+{
+    <input onclick="@_onclick" class="@className" type="submit" value="@Value" disabled="@disabled" />
+}
+@if (ButtonType == ButtonType.Reset)
+{
+    <input onclick="@_onclick" class="@className" type="reset" value="@Value" disabled="@disabled" />
+}
+@if (ButtonType == ButtonType.Checkbox)
+{
+    <label class="btn btn-secondary active">
+        <input onclick="@_buttonGroupOnClick" class="@className" type="checkbox" autocomplete="off" /> @ChildContent
+    </label>
+}
+@if (ButtonType == ButtonType.Radio)
+{
+    <label class="btn btn-secondary active">
+        <input class="@className" type="radio" checked autocomplete="off"> @ChildContent
+    </label>
+}
+
+@functions {
+    private string className
+    {
+        get
+        {
+            var outline = IsOutline ? $"btn-outline-{Color.ToDescriptionString()}" : $"btn-{Color.ToDescriptionString()}";
+            var size = Size != Size.None ? $"btn-{Size.ToDescriptionString()}" : null;
+            var block = IsBlock ? "btn-block" : null;
+            var active = ButtonType == ButtonType.Link && IsActive ? "active" : null;
+            var linkDisabled = ButtonType == ButtonType.Link && IsDisabled ? "disabled" : null;
+            return $"btn {outline} {size} {block} {active} {linkDisabled}";
+        }
+    }
+
+    private string pressed
+    {
+        get
+        {
+            return IsActive ? "true" : null;
+        }
+    }
+
+    private string disabled
+    {
+        get
+        {
+            return IsDisabled ? "true" : null;
+        }
+    }
+
+    private string tab
+    {
+        get
+        {
+            return IsDisabled ? "-1" : null;
+        }
+    }
+
+    public Action<UIMouseEventArgs> OnClick { get; set; }
+    internal Action<UIMouseEventArgs> OnButtonGroupClick { get; set; }
+    public Color Color { get; set; } = Color.Primary;
+    public ButtonType ButtonType { get; set; } = ButtonType.Button;
+    public string Href { get; set; }
+    public bool IsOutline { get; set; }
+    public Size Size { get; set; } = Size.None;
+    public bool IsBlock { get; set; }
+    public string Value { get; set; }
+    public bool IsActive { get; set; }
+    public bool IsDisabled { get; set; }
+    public RenderFragment ChildContent { get; set; }
+    private void _onclick(UIMouseEventArgs e)
+    {
+        if (OnClick != null) OnClick(e);
+    }
+    private void _buttonGroupOnClick(UIMouseEventArgs e)
+    {
+        if (OnButtonGroupClick != null) OnButtonGroupClick(e);
+    }
+}

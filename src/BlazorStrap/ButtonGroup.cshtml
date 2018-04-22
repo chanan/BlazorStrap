@@ -1,0 +1,10 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+    @ChildContent
+</div>
+
+@functions {
+    public RenderFragment ChildContent { get; set; }
+}

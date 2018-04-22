@@ -34,6 +34,8 @@
     <None Include="Badge.cshtml" />
     <None Include="Breadcrumb.cshtml" />
     <None Include="BreadcrumbItem.cshtml" />
+    <None Include="BlazorButton.cshtml" />
+    <None Include="ButtonGroup.cshtml" />
     <None Include="Col.cshtml" />
     <None Include="Container.cshtml" />
     <None Include="Row.cshtml" />
@@ -85,6 +87,18 @@
 
   <ItemGroup>
     <Content Remove="BreadcrumbItem.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="BlazorButton.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="ButtonGroup.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="ButtonGroup.cshtml" />
   </ItemGroup>
 
 </Project>

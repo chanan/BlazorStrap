@@ -19,6 +19,8 @@ namespace BlazorStrap
         [Description("light")]
         Light,
         [Description("dark")]
-        Dark
+        Dark,
+        [Description("link")]
+        Link
     }
 }
