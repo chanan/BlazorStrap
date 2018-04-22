@@ -12,12 +12,14 @@ https://chanan.github.io/BlazorStrap/
  * Badges
  * Breadcrumbs
  * Buttons (excluding ButtonGroup, Checkboxes and Radio buttons)
+ * Jumbotrons
  * Layout (Container, Row, Col)
 
 ## Not Done
 
 * ButtonGroup, Checkboxes and Radio buttons
 * Dropdowns - https://github.com/aspnet/Blazor/issues/650
+* Forms
 * Standard way to add classes to the elements
 * Standard way to add styles to an element
 * Everything else...

@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<div class="@classname">
+    @ChildContent
+</div>
+
+@functions {
+    private string classname {
+        get {
+            return IsFluid ? "jumbotron jumbotron-fluid" : "jumbotron";
+        }
+    }
+    public bool IsFluid { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}
