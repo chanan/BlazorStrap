@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<li class="@classname">
+    @ChildContent
+</li>
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            return IsActive ? "list-group-item active" : "list-group-item";
+        }
+    }
+    public bool IsActive { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}

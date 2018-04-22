@@ -1,0 +1,9 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<ul class="list-group">
+    @ChildContent
+</ul>
+
+@functions {
+    public RenderFragment ChildContent { get; set; }
+}

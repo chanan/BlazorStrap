@@ -43,6 +43,8 @@
     <None Include="DropdownMenu.cshtml" />
     <None Include="DropdownToggle.cshtml" />
     <None Include="Jumbotron.cshtml" />
+    <None Include="ListGroup.cshtml" />
+    <None Include="ListGroupItem.cshtml" />
     <None Include="Row.cshtml" />
   </ItemGroup>
 
@@ -144,6 +146,22 @@
 
   <ItemGroup>
     <Content Remove="Jumbotron.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="ListGroup.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="ListGroup.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="ListGroupItem.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="ListGroupItem.cshtml" />
   </ItemGroup>
 
 </Project>

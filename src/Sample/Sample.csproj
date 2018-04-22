@@ -29,6 +29,7 @@
     <None Include="Pages\Dropdowns.cshtml" />
     <None Include="Pages\Jumbotrons.cshtml" />
     <None Include="Pages\Layout.cshtml" />
+    <None Include="Pages\Listgroups.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -77,6 +78,14 @@
 
   <ItemGroup>
     <Content Remove="Pages\Jumbotrons.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Listgroups.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Listgroups.cshtml" />
   </ItemGroup>
 
 </Project>
