@@ -24,6 +24,7 @@
   <ItemGroup>
     <None Include="Pages\Alerts.cshtml" />
     <None Include="Pages\badges.cshtml" />
+    <None Include="Pages\Breadcrumbs.cshtml" />
     <None Include="Pages\Layout.cshtml" />
   </ItemGroup>
 
@@ -45,6 +46,10 @@
 
   <ItemGroup>
     <Content Remove="Pages\badges.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Breadcrumbs.cshtml" />
   </ItemGroup>
 
 </Project>

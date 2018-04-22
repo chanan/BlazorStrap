@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<li class="breadcrumb-item" aria-current="@aria">@ChildContent</li>
+
+
+@functions {
+    private string className
+    {
+        get
+        {
+            return IsActive ? "breadcrumb-item active" : "breadcrumb-item";
+        }
+    }
+    private string aria
+    {
+        get
+        {
+            return IsActive ? "page" : null;
+        }
+    }
+    public bool IsActive { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}
+

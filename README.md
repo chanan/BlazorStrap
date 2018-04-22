@@ -10,6 +10,7 @@ https://chanan.github.io/BlazorStrap/
 ## Done:
  * Alerts
  * Badges
+ * Breadcrumbs
  * Layout (Container, Row, Col)
 
 ## Not Done
