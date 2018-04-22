@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+<nav aria-label="Pagination">
+    <ul class="@classname">
+        @ChildContent
+    </ul>
+</nav>
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            var size = Size != Size.None ? $"pagination-{Size.ToDescriptionString()}" : null;
+            var alignment = Alignment != Alignment.Left ? Alignment == Alignment.Center ? "justify-content-center" : "justify-content-end" : null;
+            return $"pagination {size} {alignment}";
+        }
+    }
+    public Size Size { get; set; } = Size.None;
+    public Alignment Alignment { get; set; } = Alignment.Left;
+    public RenderFragment ChildContent { get; set; }
+}

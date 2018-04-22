@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<li class="@classname">
+    @ChildContent
+</li>
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            var active = IsActive ? "active" : null;
+            var disabled = IsDisabled ? "disabled" : null;
+            return $"page-item {active} {disabled}";
+        }
+    }
+    public bool IsActive { get; set; }
+    public bool IsDisabled { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}

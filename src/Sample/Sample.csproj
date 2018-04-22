@@ -30,6 +30,7 @@
     <None Include="Pages\Jumbotrons.cshtml" />
     <None Include="Pages\Layout.cshtml" />
     <None Include="Pages\Listgroups.cshtml" />
+    <None Include="Pages\Paginations.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -86,6 +87,10 @@
 
   <ItemGroup>
     <Content Remove="Pages\Listgroups.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Paginations.cshtml" />
   </ItemGroup>
 
 </Project>

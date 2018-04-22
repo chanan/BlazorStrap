@@ -15,12 +15,16 @@ https://chanan.github.io/BlazorStrap/
  * Jumbotrons
  * Layout (Container, Row, Col)
  * Listgroups
+ * Pagination
 
 ## Not Done
 
 * ButtonGroup, Checkboxes and Radio buttons
 * Dropdowns - https://github.com/aspnet/Blazor/issues/650
 * Forms
+* Modal
+* Nav
+* Navbar
 * Standard way to add classes to the elements
 * Standard way to add styles to an element
 * Everything else...

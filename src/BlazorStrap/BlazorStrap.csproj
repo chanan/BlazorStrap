@@ -47,6 +47,9 @@
     <None Include="ListGroupItem.cshtml" />
     <None Include="ListGroupItemHeading.cshtml" />
     <None Include="ListGroupItemText.cshtml" />
+    <None Include="Pagination.cshtml" />
+    <None Include="PaginationItem.cshtml" />
+    <None Include="PaginationLink.cshtml" />
     <None Include="Row.cshtml" />
   </ItemGroup>
 
@@ -180,6 +183,30 @@
 
   <ItemGroup>
     <Content Remove="ListGroupItemText.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pagination.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pagination.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="PaginationItem.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="PaginationItem.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="PaginationLink.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="PaginationLink.cshtml" />
   </ItemGroup>
 
 </Project>
