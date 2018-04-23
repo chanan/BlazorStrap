@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BlazorStrap
+﻿namespace BlazorStrap
 {
     public enum Alignment
     {
+        None,
         Left,
         Center,
         Right

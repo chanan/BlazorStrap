@@ -12,6 +12,7 @@ https://chanan.github.io/BlazorStrap/
  * Badges
  * Breadcrumbs
  * Buttons (excluding ButtonGroup, Checkboxes and Radio buttons)
+ * Images
  * Jumbotrons
  * Figures
  * Layout (Container, Row, Col)

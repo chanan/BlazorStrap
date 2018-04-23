@@ -28,6 +28,7 @@
     <None Include="Pages\Breadcrumbs.cshtml" />
     <None Include="Pages\Dropdowns.cshtml" />
     <None Include="Pages\Figures.cshtml" />
+    <None Include="Pages\Images.cshtml" />
     <None Include="Pages\Jumbotrons.cshtml" />
     <None Include="Pages\Layout.cshtml" />
     <None Include="Pages\Listgroups.cshtml" />
@@ -118,6 +119,10 @@
 
   <ItemGroup>
     <Content Remove="Pages\Figures.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Images.cshtml" />
   </ItemGroup>
 
 </Project>

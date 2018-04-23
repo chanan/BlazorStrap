@@ -9,10 +9,16 @@
     {
         get
         {
-            var alignment = Alignment != Alignment.Left ? Alignment == Alignment.Center ? "text-center" : "text-right" : null;
+            var alignment = GetAlignment();
             return $"figure-caption {alignment}";
         }
     }
     public Alignment Alignment { get; set; }
     public RenderFragment ChildContent { get; set; }
+    private string GetAlignment()
+    {
+        if (Alignment == Alignment.Center) return "text-center";
+        if (Alignment == Alignment.Right) return "text-right";
+        return null;
+    }
 }

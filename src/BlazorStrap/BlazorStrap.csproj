@@ -45,6 +45,7 @@
     <None Include="BlazorFigure.cshtml" />
     <None Include="FigureCaption.cshtml" />
     <None Include="FigureImage.cshtml" />
+    <None Include="Image.cshtml" />
     <None Include="Jumbotron.cshtml" />
     <None Include="ListGroup.cshtml" />
     <None Include="ListGroupItem.cshtml" />
@@ -280,6 +281,14 @@
 
   <ItemGroup>
     <BlazorGenerate Remove="BlazorFigure.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Image.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Image.cshtml" />
   </ItemGroup>
 
 </Project>
