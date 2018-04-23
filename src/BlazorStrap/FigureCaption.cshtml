@@ -1,0 +1,18 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<figcaption  class="@classname">
+    @ChildContent
+</figcaption>
+
+@functions {
+    string classname
+    {
+        get
+        {
+            var alignment = Alignment != Alignment.Left ? Alignment == Alignment.Center ? "text-center" : "text-right" : null;
+            return $"figure-caption {alignment}";
+        }
+    }
+    public Alignment Alignment { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}

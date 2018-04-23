@@ -13,6 +13,7 @@ https://chanan.github.io/BlazorStrap/
  * Breadcrumbs
  * Buttons (excluding ButtonGroup, Checkboxes and Radio buttons)
  * Jumbotrons
+ * Figures
  * Layout (Container, Row, Col)
  * Listgroups
  * Pagination

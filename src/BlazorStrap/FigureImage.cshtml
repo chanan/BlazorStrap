@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<img src="@src" alt="@alt" class="@classname" />
+
+@functions {
+    public string src { get; set; }
+    public string alt { get; set; }
+    string classname
+    {
+        get
+        {
+            return "figure-img img-fluid rounded";
+        }
+    }
+}

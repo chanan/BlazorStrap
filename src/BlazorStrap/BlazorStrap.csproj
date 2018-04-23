@@ -42,6 +42,9 @@
     <None Include="DropdownItem.cshtml" />
     <None Include="DropdownMenu.cshtml" />
     <None Include="DropdownToggle.cshtml" />
+    <None Include="BlazorFigure.cshtml" />
+    <None Include="FigureCaption.cshtml" />
+    <None Include="FigureImage.cshtml" />
     <None Include="Jumbotron.cshtml" />
     <None Include="ListGroup.cshtml" />
     <None Include="ListGroupItem.cshtml" />
@@ -257,6 +260,26 @@
 
   <ItemGroup>
     <Content Remove="TableHeadCell.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="FigureCaption.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="FigureCaption.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="FigureImage.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="FigureImage.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="BlazorFigure.cshtml" />
   </ItemGroup>
 
 </Project>
