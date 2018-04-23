@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<thead class="@classname">
+    @ChildContent
+</thead>
+
+@functions {
+    string classname
+    {
+        get
+        {
+            var light = TableHeadType == TableHeadType.Light ? "thead-light" : null;
+            var dark = TableHeadType == TableHeadType.Dark ? "thead-dark" : null;
+            return $"{light} {dark}";
+        }
+    }
+    public TableHeadType TableHeadType { get; set; } = TableHeadType.None;
+    public RenderFragment ChildContent { get; set; }
+}

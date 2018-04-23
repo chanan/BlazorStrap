@@ -17,10 +17,12 @@ https://chanan.github.io/BlazorStrap/
  * Listgroups
  * Pagination
  * Progress
+ * Tables
 
 ## Not Done
 
 * ButtonGroup, Checkboxes and Radio buttons
+* Card
 * Dropdowns - https://github.com/aspnet/Blazor/issues/650
 * Forms
 * Modal

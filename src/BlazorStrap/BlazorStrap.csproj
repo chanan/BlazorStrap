@@ -52,6 +52,11 @@
     <None Include="PaginationLink.cshtml" />
     <None Include="Progress.cshtml" />
     <None Include="Row.cshtml" />
+    <None Include="BlazorTable.cshtml" />
+    <None Include="TableCell.cshtml" />
+    <None Include="TableHead.cshtml" />
+    <None Include="TableHeadCell.cshtml" />
+    <None Include="TableRow.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -216,6 +221,42 @@
 
   <ItemGroup>
     <Content Remove="Progress.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="BlazorTable.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="TableHead.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="TableHead.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="TableRow.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="TableRow.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="TableCell.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="TableCell.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="TableHeadCell.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="TableHeadCell.cshtml" />
   </ItemGroup>
 
 </Project>

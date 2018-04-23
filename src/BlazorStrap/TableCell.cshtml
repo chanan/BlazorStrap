@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+<td class="@classname" colspan="@colspan">
+    @ChildContent
+</td>
+
+@functions {
+    string classname
+    {
+        get
+        {
+            var color = Color != Color.None ? $"table-{Color.ToDescriptionString()}" : null;
+            return $"{color}";
+        }
+    }
+    public Color Color { get; set; } = Color.None;
+    public int ColSpan { get; set; }
+    string colspan
+    {
+        get
+        {
+            if (ColSpan == 0) return null;
+            return ColSpan.ToString();
+        }
+    }
+    public RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+@if (IsResponsive)
+{
+    <div class="table-responsive">
+        <table class="@classname">
+            @ChildContent
+        </table>
+    </div>
+}
+@if (!IsResponsive)
+{
+    <table class="@classname">
+        @ChildContent
+    </table>
+}
+
+@functions {
+    string classname
+    {
+        get
+        {
+                var dark = IsDark ? "table-dark" : null;
+                var striped = IsStriped ? "table-striped" : null;
+                var bordered = IsBordered ? "table-bordered" : null;
+                var borderless = IsBorderless ? "table-borderless" : null;
+                var hovarable = IsHovarable ? "table-hover" : null;
+                var small = IsSmall ? "table-sm" : null;
+                return $"table {dark} {striped} {bordered} {borderless} {hovarable} {small}";
+        }
+    }
+    public bool IsDark { get; set; }
+    public bool IsStriped { get; set; }
+    public bool IsBordered { get; set; }
+    public bool IsBorderless { get; set; }
+    public bool IsHovarable { get; set; }
+    public bool IsSmall { get; set; }
+    public bool IsResponsive { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}
