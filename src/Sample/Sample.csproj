@@ -31,6 +31,7 @@
     <None Include="Pages\Layout.cshtml" />
     <None Include="Pages\Listgroups.cshtml" />
     <None Include="Pages\Paginations.cshtml" />
+    <None Include="Pages\ProgressBars.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -91,6 +92,14 @@
 
   <ItemGroup>
     <BlazorGenerate Remove="Pages\Paginations.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="ProgressBars.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="ProgressBars.cshtml" />
   </ItemGroup>
 
 </Project>

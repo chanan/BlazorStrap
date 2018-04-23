@@ -50,6 +50,7 @@
     <None Include="Pagination.cshtml" />
     <None Include="PaginationItem.cshtml" />
     <None Include="PaginationLink.cshtml" />
+    <None Include="Progress.cshtml" />
     <None Include="Row.cshtml" />
   </ItemGroup>
 
@@ -207,6 +208,14 @@
 
   <ItemGroup>
     <Content Remove="PaginationLink.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Progress.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Progress.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+@if (!IsMulti && !IsBar)
+{
+    <div class="progress">
+        <div class="@classname" role="progressbar" style="@style" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
+    </div>
+}
+@if (IsMulti && !IsBar)
+{
+    <div class="progress">
+        @ChildContent
+    </div>
+}
+@if (!IsMulti && IsBar)
+{
+    <div class="@classname" role="progressbar" style="@style" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
+}
+
+
+@functions {
+    public int Value { get; set; }
+    public int Max { get; set; } = 100;
+    string style
+    {
+        get
+        {
+            if (Value == 0) return null;
+            var percent = Math.Round(((double)Value / (double)Max) * 100);
+            return $"width: {percent}%";
+        }
+    }
+    public string classname
+    {
+        get
+        {
+            var color = Color != Color.None ? $"bg-{Color.ToDescriptionString()}" : null;
+            var striped = IsStriped ? "progress-bar-striped" : null;
+            var animated = IsAnimated ? "progress-bar-animated" : null;
+            return $"progress-bar {striped} {animated} {color}";
+        }
+    }
+    public Color Color { get; set; } = Color.None;
+    public bool IsMulti { get; set; }
+    public bool IsBar { get; set; }
+    public bool IsStriped { get; set; }
+    public bool IsAnimated { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}

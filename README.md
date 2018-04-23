@@ -16,6 +16,7 @@ https://chanan.github.io/BlazorStrap/
  * Layout (Container, Row, Col)
  * Listgroups
  * Pagination
+ * Progress
 
 ## Not Done
 
@@ -25,6 +26,8 @@ https://chanan.github.io/BlazorStrap/
 * Modal
 * Nav
 * Navbar
+* Popover
+* Tooltip
 * Standard way to add classes to the elements
 * Standard way to add styles to an element
 * Everything else...
