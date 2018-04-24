@@ -32,6 +32,7 @@
     <None Include="Pages\Jumbotrons.cshtml" />
     <None Include="Pages\Layout.cshtml" />
     <None Include="Pages\Listgroups.cshtml" />
+    <None Include="Pages\MediaTags.cshtml" />
     <None Include="Pages\Paginations.cshtml" />
     <None Include="Pages\ProgressBars.cshtml" />
     <None Include="Pages\Tables.cshtml" />
@@ -123,6 +124,14 @@
 
   <ItemGroup>
     <BlazorGenerate Remove="Pages\Images.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\MediaTags.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\MediaTags.cshtml" />
   </ItemGroup>
 
 </Project>

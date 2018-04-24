@@ -51,6 +51,7 @@
     <None Include="ListGroupItem.cshtml" />
     <None Include="ListGroupItemHeading.cshtml" />
     <None Include="ListGroupItemText.cshtml" />
+    <None Include="Media.cshtml" />
     <None Include="Pagination.cshtml" />
     <None Include="PaginationItem.cshtml" />
     <None Include="PaginationLink.cshtml" />
@@ -289,6 +290,14 @@
 
   <ItemGroup>
     <Content Remove="Image.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Media.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Media.cshtml" />
   </ItemGroup>
 
 </Project>

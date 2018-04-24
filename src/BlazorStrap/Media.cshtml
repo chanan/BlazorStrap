@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+@if (MediaType == MediaType.Media)
+{
+    <div class="media">
+        @ChildContent
+    </div>
+}
+@if (MediaType == MediaType.MediaBody)
+{
+    <div class="media-body">
+        @ChildContent
+    </div>
+}
+@if (MediaType == MediaType.MediaHeading)
+{
+    <h5 class="mt-0 mb-1">
+        @ChildContent
+    </h5>
+}
+@if (MediaType == MediaType.MediaImage)
+{
+    <img class="@classname" src="@src" alt="@alt">
+}
+@if (MediaType == MediaType.MediaList)
+{
+    <ul class="list-unstyled">
+        @ChildContent
+    </ul>
+}
+@if (MediaType == MediaType.MediaListItem)
+{
+    <li class="media">
+        @ChildContent
+    </li>
+}
+
+
+
+@functions {
+    string classname
+    {
+        get
+        {
+            var verticalAlignment = GetVerticalAlignmnet();
+            return $"{verticalAlignment} mr-3";
+        }
+    }
+    public MediaType MediaType { get; set; } = MediaType.Media;
+    public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
+    public string src { get; set; }
+    public string alt { get; set; }
+    public RenderFragment ChildContent { get; set; }
+
+    private string GetVerticalAlignmnet()
+    {
+        if (VerticalAlignment == VerticalAlignment.Center) return "align-self-center";
+        if (VerticalAlignment == VerticalAlignment.Bottom) return "align-self-end";
+        if (VerticalAlignment == VerticalAlignment.Bottom) return "align-self-start";
+        return null;
+    }
+}

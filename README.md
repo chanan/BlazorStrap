@@ -2,7 +2,7 @@
 
 Port of https://reactstrap.github.io to Blazor
 
-**Note:** Currently Col will not work correctly due to an issue in Blazor: https://github.com/aspnet/Blazor/issues/643. This will be fixed in the next version of Blazor.
+**Note:** Currently Many of these tag will **not work correctly** due to an issue in Blazor: https://github.com/aspnet/Blazor/issues/643. This will be fixed in the next version of Blazor.
 
 ## Docs
 https://chanan.github.io/BlazorStrap/
@@ -17,6 +17,7 @@ https://chanan.github.io/BlazorStrap/
  * Figures
  * Layout (Container, Row, Col)
  * Listgroups
+ * Media
  * Pagination
  * Progress
  * Tables
