@@ -6,7 +6,7 @@
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <PackageId>BlazorStrap</PackageId>
-    <Version>0.0.5</Version>
+    <Version>0.0.6</Version>
     <Authors>Chanan Braunstein</Authors>
     <Title>Blazor BootStrap</Title>
     <Description>A bootstrap4 component library for Blazor</Description>
@@ -36,6 +36,7 @@
     <None Include="BreadcrumbItem.cshtml" />
     <None Include="BlazorButton.cshtml" />
     <None Include="ButtonGroup.cshtml" />
+    <None Include="Card.cshtml" />
     <None Include="Col.cshtml" />
     <None Include="Container.cshtml" />
     <None Include="Dropdown.cshtml" />
@@ -298,6 +299,14 @@
 
   <ItemGroup>
     <Content Remove="Media.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Card.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Card.cshtml" />
   </ItemGroup>
 
 </Project>

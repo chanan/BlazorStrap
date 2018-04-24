@@ -7,10 +7,14 @@ Port of https://reactstrap.github.io to Blazor
 ## Docs
 https://chanan.github.io/BlazorStrap/
 
+## Change Log
+https://github.com/chanan/BlazorStrap/releases
+
 ## Done:
  * Alerts
  * Badges
  * Breadcrumbs
+ * Cards
  * Buttons (excluding ButtonGroup, Checkboxes and Radio buttons)
  * Images
  * Jumbotrons
@@ -25,7 +29,6 @@ https://chanan.github.io/BlazorStrap/
 ## Not Done
 
 * ButtonGroup, Checkboxes and Radio buttons
-* Card
 * Dropdowns - https://github.com/aspnet/Blazor/issues/650
 * Forms
 * Modal

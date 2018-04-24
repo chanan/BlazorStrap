@@ -3,10 +3,10 @@
     public enum MediaType
     {
         Media,
-        MediaList,
-        MediaListItem,
-        MediaImage,
-        MediaHeading,
-        MediaBody
+        List,
+        ListItem,
+        Image,
+        Heading,
+        Body
     }
 }

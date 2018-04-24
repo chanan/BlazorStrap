@@ -6,29 +6,29 @@
         @ChildContent
     </div>
 }
-@if (MediaType == MediaType.MediaBody)
+@if (MediaType == MediaType.Body)
 {
     <div class="media-body">
         @ChildContent
     </div>
 }
-@if (MediaType == MediaType.MediaHeading)
+@if (MediaType == MediaType.Heading)
 {
     <h5 class="mt-0 mb-1">
         @ChildContent
     </h5>
 }
-@if (MediaType == MediaType.MediaImage)
+@if (MediaType == MediaType.Image)
 {
     <img class="@classname" src="@src" alt="@alt">
 }
-@if (MediaType == MediaType.MediaList)
+@if (MediaType == MediaType.List)
 {
     <ul class="list-unstyled">
         @ChildContent
     </ul>
 }
-@if (MediaType == MediaType.MediaListItem)
+@if (MediaType == MediaType.ListItem)
 {
     <li class="media">
         @ChildContent
