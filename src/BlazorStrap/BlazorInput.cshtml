@@ -3,7 +3,7 @@
 
 @if (this.InputType == InputType.Select)
 {
-    <select class="@classname" id="@Id" name="@Name" readonly="@IsReadonly" disabled="@IsDisabled">
+    <select class="@classname" id="@Id" name="@Name" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex">
         @ChildContent
     </select>
 
@@ -23,8 +23,10 @@ else
         get
         {
             var size = Size != Size.None ? $"form-control-{Size.ToDescriptionString()}" : null;
+            var isvalid = IsValid ? "is-valid" : null;
+            var isinvalid = IsInvalid ? "is-invalid" : null;
             var cls = GetClass();
-            return $"{cls} {size} {Class}";
+            return $"{isvalid} {isinvalid} {cls} {size} {Class}";
         }
     }
     public InputType InputType { get; set; } = InputType.Text;
@@ -39,6 +41,11 @@ else
     public bool IsPlaintext { get; set; }
     public bool IsDisabled { get; set; }
     public bool IsChecked { get; set; }
+    public bool IsValid { get; set; }
+    public bool IsInvalid { get; set; }
+    public bool IsMultipleSelect { get; set; }
+    public int SelectSize { get; set; }
+    public int SelectedIndex { get; set; }
     public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
     private string Type

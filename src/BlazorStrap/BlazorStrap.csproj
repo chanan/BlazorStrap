@@ -49,6 +49,7 @@
     <None Include="FigureCaption.cshtml" />
     <None Include="FigureImage.cshtml" />
     <None Include="BlazorForm.cshtml" />
+    <None Include="FormFeedback.cshtml" />
     <None Include="FormGroup.cshtml" />
     <None Include="FormLabel.cshtml" />
     <None Include="Image.cshtml" />
@@ -348,6 +349,14 @@
 
   <ItemGroup>
     <Content Remove="BlazorLabel.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="FormFeedback.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="FormFeedback.cshtml" />
   </ItemGroup>
 
 </Project>

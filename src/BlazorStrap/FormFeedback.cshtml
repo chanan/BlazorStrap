@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+@if(IsValid || IsInvalid)
+{
+    <div class="@classname">@ChildContent</div>
+}
+
+@functions {
+    string classname
+    {
+        get
+        {
+            var cls = IsTooltip ? "tooltip" : "feedback";
+            var isvalid = IsValid ? $"valid-{cls}" : null;
+            var isinvalid = IsInvalid ? $"invalid-{cls}" : null;
+            return $"{isvalid} {isinvalid} {Class}";
+        }
+    }
+    public bool IsValid { get; set; }
+    public bool IsInvalid { get; set; }
+    public bool IsTooltip { get; set; }
+    public string Class { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}

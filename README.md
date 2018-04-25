@@ -10,10 +10,6 @@ https://chanan.github.io/BlazorStrap/
 ## Change Log
 https://github.com/chanan/BlazorStrap/releases
 
-## In Progress
-* Forms
-* Standard way to add addtional classes and styles
-
 ## Done:
  * Alerts
  * Badges
@@ -23,6 +19,7 @@ https://github.com/chanan/BlazorStrap/releases
  * Images
  * Jumbotrons
  * Figures
+ * Forms - mostly done (Binding still pending)
  * Layout (Container, Row, Col)
  * Listgroups
  * Media
