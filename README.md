@@ -10,6 +10,10 @@ https://chanan.github.io/BlazorStrap/
 ## Change Log
 https://github.com/chanan/BlazorStrap/releases
 
+## In Progress
+* Forms
+* Standard way to add addtional classes and styles
+
 ## Done:
  * Alerts
  * Badges
@@ -30,12 +34,9 @@ https://github.com/chanan/BlazorStrap/releases
 
 * ButtonGroup, Checkboxes and Radio buttons
 * Dropdowns - https://github.com/aspnet/Blazor/issues/650
-* Forms
 * Modal
 * Nav
 * Navbar
 * Popover
 * Tooltip
-* Standard way to add classes to the elements
-* Standard way to add styles to an element
 * Everything else...
