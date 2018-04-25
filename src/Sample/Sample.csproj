@@ -29,6 +29,7 @@
     <None Include="Pages\Cards.cshtml" />
     <None Include="Pages\Dropdowns.cshtml" />
     <None Include="Pages\Figures.cshtml" />
+    <None Include="Pages\forms.cshtml" />
     <None Include="Pages\Images.cshtml" />
     <None Include="Pages\Jumbotrons.cshtml" />
     <None Include="Pages\Layout.cshtml" />
@@ -141,6 +142,14 @@
 
   <ItemGroup>
     <Content Remove="Pages\Cards.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\forms.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\forms.cshtml" />
   </ItemGroup>
 
 </Project>

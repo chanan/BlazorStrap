@@ -21,12 +21,13 @@
         get
         {
             var pill = IsPill ? "badge-pill" : "";
-            return $"badge {pill} badge-{Color.ToDescriptionString()}";
+            return $"badge {pill} badge-{Color.ToDescriptionString()} {Class}";
         }
     }
 
     public Color Color { get; set; } = Color.Primary;
     public bool IsPill { get; set; }
     public string Href { get; set; }
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

@@ -9,8 +9,9 @@
     {
         get
         {
-            return "d-flex w-100 justify-content-between";
+            return $"d-flex w-100 justify-content-between {Class}";
         }
     }
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

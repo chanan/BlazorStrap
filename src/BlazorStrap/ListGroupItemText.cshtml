@@ -5,12 +5,13 @@
 </div>
 
 @functions {
-public string classname
-{
-    get
+    public string classname
     {
-        return "d-flex w-100 justify-content-between";
+        get
+        {
+            return $"d-flex w-100 justify-content-between {Class}";
+        }
     }
-}
-public RenderFragment ChildContent { get; set; }
+    public string Class { get; set; }
+    public RenderFragment ChildContent { get; set; }
 }

@@ -9,7 +9,7 @@
 }
 @if (IsMulti && !IsBar)
 {
-    <div class="progress">
+    <div class="@classname">
         @ChildContent
     </div>
 }
@@ -35,10 +35,11 @@
     {
         get
         {
+            if(IsMulti && !IsBar) return $"progress {Class}";
             var color = Color != Color.None ? $"bg-{Color.ToDescriptionString()}" : null;
             var striped = IsStriped ? "progress-bar-striped" : null;
             var animated = IsAnimated ? "progress-bar-animated" : null;
-            return $"progress-bar {striped} {animated} {color}";
+            return $"progress-bar {striped} {animated} {color} {Class}";
         }
     }
     public Color Color { get; set; } = Color.None;
@@ -46,5 +47,6 @@
     public bool IsBar { get; set; }
     public bool IsStriped { get; set; }
     public bool IsAnimated { get; set; }
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

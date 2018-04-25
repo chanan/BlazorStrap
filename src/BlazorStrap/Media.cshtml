@@ -2,19 +2,19 @@
 
 @if (MediaType == MediaType.Media)
 {
-    <div class="media">
+    <div class="@classname">
         @ChildContent
     </div>
 }
 @if (MediaType == MediaType.Body)
 {
-    <div class="media-body">
+    <div class="@classname">
         @ChildContent
     </div>
 }
 @if (MediaType == MediaType.Heading)
 {
-    <h5 class="mt-0 mb-1">
+    <h5 class="@classname">
         @ChildContent
     </h5>
 }
@@ -24,13 +24,13 @@
 }
 @if (MediaType == MediaType.List)
 {
-    <ul class="list-unstyled">
+    <ul class="@classname">
         @ChildContent
     </ul>
 }
 @if (MediaType == MediaType.ListItem)
 {
-    <li class="media">
+    <li class="@classname">
         @ChildContent
     </li>
 }
@@ -42,14 +42,14 @@
     {
         get
         {
-            var verticalAlignment = GetVerticalAlignmnet();
-            return $"{verticalAlignment} mr-3";
+            return $"{GetClass()} {Class}";
         }
     }
     public MediaType MediaType { get; set; } = MediaType.Media;
     public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
     public string src { get; set; }
     public string alt { get; set; }
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
 
     private string GetVerticalAlignmnet()
@@ -58,5 +58,27 @@
         if (VerticalAlignment == VerticalAlignment.Bottom) return "align-self-end";
         if (VerticalAlignment == VerticalAlignment.Bottom) return "align-self-start";
         return null;
+    }
+
+    private string GetClass()
+    {
+        switch (this.MediaType)
+        {
+            case MediaType.Media:
+                return "media";
+            case MediaType.Body:
+                return "media-body";
+            case MediaType.Heading:
+                return "mt-0 mb-1";
+            case MediaType.Image:
+                var verticalAlignment = GetVerticalAlignmnet();
+                return $"{verticalAlignment} mr-3";
+            case MediaType.List:
+                return "list-unstyled";
+            case MediaType.ListItem:
+                return "media";
+            default:
+                return "media";
+        }
     }
 }

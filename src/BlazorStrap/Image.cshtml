@@ -9,6 +9,7 @@
     public bool IsResponsive { get; set; }
     public bool IsRounded { get; set; }
     public Alignment Alignment { get; set; }
+    public string Class { get; set; }
     string classname
     {
         get
@@ -17,7 +18,7 @@
             var responsive = IsResponsive ? "img-fluid" : null;
             var rounded = IsRounded ? "rounded" : null;
             var alignment = GetAlignment();
-            return $"{rounded} {thumbnail} {responsive} {alignment}";
+            return $"{rounded} {thumbnail} {responsive} {alignment} {Class}";
         }
     }
     private string GetAlignment()

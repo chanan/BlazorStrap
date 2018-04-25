@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+@if (this.InputType == InputType.Select)
+{
+    <select class="@classname" id="@Id" name="@Name" readonly="@IsReadonly" disabled="@IsDisabled">
+        @ChildContent
+    </select>
+
+}
+else if(this.InputType == InputType.TextArea)
+{
+    <textarea class="@classname" id="@Id" rows="@Rows" cols="@Cols" placeholder="@PlaceHolder" readonly="@IsReadonly" disabled="@IsDisabled">@ChildContent</textarea>
+}
+else
+{
+    <input class="@classname" type="@Type" id="@Id" placeholder="@PlaceHolder" value="@Value" name="@Name" readonly="@IsReadonly" disabled="@IsDisabled" checked="@IsChecked" />
+}
+
+@functions {
+    string classname
+    {
+        get
+        {
+            var size = Size != Size.None ? $"form-control-{Size.ToDescriptionString()}" : null;
+            var cls = GetClass();
+            return $"{cls} {size} {Class}";
+        }
+    }
+    public InputType InputType { get; set; } = InputType.Text;
+    public string Id { get; set; }
+    public string PlaceHolder { get; set; }
+    public string Value { get; set; }
+    public string Name { get; set; }
+    public int Rows { get; set; }
+    public int Cols { get; set; }
+    public Size Size { get; set; } = Size.None;
+    public bool IsReadonly { get; set; }
+    public bool IsPlaintext { get; set; }
+    public bool IsDisabled { get; set; }
+    public bool IsChecked { get; set; }
+    public string Class { get; set; }
+    public RenderFragment ChildContent { get; set; }
+    private string Type
+    {
+        get
+        {
+            return InputType.ToDescriptionString();
+        }
+    }
+    private string GetClass()
+    {
+        switch (this.InputType)
+        {
+            case InputType.Checkbox:
+                return "form-check-input";
+            case InputType.Radio:
+                return "form-check-input";
+            case InputType.File:
+                return "form-control-file";
+            case InputType.Range:
+                return "form-control-range";
+            default:
+                return IsPlaintext ? "form-control-plaintext" : "form-control";
+        }
+    }
+}

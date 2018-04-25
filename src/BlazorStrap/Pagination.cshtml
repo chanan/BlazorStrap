@@ -14,11 +14,12 @@
         {
             var size = Size != Size.None ? $"pagination-{Size.ToDescriptionString()}" : null;
             var alignment = GetAlignment();
-            return $"pagination {size} {alignment}";
+            return $"pagination {size} {alignment} {Class}";
         }
     }
     public Size Size { get; set; } = Size.None;
     public Alignment Alignment { get; set; } = Alignment.Left;
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
     private string GetAlignment()
     {

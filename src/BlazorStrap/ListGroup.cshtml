@@ -18,10 +18,12 @@
     {
         get
         {
-            return IsFlush ? "list-group list-group-flush" : "list-group";
+            var flush = IsFlush ? "list-group list-group-flush" : "list-group";
+            return $"{flush} {Class}";
         }
     }
     public ListGroupType ListGroupType { get; set; } = ListGroupType.List;
     public bool IsFlush { get; set; }
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

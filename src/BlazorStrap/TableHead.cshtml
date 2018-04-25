@@ -11,9 +11,10 @@
         {
             var light = TableHeadType == TableHeadType.Light ? "thead-light" : null;
             var dark = TableHeadType == TableHeadType.Dark ? "thead-dark" : null;
-            return $"{light} {dark}";
+            return $"{light} {dark} {Class}";
         }
     }
     public TableHeadType TableHeadType { get; set; } = TableHeadType.None;
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

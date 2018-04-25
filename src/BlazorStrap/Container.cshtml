@@ -9,11 +9,12 @@
     {
         get
         {
-            return IsFluid ? "container-fluid" : "container";
+            var fluid = IsFluid ? "container-fluid" : "container";
+            return $"{fluid} {Class}";
         }
     }
 
     public bool IsFluid { get; set; }
-
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

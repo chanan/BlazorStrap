@@ -67,36 +67,7 @@
     {
         get
         {
-            switch (this.CardType)
-            {
-                case CardType.Body:
-                    return $"card-body {GetTextColor()}";
-                case CardType.Card:
-                    var inverse = IsInverse ? "bg-dark text-white" : null;
-                    return $"card {GetCardColor()} {GetCardAlignmnet()} {inverse}";
-                case CardType.Image:
-                    return $"card-img{GetImageVerticalAlignmnet()}";
-                case CardType.Title:
-                    return "card-title";
-                case CardType.Subtitle:
-                    return "card-subtitle mb-2 text-muted";
-                case CardType.Link:
-                    return "card-link";
-                case CardType.Header:
-                    return "card-header";
-                case CardType.Footer:
-                    return "card-footer";
-                case CardType.ImageOverlay:
-                    return "card-img-overlay";
-                case CardType.Group:
-                    return "card-group";
-                case CardType.Deck:
-                    return "card-deck";
-                case CardType.Columns:
-                    return "card-columns";
-                default:
-                    return null;
-            }
+            return $"{GetClass()} {Class}";
         }
     }
     public CardType CardType { get; set; } = CardType.Card;
@@ -109,6 +80,7 @@
     public bool IsInverse { get; set; }
     public Color Color { get; set; } = Color.None;
     public bool IsOutline { get; set; }
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
 
     private string GetImageVerticalAlignmnet()
@@ -149,5 +121,39 @@
     {
         if (Color == Color.None || Color == Color.Light) return null;
         return $"text-{Color.ToDescriptionString()}";
+    }
+
+    private string GetClass()
+    {
+        switch (this.CardType)
+        {
+            case CardType.Body:
+                return $"card-body {GetTextColor()}";
+            case CardType.Card:
+                var inverse = IsInverse ? "bg-dark text-white" : null;
+                return $"card {GetCardColor()} {GetCardAlignmnet()} {inverse}";
+            case CardType.Image:
+                return $"card-img{GetImageVerticalAlignmnet()}";
+            case CardType.Title:
+                return "card-title";
+            case CardType.Subtitle:
+                return "card-subtitle mb-2 text-muted";
+            case CardType.Link:
+                return "card-link";
+            case CardType.Header:
+                return "card-header";
+            case CardType.Footer:
+                return "card-footer";
+            case CardType.ImageOverlay:
+                return "card-img-overlay";
+            case CardType.Group:
+                return "card-group";
+            case CardType.Deck:
+                return "card-deck";
+            case CardType.Columns:
+                return "card-columns";
+            default:
+                return null;
+        }
     }
 }

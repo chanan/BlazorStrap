@@ -9,11 +9,11 @@
     {
         get
         {
-            var alignment = GetAlignment();
-            return $"figure-caption {alignment}";
+            return $"figure-caption {GetAlignment()} {Class}";
         }
     }
     public Alignment Alignment { get; set; }
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
     private string GetAlignment()
     {

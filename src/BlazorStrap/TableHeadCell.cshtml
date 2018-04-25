@@ -11,7 +11,7 @@
         get
         {
             var color = Color != Color.None ? $"table-{Color.ToDescriptionString()}" : null;
-            return $"{color}";
+            return $"{color} {Class}";
         }
     }
     public Color Color { get; set; } = Color.None;
@@ -24,5 +24,6 @@
             return ColSpan.ToString();
         }
     }
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

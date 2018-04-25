@@ -7,9 +7,11 @@
 @functions {
     private string classname {
         get {
-            return IsFluid ? "jumbotron jumbotron-fluid" : "jumbotron";
+            var fluid = IsFluid ? "jumbotron jumbotron-fluid" : "jumbotron";
+            return $"{fluid} {Class}";
         }
     }
     public bool IsFluid { get; set; }
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

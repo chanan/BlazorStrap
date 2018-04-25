@@ -11,10 +11,11 @@
         {
             var active = IsActive ? "active" : null;
             var disabled = IsDisabled ? "disabled" : null;
-            return $"page-item {active} {disabled}";
+            return $"page-item {active} {disabled} {Class}";
         }
     }
     public bool IsActive { get; set; }
     public bool IsDisabled { get; set; }
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

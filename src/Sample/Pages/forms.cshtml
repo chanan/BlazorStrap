@@ -1,0 +1,153 @@
+﻿@addTagHelper *, BlazorStrap
+@page "/forms"
+
+<h1>Forms</h1>
+
+<div class="docs-example">
+    <BlazorForm>
+        <FormGroup>
+            <BlazorLabel For="exampleInputEmail1">Email address</BlazorLabel>
+            <BlazorInput Id="exampleInputEmail1" InputType="InputType.Email" PlaceHolder="Enter email" />
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </FormGroup>
+        <FormGroup>
+            <BlazorLabel For="exampleInputPassword1">Password</BlazorLabel>
+            <BlazorInput Id="exampleInputPassword1" InputType="InputType.Password" PlaceHolder="Password" />
+        </FormGroup>
+        <FormGroup IsCheck="true">
+            <BlazorInput Id="exampleCheck1" InputType="InputType.Checkbox" />
+            <BlazorLabel IsCheck="true" For="exampleCheck1">Check me out</BlazorLabel>
+        </FormGroup>
+        <BlazorButton Color="Color.Primary" ButtonType="ButtonType.Submit">Submit</BlazorButton>
+    </BlazorForm>
+</div>
+
+<p>Bind to Value to get the value from BlazorInput</p>
+
+<div class="docs-example">
+    <BlazorForm>
+        <FormGroup>
+            <BlazorLabel For="exampleFormControlSelect1">Example select</BlazorLabel>
+            <BlazorInput Id="exampleFormControlSelect1" InputType="InputType.Select">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </BlazorInput>
+        </FormGroup>
+        <FormGroup>
+            <BlazorLabel For="exampleText">Text Area</BlazorLabel>
+            <BlazorInput InputType="InputType.TextArea" Name="text" Id="exampleText" Rows="5" />
+        </FormGroup>
+        <FormGroup>
+            <BlazorLabel For="exampleFormControlFile1">Example file input</BlazorLabel>
+            <BlazorInput InputType="InputType.File" Id="exampleFormControlFile1" />
+        </FormGroup>
+    </BlazorForm>
+</div>
+
+
+<h3>Sizing</h3>
+
+<div class="docs-example">
+    <BlazorInput InputType="InputType.Text" Size="Size.Large" PlaceHolder="Size.Large" />
+    <BlazorInput InputType="InputType.Text" PlaceHolder="Default" />
+    <BlazorInput InputType="InputType.Text" Size="Size.Small" PlaceHolder="Size.Small" />
+</div>
+
+<div class="docs-example">
+    <BlazorInput InputType="InputType.Select" Size="Size.Large">
+        <option>Large select</option>
+    </BlazorInput>
+    <BlazorInput InputType="InputType.Select">
+        <option>Default select</option>
+    </BlazorInput>
+    <BlazorInput InputType="InputType.Select" Size="Size.Small">
+        <option>Small select</option>
+    </BlazorInput>
+</div>
+
+<h3>Range Inputs</h3>
+
+<div class="docs-example">
+    <BlazorForm>
+        <FormGroup>
+            <BlazorLabel For="formControlRange">Example Range input</BlazorLabel>
+            <BlazorInput InputType="InputType.Range" Id="formControlRange" />
+        </FormGroup>
+    </BlazorForm>
+</div>
+
+<h3>Readonly</h3>
+
+<div class="docs-example">
+    <BlazorInput InputType="InputType.Text" PlaceHolder="Readonly input here…" IsReadonly="true" />
+</div>
+
+<h3>Readonly plain text</h3>
+
+<div class="docs-example">
+    <BlazorForm>
+        <FormGroup IsRow="true">
+            <BlazorLabel For="staticEmail" SM="2">Email</BlazorLabel>
+            <Col SM="10">
+            <BlazorInput InputType="InputType.Text" IsReadonly="true" IsPlaintext="true" Id="staticEmail" Value="email@example.com" />
+            </Col>
+        </FormGroup>
+        <FormGroup IsRow="true">
+            <BlazorLabel For="inputPassword" SM="2">Password</BlazorLabel>
+            <Col SM="10">
+            <BlazorInput InputType="InputType.Password" Id="inputPassword" />
+            </Col>
+        </FormGroup>
+        <FormGroup IsRow="true">
+            <Col SM="2" SMOffset="2">
+                <BlazorButton ButtonType="ButtonType.Submit">Submit</BlazorButton>
+            </Col>
+        </FormGroup>
+    </BlazorForm>
+</div>
+
+<h3>Inline Form</h3>
+
+<div class="docs-example">
+    <BlazorForm IsInline="true">
+        <FormGroup Class="mb-2 mr-sm-2 mb-sm-0">
+            <BlazorLabel For="exampleEmail" Class="mr-sm-2">Email</BlazorLabel>
+            <BlazorInput InputType="InputType.Email" Name="email" Id="exampleEmail" PlaceHolder="something@idk.cool" />
+        </FormGroup>
+        <FormGroup Class="mb-2 mr-sm-2 mb-sm-0">
+            <BlazorLabel For="examplePassword" class="mr-sm-2">Password</BlazorLabel>
+            <BlazorInput InputType="InputType.Password" Name="password" Id="examplePassword" PlaceHolder="don't tell!" />
+        </FormGroup>
+        <BlazorButton ButtonType="ButtonType.Submit">Submit</BlazorButton>
+    </BlazorForm>
+</div>
+
+<h3>Checkboxes and radios</h3>
+
+<div class="docs-example">
+    <FormGroup IsCheck="true">
+        <BlazorInput InputType="InputType.Checkbox" Id="defaultCheck1" />
+        <BlazorLabel For="defaultCheck1">Default checkbox</BlazorLabel>
+    </FormGroup>
+    <FormGroup IsCheck="true">
+        <BlazorInput InputType="InputType.Checkbox" Id="defaultCheck2" IsDisabled="true" />
+        <BlazorLabel For="defaultCheck2">Disabled checkbox</BlazorLabel>
+    </FormGroup>
+</div>
+<div class="docs-example">
+    <FormGroup IsCheck="true">
+        <BlazorInput InputType="InputType.Radio" Name="exampleRadios" Id="exampleRadios1" value="option1" IsChecked="true" />
+        <BlazorLabel For="exampleRadios1">Default radio</BlazorLabel>
+    </FormGroup>
+    <FormGroup IsCheck="true">
+        <BlazorInput InputType="InputType.Radio" Name="exampleRadios" Id="exampleRadios2" value="option2" />
+        <BlazorLabel For="exampleRadios2">Second default radio</BlazorLabel>
+    </FormGroup>
+    <FormGroup IsCheck="true" Class="disabled">
+        <BlazorInput InputType="InputType.Radio" Name="exampleRadios" Id="exampleRadios3" value="option3" IsDisabled="true" />
+        <BlazorLabel For="exampleRadios3">Disabled radio</BlazorLabel>
+    </FormGroup>
+</div>

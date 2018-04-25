@@ -32,6 +32,8 @@
   <ItemGroup>
     <None Include="Alert.cshtml" />
     <None Include="Badge.cshtml" />
+    <None Include="BlazorInput.cshtml" />
+    <None Include="BlazorLabel.cshtml" />
     <None Include="Breadcrumb.cshtml" />
     <None Include="BreadcrumbItem.cshtml" />
     <None Include="BlazorButton.cshtml" />
@@ -46,6 +48,9 @@
     <None Include="BlazorFigure.cshtml" />
     <None Include="FigureCaption.cshtml" />
     <None Include="FigureImage.cshtml" />
+    <None Include="BlazorForm.cshtml" />
+    <None Include="FormGroup.cshtml" />
+    <None Include="FormLabel.cshtml" />
     <None Include="Image.cshtml" />
     <None Include="Jumbotron.cshtml" />
     <None Include="ListGroup.cshtml" />
@@ -307,6 +312,42 @@
 
   <ItemGroup>
     <Content Remove="Card.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="FormGroup.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="FormGroup.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="FormLabel.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="FormLabel.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="BlazorForm.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="BlazorInput.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="BlazorInput.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="BlazorLabel.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="BlazorLabel.cshtml" />
   </ItemGroup>
 
 </Project>

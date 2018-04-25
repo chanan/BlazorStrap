@@ -30,7 +30,7 @@
             var active = IsActive ? "active" : null;
             var action = ListGroupType == ListGroupType.Button || ListGroupType == ListGroupType.Link ? "list-group-item-action" : null;
             var color = Color != Color.None ? $"list-group-item-{Color.ToDescriptionString()}" : null;
-            return $"list-group-item {color} {action} {active} {disabled}";
+            return $"list-group-item {color} {action} {active} {disabled} {Class}";
         }
     }
     public bool IsActive { get; set; }
@@ -39,6 +39,7 @@
     public string Href { get; set; }
     public Action<UIMouseEventArgs> OnClick { get; set; }
     public Color Color { get; set; } = Color.None;
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
     private void _onclick(UIMouseEventArgs e)
     {

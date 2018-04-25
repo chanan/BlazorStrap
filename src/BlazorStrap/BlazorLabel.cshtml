@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@inherits ColumnBase
+
+<label class="@classname" for="@For">@ChildContent</label>
+
+@functions {
+    string classname
+    {
+        get
+        {
+            var check = IsCheck ? "form-check-label" : null;
+            var size = GetColumnClass(null);
+            var column = size != null ? "col-form-label" : null;
+            return $"{check} {column} {size} {Class}";
+        }
+    }
+    public string For { get; set; }
+    public bool IsCheck { get; set; }
+    public string Class { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}

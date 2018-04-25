@@ -5,5 +5,13 @@
 </figure>
 
 @functions {
+    string classname
+    {
+        get
+        {
+            return $"figure {Class}";
+        }
+    }
+    public string Class { get; set; }
     public RenderFragment ChildContent { get; set; }
 }
