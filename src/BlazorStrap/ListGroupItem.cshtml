@@ -3,19 +3,19 @@
 
 @if (ListGroupType == ListGroupType.Button)
 {
-    <button type="button" onclick="@_onclick" class="@classname" disabled="@IsDisabled">
+    <button type="button" onclick="@_onclick" class="@classname" style="@Style" disabled="@IsDisabled">
         @ChildContent
     </button>
 }
 @if (ListGroupType == ListGroupType.Link)
 {
-    <a href="@Href" onclick="@_onclick" class="@classname">
+    <a href="@Href" onclick="@_onclick" class="@classname" style="@Style">
         @ChildContent
     </a>
 }
 @if (ListGroupType == ListGroupType.List)
 {
-    <li onclick="@_onclick" class="@classname">
+    <li onclick="@_onclick" class="@classname" style="@Style">
         @ChildContent
     </li>
 }
@@ -40,6 +40,7 @@
     public Action<UIMouseEventArgs> OnClick { get; set; }
     public Color Color { get; set; } = Color.None;
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
     private void _onclick(UIMouseEventArgs e)
     {

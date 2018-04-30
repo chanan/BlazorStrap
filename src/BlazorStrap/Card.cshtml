@@ -3,19 +3,19 @@
 
 @if (CardType == CardType.Card || CardType == CardType.Body || CardType == CardType.ImageOverlay || CardType == CardType.Group || CardType == CardType.Deck || CardType == CardType.Columns)
 {
-    <div class="@classname">@ChildContent</div>
+    <div class="@classname" style="@Style">@ChildContent</div>
 }
 @if (CardType == CardType.Image)
 {
-    <img class="@classname" src="@src" alt="@alt" />
+    <img class="@classname" style="@Style" src="@src" alt="@alt" />
 }
 @if (CardType == CardType.Title)
 {
-    <h5 class="@classname">@ChildContent</h5>
+    <h5 class="@classname" style="@Style">@ChildContent</h5>
 }
 @if (CardType == CardType.Subtitle)
 {
-    <h6 class="@classname">@ChildContent</h6>
+    <h6 class="@classname" style="@Style">@ChildContent</h6>
 }
 @if (CardType == CardType.Text)
 {
@@ -23,41 +23,41 @@
 }
 @if (CardType == CardType.Link)
 {
-    <a href="@href" class="@classname">@ChildContent</a>
+    <a href="@href" class="@classname" style="@Style">@ChildContent</a>
 }
 @if (CardType == CardType.Footer)
 {
-    <div class="@classname">@ChildContent</div>
+    <div class="@classname" style="@Style">@ChildContent</div>
 }
 @if (CardType == CardType.Header)
 {
     @if (HeadingSize == HeadingSize.None)
     {
-        <div class="@classname">@ChildContent</div>
+        <div class="@classname" style="@Style">@ChildContent</div>
     }
     @if (HeadingSize == HeadingSize.H1)
     {
-        <h1 class="@classname">@ChildContent</h1>
+        <h1 class="@classname" style="@Style">@ChildContent</h1>
     }
     @if (HeadingSize == HeadingSize.H2)
     {
-        <h2 class="@classname">@ChildContent</h2>
+        <h2 class="@classname" style="@Style">@ChildContent</h2>
     }
     @if (HeadingSize == HeadingSize.H3)
     {
-        <h3 class="@classname">@ChildContent</h3>
+        <h3 class="@classname" style="@Style">@ChildContent</h3>
     }
     @if (HeadingSize == HeadingSize.H4)
     {
-        <h4 class="@classname">@ChildContent</h4>
+        <h4 class="@classname" style="@Style">@ChildContent</h4>
     }
     @if (HeadingSize == HeadingSize.H5)
     {
-        <h5 class="@classname">@ChildContent</h5>
+        <h5 class="@classname" style="@Style">@ChildContent</h5>
     }
     @if (HeadingSize == HeadingSize.H6)
     {
-        <h6 class="@classname">@ChildContent</h6>
+        <h6 class="@classname" style="@Style">@ChildContent</h6>
     }
 }
 
@@ -81,6 +81,7 @@
     public Color Color { get; set; } = Color.None;
     public bool IsOutline { get; set; }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 
     private string GetImageVerticalAlignmnet()

@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<div class="modal-header">
+    <h5 class="@classname" style="@Style">@ChildContent</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="@OnClick">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+@functions {
+    string classname
+    {
+        get
+        {
+            return $"modal-title {Class}";
+        }
+    }
+    public Action<UIMouseEventArgs> OnClick { get; set; }
+    public string Class { get; set; }
+    public string Style { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}

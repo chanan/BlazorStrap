@@ -23,6 +23,7 @@ https://github.com/chanan/BlazorStrap/releases
  * Layout (Container, Row, Col)
  * Listgroups
  * Media
+ * Modal
  * Pagination
  * Progress
  * Tables
@@ -31,9 +32,11 @@ https://github.com/chanan/BlazorStrap/releases
 
 * ButtonGroup, Checkboxes and Radio buttons
 * Dropdowns - https://github.com/aspnet/Blazor/issues/650
-* Modal
 * Nav
 * Navbar
 * Popover
 * Tooltip
 * Everything else...
+* Modal - Clicking anywhere will close the modal (https://github.com/aspnet/Blazor/issues/715)
+* Modal - Close by clicking the Esc key
+* Modal - Will currently "clobber" body classes

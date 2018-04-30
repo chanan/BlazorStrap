@@ -2,7 +2,7 @@
 
 @if(IsValid || IsInvalid)
 {
-    <div class="@classname">@ChildContent</div>
+    <div class="@classname" style="@Style">@ChildContent</div>
 }
 
 @functions {
@@ -20,5 +20,6 @@
     public bool IsInvalid { get; set; }
     public bool IsTooltip { get; set; }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

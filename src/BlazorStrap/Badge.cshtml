@@ -3,20 +3,20 @@
 
 @if (Href == null)
 {
-    <span class="@className">
+    <span class="@classname" style="@Style">
         @ChildContent
     </span>
 }
 @if (Href != null)
 {
-    <a href="@Href" class="@className">
+    <a href="@Href" class="@classname" style="@Style">
         @ChildContent
     </a>
 }
 
 
 @functions {
-    private string className
+    private string classname
     {
         get
         {
@@ -29,5 +29,6 @@
     public bool IsPill { get; set; }
     public string Href { get; set; }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

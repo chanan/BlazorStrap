@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+<div class="@classname" style="@styles" tabindex="-1" role="dialog" onclick="@onclick">
+    <div class="@innerClassname" role="document">
+        <div class="modal-content">
+            @ChildContent
+        </div>
+    </div>
+</div>
+
+@if (IsOpen)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+@functions {
+    string classname
+    {
+        get
+        {
+            var display = IsOpen ? "show" : null;
+            return $"modal fade {display} {Class}";
+        }
+    }
+    string innerClassname
+    {
+        get
+        {
+            var center = IsCentered ? "modal-dialog-centered" : null;
+            var size = Size != Size.None ? $"modal-{Size.ToDescriptionString()}" : null;
+            return $"modal-dialog {size} {center}";
+        }
+    }
+    string styles
+    {
+        get
+        {
+            var display = IsOpen ? "display: block;" : "display: none;";
+            return $"{Style} {display}";
+        }
+    }
+    public bool _isOpen;
+    public bool IsOpen
+    {
+        get
+        {
+            return _isOpen;
+        }
+        set
+        {
+            BlazorStrapInterop.ChangeBody(value ? "modal-open" : null);
+            _isOpen = value;
+        }
+    }
+    public bool IsCentered { get; set; }
+    public Size Size { get; set; } = Size.None;
+    public string Class { get; set; }
+    public string Style { get; set; }
+    public RenderFragment ChildContent { get; set; }
+
+    void onclick()
+    {
+        IsOpen = false;
+    }
+
+    /*void dontclick(UIMouseEventArgs e)
+    {
+        //TODO: Ignore clicks in dialog
+    }
+    void onkeyup(UIKeyboardEventArgs e)
+    {
+        //TODO: Close on Esc key
+        Console.Write("Key: ", e.Key);
+    }*/
+}

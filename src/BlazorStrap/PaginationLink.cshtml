@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Blazor
 
-<a class="@classname" href="@Href" aria-label="@label">
+<a class="@classname" style="@Style" href="@Href" aria-label="@label">
     @if(PaginationLinkType == PaginationLinkType.Custom)
     {
         @ChildContent
@@ -54,6 +54,7 @@
         }
     }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 }
 

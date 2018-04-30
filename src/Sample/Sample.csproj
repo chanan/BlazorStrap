@@ -8,9 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.0-preview2-final" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.2.0" />
-    <DotNetCliToolReference Include="Microsoft.AspNetCore.Blazor.Cli" Version="0.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.2.1" />
+    <DotNetCliToolReference Include="Microsoft.AspNetCore.Blazor.Cli" Version="0.2.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,12 +29,13 @@
     <None Include="Pages\Cards.cshtml" />
     <None Include="Pages\Dropdowns.cshtml" />
     <None Include="Pages\Figures.cshtml" />
-    <None Include="Pages\forms.cshtml" />
+    <None Include="Pages\Forms.cshtml" />
     <None Include="Pages\Images.cshtml" />
     <None Include="Pages\Jumbotrons.cshtml" />
     <None Include="Pages\Layout.cshtml" />
     <None Include="Pages\Listgroups.cshtml" />
     <None Include="Pages\MediaTags.cshtml" />
+    <None Include="Pages\Modals.cshtml" />
     <None Include="Pages\Paginations.cshtml" />
     <None Include="Pages\ProgressBars.cshtml" />
     <None Include="Pages\Tables.cshtml" />
@@ -150,6 +151,14 @@
 
   <ItemGroup>
     <Content Remove="Pages\forms.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\modals.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\modals.cshtml" />
   </ItemGroup>
 
 </Project>

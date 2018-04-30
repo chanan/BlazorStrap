@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Blazor
 @using BlazorStrap.util
 
-<a class="@classname" href="@Href">
+<a class="@classname" style="@Style" href="@Href">
    @ChildContent
 </a>
 
@@ -15,5 +15,6 @@
     }
     public string Href { get; set; }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

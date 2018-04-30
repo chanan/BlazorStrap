@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Blazor
 @using BlazorStrap.util
 
-<th class="@classname" colspan="@colspan">
+<th class="@classname" style="@Style" colspan="@colspan">
     @ChildContent
 </th>
 
@@ -25,5 +25,6 @@
         }
     }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

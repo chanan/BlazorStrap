@@ -3,14 +3,14 @@
 @if (IsResponsive)
 {
     <div class="table-responsive">
-        <table class="@classname">
+        <table class="@classname" style="@Style">
             @ChildContent
         </table>
     </div>
 }
 @if (!IsResponsive)
 {
-    <table class="@classname">
+    <table class="@classname" style="@Style">
         @ChildContent
     </table>
 }
@@ -37,5 +37,6 @@
     public bool IsSmall { get; set; }
     public bool IsResponsive { get; set; }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

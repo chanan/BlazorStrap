@@ -3,7 +3,7 @@
 
 @if (IsOpen)
 {
-    <div class="@className" role="alert">
+    <div class="@classname" style="@Style" role="alert">
         @ChildContent
         @if (IsDismissible)
         {
@@ -15,7 +15,7 @@
 }
 
 @functions {
-    private string className
+    private string classname
     {
         get
         {
@@ -26,6 +26,7 @@
     public Color Color { get; set; } = Color.Primary;
     public bool IsDismissible { get; set; }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 
     private bool IsOpen { get; set; } = true;

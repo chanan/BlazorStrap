@@ -1,11 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Blazor
 
-<div class="@className">
+<div class="@classname" style="@Style">
     @ChildContent
 </div>
 
 @functions {
-    private string className
+    private string classname
     {
         get
         {
@@ -16,5 +16,6 @@
 
     public bool IsFluid { get; set; }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

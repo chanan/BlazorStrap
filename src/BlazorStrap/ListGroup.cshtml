@@ -2,13 +2,13 @@
 
 @if (ListGroupType == ListGroupType.List)
 {
-    <ul class="@classname">
+    <ul class="@classname" style="@Style">
         @ChildContent
     </ul>
 }
 @if (ListGroupType == ListGroupType.Button || ListGroupType == ListGroupType.Link)
 {
-    <div class="@classname">
+    <div class="@classname" style="@Style">
         @ChildContent
     </div>
 }
@@ -25,5 +25,6 @@
     public ListGroupType ListGroupType { get; set; } = ListGroupType.List;
     public bool IsFlush { get; set; }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

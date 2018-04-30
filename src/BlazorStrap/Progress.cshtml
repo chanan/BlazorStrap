@@ -4,18 +4,18 @@
 @if (!IsMulti && !IsBar)
 {
     <div class="progress">
-        <div class="@classname" role="progressbar" style="@style" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
+        <div class="@classname" style="@Style" role="progressbar" style="@style" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
     </div>
 }
 @if (IsMulti && !IsBar)
 {
-    <div class="@classname">
+    <div class="@classname" style="@Style">
         @ChildContent
     </div>
 }
 @if (!IsMulti && IsBar)
 {
-    <div class="@classname" role="progressbar" style="@style" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
+    <div class="@classname" style="@Style" role="progressbar" style="@style" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
 }
 
 
@@ -48,5 +48,6 @@
     public bool IsStriped { get; set; }
     public bool IsAnimated { get; set; }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

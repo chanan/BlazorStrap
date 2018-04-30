@@ -3,18 +3,18 @@
 
 @if (this.InputType == InputType.Select)
 {
-    <select class="@classname" id="@Id" name="@Name" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex">
+    <select class="@classname" style="@Style" id="@Id" name="@Name" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex">
         @ChildContent
     </select>
 
 }
 else if(this.InputType == InputType.TextArea)
 {
-    <textarea class="@classname" id="@Id" rows="@Rows" cols="@Cols" placeholder="@PlaceHolder" readonly="@IsReadonly" disabled="@IsDisabled">@ChildContent</textarea>
+    <textarea class="@classname" style="@Style" id="@Id" rows="@Rows" cols="@Cols" placeholder="@PlaceHolder" readonly="@IsReadonly" disabled="@IsDisabled">@ChildContent</textarea>
 }
 else
 {
-    <input class="@classname" type="@Type" id="@Id" placeholder="@PlaceHolder" value="@Value" name="@Name" readonly="@IsReadonly" disabled="@IsDisabled" checked="@IsChecked" />
+    <input class="@classname" style="@Style" type="@Type" id="@Id" placeholder="@PlaceHolder" value="@Value" name="@Name" readonly="@IsReadonly" disabled="@IsDisabled" checked="@IsChecked" />
 }
 
 @functions {
@@ -47,6 +47,7 @@ else
     public int SelectSize { get; set; }
     public int SelectedIndex { get; set; }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
     private string Type
     {

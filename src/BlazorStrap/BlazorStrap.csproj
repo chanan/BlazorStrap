@@ -6,7 +6,7 @@
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <PackageId>BlazorStrap</PackageId>
-    <Version>0.0.6</Version>
+    <Version>0.0.7</Version>
     <Authors>Chanan Braunstein</Authors>
     <Title>Blazor BootStrap</Title>
     <Description>A bootstrap4 component library for Blazor</Description>
@@ -16,9 +16,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- .js/.css files will be referenced via <script>/<link> tags; other content files will just be included in the app's 'dist' directory without any tags referencing them -->
+    <EmbeddedResource Include="content\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="content\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.0-preview2-final" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.2.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -59,6 +66,10 @@
     <None Include="ListGroupItemHeading.cshtml" />
     <None Include="ListGroupItemText.cshtml" />
     <None Include="Media.cshtml" />
+    <None Include="Modal.cshtml" />
+    <None Include="ModalBody.cshtml" />
+    <None Include="ModalFooter.cshtml" />
+    <None Include="ModalHeader.cshtml" />
     <None Include="Pagination.cshtml" />
     <None Include="PaginationItem.cshtml" />
     <None Include="PaginationLink.cshtml" />
@@ -357,6 +368,42 @@
 
   <ItemGroup>
     <Content Remove="FormFeedback.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Modal.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Modal.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="ModalHeader.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="ModalHeader.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="ModalBody.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="ModalBody.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="ModalFooter.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="ModalFooter.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="content\" />
   </ItemGroup>
 
 </Project>

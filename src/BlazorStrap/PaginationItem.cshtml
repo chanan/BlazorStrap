@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Blazor
 
-<li class="@classname">
+<li class="@classname" style="@Style">
     @ChildContent
 </li>
 
@@ -17,5 +17,6 @@
     public bool IsActive { get; set; }
     public bool IsDisabled { get; set; }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 }

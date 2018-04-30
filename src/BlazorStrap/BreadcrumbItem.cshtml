@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Blazor
 
-<li class="@classname" aria-current="@aria">@ChildContent</li>
+<li class="@classname" style="@Style" aria-current="@aria">@ChildContent</li>
 
 
 @functions {
@@ -21,6 +21,7 @@
     }
     public bool IsActive { get; set; }
     public string Class { get; set; }
+    public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 }
 
