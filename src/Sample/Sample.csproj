@@ -36,6 +36,7 @@
     <None Include="Pages\Listgroups.cshtml" />
     <None Include="Pages\MediaTags.cshtml" />
     <None Include="Pages\Modals.cshtml" />
+    <None Include="Pages\Navs.cshtml" />
     <None Include="Pages\Paginations.cshtml" />
     <None Include="Pages\ProgressBars.cshtml" />
     <None Include="Pages\Tables.cshtml" />
@@ -159,6 +160,14 @@
 
   <ItemGroup>
     <Content Remove="Pages\modals.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Navs.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Navs.cshtml" />
   </ItemGroup>
 
 </Project>

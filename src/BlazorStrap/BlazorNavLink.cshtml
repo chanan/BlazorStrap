@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<a href="@Href" class="@classname" style="@Style">
+    @ChildContent
+</a>
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            var active = IsActive ? "active" : null;
+            var disabled = IsDisabled ? "disabled" : null;
+            return $"nav-item nav-link {active} {disabled} {Class}";
+        }
+    }
+    public string Href { get; set; }
+    public bool IsActive { get; set; }
+    public bool IsDisabled { get; set; }
+    public string Class { get; set; }
+    public string Style { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}

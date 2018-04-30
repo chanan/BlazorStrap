@@ -22,6 +22,7 @@ https://github.com/chanan/BlazorStrap/releases
  * Forms - mostly done (Binding still pending)
  * Layout (Container, Row, Col)
  * Listgroups
+ * Navs
  * Media
  * Modal
  * Pagination
@@ -32,7 +33,6 @@ https://github.com/chanan/BlazorStrap/releases
 
 * ButtonGroup, Checkboxes and Radio buttons
 * Dropdowns - https://github.com/aspnet/Blazor/issues/650
-* Nav
 * Navbar
 * Popover
 * Tooltip

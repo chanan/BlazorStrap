@@ -70,6 +70,9 @@
     <None Include="ModalBody.cshtml" />
     <None Include="ModalFooter.cshtml" />
     <None Include="ModalHeader.cshtml" />
+    <None Include="BlazorNav.cshtml" />
+    <None Include="NavItem.cshtml" />
+    <None Include="BlazorNavLink.cshtml" />
     <None Include="Pagination.cshtml" />
     <None Include="PaginationItem.cshtml" />
     <None Include="PaginationLink.cshtml" />
@@ -404,6 +407,22 @@
 
   <ItemGroup>
     <Folder Include="content\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="NavItem.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="NavItem.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="BlazorNav.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="BlazorNavLink.cshtml" />
   </ItemGroup>
 
 </Project>
