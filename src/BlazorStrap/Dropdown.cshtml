@@ -10,10 +10,12 @@
         get
         {
             var open = IsOpen ? "show" : null;
-            return $"dropdown {open} {Class}";
+            var baseclass = IsGroup ? "btn-group" : "dropdown";
+            return $"{baseclass} {open} {Class}";
         }
     }
     public bool IsOpen { get; set; }
+    public bool IsGroup { get; set; }
     public string Class { get; set; }
     public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }

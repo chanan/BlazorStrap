@@ -6,13 +6,13 @@
 
 @if (!IsSplit)
 {
-    <button class="@classname" style="@Style" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="@IsOpen" onclick="@onclick">
+    <button class="@classname" style="@Style" type="button" aria-haspopup="true" aria-expanded="@IsOpen" onclick="@onclick">
         @ChildContent
     </button>
 }
 else
 {
-    <button class="@classname" style="@Style" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="@IsOpen" onclick="@onclick">
+    <button class="@classname" style="@Style" type="button" aria-haspopup="true" aria-expanded="@IsOpen" onclick="@onclick">
         <span class="sr-only">Toggle Dropdown</span>
     </button>
 

@@ -12,11 +12,17 @@
         {
             var toggle = IsToggle ? "btn-group-toggle" : null;
             var direction = DropdownDirection != DropdownDirection.Down ? DropdownDirection.ToDescriptionString() : null;
-            return $"btn-group {toggle} {direction} {Class}";
+            var groupdir = IsVertical ? "btn-group-vertical" : "btn-group";
+            var baseclass = IsToolbar ? "btn-toolbar" : groupdir;
+            var size = Size != Size.None ? $"btn-group-{Size.ToDescriptionString()}" : null;
+            return $"{baseclass} {size} {toggle} {direction} {Class}";
         }
     }
     public bool IsToggle { get; set; }
+    public bool IsToolbar { get; set; }
+    public bool IsVertical { get; set; }
     public DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
+    public Size Size { get; set; } = Size.None;
     public string Class { get; set; }
     public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
