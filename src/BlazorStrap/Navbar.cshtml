@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+<nav class="@classname" style="@Style">
+    @ChildContent
+</nav>
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            var color = Color != Color.None ? $"bg-{Color.ToDescriptionString()}" : null;
+            var dark = IsDark ? "navbar-dark" : "navbar-light";
+            var expand = IsExpand ? "navbar-expand-lg" : null;
+            var fixedTop = IsFixedTop ? "fixed-top" : null;
+            var fixedBottom = IsFixedBottom ? "fixed-bottom" : null;
+            var stickyTop = IsStickyTop ? "sticky-top" : null;
+            return $"navbar {fixedTop} {fixedBottom} {stickyTop} {dark} {color} {expand} {Class}";
+        }
+    }
+
+    public Color Color { get; set; } = Color.None;
+    public bool IsDark { get; set; }
+    public bool IsExpand { get; set; }
+    public bool IsFixedTop { get; set; }
+    public bool IsFixedBottom { get; set; }
+    public bool IsStickyTop { get; set; }
+    public string Class { get; set; }
+    public string Style { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}

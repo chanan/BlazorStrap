@@ -11,23 +11,25 @@ https://chanan.github.io/BlazorStrap/
 https://github.com/chanan/BlazorStrap/releases
 
 ## Done:
- * Alerts
- * Badges
- * Breadcrumbs
- * Cards
- * Buttons (excluding ButtonGroup, Checkboxes and Radio buttons)
- * Images
- * Jumbotrons
- * Figures
- * Forms - mostly done (Binding still pending)
- * Layout (Container, Row, Col)
- * Listgroups
- * Navs
- * Media
- * Modal
- * Pagination
- * Progress
- * Tables
+* Alerts
+* Badges
+* Breadcrumbs
+* Cards
+* Collapse
+* Buttons (excluding ButtonGroup, Checkboxes and Radio buttons)
+* Images
+* Jumbotrons
+* Figures
+* Forms - mostly done (Binding still pending)
+* Layout (Container, Row, Col)
+* Listgroups
+* Navs
+* Navbars
+* Media
+* Modal
+* Pagination
+* Progress
+* Tables
 
 ## Not Done
 

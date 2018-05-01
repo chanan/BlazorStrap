@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+<div class="@classname" style="@Style">
+    @ChildContent
+</div>
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            var open = IsOpen ? "show" : null;
+            var navbar = IsNavbar ? "navbar-collapse" : null;
+            return $"collapse {navbar} {open} {Class}";
+        }
+    }
+
+    public bool IsOpen { get; set; }
+    public bool IsNavbar { get; set; }
+    public string Class { get; set; }
+    public string Style { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}

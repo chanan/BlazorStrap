@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<button class="@classname" type="button" aria-label="Toggle navigation" onclick="@onclick">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            return $"navbar-toggler {Class}";
+        }
+    }
+
+    public Action<UIMouseEventArgs> onclick { get; set; }
+    public string Class { get; set; }
+    public string Style { get; set; }
+    public RenderFragment ChildContent { get; set; }
+
+
+}

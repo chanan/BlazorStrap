@@ -24,7 +24,8 @@ else
             var tabs = IsTabs ? "nav-tabs" : null;
             var pills = IsPills ? "nav-pills" : null;
             var fill = IsFill ? "nav-fill" : null;
-            return $"nav {tabs} {pills} {fill} {vertical} {GetAlignment()} {Class}";
+            var navbar = IsNavbar ? "navbar-nav" : null;
+            return $"nav {navbar} {tabs} {pills} {fill} {vertical} {GetAlignment()} {Class}";
         }
     }
 
@@ -34,6 +35,7 @@ else
     public bool IsTabs { get; set; }
     public bool IsPills { get; set; }
     public bool IsFill { get; set; }
+    public bool IsNavbar { get; set; }
     public string Class { get; set; }
     public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }

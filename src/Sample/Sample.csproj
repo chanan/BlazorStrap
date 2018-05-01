@@ -27,6 +27,7 @@
     <None Include="Pages\Badges.cshtml" />
     <None Include="Pages\Breadcrumbs.cshtml" />
     <None Include="Pages\Cards.cshtml" />
+    <None Include="Pages\CollapsePage.cshtml" />
     <None Include="Pages\Dropdowns.cshtml" />
     <None Include="Pages\Figures.cshtml" />
     <None Include="Pages\Forms.cshtml" />
@@ -36,6 +37,7 @@
     <None Include="Pages\Listgroups.cshtml" />
     <None Include="Pages\MediaTags.cshtml" />
     <None Include="Pages\Modals.cshtml" />
+    <None Include="Pages\Navbars.cshtml" />
     <None Include="Pages\Navs.cshtml" />
     <None Include="Pages\Paginations.cshtml" />
     <None Include="Pages\ProgressBars.cshtml" />
@@ -168,6 +170,22 @@
 
   <ItemGroup>
     <Content Remove="Pages\Navs.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Navbars.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Navbars.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\CollapsePage.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\CollapsePage.cshtml" />
   </ItemGroup>
 
 </Project>

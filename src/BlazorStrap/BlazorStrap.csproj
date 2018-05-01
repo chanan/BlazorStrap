@@ -47,6 +47,7 @@
     <None Include="ButtonGroup.cshtml" />
     <None Include="Card.cshtml" />
     <None Include="Col.cshtml" />
+    <None Include="Collapse.cshtml" />
     <None Include="Container.cshtml" />
     <None Include="Dropdown.cshtml" />
     <None Include="DropdownItem.cshtml" />
@@ -71,6 +72,9 @@
     <None Include="ModalFooter.cshtml" />
     <None Include="ModalHeader.cshtml" />
     <None Include="BlazorNav.cshtml" />
+    <None Include="Navbar.cshtml" />
+    <None Include="NavbarBrand.cshtml" />
+    <None Include="NavbarToggler.cshtml" />
     <None Include="NavItem.cshtml" />
     <None Include="BlazorNavLink.cshtml" />
     <None Include="Pagination.cshtml" />
@@ -423,6 +427,38 @@
 
   <ItemGroup>
     <BlazorGenerate Remove="BlazorNavLink.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Navbar.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Navbar.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="NavbarBrand.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="NavbarBrand.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="NavbarToggler.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="NavbarToggler.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Collapse.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Collapse.cshtml" />
   </ItemGroup>
 
 </Project>

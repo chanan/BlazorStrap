@@ -1,0 +1,73 @@
+﻿@addTagHelper *, BlazorStrap
+@page "/navbars"
+
+<h1>Navbars</h1>
+
+<Alert Color="Color.Info">
+    Navbar toggle needs more work
+</Alert>
+
+<div class="docs-example">
+    <Navbar IsExpand="true" IsDark="false" Color="Color.Light">
+        <NavbarBrand Href="#">Navbar</NavbarBrand>
+        <NavbarToggler onclick="@onclick" />
+        <Collapse isOpen="@IsOpen" IsNavbar="true">
+            <BlazorNav IsList="true" Class="mr-auto" IsNavbar="true">
+                <NavItem>
+                    <BlazorNavLink IsActive="true" Href="#">Home</BlazorNavLink>
+                </NavItem>
+                <NavItem>
+                    <BlazorNavLink Href="#">Link</BlazorNavLink>
+                </NavItem>
+                <NavItem>
+                    <BlazorNavLink IsDisabled="true" Href="#">Disabled</BlazorNavLink>
+                </NavItem>
+            </BlazorNav>
+            <BlazorForm IsInline="true" Class="my-2 my-lg-0">
+                <BlazorInput InputType="InputType.Search" PlaceHolder="Search" Class="mr-sm-2" />
+                <BlazorButton IsOutline="true" Color="Color.Success" ButtonType="ButtonType.Submit" Class="my-2 my-sm-0">Search</BlazorButton>
+            </BlazorForm>
+        </Collapse>
+    </Navbar>
+</div>
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Navbar</span> <span style="color:#89bdff">IsExpand</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsDark</span>=<span style="color:#65b042">"false"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavbarBrand</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Navbar<span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavbarBrand</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavbarToggler</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Collapse</span> <span style="color:#89bdff">isOpen</span>=<span style="color:#65b042">"@@IsOpen"</span> <span style="color:#89bdff">IsNavbar</span>=<span style="color:#65b042">"true"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNav</span> <span style="color:#89bdff">IsList</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"mr-auto"</span> <span style="color:#89bdff">IsNavbar</span>=<span style="color:#65b042">"true"</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>></span>
+                <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Home<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>></span>
+            <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>></span>
+                <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>></span>
+            <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>></span>
+                <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">IsDisabled</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Disabled<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>></span>
+            <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNav</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorForm</span> <span style="color:#89bdff">IsInline</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"my-2 my-lg-0"</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Search"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"Search"</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"mr-sm-2"</span> /></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">"ButtonType.Submit"</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"my-2 my-sm-0"</span>></span>Search<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorForm</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Collapse</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Navbar</span>></span>
+@@functions {
+    bool IsOpen { get; set; } = true;
+    void onclick(UIMouseEventArgs e)
+    {
+        IsOpen = !IsOpen;
+    }
+}
+</pre>
+
+
+
+
+@functions {
+    bool IsOpen { get; set; } = true;
+    void onclick(UIMouseEventArgs e)
+    {
+        IsOpen = !IsOpen;
+    }
+}
