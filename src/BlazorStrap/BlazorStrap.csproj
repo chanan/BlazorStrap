@@ -6,7 +6,7 @@
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <PackageId>BlazorStrap</PackageId>
-    <Version>0.0.8</Version>
+    <Version>0.0.9</Version>
     <Authors>Chanan Braunstein</Authors>
     <Title>Blazor BootStrap</Title>
     <Description>A bootstrap4 component library for Blazor</Description>
@@ -50,6 +50,7 @@
     <None Include="Collapse.cshtml" />
     <None Include="Container.cshtml" />
     <None Include="Dropdown.cshtml" />
+    <None Include="DropdownHeader.cshtml" />
     <None Include="DropdownItem.cshtml" />
     <None Include="DropdownMenu.cshtml" />
     <None Include="DropdownToggle.cshtml" />
@@ -482,6 +483,14 @@
 
   <ItemGroup>
     <BlazorGenerate Remove="PopoverBody.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="DropdownHeader.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="DropdownHeader.cshtml" />
   </ItemGroup>
 
 </Project>

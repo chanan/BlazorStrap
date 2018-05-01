@@ -1,17 +1,50 @@
 ﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
 
-<button class="@classname" style="@Style" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    @ChildContent
-</button>
+@*//if (!IsLink)
+    //{*@
+
+@if (!IsSplit)
+{
+    <button class="@classname" style="@Style" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="@IsOpen" onclick="@onclick">
+        @ChildContent
+    </button>
+}
+else
+{
+    <button class="@classname" style="@Style" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="@IsOpen" onclick="@onclick">
+        <span class="sr-only">Toggle Dropdown</span>
+    </button>
+
+}
+
+@* Link buttons won't work https://github.com/aspnet/Blazor/issues/715
+        }
+        else
+        {
+        <a href="#" class="@classname" style="@Style" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="@IsOpen" onclick="@onclick">
+                @ChildContent
+            </a>
+    }*@
+
 
 @functions {
     string classname
     {
         get
         {
-            return $"btn btn-secondary dropdown-toggle {Class}";
+            var color = Color != Color.None ? $"btn-{Color.ToDescriptionString()}" : null;
+            var split = IsSplit ? "dropdown-toggle-split" : null;
+            var size = Size != Size.None ? $"btn-{Size.ToDescriptionString()}" : null;
+            return $"btn {size} {color} {split} dropdown-toggle {Class}";
         }
     }
+    public Color Color { get; set; } = Color.None;
+    public Size Size { get; set; } = Size.None;
+    //public bool IsLink { get; set; }
+    public bool IsSplit { get; set; }
+    public bool IsOpen { get; set; }
+    public Action<UIMouseEventArgs> onclick { get; set; }
     public string Class { get; set; }
     public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }

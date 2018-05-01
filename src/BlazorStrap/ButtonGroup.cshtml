@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
 
-<div class="btn-group btn-group-toggle" data-toggle="buttons">
+<div class="@classname" style="@Style">
     @ChildContent
 </div>
 
@@ -9,9 +10,13 @@
     {
         get
         {
-            return $"btn-group btn-group-toggle {Class}";
+            var toggle = IsToggle ? "btn-group-toggle" : null;
+            var direction = DropdownDirection != DropdownDirection.Down ? DropdownDirection.ToDescriptionString() : null;
+            return $"btn-group {toggle} {direction} {Class}";
         }
     }
+    public bool IsToggle { get; set; }
+    public DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
     public string Class { get; set; }
     public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }

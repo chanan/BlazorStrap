@@ -1,19 +1,17 @@
 ﻿@using Microsoft.AspNetCore.Blazor
 
-<div class="@classname" style="@Style">
+<h6 class="@classname" style="@Style">
     @ChildContent
-</div>
+</h6>
 
 @functions {
     string classname
     {
         get
         {
-            var open = IsOpen ? "show" : null;
-            return $"dropdown {open} {Class}";
+            return $"dropdown-header {Class}";
         }
     }
-    public bool IsOpen { get; set; }
     public string Class { get; set; }
     public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }

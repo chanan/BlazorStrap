@@ -1,19 +1,44 @@
 ﻿@using Microsoft.AspNetCore.Blazor
-@using BlazorStrap.util
 
-<a class="@classname" style="@Style" href="@Href">
-   @ChildContent
-</a>
+@if (IsDivider)
+{
+    <div class="@classname" style="@Style"></div>
+
+}
+@if (!IsDivider)
+{
+    @if (!IsButton)
+    {
+        <a class="@classname" style="@Style" href="@Href">
+            @ChildContent
+        </a>
+    }
+    else
+    {
+        <button class="@classname" type="button" onclick="@onclick">
+            @ChildContent
+        </button>
+    }
+}
+
 
 @functions {
     string classname
     {
         get
         {
-            return $"dropdown-item {Class}";
+            if (IsDivider) return $"dropdown-divider {Class}";
+            var active = IsActive ? "active" : null;
+            var disabled = IsDisabled ? "disabled" : null;
+            return $"dropdown-item {active} {disabled} {Class}";
         }
     }
     public string Href { get; set; }
+    public bool IsDivider { get; set; }
+    public bool IsDisabled { get; set; }
+    public bool IsButton { get; set; }
+    public bool IsActive { get; set; }
+    public Action<UIMouseEventArgs> onclick { get; set; }
     public string Class { get; set; }
     public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
