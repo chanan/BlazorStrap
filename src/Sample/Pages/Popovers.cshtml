@@ -1,0 +1,24 @@
+﻿@addTagHelper *, BlazorStrap
+@page "/popovers"
+
+<h1>Popovers</h1>
+
+<Alert Color="Color.Info">
+    Work in progress - not done!
+</Alert>
+
+<div class="docs-example">
+    <BlazorButton onclick="@onclick">Launch Popover</BlazorButton>
+    <Popover IsOpen="@IsOpen">
+        <PopoverHeader>Popover Title</PopoverHeader>
+        <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
+    </Popover>
+</div>
+
+@functions {
+    bool IsOpen { get; set; }
+    void onclick(UIMouseEventArgs e)
+    {
+        IsOpen = !IsOpen;
+    }
+}

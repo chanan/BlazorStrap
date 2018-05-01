@@ -3,23 +3,23 @@
 
 @if (ButtonType == ButtonType.Button)
 {
-    <button onclick="@_onclick" type="button" class="@classname" style="@Style" disabled="@disabled">@ChildContent</button>
+    <button onclick="@onclick" type="button" class="@classname" style="@Style" disabled="@disabled">@ChildContent</button>
 }
 @if (ButtonType == ButtonType.Link)
 {
-    <a href="@Href" onclick="@_onclick" class="@classname" style="@Style" role="button" aria-pressed="@pressed" aria-disabled="@disabled" tabindex="@tab">@ChildContent</a>
+    <a href="@Href" onclick="@onclick" class="@classname" style="@Style" role="button" aria-pressed="@pressed" aria-disabled="@disabled" tabindex="@tab">@ChildContent</a>
 }
 @if (ButtonType == ButtonType.Input)
 {
-    <input onclick="@_onclick" class="@classname" style="@Style" type="button" value="@Value" disabled="@disabled" />
+    <input onclick="@onclick" class="@classname" style="@Style" type="button" value="@Value" disabled="@disabled" />
 }
 @if (ButtonType == ButtonType.Submit)
 {
-    <input onclick="@_onclick" class="@classname" style="@Style" type="submit" value="@Value" disabled="@disabled" />
+    <input onclick="@onclick" class="@classname" style="@Style" type="submit" value="@Value" disabled="@disabled" />
 }
 @if (ButtonType == ButtonType.Reset)
 {
-    <input onclick="@_onclick" class="@classname" style="@Style" type="reset" value="@Value" disabled="@disabled" />
+    <input onclick="@onclick" class="@classname" style="@Style" type="reset" value="@Value" disabled="@disabled" />
 }
 @if (ButtonType == ButtonType.Checkbox)
 {
@@ -73,7 +73,7 @@
         }
     }
 
-    public Action<UIMouseEventArgs> OnClick { get; set; }
+    public Action<UIMouseEventArgs> onclick { get; set; }
     internal Action<UIMouseEventArgs> OnButtonGroupClick { get; set; }
     public Color Color { get; set; } = Color.Primary;
     public ButtonType ButtonType { get; set; } = ButtonType.Button;
@@ -87,10 +87,6 @@
     public string Class { get; set; }
     public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
-    private void _onclick(UIMouseEventArgs e)
-    {
-        if (OnClick != null) OnClick(e);
-    }
     private void _buttonGroupOnClick(UIMouseEventArgs e)
     {
         if (OnButtonGroupClick != null) OnButtonGroupClick(e);

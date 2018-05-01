@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<div class="@classname" style="@Style">
+    @ChildContent
+</div>
+
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            return $"popover-body {Class}";
+        }
+    }
+
+    public string Class { get; set; }
+    public string Style { get; set; }
+    public RenderFragment ChildContent { get; set; }
+}

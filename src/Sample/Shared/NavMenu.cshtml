@@ -1,112 +1,119 @@
-﻿<div class="main-nav">
-    <div class="navbar navbar-dark bg-dark rounded">
-        <a class="navbar-brand" href="/">BlazorStrap Demo Site</a>
-        <ul class="navbar-nav mr-auto">
-            <li>
-                <NavLink href="/" Match=NavLinkMatch.All>
+﻿@addTagHelper *, BlazorStrap
+@using BlazorStrap
+
+<div class="main-nav">
+    <Navbar IsDark="true" Color="Color.Dark" Class="rounded" Style="overflow-y: auto;">
+        <BlazorNav IsList="true" IsVertical="true" Class="mr-auto">
+            <NavItem>
+                <BlazorNavLink href="/">
                     <span class="glyphicon glyphicon-home"></span> Home
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/alerts">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/alerts">
                     <span class="glyphicon glyphicon-education"></span> Alerts
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/badges">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/badges">
                     <span class="glyphicon glyphicon-education"></span> Badges
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/breadcrumbs">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/breadcrumbs">
                     <span class="glyphicon glyphicon-education"></span> Breadcrumbs
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/buttons">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/buttons">
                     <span class="glyphicon glyphicon-education"></span> Buttons
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/cards">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/cards">
                     <span class="glyphicon glyphicon-education"></span> Cards
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/collapse">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/collapse">
                     <span class="glyphicon glyphicon-education"></span> Collapse
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/dropdowns">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/dropdowns">
                     <span class="glyphicon glyphicon-education"></span> Dropdowns
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/figures">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/figures">
                     <span class="glyphicon glyphicon-education"></span> Figures
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/forms">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/forms">
                     <span class="glyphicon glyphicon-education"></span> Forms
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/images">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/images">
                     <span class="glyphicon glyphicon-education"></span> Images
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/jumbotrons">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/jumbotrons">
                     <span class="glyphicon glyphicon-education"></span> Jumbotrons
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/layout">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/layout">
                     <span class="glyphicon glyphicon-education"></span> Layout
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/listgroups">
-                    <span class="glyphicon glyphicon-education"></span> List Groups
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/media">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/NavItemstgroups">
+                    <span class="glyphicon glyphicon-education"></span> NavItemst Groups
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/media">
                     <span class="glyphicon glyphicon-education"></span> Media
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/modals">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/modals">
                     <span class="glyphicon glyphicon-education"></span> Modals
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/navs">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/navs">
                     <span class="glyphicon glyphicon-education"></span> Navs
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/navbars">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/navbars">
                     <span class="glyphicon glyphicon-education"></span> Navbars
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/pagination">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/pagination">
                     <span class="glyphicon glyphicon-education"></span> Pagination
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/progress">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/popovers">
+                    <span class="glyphicon glyphicon-education"></span> Popovers
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/progress">
                     <span class="glyphicon glyphicon-education"></span> Progress
-                </NavLink>
-            </li>
-            <li>
-                <NavLink href="/tables">
+                </BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink href="/tables">
                     <span class="glyphicon glyphicon-education"></span> Tables
-                </NavLink>
-            </li>
-        </ul>
-    </div>
+                </BlazorNavLink>
+            </NavItem>
+        </BlazorNav>
+    </Navbar>
 </div>

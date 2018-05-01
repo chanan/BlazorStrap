@@ -61,6 +61,7 @@
     <None Include="FormGroup.cshtml" />
     <None Include="FormLabel.cshtml" />
     <None Include="Image.cshtml" />
+    <None Include="PopoverBody.cshtml" />
     <None Include="Jumbotron.cshtml" />
     <None Include="ListGroup.cshtml" />
     <None Include="ListGroupItem.cshtml" />
@@ -80,6 +81,8 @@
     <None Include="Pagination.cshtml" />
     <None Include="PaginationItem.cshtml" />
     <None Include="PaginationLink.cshtml" />
+    <None Include="Popover.cshtml" />
+    <None Include="PopoverHeader.cshtml" />
     <None Include="Progress.cshtml" />
     <None Include="Row.cshtml" />
     <None Include="BlazorTable.cshtml" />
@@ -459,6 +462,26 @@
 
   <ItemGroup>
     <Content Remove="Collapse.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Popover.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Popover.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="PopoverHeader.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="PopoverHeader.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="PopoverBody.cshtml" />
   </ItemGroup>
 
 </Project>

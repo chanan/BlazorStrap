@@ -40,6 +40,7 @@
     <None Include="Pages\Navbars.cshtml" />
     <None Include="Pages\Navs.cshtml" />
     <None Include="Pages\Paginations.cshtml" />
+    <None Include="Pages\Popovers.cshtml" />
     <None Include="Pages\ProgressBars.cshtml" />
     <None Include="Pages\Tables.cshtml" />
   </ItemGroup>
@@ -186,6 +187,14 @@
 
   <ItemGroup>
     <Content Remove="Pages\CollapsePage.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Popovers.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Popovers.cshtml" />
   </ItemGroup>
 
 </Project>
