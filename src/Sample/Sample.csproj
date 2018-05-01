@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\ButtonGroups.cshtml" />
     <None Include="Pages\Buttons.cshtml" />
     <None Include="Pages\Alerts.cshtml" />
     <None Include="Pages\Badges.cshtml" />
@@ -204,6 +205,10 @@
 
   <ItemGroup>
     <Content Remove="Pages\test.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\ButtonGroups.cshtml" />
   </ItemGroup>
 
 </Project>

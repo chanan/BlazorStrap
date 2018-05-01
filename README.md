@@ -14,9 +14,10 @@ https://github.com/chanan/BlazorStrap/releases
 * Alerts
 * Badges
 * Breadcrumbs
+* Buttons (excluding ButtonGroup, Checkboxes and Radio buttons)
 * Cards
 * Collapse
-* Buttons (excluding ButtonGroup, Checkboxes and Radio buttons)
+* Dropdowns
 * Images
 * Jumbotrons
 * Figures
@@ -34,9 +35,7 @@ https://github.com/chanan/BlazorStrap/releases
 ## Not Done
 
 * ButtonGroup, Checkboxes and Radio buttons
-* Dropdowns - https://github.com/aspnet/Blazor/issues/650
 * Popover - use popover.js?
 * Tooltip - use popover.js?
-* Everything else...
 * Modal - Close by clicking the Esc key
 * Modal - Will currently "clobber" body classes
