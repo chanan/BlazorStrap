@@ -3,7 +3,7 @@
 
 <div class="@classname" style="@styles" tabindex="-1" role="dialog" onclick="@onclick">
     <div class="@innerClassname" role="document">
-        <div class="modal-content">
+        <div class="modal-content" onclick="@dontclick">
             @ChildContent
         </div>
     </div>
@@ -59,16 +59,18 @@
     public string Style { get; set; }
     public RenderFragment ChildContent { get; set; }
 
+    private bool _dontclickWasClicked;
     void onclick()
     {
-        IsOpen = false;
+        if(!_dontclickWasClicked) IsOpen = false;
+        _dontclickWasClicked = false;
     }
 
-    /*void dontclick(UIMouseEventArgs e)
+    void dontclick(UIMouseEventArgs e)
     {
-        //TODO: Ignore clicks in dialog
+        _dontclickWasClicked = true;
     }
-    void onkeyup(UIKeyboardEventArgs e)
+    /*void onkeyup(UIKeyboardEventArgs e)
     {
         //TODO: Close on Esc key
         Console.Write("Key: ", e.Key);
