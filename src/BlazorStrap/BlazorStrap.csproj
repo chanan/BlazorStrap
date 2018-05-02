@@ -46,6 +46,10 @@
     <None Include="BlazorButton.cshtml" />
     <None Include="ButtonGroup.cshtml" />
     <None Include="Card.cshtml" />
+    <None Include="Carousel.cshtml" />
+    <None Include="CarouselControl.cshtml" />
+    <None Include="CarouselIndicators.cshtml" />
+    <None Include="CarouselItem.cshtml" />
     <None Include="Col.cshtml" />
     <None Include="Collapse.cshtml" />
     <None Include="Container.cshtml" />
@@ -491,6 +495,38 @@
 
   <ItemGroup>
     <Content Remove="DropdownHeader.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Carousel.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Carousel.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="CarouselIndicators.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="CarouselIndicators.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="CarouselItem.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="CarouselItem.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="CarouselControl.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="CarouselControl.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -28,6 +28,7 @@
     <None Include="Pages\Badges.cshtml" />
     <None Include="Pages\Breadcrumbs.cshtml" />
     <None Include="Pages\Cards.cshtml" />
+    <None Include="Pages\Carousels.cshtml" />
     <None Include="Pages\CollapsePage.cshtml" />
     <None Include="Pages\Dropdowns.cshtml" />
     <None Include="Pages\Figures.cshtml" />
@@ -209,6 +210,14 @@
 
   <ItemGroup>
     <BlazorGenerate Remove="Pages\ButtonGroups.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Carousels.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Carousels.cshtml" />
   </ItemGroup>
 
 </Project>

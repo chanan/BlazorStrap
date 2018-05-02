@@ -10,6 +10,10 @@ https://chanan.github.io/BlazorStrap/
 ## Change Log
 https://github.com/chanan/BlazorStrap/releases
 
+## In Progress
+
+* Carousal - Stuck on: https://github.com/aspnet/Blazor/issues/380
+
 ## Done:
 * Alerts
 * Badges

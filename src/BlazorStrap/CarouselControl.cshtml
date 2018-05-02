@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<a class="@classname" role="button" onclick="@_onclick">
+    <span class="@iconClassname" aria-hidden="true"></span>
+    <span class="sr-only">@directionName</span>
+</a>
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            var direction = CarouselDirection == CarouselDirection.Previous ? "prev" : "next";
+            return $"carousel-control-{direction} {Class}";
+        }
+    }
+    private string iconClassname
+    {
+        get
+        {
+            var direction = CarouselDirection == CarouselDirection.Previous ? "prev" : "next";
+            return $"carousel-control-{direction}-icon";
+        }
+
+    }
+    private string directionName
+    {
+        get
+        {
+            return CarouselDirection == CarouselDirection.Previous ? "Previous" : "Next";
+        }
+    }
+    public int ActiveIndex { get; set; }
+    public int NumberOfItems { get; set; }
+    public Action<UIMouseEventArgs> onclick { get; set; }
+    public CarouselDirection CarouselDirection { get; set; } = CarouselDirection.Previous;
+    public string Class { get; set; }
+    public string Style { get; set; }
+
+    private void _onclick(UIMouseEventArgs e)
+    {
+        if(CarouselDirection == CarouselDirection.Previous)
+        {
+            if (ActiveIndex == 0) ActiveIndex = NumberOfItems - 1;
+            else ActiveIndex = ActiveIndex - 1;
+        }
+        else
+        {
+            if (ActiveIndex == NumberOfItems - 1) ActiveIndex = 0;
+            else ActiveIndex = ActiveIndex + 1;
+
+        }
+        Console.WriteLine("ActiveIndex: {0}", ActiveIndex);
+        onclick(e);
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<ol class="@classname" style="@Style">
+    @for(var i = 0; i < NumberOfItems; i++)
+    {
+        <li class="@ItemIsActive(i)" />
+    }
+</ol>
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            return $"carousel-indicators {Class}";
+        }
+    }
+    public int NumberOfItems { get; set; }
+    public int ActiveIndex { get; set; }
+    public string Class { get; set; }
+    public string Style { get; set; }
+    public RenderFragment ChildContent { get; set; }
+
+    string ItemIsActive(int i)
+    {
+        return i == ActiveIndex ? "active" : null;
+    }
+}
