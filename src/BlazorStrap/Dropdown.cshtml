@@ -11,12 +11,14 @@
         {
             var open = IsOpen ? "show" : null;
             var baseclass = IsGroup ? "btn-group" : "dropdown";
-            return $"{baseclass} {open} {Class}";
+            var direction = DropdownDirection != DropdownDirection.Down ? DropdownDirection.ToDescriptionString() : null;
+            return $"{baseclass} {direction} {open} {Class}";
         }
     }
-    public bool IsOpen { get; set; }
-    public bool IsGroup { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
+    [Parameter] private bool IsOpen { get; set; }
+    [Parameter] private bool IsGroup { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }

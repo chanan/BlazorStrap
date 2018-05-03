@@ -3,8 +3,8 @@
 
 @if (!IsMulti && !IsBar)
 {
-    <div class="progress">
-        <div class="@classname" style="@Style" role="progressbar" style="@style" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
+    <div class="progress" style="@Style">
+        <div class="@classname" style="@styles" role="progressbar" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
     </div>
 }
 @if (IsMulti && !IsBar)
@@ -15,14 +15,14 @@
 }
 @if (!IsMulti && IsBar)
 {
-    <div class="@classname" style="@Style" role="progressbar" style="@style" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
+    <div class="@classname" style="@styles" role="progressbar" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
 }
 
 
 @functions {
-    public int Value { get; set; }
-    public int Max { get; set; } = 100;
-    string style
+    [Parameter] private int Value { get; set; }
+    [Parameter] private int Max { get; set; } = 100;
+    string styles
     {
         get
         {
@@ -31,7 +31,7 @@
             return $"width: {percent}%";
         }
     }
-    public string classname
+    private string classname
     {
         get
         {
@@ -42,12 +42,12 @@
             return $"progress-bar {striped} {animated} {color} {Class}";
         }
     }
-    public Color Color { get; set; } = Color.None;
-    public bool IsMulti { get; set; }
-    public bool IsBar { get; set; }
-    public bool IsStriped { get; set; }
-    public bool IsAnimated { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private Color Color { get; set; } = Color.None;
+    [Parameter] private bool IsMulti { get; set; }
+    [Parameter] private bool IsBar { get; set; }
+    [Parameter] private bool IsStriped { get; set; }
+    [Parameter] private bool IsAnimated { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }

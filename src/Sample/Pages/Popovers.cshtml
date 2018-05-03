@@ -3,22 +3,27 @@
 
 <h1>Popovers</h1>
 
-<Alert Color="Color.Info">
+<Alert Color="Color.Warning">
     Work in progress - not done!
 </Alert>
 
 <div class="docs-example">
-    <BlazorButton onclick="@onclick">Launch Popover</BlazorButton>
-    <Popover IsOpen="@IsOpen">
+    <BlazorButton Id="popover1" onclick="@onclick">Launch Popover</BlazorButton>
+    <Popover Target="popover1" IsOpen="@IsOpen">
         <PopoverHeader>Popover Title</PopoverHeader>
         <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
     </Popover>
 </div>
+
+<h1>Sep</h1>
+
+
 
 @functions {
     bool IsOpen { get; set; }
     void onclick(UIMouseEventArgs e)
     {
         IsOpen = !IsOpen;
+        StateHasChanged();
     }
 }

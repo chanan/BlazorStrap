@@ -1,16 +1,11 @@
-@implements ILayoutComponent
+@inherits BlazorLayoutComponent
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3">
-            <NavMenu />
-        </div>
-        <div class="col-sm-9">
-            @Body
-        </div>
-    </div>
+<div class="sidebar" style="overflow-y: auto">
+    <NavMenu />
 </div>
 
-@functions {
-    public RenderFragment Body { get; set; }
-}
+<div class="main">
+    <div class="content px-4">
+        @Body
+    </div>
+</div>

@@ -2,7 +2,9 @@
 
 Port of https://reactstrap.github.io to Blazor
 
-**Note:** Currently Many of these tag will **not work correctly** due to an issue in Blazor: https://github.com/aspnet/Blazor/issues/643. This will be fixed in the next version of Blazor.
+## Bootstrap 4.1
+
+*IMPORTANT* Blazor 0.3.0 ships with Bootstrap 4.0. BlazorStrap uses Bootstrap 4.1. Replace bootstrap.min.css in wwwroot/css/bootstrap folder
 
 ## Docs
 https://chanan.github.io/BlazorStrap/
@@ -13,6 +15,7 @@ https://github.com/chanan/BlazorStrap/releases
 ## In Progress
 
 * Carousal - Stuck on: https://github.com/aspnet/Blazor/issues/380
+* Popovers
 
 ## Done:
 * Alerts
@@ -46,3 +49,6 @@ https://github.com/chanan/BlazorStrap/releases
 * Modal - Will currently "clobber" body classes
 * Events on all components that need it (Modal for example)
 * Allow for arbitrary attributes on all components
+* Dropdown - direction
+* Listgroup - tabs
+* Animations

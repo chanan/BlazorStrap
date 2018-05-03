@@ -3,14 +3,14 @@
 <img src="@src" alt="@alt" class="@classname" style="@Style" />
 
 @functions {
-    public string src { get; set; }
-    public string alt { get; set; }
-    public bool IsThumbnail { get; set; }
-    public bool IsResponsive { get; set; }
-    public bool IsRounded { get; set; }
-    public Alignment Alignment { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
+    [Parameter] private string src { get; set; }
+    [Parameter] private string alt { get; set; }
+    [Parameter] private bool IsThumbnail { get; set; }
+    [Parameter] private bool IsResponsive { get; set; }
+    [Parameter] private bool IsRounded { get; set; }
+    [Parameter] private Alignment Alignment { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
     string classname
     {
         get

@@ -26,20 +26,16 @@
         <h2>Install</h2>
 
         <h3>Package Manager</h3>
-        <pre>Install-Package BlazorStrap -Version 0.0.9</pre>
+        <pre>Install-Package BlazorStrap -Version 0.1.0</pre>
         <h3>dotnet CLI</h3>
-        <pre>dotnet add package BlazorStrap --version 0.0.9</pre>
-
-        <h3>Add Bootsrap 4 to index.html</h3>
-
-        Add Bootstrap 4 stylesheet to index.html instead of bootstrap 3. No need to add bootstrap javascript file.
+        <pre>dotnet add package BlazorStrap --version 0.1.0</pre>
 
         <h3>Tag Helpers</h3>
 
         <pre>@addTagHelper *, BlazorStrap</pre>
 
-        <div class="alert alert-danger" role="alert">
-            React Strap will not work propertly with Blazor 0.2.0. Blazor 0.3.0 will fix this issue.
+        <div class="alert alert-warning" role="alert">
+            Blazor 0.3.0 ships with Bootstrap 4.0. BlazorStrap uses Bootstrap 4.1. Replace bootstrap.min.css in wwwroot/css/bootstrap folder
         </div>
 
         <div class="alert alert-info" role="alert">

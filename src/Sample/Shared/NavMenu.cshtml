@@ -1,129 +1,140 @@
-﻿@addTagHelper *, BlazorStrap
-@using BlazorStrap
-
-<div class="main-nav">
-    <Navbar IsDark="true" Color="Color.Dark" Class="rounded" Style="overflow-y: auto;">
-        <BlazorNav IsList="true" IsVertical="true" Class="mr-auto">
-            <NavItem>
-                <BlazorNavLink href="/">
-                    <span class="glyphicon glyphicon-home"></span> Home
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/alerts">
-                    <span class="glyphicon glyphicon-education"></span> Alerts
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/badges">
-                    <span class="glyphicon glyphicon-education"></span> Badges
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/breadcrumbs">
-                    <span class="glyphicon glyphicon-education"></span> Breadcrumbs
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/buttons">
-                    <span class="glyphicon glyphicon-education"></span> Buttons
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/buttongroups">
-                    <span class="glyphicon glyphicon-education"></span> Button Groups
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/cards">
-                    <span class="glyphicon glyphicon-education"></span> Cards
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/carousels">
-                    <span class="glyphicon glyphicon-education"></span> Carousels
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/collapse">
-                    <span class="glyphicon glyphicon-education"></span> Collapse
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/dropdowns">
-                    <span class="glyphicon glyphicon-education"></span> Dropdowns
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/figures">
-                    <span class="glyphicon glyphicon-education"></span> Figures
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/forms">
-                    <span class="glyphicon glyphicon-education"></span> Forms
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/images">
-                    <span class="glyphicon glyphicon-education"></span> Images
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/jumbotrons">
-                    <span class="glyphicon glyphicon-education"></span> Jumbotrons
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/layout">
-                    <span class="glyphicon glyphicon-education"></span> Layout
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/NavItemstgroups">
-                    <span class="glyphicon glyphicon-education"></span> NavItemst Groups
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/media">
-                    <span class="glyphicon glyphicon-education"></span> Media
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/modals">
-                    <span class="glyphicon glyphicon-education"></span> Modals
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/navs">
-                    <span class="glyphicon glyphicon-education"></span> Navs
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/navbars">
-                    <span class="glyphicon glyphicon-education"></span> Navbars
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/pagination">
-                    <span class="glyphicon glyphicon-education"></span> Pagination
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/popovers">
-                    <span class="glyphicon glyphicon-education"></span> Popovers
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/progress">
-                    <span class="glyphicon glyphicon-education"></span> Progress
-                </BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink href="/tables">
-                    <span class="glyphicon glyphicon-education"></span> Tables
-                </BlazorNavLink>
-            </NavItem>
-        </BlazorNav>
-    </Navbar>
+﻿<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="/">BlazorStrap</a>
+    <button class="navbar-toggler" onclick=@ToggleNavMenu>
+        <span class="navbar-toggler-icon"></span>
+    </button>
 </div>
+
+<div class=@(collapseNavMenu ? "collapse" : null) onclick=@ToggleNavMenu>
+    <ul class="nav flex-column" style="overflow-y: auto;">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/" Match=NavLinkMatch.All>
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/alerts">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Alerts
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/badges">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Badges
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/breadcrumbs">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Breadcrumbs
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/buttons">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Buttons
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/buttongroups">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Button Groups
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/cards">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Cards
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/carousels">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Carousels
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/collapse">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Collapse
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/dropdowns">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Dropdowns
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/figures">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Figures
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/forms">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Forms
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/images">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Images
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/jumbotrons">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Jumbotrons
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/layout">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Layout
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/listgroups">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> List Groups
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/media">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Media
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/modals">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Modals
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/navs">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Navs
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/navbars">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Navbars
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/pagination">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Pagination
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/popovers">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Popovers
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/progress">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Progress
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/tables">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Tables
+            </NavLink>
+        </li>
+    </ul>
+</div>
+
+@functions {
+    bool collapseNavMenu = true;
+
+    void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

@@ -30,12 +30,12 @@
             return CarouselDirection == CarouselDirection.Previous ? "Previous" : "Next";
         }
     }
-    public int ActiveIndex { get; set; }
-    public int NumberOfItems { get; set; }
-    public Action<UIMouseEventArgs> onclick { get; set; }
-    public CarouselDirection CarouselDirection { get; set; } = CarouselDirection.Previous;
-    public string Class { get; set; }
-    public string Style { get; set; }
+    [Parameter] private int ActiveIndex { get; set; }
+    [Parameter] private int NumberOfItems { get; set; }
+    [Parameter] private Action<UIMouseEventArgs> onclick { get; set; }
+    [Parameter] private CarouselDirection CarouselDirection { get; set; } = CarouselDirection.Previous;
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
 
     private void _onclick(UIMouseEventArgs e)
     {

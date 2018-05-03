@@ -13,5 +13,10 @@ namespace BlazorStrap.util
         {
             return RegisteredFunction.Invoke<bool>("BlazorStrap.BlazorStrapInterop.Log", message);
         }
+
+        public static bool Popper(string targetId, string popoverId, string placement)
+        {
+            return RegisteredFunction.Invoke<bool>("BlazorStrap.BlazorStrapInterop.Popper", targetId, popoverId, placement);
+        }
     }
 }

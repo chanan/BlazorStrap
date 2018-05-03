@@ -29,26 +29,28 @@ else
             return $"{isvalid} {isinvalid} {cls} {size} {Class}";
         }
     }
-    public InputType InputType { get; set; } = InputType.Text;
-    public string Id { get; set; }
-    public string PlaceHolder { get; set; }
-    public string Value { get; set; }
-    public string Name { get; set; }
-    public int Rows { get; set; }
-    public int Cols { get; set; }
-    public Size Size { get; set; } = Size.None;
-    public bool IsReadonly { get; set; }
-    public bool IsPlaintext { get; set; }
-    public bool IsDisabled { get; set; }
-    public bool IsChecked { get; set; }
-    public bool IsValid { get; set; }
-    public bool IsInvalid { get; set; }
-    public bool IsMultipleSelect { get; set; }
-    public int SelectSize { get; set; }
-    public int SelectedIndex { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+
+    [Parameter] private InputType InputType { get; set; } = InputType.Text;
+    [Parameter] private string Id { get; set; }
+    [Parameter] private string PlaceHolder { get; set; }
+    [Parameter] private string Value { get; set; }
+    [Parameter] private string Name { get; set; }
+    [Parameter] private int Rows { get; set; }
+    [Parameter] private int Cols { get; set; }
+    [Parameter] private Size Size { get; set; } = Size.None;
+    [Parameter] private bool IsReadonly { get; set; }
+    [Parameter] private bool IsPlaintext { get; set; }
+    [Parameter] private bool IsDisabled { get; set; }
+    [Parameter] private bool IsChecked { get; set; }
+    [Parameter] private bool IsValid { get; set; }
+    [Parameter] private bool IsInvalid { get; set; }
+    [Parameter] private bool IsMultipleSelect { get; set; }
+    [Parameter] private int SelectSize { get; set; }
+    [Parameter] private int SelectedIndex { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+
     private string Type
     {
         get

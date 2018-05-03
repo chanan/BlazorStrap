@@ -11,10 +11,16 @@
             return $"{inline} {Class}";
         }
     }
-    public bool IsInline { get; set; }
-    public string Action { get; set; }
-    public string Method { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    private bool IsInline { get; set; }
+    [Parameter]
+    private string Action { get; set; }
+    [Parameter]
+    private string Method { get; set; }
+    [Parameter]
+    private string Class { get; set; }
+    [Parameter]
+    private string Style { get; set; }
+    [Parameter]
+    private RenderFragment ChildContent { get; set; }
 }

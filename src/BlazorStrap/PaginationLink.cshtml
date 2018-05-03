@@ -33,8 +33,8 @@
             return $"page-link {Class}";
         }
     }
-    public string Href { get; set; }
-    public PaginationLinkType PaginationLinkType { get; set; } = PaginationLinkType.Custom;
+    [Parameter] private string Href { get; set; }
+    [Parameter] private PaginationLinkType PaginationLinkType { get; set; } = PaginationLinkType.Custom;
     private string label
     {
         get
@@ -53,8 +53,8 @@
             return null;
         }
     }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }
 

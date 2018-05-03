@@ -5,8 +5,9 @@
     <OutputType>library</OutputType>
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+    <LangVersion>7.3</LangVersion>
     <PackageId>BlazorStrap</PackageId>
-    <Version>0.0.9</Version>
+    <Version>0.1.0</Version>
     <Authors>Chanan Braunstein</Authors>
     <Title>Blazor BootStrap</Title>
     <Description>A bootstrap4 component library for Blazor</Description>
@@ -23,9 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.0-preview2-final" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.2.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -95,6 +95,7 @@
     <None Include="TableHead.cshtml" />
     <None Include="TableHeadCell.cshtml" />
     <None Include="TableRow.cshtml" />
+    <None Include="_ViewImports.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -418,10 +419,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="content\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <BlazorGenerate Remove="NavItem.cshtml" />
   </ItemGroup>
 
@@ -527,6 +524,14 @@
 
   <ItemGroup>
     <Content Remove="CarouselControl.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="_ViewImports.cshtml" />
   </ItemGroup>
 
 </Project>

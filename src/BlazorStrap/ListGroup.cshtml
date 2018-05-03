@@ -14,7 +14,7 @@
 }
 
 @functions {
-    public string classname
+    string classname
     {
         get
         {
@@ -22,9 +22,9 @@
             return $"{flush} {Class}";
         }
     }
-    public ListGroupType ListGroupType { get; set; } = ListGroupType.List;
-    public bool IsFlush { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private ListGroupType ListGroupType { get; set; } = ListGroupType.List;
+    [Parameter] private bool IsFlush { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }

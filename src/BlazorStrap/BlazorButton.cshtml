@@ -3,7 +3,7 @@
 
 @if (ButtonType == ButtonType.Button)
 {
-    <button onclick="@onclick" type="button" class="@classname" style="@Style" disabled="@disabled">@ChildContent</button>
+    <button id="@Id" onclick="@onclick" type="button" class="@classname" style="@Style" disabled="@disabled">@ChildContent</button>
 }
 @if (ButtonType == ButtonType.Link)
 {
@@ -73,20 +73,38 @@
         }
     }
 
-    public Action<UIMouseEventArgs> onclick { get; set; }
     internal Action<UIMouseEventArgs> OnButtonGroupClick { get; set; }
-    public Color Color { get; set; } = Color.Primary;
-    public ButtonType ButtonType { get; set; } = ButtonType.Button;
-    public string Href { get; set; }
-    public bool IsOutline { get; set; }
-    public Size Size { get; set; } = Size.None;
-    public bool IsBlock { get; set; }
-    public string Value { get; set; }
-    public bool IsActive { get; set; }
-    public bool IsDisabled { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    private Action<UIMouseEventArgs> onclick { get; set; }
+    [Parameter]
+    private Color Color { get; set; } = Color.Primary;
+    [Parameter]
+    private ButtonType ButtonType { get; set; } = ButtonType.Button;
+    [Parameter]
+    private string Href { get; set; }
+    [Parameter]
+    private bool IsOutline { get; set; }
+    [Parameter]
+    private Size Size { get; set; } = Size.None;
+    [Parameter]
+    private bool IsBlock { get; set; }
+    [Parameter]
+    private string Value { get; set; }
+    [Parameter]
+    private bool IsActive { get; set; }
+    [Parameter]
+    private bool IsDisabled { get; set; }
+    [Parameter]
+    private string Id { get; set; }
+    [Parameter]
+    private string Class { get; set; }
+    [Parameter]
+    private string Style { get; set; }
+    [Parameter]
+    private RenderFragment ChildContent { get; set; }
+
+
     private void _buttonGroupOnClick(UIMouseEventArgs e)
     {
         if (OnButtonGroupClick != null) OnButtonGroupClick(e);

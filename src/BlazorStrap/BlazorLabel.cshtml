@@ -14,9 +14,9 @@
             return $"{check} {column} {size} {Class}";
         }
     }
-    public string For { get; set; }
-    public bool IsCheck { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private string For { get; set; }
+    [Parameter] private bool IsCheck { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }

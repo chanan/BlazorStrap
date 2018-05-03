@@ -39,13 +39,13 @@ else
             return $"btn {size} {color} {split} dropdown-toggle {Class}";
         }
     }
-    public Color Color { get; set; } = Color.None;
-    public Size Size { get; set; } = Size.None;
-    //public bool IsLink { get; set; }
-    public bool IsSplit { get; set; }
-    public bool IsOpen { get; set; }
-    public Action<UIMouseEventArgs> onclick { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private Color Color { get; set; } = Color.None;
+    [Parameter] private Size Size { get; set; } = Size.None;
+    //[Parameter] private bool IsLink { get; set; }
+    [Parameter] private bool IsSplit { get; set; }
+    [Parameter] private bool IsOpen { get; set; }
+    [Parameter] private Action<UIMouseEventArgs> onclick { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }

@@ -1,10 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
 
-
-    <div class="@classname" style="@Style">
+@if (IsOpen)
+{
+    <div id="@Id" class="@classname" style="@Style">
         @ChildContent
     </div>
-
+}
 
 @functions {
     private string classname
@@ -15,8 +17,23 @@
             return $"popover {open} {Class}";
         }
     }
-    public bool IsOpen { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private bool IsOpen { get; set; }
+    private string Id
+    {
+        get
+        {
+            return Target + "-popover"; //TODO: Change this to use ref
+        }
+    }
+    protected override void OnAfterRender()
+    {
+        if (IsOpen)
+        {
+            BlazorStrapInterop.Popper(Target, Id, "top");
+        }
+    }
+    [Parameter] private string Target { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }

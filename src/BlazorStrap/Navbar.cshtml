@@ -20,13 +20,13 @@
         }
     }
 
-    public Color Color { get; set; } = Color.None;
-    public bool IsDark { get; set; }
-    public bool IsExpand { get; set; }
-    public bool IsFixedTop { get; set; }
-    public bool IsFixedBottom { get; set; }
-    public bool IsStickyTop { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private Color Color { get; set; } = Color.None;
+    [Parameter] private bool IsDark { get; set; }
+    [Parameter] private bool IsExpand { get; set; }
+    [Parameter] private bool IsFixedTop { get; set; }
+    [Parameter] private bool IsFixedBottom { get; set; }
+    [Parameter] private bool IsStickyTop { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }

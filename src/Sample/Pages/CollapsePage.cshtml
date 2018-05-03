@@ -12,7 +12,7 @@
     </Collapse>
 </div>
 
-<pre style="background:#000;color:#f8f8f8">
+<code><pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick"</span>></span>Toggle<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Collapse</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen"</span>></span>
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Card"</span>></span>
@@ -28,7 +28,7 @@
         StateHasChanged();
     }
 }
-</pre>
+</pre></code>
 
 <h3>Accordion example</h3>
 
@@ -58,7 +58,7 @@
         </Card>
     </div>
 </div>
-<pre style="background:#000;color:#f8f8f8"><span style="color:#89bdff">&lt;<span style="color:#89bdff">div</span> <span style="color:#89bdff">class</span>=<span style="color:#65b042">"accordion"</span>></span>
+<code><pre style="background:#000;color:#f8f8f8"><span style="color:#89bdff">&lt;<span style="color:#89bdff">div</span> <span style="color:#89bdff">class</span>=<span style="color:#65b042">"accordion"</span>></span>
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Card"</span>></span>
             <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span><span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">"ButtonType.Button"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@accordianClick1"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.None"</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"btn-link"</span>></span>Collapsible Group Item #1<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
             <span style="color:#89bdff">&lt;<span style="color:#89bdff">Collapse</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen1"</span>></span>
@@ -105,7 +105,7 @@
         StateHasChanged();
     }
 }
-</pre>
+</pre></code>
 
 @functions {
     bool IsOpen { get; set; }

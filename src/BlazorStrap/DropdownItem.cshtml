@@ -33,13 +33,13 @@
             return $"dropdown-item {active} {disabled} {Class}";
         }
     }
-    public string Href { get; set; }
-    public bool IsDivider { get; set; }
-    public bool IsDisabled { get; set; }
-    public bool IsButton { get; set; }
-    public bool IsActive { get; set; }
-    public Action<UIMouseEventArgs> onclick { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private string Href { get; set; }
+    [Parameter] private bool IsDivider { get; set; }
+    [Parameter] private bool IsDisabled { get; set; }
+    [Parameter] private bool IsButton { get; set; }
+    [Parameter] private bool IsActive { get; set; }
+    [Parameter] private Action<UIMouseEventArgs> onclick { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }

@@ -15,7 +15,7 @@
     </Card>
 </div>
 
-<pre style="background:#000;color:#f8f8f8">
+<code><pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Card"</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">".../286x180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"Card image cap"</span> /></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
@@ -25,7 +25,7 @@
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span>></span>Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
-</pre>
+</pre></code>
 
 <p>CardType.Card is the default and does not need to be specified</p>
 
@@ -45,7 +45,7 @@
         </Card>
     </Card>
 </div>
-<pre style="background:#000;color:#f8f8f8">
+<code><pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
@@ -58,7 +58,7 @@
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Link"</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Another Link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
-</pre>
+</pre></code>
 
 <h3>Text alignment</h3>
 
@@ -85,7 +85,7 @@
         </Card>
     </Card>
 </div>
-<pre style="background:#000;color:#f8f8f8">
+<code><pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Special Title Treatment<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
@@ -107,7 +107,7 @@
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span>></span>Go somewhere<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
-</pre>
+</pre></code>
 
 <h3>Header and footer</h3>
 
@@ -118,8 +118,8 @@
             <Card CardType="CardType.Title">Special title treatment</Card>
             <Card CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</Card>
             <BlazorButton ButtonType="ButtonType.Link" Href="#">Go Somewhere</BlazorButton>
-            <Card CardType="CardType.Footer">Footer</Card>
         </Card>
+        <Card CardType="CardType.Footer">Footer</Card>
     </Card>
     <Card>
         <Card CardType="CardType.Header" HeadingSize="HeadingSize.H3">Featured</Card>
@@ -127,10 +127,11 @@
             <Card CardType="CardType.Title">Special title treatment</Card>
             <Card CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</Card>
             <BlazorButton ButtonType="ButtonType.Link" Href="#">Go Somewhere</BlazorButton>
-            <Card CardType="CardType.Footer">Footer</Card>
         </Card>
+        <Card CardType="CardType.Footer" Class="text-muted">Footer</Card>
     </Card>
 </div>
+<code>
 <pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Featured<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
@@ -138,8 +139,8 @@
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Special title treatment<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>With supporting text below as a natural lead-in to additional content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">"ButtonType.Link"</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Go Somewhere<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Footer"</span>></span>Footer<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Footer"</span>></span>Footer<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span> <span style="color:#89bdff">HeadingSize</span>=<span style="color:#65b042">"HeadingSize.H3"</span>></span>Featured<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
@@ -147,10 +148,11 @@
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Special title treatment<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>With supporting text below as a natural lead-in to additional content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">"ButtonType.Link"</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Go Somewhere<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Footer"</span>></span>Footer<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Footer"</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"text-muted"</span>></span>Footer<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 </pre>
+</code>
 
 <h3>Image Caps</h3>
 
@@ -172,7 +174,7 @@
         <Card CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Bottom" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="318x180"></Card>
     </Card>
 </div>
-<pre style="background:#000;color:#f8f8f8">
+<code><pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">".../747x180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"747x180"</span>>&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
@@ -189,7 +191,7 @@
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Bottom"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">".../747x180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"747x180"</span>>&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
-</pre>
+</pre></code>
 
 <h3>Image Overlays</h3>
 
@@ -203,7 +205,7 @@
         </Card>
     </Card>
 </div>
-<pre style="background:#000;color:#f8f8f8">
+<code><pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=318%C3%97270<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=318<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=270<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>bg=333333<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txtclr=666666"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"318x270"</span>>&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.ImageOverlay"</span>></span>
@@ -212,7 +214,7 @@
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">className</span>=<span style="color:#65b042">"text-muted"</span>></span>Last updated 3 mins ago<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
-</pre>
+</pre></code>
 
 <h3>Background Variants</h3>
 
@@ -274,7 +276,7 @@
         </Card>
     </Card>
 </div>
-<pre style="background:#000;color:#f8f8f8">
+<code><pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
@@ -331,13 +333,9 @@
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
-</pre>
+</pre></code>
 
 <h3>Border</h3>
-
-<Alert Color="Color.Info">
-    For outline cards, color needs to be repeated on the CardType.Body because currently Blazor does not have the concept of context.
-</Alert>
 
 <div class="docs-example">
     <Card Color="Color.Primary" IsOutline="true">
@@ -397,7 +395,7 @@
         </Card>
     </Card>
 </div>
-<pre style="background:#000;color:#f8f8f8">
+<code><pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">"true"</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>
@@ -454,13 +452,9 @@
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
-</pre>
+</pre></code>
 
 <h3>Card Groups</h3>
-
-<Alert Color="Color.Info">
-    Card groups won't work correctly till Blazor 0.3.0
-</Alert>
 
 <div class="docs-example">
     <Card CardType="CardType.Group">
@@ -487,7 +481,7 @@
         </Card>
     </Card>
 </div>
-<pre style="background:#000;color:#f8f8f8">
+<code><pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Group"</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=256%C3%97180<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=256<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"256x180"</span> /></span>
@@ -511,13 +505,9 @@
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"text-muted"</span>></span>Last updated 3 mins ago<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
-</pre>
+</pre></code>
 
 <h3>Card Decks</h3>
-
-<Alert Color="Color.Info">
-    Card decks won't work correctly till Blazor 0.3.0
-</Alert>
 
 <div class="docs-example">
     <Card CardType="CardType.Deck">
@@ -544,7 +534,7 @@
         </Card>
     </Card>
 </div>
-<pre style="background:#000;color:#f8f8f8">
+<code><pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Deck"</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=256%C3%97180<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=256<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"256x180"</span> /></span>
@@ -568,13 +558,9 @@
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"text-muted"</span>></span>Last updated 3 mins ago<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
-</pre>
+</pre></code>
 
 <h3>Card Columns</h3>
-
-<Alert Color="Color.Info">
-    Card columns won't work correctly till Blazor 0.3.0
-</Alert>
 
 <div class="docs-example">
     <Card CardType="CardType.Columns">
@@ -623,7 +609,7 @@
     </Card>
 </div>
 
-<pre style="background:#000;color:#f8f8f8">
+<code><pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Columns"</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=256%C3%97180<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=256<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"Card image cap"</span> /></span>
@@ -668,4 +654,4 @@
         <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
-</pre>
+</pre></code>

@@ -14,8 +14,8 @@
             return $"{light} {dark} {Class}";
         }
     }
-    public TableHeadType TableHeadType { get; set; } = TableHeadType.None;
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private TableHeadType TableHeadType { get; set; } = TableHeadType.None;
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }

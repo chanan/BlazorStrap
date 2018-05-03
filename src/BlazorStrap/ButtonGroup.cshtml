@@ -15,15 +15,17 @@
             var groupdir = IsVertical ? "btn-group-vertical" : "btn-group";
             var baseclass = IsToolbar ? "btn-toolbar" : groupdir;
             var size = Size != Size.None ? $"btn-group-{Size.ToDescriptionString()}" : null;
-            return $"{baseclass} {size} {toggle} {direction} {Class}";
+            var open = IsOpen ? "show" : null;
+            return $"{baseclass} {size} {toggle} {direction} {open} {Class}";
         }
     }
-    public bool IsToggle { get; set; }
-    public bool IsToolbar { get; set; }
-    public bool IsVertical { get; set; }
-    public DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
-    public Size Size { get; set; } = Size.None;
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private bool IsOpen { get; set; }
+    [Parameter] private bool IsToggle { get; set; }
+    [Parameter] private bool IsToolbar { get; set; }
+    [Parameter] private bool IsVertical { get; set; }
+    [Parameter] private DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
+    [Parameter] private Size Size { get; set; } = Size.None;
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }

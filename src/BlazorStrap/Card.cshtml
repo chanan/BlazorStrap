@@ -70,19 +70,19 @@
             return $"{GetClass()} {Class}";
         }
     }
-    public CardType CardType { get; set; } = CardType.Card;
-    public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
-    public Alignment Alignment { get; set; } = Alignment.Left;
-    public string src { get; set; }
-    public string alt { get; set; }
-    public string href { get; set; }
-    public HeadingSize HeadingSize { get; set; } = HeadingSize.None;
-    public bool IsInverse { get; set; }
-    public Color Color { get; set; } = Color.None;
-    public bool IsOutline { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private CardType CardType { get; set; } = CardType.Card;
+    [Parameter] private VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
+    [Parameter] private Alignment Alignment { get; set; } = Alignment.Left;
+    [Parameter] private string src { get; set; }
+    [Parameter] private string alt { get; set; }
+    [Parameter] private string href { get; set; }
+    [Parameter] private HeadingSize HeadingSize { get; set; } = HeadingSize.None;
+    [Parameter] private bool IsInverse { get; set; }
+    [Parameter] private Color Color { get; set; } = Color.None;
+    [Parameter] private bool IsOutline { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 
     private string GetImageVerticalAlignmnet()
     {
@@ -113,13 +113,14 @@
     private string GetCardColor()
     {
         if (Color == Color.None) return null;
-        var textColor = Color == Color.Light ? null : "text-white";
+        var textColor = Color == Color.Light || IsOutline ? null : "text-white";
         var prefix = IsOutline ? "border" : "bg";
         return $"{textColor} {prefix}-{Color.ToDescriptionString()}";
     }
 
     private string GetTextColor()
     {
+        if (IsOutline) return null;
         if (Color == Color.None || Color == Color.Light) return null;
         return $"text-{Color.ToDescriptionString()}";
     }

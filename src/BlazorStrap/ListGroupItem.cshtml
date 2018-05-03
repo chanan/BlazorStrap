@@ -22,7 +22,7 @@
 
 
 @functions {
-    private string classname
+    string classname
     {
         get
         {
@@ -33,15 +33,15 @@
             return $"list-group-item {color} {action} {active} {disabled} {Class}";
         }
     }
-    public bool IsActive { get; set; }
-    public bool IsDisabled { get; set; }
-    public ListGroupType ListGroupType { get; set; } = ListGroupType.List;
-    public string Href { get; set; }
-    public Action<UIMouseEventArgs> OnClick { get; set; }
-    public Color Color { get; set; } = Color.None;
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private bool IsActive { get; set; }
+    [Parameter] private bool IsDisabled { get; set; }
+    [Parameter] private ListGroupType ListGroupType { get; set; } = ListGroupType.List;
+    [Parameter] private string Href { get; set; }
+    [Parameter] private Action<UIMouseEventArgs> OnClick { get; set; }
+    [Parameter] private Color Color { get; set; } = Color.None;
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
     private void _onclick(UIMouseEventArgs e)
     {
         if (OnClick != null) OnClick(e);

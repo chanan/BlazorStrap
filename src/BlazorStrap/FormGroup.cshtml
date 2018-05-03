@@ -12,9 +12,9 @@
             return $"{check} {row} {Class}";
         }
     }
-    public bool IsRow { get; set; }
-    public bool IsCheck { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private bool IsRow { get; set; }
+    [Parameter] private bool IsCheck { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }

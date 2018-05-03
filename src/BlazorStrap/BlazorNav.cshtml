@@ -29,16 +29,16 @@ else
         }
     }
 
-    public bool IsList { get; set; }
-    public Alignment Alignment { get; set; } = Alignment.None;
-    public bool IsVertical { get; set; }
-    public bool IsTabs { get; set; }
-    public bool IsPills { get; set; }
-    public bool IsFill { get; set; }
-    public bool IsNavbar { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private bool IsList { get; set; }
+    [Parameter] private Alignment Alignment { get; set; } = Alignment.None;
+    [Parameter] private bool IsVertical { get; set; }
+    [Parameter] private bool IsTabs { get; set; }
+    [Parameter] private bool IsPills { get; set; }
+    [Parameter] private bool IsFill { get; set; }
+    [Parameter] private bool IsNavbar { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 
     private string GetAlignment()
     {

@@ -16,10 +16,10 @@
             return $"{isvalid} {isinvalid} {Class}";
         }
     }
-    public bool IsValid { get; set; }
-    public bool IsInvalid { get; set; }
-    public bool IsTooltip { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private bool IsValid { get; set; }
+    [Parameter] private bool IsInvalid { get; set; }
+    [Parameter] private bool IsTooltip { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }

@@ -45,13 +45,13 @@
             return $"{GetClass()} {Class}";
         }
     }
-    public MediaType MediaType { get; set; } = MediaType.Media;
-    public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
-    public string src { get; set; }
-    public string alt { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private MediaType MediaType { get; set; } = MediaType.Media;
+    [Parameter] private VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
+    [Parameter] private string src { get; set; }
+    [Parameter] private string alt { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 
     private string GetVerticalAlignmnet()
     {

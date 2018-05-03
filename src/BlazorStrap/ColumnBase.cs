@@ -6,7 +6,7 @@ namespace BlazorStrap
 {
     public class ColumnBase : BlazorComponent
     {
-        public string GetColumnClass(string defaultClass = "col")
+        internal string GetColumnClass(string defaultClass = "col")
         {
             var sb = new StringBuilder();
 
@@ -63,7 +63,7 @@ namespace BlazorStrap
         }
 
         private string xs;
-        public string XS
+        [Parameter] private string XS
         {
             get => xs;
 
@@ -82,7 +82,7 @@ namespace BlazorStrap
         }
 
         private string sm;
-        public string SM
+        [Parameter] private string SM
         {
             get => sm;
 
@@ -101,7 +101,7 @@ namespace BlazorStrap
         }
 
         private string md;
-        public string MD
+        [Parameter] private string MD
         {
             get => md;
 
@@ -120,7 +120,7 @@ namespace BlazorStrap
         }
 
         private string lg;
-        public string LG
+        [Parameter] private string LG
         {
             get => lg;
 
@@ -139,7 +139,7 @@ namespace BlazorStrap
         }
 
         private string xl;
-        public string XL
+        [Parameter] private string XL
         {
             get => xl;
 
@@ -158,7 +158,7 @@ namespace BlazorStrap
         }
 
         private string xsorder;
-        public string XSOrder
+        [Parameter] private string XSOrder
         {
             get => xsorder;
 
@@ -177,7 +177,7 @@ namespace BlazorStrap
         }
 
         private string smorder;
-        public string SMOrder
+        [Parameter] private string SMOrder
         {
             get => smorder;
 
@@ -196,7 +196,7 @@ namespace BlazorStrap
         }
 
         private string mdorder;
-        public string MDOrder
+        [Parameter] private string MDOrder
         {
             get => mdorder;
 
@@ -215,7 +215,7 @@ namespace BlazorStrap
         }
 
         private string lgorder;
-        public string LGOrder
+        [Parameter] private string LGOrder
         {
             get => lgorder;
 
@@ -234,7 +234,7 @@ namespace BlazorStrap
         }
 
         private string xlorder;
-        public string XLOrder
+        [Parameter] private string XLOrder
         {
             get => xlorder;
 
@@ -253,7 +253,7 @@ namespace BlazorStrap
         }
 
         private string xsoffset;
-        public string XSOffset
+        [Parameter] private string XSOffset
         {
             get => xsoffset;
 
@@ -272,7 +272,7 @@ namespace BlazorStrap
         }
 
         private string smoffset;
-        public string SMOffset
+        [Parameter] private string SMOffset
         {
             get => smoffset;
 
@@ -291,7 +291,7 @@ namespace BlazorStrap
         }
 
         private string mdoffset;
-        public string MDOffset
+        [Parameter] private string MDOffset
         {
             get => mdoffset;
 
@@ -310,7 +310,7 @@ namespace BlazorStrap
         }
 
         private string lgoffset;
-        public string LGOffset
+        [Parameter] private string LGOffset
         {
             get => lgoffset;
 
@@ -329,7 +329,7 @@ namespace BlazorStrap
         }
 
         private string xloffset;
-        public string XLOffset
+        [Parameter] private string XLOffset
         {
             get => xloffset;
 
@@ -347,15 +347,15 @@ namespace BlazorStrap
             }
         }
 
-        public bool MRAuto { get; set; }
-        public bool MLAuto { get; set; }
-        public bool SMMRAuto { get; set; }
-        public bool SMMLAuto { get; set; }
-        public bool MDMRAuto { get; set; }
-        public bool MDMLAuto { get; set; }
-        public bool LGMRAuto { get; set; }
-        public bool LGMLAuto { get; set; }
-        public bool XLMRAuto { get; set; }
-        public bool XLMLAuto { get; set; }
+        [Parameter] private bool MRAuto { get; set; }
+        [Parameter] private bool MLAuto { get; set; }
+        [Parameter] private bool SMMRAuto { get; set; }
+        [Parameter] private bool SMMLAuto { get; set; }
+        [Parameter] private bool MDMRAuto { get; set; }
+        [Parameter] private bool MDMLAuto { get; set; }
+        [Parameter] private bool LGMRAuto { get; set; }
+        [Parameter] private bool LGMLAuto { get; set; }
+        [Parameter] private bool XLMRAuto { get; set; }
+        [Parameter] private bool XLMLAuto { get; set; }
     }
 }

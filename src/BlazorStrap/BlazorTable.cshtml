@@ -29,14 +29,14 @@
             return $"table {dark} {striped} {bordered} {borderless} {hovarable} {small} {Class}";
         }
     }
-    public bool IsDark { get; set; }
-    public bool IsStriped { get; set; }
-    public bool IsBordered { get; set; }
-    public bool IsBorderless { get; set; }
-    public bool IsHovarable { get; set; }
-    public bool IsSmall { get; set; }
-    public bool IsResponsive { get; set; }
-    public string Class { get; set; }
-    public string Style { get; set; }
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] private bool IsDark { get; set; }
+    [Parameter] private bool IsStriped { get; set; }
+    [Parameter] private bool IsBordered { get; set; }
+    [Parameter] private bool IsBorderless { get; set; }
+    [Parameter] private bool IsHovarable { get; set; }
+    [Parameter] private bool IsSmall { get; set; }
+    [Parameter] private bool IsResponsive { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 }
