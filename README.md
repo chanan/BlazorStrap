@@ -1,6 +1,6 @@
 # BlazorStrap
 
-Port of https://reactstrap.github.io to Blazor
+Bootstrap 4 Components for Blazor Framework
 
 ## Bootstrap 4.1
 
