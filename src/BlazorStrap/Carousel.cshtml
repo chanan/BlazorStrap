@@ -36,7 +36,6 @@
 
     private void OnTimerEvent(Object source, ElapsedEventArgs e)
     {
-        Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}", e.SignalTime);
 
         if (ActiveIndex == NumberOfItems - 1) ActiveIndex = 0;
         else ActiveIndex = ActiveIndex + 1;
@@ -46,19 +45,18 @@
 
     private void onmouseover()
     {
-        if (PauseOnHover && !Timer.Enabled) Timer.Stop();
+        if (PauseOnHover) Timer.Stop();
     }
 
     private void onmouseout()
     {
-        if (PauseOnHover && Timer.Enabled) Timer.Start();
+        if (PauseOnHover) Timer.Start();
     }
 
     public void Dispose()
     {
         if (Timer != null)
         {
-            Console.WriteLine("Dispose");
             Timer.Stop();
             Timer.Dispose();
             Timer = null;
