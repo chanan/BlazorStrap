@@ -3,7 +3,7 @@
 <ol class="@classname" style="@Style">
     @for(var i = 0; i < NumberOfItems; i++)
     {
-        <li class="@ItemIsActive(i)" />
+        <CarouselIndicatorItem IsActive="@{i == ActiveIndex}" Index="@i" bind-ActiveIndex="@ClickEventActiveIndex" />
     }
 </ol>
 
@@ -21,8 +21,14 @@
     [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 
-    string ItemIsActive(int i)
-    {
-        return i == ActiveIndex ? "active" : null;
+    [Parameter] private Action<int> ActiveIndexChanged { get; set; }
+
+    private int _clickEventActiveIndex;
+    private int ClickEventActiveIndex {
+        get => _clickEventActiveIndex;
+        set {
+            _clickEventActiveIndex = value;
+            ActiveIndexChanged(value);
+        }
     }
 }

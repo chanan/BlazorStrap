@@ -1,0 +1,24 @@
+﻿<div class="@classname" style="@Style">
+    @if (HeaderText != null)
+    {
+        <h5>@HeaderText</h5>
+    }
+    @if (CaptionText != null)
+    {
+        <p>@CaptionText</p>
+    }
+</div>
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            return $"carousel-caption d-none d-md-block {Class}";
+        }
+    }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private string CaptionText { get; set; }
+    [Parameter] private string HeaderText { get; set; }
+}

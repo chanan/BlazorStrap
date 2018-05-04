@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Blazor.Browser.Interop;
+﻿using Microsoft.AspNetCore.Blazor;
+using Microsoft.AspNetCore.Blazor.Browser.Interop;
 
 namespace BlazorStrap.util
 {
@@ -14,9 +15,9 @@ namespace BlazorStrap.util
             return RegisteredFunction.Invoke<bool>("BlazorStrap.BlazorStrapInterop.Log", message);
         }
 
-        public static bool Popper(string targetId, string popoverId, string placement)
+        public static bool Popper(string targetId, ElementRef popper, ElementRef arrow, string placement)
         {
-            return RegisteredFunction.Invoke<bool>("BlazorStrap.BlazorStrapInterop.Popper", targetId, popoverId, placement);
+            return RegisteredFunction.Invoke<bool>("BlazorStrap.BlazorStrapInterop.Popper", targetId, popper, arrow, placement);
         }
     }
 }

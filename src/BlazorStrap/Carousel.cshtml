@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Blazor
+@using System.Timers
+@implements IDisposable
 
-<div class="@classname" style="@Style">
+<div class="@classname" style="@Style" onmouseover="@onmouseover" onmouseout="@onmouseout">
     @ChildContent
 </div>
 
@@ -15,4 +17,51 @@
     [Parameter] private string Class { get; set; }
     [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
+    [Parameter] private int Interval { get; set; } = 5000;
+    [Parameter] private bool PauseOnHover { get; set; }
+
+    [Parameter] private int NumberOfItems { get; set; }
+    [Parameter] private int ActiveIndex { get; set; }
+    [Parameter] private Action<int> ActiveIndexChanged { get; set; }
+
+    private Timer Timer { get; set; }
+
+    protected override void OnInit()
+    {
+        Timer = new Timer(Interval);
+        Timer.Elapsed += OnTimerEvent;
+        Timer.AutoReset = true;
+        Timer.Start();
+    }
+
+    private void OnTimerEvent(Object source, ElapsedEventArgs e)
+    {
+        Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}", e.SignalTime);
+
+        if (ActiveIndex == NumberOfItems - 1) ActiveIndex = 0;
+        else ActiveIndex = ActiveIndex + 1;
+
+        ActiveIndexChanged(ActiveIndex);
+    }
+
+    private void onmouseover()
+    {
+        if (PauseOnHover && !Timer.Enabled) Timer.Stop();
+    }
+
+    private void onmouseout()
+    {
+        if (PauseOnHover && Timer.Enabled) Timer.Start();
+    }
+
+    public void Dispose()
+    {
+        if (Timer != null)
+        {
+            Console.WriteLine("Dispose");
+            Timer.Stop();
+            Timer.Dispose();
+            Timer = null;
+        }
+    }
 }

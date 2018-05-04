@@ -3,12 +3,15 @@
 
 @if (IsOpen)
 {
-    <div id="@Id" class="@classname" style="@Style">
-        @ChildContent
-    </div>
+<div ref="popper" id="@Id" class="@classname" style="@Style" role="tooltip" x-placement="top">
+    <div ref="arrow" class="arrow" x-arrow></div>
+    @ChildContent
+</div>
 }
 
 @functions {
+    private ElementRef popper;
+    private ElementRef arrow;
     private string classname
     {
         get
@@ -29,7 +32,7 @@
     {
         if (IsOpen)
         {
-            BlazorStrapInterop.Popper(Target, Id, "top");
+            BlazorStrapInterop.Popper(Target, popper, arrow, "top");
         }
     }
     [Parameter] private string Target { get; set; }

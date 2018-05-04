@@ -14,7 +14,6 @@ https://github.com/chanan/BlazorStrap/releases
 
 ## In Progress
 
-* Carousal - Stuck on: https://github.com/aspnet/Blazor/issues/380
 * Popovers
 
 ## Done:
@@ -24,6 +23,7 @@ https://github.com/chanan/BlazorStrap/releases
 * Buttons (excluding Checkboxes and Radio buttons)
 * ButtonGroups
 * Cards
+* Carousals
 * Collapse
 * Dropdowns
 * Images

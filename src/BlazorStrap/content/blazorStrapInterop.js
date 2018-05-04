@@ -9,12 +9,29 @@ Blazor.registerFunction('BlazorStrap.BlazorStrapInterop.ChangeBody', function (c
 });
 
 
-Blazor.registerFunction('BlazorStrap.BlazorStrapInterop.Popper', function (targetId, popoverId, placement) {
+Blazor.registerFunction('BlazorStrap.BlazorStrapInterop.Popper', function (targetId, popper, arrow, placement) {
+    console.log(arrow);
     var reference = document.getElementById(targetId);
-    var popper = document.getElementById(popoverId);
     var anotherPopper = new Popper(reference, popper,
         {
-            placement
+            placement,
+            //arrowElement: arrow,
+            modifiers: {
+                offset: {
+                    offset: 0
+                },
+                flip: {
+                    behavior: 'flip'
+                },
+                arrow: {
+                    enabled: true,
+                    element: 'x-arrow'
+                },
+                preventOverflow: {
+                    boundary: 'scrollParent'
+                }
+                
+            }
         }
     );
     return true;

@@ -7,7 +7,7 @@
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <LangVersion>7.3</LangVersion>
     <PackageId>BlazorStrap</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>Chanan Braunstein</Authors>
     <Title>Blazor BootStrap</Title>
     <Description>A bootstrap4 component library for Blazor</Description>
@@ -47,7 +47,9 @@
     <None Include="ButtonGroup.cshtml" />
     <None Include="Card.cshtml" />
     <None Include="Carousel.cshtml" />
+    <None Include="CarouselCaption.cshtml" />
     <None Include="CarouselControl.cshtml" />
+    <None Include="CarouselIndicatorItem.cshtml" />
     <None Include="CarouselIndicators.cshtml" />
     <None Include="CarouselItem.cshtml" />
     <None Include="Col.cshtml" />
@@ -532,6 +534,22 @@
 
   <ItemGroup>
     <Content Remove="_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="CarouselIndicatorItem.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="CarouselIndicatorItem.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="CarouselCaption.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="CarouselCaption.cshtml" />
   </ItemGroup>
 
 </Project>
