@@ -3,10 +3,10 @@
 
 @if (IsOpen)
 {
-<div ref="popper" id="@Id" class="@classname" style="@Style" role="tooltip" x-placement="top">
-    <div ref="arrow" class="arrow" x-arrow></div>
-    @ChildContent
-</div>
+    <div ref="popper" class="@classname" style="@Style" role="tooltip" onclick="@onclick">
+        <div ref="arrow" class="arrow"></div>
+        @ChildContent
+    </div>
 }
 
 @functions {
@@ -17,26 +17,27 @@
         get
         {
             var open = IsOpen ? "show" : null;
-            return $"popover {open} {Class}";
+            var placement = $"bs-popover-{Placement.ToDescriptionString()}";
+            return $"popover {placement} {open} {Class}";
         }
     }
     [Parameter] private bool IsOpen { get; set; }
-    private string Id
-    {
-        get
-        {
-            return Target + "-popover"; //TODO: Change this to use ref
-        }
-    }
     protected override void OnAfterRender()
     {
         if (IsOpen)
         {
-            BlazorStrapInterop.Popper(Target, popper, arrow, "top");
+            var placement = Placement.ToDescriptionString();
+            BlazorStrapInterop.Popper(Target, popper, arrow, placement);
         }
     }
+    [Parameter] private Placement Placement { get; set; } = Placement.Auto;
     [Parameter] private string Target { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
+
+    private void onclick()
+    {
+        IsOpen = false;
+    }
 }

@@ -12,10 +12,6 @@ https://chanan.github.io/BlazorStrap/
 ## Change Log
 https://github.com/chanan/BlazorStrap/releases
 
-## In Progress
-
-* Popovers
-
 ## Done:
 * Alerts
 * Badges
@@ -37,13 +33,13 @@ https://github.com/chanan/BlazorStrap/releases
 * Media
 * Modals
 * Pagination
+* Popover
 * Progress
 * Tables
 
 ## Not Done
 
 * Button of type: Checkboxes and Radio buttons
-* Popover - use popover.js?
 * Tooltip - use popover.js?
 * Modal - Close by clicking the Esc key
 * Modal - Will currently "clobber" body classes

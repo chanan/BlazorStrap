@@ -9,15 +9,13 @@ namespace BlazorStrap.util
         {
             return RegisteredFunction.Invoke<bool>("BlazorStrap.BlazorStrapInterop.ChangeBody", classname);
         }
-
         public static bool Log(string message)
         {
             return RegisteredFunction.Invoke<bool>("BlazorStrap.BlazorStrapInterop.Log", message);
         }
-
-        public static bool Popper(string targetId, ElementRef popper, ElementRef arrow, string placement)
+        public static bool Popper(string target, ElementRef popper, ElementRef arrow, string placement)
         {
-            return RegisteredFunction.Invoke<bool>("BlazorStrap.BlazorStrapInterop.Popper", targetId, popper, arrow, placement);
+            return RegisteredFunction.Invoke<bool>("BlazorStrap.BlazorStrapInterop.Popper", target, popper, arrow, placement);
         }
     }
 }
