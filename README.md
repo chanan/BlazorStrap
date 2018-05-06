@@ -45,6 +45,5 @@ https://github.com/chanan/BlazorStrap/releases
 * Modal - Will currently "clobber" body classes
 * Events on all components that need it (Modal for example)
 * Allow for arbitrary attributes on all components
-* Dropdown - direction
 * Listgroup - tabs
 * Animations
