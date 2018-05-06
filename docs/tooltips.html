@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blazor Strap - Tooltips</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+    <link href="site.css" rel="stylesheet">
+</head>
+
+<body>
+  <main role="main" class="container">
+    <div class="content px-4">
+      <!--!--><h1>Tooltips</h1>
+
+<!--!-->    <div role="alert" class="alert alert-info ">
+      Arrow color is grey. Will be fixed in a future update.
+  </div>
+
+
+<div class="docs-example">
+  <!--!-->    <button type="button" id="tooltip1" class="btn btn-primary      " _bl_1="">Top</button>
+
+  <!--!--><div class="tooltip hide" role="tooltip" _bl_2="" x-placement="top" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-11px, 19px, 0px);">
+  <div class="arrow" _bl_3="" style="left: 46px;"></div>
+  <div class="tooltip-inner">Tooltip on Top</div>
+</div>
+  <!--!-->    <button type="button" id="tooltip2" class="btn btn-primary      " _bl_4="">Bottom</button>
+
+  <!--!--><div class="tooltip hide" role="tooltip" _bl_5="" x-placement="bottom" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(46px, 86px, 0px);">
+  <div class="arrow" _bl_6="" style="left: 58px;"></div>
+  <div class="tooltip-inner">Tooltip on Bottom</div>
+</div>
+  <!--!-->    <button type="button" id="tooltip3" class="btn btn-primary      " _bl_7="">Left</button>
+
+  <!--!--><div class="tooltip hide" role="tooltip" _bl_8="" x-placement="left" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(48px, 53px, 0px);">
+  <div class="arrow" _bl_9="" style="top: 12px;"></div>
+  <div class="tooltip-inner">Tooltip on Left</div>
+</div>
+  <!--!-->    <button type="button" id="tooltip4" class="btn btn-primary      " _bl_10="">Right</button>
+
+  <!--!--><div class="tooltip hide" role="tooltip" _bl_11="" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(273px, 53px, 0px);">
+  <div class="arrow" _bl_12="" style="top: 12px;"></div>
+  <div class="tooltip-inner">Tooltip on Right</div>
+</div>
+  <!--!-->    <button type="button" id="tooltip5" class="btn btn-primary      " _bl_13="">Tooltip with HTML</button>
+
+  <!--!--><div class="tooltip hide" role="tooltip" _bl_14="" x-placement="top" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(291px, 19px, 0px);">
+  <div class="arrow" _bl_15="" style="left: 57px;"></div>
+  <div class="tooltip-inner"><em>Tooltip</em> <u>with</u> <b>HTML</b></div>
+</div>
+</div>
+
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"tooltip1"</span>&gt;</span>Top<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>&gt;</span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Tooltip</span> <span style="color:#89bdff">Target</span>=<span style="color:#65b042">"tooltip1"</span> <span style="color:#89bdff">Placement</span>=<span style="color:#65b042">"Placement.Top"</span>&gt;</span>Tooltip on Top<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Tooltip</span>&gt;</span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"tooltip2"</span>&gt;</span>Bottom<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>&gt;</span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Tooltip</span> <span style="color:#89bdff">Target</span>=<span style="color:#65b042">"tooltip2"</span> <span style="color:#89bdff">Placement</span>=<span style="color:#65b042">"Placement.Bottom"</span>&gt;</span>Tooltip on Bottom<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Tooltip</span>&gt;</span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"tooltip3"</span>&gt;</span>Left<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>&gt;</span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Tooltip</span> <span style="color:#89bdff">Target</span>=<span style="color:#65b042">"tooltip3"</span> <span style="color:#89bdff">Placement</span>=<span style="color:#65b042">"Placement.Left"</span>&gt;</span>Tooltip on Left<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Tooltip</span>&gt;</span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"tooltip4"</span>&gt;</span>Right<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>&gt;</span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Tooltip</span> <span style="color:#89bdff">Target</span>=<span style="color:#65b042">"tooltip4"</span> <span style="color:#89bdff">Placement</span>=<span style="color:#65b042">"Placement.Right"</span>&gt;</span>Tooltip on Right<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Tooltip</span>&gt;</span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"tooltip5"</span>&gt;</span>Tooltip with HTML<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>&gt;</span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Tooltip</span> <span style="color:#89bdff">Target</span>=<span style="color:#65b042">"tooltip5"</span> <span style="color:#89bdff">Placement</span>=<span style="color:#65b042">"Placement.Top"</span>&gt;</span><span style="color:#e0c589">&lt;<span style="color:#e0c589">em</span>&gt;</span>Tooltip<span style="color:#e0c589">&lt;/<span style="color:#e0c589">em</span>&gt;</span> <span style="color:#e0c589">&lt;<span style="color:#e0c589">u</span>&gt;</span>with<span style="color:#e0c589">&lt;/<span style="color:#e0c589">u</span>&gt;</span> <span style="color:#e0c589">&lt;<span style="color:#e0c589">b</span>&gt;</span>HTML<span style="color:#e0c589">&lt;/<span style="color:#e0c589">b</span>&gt;</span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Tooltip</span>&gt;</span>
+</pre>
+  </div>
+  </main>
+</body>
+</html>

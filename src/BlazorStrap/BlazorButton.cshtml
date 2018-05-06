@@ -3,34 +3,34 @@
 
 @if (ButtonType == ButtonType.Button)
 {
-    <button id="@Id" onclick="@onclick" type="button" class="@classname" style="@Style" disabled="@disabled">@ChildContent</button>
+    <button id="@Id" onclick="@onclick" type="button" class="@classname" style="@Style" disabled="@disabled" ref="ElementRef">@ChildContent</button>
 }
 @if (ButtonType == ButtonType.Link)
 {
-    <a href="@Href" onclick="@onclick" class="@classname" style="@Style" role="button" aria-pressed="@pressed" aria-disabled="@disabled" tabindex="@tab">@ChildContent</a>
+    <a href="@Href" onclick="@onclick" class="@classname" style="@Style" role="button" aria-pressed="@pressed" aria-disabled="@disabled" tabindex="@tab" ref="ElementRef">@ChildContent</a>
 }
 @if (ButtonType == ButtonType.Input)
 {
-    <input onclick="@onclick" class="@classname" style="@Style" type="button" value="@Value" disabled="@disabled" />
+    <input onclick="@onclick" class="@classname" style="@Style" type="button" value="@Value" disabled="@disabled" ref="ElementRef" />
 }
 @if (ButtonType == ButtonType.Submit)
 {
-    <input onclick="@onclick" class="@classname" style="@Style" type="submit" value="@Value" disabled="@disabled" />
+    <input onclick="@onclick" class="@classname" style="@Style" type="submit" value="@Value" disabled="@disabled" ref="ElementRef" />
 }
 @if (ButtonType == ButtonType.Reset)
 {
-    <input onclick="@onclick" class="@classname" style="@Style" type="reset" value="@Value" disabled="@disabled" />
+    <input onclick="@onclick" class="@classname" style="@Style" type="reset" value="@Value" disabled="@disabled" ref="ElementRef" />
 }
 @if (ButtonType == ButtonType.Checkbox)
 {
     <label class="btn btn-secondary active">
-        <input onclick="@_buttonGroupOnClick" class="@classname" style="@Style" type="checkbox" autocomplete="off" /> @ChildContent
+        <input onclick="@_buttonGroupOnClick" class="@classname" style="@Style" type="checkbox" autocomplete="off" ref="ElementRef" /> @ChildContent
     </label>
 }
 @if (ButtonType == ButtonType.Radio)
 {
     <label class="btn btn-secondary active">
-        <input class="@classname" style="@Style" type="radio" checked autocomplete="off"> @ChildContent
+        <input class="@classname" style="@Style" type="radio" checked autocomplete="off" ref="ElementRef" /> @ChildContent
     </label>
 }
 
@@ -75,35 +75,22 @@
 
     internal Action<UIMouseEventArgs> OnButtonGroupClick { get; set; }
 
-    [Parameter]
-    private Action<UIMouseEventArgs> onclick { get; set; }
-    [Parameter]
-    private Color Color { get; set; } = Color.Primary;
-    [Parameter]
-    private ButtonType ButtonType { get; set; } = ButtonType.Button;
-    [Parameter]
-    private string Href { get; set; }
-    [Parameter]
-    private bool IsOutline { get; set; }
-    [Parameter]
-    private Size Size { get; set; } = Size.None;
-    [Parameter]
-    private bool IsBlock { get; set; }
-    [Parameter]
-    private string Value { get; set; }
-    [Parameter]
-    private bool IsActive { get; set; }
-    [Parameter]
-    private bool IsDisabled { get; set; }
-    [Parameter]
-    private string Id { get; set; }
-    [Parameter]
-    private string Class { get; set; }
-    [Parameter]
-    private string Style { get; set; }
-    [Parameter]
-    private RenderFragment ChildContent { get; set; }
 
+    [Parameter] private Action<UIMouseEventArgs> onclick { get; set; }
+    [Parameter] private Color Color { get; set; } = Color.Primary;
+    [Parameter] private ButtonType ButtonType { get; set; } = ButtonType.Button;
+    [Parameter] private string Href { get; set; }
+    [Parameter] private bool IsOutline { get; set; }
+    [Parameter] private Size Size { get; set; } = Size.None;
+    [Parameter] private bool IsBlock { get; set; }
+    [Parameter] private string Value { get; set; }
+    [Parameter] private bool IsActive { get; set; }
+    [Parameter] private bool IsDisabled { get; set; }
+    [Parameter] private string Id { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+    [Parameter] private ElementRef ElementRef { get; set; }
 
     private void _buttonGroupOnClick(UIMouseEventArgs e)
     {

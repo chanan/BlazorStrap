@@ -8,9 +8,25 @@ Blazor.registerFunction('BlazorStrap.BlazorStrapInterop.ChangeBody', function (c
     return true;
 });
 
-
 Blazor.registerFunction('BlazorStrap.BlazorStrapInterop.Popper', function (target, popper, arrow, placement) {
     var reference = document.getElementById(target);
+    showPopper(reference, popper, arrow, placement);
+    return true;
+});
+
+Blazor.registerFunction('BlazorStrap.BlazorStrapInterop.Tooltip', function (target, tooltip, arrow, placement) {
+    var reference = document.getElementById(target);
+    reference.addEventListener('mouseover', function () {
+        tooltip.className = "tooltip fade show bs-popover-" + placement;
+        showPopper(reference, tooltip, arrow, placement);
+    });
+    reference.addEventListener('mouseout', function () {
+        tooltip.className = "tooltip hide";
+    });
+    return true;
+});
+
+function showPopper(reference, popper, arrow, placement) {
     var thePopper = new Popper(reference, popper,
         {
             placement,
@@ -28,9 +44,8 @@ Blazor.registerFunction('BlazorStrap.BlazorStrapInterop.Popper', function (targe
                 preventOverflow: {
                     boundary: 'scrollParent'
                 }
-                
+
             }
         }
     );
-    return true;
-});
+}

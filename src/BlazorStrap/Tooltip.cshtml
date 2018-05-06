@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using BlazorStrap.util
+
+<div ref="tooltip" class="tooltip" role="tooltip">
+    <div ref="arrow" class="arrow"></div>
+    <div class="tooltip-inner">@ChildContent</div>
+</div>
+
+@functions {
+    private ElementRef tooltip;
+    private ElementRef arrow;
+    protected override void OnAfterRender()
+    {
+        if (Target != null)
+        {
+            var placement = Placement.ToDescriptionString();
+            BlazorStrapInterop.Tooltip(Target, tooltip, arrow, placement);
+        }
+    }
+
+    [Parameter] private Placement Placement { get; set; } = Placement.Auto;
+    [Parameter] private string Title { get; set; }
+    [Parameter] private string Target { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+}

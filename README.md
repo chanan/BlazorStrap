@@ -36,11 +36,11 @@ https://github.com/chanan/BlazorStrap/releases
 * Popover
 * Progress
 * Tables
+* Tooltip
 
 ## Not Done
 
 * Button of type: Checkboxes and Radio buttons
-* Tooltip - use popover.js?
 * Modal - Close by clicking the Esc key
 * Modal - Will currently "clobber" body classes
 * Events on all components that need it (Modal for example)

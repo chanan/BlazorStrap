@@ -45,6 +45,7 @@
     <None Include="Pages\Popovers.cshtml" />
     <None Include="Pages\ProgressBars.cshtml" />
     <None Include="Pages\Tables.cshtml" />
+    <None Include="Pages\Tooltips.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -209,6 +210,14 @@
 
   <ItemGroup>
     <Content Remove="Pages\Carousels.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Tooltips.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Tooltips.cshtml" />
   </ItemGroup>
 
 </Project>

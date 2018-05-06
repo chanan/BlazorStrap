@@ -17,5 +17,9 @@ namespace BlazorStrap.util
         {
             return RegisteredFunction.Invoke<bool>("BlazorStrap.BlazorStrapInterop.Popper", target, popper, arrow, placement);
         }
+        public static bool Tooltip(string target, ElementRef tooltip, ElementRef arrow, string placement)
+        {
+            return RegisteredFunction.Invoke<bool>("BlazorStrap.BlazorStrapInterop.Tooltip", target, tooltip, arrow, placement);
+        }
     }
 }
