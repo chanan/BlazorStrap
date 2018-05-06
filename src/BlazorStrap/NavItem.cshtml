@@ -9,10 +9,11 @@
     {
         get
         {
-            return $"nav-item {Class}";
+            var dropdown = IsDropdown ? "dropdown" : null;
+            return $"nav-item {dropdown} {Class}";
         }
     }
-
+    [Parameter] private bool IsDropdown { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }

@@ -40,25 +40,51 @@
     
             <!--!-->    <ul class="nav navbar-nav      mr-auto">
         
-                <!--!--><li class="nav-item ">
+                <!--!--><li class="nav-item  ">
     
                     <!--!--><a href="#" class="nav-item nav-link active  ">
     Home
 </a>
                 
 </li>
-                <!--!--><li class="nav-item ">
+                <!--!--><li class="nav-item  ">
     
                     <!--!--><a href="#" class="nav-item nav-link   ">
     Link
 </a>
                 
 </li>
-                <!--!--><li class="nav-item ">
+                <!--!--><li class="nav-item  ">
     
                     <!--!--><a href="#" class="nav-item nav-link  disabled ">
     Disabled
 </a>
+                
+</li>
+                <!--!--><li class="nav-item dropdown ">
+    
+                    <!--!-->    <button type="button" aria-haspopup="true" class="btn  btn-light  dropdown-toggle ">
+        Dropdown link
+    </button>
+
+                    <!--!--><div class="dropdown-menu  ">
+     
+                        <!--!-->        <a class="dropdown-item   " href="#">
+            Action
+        </a>
+
+                        <!--!-->        <a class="dropdown-item   " href="#">
+            Another Action
+        </a>
+
+                        <!--!-->    <div class="dropdown-divider "></div>
+
+                        <!--!-->        <a class="dropdown-item   " href="#">
+            Yet Another Action
+        </a>
+
+                    
+</div>
                 
 </li>
             
@@ -67,7 +93,7 @@
             <!--!--><form class="form-inline my-2 my-lg-0">
                 <!--!-->    <input class="  form-control  mr-sm-2" type="search" placeholder="Search">
 
-                <!--!-->    <input type="submit" class="btn btn-success btn-outline-success     my-2 my-sm-0">
+                <!--!-->    <input type="submit" class="btn btn-success btn-outline-success     my-2 my-sm-0" _bl_1="">
 
             </form>
         
@@ -75,7 +101,7 @@
     
 </nav>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Navbar</span> <span style="color:#89bdff">IsExpand</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsDark</span>=<span style="color:#65b042">"false"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>&gt;</span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavbarBrand</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>&gt;</span>Navbar<span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavbarBrand</span>&gt;</span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavbarToggler</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@onclick"</span> /&gt;</span>
@@ -90,6 +116,15 @@
             <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>&gt;</span>
                 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">IsDisabled</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>&gt;</span>Disabled<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>&gt;</span>
             <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>&gt;</span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span> <span style="color:#89bdff">IsDropdown</span>=<span style="color:#65b042">"true"</span>&gt;</span>
+                <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@onclick2"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@IsOpen2"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>&gt;</span>Dropdown link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownToggle</span>&gt;</span>
+                <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@IsOpen2"</span>&gt;</span>
+                    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>&gt;</span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>&gt;</span>
+                    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>&gt;</span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>&gt;</span>
+                    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsDivider</span>=<span style="color:#65b042">"true"</span> /&gt;</span>
+                    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>&gt;</span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>&gt;</span>
+                <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>&gt;</span>
+            <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>&gt;</span>
         <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNav</span>&gt;</span>
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorForm</span> <span style="color:#89bdff">IsInline</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"my-2 my-lg-0"</span>&gt;</span>
             <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Search"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"Search"</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"mr-sm-2"</span> /&gt;</span>
@@ -97,14 +132,23 @@
         <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorForm</span>&gt;</span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Collapse</span>&gt;</span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Navbar</span>&gt;</span>
+
 @functions {
     bool IsOpen { get; set; } = true;
     void onclick(UIMouseEventArgs e)
     {
         IsOpen = !IsOpen;
+        StateHasChanged();
+    }
+
+    bool IsOpen2 { get; set; }
+    void onclick2(UIMouseEventArgs e)
+    {
+        IsOpen2 = !IsOpen2;
+        StateHasChanged();
     }
 }
-</pre></code>
+</pre>
     </div>
   </main>
 </body>

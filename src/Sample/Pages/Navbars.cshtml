@@ -22,6 +22,15 @@
                 <NavItem>
                     <BlazorNavLink IsDisabled="true" Href="#">Disabled</BlazorNavLink>
                 </NavItem>
+                <NavItem IsDropdown="true">
+                    <DropdownToggle onclick="@onclick2" IsOpen="@IsOpen2" Color="Color.Light">Dropdown link</DropdownToggle>
+                    <DropdownMenu IsOpen="@IsOpen2">
+                        <DropdownItem Href="#">Action</DropdownItem>
+                        <DropdownItem Href="#">Another Action</DropdownItem>
+                        <DropdownItem IsDivider="true" />
+                        <DropdownItem Href="#">Yet Another Action</DropdownItem>
+                    </DropdownMenu>
+                </NavItem>
             </BlazorNav>
             <BlazorForm IsInline="true" Class="my-2 my-lg-0">
                 <BlazorInput InputType="InputType.Search" PlaceHolder="Search" Class="mr-sm-2" />
@@ -30,7 +39,7 @@
         </Collapse>
     </Navbar>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Navbar</span> <span style="color:#89bdff">IsExpand</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsDark</span>=<span style="color:#65b042">"false"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavbarBrand</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Navbar<span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavbarBrand</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavbarToggler</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick"</span> /></span>
@@ -45,6 +54,15 @@
             <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>></span>
                 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">IsDisabled</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Disabled<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>></span>
             <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span> <span style="color:#89bdff">IsDropdown</span>=<span style="color:#65b042">"true"</span>></span>
+                <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick2"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen2"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>></span>Dropdown link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownToggle</span>></span>
+                <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen2"</span>></span>
+                    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
+                    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
+                    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsDivider</span>=<span style="color:#65b042">"true"</span> /></span>
+                    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
+                <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
+            <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>></span>
         <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNav</span>></span>
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorForm</span> <span style="color:#89bdff">IsInline</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"my-2 my-lg-0"</span>></span>
             <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Search"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"Search"</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"mr-sm-2"</span> /></span>
@@ -52,16 +70,23 @@
         <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorForm</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Collapse</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Navbar</span>></span>
+
 @@functions {
     bool IsOpen { get; set; } = true;
     void onclick(UIMouseEventArgs e)
     {
         IsOpen = !IsOpen;
+        StateHasChanged();
+    }
+
+    bool IsOpen2 { get; set; }
+    void onclick2(UIMouseEventArgs e)
+    {
+        IsOpen2 = !IsOpen2;
+        StateHasChanged();
     }
 }
-</pre></code>
-
-
+</pre>
 
 
 @functions {
@@ -69,5 +94,13 @@
     void onclick(UIMouseEventArgs e)
     {
         IsOpen = !IsOpen;
+        StateHasChanged();
+    }
+
+    bool IsOpen2 { get; set; }
+    void onclick2(UIMouseEventArgs e)
+    {
+        IsOpen2 = !IsOpen2;
+        StateHasChanged();
     }
 }
