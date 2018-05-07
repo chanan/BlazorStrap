@@ -1,0 +1,18 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<div class="@classname" style="@Style">
+    @ChildContent
+</div>
+
+@functions {
+    string classname
+    {
+        get
+        {
+            return $"tab-content {Class}";
+        }
+    }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+}

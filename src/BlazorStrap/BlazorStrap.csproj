@@ -93,10 +93,12 @@
     <None Include="Progress.cshtml" />
     <None Include="Row.cshtml" />
     <None Include="BlazorTable.cshtml" />
+    <None Include="TabContent.cshtml" />
     <None Include="TableCell.cshtml" />
     <None Include="TableHead.cshtml" />
     <None Include="TableHeadCell.cshtml" />
     <None Include="TableRow.cshtml" />
+    <None Include="TabPane.cshtml" />
     <None Include="Tooltip.cshtml" />
     <None Include="_ViewImports.cshtml" />
   </ItemGroup>
@@ -559,6 +561,22 @@
 
   <ItemGroup>
     <Content Remove="Tooltip.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="TabContent.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="TabContent.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="TabPane.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="TabPane.cshtml" />
   </ItemGroup>
 
 </Project>

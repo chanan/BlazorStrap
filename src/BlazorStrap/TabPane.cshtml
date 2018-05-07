@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Blazor
+
+<div class="@classname" style="@Style" role="tabpanel">
+    @ChildContent
+</div>
+
+@functions {
+    string classname
+    {
+        get
+        {
+            var open = IsOpen ? "active show" : null; 
+            return $"tab-pane fade {open} {Class}";
+        }
+    }
+    [Parameter] private bool IsOpen { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+}
