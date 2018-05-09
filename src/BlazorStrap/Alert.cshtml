@@ -1,6 +1,7 @@
-﻿@if (IsOpen)
+﻿@inherits BootstrapComponentBase
+@if (IsOpen)
 {
-    <div class="@classname" style="@Style" role="alert">
+    <DynamicElement TagName="div" class="@classname" style="@Style" role="alert" Attributes="@UnknownParameters">
         @ChildContent
         @if (IsDismissible)
         {
@@ -8,7 +9,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         }
-    </div>
+    </DynamicElement>
 }
 
 @functions {
@@ -30,11 +31,18 @@
     [Parameter]
     private RenderFragment ChildContent { get; set; }
 
+    /// <summary>
+    /// Gets or sets an action to be invoked when the alert is dismissed.
+    /// </summary>
+    [Parameter] private Action OnDismiss { get; set; }
+
+
     private bool IsOpen { get; set; } = true;
 
     void onclick()
     {
         IsOpen = false;
+        OnDismiss?.Invoke();
         StateHasChanged();
     }
 }
