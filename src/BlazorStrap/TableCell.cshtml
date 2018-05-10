@@ -1,9 +1,9 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
-<td class="@classname" style="@Style" colspan="@colspan">
+<DynamicElement Attributes="@UnknownParameters" TagName="td" class="@classname">
     @ChildContent
-</td>
+</DynamicElement>
 
 @functions {
     string classname
@@ -15,16 +15,6 @@
         }
     }
     [Parameter] private Color Color { get; set; } = Color.None;
-    [Parameter] private int ColSpan { get; set; }
-    string colspan
-    {
-        get
-        {
-            if (ColSpan == 0) return null;
-            return ColSpan.ToString();
-        }
-    }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
