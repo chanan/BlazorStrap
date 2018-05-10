@@ -1,41 +1,8 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-@if (MediaType == MediaType.Media)
-{
-    <div class="@classname" style="@Style">
-        @ChildContent
-    </div>
-}
-@if (MediaType == MediaType.Body)
-{
-    <div class="@classname" style="@Style">
-        @ChildContent
-    </div>
-}
-@if (MediaType == MediaType.Heading)
-{
-    <h5 class="@classname" style="@Style">
-        @ChildContent
-    </h5>
-}
-@if (MediaType == MediaType.Image)
-{
-    <img class="@classname" style="@Style" src="@src" alt="@alt">
-}
-@if (MediaType == MediaType.List)
-{
-    <ul class="@classname" style="@Style">
-        @ChildContent
-    </ul>
-}
-@if (MediaType == MediaType.ListItem)
-{
-    <li class="@classname" style="@Style">
-        @ChildContent
-    </li>
-}
-
-
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname">
+    @ChildContent
+</DynamicElement>
 
 @functions {
     string classname
@@ -45,12 +12,31 @@
             return $"{GetClass()} {Class}";
         }
     }
+    string Tag
+    {
+        get
+        {
+            switch(MediaType)
+            {
+                case MediaType.Body:
+                case MediaType.Media:
+                    return "div";
+                case MediaType.Heading:
+                    return "h5";
+                case MediaType.Image:
+                    return "img";
+                case MediaType.List:
+                    return "ul";
+                case MediaType.ListItem:
+                    return "li";
+                default:
+                    return "div";
+            }
+        }
+    }
     [Parameter] private MediaType MediaType { get; set; } = MediaType.Media;
     [Parameter] private VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
-    [Parameter] private string src { get; set; }
-    [Parameter] private string alt { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 
     private string GetVerticalAlignmnet()

@@ -1,7 +1,7 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-<a class="@classname" style="@Style" href="@Href" aria-label="@label">
-    @if(PaginationLinkType == PaginationLinkType.Custom)
+<DynamicElement Attributes="@UnknownParameters" TagName="a" class="@classname">
+    @if (PaginationLinkType == PaginationLinkType.Custom)
     {
         @ChildContent
     }
@@ -23,7 +23,7 @@
     {
         <span>Previous</span>
     }
-</a>
+</DynamicElement>
 
 @functions {
     string classname
@@ -54,7 +54,6 @@
         }
     }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
 

@@ -1,9 +1,9 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
-<div class="@classname" style="@Style">
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @ChildContent
-</div>
+</DynamicElement>
 
 @functions {
     string classname
@@ -26,6 +26,5 @@
     [Parameter] private DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
     [Parameter] private Size Size { get; set; } = Size.None;
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

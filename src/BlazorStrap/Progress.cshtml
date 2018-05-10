@@ -1,23 +1,24 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
 @if (!IsMulti && !IsBar)
 {
-    <div class="progress" style="@Style">
+    <DynamicElement style="@Style" Attributes="@UnknownParameters" TagName="div" class="progress">
         <div class="@classname" style="@styles" role="progressbar" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
-    </div>
+    </DynamicElement>
 }
 @if (IsMulti && !IsBar)
 {
-    <div class="@classname" style="@Style">
+    <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" style="@Style">
         @ChildContent
-    </div>
+    </DynamicElement>
 }
 @if (!IsMulti && IsBar)
 {
-    <div class="@classname" style="@styles" role="progressbar" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
+    <DynamicElement style="@styles" Attributes="@UnknownParameters" TagName="div" class="@classname" role="progressbar" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">
+        @ChildContent
+    </DynamicElement>
 }
-
 
 @functions {
     [Parameter] private int Value { get; set; }
@@ -28,14 +29,14 @@
         {
             if (Value == 0) return null;
             var percent = Math.Round(((double)Value / (double)Max) * 100);
-            return $"width: {percent}%";
+            return $"width: {percent}%; {Style}";
         }
     }
     private string classname
     {
         get
         {
-            if(IsMulti && !IsBar) return $"progress {Class}";
+            if (IsMulti && !IsBar) return $"progress {Class}";
             var color = Color != Color.None ? $"bg-{Color.ToDescriptionString()}" : null;
             var striped = IsStriped ? "progress-bar-striped" : null;
             var animated = IsAnimated ? "progress-bar-animated" : null;

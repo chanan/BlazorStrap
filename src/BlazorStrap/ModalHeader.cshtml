@@ -1,11 +1,11 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-<div class="modal-header">
-    <h5 class="@classname" style="@Style">@ChildContent</h5>
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="modal-header">
+    <h5 class="@classname">@ChildContent</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="@OnClick">
         <span aria-hidden="true">&times;</span>
     </button>
-</div>
+</DynamicElement>
 
 @functions {
     string classname
@@ -17,6 +17,5 @@
     }
     [Parameter] private Action<UIMouseEventArgs> OnClick { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

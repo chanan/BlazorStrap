@@ -1,16 +1,15 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
 @if (IsOpen)
 {
-    <div ref="popper" class="@classname" style="@Style" role="tooltip" onclick="@onclick">
+    <DynamicElement Id="@Id" Attributes="@UnknownParameters" TagName="div" class="@classname" role="tooltip" onclick="@onclick">
         <div ref="arrow" class="arrow"></div>
         @ChildContent
-    </div>
+    </DynamicElement>
 }
 
 @functions {
-    private ElementRef popper;
     private ElementRef arrow;
     private string classname
     {
@@ -27,7 +26,14 @@
         if (IsOpen)
         {
             var placement = Placement.ToDescriptionString();
-            BlazorStrapInterop.Popper(Target, popper, arrow, placement);
+            BlazorStrapInterop.Popper(Target, Id, arrow, placement);
+        }
+    }
+    private string Id
+    {
+        get
+        {
+            return Target + "-popover";
         }
     }
     [Parameter] private Placement Placement { get; set; } = Placement.Auto;

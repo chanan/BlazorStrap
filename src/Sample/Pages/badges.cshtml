@@ -83,10 +83,10 @@
 
 <h3>Links</h3>
 
-<p>Adding the <code>Href</code> will default the badge to a link.</p>
+<p>Adding <code>Href</code> or <code>onclick</code> will default the badge to a link.</p>
 
 <div class="docs-example">
-    <Badge Href="#" Color="Color.Primary">Primary</Badge>
+    <Badge onclick="@onclick" Color="Color.Primary">Primary</Badge>
     <Badge Href="#" Color="Color.Secondary">Secondary</Badge>
     <Badge Href="#" Color="Color.Success">Success</Badge>
     <Badge Href="#" Color="Color.Danger">Danger</Badge>
@@ -95,8 +95,8 @@
     <Badge Href="#" Color="Color.Light">Light</Badge>
     <Badge Href="#" Color="Color.Dark">Dark</Badge>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>Primary<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>Primary<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>Secondary<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span>></span>Success<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Danger"</span>></span>Danger<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
@@ -104,4 +104,18 @@
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span>></span>Info<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>></span>Light<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Dark"</span>></span>Dark<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
-</pre></code>
+
+@@functions {
+    void onclick()
+    {
+        Console.WriteLine(<span style="color:#65b042">"Badge clicked"</span>);
+    }
+}
+</pre>
+
+@functions {
+    void onclick()
+    {
+        Console.WriteLine("Badge clicked");
+    }
+}

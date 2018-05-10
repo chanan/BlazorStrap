@@ -1,25 +1,9 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
-@if (ListGroupType == ListGroupType.Button)
-{
-    <button type="button" onclick="@_onclick" class="@classname" style="@Style" disabled="@IsDisabled">
-        @ChildContent
-    </button>
-}
-@if (ListGroupType == ListGroupType.Link)
-{
-    <a href="@Href" onclick="@_onclick" class="@classname" style="@Style">
-        @ChildContent
-    </a>
-}
-@if (ListGroupType == ListGroupType.List)
-{
-    <li onclick="@_onclick" class="@classname" style="@Style">
-        @ChildContent
-    </li>
-}
-
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" onclick="@_onclick" disabled="@IsDisabled">
+    @ChildContent
+</DynamicElement>
 
 @functions {
     string classname
@@ -33,14 +17,29 @@
             return $"list-group-item {color} {action} {active} {disabled} {Class}";
         }
     }
+    string Tag
+    {
+        get
+        {
+            switch(ListGroupType)
+            {
+                case ListGroupType.Button:
+                    return "button";
+                case ListGroupType.Link:
+                    return "a";
+                case ListGroupType.List:
+                    return "li";
+                default:
+                    return "li";
+            }
+        }
+    }
     [Parameter] private bool IsActive { get; set; }
     [Parameter] private bool IsDisabled { get; set; }
     [Parameter] private ListGroupType ListGroupType { get; set; } = ListGroupType.List;
-    [Parameter] private string Href { get; set; }
     [Parameter] private Action<UIMouseEventArgs> OnClick { get; set; }
     [Parameter] private Color Color { get; set; } = Color.None;
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
     private void _onclick(UIMouseEventArgs e)
     {

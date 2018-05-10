@@ -170,15 +170,29 @@
 <h3>Dismissing</h3>
 
 <div class="docs-example">
-    <Alert Color="Color.Info" IsDismissible="true">
+    <Alert Color="Color.Info" IsDismissible="true" OnDismiss="@OnDismiss">
         I am an alert and I can be dismissed!
     </Alert>
 </div>
 
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span> <span style="color:#89bdff">IsDismissible</span>=<span style="color:#65b042">"true"</span>></span>
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span> <span style="color:#89bdff">IsDismissible</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">OnDismiss</span>=<span style="color:#65b042">"@@OnDismiss"</span>></span>
     I am an alert and I can be dismissed!
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
-</pre></code>
 
+@@functions {
+    void OnDismiss()
+    {
+        Console.WriteLine(<span style="color:#65b042">"OnDismiss"</span>);
+        StateHasChanged();
+    }
+}
+</pre>
 
+@functions {
+    void OnDismiss()
+    {
+        Console.WriteLine("OnDismiss");
+        StateHasChanged();
+    }
+}

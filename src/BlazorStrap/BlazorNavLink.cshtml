@@ -1,10 +1,10 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-<a href="@Href" class="@classname" style="@Style">
+<DynamicElement Attributes="@UnknownParameters" TagName="a" class="@classname">
     @ChildContent
-</a>
+</DynamicElement>
 
-@functions {
+    @functions {
     private string classname
     {
         get
@@ -14,10 +14,8 @@
             return $"nav-item nav-link {active} {disabled} {Class}";
         }
     }
-    [Parameter] private string Href { get; set; }
     [Parameter] private bool IsActive { get; set; }
     [Parameter] private bool IsDisabled { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

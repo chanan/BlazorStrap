@@ -1,8 +1,8 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-<li class="@classname" style="@Style">
+<DynamicElement Attributes="@UnknownParameters" TagName="li" class="@classname">
     @ChildContent
-</li>
+</DynamicElement>
 
 @functions {
     private string classname
@@ -15,6 +15,5 @@
     }
     [Parameter] private bool IsDropdown { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

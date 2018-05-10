@@ -1,21 +1,9 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
-@if (this.InputType == InputType.Select)
-{
-    <select class="@classname" style="@Style" id="@Id" name="@Name" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex">
-        @ChildContent
-    </select>
-
-}
-else if(this.InputType == InputType.TextArea)
-{
-    <textarea class="@classname" style="@Style" id="@Id" rows="@Rows" cols="@Cols" placeholder="@PlaceHolder" readonly="@IsReadonly" disabled="@IsDisabled">@ChildContent</textarea>
-}
-else
-{
-    <input class="@classname" style="@Style" type="@Type" id="@Id" placeholder="@PlaceHolder" value="@Value" name="@Name" readonly="@IsReadonly" disabled="@IsDisabled" checked="@IsChecked" />
-}
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex">
+    @ChildContent
+</DynamicElement>
 
 @functions {
     string classname
@@ -30,13 +18,26 @@ else
         }
     }
 
+    string Tag
+    {
+        get
+        {
+            switch(InputType)
+            {
+                case InputType.Select:
+                    return "select";
+                case InputType.TextArea:
+                    return "textarea";
+                default:
+                    return "input";
+
+            }
+
+        }
+
+    }
+
     [Parameter] private InputType InputType { get; set; } = InputType.Text;
-    [Parameter] private string Id { get; set; }
-    [Parameter] private string PlaceHolder { get; set; }
-    [Parameter] private string Value { get; set; }
-    [Parameter] private string Name { get; set; }
-    [Parameter] private int Rows { get; set; }
-    [Parameter] private int Cols { get; set; }
     [Parameter] private Size Size { get; set; } = Size.None;
     [Parameter] private bool IsReadonly { get; set; }
     [Parameter] private bool IsPlaintext { get; set; }
@@ -48,7 +49,6 @@ else
     [Parameter] private int SelectSize { get; set; }
     [Parameter] private int SelectedIndex { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 
     private string Type
