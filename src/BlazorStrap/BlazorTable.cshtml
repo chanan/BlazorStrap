@@ -1,18 +1,18 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
 @if (IsResponsive)
 {
     <div class="table-responsive">
-        <table class="@classname" style="@Style">
+        <DynamicElement Attributes="@UnknownParameters" TagName="table" class="@classname">
             @ChildContent
-        </table>
+        </DynamicElement>
     </div>
 }
 @if (!IsResponsive)
 {
-    <table class="@classname" style="@Style">
+    <DynamicElement Attributes="@UnknownParameters" TagName="table" class="@classname">
         @ChildContent
-    </table>
+    </DynamicElement>
 }
 
 @functions {
@@ -37,6 +37,5 @@
     [Parameter] private bool IsSmall { get; set; }
     [Parameter] private bool IsResponsive { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
