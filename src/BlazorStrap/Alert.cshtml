@@ -1,7 +1,7 @@
 ﻿@inherits BootstrapComponentBase
 @if (IsOpen)
 {
-    <DynamicElement TagName="div" class="@classname" style="@Style" role="alert" Attributes="@UnknownParameters">
+    <DynamicElement TagName="div" class="@classname" role="alert" Attributes="@UnknownParameters">
         @ChildContent
         @if (IsDismissible)
         {
@@ -20,16 +20,10 @@
             return $"alert alert-{Color.ToDescriptionString()} {Class}";
         }
     }
-    [Parameter]
-    private Color Color { get; set; } = Color.Primary;
-    [Parameter]
-    private bool IsDismissible { get; set; }
-    [Parameter]
-    private string Class { get; set; }
-    [Parameter]
-    private string Style { get; set; }
-    [Parameter]
-    private RenderFragment ChildContent { get; set; }
+    [Parameter] private Color Color { get; set; } = Color.Primary;
+    [Parameter] private bool IsDismissible { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// Gets or sets an action to be invoked when the alert is dismissed.
