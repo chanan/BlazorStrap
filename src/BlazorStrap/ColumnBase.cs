@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BlazorStrap
 {
-    public class ColumnBase : BlazorComponent
+    public class ColumnBase : BootstrapComponentBase
     {
         internal string GetColumnClass(string defaultClass = "col")
         {
