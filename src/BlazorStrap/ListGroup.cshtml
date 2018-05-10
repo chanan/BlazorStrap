@@ -1,17 +1,8 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-@if (ListGroupType == ListGroupType.List)
-{
-    <ul class="@classname" style="@Style">
-        @ChildContent
-    </ul>
-}
-@if (ListGroupType == ListGroupType.Button || ListGroupType == ListGroupType.Link)
-{
-    <div class="@classname" style="@Style">
-        @ChildContent
-    </div>
-}
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname">
+    @ChildContent
+</DynamicElement>
 
 @functions {
     string classname
@@ -22,9 +13,15 @@
             return $"{flush} {Class}";
         }
     }
+    string Tag
+    {
+        get
+        {
+            return ListGroupType == ListGroupType.List ? "ul" : "div";
+        }
+    }
     [Parameter] private ListGroupType ListGroupType { get; set; } = ListGroupType.List;
     [Parameter] private bool IsFlush { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
