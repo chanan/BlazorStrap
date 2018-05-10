@@ -1,26 +1,8 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-@if (IsDivider)
-{
-    <div class="@classname" style="@Style"></div>
-
-}
-@if (!IsDivider)
-{
-    @if (!IsButton)
-    {
-        <a class="@classname" style="@Style" href="@Href">
-            @ChildContent
-        </a>
-    }
-    else
-    {
-        <button class="@classname" type="button" onclick="@onclick">
-            @ChildContent
-        </button>
-    }
-}
-
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" onclick="@onclick">
+    @ChildContent
+</DynamicElement>
 
 @functions {
     string classname
@@ -33,13 +15,28 @@
             return $"dropdown-item {active} {disabled} {Class}";
         }
     }
-    [Parameter] private string Href { get; set; }
+    string Tag
+    {
+        get
+        {
+            if (IsDivider) return "div";
+            if (IsButton) return "button";
+            else return "a";
+        }
+    }
+    string Type
+    {
+        get
+        {
+            if (IsButton) return "button";
+            else return null;
+        }
+    }
     [Parameter] private bool IsDivider { get; set; }
     [Parameter] private bool IsDisabled { get; set; }
     [Parameter] private bool IsButton { get; set; }
     [Parameter] private bool IsActive { get; set; }
     [Parameter] private Action<UIMouseEventArgs> onclick { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

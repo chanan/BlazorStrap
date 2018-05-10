@@ -1,8 +1,8 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-<h6 class="@classname" style="@Style">
+<DynamicElement Attributes="@UnknownParameters" TagName="h6" class="@classname">
     @ChildContent
-</h6>
+</DynamicElement>
 
 @functions {
     string classname
@@ -13,6 +13,5 @@
         }
     }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
