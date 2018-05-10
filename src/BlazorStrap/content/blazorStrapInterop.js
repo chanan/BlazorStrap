@@ -8,8 +8,9 @@ Blazor.registerFunction('BlazorStrap.BlazorStrapInterop.ChangeBody', function (c
     return true;
 });
 
-Blazor.registerFunction('BlazorStrap.BlazorStrapInterop.Popper', function (target, popper, arrow, placement) {
+Blazor.registerFunction('BlazorStrap.BlazorStrapInterop.Popper', function (target, popperId, arrow, placement) {
     var reference = document.getElementById(target);
+    var popper = document.getElementById(popperId);
     showPopper(reference, popper, arrow, placement);
     return true;
 });

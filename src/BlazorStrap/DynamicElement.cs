@@ -46,41 +46,33 @@ namespace BlazorStrap
         /// <inheritdoc />
         public void SetParameters(ParameterCollection parameters)
         {
-            try
-            {
-                _attributesToRender = (IDictionary<string, object>)parameters.ToDictionary();
-                _childContent = GetAndRemove<RenderFragment>(_attributesToRender, RenderTreeBuilder.ChildContent);
+            _attributesToRender = (IDictionary<string, object>)parameters.ToDictionary();
+            _childContent = GetAndRemove<RenderFragment>(_attributesToRender, RenderTreeBuilder.ChildContent);
 
-                TagName = GetAndRemove<string>(_attributesToRender, nameof(TagName))
-                    ?? throw new InvalidOperationException($"No value was supplied for required parameter '{nameof(TagName)}'.");
+            TagName = GetAndRemove<string>(_attributesToRender, nameof(TagName))
+                ?? throw new InvalidOperationException($"No value was supplied for required parameter '{nameof(TagName)}'.");
 
-                // Combine any explicitly-supplied attributes with the remaining parameters
-                var attributesParam = GetAndRemove<IReadOnlyDictionary<string, object>>(_attributesToRender, nameof(Attributes));
+            // Combine any explicitly-supplied attributes with the remaining parameters
+            var attributesParam = GetAndRemove<IReadOnlyDictionary<string, object>>(_attributesToRender, nameof(Attributes));
            
-                if (attributesParam != null)
+            if (attributesParam != null)
+            {
+                foreach (var kvp in attributesParam)
                 {
-                    foreach (var kvp in attributesParam)
+                    if (kvp.Value != null
+                        && _attributesToRender.TryGetValue(kvp.Key, out var existingValue)
+                        && existingValue != null)
                     {
-                        if (kvp.Value != null
-                            && _attributesToRender.TryGetValue(kvp.Key, out var existingValue)
-                            && existingValue != null)
-                        {
-                            _attributesToRender[kvp.Key] = existingValue.ToString()
-                                + " " + kvp.Value.ToString();
-                        }
-                        else
-                        {
-                            _attributesToRender[kvp.Key] = kvp.Value;
-                        }
+                        _attributesToRender[kvp.Key] = existingValue.ToString()
+                            + " " + kvp.Value.ToString();
+                    }
+                    else
+                    {
+                        _attributesToRender[kvp.Key] = kvp.Value;
                     }
                 }
-                _renderHandle.Render(Render);
             }
-            catch (Exception e)
-            {
-
-                Console.WriteLine("e: {0}", e);
-            }
+            _renderHandle.Render(Render);
         }
 
         private static T GetAndRemove<T>(IDictionary<string, object> values, string key)
