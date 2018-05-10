@@ -1,11 +1,11 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
-<nav aria-label="Pagination">
+<DynamicElement Attributes="@UnknownParameters" TagName="nav" aria-label="Pagination">
     <ul class="@classname" style="@Style">
         @ChildContent
     </ul>
-</nav>
+</DynamicElement>
 
 @functions {
     private string classname
