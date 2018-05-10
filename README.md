@@ -36,6 +36,7 @@ https://github.com/chanan/BlazorStrap/releases
 * Popover
 * Progress
 * Tables
+* Tabs
 * Tooltip
 
 ## Not Done

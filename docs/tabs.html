@@ -1,0 +1,225 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blazor Strap - Tabs</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+    <link href="site.css" rel="stylesheet">
+</head>
+
+<body>
+  <main role="main" class="container">
+    <div class="content px-4">
+      <!--!--><h1>Tabs</h1>
+
+<div class="docs-example">
+  <!--!--><!--!--><nav class="nav  nav-tabs     " _bl_1="">
+  
+       <!--!--><!--!--><a class="nav-item nav-link active  " _bl_6="">
+  Home
+</a>
+      <!--!--><!--!--><a class="nav-item nav-link   " _bl_7="">
+  Profile
+</a>
+      <!--!--><!--!--><a class="nav-item nav-link   " _bl_8="">
+  Contact
+</a>
+  
+</nav>
+  <!--!--><!--!--><div class="tab-content " _bl_2="">
+  
+      <!--!--><!--!--><div class="tab-pane fade active show " role="tabpanel" _bl_9="">
+  Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+</div>
+      <!--!--><!--!--><div class="tab-pane fade  " role="tabpanel" _bl_10="">
+  Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute laboris nisi. Labore labore veniam irure irure ipsum pariatur mollit magna in cupidatat dolore magna irure esse tempor ad mollit. Dolore commodo nulla minim amet ipsum officia consectetur amet ullamco voluptate nisi commodo ea sit eu.
+</div>
+      <!--!--><!--!--><div class="tab-pane fade  " role="tabpanel" _bl_11="">
+  Sint sit mollit irure quis est nostrud cillum consequat Lorem esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in labore cillum elit enim. Consequat aliquip incididunt ipsum et minim laborum laborum laborum et cillum labore. Deserunt adipisicing cillum id nulla minim nostrud labore eiusmod et amet. Laboris consequat consequat commodo non ut non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit irure ea ullamco Lorem aute nostrud magna.
+</div>
+  
+</div>
+</div>
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNav</span> <span style="color:#89bdff">IsTabs</span>&gt;</span>
+      <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@onclick1"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@(active == 1)"</span>&gt;</span>Home<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>&gt;</span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@onclick2"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@(active == 2)"</span>&gt;</span>Profile<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>&gt;</span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@onclick3"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@(active == 3)"</span>&gt;</span>Contact<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>&gt;</span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNav</span>&gt;</span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">TabContent</span>&gt;</span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@(active == 1)"</span>&gt;</span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>&gt;</span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@(active == 2)"</span>&gt;</span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>&gt;</span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@(active == 3)"</span>&gt;</span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>&gt;</span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabContent</span>&gt;</span>
+@functions {
+  private int active = 1;
+  void onclick1(UIMouseEventArgs e)
+  {
+      active = 1;
+      StateHasChanged();
+  }
+
+  void onclick2(UIMouseEventArgs e)
+  {
+      active = 2;
+      StateHasChanged();
+  }
+
+  void onclick3(UIMouseEventArgs e)
+  {
+      active = 3;
+      StateHasChanged();
+  }
+}
+</pre>
+
+<h3>Pills</h3>
+
+<div class="docs-example">
+  <!--!--><!--!--><ul class="nav   nav-pills    " _bl_3="">
+  
+      <!--!--><!--!--><li class="nav-item  " _bl_12="">
+  
+          <!--!--><!--!--><a class="nav-item nav-link active  " _bl_20="">
+  Home
+</a>
+      
+</li>
+      <!--!--><!--!--><li class="nav-item  " _bl_13="">
+  
+          <!--!--><!--!--><a class="nav-item nav-link   " _bl_21="">
+  Profile
+</a>
+      
+</li>
+      <!--!--><!--!--><li class="nav-item  " _bl_14="">
+  
+          <!--!--><!--!--><a class="nav-item nav-link   " _bl_22="">
+  Contact
+</a>
+      
+</li>
+  
+</ul>
+  <!--!--><!--!--><div class="tab-content " _bl_4="">
+  
+      <!--!--><!--!--><div class="tab-pane fade active show " role="tabpanel" _bl_15="">
+  Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+</div>
+      <!--!--><!--!--><div class="tab-pane fade  " role="tabpanel" _bl_16="">
+  Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute laboris nisi. Labore labore veniam irure irure ipsum pariatur mollit magna in cupidatat dolore magna irure esse tempor ad mollit. Dolore commodo nulla minim amet ipsum officia consectetur amet ullamco voluptate nisi commodo ea sit eu.
+</div>
+      <!--!--><!--!--><div class="tab-pane fade  " role="tabpanel" _bl_17="">
+  Sint sit mollit irure quis est nostrud cillum consequat Lorem esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in labore cillum elit enim. Consequat aliquip incididunt ipsum et minim laborum laborum laborum et cillum labore. Deserunt adipisicing cillum id nulla minim nostrud labore eiusmod et amet. Laboris consequat consequat commodo non ut non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit irure ea ullamco Lorem aute nostrud magna.
+</div>
+  
+</div>
+</div>
+
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNav</span> <span style="color:#89bdff">IsPills</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsList</span>=<span style="color:#65b042">"true"</span>&gt;</span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>&gt;</span>
+      <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@onclick1"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@(active == 1)"</span>&gt;</span>Home<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>&gt;</span>
+  <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>&gt;</span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>&gt;</span>
+      <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@onclick2"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@(active == 2)"</span>&gt;</span>Profile<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>&gt;</span>
+  <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>&gt;</span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>&gt;</span>
+      <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@onclick3"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@(active == 3)"</span>&gt;</span>Contact<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>&gt;</span>
+  <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>&gt;</span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNav</span>&gt;</span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">TabContent</span>&gt;</span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@(active == 1)"</span>&gt;</span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>&gt;</span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@(active == 2)"</span>&gt;</span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>&gt;</span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@(active == 3)"</span>&gt;</span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>&gt;</span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabContent</span>&gt;</span>
+</pre>
+
+<div class="docs-example">
+  <!--!--><!--!--><div class="row " _bl_5="">
+  
+      <!--!--><!--!--><div sm="3" class="col " _bl_18="">
+  
+          <!--!--><!--!--><ul class="nav   nav-pills  flex-column  " _bl_23="">
+  
+              <!--!--><!--!--><li class="nav-item  " _bl_25="">
+  
+                  <!--!--><!--!--><a class="nav-item nav-link active  " _bl_31="">
+  Home
+</a>
+              
+</li>
+              <!--!--><!--!--><li class="nav-item  " _bl_26="">
+  
+                  <!--!--><!--!--><a class="nav-item nav-link   " _bl_32="">
+  Profile
+</a>
+              
+</li>
+              <!--!--><!--!--><li class="nav-item  " _bl_27="">
+  
+                  <!--!--><!--!--><a class="nav-item nav-link   " _bl_33="">
+  Contact
+</a>
+              
+</li>
+          
+</ul>
+      
+</div>
+      <!--!--><!--!--><div sm="9" class="col " _bl_19="">
+  
+          <!--!--><!--!--><div class="tab-content " _bl_24="">
+  
+              <!--!--><!--!--><div class="tab-pane fade active show " role="tabpanel" _bl_28="">
+  Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+</div>
+              <!--!--><!--!--><div class="tab-pane fade  " role="tabpanel" _bl_29="">
+  Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute laboris nisi. Labore labore veniam irure irure ipsum pariatur mollit magna in cupidatat dolore magna irure esse tempor ad mollit. Dolore commodo nulla minim amet ipsum officia consectetur amet ullamco voluptate nisi commodo ea sit eu.
+</div>
+              <!--!--><!--!--><div class="tab-pane fade  " role="tabpanel" _bl_30="">
+  Sint sit mollit irure quis est nostrud cillum consequat Lorem esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in labore cillum elit enim. Consequat aliquip incididunt ipsum et minim laborum laborum laborum et cillum labore. Deserunt adipisicing cillum id nulla minim nostrud labore eiusmod et amet. Laboris consequat consequat commodo non ut non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit irure ea ullamco Lorem aute nostrud magna.
+</div>
+          
+</div>
+      
+</div>
+  
+</div>
+</div>
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Row</span>&gt;</span>
+  <span style="color:#e0c589">&lt;<span style="color:#e0c589">Col</span> <span style="color:#e0c589">SM</span>=<span style="color:#65b042">"3"</span>&gt;</span>
+      <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNav</span> <span style="color:#89bdff">IsPills</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsList</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsVertical</span>=<span style="color:#65b042">"true"</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>&gt;</span>
+              <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@onclick1"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@(active == 1)"</span>&gt;</span>Home<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>&gt;</span>
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>&gt;</span>
+              <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@onclick2"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@(active == 2)"</span>&gt;</span>Profile<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>&gt;</span>
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>&gt;</span>
+              <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@onclick3"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@(active == 3)"</span>&gt;</span>Contact<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>&gt;</span>
+          <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>&gt;</span>
+      <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNav</span>&gt;</span>
+  <span style="color:#e0c589">&lt;/<span style="color:#e0c589">Col</span>&gt;</span>
+  <span style="color:#e0c589">&lt;<span style="color:#e0c589">Col</span> <span style="color:#e0c589">SM</span>=<span style="color:#65b042">"9"</span>&gt;</span>
+      <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabContent</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@(active == 1)"</span>&gt;</span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@(active == 2)"</span>&gt;</span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>&gt;</span>
+          <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@(active == 3)"</span>&gt;</span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>&gt;</span>
+      <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabContent</span>&gt;</span>
+  <span style="color:#e0c589">&lt;/<span style="color:#e0c589">Col</span>&gt;</span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Row</span>&gt;</span>
+</pre>
+  </div>
+  </main>
+</body>
+</html>
