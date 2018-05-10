@@ -1,11 +1,11 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-<ol class="@classname" style="@Style">
-    @for(var i = 0; i < NumberOfItems; i++)
+<DynamicElement Attributes="@UnknownParameters" TagName="ol" class="@classname">
+    @for (var i = 0; i < NumberOfItems; i++)
     {
         <CarouselIndicatorItem IsActive="@{i == ActiveIndex}" Index="@i" bind-ActiveIndex="@ClickEventActiveIndex" />
     }
-</ol>
+</DynamicElement>
 
 @functions {
     private string classname
@@ -18,15 +18,16 @@
     [Parameter] private int NumberOfItems { get; set; }
     [Parameter] private int ActiveIndex { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 
     [Parameter] private Action<int> ActiveIndexChanged { get; set; }
 
     private int _clickEventActiveIndex;
-    private int ClickEventActiveIndex {
+    private int ClickEventActiveIndex
+    {
         get => _clickEventActiveIndex;
-        set {
+        set
+        {
             _clickEventActiveIndex = value;
             ActiveIndexChanged(value);
         }

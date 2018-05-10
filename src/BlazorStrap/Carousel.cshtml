@@ -1,10 +1,10 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 @using System.Timers
 @implements IDisposable
 
-<div class="@classname" style="@Style" onmouseover="@onmouseover" onmouseout="@onmouseout">
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" onmouseover="@onmouseover" onmouseout="@onmouseout">
     @ChildContent
-</div>
+</DynamicElement>
 
 @functions {
     private string classname
@@ -15,7 +15,6 @@
         }
     }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
     [Parameter] private int Interval { get; set; } = 5000;
     [Parameter] private bool PauseOnHover { get; set; }
@@ -24,19 +23,21 @@
     [Parameter] private int ActiveIndex { get; set; }
     [Parameter] private Action<int> ActiveIndexChanged { get; set; }
 
-    private Timer Timer { get; set; }
+    private Timer _timer;
 
     protected override void OnInit()
     {
-        Timer = new Timer(Interval);
-        Timer.Elapsed += OnTimerEvent;
-        Timer.AutoReset = true;
-        Timer.Start();
+        if(_timer == null)
+        {
+            _timer = new Timer(Interval);
+            _timer.Elapsed += OnTimerEvent;
+            _timer.AutoReset = true;
+            _timer.Start();
+        }
     }
 
     private void OnTimerEvent(Object source, ElapsedEventArgs e)
     {
-
         if (ActiveIndex == NumberOfItems - 1) ActiveIndex = 0;
         else ActiveIndex = ActiveIndex + 1;
 
@@ -45,21 +46,21 @@
 
     private void onmouseover()
     {
-        if (PauseOnHover) Timer.Stop();
+        if (PauseOnHover && _timer != null) _timer.Stop();
     }
 
     private void onmouseout()
     {
-        if (PauseOnHover) Timer.Start();
+        if (PauseOnHover && _timer != null) _timer.Start();
     }
 
     public void Dispose()
     {
-        if (Timer != null)
+        if (_timer != null)
         {
-            Timer.Stop();
-            Timer.Dispose();
-            Timer = null;
+            _timer.Stop();
+            _timer.Dispose();
+            _timer = null;
         }
     }
 }

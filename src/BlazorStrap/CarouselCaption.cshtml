@@ -1,4 +1,6 @@
-﻿<div class="@classname" style="@Style">
+﻿@inherits BootstrapComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @if (HeaderText != null)
     {
         <h5>@HeaderText</h5>
@@ -7,7 +9,7 @@
     {
         <p>@CaptionText</p>
     }
-</div>
+</DynamicElement>
 
 @functions {
     private string classname
@@ -18,7 +20,6 @@
         }
     }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private string CaptionText { get; set; }
     [Parameter] private string HeaderText { get; set; }
 }

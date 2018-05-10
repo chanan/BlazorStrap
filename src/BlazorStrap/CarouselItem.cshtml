@@ -1,9 +1,9 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-<div class="@classname" style="@Style">
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     <img class="d-block w-100" src="@src" alt="@alt">
     @ChildContent
-</div>
+</DynamicElement>
 
 @functions {
     private string classname
@@ -18,6 +18,5 @@
     [Parameter] private string alt { get; set; }
     [Parameter] private bool IsActive { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
