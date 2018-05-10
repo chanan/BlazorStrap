@@ -1,9 +1,8 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-<button class="@classname" style="@Style" type="button" aria-label="Toggle navigation" onclick="@onclick">
+<DynamicElement Attributes="@UnknownParameters" TagName="button" class="@classname" aria-label="Toggle navigation" onclick="@onclick">
     <span class="navbar-toggler-icon"></span>
-</button>
-
+</DynamicElement>
 
 @functions {
     private string classname
@@ -16,6 +15,4 @@
 
     [Parameter] private Action<UIMouseEventArgs> onclick { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
-    [Parameter] private RenderFragment ChildContent { get; set; }
 }

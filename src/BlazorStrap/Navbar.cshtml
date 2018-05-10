@@ -1,9 +1,9 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
-<nav class="@classname" style="@Style">
+<DynamicElement Attributes="@UnknownParameters" TagName="nav" class="@classname">
     @ChildContent
-</nav>
+</DynamicElement>
 
 @functions {
     private string classname
@@ -27,6 +27,5 @@
     [Parameter] private bool IsFixedBottom { get; set; }
     [Parameter] private bool IsStickyTop { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
