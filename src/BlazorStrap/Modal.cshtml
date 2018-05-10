@@ -1,13 +1,13 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
-<div class="@classname" style="@styles" tabindex="-1" role="dialog" onclick="@onclick">
+<DynamicElement Attributes="@UnknownParameters" style="@styles" TagName="div" class="@classname" tabindex="-1" role="dialog" onclick="@onclick">
     <div class="@innerClassname" role="document">
         <div class="modal-content" onclick="@dontclick">
             @ChildContent
         </div>
     </div>
-</div>
+</DynamicElement>
 
 @if (IsOpen)
 {
@@ -49,8 +49,8 @@
         }
         set
         {
-            BlazorStrapInterop.ChangeBody(value ? "modal-open" : null); //TODO: Change to onRender?
             _isOpen = value;
+            BlazorStrapInterop.ChangeBody(_isOpen ? "modal-open" : null); //TODO: Change to onRender?
         }
     }
     [Parameter] private bool IsCentered { get; set; }
@@ -62,7 +62,7 @@
     private bool _dontclickWasClicked;
     void onclick()
     {
-        if(!_dontclickWasClicked) IsOpen = false;
+        if (!_dontclickWasClicked) IsOpen = false;
         _dontclickWasClicked = false;
     }
 
