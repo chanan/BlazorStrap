@@ -1,8 +1,10 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-@if(IsValid || IsInvalid)
+@if (IsValid || IsInvalid)
 {
-    <div class="@classname" style="@Style">@ChildContent</div>
+    <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+        @ChildContent
+    </DynamicElement>
 }
 
 @functions {
@@ -20,6 +22,5 @@
     [Parameter] private bool IsInvalid { get; set; }
     [Parameter] private bool IsTooltip { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
