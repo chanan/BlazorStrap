@@ -1,10 +1,8 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-<img src="@src" alt="@alt" class="@classname" style="@Style" />
+<DynamicElement TagName="img" class="@classname" style="@Style" Attributes="@UnknownParameters" />
 
 @functions {
-    [Parameter] private string src { get; set; }
-    [Parameter] private string alt { get; set; }
     string classname
     {
         get

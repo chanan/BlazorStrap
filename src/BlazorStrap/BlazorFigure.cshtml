@@ -1,8 +1,8 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 
-<figure class="figure">
+<DynamicElement TagName="figure" class="@classname" style="@Style" Attributes="@UnknownParameters">
     @ChildContent
-</figure>
+</DynamicElement>
 
 @functions {
     string classname

@@ -1,39 +1,10 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
-@if (ButtonType == ButtonType.Button)
-{
-    <button id="@Id" onclick="@onclick" type="button" class="@classname" style="@Style" disabled="@disabled" ref="ElementRef">@ChildContent</button>
-}
-@if (ButtonType == ButtonType.Link)
-{
-    <a href="@Href" onclick="@onclick" class="@classname" style="@Style" role="button" aria-pressed="@pressed" aria-disabled="@disabled" tabindex="@tab" ref="ElementRef">@ChildContent</a>
-}
-@if (ButtonType == ButtonType.Input)
-{
-    <input onclick="@onclick" class="@classname" style="@Style" type="button" value="@Value" disabled="@disabled" ref="ElementRef" />
-}
-@if (ButtonType == ButtonType.Submit)
-{
-    <input onclick="@onclick" class="@classname" style="@Style" type="submit" value="@Value" disabled="@disabled" ref="ElementRef" />
-}
-@if (ButtonType == ButtonType.Reset)
-{
-    <input onclick="@onclick" class="@classname" style="@Style" type="reset" value="@Value" disabled="@disabled" ref="ElementRef" />
-}
-@if (ButtonType == ButtonType.Checkbox)
-{
-    <label class="btn btn-secondary active">
-        <input onclick="@_buttonGroupOnClick" class="@classname" style="@Style" type="checkbox" autocomplete="off" ref="ElementRef" /> @ChildContent
-    </label>
-}
-@if (ButtonType == ButtonType.Radio)
-{
-    <label class="btn btn-secondary active">
-        <input class="@classname" style="@Style" type="radio" checked autocomplete="off" ref="ElementRef" /> @ChildContent
-    </label>
-}
-
+<DynamicElement TagName="@Tag" href="@Href" type="@type" onclick="@onclick" class="@classname" style="@Style" disabled="@disabled" ref="ElementRef" role="button" aria-pressed="@pressed" aria-disabled="@disabled" tabindex="@tab" value="@Value" Attributes="@UnknownParameters">
+    @ChildContent
+</DynamicElement>
+               
 @functions {
     private string classname
     {
@@ -48,6 +19,8 @@
             return $"btn {color} {outline} {size} {block} {active} {linkDisabled} {Class}";
         }
     }
+
+    private string Tag { get; set; } = "button";
 
     private string pressed
     {
@@ -73,12 +46,62 @@
         }
     }
 
+    private string type
+    {
+        get
+        {
+            switch (ButtonType)
+            {
+                case ButtonType.Input:
+                case ButtonType.Button:
+                    return "button";
+                case ButtonType.Submit:
+                    return "submit";
+                case ButtonType.Reset:
+                    return "reset";
+                default:
+                    return null;
+            }
+        }
+    }
+
     internal Action<UIMouseEventArgs> OnButtonGroupClick { get; set; }
 
 
     [Parameter] private Action<UIMouseEventArgs> onclick { get; set; }
     [Parameter] private Color Color { get; set; } = Color.Primary;
-    [Parameter] private ButtonType ButtonType { get; set; } = ButtonType.Button;
+
+    private ButtonType _buttonType = ButtonType.Button;
+    [Parameter] private ButtonType ButtonType
+    {
+        get
+        {
+            return _buttonType;
+        }
+        set
+        {
+            _buttonType = value;
+            switch(_buttonType)
+            {
+                case ButtonType.Button:
+                    Tag = "button";
+                    break;
+                case ButtonType.Link:
+                    Tag = "a";
+                    break;
+                case ButtonType.Input:
+                case ButtonType.Submit:
+                case ButtonType.Reset:
+                case ButtonType.Radio:
+                case ButtonType.Checkbox:
+                    Tag = "input";
+                    break;
+                default:
+                    Tag = "button";
+                    break;
+            }
+        }
+    }
     [Parameter] private string Href { get; set; }
     [Parameter] private bool IsOutline { get; set; }
     [Parameter] private Size Size { get; set; } = Size.None;
@@ -90,7 +113,7 @@
     [Parameter] private string Class { get; set; }
     [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
-    [Parameter] private ElementRef ElementRef { get; set; }
+    [Parameter] private DynamicElement ElementRef { get; set; }
 
     private void _buttonGroupOnClick(UIMouseEventArgs e)
     {
