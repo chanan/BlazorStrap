@@ -1,66 +1,9 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
-@if (CardType == CardType.Card || CardType == CardType.Body || CardType == CardType.ImageOverlay || CardType == CardType.Group || CardType == CardType.Deck || CardType == CardType.Columns)
-{
-    <div class="@classname" style="@Style">@ChildContent</div>
-}
-@if (CardType == CardType.Image)
-{
-    <img class="@classname" style="@Style" src="@src" alt="@alt" />
-}
-@if (CardType == CardType.Title)
-{
-    <h5 class="@classname" style="@Style">@ChildContent</h5>
-}
-@if (CardType == CardType.Subtitle)
-{
-    <h6 class="@classname" style="@Style">@ChildContent</h6>
-}
-@if (CardType == CardType.Text)
-{
-    <p class="card-text">@ChildContent</p>
-}
-@if (CardType == CardType.Link)
-{
-    <a href="@href" class="@classname" style="@Style">@ChildContent</a>
-}
-@if (CardType == CardType.Footer)
-{
-    <div class="@classname" style="@Style">@ChildContent</div>
-}
-@if (CardType == CardType.Header)
-{
-    @if (HeadingSize == HeadingSize.None)
-    {
-        <div class="@classname" style="@Style">@ChildContent</div>
-    }
-    @if (HeadingSize == HeadingSize.H1)
-    {
-        <h1 class="@classname" style="@Style">@ChildContent</h1>
-    }
-    @if (HeadingSize == HeadingSize.H2)
-    {
-        <h2 class="@classname" style="@Style">@ChildContent</h2>
-    }
-    @if (HeadingSize == HeadingSize.H3)
-    {
-        <h3 class="@classname" style="@Style">@ChildContent</h3>
-    }
-    @if (HeadingSize == HeadingSize.H4)
-    {
-        <h4 class="@classname" style="@Style">@ChildContent</h4>
-    }
-    @if (HeadingSize == HeadingSize.H5)
-    {
-        <h5 class="@classname" style="@Style">@ChildContent</h5>
-    }
-    @if (HeadingSize == HeadingSize.H6)
-    {
-        <h6 class="@classname" style="@Style">@ChildContent</h6>
-    }
-}
-
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname">
+    @ChildContent
+</DynamicElement>
 
 @functions {
     string classname
@@ -70,18 +13,41 @@
             return $"{GetClass()} {Class}";
         }
     }
+    private string Tag
+    {
+        get
+        {
+            switch (CardType)
+            {
+                case CardType.Image:
+                    return "img";
+                case CardType.Title:
+                    return "h5";
+                case CardType.Subtitle:
+                    return "h6";
+                case CardType.Text:
+                    return "p";
+                case CardType.Link:
+                    return "a";
+                case CardType.Header:
+                    return HeadingSize.ToDescriptionString();
+                default:
+                    return "div";
+
+            }
+
+        }
+
+    }
+
     [Parameter] private CardType CardType { get; set; } = CardType.Card;
     [Parameter] private VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
     [Parameter] private Alignment Alignment { get; set; } = Alignment.Left;
-    [Parameter] private string src { get; set; }
-    [Parameter] private string alt { get; set; }
-    [Parameter] private string href { get; set; }
     [Parameter] private HeadingSize HeadingSize { get; set; } = HeadingSize.None;
     [Parameter] private bool IsInverse { get; set; }
     [Parameter] private Color Color { get; set; } = Color.None;
     [Parameter] private bool IsOutline { get; set; }
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 
     private string GetImageVerticalAlignmnet()
