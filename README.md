@@ -9,6 +9,11 @@ Bootstrap 4 Components for Blazor Framework
 ## Docs
 https://chanan.github.io/BlazorStrap/
 
+## Blazorous
+
+If you want to manage your styles in code and use dynamic styles you can check out my other project: [Blazorous](https://chanan.github.io/Blazorous/).
+In the future I will show examples of mixing and matching BlazorStrap and Blazorous.
+
 ## Change Log
 https://github.com/chanan/BlazorStrap/releases
 
