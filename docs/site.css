@@ -472,3 +472,7 @@ code .tag {
     margin-right: auto;
     margin-left: auto
 }
+
+h3 {
+    margin-top: 10px;
+}
