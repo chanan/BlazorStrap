@@ -1,0 +1,14 @@
+﻿@using BlazorStrap.util
+@using Microsoft.AspNetCore.Blazor
+@page "/test"
+@addTagHelper *, BlazorStrap
+
+<BlazorButton onclick="@onclick">Test</BlazorButton>
+
+@functions {
+    void onclick(UIMouseEventArgs e)
+    {
+        Console.WriteLine("onclick");
+        BlazorStrapInterop.Log("TEST!");
+    }
+}

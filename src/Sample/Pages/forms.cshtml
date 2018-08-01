@@ -1,5 +1,5 @@
-﻿@addTagHelper *, BlazorStrap
-@page "/forms"
+﻿@page "/forms"
+@addTagHelper *, BlazorStrap
 
 <h1>Forms</h1>
 
@@ -23,24 +23,26 @@
         <BlazorButton Color="Color.Primary" ButtonType="ButtonType.Submit">Submit</BlazorButton>
     </BlazorForm>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<code>
+    <pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorForm</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleInputEmail1"</span>></span>Email address<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleInputEmail1"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Email"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"Enter email"</span> /></span>
-        <span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">id</span>=<span style="color:#65b042">"emailHelp"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"form-text text-muted"</span>></span>We'll never share your email with anyone else.<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleInputEmail1"</span>></span>Email address<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleInputEmail1"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Email"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"Enter email"</span> /></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">id</span>=<span style="color:#65b042">"emailHelp"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"form-text text-muted"</span>></span>We'll never share your email with anyone else.<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleInputPassword1"</span>></span>Password<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleInputPassword1"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Password"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"Password"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleInputPassword1"</span>></span>Password<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleInputPassword1"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Password"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"Password"</span> /></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span> <span style="color:#89bdff">IsCheck</span>=<span style="color:#65b042">"true"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleCheck1"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Checkbox"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">IsCheck</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleCheck1"</span>></span>Check me out<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleCheck1"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Checkbox"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">IsCheck</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleCheck1"</span>></span>Check me out<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">"ButtonType.Submit"</span>></span>Submit<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorForm</span>></span>
-</pre></code>
+</pre>
+</code>
 
 <p>Bind to Value to get the value from BlazorInput</p>
 
@@ -66,28 +68,30 @@
         </FormGroup>
     </BlazorForm>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<code>
+    <pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorForm</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleFormControlSelect1"</span>></span>Example select<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleFormControlSelect1"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Select"</span>></span>
-            <span style="color:#e0c589">&lt;<span style="color:#e0c589">option</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">option</span>></span>
-            <span style="color:#e0c589">&lt;<span style="color:#e0c589">option</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">option</span>></span>
-            <span style="color:#e0c589">&lt;<span style="color:#e0c589">option</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">option</span>></span>
-            <span style="color:#e0c589">&lt;<span style="color:#e0c589">option</span>></span>4<span style="color:#e0c589">&lt;/<span style="color:#e0c589">option</span>></span>
-            <span style="color:#e0c589">&lt;<span style="color:#e0c589">option</span>></span>5<span style="color:#e0c589">&lt;/<span style="color:#e0c589">option</span>></span>
-        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorInput</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleFormControlSelect1"</span>></span>Example select<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleFormControlSelect1"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Select"</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">option</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">option</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">option</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">option</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">option</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">option</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">option</span>></span>4<span style="color:#e0c589">&lt;/<span style="color:#e0c589">option</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">option</span>></span>5<span style="color:#e0c589">&lt;/<span style="color:#e0c589">option</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorInput</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleText"</span>></span>Text Area<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.TextArea"</span> <span style="color:#89bdff">Name</span>=<span style="color:#65b042">"text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleText"</span> <span style="color:#89bdff">Rows</span>=<span style="color:#65b042">"5"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleText"</span>></span>Text Area<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.TextArea"</span> <span style="color:#89bdff">Name</span>=<span style="color:#65b042">"text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleText"</span> <span style="color:#89bdff">Rows</span>=<span style="color:#65b042">"5"</span> /></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleFormControlFile1"</span>></span>Example file input<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.File"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleFormControlFile1"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleFormControlFile1"</span>></span>Example file input<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.File"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleFormControlFile1"</span> /></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorForm</span>></span>
-</pre></code>
+</pre>
+</code>
 
 
 <h3>Sizing</h3>
@@ -97,11 +101,13 @@
     <BlazorInput InputType="InputType.Text" PlaceHolder="Default" />
     <BlazorInput InputType="InputType.Text" Size="Size.Small" PlaceHolder="Size.Small" />
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<code>
+    <pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">"Size.Large"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"Size.Large"</span> /></span>
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"Default"</span> /></span>
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">"Size.Small"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"Size.Small"</span> /></span>
-</pre></code>
+</pre>
+</code>
 
 <div class="docs-example">
     <BlazorInput InputType="InputType.Select" Size="Size.Large">
@@ -114,7 +120,8 @@
         <option>Small select</option>
     </BlazorInput>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<code>
+    <pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Select"</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">"Size.Large"</span>></span>
     <span style="color:#e0c589">&lt;<span style="color:#e0c589">option</span>></span>Large select<span style="color:#e0c589">&lt;/<span style="color:#e0c589">option</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorInput</span>></span>
@@ -124,7 +131,8 @@
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Select"</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">"Size.Small"</span>></span>
     <span style="color:#e0c589">&lt;<span style="color:#e0c589">option</span>></span>Small select<span style="color:#e0c589">&lt;/<span style="color:#e0c589">option</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorInput</span>></span>
-</pre></code>
+</pre>
+</code>
 
 <h3>Range Inputs</h3>
 
@@ -136,23 +144,27 @@
         </FormGroup>
     </BlazorForm>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<code>
+    <pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorForm</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"formControlRange"</span>></span>Example Range input<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Range"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"formControlRange"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"formControlRange"</span>></span>Example Range input<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Range"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"formControlRange"</span> /></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorForm</span>></span>
-</pre></code>
+</pre>
+</code>
 
 <h3>Readonly</h3>
 
 <div class="docs-example">
     <BlazorInput InputType="InputType.Text" PlaceHolder="Readonly input here…" IsReadonly="true" />
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<code>
+    <pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"Readonly input here…"</span> <span style="color:#89bdff">IsReadonly</span>=<span style="color:#65b042">"true"</span> /></span>
-</pre></code>
+</pre>
+</code>
 
 <h3>Readonly plain text</h3>
 
@@ -160,44 +172,46 @@
     <BlazorForm>
         <FormGroup IsRow="true">
             <BlazorLabel For="staticEmail" SM="2">Email</BlazorLabel>
-            <Col SM="10">
-            <BlazorInput InputType="InputType.Text" IsReadonly="true" IsPlaintext="true" Id="staticEmail" Value="email@example.com" />
-            </Col>
+            <BlazorCol SM="10">
+                <BlazorInput InputType="InputType.Text" IsReadonly="true" IsPlaintext="true" Id="staticEmail" Value="email@example.com" />
+            </BlazorCol>
         </FormGroup>
         <FormGroup IsRow="true">
             <BlazorLabel For="inputPassword" SM="2">Password</BlazorLabel>
-            <Col SM="10">
-            <BlazorInput InputType="InputType.Password" Id="inputPassword" />
-            </Col>
+            <BlazorCol SM="10">
+                <BlazorInput InputType="InputType.Password" Id="inputPassword" />
+            </BlazorCol>
         </FormGroup>
         <FormGroup IsRow="true">
-            <Col SM="2" SMOffset="2">
+            <BlazorCol SM="2" SMOffset="2">
                 <BlazorButton ButtonType="ButtonType.Submit">Submit</BlazorButton>
-            </Col>
+            </BlazorCol>
         </FormGroup>
     </BlazorForm>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<code>
+    <pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorForm</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span> <span style="color:#89bdff">IsRow</span>=<span style="color:#65b042">"true"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"staticEmail"</span> <span style="color:#89bdff">SM</span>=<span style="color:#65b042">"2"</span>></span>Email<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#e0c589">&lt;<span style="color:#e0c589">Col</span> <span style="color:#e0c589">SM</span>=<span style="color:#65b042">"10"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">IsReadonly</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsPlaintext</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"staticEmail"</span> <span style="color:#89bdff">Value</span>=<span style="color:#65b042">"email@example.com"</span> /></span>
-        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">Col</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"staticEmail"</span> <span style="color:#89bdff">SM</span>=<span style="color:#65b042">"2"</span>></span>Email<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">BlazorCol</span> <span style="color:#e0c589">SM</span>=<span style="color:#65b042">"10"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">IsReadonly</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsPlaintext</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"staticEmail"</span> <span style="color:#89bdff">Value</span>=<span style="color:#65b042">"email@example.com"</span> /></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">BlazorCol</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span> <span style="color:#89bdff">IsRow</span>=<span style="color:#65b042">"true"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"inputPassword"</span> <span style="color:#89bdff">SM</span>=<span style="color:#65b042">"2"</span>></span>Password<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#e0c589">&lt;<span style="color:#e0c589">Col</span> <span style="color:#e0c589">SM</span>=<span style="color:#65b042">"10"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Password"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"inputPassword"</span> /></span>
-        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">Col</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"inputPassword"</span> <span style="color:#89bdff">SM</span>=<span style="color:#65b042">"2"</span>></span>Password<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">BlazorCol</span> <span style="color:#e0c589">SM</span>=<span style="color:#65b042">"10"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Password"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"inputPassword"</span> /></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">BlazorCol</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span> <span style="color:#89bdff">IsRow</span>=<span style="color:#65b042">"true"</span>></span>
-        <span style="color:#e0c589">&lt;<span style="color:#e0c589">Col</span> <span style="color:#e0c589">SM</span>=<span style="color:#65b042">"2"</span> <span style="color:#e0c589">SMOffset</span>=<span style="color:#65b042">"2"</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">"ButtonType.Submit"</span>></span>Submit<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">Col</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">BlazorCol</span> <span style="color:#e0c589">SM</span>=<span style="color:#65b042">"2"</span> <span style="color:#e0c589">SMOffset</span>=<span style="color:#65b042">"2"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">"ButtonType.Submit"</span>></span>Submit<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">BlazorCol</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorForm</span>></span>
-</pre></code>
+</pre>
+</code>
 
 <h3>Inline Form</h3>
 
@@ -214,19 +228,21 @@
         <BlazorButton ButtonType="ButtonType.Submit">Submit</BlazorButton>
     </BlazorForm>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<code>
+    <pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorForm</span> <span style="color:#89bdff">IsInline</span>=<span style="color:#65b042">"true"</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"mb-2 mr-sm-2 mb-sm-0"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail"</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"mr-sm-2"</span>></span>Email<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Email"</span> <span style="color:#89bdff">Name</span>=<span style="color:#65b042">"email"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"something@idk.cool"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail"</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"mr-sm-2"</span>></span>Email<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Email"</span> <span style="color:#89bdff">Name</span>=<span style="color:#65b042">"email"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"something@idk.cool"</span> /></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"mb-2 mr-sm-2 mb-sm-0"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"examplePassword"</span> <span style="color:#89bdff">class</span>=<span style="color:#65b042">"mr-sm-2"</span>></span>Password<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Password"</span> <span style="color:#89bdff">Name</span>=<span style="color:#65b042">"password"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"examplePassword"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"don't tell!"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"examplePassword"</span> <span style="color:#89bdff">class</span>=<span style="color:#65b042">"mr-sm-2"</span>></span>Password<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Password"</span> <span style="color:#89bdff">Name</span>=<span style="color:#65b042">"password"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"examplePassword"</span> <span style="color:#89bdff">PlaceHolder</span>=<span style="color:#65b042">"don't tell!"</span> /></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">"ButtonType.Submit"</span>></span>Submit<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorForm</span>></span>
-</pre></code>
+</pre>
+</code>
 
 <h3>Checkboxes and radios</h3>
 
@@ -240,7 +256,8 @@
         <BlazorLabel For="defaultCheck2">Disabled checkbox</BlazorLabel>
     </FormGroup>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<code>
+    <pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span> <span style="color:#89bdff">IsCheck</span>=<span style="color:#65b042">"true"</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Checkbox"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"defaultCheck1"</span> /></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"defaultCheck1"</span>></span>Default checkbox<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
@@ -249,7 +266,8 @@
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Checkbox"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"defaultCheck2"</span> <span style="color:#89bdff">IsDisabled</span>=<span style="color:#65b042">"true"</span> /></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"defaultCheck2"</span>></span>Disabled checkbox<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
-</pre></code>
+</pre>
+</code>
 <div class="docs-example">
     <FormGroup IsCheck="true">
         <BlazorInput InputType="InputType.Radio" Name="exampleRadios" Id="exampleRadios1" value="option1" IsChecked="true" />
@@ -264,7 +282,8 @@
         <BlazorLabel For="exampleRadios3">Disabled radio</BlazorLabel>
     </FormGroup>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<code>
+    <pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span> <span style="color:#89bdff">IsCheck</span>=<span style="color:#65b042">"true"</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Radio"</span> <span style="color:#89bdff">Name</span>=<span style="color:#65b042">"exampleRadios"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleRadios1"</span> <span style="color:#89bdff">value</span>=<span style="color:#65b042">"option1"</span> <span style="color:#89bdff">IsChecked</span>=<span style="color:#65b042">"true"</span> /></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleRadios1"</span>></span>Default radio<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
@@ -277,7 +296,8 @@
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Radio"</span> <span style="color:#89bdff">Name</span>=<span style="color:#65b042">"exampleRadios"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleRadios3"</span> <span style="color:#89bdff">value</span>=<span style="color:#65b042">"option3"</span> <span style="color:#89bdff">IsDisabled</span>=<span style="color:#65b042">"true"</span> /></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleRadios3"</span>></span>Disabled radio<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
-</pre></code>
+</pre>
+</code>
 
 <h3>Form Validation</h3>
 
@@ -300,25 +320,27 @@
         </FormGroup>
     </BlazorForm>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<code>
+    <pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorForm</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail3"</span>></span>Input without validation<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail3"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormFeedback</span>></span>You will not be able to see this<span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormFeedback</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail3"</span>></span>Input without validation<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail3"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormFeedback</span>></span>You will not be able to see this<span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormFeedback</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail4"</span>></span>Valid input<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">IsValid</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail4"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormFeedback</span> <span style="color:#89bdff">IsValid</span>=<span style="color:#65b042">"true"</span>></span>Sweet! that name is available<span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormFeedback</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail4"</span>></span>Valid input<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">IsValid</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail4"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormFeedback</span> <span style="color:#89bdff">IsValid</span>=<span style="color:#65b042">"true"</span>></span>Sweet! that name is available<span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormFeedback</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail5"</span>></span>Invalid input<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">IsInvalid</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail5"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormFeedback</span> <span style="color:#89bdff">IsInvalid</span>=<span style="color:#65b042">"true"</span>></span>Oh noes! that name is already taken<span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormFeedback</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail5"</span>></span>Invalid input<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">IsInvalid</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail5"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormFeedback</span> <span style="color:#89bdff">IsInvalid</span>=<span style="color:#65b042">"true"</span>></span>Oh noes! that name is already taken<span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormFeedback</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorForm</span>></span>
-</pre></code>
+</pre>
+</code>
 
 <h4>Form Tooltip Validation</h4>
 <div class="docs-example">
@@ -340,22 +362,24 @@
         </FormGroup>
     </BlazorForm>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
+<code>
+    <pre style="background:#000;color:#f8f8f8">
 <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorForm</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail6"</span>></span>Input without validation<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail6"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormFeedback</span> <span style="color:#89bdff">IsTooltip</span>=<span style="color:#65b042">"true"</span>></span>You will not be able to see this<span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormFeedback</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail6"</span>></span>Input without validation<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail6"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormFeedback</span> <span style="color:#89bdff">IsTooltip</span>=<span style="color:#65b042">"true"</span>></span>You will not be able to see this<span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormFeedback</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail7"</span>></span>Valid input<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">IsValid</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail7"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormFeedback</span> <span style="color:#89bdff">IsTooltip</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsValid</span>=<span style="color:#65b042">"true"</span>></span>Sweet! that name is available<span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormFeedback</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail7"</span>></span>Valid input<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">IsValid</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail7"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormFeedback</span> <span style="color:#89bdff">IsTooltip</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsValid</span>=<span style="color:#65b042">"true"</span>></span>Sweet! that name is available<span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormFeedback</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail8"</span>></span>Invalid input<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">IsInvalid</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail8"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormFeedback</span> <span style="color:#89bdff">IsTooltip</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsInvalid</span>=<span style="color:#65b042">"true"</span>></span>Oh noes! that name is already taken<span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormFeedback</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">For</span>=<span style="color:#65b042">"exampleEmail8"</span>></span>Invalid input<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">IsInvalid</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Text"</span> <span style="color:#89bdff">Id</span>=<span style="color:#65b042">"exampleEmail8"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormFeedback</span> <span style="color:#89bdff">IsTooltip</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsInvalid</span>=<span style="color:#65b042">"true"</span>></span>Oh noes! that name is already taken<span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormFeedback</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorForm</span>></span>
-</pre></code>
+</pre>
+</code>

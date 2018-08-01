@@ -1,7 +1,10 @@
-﻿@inherits BootstrapComponentBase
+﻿@inherits BlazorStrap.BootstrapComponentBase
+@using BlazorStrap
 @using BlazorStrap.util
+@using Microsoft.AspNetCore.Blazor
+@using Microsoft.AspNetCore.Blazor.Components
 
-<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex">
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex" bind="@Value">
     @ChildContent
 </DynamicElement>
 
@@ -30,11 +33,8 @@
                     return "textarea";
                 default:
                     return "input";
-
             }
-
         }
-
     }
 
     [Parameter] private InputType InputType { get; set; } = InputType.Text;
@@ -48,6 +48,8 @@
     [Parameter] private bool IsMultipleSelect { get; set; }
     [Parameter] private int SelectSize { get; set; }
     [Parameter] private int SelectedIndex { get; set; }
+    [Parameter] private string Value { get; set; }
+    [Parameter] private Action<string> ValueChanged { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 
@@ -73,5 +75,12 @@
             default:
                 return IsPlaintext ? "form-control-plaintext" : "form-control";
         }
+    }
+
+    void onchange(UIChangeEventArgs e)
+    {
+        Console.WriteLine("e: {0}", e.Value);
+        Value = e.Value.ToString();
+        ValueChanged?.Invoke(Value);
     }
 }

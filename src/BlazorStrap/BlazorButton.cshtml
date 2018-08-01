@@ -1,7 +1,10 @@
-﻿@inherits BootstrapComponentBase
+﻿@inherits BlazorStrap.BootstrapComponentBase
+@using BlazorStrap
 @using BlazorStrap.util
+@using Microsoft.AspNetCore.Blazor
+@using Microsoft.AspNetCore.Blazor.Components
 
-<DynamicElement TagName="@Tag" type="@type" onclick="@onclick" class="@classname" disabled="@disabled" ref="ElementRef" role="button" aria-pressed="@pressed" aria-disabled="@disabled" tabindex="@tab" value="@Value" Attributes="@UnknownParameters">
+<DynamicElement TagName="@Tag" onclick="@onclick" type="@type" class="@classname" disabled="@disabled" role="button" aria-pressed="@pressed" aria-disabled="@disabled" tabindex="@tab" value="@Value" Attributes="@UnknownParameters">
     @ChildContent
 </DynamicElement>
                
@@ -65,9 +68,6 @@
         }
     }
 
-    internal Action<UIMouseEventArgs> OnButtonGroupClick { get; set; }
-
-
     [Parameter] private Action<UIMouseEventArgs> onclick { get; set; }
     [Parameter] private Color Color { get; set; } = Color.Primary;
 
@@ -110,10 +110,4 @@
     [Parameter] private bool IsDisabled { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
-    [Parameter] private DynamicElement ElementRef { get; set; }
-
-    private void _buttonGroupOnClick(UIMouseEventArgs e)
-    {
-        if (OnButtonGroupClick != null) OnButtonGroupClick(e);
-    }
 }

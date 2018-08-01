@@ -2,10 +2,6 @@
 
 Bootstrap 4 Components for Blazor Framework
 
-## Blazor 0.4.0
-
-**Please note:** BlazorStrap is still using Blazor 0.3.0 due to a bug in Blazor 0.4.0: https://github.com/aspnet/Blazor/issues/954
-
 ## Bootstrap 4.1
 
 **IMPORTANT** Blazor 0.3.0 ships with Bootstrap 4.0. BlazorStrap uses Bootstrap 4.1. Replace bootstrap.min.css in wwwroot/css/bootstrap folder
