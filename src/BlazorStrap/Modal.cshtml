@@ -64,6 +64,7 @@
     {
         if (!_dontclickWasClicked) IsOpen = false;
         _dontclickWasClicked = false;
+        StateHasChanged();
     }
 
     void dontclick(UIMouseEventArgs e)
