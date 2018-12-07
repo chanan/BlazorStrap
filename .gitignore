@@ -332,3 +332,8 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+# Include dlls in the docs folder
+!/docs/*
+!/docs/_framework/*
+!/docs/_framework/_bin/*
