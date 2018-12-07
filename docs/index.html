@@ -1,93 +1,61 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56303263-3"></script>
-  <script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Blazor Strap Documentation Site</title>
+    <meta name="description" content="Bootstrap components for Blazor">
+    <meta name="keywords" content="bootstrap, design, blazor, razor">
+
+    <base href="/BlazorStrap/" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link href="css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <app>Loading...</app>
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+        // Single Page Apps for GitHub Pages
+        // https://github.com/rafrex/spa-github-pages
+        // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+        // ----------------------------------------------------------------------
+        // This script checks to see if a redirect is present in the query string
+        // and converts it back into the correct url and adds it to the
+        // browser's history using window.history.replaceState(...),
+        // which won't cause the browser to attempt to load the new url.
+        // When the single page app is loaded further down in this file,
+        // the correct url will be waiting in the browser's history for
+        // the single page app to route accordingly.
+        (function(l) {
+            if (l.search) {
+                var q = {};
+                l.search.slice(1).split('&').forEach(function(v) {
+                    var a = v.split('=');
+                    q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+                });
+                if (q.p !== undefined) {
+                    window.history.replaceState(null,
+                        null,
+                        l.pathname.slice(0, -1) +
+                        (q.p || '') +
+                        (q.q ? ('?' + q.q) : '') +
+                        l.hash
+                    );
+                }
+            }
+        }(window.location))
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+
+    <script src="_framework/blazor.webassembly.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56303263-3"></script>
+    <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-56303263-3');
-  </script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Blazor Strap Documentation Site</title>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
-</head>
-
-<body>
-        <a href="https://github.com/chanan/BlazorStrap"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
-    <main role="main" class="container">
-
-        <div class="starter-template">
-            <h1>Blazor Strap</h1>
-            <p class="lead">Bootstrap 4 Components for Blazor Framework</p>
-        </div>
-
-        <h2>Blazorous</h2>
-        <p>If you want to manage your styles in code and use dynamic styles you can check out my other project: <a href="https://chanan.github.io/Blazorous/">Blazorous</a>.
-In the future I will show examples of mixing and matching BlazorStrap and Blazorous.</p>
-
-        <h2>Install</h2>
-
-        <a href="https://www.nuget.org/packages/BlazorStrap/"><img src="https://img.shields.io/nuget/vpre/BlazorStrap.svg" /></a>
-
-        <h3>Tag Helpers</h3>
-
-        <pre>@addTagHelper *, BlazorStrap</pre>
-
-        <div class="alert alert-warning" role="alert">
-            Blazor 0.3.0 ships with Bootstrap 4.0. BlazorStrap uses Bootstrap 4.1. Replace bootstrap.min.css in wwwroot/css/bootstrap folder
-        </div>
-
-        <div class="alert alert-info" role="alert">
-            The interactive demos in this site will not work in this static site. To see the samples in action run the sample project locally.
-        </div>
-
-        <h2>Docs</h2>
-        <ul>
-            <li><a href="alerts.html">Alerts</a></li>
-            <li><a href="badges.html">Badges</a></li>
-            <li><a href="breadcrumbs.html">Breadcrumbs</a></li>
-            <li><a href="buttons.html">Buttons</a></li>
-            <li><a href="buttongroups.html">Button Groups</a></li>
-            <li><a href="cards.html">Cards</a></li>
-            <li><a href="carousals.html">Carousals</a></li>
-            <li><a href="collapse.html">Collapse</a></li>
-            <li><a href="dropdowns.html">Dropdowns</a></li>
-            <li><a href="Figures.html">Figures</a></li>
-            <li><a href="images.html">Images</a></li>
-            <li><a href="jumbotrons.html">Jumbotrons</a></li>
-            <li><a href="layout.html">Layout</a></li>
-            <li><a href="listgroups.html">Listgroups</a></li>
-            <li><a href="navs.html">Navs</a></li>
-            <li><a href="navbars.html">Navbars</a></li>
-            <li><a href="media.html">Media</a></li>
-            <li><a href="modals.html">Modals</a></li>
-            <li><a href="pagination.html">Pagination</a></li>
-            <li><a href="popover.html">Popover</a></li>
-            <li><a href="progress.html">Progress</a></li>
-            <li><a href="tables.html">Tables</a></li>
-            <li><a href="tabs.html">Tabs</a></li>
-            <li><a href="tooltips.html">Tooltips</a></li>
-        </ul>
-
-        <h2>Github</h2>
-        <p><a href="https://github.com/chanan/BlazorStrap">https://github.com/chanan/BlazorStrap</a></p>
-        <p class="text-center">
-            <a href="https://github.com/chanan/BlazorStrap"><img src="https://img.shields.io/github/stars/chanan/BlazorStrap.svg?style=social&label=Stars" /></a>
-        </p>
-
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-    </main><!-- /.container -->
+    </script>
 </body>
 </html>
