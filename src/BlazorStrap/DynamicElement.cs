@@ -11,7 +11,7 @@ namespace BlazorStrap
     /// when you want to combine a set of attributes declared at compile time with
     /// another set determined at runtime.
     /// </summary>
-    public class DynamicElement : IComponent, IHandleEvent
+    public class DynamicElement : BlazorComponent
     {
         /// <summary>
         /// Gets or sets the name of the element to render.
@@ -32,19 +32,11 @@ namespace BlazorStrap
         /// Gets the <see cref="Microsoft.AspNetCore.Blazor.ElementRef"/>.
         /// </summary>
         public ElementRef ElementRef { get; private set; }
-
-        private RenderHandle _renderHandle;
         private IDictionary<string, object> _attributesToRender;
         private RenderFragment _childContent;
 
         /// <inheritdoc />
-        public void Init(RenderHandle renderHandle)
-        {
-            _renderHandle = renderHandle;
-        }
-
-        /// <inheritdoc />
-        public void SetParameters(ParameterCollection parameters)
+        public override void SetParameters(ParameterCollection parameters)
         {
             _attributesToRender = (IDictionary<string, object>)parameters.ToDictionary();
             _childContent = GetAndRemove<RenderFragment>(_attributesToRender, RenderTreeBuilder.ChildContent);
@@ -72,7 +64,7 @@ namespace BlazorStrap
                     }
                 }
             }
-            _renderHandle.Render(Render);
+            base.SetParameters(ParameterCollection.Empty);
         }
 
         private static T GetAndRemove<T>(IDictionary<string, object> values, string key)
@@ -88,22 +80,17 @@ namespace BlazorStrap
             }
         }
 
-        private void Render(RenderTreeBuilder builder)
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+            base.BuildRenderTree(builder);
             builder.OpenElement(0, TagName);
-            foreach (var kvp in _attributesToRender)
+            foreach (var param in _attributesToRender)
             {
-                builder.AddAttribute(1, kvp.Key, kvp.Value);
+                builder.AddAttribute(1, param.Key, param.Value);
             }
             builder.AddElementReferenceCapture(2, capturedRef => { ElementRef = capturedRef; });
             builder.AddContent(3, _childContent);
             builder.CloseElement();
-        }
-
-        public void HandleEvent(EventHandlerInvoker handler, UIEventArgs args)
-        {
-            //Implementing IHandleEvent as a workaround for https://github.com/aspnet/Blazor/issues/656
-            handler.Invoke(args);
         }
     }
 }
