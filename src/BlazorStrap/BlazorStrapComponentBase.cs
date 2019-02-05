@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Blazor.Components;
+﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -9,7 +9,7 @@ namespace BlazorStrap
     /// <summary>
     /// The base class for BlazorStrap components.
     /// </summary>
-    public abstract class BootstrapComponentBase : BlazorComponent
+    public abstract class BootstrapComponentBase : ComponentBase
     {
         private bool _hasCalledInit;
         /// <summary>
@@ -20,7 +20,7 @@ namespace BlazorStrap
             = new Dictionary<string, object>();
 
         /// <inheritdoc />
-        public override void SetParameters(ParameterCollection parameters)
+        public async override Task SetParametersAsync(ParameterCollection parameters)
         {
             UnknownParameters.Clear();
 
@@ -46,7 +46,7 @@ namespace BlazorStrap
                 var initTask = OnInitAsync();
                 if (initTask != null && initTask.Status != TaskStatus.RanToCompletion)
                 {
-                    initTask.ContinueWith(ContinueAfterLifecycleTask);
+                    await initTask.ContinueWith(ContinueAfterLifecycleTask);
                 }
             }
 
@@ -54,7 +54,7 @@ namespace BlazorStrap
             var parametersTask = OnParametersSetAsync();
             if (parametersTask != null && parametersTask.Status != TaskStatus.RanToCompletion)
             {
-                parametersTask.ContinueWith(ContinueAfterLifecycleTask);
+                await parametersTask.ContinueWith(ContinueAfterLifecycleTask);
             }
 
             StateHasChanged();

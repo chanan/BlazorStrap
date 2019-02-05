@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Blazor;
-using Microsoft.AspNetCore.Blazor.Components;
-using Microsoft.AspNetCore.Blazor.RenderTree;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.RenderTree;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
@@ -11,7 +11,7 @@ namespace BlazorStrap
     /// when you want to combine a set of attributes declared at compile time with
     /// another set determined at runtime.
     /// </summary>
-    public class DynamicElement : BlazorComponent
+    public class DynamicElement : ComponentBase
     {
         /// <summary>
         /// Gets or sets the name of the element to render.
@@ -36,7 +36,7 @@ namespace BlazorStrap
         private RenderFragment _childContent;
 
         /// <inheritdoc />
-        public override void SetParameters(ParameterCollection parameters)
+        public async override Task SetParametersAsync(ParameterCollection parameters)
         {
             _attributesToRender = (IDictionary<string, object>)parameters.ToDictionary();
             _childContent = GetAndRemove<RenderFragment>(_attributesToRender, RenderTreeBuilder.ChildContent);
@@ -64,7 +64,7 @@ namespace BlazorStrap
                     }
                 }
             }
-            base.SetParameters(ParameterCollection.Empty);
+            await base.SetParametersAsync(ParameterCollection.Empty);
         }
 
         private static T GetAndRemove<T>(IDictionary<string, object> values, string key)

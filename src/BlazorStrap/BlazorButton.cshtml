@@ -1,8 +1,7 @@
 ﻿@inherits BlazorStrap.BootstrapComponentBase
 @using BlazorStrap
 @using BlazorStrap.util
-@using Microsoft.AspNetCore.Blazor
-@using Microsoft.AspNetCore.Blazor.Components
+@using Microsoft.AspNetCore.Components
 
 <DynamicElement TagName="@Tag" onclick="@onclick" type="@type" class="@classname" disabled="@disabled" role="button" aria-pressed="@pressed" aria-disabled="@disabled" tabindex="@tab" value="@Value" Attributes="@UnknownParameters">
     @ChildContent
