@@ -20,7 +20,7 @@ namespace BlazorStrap
             = new Dictionary<string, object>();
 
         /// <inheritdoc />
-        public override Task SetParametersAsync(ParameterCollection parameters)
+        public override async Task SetParametersAsync(ParameterCollection parameters)
         {
             UnknownParameters.Clear();
 
@@ -46,7 +46,7 @@ namespace BlazorStrap
                 var initTask = OnInitAsync();
                 if (initTask != null && initTask.Status != TaskStatus.RanToCompletion)
                 {
-                    initTask.ContinueWith(ContinueAfterLifecycleTask);
+                    await initTask.ContinueWith(ContinueAfterLifecycleTask);
                 }
             }
 
@@ -54,12 +54,10 @@ namespace BlazorStrap
             var parametersTask = OnParametersSetAsync();
             if (parametersTask != null && parametersTask.Status != TaskStatus.RanToCompletion)
             {
-                parametersTask.ContinueWith(ContinueAfterLifecycleTask);
+                await parametersTask.ContinueWith(ContinueAfterLifecycleTask);
             }
 
             StateHasChanged();
-
-            return Task.CompletedTask;
         }
 
         //TODO: Only get props that are decorated by [Parameter] attribute
