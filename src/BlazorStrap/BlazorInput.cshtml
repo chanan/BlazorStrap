@@ -1,8 +1,7 @@
 ﻿@inherits BlazorStrap.BootstrapComponentBase
 @using BlazorStrap
 @using BlazorStrap.util
-@using Microsoft.AspNetCore.Blazor
-@using Microsoft.AspNetCore.Blazor.Components
+@using Microsoft.AspNetCore.Components
 
 <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex" bind="@Value">
     @ChildContent
