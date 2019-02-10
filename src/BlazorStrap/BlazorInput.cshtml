@@ -4,7 +4,7 @@
 @using Microsoft.AspNetCore.Blazor
 @using Microsoft.AspNetCore.Blazor.Components
 
-<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex" bind="@Value">
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex" value="@Value">
     @ChildContent
 </DynamicElement>
 
