@@ -3,7 +3,7 @@
 <DynamicElement Attributes="@UnknownParameters" TagName="ol" class="@classname">
     @for (var i = 0; i < NumberOfItems; i++)
     {
-        <CarouselIndicatorItem IsActive="@{i == ActiveIndex}" Index="@i" bind-ActiveIndex="@ClickEventActiveIndex" />
+        <CarouselIndicatorItem IsActive="@(i == ActiveIndex)" Index="@i" bind-ActiveIndex="@ClickEventActiveIndex" />
     }
 </DynamicElement>
 
