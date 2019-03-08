@@ -15,7 +15,7 @@
         if (Target != null)
         {
             var placement = Placement.ToDescriptionString();
-            BlazorStrapInterop.Tooltip(Target, tooltip, arrow, placement);
+            new BlazorStrapInterop(JSRuntime).Tooltip(Target, tooltip, arrow, placement);
         }
     }
 

@@ -50,7 +50,7 @@
         set
         {
             _isOpen = value;
-            BlazorStrapInterop.ChangeBody(_isOpen ? "modal-open" : null); //TODO: Change to onRender?
+            new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null); //TODO: Change to onRender?
         }
     }
     [Parameter] private bool IsCentered { get; set; }

@@ -3,12 +3,14 @@
 @page "/test"
 @addTagHelper *, BlazorStrap
 
+@inject IJSRuntime JSRuntime
+
 <BlazorButton onclick="@onclick">Test</BlazorButton>
 
 @functions {
     void onclick(UIMouseEventArgs e)
     {
         Console.WriteLine("onclick");
-        BlazorStrapInterop.Log("TEST!");
+        new BlazorStrapInterop(JSRuntime).Log("TEST!");
     }
 }
