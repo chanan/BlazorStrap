@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Blazor;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
 using System;
 using System.Collections.Generic;
@@ -29,14 +30,14 @@ namespace BlazorStrap
         }
 
         /// <summary>
-        /// Gets the <see cref="Microsoft.AspNetCore.Blazor.ElementRef"/>.
+        /// Gets the <see cref="Microsoft.AspNetCore.Components.ElementRef"/>.
         /// </summary>
         public ElementRef ElementRef { get; private set; }
         private IDictionary<string, object> _attributesToRender;
         private RenderFragment _childContent;
 
         /// <inheritdoc />
-        public async override Task SetParametersAsync(ParameterCollection parameters)
+        public override Task SetParametersAsync(ParameterCollection parameters)
         {
             _attributesToRender = (IDictionary<string, object>)parameters.ToDictionary();
             _childContent = GetAndRemove<RenderFragment>(_attributesToRender, RenderTreeBuilder.ChildContent);
@@ -64,7 +65,7 @@ namespace BlazorStrap
                     }
                 }
             }
-            await base.SetParametersAsync(ParameterCollection.Empty);
+            return base.SetParametersAsync(ParameterCollection.Empty);
         }
 
         private static T GetAndRemove<T>(IDictionary<string, object> values, string key)

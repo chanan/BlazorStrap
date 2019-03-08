@@ -20,7 +20,7 @@ namespace BlazorStrap
             = new Dictionary<string, object>();
 
         /// <inheritdoc />
-        public async override Task SetParametersAsync(ParameterCollection parameters)
+        public override async Task SetParametersAsync(ParameterCollection parameters)
         {
             UnknownParameters.Clear();
 

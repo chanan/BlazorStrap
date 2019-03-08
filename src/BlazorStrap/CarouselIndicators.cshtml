@@ -3,8 +3,7 @@
 <DynamicElement Attributes="@UnknownParameters" TagName="ol" class="@classname">
     @for (var i = 0; i < NumberOfItems; i++)
     {
-        <!-- this is currently disabled until AspNetCore#7159 is fixed. Do not uncomment; VS will crash. -->
-        @*<CarouselIndicatorItem IsActive="@{i == ActiveIndex}" Index="@i" bind-ActiveIndex="@ClickEventActiveIndex" />*@
+        <CarouselIndicatorItem IsActive="@(i == ActiveIndex)" Index="@i" bind-ActiveIndex="@ClickEventActiveIndex" />
     }
 </DynamicElement>
 
