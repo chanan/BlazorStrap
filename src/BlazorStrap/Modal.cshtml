@@ -1,6 +1,8 @@
 ﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
+@inject Microsoft.JSInterop.IJSRuntime JSRuntime
+
 <DynamicElement Attributes="@UnknownParameters" style="@styles" TagName="div" class="@classname" tabindex="-1" role="dialog" onclick="@onclick">
     <div class="@innerClassname" role="document">
         <div class="modal-content" onclick="@dontclick">
@@ -50,7 +52,7 @@
         set
         {
             _isOpen = value;
-            BlazorStrapInterop.ChangeBody(_isOpen ? "modal-open" : null); //TODO: Change to onRender?
+            new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null); //TODO: Change to onRender?
         }
     }
     [Parameter] private bool IsCentered { get; set; }

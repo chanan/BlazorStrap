@@ -1,6 +1,8 @@
 ﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
+@inject Microsoft.JSInterop.IJSRuntime JSRuntime
+
 @if (IsOpen)
 {
     <DynamicElement Id="@Id" Attributes="@UnknownParameters" TagName="div" class="@classname" role="tooltip" onclick="@onclick">
@@ -26,7 +28,7 @@
         if (IsOpen)
         {
             var placement = Placement.ToDescriptionString();
-            BlazorStrapInterop.Popper(Target, Id, arrow, placement);
+            new BlazorStrapInterop(JSRuntime).Popper(Target, Id, arrow, placement);
         }
     }
     private string Id
