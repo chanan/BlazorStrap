@@ -6,6 +6,7 @@
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <LangVersion>7.3</LangVersion>
+    <RazorLangVersion>3.0</RazorLangVersion>
     <PackageId>BlazorStrap</PackageId>
     <Version>0.9.0-pre</Version>
     <Authors>Chanan Braunstein</Authors>
@@ -17,8 +18,8 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="0.9.0-preview3-19154-02" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.9.0-preview3-19154-02" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview4-19216-03" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview4-19216-03" />
   </ItemGroup>
 
   <ItemGroup>

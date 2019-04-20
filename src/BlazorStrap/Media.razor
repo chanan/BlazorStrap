@@ -1,0 +1,71 @@
+﻿@inherits BootstrapComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname">
+    @ChildContent
+</DynamicElement>
+
+@functions {
+    string classname
+    {
+        get
+        {
+            return $"{GetClass()} {Class}";
+        }
+    }
+    string Tag
+    {
+        get
+        {
+            switch(MediaType)
+            {
+                case MediaType.Body:
+                case MediaType.Media:
+                    return "div";
+                case MediaType.Heading:
+                    return "h5";
+                case MediaType.Image:
+                    return "img";
+                case MediaType.List:
+                    return "ul";
+                case MediaType.ListItem:
+                    return "li";
+                default:
+                    return "div";
+            }
+        }
+    }
+    [Parameter] private MediaType MediaType { get; set; } = MediaType.Media;
+    [Parameter] private VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
+    [Parameter] private string Class { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+
+    private string GetVerticalAlignmnet()
+    {
+        if (VerticalAlignment == VerticalAlignment.Center) { return "align-self-center"; }
+        if (VerticalAlignment == VerticalAlignment.Bottom) { return "align-self-end"; }
+        if (VerticalAlignment == VerticalAlignment.Bottom) { return "align-self-start"; }
+        return null;
+    }
+
+    private string GetClass()
+    {
+        switch (this.MediaType)
+        {
+            case MediaType.Media:
+                return "media";
+            case MediaType.Body:
+                return "media-body";
+            case MediaType.Heading:
+                return "mt-0 mb-1";
+            case MediaType.Image:
+                var verticalAlignment = GetVerticalAlignmnet();
+                return $"{verticalAlignment} mr-3";
+            case MediaType.List:
+                return "list-unstyled";
+            case MediaType.ListItem:
+                return "media";
+            default:
+                return "media";
+        }
+    }
+}

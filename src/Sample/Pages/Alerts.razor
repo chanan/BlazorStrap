@@ -1,0 +1,203 @@
+﻿@page "/alerts"
+
+<h1>Alerts</h1>
+
+<div class="docs-example">
+    <Alert Color="Color.Primary">
+        This is a primary alert — check it out!
+    </Alert>
+    <Alert Color="Color.Secondary">
+        This is a secondary alert — check it out!
+    </Alert>
+    <Alert Color="Color.Success">
+        This is a success alert — check it out!
+    </Alert>
+    <Alert Color="Color.Danger">
+        This is a danger alert — check it out!
+    </Alert>
+    <Alert Color="Color.Warning">
+        This is a warning alert — check it out!
+    </Alert>
+    <Alert Color="Color.Info">
+        This is a info alert — check it out!
+    </Alert>
+    <Alert Color="Color.Light">
+        This is a light alert — check it out!
+    </Alert>
+    <Alert Color="Color.Dark">
+        This is a dark alert — check it out!
+    </Alert>
+</div>
+
+<code>
+    <pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>
+    This is a primary alert — check it out!
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>
+    This is a secondary alert — check it out!
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span>></span>
+    This is a success alert — check it out!
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Danger"</span>></span>
+    This is a danger alert — check it out!
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Warning"</span>></span>
+    This is a warning alert — check it out!
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span>></span>
+    This is a info alert — check it out!
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>></span>
+    This is a light alert — check it out!
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Dark"</span>></span>
+    This is a dark alert — check it out!
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+</pre>
+</code>
+
+<h3>Properties</h3>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Color</td>
+            <td>Color enum</td>
+            <td>Applies the selected color to the alert</td>
+        </tr>
+        <tr>
+            <td>IsDismissible</td>
+            <td>bool</td>
+            <td>Adds the ability to dismiss the alert</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3>Link color</h3>
+<div class="docs-example">
+    <Alert Color="Color.Primary">
+        This is a primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </Alert>
+    <Alert Color="Color.Secondary">
+        This is a secondary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </Alert>
+    <Alert Color="Color.Success">
+        This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </Alert>
+    <Alert Color="Color.Danger">
+        This is a danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </Alert>
+    <Alert Color="Color.Warning">
+        This is a warning alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </Alert>
+    <Alert Color="Color.Info">
+        This is a info alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </Alert>
+    <Alert Color="Color.Light">
+        This is a light alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </Alert>
+    <Alert Color="Color.Dark">
+        This is a dark alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </Alert>
+</div>
+<code>
+    <pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>
+    This is a primary alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>></span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>></span>. Give it a click if you like.
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>
+    This is a secondary alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>></span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>></span>. Give it a click if you like.
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span>></span>
+    This is a success alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>></span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>></span>. Give it a click if you like.
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Danger"</span>></span>
+    This is a danger alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>></span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>></span>. Give it a click if you like.
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Warning"</span>></span>
+    This is a warning alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>></span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>></span>. Give it a click if you like.
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span>></span>
+    This is a info alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>></span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>></span>. Give it a click if you like.
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>></span>
+    This is a light alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>></span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>></span>. Give it a click if you like.
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Dark"</span>></span>
+    This is a dark alert with <span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"alert-link"</span>></span>an example link<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>></span>. Give it a click if you like.
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+</pre>
+</code>
+
+<h3>Additional content</h3>
+
+<div class="docs-example">
+    <Alert Color="Color.Success">
+        <h4 className="alert-heading">Well done!</h4>
+        <p>
+            Aww yeah, you successfully read this important alert message. This example text is going
+            to run a bit longer so that you can see how spacing within an alert works with this kind
+            of content.
+        </p>
+        <hr />
+        <p className="mb-0">
+            Whenever you need to, be sure to use margin utilities to keep things nice and tidy.
+        </p>
+    </Alert>
+</div>
+<code>
+    <pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">h4</span> <span style="color:#89bdff">className</span>=<span style="color:#65b042">"alert-heading"</span>></span>Well done!<span style="color:#89bdff">&lt;/<span style="color:#89bdff">h4</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">p</span>></span>
+        Aww yeah, you successfully read this important alert message. This example text is going
+        to run a bit longer so that you can see how spacing within an alert works with this kind
+        of content.
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">p</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">hr</span> /></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">p</span> <span style="color:#89bdff">className</span>=<span style="color:#65b042">"mb-0"</span>></span>
+        Whenever you need to, be sure to use margin utilities to keep things nice and tidy.
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">p</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+</pre>
+</code>
+
+<h3>Dismissing</h3>
+
+<div class="docs-example">
+    <Alert Color="Color.Info" IsDismissible="true" OnDismiss="@OnDismiss">
+        I am an alert and I can be dismissed!
+    </Alert>
+</div>
+
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Alert</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span> <span style="color:#89bdff">IsDismissible</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">OnDismiss</span>=<span style="color:#65b042">"@@OnDismiss"</span>></span>
+    I am an alert and I can be dismissed!
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
+
+@@functions {
+    void OnDismiss()
+    {
+        Console.WriteLine(<span style="color:#65b042">"OnDismiss"</span>);
+        StateHasChanged();
+    }
+}
+</pre>
+
+@functions {
+void OnDismiss()
+{
+    Console.WriteLine("OnDismiss");
+    StateHasChanged();
+}
+}

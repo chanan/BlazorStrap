@@ -1,0 +1,56 @@
+﻿@inherits BootstrapComponentBase
+
+<DynamicElement TagName="@Tag" class="@classname" href="@Href" onclick="@_onclick" Attributes="@UnknownParameters">
+    @ChildContent
+</DynamicElement>
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            var pill = IsPill ? "badge-pill" : "";
+            return $"badge {pill} badge-{Color.ToDescriptionString()} {Class}";
+        }
+    }
+    private string Tag { get; set; } = "span";
+
+    [Parameter] private Color Color { get; set; } = Color.Primary;
+    [Parameter] private bool IsPill { get; set; }
+    private string _href;
+    [Parameter] private string Href
+    {
+        get
+        {
+            return _href;
+        }
+        set
+        {
+            _href = value;
+            if (value != null || onclick != null) { Tag = "a"; }
+            else { Tag = "span"; }
+        }
+    }
+    private Action _onlick { get; set; }
+    [Parameter] private Action onclick
+    {
+        get
+        {
+            return _onlick;
+        }
+
+        set
+        {
+            _onlick = value;
+            if (value != null || Href != null) { Tag = "a"; }
+            else { Tag = "span"; }
+        }
+    }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+
+    void _onclick()
+    {
+        onclick?.Invoke();
+    }
+}
