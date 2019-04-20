@@ -13,7 +13,7 @@
         get
         {
             var outline = IsOutline ? $"btn-outline-{Color.ToDescriptionString()}" : null;
-            var color = Color != Color.None ? $"btn-{Color.ToDescriptionString()}" : null;
+            var color = Color != Color.None && !IsOutline ? $"btn-{Color.ToDescriptionString()}" : null;
             var size = Size != Size.None ? $"btn-{Size.ToDescriptionString()}" : null;
             var block = IsBlock ? "btn-block" : null;
             var active = ButtonType == ButtonType.Link && IsActive ? "active" : null;
