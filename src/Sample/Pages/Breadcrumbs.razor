@@ -1,0 +1,32 @@
+﻿@page "/breadcrumbs"
+
+<h1>Breadcrumbs</h1>
+
+<div class="docs-example">
+    <Breadcrumb>
+        <BreadcrumbItem IsActive="true">Home</BreadcrumbItem>
+    </Breadcrumb>
+    <Breadcrumb>
+        <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+        <BreadcrumbItem IsActive="true">Library</BreadcrumbItem>
+    </Breadcrumb>
+    <Breadcrumb>
+        <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+        <BreadcrumbItem><a href="#">Library</a></BreadcrumbItem>
+        <BreadcrumbItem IsActive="true">Data</BreadcrumbItem>
+    </Breadcrumb>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Breadcrumb</span>></span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">BreadcrumbItem</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"true"</span>></span>Home<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BreadcrumbItem</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Breadcrumb</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Breadcrumb</span>></span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">BreadcrumbItem</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span>></span>Home<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">BreadcrumbItem</span>></span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">BreadcrumbItem</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"true"</span>></span>Library<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BreadcrumbItem</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Breadcrumb</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Breadcrumb</span>></span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">BreadcrumbItem</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span>></span>Home<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">BreadcrumbItem</span>></span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">BreadcrumbItem</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">a</span> <span style="color:#e0c589">href</span>=<span style="color:#65b042">"#"</span>></span>Library<span style="color:#e0c589">&lt;/<span style="color:#e0c589">a</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">BreadcrumbItem</span>></span>
+  <span style="color:#89bdff">&lt;<span style="color:#89bdff">BreadcrumbItem</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"true"</span>></span>Data<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BreadcrumbItem</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Breadcrumb</span>></span>
+</pre></code>

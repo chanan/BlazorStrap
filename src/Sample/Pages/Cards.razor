@@ -1,0 +1,680 @@
+﻿@page "/cards"
+
+<h1>Cards</h1>
+
+<div class="docs-example">
+    <Card CardType="CardType.Card">
+        <Card CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_162f52d8790%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_162f52d8790%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22107.203125%22%20y%3D%2296.3%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Card image cap" />
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Card title</Card>
+            <Card CardType="CardType.Subtitle">Card subtitle</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+            <BlazorButton>Button</BlazorButton>
+        </Card>
+    </Card>
+</div>
+
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Card"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">".../286x180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"Card image cap"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Subtitle"</span>></span>Card subtitle<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span>></span>Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+</pre></code>
+
+<p>CardType.Card is the default and does not need to be specified</p>
+
+<h3>Content Types</h3>
+
+<div class="docs-example">
+    <Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Card title</Card>
+            <Card CardType="CardType.Subtitle">Card subtitle</Card>
+        </Card>
+        <Card CardType="CardType.Image" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_162f52d8790%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_162f52d8790%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22107.203125%22%20y%3D%2296.3%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Card image cap" />
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+            <Card CardType="CardType.Link" href="#">Card Link</Card>
+            <Card CardType="CardType.Link" href="#">Another Link</Card>
+        </Card>
+    </Card>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Subtitle"</span>></span>Card subtitle<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">".../286x180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"Card image cap"</span> /></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Link"</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Card Link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Link"</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Another Link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+</pre></code>
+
+<h3>Text alignment</h3>
+
+<div class="docs-example">
+    <Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Special Title Treatment</Card>
+            <Card CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</Card>
+            <BlazorButton>Go somewhere</BlazorButton>
+        </Card>
+    </Card>
+    <Card Alignment="Alignment.Center">
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Special Title Treatment</Card>
+            <Card CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</Card>
+            <BlazorButton>Go somewhere</BlazorButton>
+        </Card>
+    </Card>
+    <Card Alignment="Alignment.Right">
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Special Title Treatment</Card>
+            <Card CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</Card>
+            <BlazorButton>Go somewhere</BlazorButton>
+        </Card>
+    </Card>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Special Title Treatment<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>With supporting text below as a natural lead-in to additional content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span>></span>Go somewhere<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Alignment</span>=<span style="color:#65b042">"Alignment.Center"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Special Title Treatment<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>With supporting text below as a natural lead-in to additional content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span>></span>Go somewhere<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Alignment</span>=<span style="color:#65b042">"Alignment.Right"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Special Title Treatment<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>With supporting text below as a natural lead-in to additional content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span>></span>Go somewhere<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+</pre></code>
+
+<h3>Header and footer</h3>
+
+<div class="docs-example">
+    <Card>
+        <Card CardType="CardType.Header">Featured</Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Special title treatment</Card>
+            <Card CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</Card>
+            <BlazorButton ButtonType="ButtonType.Link" Href="#">Go Somewhere</BlazorButton>
+        </Card>
+        <Card CardType="CardType.Footer">Footer</Card>
+    </Card>
+    <Card>
+        <Card CardType="CardType.Header" HeadingSize="HeadingSize.H3">Featured</Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Special title treatment</Card>
+            <Card CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</Card>
+            <BlazorButton ButtonType="ButtonType.Link" Href="#">Go Somewhere</BlazorButton>
+        </Card>
+        <Card CardType="CardType.Footer" Class="text-muted">Footer</Card>
+    </Card>
+</div>
+<code>
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Featured<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Special title treatment<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>With supporting text below as a natural lead-in to additional content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">"ButtonType.Link"</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Go Somewhere<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Footer"</span>></span>Footer<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span> <span style="color:#89bdff">HeadingSize</span>=<span style="color:#65b042">"HeadingSize.H3"</span>></span>Featured<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Special title treatment<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>With supporting text below as a natural lead-in to additional content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">"ButtonType.Link"</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Go Somewhere<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Footer"</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"text-muted"</span>></span>Footer<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+</pre>
+</code>
+
+<h3>Image Caps</h3>
+
+<div class="docs-example">
+    <Card>
+        <Card CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="318x180"></Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Card title</Card>
+            <Card CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</Card>
+            <Card CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></Card>
+        </Card>
+    </Card>
+    <Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Card title</Card>
+            <Card CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</Card>
+            <Card CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></Card>
+        </Card>
+        <Card CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Bottom" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="318x180"></Card>
+    </Card>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">".../747x180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"747x180"</span>>&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"text-muted"</span>></span>Last updated 3 mins ago<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"text-muted"</span>></span>Last updated 3 mins ago<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Bottom"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">".../747x180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"747x180"</span>>&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+</pre></code>
+
+<h3>Image Overlays</h3>
+
+<div class="docs-example">
+    <Card>
+        <Card CardType="CardType.Image" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97270&w=318&h=270&bg=333333&txtclr=666666" alt="318x270"></Card>
+        <Card CardType="CardType.ImageOverlay">
+            <Card CardType="CardType.Title">Card title</Card>
+            <Card CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</Card>
+            <Card CardType="CardType.Text"><small className="text-muted">Last updated 3 mins ago</small></Card>
+        </Card>
+    </Card>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=318%C3%97270<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=318<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=270<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>bg=333333<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txtclr=666666"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"318x270"</span>>&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.ImageOverlay"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">className</span>=<span style="color:#65b042">"text-muted"</span>></span>Last updated 3 mins ago<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+</pre></code>
+
+<h3>Background Variants</h3>
+
+<div class="docs-example">
+    <Card Color="Color.Primary">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Primary card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Secondary">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Secondary card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Success">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Success card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Danger">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Danger card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Warning">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Warning card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Info">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Info card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Light">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Light card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Dark">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Dark card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Primary card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Secondary card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Success card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Danger"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Danger card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Warning"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Warning card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Info card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Light card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Dark"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Dark card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+</pre></code>
+
+<h3>Border</h3>
+
+<div class="docs-example">
+    <Card Color="Color.Primary" IsOutline="true">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body" Color="Color.Primary">
+            <Card CardType="CardType.Title">Primary card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Secondary" IsOutline="true">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body" Color="Color.Secondary">
+            <Card CardType="CardType.Title">Secondary card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Success" IsOutline="true">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body" Color="Color.Success">
+            <Card CardType="CardType.Title">Success card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Danger" IsOutline="true">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body" Color="Color.Danger">
+            <Card CardType="CardType.Title">Danger card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Warning" IsOutline="true">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body" Color="Color.Warning">
+            <Card CardType="CardType.Title">Warning card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Info" IsOutline="true">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body" Color="Color.Info">
+            <Card CardType="CardType.Title">Info card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Light" IsOutline="true">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body">
+            <Card CardType="CardType.Title">Light card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+    <Card Color="Color.Dark" IsOutline="true">
+        <Card CardType="CardType.Header">Header</Card>
+        <Card CardType="CardType.Body" Color="Color.Dark">
+            <Card CardType="CardType.Title">Dark card title</Card>
+            <Card CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</Card>
+        </Card>
+    </Card>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Primary card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Secondary card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Success card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Danger"</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Danger"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Danger card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Warning"</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Warning"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Warning card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Info card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Light card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Dark"</span> <span style="color:#89bdff">IsOutline</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Header"</span>></span>Header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Dark"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Dark card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>Some quick example text to build on the card title and make up the bulk of the card's content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+</pre></code>
+
+<h3>Card Groups</h3>
+
+<div class="docs-example">
+    <Card CardType="CardType.Group">
+        <Card>
+            <Card CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="256x180" />
+            <Card CardType="CardType.Body">
+                <Card CardType="CardType.Title">Card title</Card>
+                <Card CardType="CardType.Subtitle">Card subtitle</Card>
+                <Card CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</Card>
+                <Card CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></Card>
+            </Card>
+        </Card>
+        <Card>
+            <Card CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="256x180" />
+            <Card CardType="CardType.Body">
+                <Card CardType="CardType.Title">Card title</Card>
+                <Card CardType="CardType.Subtitle">Card subtitle</Card>
+                <Card CardType="CardType.Text">This card has supporting text below as a natural lead-in to additional content.</Card>
+                <Card CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></Card>
+            </Card>
+            </Card>
+        <Card>
+            <Card CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="256x180" />
+            <Card CardType="CardType.Body">
+                <Card CardType="CardType.Title">Card title</Card>
+                <Card CardType="CardType.Subtitle">Card subtitle</Card>
+                <Card CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</Card>
+                <Card CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></Card>
+            </Card>
+        </Card>
+    </Card>
+</div>
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Group"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=256%C3%97180<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=256<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"256x180"</span> /></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Subtitle"</span>></span>Card subtitle<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"text-muted"</span>></span>Last updated 3 mins ago<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=256%C3%97180<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=256<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"256x180"</span> /></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Subtitle"</span>></span>Card subtitle<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>This card has supporting text below as a natural lead-in to additional content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"text-muted"</span>></span>Last updated 3 mins ago<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=256%C3%97180<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=256<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"256x180"</span> /></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Subtitle"</span>></span>Card subtitle<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"text-muted"</span>></span>Last updated 3 mins ago<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+</pre>
+
+<h3>Card Decks</h3>
+
+<div class="docs-example">
+    <Card CardType="CardType.Deck">
+        <Card>
+            <Card CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="256x180" />
+            <Card CardType="CardType.Body">
+                <Card CardType="CardType.Title">Card title</Card>
+                <Card CardType="CardType.Subtitle">Card subtitle</Card>
+                <Card CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</Card>
+                <Card CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></Card>
+            </Card>
+        </Card>
+        <Card>
+            <Card CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="256x180" />
+            <Card CardType="CardType.Body">
+                <Card CardType="CardType.Title">Card title</Card>
+                <Card CardType="CardType.Subtitle">Card subtitle</Card>
+                <Card CardType="CardType.Text">This card has supporting text below as a natural lead-in to additional content.</Card>
+                <Card CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></Card>
+            </Card>
+        </Card>
+        <Card>
+            <Card CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="256x180" />
+            <Card CardType="CardType.Body">
+                <Card CardType="CardType.Title">Card title</Card>
+                <Card CardType="CardType.Subtitle">Card subtitle</Card>
+                <Card CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</Card>
+                <Card CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></Card>
+            </Card>
+        </Card>
+    </Card>
+</div>
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Deck"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=256%C3%97180<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=256<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"256x180"</span> /></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Subtitle"</span>></span>Card subtitle<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"text-muted"</span>></span>Last updated 3 mins ago<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=256%C3%97180<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=256<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"256x180"</span> /></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Subtitle"</span>></span>Card subtitle<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>This card has supporting text below as a natural lead-in to additional content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"text-muted"</span>></span>Last updated 3 mins ago<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=256%C3%97180<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=256<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"256x180"</span> /></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Subtitle"</span>></span>Card subtitle<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span><span style="color:#e0c589">&lt;<span style="color:#e0c589">small</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"text-muted"</span>></span>Last updated 3 mins ago<span style="color:#e0c589">&lt;/<span style="color:#e0c589">small</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+</pre>
+
+<h3>Card Columns</h3>
+
+<div class="docs-example">
+    <Card CardType="CardType.Columns">
+        <Card>
+            <Card CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap" />
+            <Card CardType="CardType.Body">
+                <Card CardType="CardType.Title">Card title</Card>
+                <Card CardType="CardType.Subtitle">Card subtitle</Card>
+                <Card CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</Card>
+                <BlazorButton Color="Color.Secondary">Button</BlazorButton>
+            </Card>
+        </Card>
+        <Card>
+            <Card CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap" />
+        </Card>
+        <Card>
+            <Card CardType="CardType.Body">
+                <Card CardType="CardType.Title">Card title</Card>
+                <Card CardType="CardType.Subtitle">Card subtitle</Card>
+                <Card CardType="CardType.Text">This card has supporting text below as a natural lead-in to additional content.</Card>
+                <BlazorButton Color="Color.Secondary">Button</BlazorButton>
+            </Card>
+        </Card>
+        <Card IsInverse="true">
+            <Card CardType="CardType.Body">
+                <Card CardType="CardType.Title">Special Title Treatment</Card>
+                <Card CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</Card>
+                <BlazorButton Color="Color.Secondary">Button</BlazorButton>
+            </Card>
+        </Card>
+        <Card>
+            <Card CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap" />
+            <Card CardType="CardType.Body">
+                <Card CardType="CardType.Title">Card title</Card>
+                <Card CardType="CardType.Subtitle">Card subtitle</Card>
+                <Card CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</Card>
+                <BlazorButton Color="Color.Secondary">Button</BlazorButton>
+            </Card>
+        </Card>
+        <Card Color="Color.Primary">
+            <Card CardType="CardType.Body">
+                <Card CardType="CardType.Title">Special Title Treatment</Card>
+                <Card CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</Card>
+            </Card>
+        </Card>
+    </Card>
+</div>
+
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Columns"</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=256%C3%97180<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=256<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"Card image cap"</span> /></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Subtitle"</span>></span>Card subtitle<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=256%C3%97180<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=256<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"Card image cap"</span> /></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Subtitle"</span>></span>Card subtitle<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>This card has supporting text below as a natural lead-in to additional content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">IsInverse</span>=<span style="color:#65b042">"true"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Special Title Treatment<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>With supporting text below as a natural lead-in to additional content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Image"</span> <span style="color:#89bdff">VerticalAlignment</span>=<span style="color:#65b042">"VerticalAlignment.Top"</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"https://placeholdit.imgix.net/~text?txtsize=33<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>txt=256%C3%97180<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>w=256<span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&amp;</span>h=180"</span> <span style="color:#89bdff">alt</span>=<span style="color:#65b042">"Card image cap"</span> /></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Card title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Subtitle"</span>></span>Card subtitle<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>Button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Body"</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Title"</span>></span>Special Title Treatment<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">Card</span> <span style="color:#89bdff">CardType</span>=<span style="color:#65b042">"CardType.Text"</span>></span>With supporting text below as a natural lead-in to additional content.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
+</pre></code>

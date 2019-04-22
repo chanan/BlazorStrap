@@ -1,0 +1,82 @@
+﻿@inherits BootstrapComponentBase
+@using BlazorStrap.util
+
+@inject Microsoft.JSInterop.IJSRuntime JSRuntime
+
+<DynamicElement Attributes="@UnknownParameters" style="@styles" TagName="div" class="@classname" tabindex="-1" role="dialog" onclick="@onclick">
+    <div class="@innerClassname" role="document">
+        <div class="modal-content" onclick="@dontclick">
+            @ChildContent
+        </div>
+    </div>
+</DynamicElement>
+
+@if (IsOpen)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+@functions {
+    string classname
+    {
+        get
+        {
+            var display = IsOpen ? "fade show" : null;
+            return $"modal {display} {Class}";
+        }
+    }
+    string innerClassname
+    {
+        get
+        {
+            var center = IsCentered ? "modal-dialog-centered" : null;
+            var size = Size != Size.None ? $"modal-{Size.ToDescriptionString()}" : null;
+            return $"modal-dialog {size} {center}";
+        }
+    }
+    string styles
+    {
+        get
+        {
+            var display = IsOpen ? "display: block; padding-right: 17px;" : null;
+            return $"{Style} {display}";
+        }
+    }
+    private bool _isOpen;
+    [Parameter]
+    private bool IsOpen
+    {
+        get
+        {
+            return _isOpen;
+        }
+        set
+        {
+            _isOpen = value;
+            new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null); //TODO: Change to onRender?
+        }
+    }
+    [Parameter] private bool IsCentered { get; set; }
+    [Parameter] private Size Size { get; set; } = Size.None;
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+
+    private bool _dontclickWasClicked;
+    void onclick()
+    {
+        if (!_dontclickWasClicked) { IsOpen = false; }
+        _dontclickWasClicked = false;
+        StateHasChanged();
+    }
+
+    void dontclick(UIMouseEventArgs e)
+    {
+        _dontclickWasClicked = true;
+    }
+    /*void onkeyup(UIKeyboardEventArgs e)
+    {
+        //TODO: Close on Esc key
+        Console.Write("Key: ", e.Key);
+    }*/
+}

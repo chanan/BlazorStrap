@@ -1,0 +1,120 @@
+﻿@page "/badges"
+
+<h1>Badges</h1>
+
+<div class="docs-example">
+    <h1>Heading <Badge Color="Color.Secondary">New</Badge></h1>
+    <h2>Heading <Badge Color="Color.Secondary">New</Badge></h2>
+    <h3>Heading <Badge Color="Color.Secondary">New</Badge></h3>
+    <h3>Heading <Badge Color="Color.Secondary">New</Badge></h3>
+    <h5>Heading <Badge Color="Color.Secondary">New</Badge></h5>
+    <h6>Heading <Badge Color="Color.Secondary">New</Badge></h6>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">h1</span>></span>Heading <span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>New<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">h1</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">h2</span>></span>Heading <span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>New<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">h2</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">h3</span>></span>Heading <span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>New<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">h3</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">h3</span>></span>Heading <span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>New<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">h3</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">h5</span>></span>Heading <span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>New<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">h5</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">h6</span>></span>Heading <span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>New<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">h6</span>></span>
+</pre></code>
+
+<p>Badges can be used as part of links or buttons to provide a counter.</p>
+
+<div class="docs-example">
+    <button type="button" class="btn btn-primary">
+        Profile <Badge Color="Color.Light">9</Badge>
+        <span class="sr-only">unread messages</span>
+    </button>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#e0c589">&lt;<span style="color:#e0c589">button</span> <span style="color:#e0c589">type</span>=<span style="color:#65b042">"button"</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"btn btn-primary"</span>></span>
+  Profile <span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>></span>9<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+  <span style="color:#e0c589">&lt;<span style="color:#e0c589">span</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"sr-only"</span>></span>unread messages<span style="color:#e0c589">&lt;/<span style="color:#e0c589">span</span>></span>
+<span style="color:#e0c589">&lt;/<span style="color:#e0c589">button</span>></span>
+</pre></code>
+
+<h3>Contextual variations</h3>
+
+<div class="docs-example">
+    <Badge Color="Color.Primary">Primary</Badge>
+    <Badge Color="Color.Secondary">Secondary</Badge>
+    <Badge Color="Color.Success">Success</Badge>
+    <Badge Color="Color.Danger">Danger</Badge>
+    <Badge Color="Color.Warning">Warning</Badge>
+    <Badge Color="Color.Info">Info</Badge>
+    <Badge Color="Color.Light">Light</Badge>
+    <Badge Color="Color.Dark">Dark</Badge>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>Primary<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>Secondary<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span>></span>Success<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Danger"</span>></span>Danger<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Warning"</span>></span>Warning<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span>></span>Info<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>></span>Light<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Dark"</span>></span>Dark<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+</pre></code>
+
+<h3>Pills</h3>
+
+<div class="docs-example">
+    <Badge Color="Color.Primary" IsPill="true">Primary</Badge>
+    <Badge Color="Color.Secondary" IsPill="true">Secondary</Badge>
+    <Badge Color="Color.Success" IsPill="true">Success</Badge>
+    <Badge Color="Color.Danger" IsPill="true">Danger</Badge>
+    <Badge Color="Color.Warning" IsPill="true">Warning</Badge>
+    <Badge Color="Color.Info" IsPill="true">Info</Badge>
+    <Badge Color="Color.Light" IsPill="true">Light</Badge>
+    <Badge Color="Color.Dark" IsPill="true">Dark</Badge>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">IsPill</span>=<span style="color:#65b042">"true"</span>></span>Primary<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span> <span style="color:#89bdff">IsPill</span>=<span style="color:#65b042">"true"</span>></span>Secondary<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span> <span style="color:#89bdff">IsPill</span>=<span style="color:#65b042">"true"</span>></span>Success<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Danger"</span> <span style="color:#89bdff">IsPill</span>=<span style="color:#65b042">"true"</span>></span>Danger<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Warning"</span> <span style="color:#89bdff">IsPill</span>=<span style="color:#65b042">"true"</span>></span>Warning<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span> <span style="color:#89bdff">IsPill</span>=<span style="color:#65b042">"true"</span>></span>Info<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span> <span style="color:#89bdff">IsPill</span>=<span style="color:#65b042">"true"</span>></span>Light<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Dark"</span> <span style="color:#89bdff">IsPill</span>=<span style="color:#65b042">"true"</span>></span>Dark<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+</pre></code>
+
+<h3>Links</h3>
+
+<p>Adding <code>Href</code> or <code>onclick</code> will default the badge to a link.</p>
+
+<div class="docs-example">
+    <Badge onclick="@onclick" Color="Color.Primary">Primary</Badge>
+    <Badge Href="#" Color="Color.Secondary">Secondary</Badge>
+    <Badge Href="#" Color="Color.Success">Success</Badge>
+    <Badge Href="#" Color="Color.Danger">Danger</Badge>
+    <Badge Href="#" Color="Color.Warning">Warning</Badge>
+    <Badge Href="#" Color="Color.Info">Info</Badge>
+    <Badge Href="#" Color="Color.Light">Light</Badge>
+    <Badge Href="#" Color="Color.Dark">Dark</Badge>
+</div>
+<pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>Primary<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>Secondary<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span>></span>Success<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Danger"</span>></span>Danger<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Warning"</span>></span>Warning<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span>></span>Info<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>></span>Light<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">Badge</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Dark"</span>></span>Dark<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Badge</span>></span>
+
+@@functions {
+    void onclick()
+    {
+        Console.WriteLine(<span style="color:#65b042">"Badge clicked"</span>);
+    }
+}
+</pre>
+
+@functions {
+    void onclick()
+    {
+        Console.WriteLine("Badge clicked");
+    }
+}

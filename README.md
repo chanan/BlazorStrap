@@ -2,10 +2,6 @@
 
 Bootstrap 4 Components for Blazor Framework
 
-## Bootstrap 4.1
-
-**IMPORTANT** Blazor 0.3.0 ships with Bootstrap 4.0. BlazorStrap uses Bootstrap 4.1. Replace bootstrap.min.css in wwwroot/css/bootstrap folder
-
 ## Install
 
 [![NuGet Pre Release](https://img.shields.io/nuget/vpre/BlazorStrap.svg)](https://www.nuget.org/packages/BlazorStrap/)

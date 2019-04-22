@@ -1,0 +1,84 @@
+﻿@inherits BootstrapComponentBase
+@using BlazorStrap.util
+@using Microsoft.AspNetCore.Components
+
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex" value="@Value">
+    @ChildContent
+</DynamicElement>
+
+@functions {
+    string classname
+    {
+        get
+        {
+            var size = Size != Size.None ? $"form-control-{Size.ToDescriptionString()}" : null;
+            var isvalid = IsValid ? "is-valid" : null;
+            var isinvalid = IsInvalid ? "is-invalid" : null;
+            var cls = GetClass();
+            return $"{isvalid} {isinvalid} {cls} {size} {Class}";
+        }
+    }
+
+    string Tag
+    {
+        get
+        {
+            switch(InputType)
+            {
+                case InputType.Select:
+                    return "select";
+                case InputType.TextArea:
+                    return "textarea";
+                default:
+                    return "input";
+            }
+        }
+    }
+
+    [Parameter] private InputType InputType { get; set; } = InputType.Text;
+    [Parameter] private Size Size { get; set; } = Size.None;
+    [Parameter] private bool IsReadonly { get; set; }
+    [Parameter] private bool IsPlaintext { get; set; }
+    [Parameter] private bool IsDisabled { get; set; }
+    [Parameter] private bool IsChecked { get; set; }
+    [Parameter] private bool IsValid { get; set; }
+    [Parameter] private bool IsInvalid { get; set; }
+    [Parameter] private bool IsMultipleSelect { get; set; }
+    [Parameter] private int SelectSize { get; set; }
+    [Parameter] private int SelectedIndex { get; set; }
+    [Parameter] private string Value { get; set; }
+    [Parameter] private Action<string> ValueChanged { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+
+    private string Type
+    {
+        get
+        {
+            return InputType.ToDescriptionString();
+        }
+    }
+    private string GetClass()
+    {
+        switch (this.InputType)
+        {
+            case InputType.Checkbox:
+                return "form-check-input";
+            case InputType.Radio:
+                return "form-check-input";
+            case InputType.File:
+                return "form-control-file";
+            case InputType.Range:
+                return "form-control-range";
+            default:
+                return IsPlaintext ? "form-control-plaintext" : "form-control";
+        }
+    }
+
+    void onchange(UIChangeEventArgs e)
+    {
+        Console.WriteLine("e: {0}", e.Value);
+        Value = e.Value.ToString();
+        ValueChanged?.Invoke(Value);
+    }
+}

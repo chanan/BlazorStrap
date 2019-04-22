@@ -1,0 +1,1140 @@
+﻿@page "/tables"
+
+<h1>Tables</h1>
+
+<div class="docs-example">
+    <BlazorTable>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<h3>Inverted Color</h3>
+<div class="docs-example">
+    <BlazorTable IsDark="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span> <span style="color:#89bdff">IsDark</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<h3>Table head options</h3>
+<div class="docs-example">
+    <BlazorTable>
+        <TableHead TableHeadType="TableHeadType.Dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </TableHead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+    <BlazorTable>
+        <TableHead TableHeadType="TableHeadType.Light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </TableHead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableHead</span> <span style="color:#89bdff">TableHeadType</span>=<span style="color:#65b042">"TableHeadType.Dark"</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableHead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span>></span>
+    <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableHead</span> <span style="color:#89bdff">TableHeadType</span>=<span style="color:#65b042">"TableHeadType.Light"</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableHead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<h3>Striped rows</h3>
+<div class="docs-example">
+    <BlazorTable IsStriped="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span> <span style="color:#89bdff">IsStriped</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<div class="docs-example">
+    <BlazorTable IsStriped="true" IsDark="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span> <span style="color:#89bdff">IsStriped</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsDark</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<h3>Bordered table</h3>
+
+<div class="docs-example">
+    <BlazorTable IsBordered="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span> <span style="color:#89bdff">IsBordered</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<div class="docs-example">
+    <BlazorTable IsBordered="true" IsDark="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span> <span style="color:#89bdff">IsBordered</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsDark</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<h3>Borderless table</h3>
+
+<div class="docs-example">
+    <BlazorTable IsBorderless="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span> <span style="color:#89bdff">IsBorderless</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<div class="docs-example">
+    <BlazorTable IsBorderless="true" IsDark="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span> <span style="color:#89bdff">IsBorderless</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsDark</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<h3>Hoverable rows</h3>
+
+<div class="docs-example">
+    <BlazorTable IsHovarable="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span> <span style="color:#89bdff">IsHovarable</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<div class="docs-example">
+    <BlazorTable IsHovarable="true" IsDark="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span> <span style="color:#89bdff">IsHovarable</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsDark</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<h3>Small table</h3>
+
+<div class="docs-example">
+    <BlazorTable IsSmall="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span> <span style="color:#89bdff">IsSmall</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<div class="docs-example">
+    <BlazorTable IsSmall="true" IsDark="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span> <span style="color:#89bdff">IsSmall</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsDark</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>First<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Last<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"col"</span>></span>Handle<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Mark<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Otto<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@mdo<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Jacob<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Thornton<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@fat<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span> <span style="color:#e0c589">scope</span>=<span style="color:#65b042">"row"</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Larry<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>the Bird<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>@@twitter<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<h3>Contextual classes</h3>
+
+<div class="docs-example">
+    <BlazorTable>
+        <thead>
+            <tr>
+                <TableHeadCell Color="Color.Active">Head</TableHeadCell>
+                <TableHeadCell>Head</TableHeadCell>
+                <TableHeadCell Color="Color.Primary">Head</TableHeadCell>
+                <TableHeadCell Color="Color.Secondary">Head</TableHeadCell>
+                <TableHeadCell Color="Color.Success">Head</TableHeadCell>
+                <TableHeadCell Color="Color.Danger">Head</TableHeadCell>
+                <TableHeadCell Color="Color.Warning">Head</TableHeadCell>
+                <TableHeadCell Color="Color.Info">Head</TableHeadCell>
+                <TableHeadCell Color="Color.Light">Head</TableHeadCell>
+                <TableHeadCell Color="Color.Dark">Head</TableHeadCell>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <TableCell Color="Color.Active">Cell</TableCell>
+                <TableCell>Cell</TableCell>
+                <TableCell Color="Color.Primary">Cell</TableCell>
+                <TableCell Color="Color.Secondary">Cell</TableCell>
+                <TableCell Color="Color.Success">Cell</TableCell>
+                <TableCell Color="Color.Danger">Cell</TableCell>
+                <TableCell Color="Color.Warning">Cell</TableCell>
+                <TableCell Color="Color.Info">Cell</TableCell>
+                <TableCell Color="Color.Light">Cell</TableCell>
+                <TableCell Color="Color.Dark">Cell</TableCell>
+            </tr>
+            <TableRow Color="Color.Active">
+                <td colspan="10">Cell</td>
+            </TableRow>
+            <TableRow>
+                <td colspan="10">Cell</td>
+            </TableRow>
+            <TableRow Color="Color.Primary">
+                <td colspan="10">Cell</td>
+            </TableRow>
+            <TableRow Color="Color.Secondary">
+                <td colspan="10">Cell</td>
+            </TableRow>
+            <TableRow Color="Color.Success">
+                <td colspan="10">Cell</td>
+            </TableRow>
+            <TableRow Color="Color.Danger">
+                <td colspan="10">Cell</td>
+            </TableRow>
+            <TableRow Color="Color.Warning">
+                <td colspan="10">Cell</td>
+            </TableRow>
+            <TableRow Color="Color.Info">
+                <td colspan="10">Cell</td>
+            </TableRow>
+            <TableRow Color="Color.Light">
+                <td colspan="10">Cell</td>
+            </TableRow>
+            <TableRow Color="Color.Dark">
+                <td colspan="10">Cell</td>
+            </TableRow>
+        </tbody>
+    </BlazorTable>
+</div>
+
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableHeadCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Active"</span>></span>Head<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableHeadCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableHeadCell</span>></span>Head<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableHeadCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableHeadCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>Head<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableHeadCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableHeadCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>Head<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableHeadCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableHeadCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span>></span>Head<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableHeadCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableHeadCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Danger"</span>></span>Head<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableHeadCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableHeadCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Warning"</span>></span>Head<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableHeadCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableHeadCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span>></span>Head<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableHeadCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableHeadCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>></span>Head<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableHeadCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableHeadCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Dark"</span>></span>Head<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableHeadCell</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Active"</span>></span>Cell<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableCell</span>></span>Cell<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>Cell<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>Cell<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span>></span>Cell<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Danger"</span>></span>Cell<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Warning"</span>></span>Cell<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span>></span>Cell<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>></span>Cell<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableCell</span>></span>
+            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableCell</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Dark"</span>></span>Cell<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableCell</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableRow</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Active"</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span> <span style="color:#e0c589">colspan</span>=<span style="color:#65b042">"10"</span>></span>Cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableRow</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableRow</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span> <span style="color:#e0c589">colspan</span>=<span style="color:#65b042">"10"</span>></span>Cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableRow</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableRow</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span> <span style="color:#e0c589">colspan</span>=<span style="color:#65b042">"10"</span>></span>Cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableRow</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableRow</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span> <span style="color:#e0c589">colspan</span>=<span style="color:#65b042">"10"</span>></span>Cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableRow</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableRow</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Success"</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span> <span style="color:#e0c589">colspan</span>=<span style="color:#65b042">"10"</span>></span>Cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableRow</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableRow</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Danger"</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span> <span style="color:#e0c589">colspan</span>=<span style="color:#65b042">"10"</span>></span>Cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableRow</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableRow</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Warning"</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span> <span style="color:#e0c589">colspan</span>=<span style="color:#65b042">"10"</span>></span>Cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableRow</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableRow</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Info"</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span> <span style="color:#e0c589">colspan</span>=<span style="color:#65b042">"10"</span>></span>Cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableRow</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableRow</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Light"</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span> <span style="color:#e0c589">colspan</span>=<span style="color:#65b042">"10"</span>></span>Cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableRow</span>></span>
+        <span style="color:#89bdff">&lt;<span style="color:#89bdff">TableRow</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Dark"</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span> <span style="color:#e0c589">colspan</span>=<span style="color:#65b042">"10"</span>></span>Cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TableRow</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+
+<h3>Responsive table</h3>
+
+<div class="docs-example">
+    <BlazorTable IsResponsive="true">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>1</th>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+            </tr>
+        </tbody>
+    </BlazorTable>
+</div>
+
+<code><pre style="background:#000;color:#f8f8f8">
+<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorTable</span> <span style="color:#89bdff">IsResponsive</span>=<span style="color:#65b042">"true"</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">thead</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span>></span>#<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span>></span>Table heading<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span>></span>Table heading<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span>></span>Table heading<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span>></span>Table heading<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span>></span>Table heading<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span>></span>Table heading<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">thead</span>></span>
+    <span style="color:#e0c589">&lt;<span style="color:#e0c589">tbody</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span>></span>1<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span>></span>2<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+        <span style="color:#e0c589">&lt;<span style="color:#e0c589">tr</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">th</span>></span>3<span style="color:#e0c589">&lt;/<span style="color:#e0c589">th</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+            <span style="color:#e0c589">&lt;<span style="color:#e0c589">td</span>></span>Table cell<span style="color:#e0c589">&lt;/<span style="color:#e0c589">td</span>></span>
+        <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tr</span>></span>
+    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">tbody</span>></span>
+<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorTable</span>></span>
+</pre></code>
+

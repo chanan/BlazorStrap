@@ -1,0 +1,42 @@
+﻿@inherits BootstrapComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" onclick="@onclick">
+    @ChildContent
+</DynamicElement>
+
+@functions {
+    string classname
+    {
+        get
+        {
+            if (IsDivider) { return $"dropdown-divider {Class}"; }
+            var active = IsActive ? "active" : null;
+            var disabled = IsDisabled ? "disabled" : null;
+            return $"dropdown-item {active} {disabled} {Class}";
+        }
+    }
+    string Tag
+    {
+        get
+        {
+            if (IsDivider) { return "div"; }
+            if (IsButton) { return "button"; }
+            else { return "a"; }
+        }
+    }
+    string Type
+    {
+        get
+        {
+            if (IsButton) { return "button"; }
+            else { return null; }
+        }
+    }
+    [Parameter] private bool IsDivider { get; set; }
+    [Parameter] private bool IsDisabled { get; set; }
+    [Parameter] private bool IsButton { get; set; }
+    [Parameter] private bool IsActive { get; set; }
+    [Parameter] private Action<UIMouseEventArgs> onclick { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+}

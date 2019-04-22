@@ -1,0 +1,27 @@
+﻿@using BlazorStrap.util
+
+@inject Microsoft.JSInterop.IJSRuntime JSRuntime
+
+<div ref="tooltip" class="tooltip" role="tooltip">
+    <div ref="arrow" class="arrow"></div>
+    <div class="tooltip-inner">@ChildContent</div>
+</div>
+
+@functions {
+    //Didnt change this to use DynamicElement so that ref will still work
+    private ElementRef tooltip;
+    private ElementRef arrow;
+    protected override void OnAfterRender()
+    {
+        if (Target != null)
+        {
+            var placement = Placement.ToDescriptionString();
+            new BlazorStrapInterop(JSRuntime).Tooltip(Target, tooltip, arrow, placement);
+        }
+    }
+
+    [Parameter] private Placement Placement { get; set; } = Placement.Auto;
+    [Parameter] private string Title { get; set; }
+    [Parameter] private string Target { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+}
