@@ -43,6 +43,6 @@
     [Parameter] private RenderFragment ChildContent { get; set; }
     private void _onclick(UIMouseEventArgs e)
     {
-        if (OnClick != null) { OnClick(e); }
+        OnClick?.Invoke(e);
     }
 }

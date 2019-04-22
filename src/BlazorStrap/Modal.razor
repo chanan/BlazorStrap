@@ -17,33 +17,34 @@
 }
 
 @functions {
-        string classname
+    string classname
     {
-            get
+        get
         {
-                var display = IsOpen ? "fade show" : null;
-                return $"modal {display} {Class}";
-            }
+            var display = IsOpen ? "fade show" : null;
+            return $"modal {display} {Class}";
         }
-        string innerClassname
+    }
+    string innerClassname
     {
-            get
+        get
         {
-                var center = IsCentered ? "modal-dialog-centered" : null;
-                var size = Size != Size.None ? $"modal-{Size.ToDescriptionString()}" : null;
-                return $"modal-dialog {size} {center}";
-            }
+            var center = IsCentered ? "modal-dialog-centered" : null;
+            var size = Size != Size.None ? $"modal-{Size.ToDescriptionString()}" : null;
+            return $"modal-dialog {size} {center}";
         }
-        string styles
+    }
+    string styles
     {
-            get
+        get
         {
-                var display = IsOpen ? "display: block; padding-right: 17px;" : null;
-                return $"{Style} {display}";
-            }
+            var display = IsOpen ? "display: block; padding-right: 17px;" : null;
+            return $"{Style} {display}";
         }
+    }
     private bool _isOpen;
-    [Parameter] private bool IsOpen
+    [Parameter]
+    private bool IsOpen
     {
         get
         {
