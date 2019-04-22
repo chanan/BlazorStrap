@@ -54,8 +54,10 @@
         {
             _isOpen = value;
             new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null); //TODO: Change to onRender?
+            IsOpenChanged?.Invoke(value);
         }
     }
+    [Parameter] private Action<bool> IsOpenChanged { get; set; }
     [Parameter] private bool IsCentered { get; set; }
     [Parameter] private Size Size { get; set; } = Size.None;
     [Parameter] private string Class { get; set; }
