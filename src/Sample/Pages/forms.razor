@@ -5,7 +5,7 @@
 <Alert Color="Color.Warning">Form tags are not finished. Binding, specifically of the select tag, still needs work.</Alert>
 
 <div class="docs-example">
-    <BlazorForm>
+    <BlazorForm onsubmit="@(() => Console.WriteLine("Form Submitted"))">
         <FormGroup>
             <BlazorLabel For="exampleInputEmail1">Email address</BlazorLabel>
             <BlazorInput Id="exampleInputEmail1" InputType="InputType.Email" PlaceHolder="Enter email" />
@@ -382,3 +382,33 @@
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorForm</span>></span>
 </pre>
 </code>
+
+
+<h4>Two Way Data Binding</h4>
+<div class="docs-example">
+    <BlazorForm>
+        <FormGroup>
+            <BlazorLabel For="exampleFirstName">First Name</BlazorLabel>
+            <BlazorInput InputType="InputType.Text" Id="exampleFirstName" bind-Value=@FirstName />
+        </FormGroup>
+
+        <FormGroup>
+            <BlazorLabel For="exampleLastName">Last Name</BlazorLabel>
+            <BlazorInput InputType="InputType.Text" Id="exampleLastName" bind-Value=@LastName />
+        </FormGroup>
+
+        <input type="text" bind="@FirstName" />
+        <input type="text" bind="@LastName" />
+        <FormGroup>
+            <BlazorLabel For="exampleFullName">Full Name</BlazorLabel>
+            <BlazorInput InputType="InputType.Text" Id="exampleFullName" IsReadonly="true" Value="@(FirstName + " " + LastName)" />
+        </FormGroup>
+
+    </BlazorForm>
+</div>
+
+
+@functions {
+    public String FirstName { get; set; }
+    public String LastName { get; set; }
+}
