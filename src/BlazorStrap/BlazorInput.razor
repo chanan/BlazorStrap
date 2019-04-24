@@ -74,11 +74,4 @@
                 return IsPlaintext ? "form-control-plaintext" : "form-control";
         }
     }
-
-    void onchange(UIChangeEventArgs e)
-    {
-        Console.WriteLine("e: {0}", e.Value);
-        Value = e.Value.ToString();
-        ValueChanged?.Invoke(Value);
-    }
 }

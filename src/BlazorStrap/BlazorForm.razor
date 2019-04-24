@@ -1,7 +1,7 @@
 ﻿@inherits BootstrapComponentBase
 
-<DynamicElement Attributes="@UnknownParameters" TagName="form" class="@classname">
-    @ChildContent
+<DynamicElement Attributes="@UnknownParameters" TagName="form" class="@classname" onsubmit="@InternalOnSubmit">
+    @ChildContent 
 </DynamicElement>
 
 @functions {
@@ -16,4 +16,14 @@
     [Parameter] private bool IsInline { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
+    [Parameter] private EventCallback OnSubmit { get; set; }
+
+    async Task InternalOnSubmit(object e)
+    {
+        Console.WriteLine(e);
+        if(OnSubmit.HasDelegate)
+        {
+            await OnSubmit.InvokeAsync(new object());
+        }
+    }
 }

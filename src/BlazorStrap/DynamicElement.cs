@@ -106,6 +106,9 @@ namespace BlazorStrap
                     case EventCallback<UIEventArgs> e:
                         builder.AddAttribute(1, param.Key, e);
                         break;
+                    case EventCallback<UIChangeEventArgs> e:
+                        builder.AddAttribute(1, param.Key, e);
+                        break;
                     default:
                         builder.AddAttribute(1, param.Key, param.Value);
                         break;
