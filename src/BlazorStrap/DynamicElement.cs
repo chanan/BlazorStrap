@@ -100,14 +100,29 @@ namespace BlazorStrap
                      * Handling EventCallback<UIEventArgs> altogether will not
                      * work.
                      */
-                    case EventCallback<UIMouseEventArgs> ec:
+                    case EventCallback<UIChangeEventArgs> ec:
                         builder.AddAttribute(1, param.Key, ec);
                         break;
-                    case EventCallback<UIEventArgs> e:
-                        builder.AddAttribute(1, param.Key, e);
+                    case EventCallback<UIClipboardEventArgs> ec:
+                        builder.AddAttribute(1, param.Key, ec);
                         break;
-                    case EventCallback<UIChangeEventArgs> e:
-                        builder.AddAttribute(1, param.Key, e);
+                    case EventCallback<UIDataTransferItem> ec:
+                        builder.AddAttribute(1, param.Key, ec);
+                        break;
+                    case EventCallback<UIErrorEventArgs> ec:
+                        builder.AddAttribute(1, param.Key, ec);
+                        break;
+                    case EventCallback<UIEventArgs> ec:
+                        builder.AddAttribute(1, param.Key, ec);
+                        break;
+                    case EventCallback<UIFocusEventArgs> ec:
+                        builder.AddAttribute(1, param.Key, ec);
+                        break;
+                    case EventCallback<UIKeyboardEventArgs> ec:
+                        builder.AddAttribute(1, param.Key, ec);
+                        break;
+                    case EventCallback<UIMouseEventArgs> ec:
+                        builder.AddAttribute(1, param.Key, ec);
                         break;
                     default:
                         builder.AddAttribute(1, param.Key, param.Value);
