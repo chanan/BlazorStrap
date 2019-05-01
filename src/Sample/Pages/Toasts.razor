@@ -2,14 +2,14 @@
 @using Microsoft.AspNetCore.Blazor
 @page "/toasts"
 
-@inject IJSRuntime JSRuntime
-
-<Toast IsVisible="@isVisible">
-    <ToastHeader>I am Heading</ToastHeader>
-    <ToastBody>
-        <p>Test me </p>
-    </ToastBody>
-</Toast>
+<div class="bg-light p-5">
+    <Toast IsVisible="@isVisible">
+        <ToastHeader>I am Heading</ToastHeader>
+        <ToastBody>
+            <p>Test me </p>
+        </ToastBody>
+    </Toast>
+</div>
 
 <div class="bg-dark p-5">
     <Toast IsVisible="@isVisible">
@@ -20,7 +20,7 @@
     </Toast>
 </div>
 
-<BlazorButton onclick="@onclick">Test</BlazorButton>
+<BlazorButton onclick="@onclick">Toggle Toast Visibility</BlazorButton>
 
 @functions {
 
