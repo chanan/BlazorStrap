@@ -1,0 +1,34 @@
+﻿@using BlazorStrap.util
+@using Microsoft.AspNetCore.Blazor
+@page "/toasts"
+
+@inject IJSRuntime JSRuntime
+
+<Toast IsVisible="@isVisible">
+    <ToastHeader>I am Heading</ToastHeader>
+    <ToastBody>
+        <p>Test me </p>
+    </ToastBody>
+</Toast>
+
+<div class="bg-dark p-5">
+    <Toast IsVisible="@isVisible">
+        <ToastHeader>I am Heading</ToastHeader>
+        <ToastBody>
+            Test Me
+        </ToastBody>
+    </Toast>
+</div>
+
+<BlazorButton onclick="@onclick">Test</BlazorButton>
+
+@functions {
+
+    private bool isVisible { get; set; } = true;
+    void onclick(UIMouseEventArgs e)
+    {
+        isVisible = !isVisible;
+        StateHasChanged();
+        Console.WriteLine($"Visible: {isVisible}");
+    }
+}

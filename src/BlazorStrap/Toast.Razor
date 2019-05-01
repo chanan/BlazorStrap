@@ -1,0 +1,51 @@
+﻿@inherits BootstrapComponentBase
+@if (IsOpen)
+{
+    <DynamicElement TagName="div" class="@classname" data-autohide="false" role="alert" aria-live="assertive" aria-atomic="true" Attributes="@UnknownParameters">
+
+        <div class="toast-header">
+            @ToastHeader
+            <button onclick="@onclick" type="button" class="close ml-auto" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            @ToastBody
+        </div>
+    </DynamicElement>
+}
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            return $"toast {visible} {Class}";
+        }
+    }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private bool IsVisible { get; set; }
+    [Parameter] private RenderFragment ToastHeader { get; set; }
+    [Parameter] private RenderFragment ToastBody { get; set; }
+
+    /// <summary>
+    /// Gets or sets an action to be invoked when the alert is dismissed.
+    ///</summary>
+    [Parameter] private Action OnDismiss { get; set; }
+
+    private bool IsOpen { get; set; } = true;
+    private string visible
+    {
+        get
+        {
+            return IsVisible ? "show" : "";
+        }
+    }
+
+    void onclick()
+    {
+        IsOpen = false;
+        OnDismiss?.Invoke();
+        StateHasChanged();
+    }
+}
