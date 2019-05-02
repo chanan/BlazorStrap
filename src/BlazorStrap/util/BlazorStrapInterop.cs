@@ -13,16 +13,16 @@ namespace BlazorStrap.util
             JSRuntime = jsRuntime;
         }
 
-        public Task<bool> ChangeBody(string classname) 
+        public Task<bool> ChangeBody(string classname)
             => JSRuntime.InvokeAsync<bool>("blazorStrap.changeBody", classname);
 
-        public Task<bool> Log(string message) 
+        public Task<bool> Log(string message)
             => JSRuntime.InvokeAsync<bool>("blazorStrap.log", message);
 
-        public Task<bool> Popper(string target, string popper, ElementRef arrow, string placement) 
+        public Task<bool> Popper(string target, string popper, ElementRef arrow, string placement)
             => JSRuntime.InvokeAsync<bool>("blazorStrap.popper", target, popper, arrow, placement);
 
-        public Task<bool> Tooltip(string target, ElementRef tooltip, ElementRef arrow, string placement) 
+        public Task<bool> Tooltip(string target, ElementRef tooltip, ElementRef arrow, string placement)
             => JSRuntime.InvokeAsync<bool>("blazorStrap.tooltip", target, tooltip, arrow, placement);
     }
 }

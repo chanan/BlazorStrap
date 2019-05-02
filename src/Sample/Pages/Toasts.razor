@@ -2,25 +2,30 @@
 @using Microsoft.AspNetCore.Blazor
 @page "/toasts"
 
-<div class="bg-light p-5">
+<h1>Toasts</h1>
+
+<Alert Color="Color.Info">Click the '&times;' button to dismiss the toast forever :(</Alert>
+<div class="docs-example">
+
     <Toast IsVisible="@isVisible">
         <ToastHeader>I am Heading</ToastHeader>
         <ToastBody>
             <p>Test me </p>
         </ToastBody>
     </Toast>
-</div>
 
-<div class="bg-dark p-5">
     <Toast IsVisible="@isVisible">
-        <ToastHeader>I am Heading</ToastHeader>
+        <ToastHeader>I am also Heading</ToastHeader>
         <ToastBody>
             Test Me
         </ToastBody>
     </Toast>
-</div>
 
-<BlazorButton onclick="@onclick">Toggle Toast Visibility</BlazorButton>
+    <BlazorButton onclick="@onclick">Toggle Toast Visibility</BlazorButton>
+</div>
+<pre style="background:#000;color:#f8f8f8">
+@myMarkup
+</pre>
 
 @functions {
 
@@ -29,6 +34,34 @@
     {
         isVisible = !isVisible;
         StateHasChanged();
-        Console.WriteLine($"Visible: {isVisible}");
     }
+
+    protected override void OnInit()
+    {
+        myMarkup = myMarkup.Replace("&", "\t");
+    }
+    string myMarkup = @"<Toast IsVisible='@isVisible'>
+&<ToastHeader>I am Heading</ToastHeader>
+&<ToastBody>
+&&<p>Test me </p>
+&</ToastBody>
+</Toast>
+
+<Toast IsVisible='@isVisible'>
+&<ToastHeader>I am also Heading</ToastHeader>
+&<ToastBody>
+&&Test Me
+&</ToastBody>
+</Toast>
+<BlazorButton onclick='@onclick'>Toggle Toast Visibility</BlazorButton>
+
+@functions {
+&private bool isVisible { get; set; } = true;
+&void onclick(UIMouseEventArgs e)
+&&{
+&&&isVisible = !isVisible;
+&&&StateHasChanged();
+&&}
+&}";
+
 }
