@@ -1,7 +1,7 @@
 ﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
-<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" onclick="@_onclick" disabled="@IsDisabled">
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" onclick="@_onclick" disabled="@IsDisabled" type="@IsButton">
     @ChildContent
 </DynamicElement>
 
@@ -21,7 +21,7 @@
     {
         get
         {
-            switch(ListGroupType)
+            switch (ListGroupType)
             {
                 case ListGroupType.Button:
                     return "button";
@@ -34,6 +34,14 @@
             }
         }
     }
+
+    string IsButton
+    {
+        get
+        {
+            return Tag == "button" ? "button" : "";
+        }
+    }
     [Parameter] private bool IsActive { get; set; }
     [Parameter] private bool IsDisabled { get; set; }
     [Parameter] private ListGroupType ListGroupType { get; set; } = ListGroupType.List;
@@ -41,6 +49,7 @@
     [Parameter] private Color Color { get; set; } = Color.None;
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
+
     private void _onclick(UIMouseEventArgs e)
     {
         OnClick?.Invoke(e);
