@@ -6,7 +6,7 @@
 <DynamicElement TagName="@Tag" onclick="@onclick" type="@type" class="@classname" disabled="@disabled" role="button" aria-pressed="@pressed" aria-disabled="@disabled" tabindex="@tab" value="@Value" Attributes="@UnknownParameters">
     @ChildContent
 </DynamicElement>
-               
+
 @functions {
     private string classname
     {
@@ -67,7 +67,7 @@
         }
     }
 
-    [Parameter] private Action<UIMouseEventArgs> onclick { get; set; }
+    [Parameter] private EventCallback<UIMouseEventArgs> onclick { get; set; }
     [Parameter] private Color Color { get; set; } = Color.Primary;
 
     private ButtonType _buttonType = ButtonType.Button;
