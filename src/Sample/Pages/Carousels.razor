@@ -3,16 +3,16 @@
 <h1>Carousels</h1>
 
 <div class="docs-example">
-    <Carousel NumberOfItems="@items.Count" bind-ActiveIndex="@ActiveIndex" PauseOnHover="true">
-        <CarouselIndicators NumberOfItems="@items.Count" bind-ActiveIndex="@ActiveIndex" />
+    <Carousel NumberOfItems="@items.Count" @bind-ActiveIndex="@ActiveIndex" PauseOnHover="true">
+        <CarouselIndicators NumberOfItems="@items.Count" @bind-ActiveIndex="@ActiveIndex" />
         <div class="carousel-inner">
             @for (int i = 0; i < items.Count; i++)
             {
                 <CarouselItem IsActive="@(ActiveIndex == i)" src="@items[i].Source" alt="@items[i].Alt" />
             }
         </div>
-        <CarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" bind-ActiveIndex="@ActiveIndex" />
-        <CarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" bind-ActiveIndex="@ActiveIndex" />
+        <CarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" @bind-ActiveIndex="@ActiveIndex" />
+        <CarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" @bind-ActiveIndex="@ActiveIndex" />
     </Carousel>
 </div>
 <pre style="background:#000;color:#f8f8f8">
@@ -71,8 +71,8 @@
 <h3>With Captions & Headers</h3>
 
 <div class="docs-example">
-    <Carousel NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" PauseOnHover="true">
-        <CarouselIndicators NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" />
+    <Carousel NumberOfItems="@items.Count" @bind-ActiveIndex="@SecondIndex" PauseOnHover="true">
+        <CarouselIndicators NumberOfItems="@items.Count" @bind-ActiveIndex="@SecondIndex" />
         <div class="carousel-inner">
             @for (int i = 0; i < items.Count; i++)
             {
@@ -82,8 +82,8 @@
                 </CarouselItem>
             }
         </div>
-        <CarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" />
-        <CarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" />
+        <CarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" @bind-ActiveIndex="@SecondIndex" />
+        <CarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" @bind-ActiveIndex="@SecondIndex" />
     </Carousel>
 </div>
 
