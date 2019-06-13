@@ -28,14 +28,13 @@
     /// <summary>
     /// Gets or sets an action to be invoked when the alert is dismissed.
     /// </summary>
-    [Parameter] private Action OnDismiss { get; set; }
+    [Parameter] private EventCallback OnDismiss { get; set; }
 
     private bool IsOpen { get; set; } = true;
 
     void onclick()
     {
         IsOpen = false;
-        OnDismiss?.Invoke();
-        StateHasChanged();
+        OnDismiss.InvokeAsync(EventCallback.Empty);
     }
 }
