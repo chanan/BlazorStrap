@@ -1,7 +1,7 @@
 ﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
-<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" aria-haspopup="true" aria-expanded="@IsOpen" onclick="@onclick">
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" aria-haspopup="true" aria-expanded="@IsOpen" @onclick="@onclick">
     @ChildContent
 </DynamicElement>
 
