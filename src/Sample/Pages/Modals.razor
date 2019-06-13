@@ -47,7 +47,7 @@
         <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick"</span>></span>Save Changes<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalFooter</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Modal</span>></span>
-@@functions {
+@@code {
     bool IsOpen { get; set; }
     void onclick(UIMouseEventArgs e)
     {
@@ -124,7 +124,7 @@
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Modal</span>></span>
 </pre></code>
 
-@functions {
+@code {
     bool IsOpen { get; set; }
     void onclick(UIMouseEventArgs e)
     {
