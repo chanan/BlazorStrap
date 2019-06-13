@@ -3,9 +3,9 @@
 
 @inject Microsoft.JSInterop.IJSRuntime JSRuntime
 
-<DynamicElement Attributes="@UnknownParameters" style="@styles" TagName="div" class="@classname" tabindex="-1" role="dialog" onclick="@onclick">
+<DynamicElement Attributes="@UnknownParameters" style="@styles" TagName="div" class="@classname" tabindex="-1" role="dialog" @onclick="@onclick">
     <div class="@innerClassname" role="document">
-        <div class="modal-content" onclick="@dontclick">
+        <div class="modal-content" @onclick="@dontclick">
             @ChildContent
         </div>
     </div>

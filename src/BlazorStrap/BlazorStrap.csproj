@@ -28,6 +28,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="BlazorRadioButton.razor.txt" />
+    <None Remove="ButtonGroupToggleButton.razor.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="BlazorRadioButton.razor.txt" />
+    <Content Include="ButtonGroupToggleButton.razor.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="*.razor">
       <Pack>false</Pack>
     </Content>
