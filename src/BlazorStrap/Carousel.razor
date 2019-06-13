@@ -2,11 +2,11 @@
 @using System.Timers
 @implements IDisposable
 
-<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" onmouseover="@onmouseover" onmouseout="@onmouseout">
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" @onmouseover="@onmouseover" @onmouseout="@onmouseout">
     @ChildContent
 </DynamicElement>
 
-@functions {
+@code {
     private string classname
     {
         get

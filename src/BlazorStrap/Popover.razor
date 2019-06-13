@@ -5,13 +5,13 @@
 
 @if (IsOpen)
 {
-    <DynamicElement Id="@Id" Attributes="@UnknownParameters" TagName="div" class="@classname" role="tooltip" onclick="@onclick">
-        <div ref="arrow" class="arrow"></div>
+    <DynamicElement Id="@Id" Attributes="@UnknownParameters" TagName="div" class="@classname" role="tooltip" @onclick="@onclick">
+        <div @ref="arrow" class="arrow"></div>
         @ChildContent
     </DynamicElement>
 }
 
-@functions {
+@code {
     private ElementRef arrow;
     private string classname
     {

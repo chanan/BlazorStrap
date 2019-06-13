@@ -4,7 +4,7 @@
 
     <div class="toast-header">
         @ToastHeader
-        <button onclick="@onclick" type="button" class="close ml-auto" data-dismiss="toast" aria-label="Close">
+        <button @onclick="@onclick" type="button" class="close ml-auto" data-dismiss="toast" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -13,7 +13,7 @@
     </div>
 </DynamicElement>
 
-@functions {
+@code {
     private string classname
     {
         get

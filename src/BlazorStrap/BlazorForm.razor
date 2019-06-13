@@ -1,10 +1,10 @@
 ﻿@inherits BootstrapComponentBase
 
-<DynamicElement Attributes="@UnknownParameters" TagName="form" class="@classname" onsubmit="@InternalOnSubmit">
+<DynamicElement Attributes="@UnknownParameters" TagName="form" class="@classname" @onsubmit="@InternalOnSubmit">
     @ChildContent 
 </DynamicElement>
 
-@functions {
+@code {
     string classname
     {
         get

@@ -175,7 +175,7 @@
 <h3>Dismissing</h3>
 
 <div class="docs-example">
-    <Alert Color="Color.Info" IsDismissible="true" OnDismiss="@OnDismiss">
+    <Alert Color="Color.Info" IsDismissible="true" @OnDismiss="@OnDismiss">
         I am an alert and I can be dismissed!
     </Alert>
 </div>
@@ -185,7 +185,7 @@
     I am an alert and I can be dismissed!
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Alert</span>></span>
 
-@@functions {
+@@code {
     void OnDismiss()
     {
         Console.WriteLine(<span style="color:#65b042">"OnDismiss"</span>);

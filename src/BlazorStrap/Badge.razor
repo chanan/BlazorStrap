@@ -1,10 +1,10 @@
 ﻿@inherits BootstrapComponentBase
 
-<DynamicElement TagName="@Tag" class="@classname" href="@Href" onclick="@_onclick" Attributes="@UnknownParameters">
+<DynamicElement TagName="@Tag" class="@classname" href="@Href" @onclick="@_onclick" Attributes="@UnknownParameters">
     @ChildContent
 </DynamicElement>
 
-@functions {
+@code {
     private string classname
     {
         get

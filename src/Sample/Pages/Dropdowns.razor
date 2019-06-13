@@ -4,7 +4,7 @@
 
 <div class="docs-example">
     <Dropdown IsOpen="@IsOpen">
-        <DropdownToggle onclick="@onclick" IsOpen="@IsOpen">Dropdown</DropdownToggle>
+        <DropdownToggle @onclick="@onclick" IsOpen="@IsOpen">Dropdown</DropdownToggle>
         <DropdownMenu IsOpen="@IsOpen">
             <DropdownItem Href="#">Action</DropdownItem>
             <DropdownItem Href="#">Another Action</DropdownItem>
@@ -43,7 +43,7 @@
 <div class="docs-example">
     <ButtonGroup>
         <Dropdown IsOpen="@IsOpen1">
-            <DropdownToggle Color="Color.Primary" onclick="@onclick1" IsOpen="@IsOpen1">Dropdown</DropdownToggle>
+            <DropdownToggle Color="Color.Primary" @onclick="@onclick1" IsOpen="@IsOpen1">Dropdown</DropdownToggle>
             <DropdownMenu IsOpen="@IsOpen1">
                 <DropdownItem Href="#">Action</DropdownItem>
                 <DropdownItem Href="#">Another Action</DropdownItem>
@@ -51,7 +51,7 @@
             </DropdownMenu>
         </Dropdown>
         <Dropdown IsOpen="@IsOpen2">
-            <DropdownToggle Color="Color.Secondary" onclick="@onclick2" IsOpen="@IsOpen2">Dropdown</DropdownToggle>
+            <DropdownToggle Color="Color.Secondary" @onclick="@onclick2" IsOpen="@IsOpen2">Dropdown</DropdownToggle>
             <DropdownMenu IsOpen="@IsOpen2">
                 <DropdownItem Href="#">Action</DropdownItem>
                 <DropdownItem Href="#">Another Action</DropdownItem>
@@ -59,7 +59,7 @@
             </DropdownMenu>
         </Dropdown>
         <Dropdown IsOpen="@IsOpen3">
-            <DropdownToggle Color="Color.Success" onclick="@onclick3" IsOpen="@IsOpen3">Dropdown</DropdownToggle>
+            <DropdownToggle Color="Color.Success" @onclick="@onclick3" IsOpen="@IsOpen3">Dropdown</DropdownToggle>
             <DropdownMenu IsOpen="@IsOpen3">
                 <DropdownItem Href="#">Action</DropdownItem>
                 <DropdownItem Href="#">Another Action</DropdownItem>
@@ -67,7 +67,7 @@
             </DropdownMenu>
         </Dropdown>
         <Dropdown IsOpen="@IsOpen4">
-            <DropdownToggle Color="Color.Info" onclick="@onclick4" IsOpen="@IsOpen4">Dropdown</DropdownToggle>
+            <DropdownToggle Color="Color.Info" @onclick="@onclick4" IsOpen="@IsOpen4">Dropdown</DropdownToggle>
             <DropdownMenu IsOpen="@IsOpen4">
                 <DropdownItem Href="#">Action</DropdownItem>
                 <DropdownItem Href="#">Another Action</DropdownItem>
@@ -75,7 +75,7 @@
             </DropdownMenu>
         </Dropdown>
         <Dropdown IsOpen="@IsOpen5">
-            <DropdownToggle Color="Color.Warning" onclick="@onclick5" IsOpen="@IsOpen5">Dropdown</DropdownToggle>
+            <DropdownToggle Color="Color.Warning" @onclick="@onclick5" IsOpen="@IsOpen5">Dropdown</DropdownToggle>
             <DropdownMenu IsOpen="@IsOpen5">
                 <DropdownItem Href="#">Action</DropdownItem>
                 <DropdownItem Href="#">Another Action</DropdownItem>
@@ -83,7 +83,7 @@
             </DropdownMenu>
         </Dropdown>
         <Dropdown IsOpen="@IsOpen6">
-            <DropdownToggle Color="Color.Danger" onclick="@onclick6" IsOpen="@IsOpen6">Dropdown</DropdownToggle>
+            <DropdownToggle Color="Color.Danger" @onclick="@onclick6" IsOpen="@IsOpen6">Dropdown</DropdownToggle>
             <DropdownMenu IsOpen="@IsOpen6">
                 <DropdownItem Href="#">Action</DropdownItem>
                 <DropdownItem Href="#">Another Action</DropdownItem>
@@ -127,7 +127,7 @@
 <div class="docs-example">
     <ButtonGroup>
         <Dropdown IsOpen="@IsOpen8">
-            <DropdownToggle Color="Color.Secondary" Size="Size.Large" onclick="@onclick8" IsOpen="@IsOpen8">Large button</DropdownToggle>
+            <DropdownToggle Color="Color.Secondary" Size="Size.Large" @onclick="@onclick8" IsOpen="@IsOpen8">Large button</DropdownToggle>
             <DropdownMenu IsOpen="@IsOpen8">
                 <DropdownItem Href="#">Action</DropdownItem>
                 <DropdownItem Href="#">Another Action</DropdownItem>
@@ -136,7 +136,7 @@
         </Dropdown>
         <ButtonGroup>
             <BlazorButton Size="Size.Large" Color="Color.Secondary">Large split button</BlazorButton>
-            <DropdownToggle Size="Size.Large" IsSplit="true" Color="Color.Secondary" onclick="@onclick9" IsOpen="@IsOpen9" />
+            <DropdownToggle Size="Size.Large" IsSplit="true" Color="Color.Secondary" @onclick="@onclick9" IsOpen="@IsOpen9" />
             <DropdownMenu IsOpen="@IsOpen9">
                 <DropdownItem Href="#">Action</DropdownItem>
                 <DropdownItem Href="#">Another Action</DropdownItem>
@@ -147,7 +147,7 @@
     </ButtonGroup>
     <ButtonGroup>
         <Dropdown IsOpen="@IsOpen10">
-            <DropdownToggle Color="Color.Secondary" Size="Size.Small" onclick="@onclick10" IsOpen="@IsOpen10">Small button</DropdownToggle>
+            <DropdownToggle Color="Color.Secondary" Size="Size.Small" @onclick="@onclick10" IsOpen="@IsOpen10">Small button</DropdownToggle>
             <DropdownMenu IsOpen="@IsOpen10">
                 <DropdownItem Href="#">Action</DropdownItem>
                 <DropdownItem Href="#">Another Action</DropdownItem>
@@ -309,7 +309,7 @@
         </DropdownMenu>
     </ButtonGroup>
     <ButtonGroup DropdownDirection="DropdownDirection.Left">
-        <DropdownToggle IsSplit="true" Color="Color.Secondary" onclick="@onclick18" IsOpen="@IsOpen18" />
+        <DropdownToggle IsSplit="true" Color="Color.Secondary" @onclick="@onclick18" IsOpen="@IsOpen18" />
         <DropdownMenu IsOpen="@IsOpen18">
             <DropdownItem Href="#">Action</DropdownItem>
             <DropdownItem Href="#">Another Action</DropdownItem>
@@ -346,7 +346,7 @@
 
 <div class="docs-example">
     <Dropdown IsOpen="@IsOpen16">
-        <DropdownToggle Color="Color.Secondary" onclick="@onclick16" IsOpen="@IsOpen16">Dropdown</DropdownToggle>
+        <DropdownToggle Color="Color.Secondary" @onclick="@onclick16" IsOpen="@IsOpen16">Dropdown</DropdownToggle>
         <DropdownMenu IsOpen="@IsOpen16">
             <DropdownItem IsButton="true" onclick="@menuButtonClick">Action</DropdownItem>
             <DropdownItem IsDivider="true" />
@@ -532,7 +532,7 @@
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
 </pre></code>
 
-@functions  {
+@functions {
     bool IsOpen { get; set; }
     void onclick(UIMouseEventArgs e)
     {

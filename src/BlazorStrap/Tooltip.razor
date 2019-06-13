@@ -2,12 +2,12 @@
 
 @inject Microsoft.JSInterop.IJSRuntime JSRuntime
 
-<div ref="tooltip" class="tooltip" role="tooltip">
-    <div ref="arrow" class="arrow"></div>
+<div @ref="tooltip" class="tooltip" role="tooltip">
+    <div @ref="arrow" class="arrow"></div>
     <div class="tooltip-inner">@ChildContent</div>
 </div>
 
-@functions {
+@code {
     //Didnt change this to use DynamicElement so that ref will still work
     private ElementRef tooltip;
     private ElementRef arrow;

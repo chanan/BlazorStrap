@@ -1,6 +1,6 @@
-﻿@using BlazorStrap.util
+﻿@page "/toasts"
+@using BlazorStrap.util
 @using Microsoft.AspNetCore.Blazor
-@page "/toasts"
 
 <h1>Toasts</h1>
 
@@ -21,7 +21,7 @@
         </ToastBody>
     </Toast>
 
-    <BlazorButton onclick="@onclick">Toggle Toast Visibility</BlazorButton>
+    <BlazorButton @onclick="@onclick">Toggle Toast Visibility</BlazorButton>
 </div>
 <pre style="background:#000;color:#f8f8f8">
 @myMarkup
@@ -53,9 +53,9 @@
 &&Test Me
 &</ToastBody>
 </Toast>
-<BlazorButton onclick='@onclick'>Toggle Toast Visibility</BlazorButton>
+<BlazorButton @onclick='@onclick'>Toggle Toast Visibility</BlazorButton>
 
-@functions {
+@@code {
 &private bool isVisible { get; set; } = true;
 &void onclick(UIMouseEventArgs e)
 &&{

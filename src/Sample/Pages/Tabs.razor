@@ -25,7 +25,7 @@
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@(active == 2)"</span>></span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>></span>
     <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@(active == 3)"</span>></span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabContent</span>></span>
-@@functions {
+@@code {
     private int active = 1;
     void onclick1(UIMouseEventArgs e)
     {
@@ -92,13 +92,13 @@
         <BlazorCol SM="3">
             <BlazorNav IsPills="true" IsList="true" IsVertical="true">
                 <NavItem>
-                    <BlazorNavLink onclick="@onclick1" IsActive="@(active == 1)">Home</BlazorNavLink>
+                    <BlazorNavLink @onclick="@onclick1" IsActive="@(active == 1)">Home</BlazorNavLink>
                 </NavItem>
                 <NavItem>
-                    <BlazorNavLink onclick="@onclick2" IsActive="@(active == 2)">Profile</BlazorNavLink>
+                    <BlazorNavLink @onclick="@onclick2" IsActive="@(active == 2)">Profile</BlazorNavLink>
                 </NavItem>
                 <NavItem>
-                    <BlazorNavLink onclick="@onclick3" IsActive="@(active == 3)">Contact</BlazorNavLink>
+                    <BlazorNavLink @onclick="@onclick3" IsActive="@(active == 3)">Contact</BlazorNavLink>
                 </NavItem>
             </BlazorNav>
         </BlazorCol>
@@ -135,7 +135,6 @@
     <span style="color:#e0c589">&lt;/<span style="color:#e0c589">BlazorCol</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Row</span>></span>
 </pre>
-
 
 @functions {
     private int active = 1;

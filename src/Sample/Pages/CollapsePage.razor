@@ -3,7 +3,7 @@
 <h1>Collapse</h1>
 
 <div class="docs-example">
-    <BlazorButton Color="Color.Primary" OnClick="@onclick">Toggle</BlazorButton>
+    <BlazorButton Color="Color.Primary" @OnClick="@onclick">Toggle</BlazorButton>
     <Collapse IsOpen="@IsOpen">
         <Card CardType="CardType.Card">
             <Card CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</Card>
@@ -19,7 +19,7 @@
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Collapse</span>></span>
 
-@@functions {
+@@code {
     bool IsOpen { get; set; }
     void onclick(UIMouseEventArgs e)
     {
@@ -38,19 +38,19 @@
 <div class="docs-example">
     <div class="accordion">
         <Card CardType="CardType.Card">
-            <Card CardType="CardType.Header"><BlazorButton ButtonType="ButtonType.Button" OnClick="@accordianClick1" Color="Color.None" Class="btn-link">Collapsible Group Item #1</BlazorButton></Card>
+            <Card CardType="CardType.Header"><BlazorButton ButtonType="ButtonType.Button" @OnClick="@accordianClick1" Color="Color.None" Class="btn-link">Collapsible Group Item #1</BlazorButton></Card>
             <Collapse IsOpen="@IsOpen1">
                 <Card CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</Card>
             </Collapse>
         </Card>
         <Card CardType="CardType.Card">
-            <Card CardType="CardType.Header"><BlazorButton ButtonType="ButtonType.Button" OnClick="@accordianClick2" Color="Color.None" Class="btn-link">Collapsible Group Item #2</BlazorButton></Card>
+            <Card CardType="CardType.Header"><BlazorButton ButtonType="ButtonType.Button" @OnClick="@accordianClick2" Color="Color.None" Class="btn-link">Collapsible Group Item #2</BlazorButton></Card>
             <Collapse IsOpen="@IsOpen2">
                 <Card CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</Card>
             </Collapse>
         </Card>
         <Card CardType="CardType.Card">
-            <Card CardType="CardType.Header"><BlazorButton ButtonType="ButtonType.Button" OnClick="@accordianClick3" Color="Color.None" Class="btn-link">Collapsible Group Item #3</BlazorButton></Card>
+            <Card CardType="CardType.Header"><BlazorButton ButtonType="ButtonType.Button" @OnClick="@accordianClick3" Color="Color.None" Class="btn-link">Collapsible Group Item #3</BlazorButton></Card>
             <Collapse IsOpen="@IsOpen3">
                 <Card CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</Card>
             </Collapse>
@@ -78,7 +78,7 @@
         <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Card</span>></span>
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">div</span>></span>
 
-@@functions {
+@@code {
     bool IsOpen1 { get; set; } = true;
     bool IsOpen2 { get; set; }
     bool IsOpen3 { get; set; }

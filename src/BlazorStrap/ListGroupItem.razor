@@ -1,11 +1,11 @@
 ﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
-<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" onclick="@_onclick" disabled="@IsDisabled" type="@IsButton">
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" @onclick="@_onclick" disabled="@IsDisabled" type="@IsButton">
     @ChildContent
 </DynamicElement>
 
-@functions {
+@code {
     string classname
     {
         get

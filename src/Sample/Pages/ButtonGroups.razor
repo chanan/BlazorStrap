@@ -92,7 +92,7 @@
         <BlazorButton Color="Color.Secondary">2</BlazorButton>
 
         <Dropdown IsGroup="true" IsOpen="@IsOpen">
-            <DropdownToggle Color="Color.Secondary" onclick="@onclick" IsOpen="@IsOpen">Dropdown</DropdownToggle>
+            <DropdownToggle Color="Color.Secondary" @onclick="@onclick" IsOpen="@IsOpen">Dropdown</DropdownToggle>
             <DropdownMenu IsOpen="@IsOpen">
                 <DropdownItem href="#">Dropdown link</DropdownItem>
                 <DropdownItem href="#">Dropdown link</DropdownItem>
@@ -114,7 +114,7 @@
     <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Dropdown</span>></span>
 <span style="color:#89bdff">&lt;/<span style="color:#89bdff">ButtonGroup</span>></span>
 
-@@functions {
+@@code {
     bool IsOpen { get; set; }
     void onclick(UIMouseEventArgs e)
     {
@@ -133,7 +133,7 @@
         <BlazorButton Color="Color.Secondary">2</BlazorButton>
 
         <Dropdown IsGroup="true" IsOpen="@IsOpen1">
-            <DropdownToggle Color="Color.Secondary" onclick="@onclick1" IsOpen="@IsOpen1">Dropdown</DropdownToggle>
+            <DropdownToggle Color="Color.Secondary" @onclick="@onclick1" IsOpen="@IsOpen1">Dropdown</DropdownToggle>
             <DropdownMenu IsOpen="@IsOpen1">
                 <DropdownItem href="#">Dropdown link</DropdownItem>
                 <DropdownItem href="#">Dropdown link</DropdownItem>
