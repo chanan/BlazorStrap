@@ -2,8 +2,8 @@
 
 @inject Microsoft.JSInterop.IJSRuntime JSRuntime
 
-<div ref="tooltip" class="tooltip" role="tooltip">
-    <div ref="arrow" class="arrow"></div>
+<div @ref="tooltip" class="tooltip" role="tooltip">
+    <div @ref="arrow" class="arrow"></div>
     <div class="tooltip-inner">@ChildContent</div>
 </div>
 
