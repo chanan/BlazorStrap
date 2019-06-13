@@ -1,6 +1,6 @@
-﻿@using BlazorStrap.util
+﻿@page "/toasts"
+@using BlazorStrap.util
 @using Microsoft.AspNetCore.Blazor
-@page "/toasts"
 
 <h1>Toasts</h1>
 
@@ -55,7 +55,7 @@
 </Toast>
 <BlazorButton @onclick='@onclick'>Toggle Toast Visibility</BlazorButton>
 
-@code {
+@@code {
 &private bool isVisible { get; set; } = true;
 &void onclick(UIMouseEventArgs e)
 &&{
