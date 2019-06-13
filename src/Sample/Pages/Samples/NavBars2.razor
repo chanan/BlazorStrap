@@ -32,7 +32,7 @@
             </BlazorCol>
             <div class="env float-left"><i class="fa fa-envelope"></i></div>
             <Dropdown IsOpen="@IsOpen2" Class="avatar float-left">
-                <DropdownToggle onclick="@onclick2"><img src="/avatar.png" alt="" /> <b class="caret"></b></DropdownToggle>
+                <DropdownToggle @onclick="@onclick2"><img src="/avatar.png" alt="" /> <b class="caret"></b></DropdownToggle>
                 <div class="status-green"></div>
                 <DropdownMenu IsOpen="@IsOpen2">
                     <DropdownItem Href="#">My Profile</DropdownItem>

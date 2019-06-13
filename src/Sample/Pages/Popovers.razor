@@ -3,22 +3,22 @@
 <h1>Popovers</h1>
 
 <div class="docs-example">
-    <BlazorButton id="popover1" onclick="@onclick1">Top</BlazorButton>
+    <BlazorButton id="popover1" @onclick="@onclick1">Top</BlazorButton>
     <Popover Target="popover1" IsOpen="@IsOpen1" Placement="Placement.Top">
         <PopoverHeader>Top Popover</PopoverHeader>
         <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
     </Popover>
-    <BlazorButton Id="popover2" onclick="@onclick2">Bottom</BlazorButton>
+    <BlazorButton Id="popover2" @onclick="@onclick2">Bottom</BlazorButton>
     <Popover Target="popover2" IsOpen="@IsOpen2" Placement="Placement.Bottom">
         <PopoverHeader>Bottom Popover</PopoverHeader>
         <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
     </Popover>
-    <BlazorButton Id="popover3" onclick="@onclick3">Left</BlazorButton>
+    <BlazorButton Id="popover3" @onclick="@onclick3">Left</BlazorButton>
     <Popover Target="popover3" IsOpen="@IsOpen3" Placement="Placement.Left">
         <PopoverHeader>Left Popover</PopoverHeader>
         <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
     </Popover>
-    <BlazorButton Id="popover4" onclick="@onclick4">Right</BlazorButton>
+    <BlazorButton Id="popover4" @onclick="@onclick4">Right</BlazorButton>
     <Popover Target="popover4" IsOpen="@IsOpen4" Placement="Placement.Right">
         <PopoverHeader>Right Popover</PopoverHeader>
         <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
