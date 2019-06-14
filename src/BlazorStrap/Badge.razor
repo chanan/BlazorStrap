@@ -5,52 +5,52 @@
 </DynamicElement>
 
 @code {
-    private string classname
+private string classname
+{
+    get
     {
-        get
-        {
-            var pill = IsPill ? "badge-pill" : "";
-            return $"badge {pill} badge-{Color.ToDescriptionString()} {Class}";
-        }
+        var pill = IsPill ? "badge-pill" : "";
+        return $"badge {pill} badge-{Color.ToDescriptionString()} {Class}";
     }
-    private string Tag { get; set; } = "span";
+}
+private string Tag { get; set; } = "span";
 
-    [Parameter] private Color Color { get; set; } = Color.Primary;
-    [Parameter] private bool IsPill { get; set; }
-    private string _href;
-    [Parameter] private string Href
+[Parameter] private Color Color { get; set; } = Color.Primary;
+[Parameter] private bool IsPill { get; set; }
+private string _href;
+[Parameter] private string Href
+{
+    get
     {
-        get
-        {
-            return _href;
-        }
-        set
-        {
-            _href = value;
-            if (value != null || onclick != null) { Tag = "a"; }
-            else { Tag = "span"; }
-        }
+        return _href;
     }
-    private Action _onlick { get; set; }
-    [Parameter] private Action onclick
+    set
     {
-        get
-        {
-            return _onlick;
-        }
+        _href = value;
+        if (value != null) { Tag = "a"; }
+        else { Tag = "span"; }
+    }
+}
+private EventCallback<UIMouseEventArgs> _onlick { get; set; }
+[Parameter] private EventCallback<UIMouseEventArgs> onclick
+{
+    get
+    {
+        return _onlick;
+    }
 
-        set
-        {
-            _onlick = value;
-            if (value != null || Href != null) { Tag = "a"; }
-            else { Tag = "span"; }
-        }
-    }
-    [Parameter] private string Class { get; set; }
-    [Parameter] private RenderFragment ChildContent { get; set; }
-
-    void _onclick()
+    set
     {
-        onclick?.Invoke();
+        _onlick = value;
+        if (Href != null) { Tag = "a"; }
+        else { Tag = "span"; }
     }
+}
+[Parameter] private string Class { get; set; }
+[Parameter] private RenderFragment ChildContent { get; set; }
+
+async Task _onclick(UIMouseEventArgs e)
+{
+    await onclick.InvokeAsync(e);
+}
 }
