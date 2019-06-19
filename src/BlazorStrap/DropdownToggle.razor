@@ -37,7 +37,7 @@
     //[Parameter] private bool IsLink { get; set; } //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
     [Parameter] private bool IsSplit { get; set; }
     [Parameter] private bool IsOpen { get; set; }
-    [Parameter] private Action<UIMouseEventArgs> onclick { get; set; }
+    [Parameter] private EventCallback<UIMouseEventArgs> onclick { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

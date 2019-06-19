@@ -84,52 +84,7 @@ namespace BlazorStrap
         {
             base.BuildRenderTree(builder);
             builder.OpenElement(0, TagName);
-
-            foreach (var param in _attributesToRender)
-            {
-                switch (param.Value)
-                {
-                    /*
-                     * This is a workaround for:
-                     * https://github.com/aspnet/AspNetCore/issues/8336.
-                     * 
-                     * NOTE: if other UI*EventArgs types (such as
-                     * `UIChangeEventargs`) are used within DynamicElement, you
-                     * must explicitly handle those below as well.
-                     * 
-                     * Handling EventCallback<UIEventArgs> altogether will not
-                     * work.
-                     */
-                    case EventCallback<UIChangeEventArgs> ec:
-                        builder.AddAttribute(1, param.Key, ec);
-                        break;
-                    case EventCallback<UIClipboardEventArgs> ec:
-                        builder.AddAttribute(1, param.Key, ec);
-                        break;
-                    case EventCallback<UIDataTransferItem> ec:
-                        builder.AddAttribute(1, param.Key, ec);
-                        break;
-                    case EventCallback<UIErrorEventArgs> ec:
-                        builder.AddAttribute(1, param.Key, ec);
-                        break;
-                    case EventCallback<UIEventArgs> ec:
-                        builder.AddAttribute(1, param.Key, ec);
-                        break;
-                    case EventCallback<UIFocusEventArgs> ec:
-                        builder.AddAttribute(1, param.Key, ec);
-                        break;
-                    case EventCallback<UIKeyboardEventArgs> ec:
-                        builder.AddAttribute(1, param.Key, ec);
-                        break;
-                    case EventCallback<UIMouseEventArgs> ec:
-                        builder.AddAttribute(1, param.Key, ec);
-                        break;
-                    default:
-                        builder.AddAttribute(1, param.Key, param.Value);
-                        break;
-                }
-            }
-
+            builder.AddMultipleAttributes(1, _attributesToRender);
             builder.AddElementReferenceCapture(2, capturedRef => { ElementRef = capturedRef; });
             builder.AddContent(3, _childContent);
             builder.CloseElement();

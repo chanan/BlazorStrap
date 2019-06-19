@@ -27,12 +27,12 @@
         set
         {
             _href = value;
-            if (value != null || onclick != null) { Tag = "a"; }
+            if (value != null || onclick.HasDelegate) { Tag = "a"; }
             else { Tag = "span"; }
         }
     }
-    private Action _onlick { get; set; }
-    [Parameter] private Action onclick
+    private EventCallback<UIMouseEventArgs> _onlick { get; set; }
+    [Parameter] private EventCallback<UIMouseEventArgs> onclick
     {
         get
         {
@@ -42,15 +42,15 @@
         set
         {
             _onlick = value;
-            if (value != null || Href != null) { Tag = "a"; }
+            if (value.HasDelegate || Href != null) { Tag = "a"; }
             else { Tag = "span"; }
         }
     }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 
-    void _onclick()
+    void _onclick(UIMouseEventArgs e)
     {
-        onclick?.Invoke();
+        if (onclick.HasDelegate) onclick.InvokeAsync(e);
     }
 }

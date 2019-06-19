@@ -7,7 +7,7 @@
     <RazorLangVersion>3.0</RazorLangVersion>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <PackageId>BlazorStrap</PackageId>
-    <Version>1.0.0-preview5-08</Version>
+    <Version>1.0.0-preview6-09</Version>
     <Authors>Chanan Braunstein</Authors>
     <Title>Blazor BootStrap</Title>
     <Description>A bootstrap4 component library for Blazor</Description>
@@ -25,16 +25,6 @@
     <EmbeddedResource Include="content\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="content\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="BlazorRadioButton.razor.txt" />
-    <None Remove="ButtonGroupToggleButton.razor.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="BlazorRadioButton.razor.txt" />
-    <Content Include="ButtonGroupToggleButton.razor.txt" />
   </ItemGroup>
 
   <ItemGroup>
