@@ -53,6 +53,7 @@
         set
         {
             _isOpen = value;
+            IsOpenChanged.InvokeAsync(_isOpen);
             new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null); //TODO: Change to onRender?
         }
     }
