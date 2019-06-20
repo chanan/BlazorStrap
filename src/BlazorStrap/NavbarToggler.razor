@@ -13,6 +13,6 @@
         }
     }
 
-    [Parameter] private Action<UIMouseEventArgs> onclick { get; set; }
+    [Parameter] private EventCallback<UIMouseEventArgs> onclick { get; set; }
     [Parameter] private string Class { get; set; }
 }

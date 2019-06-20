@@ -35,9 +35,9 @@
         [Parameter] private CarouselDirection CarouselDirection { get; set; } = CarouselDirection.Previous;
         [Parameter] private string Class { get; set; }
 
-        [Parameter] private Action<int> ActiveIndexChanged { get; set; }
+        [Parameter] private EventCallback<int> ActiveIndexChanged { get; set; }
 
-        private void _onclick(UIMouseEventArgs e)
+        private async Task _onclick(UIMouseEventArgs e)
         {
             if (CarouselDirection == CarouselDirection.Previous)
             {
@@ -50,6 +50,6 @@
                 else { ActiveIndex = ActiveIndex + 1; }
 
             }
-            ActiveIndexChanged(ActiveIndex);
+            await ActiveIndexChanged.InvokeAsync(ActiveIndex);
         }
     }

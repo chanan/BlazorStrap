@@ -16,10 +16,10 @@
 
 
     [Parameter] private int ActiveIndex { get; set; }
-    [Parameter] private Action<int> ActiveIndexChanged { get; set; }
+    [Parameter] private EventCallback<int> ActiveIndexChanged { get; set; }
 
-    void onclick()
+    async Task onclick()
     {
-        ActiveIndexChanged(Index);
+        await ActiveIndexChanged.InvokeAsync(Index);
     }
 }

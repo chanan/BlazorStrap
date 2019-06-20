@@ -47,7 +47,7 @@
     [Parameter] private int SelectSize { get; set; }
     [Parameter] private int SelectedIndex { get; set; }
     [Parameter] private string Value { get; set; }
-    [Parameter] private Action<string> ValueChanged { get; set; }
+    [Parameter] private EventCallback<string> ValueChanged { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 
@@ -75,8 +75,8 @@
         }
     }
 
-    void onchange(UIChangeEventArgs e)
+    async Task onchange(UIChangeEventArgs e)
     {
-        ValueChanged?.Invoke((string)e.Value);
+        await ValueChanged.InvokeAsync((string)e.Value);
     }
 }
