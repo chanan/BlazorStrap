@@ -21,7 +21,7 @@
 
     [Parameter] private int NumberOfItems { get; set; }
     [Parameter] private int ActiveIndex { get; set; }
-    [Parameter] private EventCallback<int> ActiveIndexChanged { get; set; }
+    [Parameter] private EventCallback<int> ActiveIndexChangedEvent { get; set; }
 
     private Timer _timer;
 
@@ -41,7 +41,7 @@
         if (ActiveIndex == NumberOfItems - 1) { ActiveIndex = 0; }
         else { ActiveIndex = ActiveIndex + 1; }
 
-        await ActiveIndexChanged.InvokeAsync(ActiveIndex);
+        await ActiveIndexChangedEvent.InvokeAsync(ActiveIndex);
     }
 
     private void onmouseover()

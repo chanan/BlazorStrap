@@ -14,12 +14,10 @@
     [Parameter] private bool IsActive { get; set; }
     [Parameter] private int Index { get; set; }
 
-
-    [Parameter] private int ActiveIndex { get; set; }
-    [Parameter] private EventCallback<int> ActiveIndexChanged { get; set; }
+    [Parameter] private EventCallback<int> ActiveIndexChangedEvent { get; set; }
 
     async Task onclick()
     {
-        await ActiveIndexChanged.InvokeAsync(Index);
+        await ActiveIndexChangedEvent.InvokeAsync(Index);
     }
 }

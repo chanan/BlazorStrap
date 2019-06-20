@@ -3,7 +3,7 @@
 <DynamicElement Attributes="@UnknownParameters" TagName="ol" class="@classname">
     @for (var i = 0; i < NumberOfItems; i++)
     {
-        <CarouselIndicatorItem IsActive="@(i == ActiveIndex)" Index="@i" @bind-ActiveIndex="@ClickEventActiveIndex" />
+        <CarouselIndicatorItem IsActive="@(i == ActiveIndex)" Index="@i" ActiveIndexChangedEvent="@clickEventActiveIndex" />
     }
 </DynamicElement>
 
@@ -20,16 +20,13 @@
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 
-    [Parameter] private Action<int> ActiveIndexChanged { get; set; }
+    [Parameter] private EventCallback<int> ActiveIndexChanged { get; set; }
+    [Parameter] private EventCallback<int> ActiveIndexChangedEvent { get; set; }
 
-    private int _clickEventActiveIndex;
-    private int ClickEventActiveIndex
+    private void clickEventActiveIndex(int index)
     {
-        get => _clickEventActiveIndex;
-        set
-        {
-            _clickEventActiveIndex = value;
-            ActiveIndexChanged(value);
-        }
+        ActiveIndex = index;
+        ActiveIndexChanged.InvokeAsync(index);
+        ActiveIndexChangedEvent.InvokeAsync(index);
     }
 }
