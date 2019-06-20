@@ -28,7 +28,15 @@ namespace BlazorStrap
             {
                 if (TryGetPropertyInfo(param.Name, out var declaredPropertyInfo))
                 {
-                    declaredPropertyInfo.SetValue(this, param.Value);
+                    try
+                    {
+                        declaredPropertyInfo.SetValue(this, param.Value);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.Error.WriteLine(param.Name);
+                        Console.Error.WriteLine($"[{ex.GetType().FullName}] {ex.Message}\n{ex.StackTrace}");
+                    }
                 }
                 else
                 {
@@ -87,7 +95,7 @@ namespace BlazorStrap
             }
 
             // TODO: Need better global exception handling
-            Console.Error.WriteLine($"[{ex.GetType().FullName}] {ex.Message}\n{ex.StackTrace}");
+;           Console.Error.WriteLine($"[{ex.GetType().FullName}] {ex.Message}\n{ex.StackTrace}");
         }
     }
 }
