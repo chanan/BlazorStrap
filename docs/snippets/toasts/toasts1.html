@@ -1,0 +1,24 @@
+﻿<Toast IsVisible="@isVisible">
+    <ToastHeader>I am Heading</ToastHeader>
+    <ToastBody>
+        <p>Test me</p>
+    </ToastBody>
+</Toast>
+
+<Toast IsVisible="@isVisible">
+    <ToastHeader>I am also Heading</ToastHeader>
+    <ToastBody>
+        Test Me
+    </ToastBody>
+</Toast>
+<BlazorButton @onclick="@onclick">Toggle Toast Visibility</BlazorButton>
+
+@code {
+    private bool isVisible { get; set; } = true;
+
+    void onclick(UIMouseEventArgs e)
+	{
+		isVisible = !isVisible;
+		StateHasChanged();
+	}
+}

@@ -12,25 +12,7 @@
         </DropdownMenu>
     </Dropdown>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">Dropdown</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick"</span>></span>Dropdown<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownToggle</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Dropdown</span>></span>
-
-@@code  {
-    bool IsOpen { get; set; }
-    void onclick(UIMouseEventArgs e)
-    {
-        IsOpen = !IsOpen;
-        StateHasChanged();
-    }
-}
-</pre></code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns1.html" />
 
 <Alert Color="Color.Info">
     Currently only buttons are supported as dropdowns. See: https://github.com/aspnet/Blazor/issues/715
@@ -109,18 +91,7 @@
         </DropdownMenu>
     </ButtonGroup>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">ButtonGroup</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">IsSplit</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick7"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen7"</span> /></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen7"</span>></span>        
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsDivider</span>=<span style="color:#65b042">"true"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ButtonGroup</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns2.html" />
 
 <h3>Sizing</h3>
 
@@ -166,48 +137,7 @@
         </ButtonGroup>
     </ButtonGroup>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">ButtonGroup</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Dropdown</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen8"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">"Size.Large"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick8"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen8"</span>></span>Large button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownToggle</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen8"</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Dropdown</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ButtonGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">"Size.Large"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>Large split button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">"Size.Large"</span> <span style="color:#89bdff">IsSplit</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick9"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen9"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen9"</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsDivider</span>=<span style="color:#65b042">"true"</span> /></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">ButtonGroup</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ButtonGroup</span>></span>
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">ButtonGroup</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">Dropdown</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen10"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">"Size.Small"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick10"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen10"</span>></span>Small button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownToggle</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen10"</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">Dropdown</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ButtonGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">"Size.Small"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>Small split button<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">"Size.Small"</span> <span style="color:#89bdff">IsSplit</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick11"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen11"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen11"</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsDivider</span>=<span style="color:#65b042">"true"</span> /></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">ButtonGroup</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ButtonGroup</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns3.html" />
 
 <h3>Directions</h3>
 
@@ -233,28 +163,7 @@
         </DropdownMenu>
     </ButtonGroup>
 </div>
-<code>
-<pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">ButtonGroup</span> <span style="color:#89bdff">DropdownDirection</span>=<span style="color:#65b042">"DropdownDirection.Up"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen12"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick12"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen12"</span>></span>Dropup<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownToggle</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen12"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ButtonGroup</span>></span>
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">ButtonGroup</span> <span style="color:#89bdff">DropdownDirection</span>=<span style="color:#65b042">"DropdownDirection.Up"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen13"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>Split Dropup<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">IsSplit</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick13"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen13"</span> /></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen13"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsDivider</span>=<span style="color:#65b042">"true"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ButtonGroup</span>></span>
-</pre>
-</code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns4.html" />
 
 <h4>Dropright</h4>
 
@@ -278,26 +187,7 @@
         </DropdownMenu>
     </ButtonGroup>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">ButtonGroup</span> <span style="color:#89bdff">DropdownDirection</span>=<span style="color:#65b042">"DropdownDirection.Right"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen14"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick14"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen14"</span>></span>Dropright<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownToggle</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen14"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ButtonGroup</span>></span>
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">ButtonGroup</span> <span style="color:#89bdff">DropdownDirection</span>=<span style="color:#65b042">"DropdownDirection.Right"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen15"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>Split Dropright<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">IsSplit</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick15"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen15"</span> /></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen15"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsDivider</span>=<span style="color:#65b042">"true"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ButtonGroup</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns5.html" />
 
 <div class="docs-example">
     <ButtonGroup DropdownDirection="DropdownDirection.Left">
@@ -319,26 +209,7 @@
         <BlazorButton Color="Color.Secondary">Split Dropleft</BlazorButton>
     </ButtonGroup>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">ButtonGroup</span> <span style="color:#89bdff">DropdownDirection</span>=<span style="color:#65b042">"DropdownDirection.Right"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@IsOpen14"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick14"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen14"</span>></span>Dropright<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownToggle</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen14"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ButtonGroup</span>></span>
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">ButtonGroup</span> <span style="color:#89bdff">DropdownDirection</span>=<span style="color:#65b042">"DropdownDirection.Right"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen15"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>Split Dropright<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">IsSplit</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick15"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen15"</span> /></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen15"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsDivider</span>=<span style="color:#65b042">"true"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ButtonGroup</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns6.html" />
 
 <h3>Menu Items</h3>
 
@@ -354,16 +225,7 @@
         </DropdownMenu>
     </Dropdown>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">Dropdown</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen16"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownToggle</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick16"</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen16"</span>></span>Dropdown<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownToggle</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen16"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsButton</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@menuButtonClick"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsDivider</span>=<span style="color:#65b042">"true"</span> /></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsButton</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@menuButtonClick"</span>></span>Yet Another Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Dropdown</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns7.html" />
 
 <p>You can also create non-interactive dropdown items with <code class="highlighter-rouge">.dropdown-item-text</code>. Feel free to style further with custom CSS or text utilities.</p>
 
@@ -375,14 +237,7 @@
         <DropdownItem href="#">Something else here</DropdownItem>
     </DropdownMenu>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">Style</span>=<span style="color:#65b042">"position: static; display: block;"</span>></span>
-    <span style="color:#e0c589">&lt;<span style="color:#e0c589">span</span> <span style="color:#e0c589">class</span>=<span style="color:#65b042">"dropdown-item-text"</span>></span>Dropdown item text<span style="color:#e0c589">&lt;/<span style="color:#e0c589">span</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Another action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Something else here<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns8.html" />
 
 <h3>Active</h3>
 <div class="docs-example">
@@ -392,13 +247,7 @@
         <DropdownItem href="#">Another link</DropdownItem>
     </DropdownMenu>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">Style</span>=<span style="color:#65b042">"position: static; display: block;"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Regular link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Active link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Another link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns9.html" />
 
 <h3>Disabled</h3>
 <div class="docs-example">
@@ -408,13 +257,7 @@
         <DropdownItem href="#">Another link</DropdownItem>
     </DropdownMenu>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">Style</span>=<span style="color:#65b042">"position: static; display: block;"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Regular link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsDisabled</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Disabled link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Another link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns10.html" />
 
 <h3>Menu content</h3>
 <h4>Headers</h4>
@@ -426,17 +269,7 @@
         <DropdownItem href="#">Another action</DropdownItem>
     </DropdownMenu>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">Style</span>=<span style="color:#65b042">"position: static; display: block;"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Regular link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsDisabled</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Disabled link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Another link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span><span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">Style</span>=<span style="color:#65b042">"position: static; display: block;"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownHeader</span>></span>Dropdown header<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownHeader</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Another action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns11.html" />
 
 <h4>Dividers</h4>
 
@@ -449,15 +282,7 @@
         <DropdownItem Href="#">Separated link</DropdownItem>
     </DropdownMenu>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">Style</span>=<span style="color:#65b042">"position: static; display: block;"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Another action<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Something else here<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsDivider</span>=<span style="color:#65b042">"true"</span> /></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">Href</span>=<span style="color:#65b042">"#"</span>></span>Separated link<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns12.html" />
 
 <h4>Text</h4>
 <div class="docs-example">
@@ -470,16 +295,7 @@
         </p>
     </DropdownMenu>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"p-4 text-muted"</span> <span style="color:#89bdff">Style</span>=<span style="color:#65b042">"position: static; display: block; max-width: 200px;"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">p</span>></span>
-        Some example text that's free-flowing within the dropdown menu.
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">p</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">p</span> <span style="color:#89bdff">class</span>=<span style="color:#65b042">"mb-0"</span>></span>
-        And this is more example text.
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">p</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns13.html" />
 
 <h4>Forms</h4>
 
@@ -507,30 +323,7 @@
         <DropdownItem href="#">Forgot password?</DropdownItem>
     </DropdownMenu>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownMenu</span> <span style="color:#89bdff">Style</span>=<span style="color:#65b042">"position: static; display: block;"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorForm</span> <span style="color:#89bdff">Class</span>=<span style="color:#65b042">"px-4 py-3"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">for</span>=<span style="color:#65b042">"exampleDropdownFormEmail1"</span>></span>Email address<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Email"</span> <span style="color:#89bdff">id</span>=<span style="color:#65b042">"exampleDropdownFormEmail1"</span> <span style="color:#89bdff">placeholder</span>=<span style="color:#65b042">"email@example.com"</span> /></span>
-        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">for</span>=<span style="color:#65b042">"exampleDropdownFormPassword1"</span>></span>Password<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Password"</span> <span style="color:#89bdff">id</span>=<span style="color:#65b042">"exampleDropdownFormPassword1"</span> <span style="color:#89bdff">placeholder</span>=<span style="color:#65b042">"Password"</span> /></span>
-        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">FormGroup</span> <span style="color:#89bdff">IsCheck</span>=<span style="color:#65b042">"true"</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorInput</span> <span style="color:#89bdff">InputType</span>=<span style="color:#65b042">"InputType.Checkbox"</span> <span style="color:#89bdff">id</span>=<span style="color:#65b042">"dropdownCheck"</span> /></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorLabel</span> <span style="color:#89bdff">IsCheck</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">for</span>=<span style="color:#65b042">"dropdownCheck"</span>></span>
-                Remember me
-            <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorLabel</span>></span>
-        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">FormGroup</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">ButtonType</span>=<span style="color:#65b042">"ButtonType.Submit"</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>Sign in<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorForm</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">IsDivider</span>=<span style="color:#65b042">"true"</span> /></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>New around here? Sign up<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">DropdownItem</span> <span style="color:#89bdff">href</span>=<span style="color:#65b042">"#"</span>></span>Forgot password?<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownItem</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">DropdownMenu</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/dropdowns/dropdowns14.html" />
 
 @code {
     bool IsOpen { get; set; }

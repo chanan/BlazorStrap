@@ -13,17 +13,7 @@
         </ModalFooter>
     </Modal>
 </div>
-<code>
-<pre style="background:#000;color:#f8f8f8"><span style="color:#89bdff">&lt;<span style="color:#89bdff">Modal</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalHeader</span>></span>Modal title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalHeader</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalBody</span>></span><span style="color:#89bdff">&lt;<span style="color:#89bdff">p</span>></span>Modal body text goes here.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">p</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalBody</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalFooter</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span>></span>Do Something<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span>></span>Cancel<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalFooter</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Modal</span>></span>
-</pre>
-</code>
+<PrettyCode CodeFile="snippets/modals/modals1.html" />
 
 <h3>Live Demo</h3>
 <div class="docs-example">
@@ -37,25 +27,7 @@
         </ModalFooter>
     </Modal>
 </div>
-<code>
-<pre style="background:#000;color:#f8f8f8"><span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick"</span>></span>Launch demo modal<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">Modal</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalHeader</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick"</span>></span>Modal title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalHeader</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalBody</span>></span><span style="color:#89bdff">&lt;<span style="color:#89bdff">p</span>></span>Modal body text goes here.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">p</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalBody</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalFooter</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick"</span>></span>Close<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick"</span>></span>Save Changes<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalFooter</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Modal</span>></span>
-@@code {
-    bool IsOpen { get; set; }
-    void onclick(UIMouseEventArgs e)
-    {
-        IsOpen = !IsOpen;
-        StateHasChanged();
-    }
-}
-</pre></code>
+<PrettyCode CodeFile="snippets/modals/modals2.html" />
 
 <h3>Vertically Centered</h3>
 <div class="docs-example">
@@ -69,17 +41,7 @@
         </ModalFooter>
     </Modal>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick2"</span>></span>Launch demo modal<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">Modal</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen2"</span> <span style="color:#89bdff">IsCentered</span>=<span style="color:#65b042">"true"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalHeader</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick2"</span>></span>Modal title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalHeader</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalBody</span>></span><span style="color:#89bdff">&lt;<span style="color:#89bdff">p</span>></span>Modal body text goes here.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">p</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalBody</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalFooter</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick2"</span>></span>Close<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick2"</span>></span>Save Changes<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalFooter</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Modal</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/modals/modals3.html" />
 
 <h3>Sizes</h3>
 
@@ -103,26 +65,7 @@
         </ModalFooter>
     </Modal>
 </div>
-<code><pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick3"</span>></span>Large modal<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">Modal</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen3"</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">"Size.Large"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalHeader</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick3"</span>></span>Modal title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalHeader</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalBody</span>></span><span style="color:#89bdff">&lt;<span style="color:#89bdff">p</span>></span>Modal body text goes here.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">p</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalBody</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalFooter</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick3"</span>></span>Close<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick3"</span>></span>Save Changes<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalFooter</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Modal</span>></span>
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick4"</span>></span>Small modal<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">Modal</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@IsOpen4"</span> <span style="color:#89bdff">Size</span>=<span style="color:#65b042">"Size.Small"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalHeader</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick4"</span>></span>Modal title<span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalHeader</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalBody</span>></span><span style="color:#89bdff">&lt;<span style="color:#89bdff">p</span>></span>Modal body text goes here.<span style="color:#89bdff">&lt;/<span style="color:#89bdff">p</span>></span><span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalBody</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">ModalFooter</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Secondary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick4"</span>></span>Close<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorButton</span> <span style="color:#89bdff">Color</span>=<span style="color:#65b042">"Color.Primary"</span> <span style="color:#89bdff">OnClick</span>=<span style="color:#65b042">"@@onclick4"</span>></span>Save Changes<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorButton</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">ModalFooter</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Modal</span>></span>
-</pre></code>
+<PrettyCode CodeFile="snippets/modals/modals4.html" />
 
 @code {
     bool IsOpen { get; set; }

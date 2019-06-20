@@ -14,38 +14,7 @@
         <TabPane IsOpen="@(active == 3)">Sint sit mollit irure quis est nostrud cillum consequat Lorem esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in labore cillum elit enim. Consequat aliquip incididunt ipsum et minim laborum laborum laborum et cillum labore. Deserunt adipisicing cillum id nulla minim nostrud labore eiusmod et amet. Laboris consequat consequat commodo non ut non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit irure ea ullamco Lorem aute nostrud magna.</TabPane>
     </TabContent>
 </div>
-<pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNav</span> <span style="color:#89bdff">IsTabs</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick1"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@@(active == 1)"</span>></span>Home<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick2"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@@(active == 2)"</span>></span>Profile<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick3"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@@(active == 3)"</span>></span>Contact<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNav</span>></span>
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">TabContent</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@(active == 1)"</span>></span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@(active == 2)"</span>></span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@(active == 3)"</span>></span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabContent</span>></span>
-@@code {
-    private int active = 1;
-    void onclick1(UIMouseEventArgs e)
-    {
-        active = 1;
-        StateHasChanged();
-    }
-
-    void onclick2(UIMouseEventArgs e)
-    {
-        active = 2;
-        StateHasChanged();
-    }
-
-    void onclick3(UIMouseEventArgs e)
-    {
-        active = 3;
-        StateHasChanged();
-    }
-}
-</pre>
+<PrettyCode CodeFile="snippets/tabs/tabs1.html" />
 
 <h3>Pills</h3>
 
@@ -67,25 +36,7 @@
         <TabPane IsOpen="@(active == 3)">Sint sit mollit irure quis est nostrud cillum consequat Lorem esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in labore cillum elit enim. Consequat aliquip incididunt ipsum et minim laborum laborum laborum et cillum labore. Deserunt adipisicing cillum id nulla minim nostrud labore eiusmod et amet. Laboris consequat consequat commodo non ut non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit irure ea ullamco Lorem aute nostrud magna.</TabPane>
     </TabContent>
 </div>
-
-<pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNav</span> <span style="color:#89bdff">IsPills</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsList</span>=<span style="color:#65b042">"true"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick1"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@@(active == 1)"</span>></span>Home<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick2"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@@(active == 2)"</span>></span>Profile<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick3"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@@(active == 3)"</span>></span>Contact<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>></span>
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNav</span>></span>
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">TabContent</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@(active == 1)"</span>></span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@(active == 2)"</span>></span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@(active == 3)"</span>></span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabContent</span>></span>
-</pre>
+<PrettyCode CodeFile="snippets/tabs/tabs2.html" />
 
 <div class="docs-example">
     <Row>
@@ -111,30 +62,7 @@
         </BlazorCol>
     </Row>
 </div>
-<pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">Row</span>></span>
-    <span style="color:#e0c589">&lt;<span style="color:#e0c589">BlazorCol</span> <span style="color:#e0c589">SM</span>=<span style="color:#65b042">"3"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNav</span> <span style="color:#89bdff">IsPills</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsList</span>=<span style="color:#65b042">"true"</span> <span style="color:#89bdff">IsVertical</span>=<span style="color:#65b042">"true"</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>></span>
-                <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick1"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@@(active == 1)"</span>></span>Home<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>></span>
-            <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>></span>
-                <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick2"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@@(active == 2)"</span>></span>Profile<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>></span>
-            <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">NavItem</span>></span>
-                <span style="color:#89bdff">&lt;<span style="color:#89bdff">BlazorNavLink</span> <span style="color:#89bdff">onclick</span>=<span style="color:#65b042">"@@onclick3"</span> <span style="color:#89bdff">IsActive</span>=<span style="color:#65b042">"@@(active == 3)"</span>></span>Contact<span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNavLink</span>></span>
-            <span style="color:#89bdff">&lt;/<span style="color:#89bdff">NavItem</span>></span>
-        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">BlazorNav</span>></span>
-    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">BlazorCol</span>></span>
-    <span style="color:#e0c589">&lt;<span style="color:#e0c589">BlazorCol</span> <span style="color:#e0c589">SM</span>=<span style="color:#65b042">"9"</span>></span>
-        <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabContent</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@(active == 1)"</span>></span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@(active == 2)"</span>></span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>></span>
-            <span style="color:#89bdff">&lt;<span style="color:#89bdff">TabPane</span> <span style="color:#89bdff">IsOpen</span>=<span style="color:#65b042">"@@(active == 3)"</span>></span>...<span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabPane</span>></span>
-        <span style="color:#89bdff">&lt;/<span style="color:#89bdff">TabContent</span>></span>
-    <span style="color:#e0c589">&lt;/<span style="color:#e0c589">BlazorCol</span>></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Row</span>></span>
-</pre>
+<PrettyCode CodeFile="snippets/tabs/tabs3.html" />
 
 @code {
     private int active = 1;

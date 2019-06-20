@@ -15,58 +15,7 @@
         <CarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" @bind-ActiveIndex="@ActiveIndex" />
     </Carousel>
 </div>
-<pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">Carousel</span> <span style="color:#89bdff">NumberOfItems</span>=<span style="color:#65b042">"@@items.Count"</span> <span style="color:#89bdff">bind-ActiveIndex</span>=<span style="color:#65b042">"@@ActiveIndex"</span> <span style="color:#89bdff">PauseOnHover</span>=<span style="color:#65b042">"true"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">CarouselIndicators</span> <span style="color:#89bdff">NumberOfItems</span>=<span style="color:#65b042">"@@items.Count"</span> <span style="color:#89bdff">bind-ActiveIndex</span>=<span style="color:#65b042">"@@ActiveIndex"</span> /></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">div</span> <span style="color:#89bdff">class</span>=<span style="color:#65b042">"carousel-inner"</span>></span>
-        @@for (int i = 0; i <span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&lt;</span> items.Count; i++)
-        {
-            <span style="color:#89bdff">&lt;CarouselItem IsActive=<span style="color:#65b042">"@@(ActiveIndex == i)"</span> src=<span style="color:#65b042">"@@items[i].Source"</span> alt=<span style="color:#65b042">"@@items[i].Alt"</span> /></span>
-        }
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">div</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">CarouselControl</span> <span style="color:#89bdff">CarouselDirection</span>=<span style="color:#65b042">"CarouselDirection.Previous"</span> <span style="color:#89bdff">NumberOfItems</span>=<span style="color:#65b042">"@@items.Count"</span> <span style="color:#89bdff">bind-ActiveIndex</span>=<span style="color:#65b042">"@@ActiveIndex"</span> /></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">CarouselControl</span> <span style="color:#89bdff">CarouselDirection</span>=<span style="color:#65b042">"CarouselDirection.Next"</span> <span style="color:#89bdff">NumberOfItems</span>=<span style="color:#65b042">"@@items.Count"</span> <span style="color:#89bdff">bind-ActiveIndex</span>=<span style="color:#65b042">"@@ActiveIndex"</span> /></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Carousel</span>></span>
-    
-@@code {
-    IList&lt;Item> items = new List&lt;Item>
-    {
-        new Item {
-            Source = <span style="color:#65b042">".../First Slide"</span>,
-            Alt =<span style="color:#65b042">"First Slide"</span>,
-            Caption = <span style="color:#65b042">"Slide 1"</span>,
-            Header = <span style="color:#65b042">"Slide 1 Header"</span>
-        },
-        new Item {
-            Source = <span style="color:#65b042">".../Second Slide"</span>,
-            Alt =<span style="color:#65b042">"Second Slide"</span>,
-            Caption = <span style="color:#65b042">"Slide 2"</span>,
-            Header = <span style="color:#65b042">"Slide 2 Header"</span>
-        },
-        new Item {
-            Source = <span style="color:#65b042">".../Third Slide"</span>,
-            Alt =<span style="color:#65b042">"Third Slide"</span>,
-            Caption = <span style="color:#65b042">"Slide 3"</span>,
-            Header = <span style="color:#65b042">"Slide 3 Header"</span>
-        }
-    };
-
-    private int _activeIndex;
-    int ActiveIndex
-    {
-        get => _activeIndex;
-        set { _activeIndex = value; StateHasChanged(); }
-    }
-
-    class Item
-    {
-        public string Source { get; set; }
-        public string Alt { get; set; }
-        public string Caption { get; set; }
-        public string Header { get; set; }
-    }
-}
-</pre>
+<PrettyCode CodeFile="snippets/carousels/carousels1.html" />
 
 <h3>With Captions & Headers</h3>
 
@@ -86,62 +35,7 @@
         <CarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" @bind-ActiveIndex="@SecondIndex" />
     </Carousel>
 </div>
-
-<pre style="background:#000;color:#f8f8f8">
-<span style="color:#89bdff">&lt;<span style="color:#89bdff">Carousel</span> <span style="color:#89bdff">NumberOfItems</span>=<span style="color:#65b042">"@@items.Count"</span> <span style="color:#89bdff">bind-ActiveIndex</span>=<span style="color:#65b042">"@@SecondIndex"</span> <span style="color:#89bdff">PauseOnHover</span>=<span style="color:#65b042">"true"</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">CarouselIndicators</span> <span style="color:#89bdff">NumberOfItems</span>=<span style="color:#65b042">"@@items.Count"</span> <span style="color:#89bdff">bind-ActiveIndex</span>=<span style="color:#65b042">"@@SecondIndex"</span> /></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">div</span> <span style="color:#89bdff">class</span>=<span style="color:#65b042">"carousel-inner"</span>></span>
-        @@for (int i = 0; i <span style="background:rgba(86,45,86,0.75);color:#fd5ff1">&lt;</span> items.Count; i++)
-        {
-            Item item = items[i];
-            <span style="color:#89bdff">&lt;CarouselItem IsActive=<span style="color:#65b042">"@@(SecondIndex == i)"</span> src=<span style="color:#65b042">"@@item.Source"</span> alt=<span style="color:#65b042">"@@item.Alt"</span>></span>
-               <span style="color:#89bdff">&lt;CarouselCaption CaptionText=<span style="color:#65b042">"@@item.Caption"</span> HeaderText=<span style="color:#65b042">"@@item.Header"</span> /></span>
-            <span style="color:#89bdff">&lt;/CarouselItem></span>
-        }
-    <span style="color:#89bdff">&lt;/<span style="color:#89bdff">div</span>></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">CarouselControl</span> <span style="color:#89bdff">CarouselDirection</span>=<span style="color:#65b042">"CarouselDirection.Previous"</span> <span style="color:#89bdff">NumberOfItems</span>=<span style="color:#65b042">"@@items.Count"</span> <span style="color:#89bdff">bind-ActiveIndex</span>=<span style="color:#65b042">"@@SecondIndex"</span> /></span>
-    <span style="color:#89bdff">&lt;<span style="color:#89bdff">CarouselControl</span> <span style="color:#89bdff">CarouselDirection</span>=<span style="color:#65b042">"CarouselDirection.Next"</span> <span style="color:#89bdff">NumberOfItems</span>=<span style="color:#65b042">"@@items.Count"</span> <span style="color:#89bdff">bind-ActiveIndex</span>=<span style="color:#65b042">"@@SecondIndex"</span> /></span>
-<span style="color:#89bdff">&lt;/<span style="color:#89bdff">Carousel</span>></span>
-    
-@@code {
-    IList&lt;Item> items = new List&lt;Item>
-    {
-        new Item {
-            Source = <span style="color:#65b042">".../First Slide"</span>,
-            Alt =<span style="color:#65b042">"First Slide"</span>,
-            Caption = <span style="color:#65b042">"Slide 1"</span>,
-            Header = <span style="color:#65b042">"Slide 1 Header"</span>
-        },
-        new Item {
-            Source = <span style="color:#65b042">".../Second Slide"</span>,
-            Alt =<span style="color:#65b042">"Second Slide"</span>,
-            Caption = <span style="color:#65b042">"Slide 2"</span>,
-            Header = <span style="color:#65b042">"Slide 2 Header"</span>
-        },
-        new Item {
-            Source = <span style="color:#65b042">".../Third Slide"</span>,
-            Alt =<span style="color:#65b042">"Third Slide"</span>,
-            Caption = <span style="color:#65b042">"Slide 3"</span>,
-            Header = <span style="color:#65b042">"Slide 3 Header"</span>
-        }
-    };
-
-    private int _secondIndex;
-    int SecondIndex
-    {
-        get => _secondIndex;
-        set { _secondIndex = value; StateHasChanged(); }
-    }
-
-    class Item
-    {
-        public string Source { get; set; }
-        public string Alt { get; set; }
-        public string Caption { get; set; }
-        public string Header { get; set; }
-    }
-}
-</pre>
+<PrettyCode CodeFile="snippets/carousels/carousels2.html" />
 
 @code {
         IList<Item> items = new List<Item>

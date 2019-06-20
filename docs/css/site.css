@@ -44,18 +44,18 @@ app {
         top: -2px;
     }
 
-.sidebar .nav-item {
-    font-size: 0.9rem;
-    padding-bottom: 0.5rem;
-}
-
-    .sidebar .nav-item:first-of-type {
-        padding-top: 1rem;
+    .sidebar .nav-item {
+        font-size: 0.9rem;
+        padding-bottom: 0.5rem;
     }
 
-.sidebar nav-item:last-of-type {
-    padding-bottom: 1rem;
-}
+        .sidebar .nav-item:first-of-type {
+            padding-top: 1rem;
+        }
+
+    .sidebar nav-item:last-of-type {
+        padding-bottom: 1rem;
+    }
 
     .sidebar .nav-item a {
         color: #d7d7d7;
@@ -120,6 +120,22 @@ app {
         /* Never collapse the sidebar for wide screens */
         display: block;
     }
+}
+
+/*Bootstrap Jquery workarounds*/
+
+.toast.show {
+    display: block;
+    opacity: 1;
+    max-height: 1000px;
+    transition: max-height 0.8s ease-out, opacity .15s linear;
+}
+
+.toast.hide {
+    display: block;
+    opacity: 0;
+    max-height: 0;
+    transition: max-height 0.8s ease-in, opacity .15s linear;
 }
 
 /* react-strap docs */
@@ -265,20 +281,7 @@ h1, h2, h3 {
         max-width: 320px;
     }
 
-pre, code {
-    background: #f5f5f5;
-    border-radius: 0;
-    border-color: #d8d8d8;
-    margin: 0;
-}
 
-.docs-example + pre {
-    border: 1px solid #d8d8d8;
-    border-top: none;
-    padding: 1em;
-    margin-top: 0 !important;
-    clear: both;
-}
 
 .docs-sidebar .nav-item {
     padding: .2rem 0 .2rem 0;
@@ -323,7 +326,6 @@ pre, code {
     margin-bottom: 1rem;
 }
 
-
 /* http://prismjs.com/download.html?themes=prism-okaidia&languages=markup+css+clike+javascript+bash+jsx&plugins=autolinker */
 /**
  * okaidia theme for JavaScript, CSS and HTML
@@ -351,17 +353,6 @@ pre[class*="language-"] {
     hyphens: none;
 }
 
-/* Code blocks */
-pre[class*="language-"] {
-    padding: 1em;
-    margin: 1.5em 0;
-    overflow: auto;
-}
-
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-    background: #272822;
-}
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
@@ -448,11 +439,7 @@ pre[class*="language-"] {
     color: inherit;
 }
 
-code .tag {
-    font-size: inherit;
-    padding: 0;
-    display: inherit;
-}
+
 
 /* From getbootstrap.com*/
 .bd-example-modal {

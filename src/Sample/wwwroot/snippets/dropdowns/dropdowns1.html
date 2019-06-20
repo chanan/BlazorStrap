@@ -1,0 +1,17 @@
+﻿<Dropdown IsOpen="@IsOpen">
+    <DropdownToggle onclick="@onclick">Dropdown</DropdownToggle>
+    <DropdownMenu IsOpen="@IsOpen">
+        <DropdownItem Href="#">Action</DropdownItem>
+        <DropdownItem Href="#">Another Action</DropdownItem>
+        <DropdownItem Href="#">Yet Another Action</DropdownItem>
+    </DropdownMenu>
+</Dropdown>
+
+@code  {
+    bool IsOpen { get; set; }
+    void onclick(UIMouseEventArgs e)
+    {
+        IsOpen = !IsOpen;
+        StateHasChanged();
+    }
+}

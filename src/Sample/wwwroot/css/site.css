@@ -281,20 +281,7 @@ h1, h2, h3 {
         max-width: 320px;
     }
 
-pre, code {
-    background: #f5f5f5;
-    border-radius: 0;
-    border-color: #d8d8d8;
-    margin: 0;
-}
 
-.docs-example + pre {
-    border: 1px solid #d8d8d8;
-    border-top: none;
-    padding: 1em;
-    margin-top: 0 !important;
-    clear: both;
-}
 
 .docs-sidebar .nav-item {
     padding: .2rem 0 .2rem 0;
@@ -366,17 +353,6 @@ pre[class*="language-"] {
     hyphens: none;
 }
 
-/* Code blocks */
-pre[class*="language-"] {
-    padding: 1em;
-    margin: 1.5em 0;
-    overflow: auto;
-}
-
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-    background: #272822;
-}
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
@@ -463,11 +439,7 @@ pre[class*="language-"] {
     color: inherit;
 }
 
-code .tag {
-    font-size: inherit;
-    padding: 0;
-    display: inherit;
-}
+
 
 /* From getbootstrap.com*/
 .bd-example-modal {
