@@ -21,7 +21,7 @@
                 <NavItem>
                     <BlazorNavLink IsDisabled="true" Href="#">Disabled</BlazorNavLink>
                 </NavItem>
-                <NavItem IsDropdown="true">
+                <NavItem IsDropdown="true" IsOpen="@IsOpen2">
                     <DropdownToggle onclick="@onclick2" IsOpen="@IsOpen2" Color="Color.Light">Dropdown link</DropdownToggle>
                     <DropdownMenu IsOpen="@IsOpen2">
                         <DropdownItem Href="#">Action</DropdownItem>

@@ -10,10 +10,12 @@
         get
         {
             var dropdown = IsDropdown ? "dropdown" : null;
-            return $"nav-item {dropdown} {Class}";
+            var show = (IsDropdown && IsOpen) ? "show" : null;
+            return $"nav-item {dropdown} {show} {Class} ";
         }
     }
     [Parameter] private bool IsDropdown { get; set; }
+[Parameter] private bool IsOpen { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
