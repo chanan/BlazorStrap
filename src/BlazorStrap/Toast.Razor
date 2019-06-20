@@ -38,14 +38,14 @@
     /// Gets or sets an action to be invoked when the alert is dismissed.
     ///
     ///</summary>
-    [Parameter] private Action OnDismiss { get; set; }
+    [Parameter] private EventCallback OnDismiss { get; set; }
 
     private bool IsDismissed { get; set; } = false;
 
-    void onclick()
+    async Task onclick()
     {
         IsDismissed = true;
-        OnDismiss?.Invoke();
+        await OnDismiss.InvokeAsync(null);
         StateHasChanged();
     }
 }

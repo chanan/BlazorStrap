@@ -1,6 +1,6 @@
 ﻿@inherits BootstrapComponentBase
 
-<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" @onclick="@onclick">
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" @onclick="@OnClick">
     @ChildContent
 </DynamicElement>
 
@@ -36,7 +36,7 @@
     [Parameter] private bool IsDisabled { get; set; }
     [Parameter] private bool IsButton { get; set; }
     [Parameter] private bool IsActive { get; set; }
-    [Parameter] private Action<UIMouseEventArgs> onclick { get; set; }
+    [Parameter] private EventCallback<UIMouseEventArgs> OnClick { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

@@ -15,7 +15,7 @@
             return $"modal-title {Class}";
         }
     }
-    [Parameter] private Action<UIMouseEventArgs> OnClick { get; set; }
+    [Parameter] private EventCallback<UIMouseEventArgs> OnClick { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
