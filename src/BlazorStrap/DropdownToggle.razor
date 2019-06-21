@@ -1,9 +1,18 @@
 ﻿@inherits BootstrapComponentBase
 @using BlazorStrap.util
 
-<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" aria-haspopup="true" aria-expanded="@IsOpen" @onclick="@onclick">
-    @ChildContent
-</DynamicElement>
+@if (IsOpen == null)
+{
+    <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" aria-haspopup="true" aria-expanded="@DropDownManager.IsOpen(Id).ToString()" @onclick="@onClickEvent">
+        @ChildContent
+    </DynamicElement>
+}
+else
+{
+    <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" aria-haspopup="true" aria-expanded="@IsOpen.ToString()" @onclick="@onclick">
+        @ChildContent
+    </DynamicElement>
+}
 
 @code {
     string classname
@@ -36,8 +45,23 @@
     [Parameter] private Size Size { get; set; } = Size.None;
     //[Parameter] private bool IsLink { get; set; } //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
     [Parameter] private bool IsSplit { get; set; }
-    [Parameter] private bool IsOpen { get; set; }
+    [Parameter] private bool? IsOpen { get; set; }
     [Parameter] private EventCallback<UIMouseEventArgs> onclick { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
+    [CascadingParameter] private DropDownManager DropDownManager { get; set; }
+    [Parameter] private string Id { get; set; }
+
+    private void onClickEvent(UIMouseEventArgs e)
+    {
+        if (onclick.HasDelegate)
+        {
+            onclick.InvokeAsync(e);
+        }
+        if (DropDownManager != null && IsOpen == null)
+        {
+            DropDownManager.Toggle(Id);
+            StateHasChanged();
+        }
+    }
 }

@@ -21,8 +21,26 @@
                 <NavItem>
                     <BlazorNavLink IsDisabled="true" Href="#">Disabled</BlazorNavLink>
                 </NavItem>
+                <NavItem IsDropdown="true" Id="DropDownMenu1">
+                    <DropdownToggle Id="DropDownMenu1" Color="Color.Light">Dropdown link</DropdownToggle>
+                    <DropdownMenu Id="DropDownMenu1">
+                        <DropdownItem Href="#">Action</DropdownItem>
+                        <DropdownItem Href="#">Another Action</DropdownItem>
+                        <DropdownItem IsDivider="true" />
+                        <DropdownItem Href="#">Yet Another Action</DropdownItem>
+                    </DropdownMenu>
+                </NavItem>
+                <NavItem IsDropdown="true" Id="DropDownMenu2">
+                    <DropdownToggle Id="DropDownMenu2" Color="Color.Light">Manager Controlled</DropdownToggle>
+                    <DropdownMenu Id="DropDownMenu2">
+                        <DropdownItem Href="#">Action</DropdownItem>
+                        <DropdownItem Href="#">Another Action</DropdownItem>
+                        <DropdownItem IsDivider="true" />
+                        <DropdownItem Href="#">Yet Another Action</DropdownItem>
+                    </DropdownMenu>
+                </NavItem>
                 <NavItem IsDropdown="true" IsOpen="@IsOpen2">
-                    <DropdownToggle onclick="@onclick2" IsOpen="@IsOpen2" Color="Color.Light">Dropdown link</DropdownToggle>
+                    <DropdownToggle IsOpen="@IsOpen2" onclick="@onclick2" Color="Color.Light">User Controlled</DropdownToggle>
                     <DropdownMenu IsOpen="@IsOpen2">
                         <DropdownItem Href="#">Action</DropdownItem>
                         <DropdownItem Href="#">Another Action</DropdownItem>

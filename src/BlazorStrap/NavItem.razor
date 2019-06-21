@@ -1,8 +1,10 @@
 ﻿@inherits BootstrapComponentBase
 
-<DynamicElement Attributes="@UnknownParameters" TagName="li" class="@classname">
-    @ChildContent
-</DynamicElement>
+<CascadingValue Value="@DropDownManager">
+    <DynamicElement Attributes="@UnknownParameters" TagName="li" class="@classname">
+        @ChildContent
+    </DynamicElement>
+</CascadingValue>
 
 @code {
     private string classname
@@ -10,12 +12,41 @@
         get
         {
             var dropdown = IsDropdown ? "dropdown" : null;
-            var show = (IsDropdown && IsOpen) ? "show" : null;
+            var show = "";
+            if (IsDropdown)
+            {
+                if (IsOpen == null)
+                {
+                    show = DropDownManager.IsOpen(Id) ? "show" : null;
+                }
+                else
+                {
+                    show = (bool)IsOpen ? "show" : null;
+                }
+            }
             return $"nav-item {dropdown} {show} {Class} ";
         }
     }
     [Parameter] private bool IsDropdown { get; set; }
-[Parameter] private bool IsOpen { get; set; }
+    [Parameter] private bool? IsOpen { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
+    [Parameter] private string Id { get; set; } = "";
+    [CascadingParameter] private DropDownManager DropDownManager { get; set; }
+    protected override Task OnInitAsync()
+    {
+        if (DropDownManager != null && IsDropdown && IsOpen == null)
+        {
+            DropDownManager.AddDropDownMenu(Id);
+        }
+        return base.OnInitAsync();
+    }
+
+    public void Dispose()
+    {
+        if (DropDownManager != null && IsDropdown && IsOpen == null)
+        {
+            DropDownManager.RemoveDropDownMenu(Id);
+        }
+    }
 }
