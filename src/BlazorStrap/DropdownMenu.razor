@@ -5,25 +5,31 @@
 </DynamicElement>
 
 @code {
-    string classname
+string classname
+{
+    get
     {
-        get
+        var open = "";
+        if (IsOpen == null)
         {
-            var open = "";
-            if (IsOpen == null)
+            if (DropDownMenuControl == null)
             {
-                open = DropDownManager.IsOpen(Id) ? "show" : null;
+                open = null;
             }
             else
             {
-                open = (bool)IsOpen ? "show" : null;
+                open = DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id) ? "show" : null;
             }
-            return $"dropdown-menu {open} {Class}";
         }
+        else
+        {
+            open = (bool)IsOpen ? "show" : null;
+        }
+        return $"dropdown-menu {open} {Class}";
     }
-    [Parameter] private bool? IsOpen { get; set; }
-    [Parameter] private string Class { get; set; }
-    [Parameter] private RenderFragment ChildContent { get; set; }
-    [Parameter] private string Id { get; set; }
-    [CascadingParameter] private DropDownManager DropDownManager { get; set; }
+}
+[Parameter] private bool? IsOpen { get; set; }
+[Parameter] private string Class { get; set; }
+[Parameter] private RenderFragment ChildContent { get; set; }
+[CascadingParameter] private DropDownMenuControl DropDownMenuControl { get; set; }
 }
