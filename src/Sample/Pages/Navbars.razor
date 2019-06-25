@@ -21,27 +21,18 @@
                 <NavItem>
                     <BlazorNavLink IsDisabled="true" Href="#">Disabled</BlazorNavLink>
                 </NavItem>
-                <NavItem IsDropdown="true" Id="DropDownMenu1">
-                    <DropdownToggle Id="DropDownMenu1" Color="Color.Light">Dropdown link</DropdownToggle>
-                    <DropdownMenu Id="DropDownMenu1">
+                <NavItem IsDropdown="true">
+                    <DropdownToggle Color="Color.Light">Dropdown link</DropdownToggle>
+                    <DropdownMenu>
                         <DropdownItem Href="#">Action</DropdownItem>
                         <DropdownItem Href="#">Another Action</DropdownItem>
                         <DropdownItem IsDivider="true" />
                         <DropdownItem Href="#">Yet Another Action</DropdownItem>
                     </DropdownMenu>
                 </NavItem>
-                <NavItem IsDropdown="true" Id="DropDownMenu2">
-                    <DropdownToggle Id="DropDownMenu2" Color="Color.Light">Manager Controlled</DropdownToggle>
-                    <DropdownMenu Id="DropDownMenu2">
-                        <DropdownItem Href="#">Action</DropdownItem>
-                        <DropdownItem Href="#">Another Action</DropdownItem>
-                        <DropdownItem IsDivider="true" />
-                        <DropdownItem Href="#">Yet Another Action</DropdownItem>
-                    </DropdownMenu>
-                </NavItem>
-                <NavItem IsDropdown="true" IsOpen="@IsOpen2">
-                    <DropdownToggle IsOpen="@IsOpen2" onclick="@onclick2" Color="Color.Light">User Controlled</DropdownToggle>
-                    <DropdownMenu IsOpen="@IsOpen2">
+                <NavItem IsDropdown="true" IsOpen="@IsOpen">
+                    <DropdownToggle IsOpen="@IsOpen" onclick="@onclick" Color="Color.Light">User Controlled</DropdownToggle>
+                    <DropdownMenu IsOpen="@IsOpen">
                         <DropdownItem Href="#">Action</DropdownItem>
                         <DropdownItem Href="#">Another Action</DropdownItem>
                         <DropdownItem IsDivider="true" />
@@ -63,13 +54,6 @@
     void onclick(UIMouseEventArgs e)
     {
         IsOpen = !IsOpen;
-        StateHasChanged();
-    }
-
-    bool IsOpen2 { get; set; }
-    void onclick2(UIMouseEventArgs e)
-    {
-        IsOpen2 = !IsOpen2;
         StateHasChanged();
     }
 }

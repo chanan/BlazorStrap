@@ -1,21 +1,12 @@
 ﻿@inherits BootstrapComponentBase
 
-<CascadingValue Value="@DropDownManager">
+<CascadingValue Value="@DropDownMenuHandler">
     <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname">
         @ChildContent
     </DynamicElement>
 </CascadingValue>
 @code {
-    protected override void OnInit()
-    {
-        DropDownManager.OnToggle += OnToggle;
-        base.OnInit();
-    }
-    private void OnToggle(Object Sender, EventArgs e)
-    {
-        DropDownManager = DropDownManager;
-        StateHasChanged();
-    }
+ 
     private string classname
     {
         get
@@ -45,6 +36,7 @@
     [Parameter] private bool IsNavbar { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
+    private DropDownMenuHandler DropDownMenuHandler { get; set; } = new DropDownMenuHandler();
 
     private string GetAlignment()
     {
@@ -52,5 +44,16 @@
         if (Alignment == Alignment.Right) { return "justify-content-end"; }
         return null;
     }
-    private DropDownManager DropDownManager { get; set; } = new DropDownManager();
+
+   protected override void OnInit()
+    {
+        DropDownMenuHandler.OnToggle += OnToggle;
+        base.OnInit();
+    }
+    private void OnToggle(Object Sender, EventArgs e)
+    {
+        DropDownMenuHandler = DropDownMenuHandler;
+        StateHasChanged();
+    }
+    
 }
