@@ -1,40 +1,44 @@
 ﻿<ButtonGroup>
-    <Dropdown IsOpen="@IsOpen8">
-        <DropdownToggle Size="Size.Large" onclick="@onclick8" IsOpen="@IsOpen8">Large button</DropdownToggle>
-        <DropdownMenu IsOpen="@IsOpen8">
+    <Dropdown>
+        <DropdownToggle Color="Color.Secondary" Size="Size.Large">Large button</DropdownToggle>
+        <DropdownMenu>
             <DropdownItem Href="#">Action</DropdownItem>
             <DropdownItem Href="#">Another Action</DropdownItem>
             <DropdownItem Href="#">Yet Another Action</DropdownItem>
         </DropdownMenu>
     </Dropdown>
-    <ButtonGroup>
-        <BlazorButton Size="Size.Large" Color="Color.Primary">Large split button</BlazorButton>
-        <DropdownToggle Size="Size.Large" IsSplit="true" Color="Color.Primary" onclick="@onclick9" IsOpen="@IsOpen9" />
-        <DropdownMenu IsOpen="@IsOpen9">
-            <DropdownItem Href="#">Action</DropdownItem>
-            <DropdownItem Href="#">Another Action</DropdownItem>
-            <DropdownItem IsDivider="true" />
-            <DropdownItem Href="#">Yet Another Action</DropdownItem>
-        </DropdownMenu>
-    </ButtonGroup>
+    <Dropdown>
+        <ButtonGroup>
+            <BlazorButton Size="Size.Large" Color="Color.Secondary">Large split button</BlazorButton>
+            <DropdownToggle Size="Size.Large" IsSplit="true" Color="Color.Secondary" />
+            <DropdownMenu>
+                <DropdownItem Href="#">Action</DropdownItem>
+                <DropdownItem Href="#">Another Action</DropdownItem>
+                <DropdownItem IsDivider="true" />
+                <DropdownItem Href="#">Yet Another Action</DropdownItem>
+            </DropdownMenu>
+        </ButtonGroup>
+    </Dropdown>
 </ButtonGroup>
 <ButtonGroup>
-    <Dropdown IsOpen="@IsOpen10">
-        <DropdownToggle Size="Size.Small" onclick="@onclick10" IsOpen="@IsOpen10">Small button</DropdownToggle>
-        <DropdownMenu IsOpen="@IsOpen10">
+    <Dropdown>
+        <DropdownToggle Color="Color.Secondary" Size="Size.Small">Small button</DropdownToggle>
+        <DropdownMenu>
             <DropdownItem Href="#">Action</DropdownItem>
             <DropdownItem Href="#">Another Action</DropdownItem>
             <DropdownItem Href="#">Yet Another Action</DropdownItem>
         </DropdownMenu>
     </Dropdown>
-    <ButtonGroup>
-        <BlazorButton Size="Size.Small" Color="Color.Primary">Small split button</BlazorButton>
-        <DropdownToggle Size="Size.Small" IsSplit="true" Color="Color.Primary" onclick="@onclick11" IsOpen="@IsOpen11" />
-        <DropdownMenu IsOpen="@IsOpen11">
-            <DropdownItem Href="#">Action</DropdownItem>
-            <DropdownItem Href="#">Another Action</DropdownItem>
-            <DropdownItem IsDivider="true" />
-            <DropdownItem Href="#">Yet Another Action</DropdownItem>
-        </DropdownMenu>
-    </ButtonGroup>
+    <Dropdown>
+        <ButtonGroup>
+            <BlazorButton Size="Size.Small" Color="Color.Secondary">Small split button</BlazorButton>
+            <DropdownToggle Size="Size.Small" IsSplit="true" Color="Color.Secondary" />
+            <DropdownMenu>
+                <DropdownItem Href="#">Action</DropdownItem>
+                <DropdownItem Href="#">Another Action</DropdownItem>
+                <DropdownItem IsDivider="true" />
+                <DropdownItem Href="#">Yet Another Action</DropdownItem>
+            </DropdownMenu>
+        </ButtonGroup>
+    </Dropdown>
 </ButtonGroup>
