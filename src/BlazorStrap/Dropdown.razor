@@ -1,23 +1,47 @@
 ﻿@inherits BootstrapComponentBase
 
-<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
-    @ChildContent
-</DynamicElement>
+<CascadingValue Value="@DropDownMenuControl">
+    <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+        @ChildContent
+    </DynamicElement>
+</CascadingValue>
 
 @code {
     string classname
     {
         get
         {
-            var open = IsOpen ? "show" : null;
+            var show = "";
+            if (IsOpen == null)
+            {
+                show = DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id) ? "show" : null;
+            }
+            else
+            {
+                show = (bool)IsOpen ? "show" : null;
+            }
             var baseclass = IsGroup ? "btn-group" : "dropdown";
             var direction = DropdownDirection != DropdownDirection.Down ? DropdownDirection.ToDescriptionString() : null;
-            return $"{baseclass} {direction} {open} {Class}";
+            return $"{baseclass} {direction} {show} {Class}";
         }
     }
     [Parameter] private DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
-    [Parameter] private bool IsOpen { get; set; }
+    [Parameter] private bool? IsOpen { get; set; }
     [Parameter] private bool IsGroup { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
+    public DropDownMenuControl DropDownMenuControl { get; set; } = new DropDownMenuControl();
+
+    protected override void OnInit()
+    {
+        DropDownMenuControl.Handler.OnToggle += OnToggle;
+        DropDownMenuControl.Id = Guid.NewGuid().ToString();
+        DropDownMenuControl.Handler.AddDropDownMenu(DropDownMenuControl.Id);
+        base.OnInit();
+    }
+    private void OnToggle(Object Sender, EventArgs e)
+    {
+        DropDownMenuControl.Handler = DropDownMenuControl.Handler;
+        StateHasChanged();
+    }
 }

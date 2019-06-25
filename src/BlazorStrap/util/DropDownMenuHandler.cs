@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace BlazorStrap.util
 {
-    public class DropDownManager
+    public class DropDownMenuHandler
     {
         public EventHandler OnToggle { get; set; }
         public List<KeyAndValue<string, bool>> MenuState { get; set; } = new List<KeyAndValue<string, bool>>();
@@ -63,5 +63,11 @@ namespace BlazorStrap.util
             Key = key;
             Value = value;
         }
+    }
+
+    public class DropDownMenuControl
+    {
+        public string Id { get; set; } = "";
+        public DropDownMenuHandler Handler { get; set; } = new DropDownMenuHandler();
     }
 }
