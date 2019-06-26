@@ -5,13 +5,8 @@
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
-        {
-            return $"tab-content {Class}";
-        }
-    }
+    string classname => $"tab-content {Class}";
+    
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

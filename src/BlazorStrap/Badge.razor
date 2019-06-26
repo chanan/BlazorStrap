@@ -20,10 +20,7 @@
     private string _href;
     [Parameter] private string Href
     {
-        get
-        {
-            return _href;
-        }
+        get => _href;
         set
         {
             _href = value;
@@ -34,10 +31,7 @@
     private EventCallback<UIMouseEventArgs> _onlick { get; set; }
     [Parameter] private EventCallback<UIMouseEventArgs> onclick
     {
-        get
-        {
-            return _onlick;
-        }
+        get => _onlick;
 
         set
         {

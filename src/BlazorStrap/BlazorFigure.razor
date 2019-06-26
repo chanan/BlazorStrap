@@ -5,13 +5,8 @@
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
-        {
-            return $"figure {Class}";
-        }
-    }
+    string classname => $"figure {Class}";
+    
     [Parameter]
     private string Class { get; set; }
     [Parameter]

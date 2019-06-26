@@ -5,44 +5,44 @@
 </DynamicElement>
 
 @code {
-string classname
-{
-    get
+    string classname
     {
-        if (IsDivider) { return $"dropdown-divider {Class}"; }
-        var active = IsActive ? "active" : null;
-        var disabled = IsDisabled ? "disabled" : null;
-        return $"dropdown-item {active} {disabled} {Class}";
+        get
+        {
+            if (IsDivider) { return $"dropdown-divider {Class}"; }
+            var active = IsActive ? "active" : null;
+            var disabled = IsDisabled ? "disabled" : null;
+            return $"dropdown-item {active} {disabled} {Class}";
+        }
     }
-}
-string Tag
-{
-    get
+    string Tag
     {
-        if (IsDivider) { return "div"; }
-        if (IsButton) { return "button"; }
-        else { return "a"; }
+        get
+        {
+            if (IsDivider) { return "div"; }
+            if (IsButton) { return "button"; }
+            else { return "a"; }
+        }
     }
-}
-string Type
-{
-    get
+    string Type
     {
-        if (IsButton) { return "button"; }
-        else { return null; }
+        get
+        {
+            if (IsButton) { return "button"; }
+            else { return null; }
+        }
     }
-}
-[Parameter] private bool IsDivider { get; set; }
-[Parameter] private bool IsDisabled { get; set; }
-[Parameter] private bool IsButton { get; set; }
-[Parameter] private bool IsActive { get; set; }
-[Parameter] private bool StayOpen { get; set; }
-[Parameter] private EventCallback<UIMouseEventArgs> OnClick { get; set; }
-[Parameter] private string Class { get; set; }
-[Parameter] private RenderFragment ChildContent { get; set; }
-[CascadingParameter] private DropDownMenuControl DropDownMenuControl { get; set; }
+    [Parameter] private bool IsDivider { get; set; }
+    [Parameter] private bool IsDisabled { get; set; }
+    [Parameter] private bool IsButton { get; set; }
+    [Parameter] private bool IsActive { get; set; }
+    [Parameter] private bool StayOpen { get; set; }
+    [Parameter] private EventCallback<UIMouseEventArgs> OnClick { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+    [CascadingParameter] private DropDownMenuControl DropDownMenuControl { get; set; }
 
-   private void onClickEvent(UIMouseEventArgs e)
+    private void onClickEvent(UIMouseEventArgs e)
     {
         if (OnClick.HasDelegate)
         {

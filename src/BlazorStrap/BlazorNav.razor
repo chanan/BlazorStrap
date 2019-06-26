@@ -19,13 +19,7 @@
             return $"nav {navbar} {tabs} {pills} {fill} {vertical} {GetAlignment()} {Class}";
         }
     }
-    private string Tag
-    {
-        get
-        {
-            return IsList ? "ul" : "nav";
-        }
-    }
+    private string Tag => IsList ? "ul" : "nav";
 
     [Parameter] private bool IsList { get; set; }
     [Parameter] private Alignment Alignment { get; set; } = Alignment.None;

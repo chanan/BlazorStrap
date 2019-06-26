@@ -5,13 +5,8 @@
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
-        {
-            return $"modal-footer {Class}";
-        }
-    }
+    string classname => $"modal-footer {Class}";
+    
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

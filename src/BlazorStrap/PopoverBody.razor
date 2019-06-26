@@ -5,13 +5,7 @@
 </DynamicElement>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            return $"popover-body {Class}";
-        }
-    }
+    private string classname => $"popover-body {Class}";
 
     [Parameter] private string Class { get; set; }
     [Parameter] private string Style { get; set; }

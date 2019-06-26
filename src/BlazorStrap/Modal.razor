@@ -17,73 +17,73 @@
 }
 
 @code {
-string classname
-{
-    get
+    string classname
     {
-        var display = IsOpen ? "fade show" : null;
-        return $"modal {display} {Class}";
+        get
+        {
+            var display = IsOpen ? "fade show" : null;
+            return $"modal {display} {Class}";
+        }
     }
-}
-string innerClassname
-{
-    get
+    string innerClassname
     {
-        var center = IsCentered ? "modal-dialog-centered" : null;
-        var size = Size != Size.None ? $"modal-{Size.ToDescriptionString()}" : null;
-        return $"modal-dialog {size} {center}";
+        get
+        {
+            var center = IsCentered ? "modal-dialog-centered" : null;
+            var size = Size != Size.None ? $"modal-{Size.ToDescriptionString()}" : null;
+            return $"modal-dialog {size} {center}";
+        }
     }
-}
-string styles
-{
-    get
+    string styles
     {
-        var display = IsOpen ? "display: block; padding-right: 17px;" : null;
-        return $"{Style} {display}";
+        get
+        {
+            var display = IsOpen ? "display: block; padding-right: 17px;" : null;
+            return $"{Style} {display}";
+        }
     }
-}
-private bool _isOpen;
-[Parameter]
-private bool IsOpen
-{
-    get
+    private bool _isOpen;
+    [Parameter]
+    private bool IsOpen
     {
-        return _isOpen;
+        get
+        {
+            return _isOpen;
+        }
+        set
+        {
+            _isOpen = value;
+            IsOpenChanged.InvokeAsync(_isOpen);
+            
+        }
     }
-    set
-    {
-        _isOpen = value;
-        IsOpenChanged.InvokeAsync(_isOpen);
-        
-    }
-}
-[Parameter] private EventCallback<bool> IsOpenChanged { get; set; }
-[Parameter] private bool IsCentered { get; set; }
-[Parameter] private Size Size { get; set; } = Size.None;
-[Parameter] private string Class { get; set; }
-[Parameter] private string Style { get; set; }
-[Parameter] private RenderFragment ChildContent { get; set; }
+    [Parameter] private EventCallback<bool> IsOpenChanged { get; set; }
+    [Parameter] private bool IsCentered { get; set; }
+    [Parameter] private Size Size { get; set; } = Size.None;
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
 
-private bool _dontclickWasClicked;
-void onclick()
-{
-    if (!_dontclickWasClicked) { IsOpen = false; }
-    _dontclickWasClicked = false;
-    StateHasChanged();
-}
+    private bool _dontclickWasClicked;
+    void onclick()
+    {
+        if (!_dontclickWasClicked) { IsOpen = false; }
+        _dontclickWasClicked = false;
+        StateHasChanged();
+    }
 
-void dontclick(UIMouseEventArgs e)
-{
-    _dontclickWasClicked = true;
-}
-protected override void OnAfterRender()
-{
-    new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null); 
-    base.OnAfterRender();
-}
-/*void onkeyup(UIKeyboardEventArgs e)
-{
-    //TODO: Close on Esc key
-    Console.Write("Key: ", e.Key);
-}*/
+    void dontclick(UIMouseEventArgs e)
+    {
+        _dontclickWasClicked = true;
+    }
+    protected override void OnAfterRender()
+    {
+        new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null); 
+        base.OnAfterRender();
+    }
+    /*void onkeyup(UIKeyboardEventArgs e)
+    {
+        //TODO: Close on Esc key
+        Console.Write("Key: ", e.Key);
+    }*/
 }

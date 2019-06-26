@@ -40,8 +40,7 @@ namespace BlazorStrap
             AppendBoolProperty(sb, "mr-xl-auto", XLMRAuto);
             AppendBoolProperty(sb, "ml-xl-auto", XLMLAuto);
 
-            if (sb.Length == 0) return defaultClass;
-            else return sb.ToString();
+            return sb.Length == 0 ? defaultClass : sb.ToString();
         }
 
         private void AppendProperty(StringBuilder sb, string prefix, string value)
@@ -53,9 +52,9 @@ namespace BlazorStrap
             }
         }
 
-        private void AppendBoolProperty(StringBuilder sb, string value, bool ShouldAppend)
+        private void AppendBoolProperty(StringBuilder sb, string value, bool shouldAppend)
         {
-            if (ShouldAppend)
+            if (shouldAppend)
             {
                 if (sb.Length != 0) sb.Append(" ");
                 sb.Append(value);
@@ -67,18 +66,12 @@ namespace BlazorStrap
         {
             get => xs;
 
-            set
-            {
-                if (value.ToLowerInvariant() == "auto" || value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => xs = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch 
                 {
-                    xs = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(XS));
-                }
-            }
+                    (false, "auto") => "auto",
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(XS))
+                };
         }
 
         private string sm;
@@ -86,18 +79,12 @@ namespace BlazorStrap
         {
             get => sm;
 
-            set
-            {
-                if (value.ToLowerInvariant() == "auto" || value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => sm = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch 
                 {
-                    sm = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(SM));
-                }
-            }
+                    (false, "auto") => "auto",
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(SM))
+                };
         }
 
         private string md;
@@ -105,18 +92,12 @@ namespace BlazorStrap
         {
             get => md;
 
-            set
-            {
-                if (value.ToLowerInvariant() == "auto" || value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => md = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch 
                 {
-                    md = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(MD));
-                }
-            }
+                    (false, "auto") => "auto",
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(MD))
+                };
         }
 
         private string lg;
@@ -124,18 +105,12 @@ namespace BlazorStrap
         {
             get => lg;
 
-            set
-            {
-                if (value.ToLowerInvariant() == "auto" || value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => lg = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch 
                 {
-                    lg = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(LG));
-                }
-            }
+                    (false, "auto") => "auto",
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(LG))
+                };
         }
 
         private string xl;
@@ -143,18 +118,12 @@ namespace BlazorStrap
         {
             get => xl;
 
-            set
-            {
-                if (value.ToLowerInvariant() == "auto" || value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => xl = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch 
                 {
-                    xl = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(XL));
-                }
-            }
+                    (false, "auto") => "auto",
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(XL))
+                };
         }
 
         private string xsorder;
@@ -162,18 +131,13 @@ namespace BlazorStrap
         {
             get => xsorder;
 
-            set
-            {
-                if (value.ToLowerInvariant() == "first" || value.ToLowerInvariant() == "last" || value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => xsorder = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch 
                 {
-                    xsorder = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(XSOrder));
-                }
-            }
+                    (false, "first") => "first",
+                    (false, "last") => "last",
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(XSOrder))
+                };
         }
 
         private string smorder;
@@ -181,18 +145,13 @@ namespace BlazorStrap
         {
             get => smorder;
 
-            set
-            {
-                if (value.ToLowerInvariant() == "first" || value.ToLowerInvariant() == "last" || value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => smorder = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch 
                 {
-                    smorder = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(SMOrder));
-                }
-            }
+                    (false, "first") => "first",
+                    (false, "last") => "last",
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(SMOrder))
+                };
         }
 
         private string mdorder;
@@ -200,18 +159,13 @@ namespace BlazorStrap
         {
             get => mdorder;
 
-            set
-            {
-                if (value.ToLowerInvariant() == "first" || value.ToLowerInvariant() == "last" || value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => mdorder = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch 
                 {
-                    mdorder = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(MDOrder));
-                }
-            }
+                    (false, "first") => "first",
+                    (false, "last") => "last",
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(MDOrder))
+                };
         }
 
         private string lgorder;
@@ -219,18 +173,13 @@ namespace BlazorStrap
         {
             get => lgorder;
 
-            set
-            {
-                if (value.ToLowerInvariant() == "first" || value.ToLowerInvariant() == "last" || value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => lgorder = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch 
                 {
-                    lgorder = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(LGOrder));
-                }
-            }
+                    (false, "first") => "first",
+                    (false, "last") => "last",
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(LGOrder))
+                };
         }
 
         private string xlorder;
@@ -238,18 +187,13 @@ namespace BlazorStrap
         {
             get => xlorder;
 
-            set
-            {
-                if (value.ToLowerInvariant() == "first" || value.ToLowerInvariant() == "last" || value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => xlorder = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch 
                 {
-                    xlorder = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(XLOrder));
-                }
-            }
+                    (false, "first") => "first",
+                    (false, "last") => "last",
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(XLOrder))
+                };
         }
 
         private string xsoffset;
@@ -257,18 +201,12 @@ namespace BlazorStrap
         {
             get => xsoffset;
 
-            set
-            {
-                if (value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => xsoffset = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch
                 {
-                    xsoffset = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be between 1 and 12", nameof(XSOffset));
-                }
-            }
+                    (false, _) => throw new ArgumentException("Must be between 1 and 12", nameof(XSOffset)),
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be between 1 and 12", nameof(XSOffset))
+                };
         }
 
         private string smoffset;
@@ -276,18 +214,12 @@ namespace BlazorStrap
         {
             get => smoffset;
 
-            set
-            {
-                if (value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => smoffset = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch
                 {
-                    smoffset = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be between 1 and 12", nameof(SMOffset));
-                }
-            }
+                    (false, _) => throw new ArgumentException("Must be between 1 and 12", nameof(SMOffset)),
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be between 1 and 12", nameof(SMOffset))
+                };
         }
 
         private string mdoffset;
@@ -295,18 +227,12 @@ namespace BlazorStrap
         {
             get => mdoffset;
 
-            set
-            {
-                if (value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => mdoffset = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch
                 {
-                    mdoffset = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be between 1 and 12", nameof(MDOffset));
-                }
-            }
+                    (false, _) => throw new ArgumentException("Must be between 1 and 12", nameof(MDOffset)),
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be between 1 and 12", nameof(MDOffset))
+                };
         }
 
         private string lgoffset;
@@ -314,18 +240,12 @@ namespace BlazorStrap
         {
             get => lgoffset;
 
-            set
-            {
-                if (value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => lgoffset = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch
                 {
-                    lgoffset = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be between 1 and 12", nameof(LGOffset));
-                }
-            }
+                    (false, _) => throw new ArgumentException("Must be between 1 and 12", nameof(LGOffset)),
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be between 1 and 12", nameof(LGOffset))
+                };
         }
 
         private string xloffset;
@@ -333,18 +253,12 @@ namespace BlazorStrap
         {
             get => xloffset;
 
-            set
-            {
-                if (value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12")
+            set => xloffset = (int.TryParse(value, out var ivalue), value.ToLowerInvariant()) switch
                 {
-                    xloffset = value.ToLowerInvariant();
-
-                }
-                else
-                {
-                    throw new ArgumentException("Must be between 1 and 12", nameof(XLOffset));
-                }
-            }
+                    (false, _) => throw new ArgumentException("Must be between 1 and 12", nameof(XLOffset)),
+                    (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
+                    _ => throw new ArgumentException("Must be between 1 and 12", nameof(XLOffset))
+                };
         }
 
         [Parameter] protected bool MRAuto { get; set; }

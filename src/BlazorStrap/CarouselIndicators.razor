@@ -8,13 +8,8 @@
 </DynamicElement>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            return $"carousel-indicators {Class}";
-        }
-    }
+    private string classname => $"carousel-indicators {Class}";
+    
     [Parameter] private int NumberOfItems { get; set; }
     [Parameter] private int ActiveIndex { get; set; }
     [Parameter] private string Class { get; set; }

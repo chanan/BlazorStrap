@@ -8,13 +8,8 @@
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
-        {
-            return $"modal-title {Class}";
-        }
-    }
+    string classname => $"modal-title {Class}";
+    
     [Parameter] private EventCallback<UIMouseEventArgs> OnClick { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }

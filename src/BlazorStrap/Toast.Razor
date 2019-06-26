@@ -14,20 +14,9 @@
 </DynamicElement>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            return $"toast fade {visible} {Class}";
-        }
-    }
-    private string visible
-    {
-        get
-        {
-            return IsVisible && !IsDismissed ? "show" : "hide";
-        }
-    }
+    private string classname => $"toast fade {visible} {Class}";
+    
+    private string visible => IsVisible && !IsDismissed ? "show" : "hide";
 
     [Parameter] private string Class { get; set; }
     [Parameter] private bool IsVisible { get; set; }

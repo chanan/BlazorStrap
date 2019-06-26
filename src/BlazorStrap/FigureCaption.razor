@@ -5,13 +5,8 @@
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
-        {
-            return $"figure-caption {GetAlignment()} {Class}";
-        }
-    }
+    string classname => $"figure-caption {GetAlignment()} {Class}";
+    
     [Parameter] private Alignment Alignment { get; set; } = Alignment.None;
     [Parameter] private string Class { get; set; }
     [Parameter] private string Style { get; set; }

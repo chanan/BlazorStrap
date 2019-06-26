@@ -3,13 +3,7 @@
 <DynamicElement Attributes="@UnknownParameters" TagName="li" class="@classname" @onclick="@onclick" />
 
 @code {
-    private string classname
-    {
-        get
-        {
-            return IsActive ? "active" : null;
-        }
-    }
+    private string classname => IsActive ? "active" : null;
 
     [Parameter] private bool IsActive { get; set; }
     [Parameter] private int Index { get; set; }

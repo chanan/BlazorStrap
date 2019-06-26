@@ -12,13 +12,8 @@
 </DynamicElement>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            return $"carousel-caption d-none d-md-block {Class}";
-        }
-    }
+    private string classname => $"carousel-caption d-none d-md-block {Class}";
+    
     [Parameter] private string Class { get; set; }
     [Parameter] private string CaptionText { get; set; }
     [Parameter] private string HeaderText { get; set; }

@@ -14,13 +14,8 @@
             return $"{active} {Class}";
         }
     }
-    private string aria
-    {
-        get
-        {
-            return IsActive ? "page" : null;
-        }
-    }
+    private string aria => IsActive ? "page" : null;
+    
     [Parameter] private bool IsActive { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }

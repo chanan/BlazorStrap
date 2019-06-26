@@ -25,25 +25,17 @@ else
             return $"btn {size} {color} {split} dropdown-toggle {Class}";
         }
     }
-    string Tag
-    {
-        get
-        {
-            //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
-            return "button";
-        }
-    }
-    String Type
-    {
-        get
-        {
-            //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
-            return "button";
-        }
-    }
+
+    //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
+    string Tag => "button";
+
+    //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
+    string Type => "button";
+    
     [Parameter] private Color Color { get; set; } = Color.None;
     [Parameter] private Size Size { get; set; } = Size.None;
-    //[Parameter] private bool IsLink { get; set; } //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
+    //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
+    //[Parameter] private bool IsLink { get; set; } 
     [Parameter] private bool IsSplit { get; set; }
     [Parameter] private bool? IsOpen { get; set; }
     [Parameter] private EventCallback<UIMouseEventArgs> onclick { get; set; }

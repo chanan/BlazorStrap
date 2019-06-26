@@ -24,48 +24,20 @@
 
     private string Tag { get; set; } = "button";
 
-    private string pressed
-    {
-        get
-        {
-            return IsActive ? "true" : null;
-        }
-    }
+    private string pressed => IsActive ? "true" : null;
 
-    private string disabled
-    {
-        get
-        {
-            return IsDisabled ? "true" : null;
-        }
-    }
+    private string disabled => IsDisabled ? "true" : null;
 
-    private string tab
-    {
-        get
+    private string tab => IsDisabled ? "-1" : null;
+    
+    private string type => ButtonType switch
         {
-            return IsDisabled ? "-1" : null;
-        }
-    }
-
-    private string type
-    {
-        get
-        {
-            switch (ButtonType)
-            {
-                case ButtonType.Input:
-                case ButtonType.Button:
-                    return "button";
-                case ButtonType.Submit:
-                    return "submit";
-                case ButtonType.Reset:
-                    return "reset";
-                default:
-                    return null;
-            }
-        }
-    }
+            ButtonType.Input => "button",
+            ButtonType.Button => "button",
+            ButtonType.Submit => "submit",
+            ButtonType.Reset => "reset",
+            _ => null
+        };
 
     [Parameter] private EventCallback<UIMouseEventArgs> onclick { get; set; }
     [Parameter] private Color Color { get; set; } = Color.Primary;
@@ -73,32 +45,21 @@
     private ButtonType _buttonType = ButtonType.Button;
     [Parameter] private ButtonType ButtonType
     {
-        get
-        {
-            return _buttonType;
-        }
+        get => _buttonType;
         set
         {
             _buttonType = value;
-            switch(_buttonType)
+            Tag = _buttonType switch
             {
-                case ButtonType.Button:
-                    Tag = "button";
-                    break;
-                case ButtonType.Link:
-                    Tag = "a";
-                    break;
-                case ButtonType.Input:
-                case ButtonType.Submit:
-                case ButtonType.Reset:
-                case ButtonType.Radio:
-                case ButtonType.Checkbox:
-                    Tag = "input";
-                    break;
-                default:
-                    Tag = "button";
-                    break;
-            }
+                ButtonType.Button => "button",
+                ButtonType.Link => "a",
+                ButtonType.Input => "input",
+                ButtonType.Submit => "input",
+                ButtonType.Reset => "input",
+                ButtonType.Radio => "input",
+                ButtonType.Checkbox => "input",
+                _ => "button"
+            };
         }
     }
     [Parameter] private bool IsOutline { get; set; }

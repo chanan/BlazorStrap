@@ -5,35 +5,19 @@
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
+    string classname => $"{GetClass()} {Class}";
+    
+    string Tag => MediaType switch 
         {
-            return $"{GetClass()} {Class}";
-        }
-    }
-    string Tag
-    {
-        get
-        {
-            switch(MediaType)
-            {
-                case MediaType.Body:
-                case MediaType.Media:
-                    return "div";
-                case MediaType.Heading:
-                    return "h5";
-                case MediaType.Image:
-                    return "img";
-                case MediaType.List:
-                    return "ul";
-                case MediaType.ListItem:
-                    return "li";
-                default:
-                    return "div";
-            }
-        }
-    }
+            MediaType.Body => "div",
+            MediaType.Media => "div",
+            MediaType.Heading => "h5",
+            MediaType.Image => "img",
+            MediaType.List => "ul",
+            MediaType.ListItem => "li",
+            _ => "div"
+        };
+    
     [Parameter] private MediaType MediaType { get; set; } = MediaType.Media;
     [Parameter] private VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
     [Parameter] private string Class { get; set; }
@@ -47,25 +31,13 @@
         return null;
     }
 
-    private string GetClass()
-    {
-        switch (this.MediaType)
+    private string GetClass() => this.MediaType switch 
         {
-            case MediaType.Media:
-                return "media";
-            case MediaType.Body:
-                return "media-body";
-            case MediaType.Heading:
-                return "mt-0 mb-1";
-            case MediaType.Image:
-                var verticalAlignment = GetVerticalAlignmnet();
-                return $"{verticalAlignment} mr-3";
-            case MediaType.List:
-                return "list-unstyled";
-            case MediaType.ListItem:
-                return "media";
-            default:
-                return "media";
-        }
-    }
+            MediaType.Media => "media",
+            MediaType.Heading => "mt-0 mb-1",
+            MediaType.Image => $"{GetVerticalAlignmnet()} mr-3",
+            MediaType.List => "list-unstyled",
+            MediaType.ListItem => "media",
+            _ => "media"
+        };
 }

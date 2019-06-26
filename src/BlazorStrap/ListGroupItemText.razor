@@ -5,13 +5,7 @@
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
-        {
-            return $"d-flex w-100 justify-content-between {Class}";
-        }
-    }
+    string classname => $"d-flex w-100 justify-content-between {Class}";
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

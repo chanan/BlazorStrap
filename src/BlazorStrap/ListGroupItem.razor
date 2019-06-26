@@ -17,31 +17,16 @@
             return $"list-group-item {color} {action} {active} {disabled} {Class}";
         }
     }
-    string Tag
-    {
-        get
+    string Tag => ListGroupType switch 
         {
-            switch (ListGroupType)
-            {
-                case ListGroupType.Button:
-                    return "button";
-                case ListGroupType.Link:
-                    return "a";
-                case ListGroupType.List:
-                    return "li";
-                default:
-                    return "li";
-            }
-        }
-    }
+            ListGroupType.Button => "button",
+            ListGroupType.Link => "a",
+            ListGroupType.List => "li",
+            _ => "li"
+        };
 
-    string IsButton
-    {
-        get
-        {
-            return Tag == "button" ? "button" : "";
-        }
-    }
+    string IsButton => Tag == "button" ? "button" : "";
+    
     [Parameter] private bool IsActive { get; set; }
     [Parameter] private bool IsDisabled { get; set; }
     [Parameter] private ListGroupType ListGroupType { get; set; } = ListGroupType.List;

@@ -13,13 +13,7 @@
 }
 
 @code {
-    private string classname
-    {
-        get
-        {
-            return $"alert alert-{Color.ToDescriptionString()} {Class}";
-        }
-    }
+    private string classname => $"alert alert-{Color.ToDescriptionString()} {Class}";
     [Parameter] private Color Color { get; set; } = Color.Primary;
     [Parameter] private bool IsDismissible { get; set; }
     [Parameter] private string Class { get; set; }

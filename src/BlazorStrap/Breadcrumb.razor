@@ -7,13 +7,8 @@
 </nav>
 
 @code {
-    string classname
-    {
-        get
-        {
-            return $"breadcrumb {Class}";
-        }
-    }
+    string classname => $"breadcrumb {Class}";
+    
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

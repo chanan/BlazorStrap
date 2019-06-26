@@ -26,13 +26,8 @@
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
-        {
-            return $"page-link {Class}";
-        }
-    }
+    string classname => $"page-link {Class}";
+    
     [Parameter] private string Href { get; set; }
     [Parameter] private PaginationLinkType PaginationLinkType { get; set; } = PaginationLinkType.Custom;
     private string label

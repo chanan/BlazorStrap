@@ -6,39 +6,18 @@
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
+    string classname => $"{GetClass()} {Class}";
+    
+    private string Tag => CardType switch 
         {
-           return $"{GetClass()} {Class}";
-        }
-    }
-    private string Tag
-    {
-        get
-        {
-            switch (CardType)
-            {
-                case CardType.Image:
-                    return "img";
-                case CardType.Title:
-                    return "h5";
-                case CardType.Subtitle:
-                    return "h6";
-                case CardType.Text:
-                    return "p";
-                case CardType.Link:
-                    return "a";
-                case CardType.Header:
-                    return HeadingSize.ToDescriptionString();
-                default:
-                    return "div";
-
-            }
-
-        }
-
-    }
+            CardType.Image => "img",
+            CardType.Title => "h5",
+            CardType.Subtitle => "h6",
+            CardType.Text => "p",
+            CardType.Link => "a",
+            CardType.Header => HeadingSize.ToDescriptionString(),
+            _ => "div"
+        };
 
     [Parameter] private CardType CardType { get; set; } = CardType.Card;
     [Parameter] private VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
@@ -50,31 +29,19 @@
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 
-    private string GetImageVerticalAlignmnet()
-    {
-        switch (this.VerticalAlignment)
+    private string GetImageVerticalAlignmnet() => this.VerticalAlignment switch
         {
-            case VerticalAlignment.Top:
-                return "-top";
-            case VerticalAlignment.Bottom:
-                return "-bottom";
-            default:
-                return null;
-        }
-    }
+            VerticalAlignment.Top => "-top",
+            VerticalAlignment.Bottom => "-bottom",
+            _ => null
+        };
 
-    private string GetCardAlignmnet()
-    {
-        switch (this.Alignment)
+    private string GetCardAlignmnet() => this.Alignment switch 
         {
-            case Alignment.Center:
-                return "text-center";
-            case Alignment.Right:
-                return "text-right";
-            default:
-                return null;
-        }
-    }
+            Alignment.Center => "text-center",
+            Alignment.Right => "text-right",
+            _ => null
+        };
 
     private string GetCardColor()
     {
@@ -91,37 +58,20 @@
         return $"text-{Color.ToDescriptionString()}";
     }
 
-    private string GetClass()
-    {
-        switch (this.CardType)
+    private string GetClass() => this.CardType switch 
         {
-            case CardType.Body:
-                return $"card-body {GetTextColor()}";
-            case CardType.Card:
-                var inverse = IsInverse ? "bg-dark text-white" : null;
-                return $"card {GetCardColor()} {GetCardAlignmnet()} {inverse}";
-            case CardType.Image:
-                return $"card-img{GetImageVerticalAlignmnet()}";
-            case CardType.Title:
-                return "card-title";
-            case CardType.Subtitle:
-                return "card-subtitle mb-2 text-muted";
-            case CardType.Link:
-                return "card-link";
-            case CardType.Header:
-                return "card-header";
-            case CardType.Footer:
-                return "card-footer";
-            case CardType.ImageOverlay:
-                return "card-img-overlay";
-            case CardType.Group:
-                return "card-group";
-            case CardType.Deck:
-                return "card-deck";
-            case CardType.Columns:
-                return "card-columns";
-            default:
-                return null;
-        }
-    }
+            CardType.Body => $"card-body {GetTextColor()}",
+            CardType.Card => $"card {GetCardColor()} {GetCardAlignmnet()} {(IsInverse ? "bg-dark text-white" : null)}",
+            CardType.Image => $"card-img{GetImageVerticalAlignmnet()}",
+            CardType.Title => "card-title",
+            CardType.Subtitle => "card-subtitle mb-2 text-muted",
+            CardType.Link => "card-link",
+            CardType.Header => "card-header",
+            CardType.Footer => "card-footer",
+            CardType.ImageOverlay => "card-img-overlay",
+            CardType.Group => "card-group",
+            CardType.Deck => "card-deck",
+            CardType.Columns => "card-columns",
+            _ => null
+        };
 }

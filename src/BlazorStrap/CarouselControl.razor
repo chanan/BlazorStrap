@@ -23,13 +23,8 @@
             }
 
         }
-        private string directionName
-        {
-            get
-            {
-                return CarouselDirection == CarouselDirection.Previous ? "Previous" : "Next";
-            }
-        }
+        private string directionName => CarouselDirection == CarouselDirection.Previous ? "Previous" : "Next";
+        
         [Parameter] private int ActiveIndex { get; set; }
         [Parameter] private int NumberOfItems { get; set; }
         [Parameter] private CarouselDirection CarouselDirection { get; set; } = CarouselDirection.Previous;

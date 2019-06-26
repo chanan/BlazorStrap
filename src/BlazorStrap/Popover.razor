@@ -31,13 +31,8 @@
             new BlazorStrapInterop(JSRuntime).Popper(Target, Id, arrow, placement);
         }
     }
-    private string Id
-    {
-        get
-        {
-            return Target + "-popover";
-        }
-    }
+    private string Id => Target + "-popover";
+    
     [Parameter] private Placement Placement { get; set; } = Placement.Auto;
     [Parameter] private string Target { get; set; }
     [Parameter] private string Class { get; set; }

@@ -5,13 +5,7 @@
 </DynamicElement>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            return $"navbar-toggler {Class}";
-        }
-    }
+    private string classname => $"navbar-toggler {Class}";
 
     [Parameter] private EventCallback<UIMouseEventArgs> onclick { get; set; }
     [Parameter] private string Class { get; set; }

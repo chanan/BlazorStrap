@@ -5,74 +5,74 @@
 </DynamicElement>
 
 @code {
-string classname
-{
-    get
+    string classname
     {
-        var open = "";
-        if (IsOpen == null)
+        get
         {
-            if (DropDownMenuControl == null)
+            var open = "";
+            if (IsOpen == null)
             {
-                open = null;
+                if (DropDownMenuControl == null)
+                {
+                    open = null;
+                }
+                else
+                {
+                    open = DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id) ? "show" : null;
+                }
             }
             else
             {
-                open = DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id) ? "show" : null;
+                open = (bool)IsOpen ? "show" : null;
             }
+            return $"dropdown-menu {open} {Class}";
         }
-        else
+    }
+    [Parameter] private bool? IsOpen { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private bool AutoClose { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+    [CascadingParameter] private DropDownMenuControl DropDownMenuControl { get; set; }
+
+    // WORKAROUND. Below is a work around for auto close. Until on mouse leave event exist so not default behaviour. 
+    private System.Timers.Timer CloseTimer = new System.Timers.Timer(1000);
+
+    protected override void OnInit()
+    {
+        if (AutoClose)
         {
-            open = (bool)IsOpen ? "show" : null;
+            CloseTimer.Elapsed += OnTimedEvent;
         }
-        return $"dropdown-menu {open} {Class}";
+        base.OnInit();
     }
-}
-[Parameter] private bool? IsOpen { get; set; }
-[Parameter] private string Class { get; set; }
-[Parameter] private bool AutoClose { get; set; }
-[Parameter] private RenderFragment ChildContent { get; set; }
-[CascadingParameter] private DropDownMenuControl DropDownMenuControl { get; set; }
-
-// WORKAROUND. Below is a work around for auto close. Until on mouse leave event exist so not default behaviour. 
-private System.Timers.Timer CloseTimer = new System.Timers.Timer(1000);
-
-protected override void OnInit()
-{
-    if (AutoClose)
+    public void MouseOut(UIMouseEventArgs e)
     {
-        CloseTimer.Elapsed += OnTimedEvent;
-    }
-    base.OnInit();
-}
-public void MouseOut(UIMouseEventArgs e)
-{
-    if (AutoClose)
-    {
-        CloseTimer.Start();
-    }
-
-}
-
-public void MouseOver(UIMouseEventArgs e)
-{
-    if (AutoClose)
-    {
-        CloseTimer.Stop();
-        CloseTimer.Interval = 1000;
-    }
-
-}
-private void OnTimedEvent(Object source, ElapsedEventArgs e)
-{
-    if(DropDownMenuControl != null)
-    {
-        if (DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id))
+        if (AutoClose)
         {
-            Invoke(() => DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id));
+            CloseTimer.Start();
+        }
+
+    }
+
+    public void MouseOver(UIMouseEventArgs e)
+    {
+        if (AutoClose)
+        {
             CloseTimer.Stop();
             CloseTimer.Interval = 1000;
         }
+
     }
-}
+    private void OnTimedEvent(Object source, ElapsedEventArgs e)
+    {
+        if(DropDownMenuControl != null)
+        {
+            if (DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id))
+            {
+                Invoke(() => DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id));
+                CloseTimer.Stop();
+                CloseTimer.Interval = 1000;
+            }
+        }
+    }
 }

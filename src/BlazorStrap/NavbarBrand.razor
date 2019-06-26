@@ -5,13 +5,8 @@
 </DynamicElement>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            return $"navbar-brand {Class}";
-        }
-    }
+    private string classname => $"navbar-brand {Class}";
+    
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
