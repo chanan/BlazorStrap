@@ -67,7 +67,7 @@
     private bool _dontclickWasClicked;
     void onclick()
     {
-        if (!_dontclickWasClicked) { IsOpen = false; }
+        if (!_dontclickWasClicked) IsOpen = false;
         _dontclickWasClicked = false;
         StateHasChanged();
     }

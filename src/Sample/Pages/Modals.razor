@@ -18,7 +18,7 @@
 <h3>Live Demo</h3>
 <div class="docs-example">
     <BlazorButton Color="Color.Primary" OnClick="@onclick">Launch demo modal</BlazorButton>
-    <Modal IsOpen="@IsOpen">
+    <Modal @bind-IsOpen="@IsOpen">
         <ModalHeader OnClick="@onclick">Modal title</ModalHeader>
         <ModalBody><p>Modal body text goes here.</p></ModalBody>
         <ModalFooter>
@@ -32,7 +32,7 @@
 <h3>Vertically Centered</h3>
 <div class="docs-example">
     <BlazorButton Color="Color.Primary" OnClick="@onclick2">Launch demo modal</BlazorButton>
-    <Modal IsOpen="@IsOpen2" IsCentered="true">
+    <Modal @bind-IsOpen="@IsOpen2" IsCentered="true">
         <ModalHeader OnClick="@onclick2">Modal title</ModalHeader>
         <ModalBody><p>Modal body text goes here.</p></ModalBody>
         <ModalFooter>
@@ -47,7 +47,7 @@
 
 <div class="docs-example">
     <BlazorButton Color="Color.Primary" OnClick="@onclick3">Large modal</BlazorButton>
-    <Modal IsOpen="@IsOpen3" Size="Size.Large">
+    <Modal @bind-IsOpen="@IsOpen3" Size="Size.Large">
         <ModalHeader OnClick="@onclick3">Modal title</ModalHeader>
         <ModalBody><p>Modal body text goes here.</p></ModalBody>
         <ModalFooter>
@@ -56,7 +56,7 @@
         </ModalFooter>
     </Modal>
     <BlazorButton Color="Color.Primary" OnClick="@onclick4">Small modal</BlazorButton>
-    <Modal IsOpen="@IsOpen4" Size="Size.Small">
+    <Modal @bind-IsOpen="@IsOpen4" Size="Size.Small">
         <ModalHeader OnClick="@onclick4">Modal title</ModalHeader>
         <ModalBody><p>Modal body text goes here.</p></ModalBody>
         <ModalFooter>
