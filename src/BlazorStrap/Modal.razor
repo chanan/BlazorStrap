@@ -52,9 +52,11 @@ private bool IsOpen
     }
     set
     {
-        _isOpen = value;
-        IsOpenChanged.InvokeAsync(_isOpen);
-        
+        if (value != _isOpen)
+        {
+            _isOpen = value;
+            IsOpenChanged.InvokeAsync(_isOpen);
+        }
     }
 }
 [Parameter] private EventCallback<bool> IsOpenChanged { get; set; }
@@ -78,7 +80,7 @@ void dontclick(UIMouseEventArgs e)
 }
 protected override void OnAfterRender()
 {
-    new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null); 
+    new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
     base.OnAfterRender();
 }
 /*void onkeyup(UIKeyboardEventArgs e)
