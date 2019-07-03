@@ -1,0 +1,4 @@
+/* BlazorStrap#29 */
+.tooltip.hide {
+    pointer-events: none;
+}
