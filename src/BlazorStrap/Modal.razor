@@ -73,16 +73,15 @@
         _dontclickWasClicked = false;
         StateHasChanged();
     }
-
     void dontclick(UIMouseEventArgs e)
     {
         _dontclickWasClicked = true;
     }
-    protected override void OnAfterRender()
+    protected override async Task OnAfterRenderAsync()
     {
-        new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
-        base.OnAfterRender();
+        await new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
     }
+
     /*void onkeyup(UIKeyboardEventArgs e)
     {
         //TODO: Close on Esc key
