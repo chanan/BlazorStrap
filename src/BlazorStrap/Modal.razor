@@ -22,7 +22,7 @@
         get
         {
             var display = IsOpen ? "fade show" : null;
-            return $"modal {display} {Class}";
+            return $"modal {display} {Class}".RemoveUnneededSpaces();
         }
     }
     string innerClassname
@@ -31,7 +31,7 @@
         {
             var center = IsCentered ? "modal-dialog-centered" : null;
             var size = Size != Size.None ? $"modal-{Size.ToDescriptionString()}" : null;
-            return $"modal-dialog {size} {center}";
+            return $"modal-dialog {size} {center}".RemoveUnneededSpaces();
         }
     }
     string styles

@@ -1,11 +1,12 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement TagName="figcaption" class="@classname" style="@Style" Attributes="@UnknownParameters">
     @ChildContent
 </DynamicElement>
 
 @code {
-    string classname => $"figure-caption {GetAlignment()} {Class}";
+    string classname => $"figure-caption {GetAlignment()} {Class}".RemoveUnneededSpaces();
     
     [Parameter] private Alignment Alignment { get; set; } = Alignment.None;
     [Parameter] private string Class { get; set; }

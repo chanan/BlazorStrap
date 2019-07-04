@@ -14,7 +14,7 @@
         {
             var size = Size != Size.None ? $"pagination-{Size.ToDescriptionString()}" : null;
             var alignment = GetAlignment();
-            return $"pagination {size} {alignment} {Class}";
+            return $"pagination {size} {alignment} {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private Size Size { get; set; } = Size.None;

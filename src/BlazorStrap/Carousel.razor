@@ -1,5 +1,6 @@
 ﻿@inherits BootstrapComponentBase
 @using System.Timers
+@using  BlazorStrap.util
 @implements IDisposable
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" @onmouseover="@onmouseover" @onmouseout="@onmouseout">
@@ -7,7 +8,7 @@
 </DynamicElement>
 
 @code {
-    private string classname => $"carousel slide {Class}";
+    private string classname => $"carousel slide {Class}".RemoveUnneededSpaces();
     
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }

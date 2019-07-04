@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="ol" class="@classname">
     @for (var i = 0; i < NumberOfItems; i++)
@@ -8,7 +9,7 @@
 </DynamicElement>
 
 @code {
-    private string classname => $"carousel-indicators {Class}";
+    private string classname => $"carousel-indicators {Class}".RemoveUnneededSpaces();
     
     [Parameter] private int NumberOfItems { get; set; }
     [Parameter] private int ActiveIndex { get; set; }

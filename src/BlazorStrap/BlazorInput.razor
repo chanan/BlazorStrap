@@ -15,7 +15,7 @@
             var isvalid = IsValid ? "is-valid" : null;
             var isinvalid = IsInvalid ? "is-invalid" : null;
             var cls = GetClass();
-            return $"{isvalid} {isinvalid} {cls} {size} {Class}";
+            return $"{isvalid} {isinvalid} {cls} {size} {Class}".RemoveUnneededSpaces();
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @ChildContent
@@ -11,7 +12,7 @@
         {
             var open = IsOpen ? "show" : null;
             var navbar = IsNavbar ? "navbar-collapse" : null;
-            return $"collapse {navbar} {open} {Class}";
+            return $"collapse {navbar} {open} {Class}".RemoveUnneededSpaces();
         }
     }
 

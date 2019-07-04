@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement TagName="@Tag" class="@classname" href="@Href" @onclick="@_onclick" Attributes="@UnknownParameters">
     @ChildContent
@@ -10,7 +11,7 @@
         get
         {
             var pill = IsPill ? "badge-pill" : "";
-            return $"badge {pill} badge-{Color.ToDescriptionString()} {Class}";
+            return $"badge {pill} badge-{Color.ToDescriptionString()} {Class}".RemoveUnneededSpaces();
         }
     }
     private string Tag { get; set; } = "span";

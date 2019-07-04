@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <nav aria-label="breadcrumb">
     <DynamicElement Attributes="@UnknownParameters" TagName="ol" class="@classname">
@@ -7,7 +8,7 @@
 </nav>
 
 @code {
-    string classname => $"breadcrumb {Class}";
+    string classname => $"breadcrumb {Class}".RemoveUnneededSpaces();
     
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }

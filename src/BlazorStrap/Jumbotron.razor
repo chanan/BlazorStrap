@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @ChildContent
@@ -10,7 +11,7 @@
         get
         {
             var fluid = IsFluid ? "jumbotron jumbotron-fluid" : "jumbotron";
-            return $"{fluid} {Class}";
+            return $"{fluid} {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private bool IsFluid { get; set; }

@@ -11,7 +11,7 @@
         get
         {
             var color = Color != Color.None ? $"table-{Color.ToDescriptionString()}" : null;
-            return $"{color} {Class}";
+            return $"{color} {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private Color Color { get; set; } = Color.None;

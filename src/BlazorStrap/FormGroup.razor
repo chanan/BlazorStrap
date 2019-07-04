@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @ChildContent
@@ -11,7 +12,7 @@
         {
             var check = IsCheck ? "form-check" : "form-group";
             var row = IsRow ? "row" : null;
-            return $"{check} {row} {Class}";
+            return $"{check} {row} {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private bool IsRow { get; set; }

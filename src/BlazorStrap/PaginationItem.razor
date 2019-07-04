@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="li" class="@classname">
     @ChildContent
@@ -11,7 +12,7 @@
         {
             var active = IsActive ? "active" : null;
             var disabled = IsDisabled ? "disabled" : null;
-            return $"page-item {active} {disabled} {Class}";
+            return $"page-item {active} {disabled} {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private bool IsActive { get; set; }

@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <CascadingValue Value="@DropDownMenuControl">
     <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
@@ -22,7 +23,7 @@
             }
             var baseclass = IsGroup ? "btn-group" : "dropdown";
             var direction = DropdownDirection != DropdownDirection.Down ? DropdownDirection.ToDescriptionString() : null;
-            return $"{baseclass} {direction} {show} {Class}";
+            return $"{baseclass} {direction} {show} {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;

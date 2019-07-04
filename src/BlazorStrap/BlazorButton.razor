@@ -18,7 +18,7 @@
             var block = IsBlock ? "btn-block" : null;
             var active = ButtonType == ButtonType.Link && IsActive ? "active" : null;
             var linkDisabled = ButtonType == ButtonType.Link && IsDisabled ? "disabled" : null;
-            return $"btn {color} {outline} {size} {block} {active} {linkDisabled} {Class}";
+            return $"btn {color} {outline} {size} {block} {active} {linkDisabled} {Class}".RemoveUnneededSpaces();
         }
     }
 

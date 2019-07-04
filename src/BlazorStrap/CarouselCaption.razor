@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @if (HeaderText != null)
@@ -12,7 +13,7 @@
 </DynamicElement>
 
 @code {
-    private string classname => $"carousel-caption d-none d-md-block {Class}";
+    private string classname => $"carousel-caption d-none d-md-block {Class}".RemoveUnneededSpaces();
     
     [Parameter] private string Class { get; set; }
     [Parameter] private string CaptionText { get; set; }

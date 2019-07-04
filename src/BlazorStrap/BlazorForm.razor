@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="form" class="@classname" @onsubmit="@OnSubmit">
     @ChildContent 
@@ -10,7 +11,7 @@
         get
         {
             var inline = IsInline ? "form-inline" : null;
-            return $"{inline} {Class}";
+            return $"{inline} {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private bool IsInline { get; set; }

@@ -16,7 +16,7 @@
             var fixedTop = IsFixedTop ? "fixed-top" : null;
             var fixedBottom = IsFixedBottom ? "fixed-bottom" : null;
             var stickyTop = IsStickyTop ? "sticky-top" : null;
-            return $"navbar {fixedTop} {fixedBottom} {stickyTop} {dark} {color} {expand} {Class}";
+            return $"navbar {fixedTop} {fixedBottom} {stickyTop} {dark} {color} {expand} {Class}".RemoveUnneededSpaces();
         }
     }
 

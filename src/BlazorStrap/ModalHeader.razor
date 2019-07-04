@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="modal-header">
     <h5 class="@classname">@ChildContent</h5>
@@ -8,7 +9,7 @@
 </DynamicElement>
 
 @code {
-    string classname => $"modal-title {Class}";
+    string classname => $"modal-title {Class}".RemoveUnneededSpaces();
     
     [Parameter] private EventCallback<UIMouseEventArgs> OnClick { get; set; }
     [Parameter] private string Class { get; set; }

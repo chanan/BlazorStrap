@@ -1,11 +1,12 @@
 ﻿@inherits ColumnBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @ChildContent
 </DynamicElement>
 
 @code {
-    private string classname => $"{GetColumnClass()} {Class}";
+    private string classname => $"{GetColumnClass()} {Class}".RemoveUnneededSpaces();
     
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }

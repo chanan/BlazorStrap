@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" role="tabpanel">
     @ChildContent
@@ -10,7 +11,7 @@
         get
         {
             var open = IsOpen ? "active show" : null;
-            return $"tab-pane fade {open} {Class}";
+            return $"tab-pane fade {open} {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private bool IsOpen { get; set; }

@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="img" class="@classname" />
 
@@ -16,7 +17,7 @@
             var responsive = IsResponsive ? "img-fluid" : null;
             var rounded = IsRounded ? "rounded" : null;
             var alignment = GetAlignment();
-            return $"{rounded} {thumbnail} {responsive} {alignment} {Class}";
+            return $"{rounded} {thumbnail} {responsive} {alignment} {Class}".RemoveUnneededSpaces();
         }
     }
     private string GetAlignment()

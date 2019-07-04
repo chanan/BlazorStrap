@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     <img class="d-block w-100" src="@src" alt="@alt">
@@ -11,7 +12,7 @@
         get
         {
             var active = IsActive ? "active" : null;
-            return $"carousel-item {active} {Class}";
+            return $"carousel-item {active} {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private string src { get; set; }

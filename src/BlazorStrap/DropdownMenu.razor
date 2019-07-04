@@ -1,5 +1,7 @@
 ﻿@inherits BootstrapComponentBase
 @using System.Timers;
+@using  BlazorStrap.util
+
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" @onmouseout="@MouseOut" @onmouseover="@MouseOver">
     @ChildContent
 </DynamicElement>
@@ -25,7 +27,7 @@
             {
                 open = (bool)IsOpen ? "show" : null;
             }
-            return $"dropdown-menu {open} {Class}";
+            return $"dropdown-menu {open} {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private bool? IsOpen { get; set; }

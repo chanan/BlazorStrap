@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 @if (IsResponsive)
 {
@@ -26,7 +27,7 @@
             var borderless = IsBorderless ? "table-borderless" : null;
             var hovarable = IsHovarable ? "table-hover" : null;
             var small = IsSmall ? "table-sm" : null;
-            return $"table {dark} {striped} {bordered} {borderless} {hovarable} {small} {Class}";
+            return $"table {dark} {striped} {bordered} {borderless} {hovarable} {small} {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private bool IsDark { get; set; }

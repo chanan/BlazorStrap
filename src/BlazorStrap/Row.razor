@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @ChildContent
@@ -10,7 +11,7 @@
         get
         {
             var gutters = NoGutters ? "row no-gutters" : "row";
-            return $"{gutters} {Class}";
+            return $"{gutters} {Class}".RemoveUnneededSpaces();
         }
     }
 

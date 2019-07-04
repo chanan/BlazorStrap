@@ -16,7 +16,7 @@
             var baseclass = IsToolbar ? "btn-toolbar" : groupdir;
             var size = Size != Size.None ? $"btn-group-{Size.ToDescriptionString()}" : null;
             var open = IsOpen ? "show" : null;
-            return $"{baseclass} {size} {toggle} {direction} {open} {Class}";
+            return $"{baseclass} {size} {toggle} {direction} {open} {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private bool IsOpen { get; set; }

@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" @onclick="@onClickEvent">
     @ChildContent
@@ -12,7 +13,7 @@
             if (IsDivider) { return $"dropdown-divider {Class}"; }
             var active = IsActive ? "active" : null;
             var disabled = IsDisabled ? "disabled" : null;
-            return $"dropdown-item {active} {disabled} {Class}";
+            return $"dropdown-item {active} {disabled} {Class}".RemoveUnneededSpaces();
         }
     }
     string Tag

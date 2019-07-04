@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="thead" class="@classname">
     @ChildContent
@@ -11,7 +12,7 @@
         {
             var light = TableHeadType == TableHeadType.Light ? "thead-light" : null;
             var dark = TableHeadType == TableHeadType.Dark ? "thead-dark" : null;
-            return $"{light} {dark} {Class}";
+            return $"{light} {dark} {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private TableHeadType TableHeadType { get; set; } = TableHeadType.None;

@@ -22,7 +22,7 @@ else
             var color = Color != Color.None ? $"btn-{Color.ToDescriptionString()}" : null;
             var split = IsSplit ? "dropdown-toggle-split" : null;
             var size = Size != Size.None ? $"btn-{Size.ToDescriptionString()}" : null;
-            return $"btn {size} {color} {split} dropdown-toggle {Class}";
+            return $"btn {size} {color} {split} dropdown-toggle {Class}".RemoveUnneededSpaces();
         }
     }
 

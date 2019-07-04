@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="h6" class="@classname">
     @ChildContent
@@ -9,7 +10,7 @@
     {
         get
         {
-            return $"dropdown-header {Class}";
+            return $"dropdown-header {Class}".RemoveUnneededSpaces();
         }
     }
     [Parameter] private string Class { get; set; }

@@ -1,4 +1,5 @@
 ﻿@inherits BootstrapComponentBase
+@using  BlazorStrap.util
 
 <CascadingValue Value="@DropDownMenuHandler">
     <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname">
@@ -16,7 +17,7 @@
             var pills = IsPills ? "nav-pills" : null;
             var fill = IsFill ? "nav-fill" : null;
             var navbar = IsNavbar ? "navbar-nav" : null;
-            return $"nav {navbar} {tabs} {pills} {fill} {vertical} {GetAlignment()} {Class}";
+            return $"nav {navbar} {tabs} {pills} {fill} {vertical} {GetAlignment()} {Class}".RemoveUnneededSpaces();
         }
     }
     private string Tag => IsList ? "ul" : "nav";
