@@ -17,6 +17,11 @@
 }
 
 @code {
+    protected override async Task OnAfterRenderAsync()
+    {
+        await new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
+    }
+
     string classname
     {
         get
@@ -65,21 +70,21 @@
     [Parameter] private string Class { get; set; }
     [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
+    [Parameter] private bool IgnoreClickOnBackdrop { get; set; }
 
     private bool _dontclickWasClicked;
     void onclick()
     {
-        if (!_dontclickWasClicked) IsOpen = false;
-        _dontclickWasClicked = false;
-        StateHasChanged();
+        if (!IgnoreClickOnBackdrop)
+        {
+            if (!_dontclickWasClicked) IsOpen = false;
+            _dontclickWasClicked = false;
+            StateHasChanged();
+        }
     }
     void dontclick(UIMouseEventArgs e)
     {
         _dontclickWasClicked = true;
-    }
-    protected override async Task OnAfterRenderAsync()
-    {
-        await new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
     }
 
     /*void onkeyup(UIKeyboardEventArgs e)
