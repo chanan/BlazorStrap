@@ -67,6 +67,12 @@
 </div>
 <PrettyCode CodeFile="snippets/modals/modals4.html" />
 
+<h3>Ignore Click on Back Drop</h3>
+
+<p>You can set <code>IgnoreClickOnBackDrop</code> to prevent the user closing the model by clicking on the back drop.</p>
+
+<Alert Color="Color.Info">Currently closing the modal using the Esc key doesn't work, but when it does an option to disable closing by Esc will be added as well.</Alert>
+
 @code {
     bool IsOpen { get; set; }
     void onclick(UIMouseEventArgs e)
