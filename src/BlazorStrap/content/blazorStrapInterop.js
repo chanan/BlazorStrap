@@ -14,14 +14,24 @@
         return true;
     },
     tooltip: function (target, tooltip, arrow, placement) {
+        var instance;
         var reference = document.getElementById(target);
-        reference.addEventListener("mouseover", function () {
+        function mouseoverHandler() {
+            reference.removeEventListener("mouseover", mouseoverHandler);
+            reference.addEventListener("mouseout", mouseoutHandler);
             tooltip.className = "tooltip fade show bs-popover-" + placement;
-            showPopper(reference, tooltip, arrow, placement);
-        });
-        reference.addEventListener("mouseout", function () {
+            instance = showPopper(reference, tooltip, arrow, placement);
+        }
+        function mouseoutHandler() {
+            reference.removeEventListener("mouseout", mouseoutHandler);
+            reference.addEventListener("mouseover", mouseoverHandler);
             tooltip.className = "tooltip hide";
-        });
+            if (instance) {
+                instance.destroy && instance.destroy();
+                instance = undefined;
+            }
+        }
+        reference.addEventListener("mouseover", mouseoverHandler);
         return true;
     }
 };
@@ -48,4 +58,5 @@ function showPopper(reference, popper, arrow, placement) {
             }
         }
     );
+    return thePopper;
 }
