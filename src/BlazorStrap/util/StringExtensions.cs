@@ -29,7 +29,11 @@ namespace BlazorStrap.util
 				sbBuffer.Append(chr);
 			}
 
-			return sbBuffer.ToString();
+			string strResult = sbBuffer.ToString().Trim();
+			if (string.IsNullOrWhiteSpace(strResult))
+				return null;
+
+			return strResult;
 		}
 	}
 }

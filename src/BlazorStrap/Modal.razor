@@ -39,7 +39,7 @@
         get
         {
             var display = IsOpen ? "display: block; padding-right: 17px;" : null;
-            return $"{Style} {display}";
+            return $"{Style} {display}".RemoveUnneededSpaces();
         }
     }
     private bool _isOpen;
@@ -80,7 +80,7 @@
     }
     protected override void OnAfterRender()
     {
-        new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null); 
+        new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
         base.OnAfterRender();
     }
     /*void onkeyup(UIKeyboardEventArgs e)

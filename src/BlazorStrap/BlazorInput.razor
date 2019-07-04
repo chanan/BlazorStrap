@@ -35,8 +35,8 @@
     [Parameter] private bool IsValid { get; set; }
     [Parameter] private bool IsInvalid { get; set; }
     [Parameter] private bool IsMultipleSelect { get; set; }
-    [Parameter] private int SelectSize { get; set; }
-    [Parameter] private int SelectedIndex { get; set; }
+    [Parameter] private int? SelectSize { get; set; }
+    [Parameter] private int? SelectedIndex { get; set; }
     [Parameter] private string Value { get; set; }
     [Parameter] private EventCallback<string> ValueChanged { get; set; }
     [Parameter] private string Class { get; set; }

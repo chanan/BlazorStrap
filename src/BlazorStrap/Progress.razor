@@ -29,7 +29,7 @@
         {
             if (Value == 0) { return null; }
             var percent = Math.Round(((double)Value / (double)Max) * 100);
-            return $"width: {percent}%; {Style}";
+            return $"width: {percent}%; {Style}".RemoveUnneededSpaces();
         }
     }
     private string classname
