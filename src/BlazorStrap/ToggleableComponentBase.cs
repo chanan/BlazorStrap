@@ -42,6 +42,10 @@ namespace BlazorStrap
         protected bool JustOpened { get; set; }
         public virtual void Show()
         {
+            if (_manual)
+            {
+                throw new InvalidOperationException("Boolean IsOpen and @Ref show/hide/toggle. May not be used together. ");
+            }
             _isOpen = true;
             JustOpened = true;
             IsOpenChanged.InvokeAsync(true);
@@ -49,12 +53,20 @@ namespace BlazorStrap
         }
         public virtual void Hide()
         {
+            if (_manual)
+            {
+                throw new InvalidOperationException("Boolean IsOpen and @Ref show/hide/toggle. May not be used together. ");
+            }
             _isOpen = false;
             IsOpenChanged.InvokeAsync(false);
             StateHasChanged();
         }
         public virtual void Toggle()
         {
+            if (_manual)
+            {
+                throw new InvalidOperationException("Boolean IsOpen and @Ref show/hide/toggle. May not be used together. ");
+            }
             _isOpen = !_isOpen;
             JustOpened = _isOpen;
             IsOpenChanged.InvokeAsync(_isOpen);
