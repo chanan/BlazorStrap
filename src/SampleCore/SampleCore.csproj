@@ -12,8 +12,6 @@
 
 
   <ItemGroup>
-    <!-- This is here becuase there is a bug in BlazorPrettyCode for server side. Fix already submitted in PR. jbomhold3-->
-    <!--<ProjectReference Include="..\..\..\BlazorPrettyCode\src\BlazorPrettyCode\BlazorPrettyCode.csproj" />-->
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
   </ItemGroup>
   

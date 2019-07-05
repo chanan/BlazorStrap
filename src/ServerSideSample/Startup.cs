@@ -43,7 +43,11 @@ namespace ServerSideSample
                 });
             }
 
-            services.AddBlazorPrettyCode();
+            services.AddBlazorPrettyCode(defaults =>
+            {
+                defaults.DefaultTheme = "SolarizedDark";
+                defaults.ShowLineNumbers = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

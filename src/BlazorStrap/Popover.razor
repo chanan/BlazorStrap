@@ -1,9 +1,9 @@
-﻿@inherits BootstrapComponentBase
+﻿@inherits ToggleableComponentBase
 @using BlazorStrap.util
 
 @inject Microsoft.JSInterop.IJSRuntime JSRuntime
 
-@if (IsOpen)
+@if (_isOpen)
 {
     <DynamicElement Id="@Id" Attributes="@UnknownParameters" TagName="div" class="@classname" role="tooltip" @onclick="@onclick">
         <div @ref="arrow" class="arrow"></div>
@@ -17,22 +17,22 @@
     {
         get
         {
-            var open = IsOpen ? "show" : null;
+            var open = _isOpen ? "show" : null;
             var placement = $"bs-popover-{Placement.ToDescriptionString()}";
             return $"popover {placement} {open} {Class}".RemoveUnneededSpaces();
         }
     }
-    [Parameter] private bool IsOpen { get; set; }
+
     protected override void OnAfterRender()
     {
-        if (IsOpen)
+        if (_isOpen)
         {
             var placement = Placement.ToDescriptionString();
             new BlazorStrapInterop(JSRuntime).Popper(Target, Id, arrow, placement);
         }
     }
     private string Id => Target + "-popover";
-    
+
     [Parameter] private Placement Placement { get; set; } = Placement.Auto;
     [Parameter] private string Target { get; set; }
     [Parameter] private string Class { get; set; }
@@ -41,6 +41,6 @@
 
     private void onclick()
     {
-        IsOpen = false;
+        Hide();
     }
 }

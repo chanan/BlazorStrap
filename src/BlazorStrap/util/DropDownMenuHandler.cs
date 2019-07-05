@@ -52,6 +52,42 @@ namespace BlazorStrap.util
             OnToggle.Invoke(this, new EventArgs());
         }
 
+        public void Show(string id)
+        {
+            if (id == null || id == "")
+            {
+                throw new InvalidOperationException("Id must be used with Drop Down Manager");
+            }
+
+            foreach (KeyAndValue<string, bool> menu in MenuState)
+            {
+                if (menu.Key == id)
+                {
+
+                    menu.Value = true;
+                }
+                else
+                {
+                    menu.Value = false;
+                }
+            }
+            OnToggle.Invoke(this, new EventArgs());
+        }
+
+        public void Hide(string id)
+        {
+            if (id == null || id == "")
+            {
+                throw new InvalidOperationException("Id must be used with Drop Down Manager");
+            }
+
+            foreach (KeyAndValue<string, bool> menu in MenuState)
+            {
+                menu.Value = false;
+            }
+            OnToggle.Invoke(this, new EventArgs());
+        }
+
         public bool IsOpen(string id)
         {
             if (id == null || id == "")

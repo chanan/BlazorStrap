@@ -1,4 +1,4 @@
-﻿@inherits BootstrapComponentBase
+﻿@inherits ToggleableComponentBase
 @using  BlazorStrap.util
 
 <CascadingValue Value="@DropDownMenuControl">
@@ -13,7 +13,7 @@
         get
         {
             var show = "";
-            if (IsOpen == null)
+            if (!_manual)
             {
                 show = DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id) ? "show" : null;
             }
@@ -27,7 +27,6 @@
         }
     }
     [Parameter] private DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
-    [Parameter] private bool? IsOpen { get; set; }
     [Parameter] private bool IsGroup { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
@@ -40,6 +39,25 @@
         DropDownMenuControl.Handler.AddDropDownMenu(DropDownMenuControl.Id);
         base.OnInit();
     }
+
+    public override void Toggle()
+    {
+        DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id);
+        base.Toggle();
+    }
+
+    public override void Show()
+    {
+        DropDownMenuControl.Handler.Show(DropDownMenuControl.Id);
+        base.Show();
+    }
+
+    public override void Hide()
+    {
+        DropDownMenuControl.Handler.Hide(DropDownMenuControl.Id);
+        base.Hide();
+    }
+
     private void OnToggle(Object Sender, EventArgs e)
     {
         DropDownMenuControl.Handler = DropDownMenuControl.Handler;

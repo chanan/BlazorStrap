@@ -1,4 +1,4 @@
-﻿@inherits BootstrapComponentBase
+﻿@inherits ToggleableComponentBase
 @using  BlazorStrap.util
 
 <CascadingValue Value="@DropDownMenuControl">
@@ -8,48 +8,65 @@
 </CascadingValue>
 
 @code {
-private string classname
-{
-    get
+    private string classname
     {
-        var dropdown = IsDropdown ? "dropdown" : null;
-        var show = "";
-        if (IsDropdown)
+        get
         {
-            if (IsOpen == null)
+            var dropdown = IsDropdown ? "dropdown" : null;
+            var show = "";
+            if (IsDropdown)
             {
-                show = DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id) ? "show" : null;
+                if (!_manual)
+                {
+                    show = DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id) ? "show" : null;
+                }
+                else
+                {
+                    show = (bool)IsOpen ? "show" : null;
+                }
             }
-            else
-            {
-                show = (bool)IsOpen ? "show" : null;
-            }
+            return $"nav-item {dropdown} {show} {Class}".RemoveUnneededSpaces();
         }
-        return $"nav-item {dropdown} {show} {Class}".RemoveUnneededSpaces();
     }
-}
-[Parameter] private bool IsDropdown { get; set; }
-[Parameter] private bool? IsOpen { get; set; }
-[Parameter] private string Class { get; set; }
-[Parameter] private RenderFragment ChildContent { get; set; }
-[CascadingParameter] private DropDownMenuHandler DropDownMenuHandler { get; set; }
-public DropDownMenuControl DropDownMenuControl { get; set; } = new DropDownMenuControl();
-protected override Task OnInitAsync()
-{
-    if (DropDownMenuHandler != null && IsDropdown && IsOpen == null)
+    [Parameter] private bool IsDropdown { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+    [CascadingParameter] private DropDownMenuHandler DropDownMenuHandler { get; set; }
+    public DropDownMenuControl DropDownMenuControl { get; set; } = new DropDownMenuControl();
+    protected override Task OnInitAsync()
     {
-        DropDownMenuControl.Handler = DropDownMenuHandler;
-        DropDownMenuControl.Id = Guid.NewGuid().ToString();
-        DropDownMenuHandler.AddDropDownMenu(DropDownMenuControl.Id);
+        if (DropDownMenuHandler != null && IsDropdown && !_manual)
+        {
+            DropDownMenuControl.Handler = DropDownMenuHandler;
+            DropDownMenuControl.Id = Guid.NewGuid().ToString();
+            DropDownMenuHandler.AddDropDownMenu(DropDownMenuControl.Id);
+        }
+        return base.OnInitAsync();
     }
-    return base.OnInitAsync();
-}
 
-public void Dispose()
-{
-    if (DropDownMenuHandler != null && IsDropdown && IsOpen == null)
+    public override void Toggle()
     {
-        DropDownMenuHandler.RemoveDropDownMenu(DropDownMenuControl.Id);
+        DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id);
+        base.Toggle();
     }
-}
+
+    public override void Show()
+    {
+        DropDownMenuControl.Handler.Show(DropDownMenuControl.Id);
+        base.Show();
+    }
+
+    public override void Hide()
+    {
+        DropDownMenuControl.Handler.Hide(DropDownMenuControl.Id);
+        base.Hide();
+    }
+
+    public void Dispose()
+    {
+        if (DropDownMenuHandler != null && IsDropdown && IsOpen == null)
+        {
+            DropDownMenuHandler.RemoveDropDownMenu(DropDownMenuControl.Id);
+        }
+    }
 }

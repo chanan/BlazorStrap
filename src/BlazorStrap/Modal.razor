@@ -1,4 +1,5 @@
-﻿@inherits BootstrapComponentBase
+﻿@inherits ToggleableComponentBase  
+
 @using BlazorStrap.util
 @inject Microsoft.JSInterop.IJSRuntime JSRuntime
 <DynamicElement Attributes="@UnknownParameters" style="@styles" TagName="div" class="@classname" tabindex="-1" role="dialog" @onclick="@onclick" @onkeydown="@onEscape">
@@ -8,14 +9,13 @@
         </div>
     </div>
 </DynamicElement>
-@if (IsOpen)
+@if (_isOpen)
 {
     <div class="modal-backdrop fade show"></div>
 }
 
 @code {
     private ElementRef Me { get; set; }
-    private bool JustOpened;
     protected override async Task OnAfterRenderAsync()
     {
         await new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
@@ -31,7 +31,7 @@
     {
         get
         {
-            var display = IsOpen ? "fade show" : null;
+            var display = _isOpen ? "fade show" : null;
             return $"modal {display} {Class}".RemoveUnneededSpaces();
         }
     }
@@ -48,32 +48,11 @@
     {
         get
         {
-            var display = IsOpen ? "display: block; padding-right: 17px;" : null;
+            var display = _isOpen ? "display: block; padding-right: 17px;" : null;
             return $"{Style} {display}".RemoveUnneededSpaces();
         }
     }
-    private bool _isOpen;
-    [Parameter]
-    private bool IsOpen
-    {
-        get
-        {
-            return _isOpen;
-        }
-        set
-        {
-            if (value != _isOpen)
-            {
-                _isOpen = value;
-                IsOpenChanged.InvokeAsync(_isOpen);
-            }
-            if(value == true)
-            {
-                JustOpened = true;
-            }
-        }
-    }
-    [Parameter] private EventCallback<bool> IsOpenChanged { get; set; }
+ 
     [Parameter] private bool IsCentered { get; set; }
     [Parameter] private Size Size { get; set; } = Size.None;
     [Parameter] private string Class { get; set; }
@@ -106,25 +85,5 @@
         _dontclickWasClicked = true;
     }
 
-    public void Show()
-    {
-        _isOpen = true;
-        JustOpened = true;
-        IsOpenChanged.InvokeAsync(true);
-        StateHasChanged();
-    }
-    public void Hide()
-    {
-        _isOpen = false;
-        IsOpenChanged.InvokeAsync(false);
-        StateHasChanged();
-    }
-    public void Toggle()
-    {
-        _isOpen = !_isOpen;
-        JustOpened = _isOpen;
-        IsOpenChanged.InvokeAsync(_isOpen);
-        StateHasChanged();
-    }
-  
+ 
 }
