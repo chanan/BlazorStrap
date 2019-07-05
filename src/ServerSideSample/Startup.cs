@@ -1,17 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using BlazorPrettyCode;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SampleCore;
+using System;
+using System.Linq;
+using System.Net.Http;
 
 namespace ServerSideSample
 {
@@ -38,7 +35,7 @@ namespace ServerSideSample
                 services.AddScoped<HttpClient>(s =>
                 {
                     // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.
-                    var uriHelper = s.GetRequiredService<IUriHelper>();
+                    IUriHelper uriHelper = s.GetRequiredService<IUriHelper>();
                     return new HttpClient
                     {
                         BaseAddress = new Uri(uriHelper.GetBaseUri())

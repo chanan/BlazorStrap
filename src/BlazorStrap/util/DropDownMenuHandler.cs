@@ -12,7 +12,9 @@ namespace BlazorStrap.util
         public void AddDropDownMenu(string id)
         {
             if (id == null || id == "")
+            {
                 throw new InvalidOperationException("Id must be used with Drop Down Manager");
+            }
 
             MenuState.Add(new KeyAndValue<string, bool>(id, false));
         }
@@ -20,17 +22,22 @@ namespace BlazorStrap.util
         public void RemoveDropDownMenu(string id)
         {
             if (id == null || id == "")
+            {
                 throw new InvalidOperationException("Id must be used with Drop Down Manager");
-            var remove = MenuState.FirstOrDefault(q => q.Key == id);
+            }
+
+            KeyAndValue<string, bool> remove = MenuState.FirstOrDefault(q => q.Key == id);
             MenuState.Remove(remove);
         }
 
         public void Toggle(string id)
         {
             if (id == null || id == "")
+            {
                 throw new InvalidOperationException("Id must be used with Drop Down Manager");
+            }
 
-            foreach (var menu in MenuState)
+            foreach (KeyAndValue<string, bool> menu in MenuState)
             {
                 if (menu.Key == id)
                 {
@@ -48,7 +55,9 @@ namespace BlazorStrap.util
         public bool IsOpen(string id)
         {
             if (id == null || id == "")
+            {
                 throw new InvalidOperationException("Id must be used with Drop Down Manager");
+            }
 
             return MenuState.FirstOrDefault(q => q.Key == id).Value;
         }

@@ -2,38 +2,44 @@
 
 namespace BlazorStrap.util
 {
-	public static class StringExtensions
-	{
-		public static string RemoveUnneededSpaces(this string source)
-		{
-			if (string.IsNullOrEmpty(source))
-				return string.Empty;
+    public static class StringExtensions
+    {
+        public static string RemoveUnneededSpaces(this string source)
+        {
+            if (string.IsNullOrEmpty(source))
+            {
+                return string.Empty;
+            }
 
-			bool bFound = false;
-			StringBuilder sbBuffer = new StringBuilder(source.Length);
+            bool bFound = false;
+            StringBuilder sbBuffer = new StringBuilder(source.Length);
 
-			foreach (char chr in source.Trim())
-			{
-				if (chr == ' ')
-				{
-					if (bFound)
-						continue;
+            foreach (char chr in source.Trim())
+            {
+                if (chr == ' ')
+                {
+                    if (bFound)
+                    {
+                        continue;
+                    }
 
-					bFound = true;
-				}
-				else
-				{
-					bFound = false;
-				}
+                    bFound = true;
+                }
+                else
+                {
+                    bFound = false;
+                }
 
-				sbBuffer.Append(chr);
-			}
+                sbBuffer.Append(chr);
+            }
 
-			string strResult = sbBuffer.ToString().Trim();
-			if (string.IsNullOrWhiteSpace(strResult))
-				return null;
+            string strResult = sbBuffer.ToString().Trim();
+            if (string.IsNullOrWhiteSpace(strResult))
+            {
+                return null;
+            }
 
-			return strResult;
-		}
-	}
+            return strResult;
+        }
+    }
 }

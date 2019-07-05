@@ -24,9 +24,9 @@ namespace BlazorStrap
         {
             UnknownParameters.Clear();
 
-            foreach (var param in parameters)
+            foreach (Parameter param in parameters)
             {
-                if (TryGetPropertyInfo(param.Name, out var declaredPropertyInfo))
+                if (TryGetPropertyInfo(param.Name, out PropertyInfo declaredPropertyInfo))
                 {
                     try
                     {
@@ -51,7 +51,7 @@ namespace BlazorStrap
 
                 // If you override OnInitAsync and return a nonnull task, then by default
                 // we automatically re-render once that task completes.
-                var initTask = OnInitAsync();
+                Task initTask = OnInitAsync();
                 if (initTask != null && initTask.Status != TaskStatus.RanToCompletion)
                 {
                     await initTask.ContinueWith(ContinueAfterLifecycleTask);
@@ -59,7 +59,7 @@ namespace BlazorStrap
             }
 
             OnParametersSet();
-            var parametersTask = OnParametersSetAsync();
+            Task parametersTask = OnParametersSetAsync();
             if (parametersTask != null && parametersTask.Status != TaskStatus.RanToCompletion)
             {
                 await parametersTask.ContinueWith(ContinueAfterLifecycleTask);
@@ -95,7 +95,7 @@ namespace BlazorStrap
             }
 
             // TODO: Need better global exception handling
-;           Console.Error.WriteLine($"[{ex.GetType().FullName}] {ex.Message}\n{ex.StackTrace}");
+; Console.Error.WriteLine($"[{ex.GetType().FullName}] {ex.Message}\n{ex.StackTrace}");
         }
     }
 }

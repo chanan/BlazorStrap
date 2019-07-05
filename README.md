@@ -47,7 +47,6 @@ https://github.com/chanan/BlazorStrap/releases
 ## Not Done
 
 * Button of type: Checkboxes and Radio buttons
-* Modal - Close by clicking the Esc key
 * Modal - Will currently "clobber" body classes
 * Events on all components that need it (Modal for example)
 * Allow for arbitrary attributes on all components

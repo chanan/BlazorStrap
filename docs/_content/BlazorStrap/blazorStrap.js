@@ -23,6 +23,9 @@
             tooltip.className = "tooltip hide";
         });
         return true;
+    },
+    focusElement: function (element) {
+        element.focus();
     }
 };
 

@@ -18,7 +18,7 @@
 <h3>Live Demo</h3>
 <div class="docs-example">
     <BlazorButton Color="Color.Primary" OnClick="@(() => LiveDemo.Show())">Launch demo modal</BlazorButton>
-    <Modal @ref="LiveDemo" >
+    <Modal @ref="LiveDemo">
         <ModalHeader OnClick="@(() => LiveDemo.Hide())">Modal title</ModalHeader>
         <ModalBody><p>Modal body text goes here.</p></ModalBody>
         <ModalFooter>
@@ -71,27 +71,31 @@
 
 <p>You can set <code>IgnoreClickOnBackDrop</code> to prevent the user closing the model by clicking on the back drop.</p>
 
+<h3>Ignore Escape Key</h3>
+
+<p>You can set <code>IgnoreEscape</code> to prevent the user closing the model by clicking the Escape key.</p>
+
 
 @code {
 
-Modal LiveDemo;
-Modal Centered;
-bool IsOpen { get; set; }
+    Modal LiveDemo;
+    Modal Centered;
+    bool IsOpen { get; set; }
 
-void onToggle(UIMouseEventArgs e)
-{
-    Centered.Toggle();
-}
-bool IsOpen3 { get; set; }
-void onclick3(UIMouseEventArgs e)
-{
-    IsOpen3 = !IsOpen3;
-    StateHasChanged();
-}
-bool IsOpen4 { get; set; }
-void onclick4(UIMouseEventArgs e)
-{
-    IsOpen4 = !IsOpen4;
-    StateHasChanged();
-}
+    void onToggle(UIMouseEventArgs e)
+    {
+        Centered.Toggle();
+    }
+    bool IsOpen3 { get; set; }
+    void onclick3(UIMouseEventArgs e)
+    {
+        IsOpen3 = !IsOpen3;
+        StateHasChanged();
+    }
+    bool IsOpen4 { get; set; }
+    void onclick4(UIMouseEventArgs e)
+    {
+        IsOpen4 = !IsOpen4;
+        StateHasChanged();
+    }
 }
