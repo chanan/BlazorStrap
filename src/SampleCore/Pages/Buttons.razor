@@ -1,0 +1,94 @@
+﻿@page "/buttons"
+
+<h1>Buttons</h1>
+
+<div class="docs-example">
+    <BlazorButton Color="Color.Primary">primary</BlazorButton>
+    <BlazorButton Color="Color.Secondary">secondary</BlazorButton>
+    <BlazorButton Color="Color.Success">success</BlazorButton>
+    <BlazorButton Color="Color.Info">info</BlazorButton>
+    <BlazorButton Color="Color.Warning">warning</BlazorButton>
+    <BlazorButton Color="Color.Danger">danger</BlazorButton>
+    <BlazorButton Color="Color.Light">light</BlazorButton>
+    <BlazorButton Color="Color.Dark">dark</BlazorButton>
+    <BlazorButton Color="Color.Link">link</BlazorButton>
+</div>
+<PrettyCode CodeFile="/snippets/buttons/buttons1.html" />
+
+<h3>Supplying OnClick Handler</h3>
+<div class="docs-example">
+    <BlazorButton @OnClick="@onclick">Click Me</BlazorButton>
+</div>
+<PrettyCode CodeFile="/snippets/buttons/buttons2.html" />
+
+<h3>Button tags</h3>
+
+<div class="docs-example">
+    <BlazorButton ButtonType="ButtonType.Link" Href="#">Link</BlazorButton>
+    <BlazorButton ButtonType="ButtonType.Button">Button</BlazorButton>
+    <BlazorButton ButtonType="ButtonType.Input" Value="Input" />
+    <BlazorButton ButtonType="ButtonType.Submit" Value="Submit" />
+    <BlazorButton ButtonType="ButtonType.Reset" Value="Reset" />
+</div>
+<PrettyCode CodeFile="/snippets/buttons/buttons3.html" />
+
+<h3>Outline Buttons</h3>
+
+<div class="docs-example">
+    <BlazorButton IsOutline="true" Color="Color.Primary">primary</BlazorButton>
+    <BlazorButton IsOutline="true" Color="Color.Secondary">secondary</BlazorButton>
+    <BlazorButton IsOutline="true" Color="Color.Success">success</BlazorButton>
+    <BlazorButton IsOutline="true" Color="Color.Info">info</BlazorButton>
+    <BlazorButton IsOutline="true" Color="Color.Warning">warning</BlazorButton>
+    <BlazorButton IsOutline="true" Color="Color.Danger">danger</BlazorButton>
+    <BlazorButton IsOutline="true" Color="Color.Light">light</BlazorButton>
+    <BlazorButton IsOutline="true" Color="Color.Dark">dark</BlazorButton>
+</div>
+<PrettyCode CodeFile="/snippets/buttons/buttons4.html" />
+<h3>Sizes</h3>
+
+<div class="docs-example">
+    <BlazorButton Color="Color.Primary" Size="Size.Large">Large Button</BlazorButton>
+    <BlazorButton Color="Color.Secondary" Size="Size.Large">Large Button</BlazorButton>
+</div>
+<PrettyCode CodeFile="/snippets/buttons/buttons5.html" />
+
+<div class="docs-example">
+    <BlazorButton Color="Color.Primary" Size="Size.Small">Small Button</BlazorButton>
+    <BlazorButton Color="Color.Secondary" Size="Size.Small">Small Button</BlazorButton>
+</div>
+<PrettyCode CodeFile="/snippets/buttons/buttons6.html" />
+
+<div class="docs-example">
+    <BlazorButton Color="Color.Primary" Size="Size.Large" IsBlock="true">Block Level Button</BlazorButton>
+    <BlazorButton Color="Color.Secondary" Size="Size.Large" IsBlock="true">Block Level Button</BlazorButton>
+</div>
+<PrettyCode CodeFile="/snippets/buttons/buttons7.html" />
+
+<h3>Active State</h3>
+<div class="docs-example">
+    <BlazorButton ButtonType="ButtonType.Link" Href="#" Color="Color.Primary" Size="Size.Large" IsActive="true">Primary Link</BlazorButton>
+    <BlazorButton ButtonType="ButtonType.Link" Href="#" Color="Color.Secondary" Size="Size.Large" IsActive="true">Link</BlazorButton>
+</div>
+<PrettyCode CodeFile="/snippets/buttons/buttons8.html" />
+
+<h3>Disabled State</h3>
+<div class="docs-example">
+    <BlazorButton Color="Color.Primary" Size="Size.Large" IsDisabled="true">Primary Button</BlazorButton>
+    <BlazorButton Color="Color.Secondary" Size="Size.Large" IsDisabled="true">Button</BlazorButton>
+    <BlazorButton ButtonType="ButtonType.Link" Href="#" Color="Color.Primary" Size="Size.Large" IsDisabled="true">Primary Link</BlazorButton>
+    <BlazorButton ButtonType="ButtonType.Link" Href="#" Color="Color.Secondary" Size="Size.Large" IsDisabled="true">Link</BlazorButton>
+</div>
+<PrettyCode CodeFile="/snippets/buttons/buttons9.html" />
+
+<h3>Checkbox and radio buttons</h3>
+
+<Alert Color="Color.Info">Checkboxes and Radio aren't support yet by BlazorStrap</Alert>
+
+
+@code {
+    void onclick(UIMouseEventArgs e)
+    {
+        Console.WriteLine("Button was clicked!");
+    }
+}

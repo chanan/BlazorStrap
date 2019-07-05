@@ -1,0 +1,138 @@
+﻿.headernav {
+    height: 70px;
+    border-bottom: 1px solid #c9cccd;
+}
+
+
+.content {
+    background-color: #ecf0f1;
+    border-top: solid 1px #e0e4e5;
+}
+
+.selecttopic {
+    line-height: 69px;
+    font-family: 'Open Sans Semibold', sans-serif;
+    font-size: 16px;
+    color: #363838;
+}
+
+    .selecttopic select {
+        border: none;
+    }
+
+    .selecttopic .dropdown-menu {
+        margin-top: -20px;
+    }
+
+.headernav .search {
+    color: #363838;
+    font-size: 14px;
+    font-family: 'Open Sans Light', sans-serif;
+    margin-top: 16px;
+    height: 38px
+}
+
+    .headernav .search .wrap {
+        background-color: #f3f5f9;
+        border-radius: 3px;
+    }
+
+    .headernav .search .txt {
+        width: 85%;
+    }
+
+    .headernav .search input {
+        border: none;
+        box-shadow: none;
+        background-color: #f3f5f9;
+        color: #363838;
+        font-size: 14px;
+        padding: 8px 19px;
+        height: 38px;
+    }
+
+
+    .headernav .search button {
+        border: solid 1px #697683;
+        box-shadow: none;
+        background-color: #697683;
+        color: #ffffff;
+        font-size: 18px;
+    }
+
+/*--- Avatar ---*/
+.avt {
+    margin-top: 16px;
+    height: 38px;
+}
+
+    .avt button {
+        height: 38px;
+        border: none;
+        box-shadow: none;
+        color: #ffffff;
+        font-size: 14px;
+        font-family: 'Open Sans Bold', sans-serif;
+        padding-left: 30px;
+        padding-right: 30px;
+        background-color: #1abc9c;
+    }
+
+    .avt .btn-primary:hover,
+    .avt .btn-primary:focus,
+    .avt .btn-primary:active,
+    .avt .btn-primary.active {
+        background-color: #1abc9c;
+        border: none;
+        box-shadow: none;
+    }
+
+.env {
+    font-size: 18px;
+    color: #cfd5d7;
+    line-height: 38px;
+    padding: 0 20px;
+}
+
+.avatar {
+    position: relative;
+}
+
+    .avatar img {
+        border-radius: 50%;
+    }
+
+    .avatar .status {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 12px;
+        height: 12px;
+        line-height: 12px;
+        border-radius: 50%;
+        border: solid 2px #ffffff;
+    }
+
+.dropdown.avatar .status {
+    right: 14px;
+}
+
+.caretl {
+    color: #363838;
+    font-size: 14px;
+    line-height: 38px;
+    padding: 0 15px;
+}
+
+
+.avatar .green {
+    background-color: #80d3ab;
+}
+
+.avatar .red {
+    background-color: #f27777;
+}
+
+.avatar .yellow {
+    background-color: #ecd346;
+}

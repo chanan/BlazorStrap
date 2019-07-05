@@ -1,0 +1,54 @@
+﻿<Carousel NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" PauseOnHover="true">
+    <CarouselIndicators NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" />
+    <div class="carousel-inner">
+        @foreach(var item in items)
+        {
+            i++;
+            <CarouselItem IsActive="@(SecondIndex == i)" src="@item.Source" alt="@item.Alt">
+                <CarouselCaption CaptionText="@item.Caption" HeaderText="@item.Header" />
+            </CarouselItem>
+        }
+    </div>
+    <CarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" />
+    <CarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" />
+</Carousel>
+    
+@code {
+    int i = 0;
+    IList<Item> items = new List<Item>
+    {
+        new Item {
+            Source = "...First Slide",
+            Alt ="First Slide",
+            Caption = "Slide 1",
+            Header = "Slide 1 Header"
+        },
+        new Item {
+            Source = "...Second Slide",
+            Alt ="Second Slide",
+            Caption = "Slide 2",
+            Header = "Slide 2 Header"
+        },
+        new Item {
+            Source = "...Third Slide",
+            Alt ="Third Slide",
+            Caption = "Slide 3",
+            Header = "Slide 3 Header"
+        }
+    };
+
+    private int _secondIndex;
+    int SecondIndex
+    {
+        get => _secondIndex;
+        set { _secondIndex = value; StateHasChanged(); }
+    }
+
+    class Item
+    {
+        public string Source { get; set; }
+        public string Alt { get; set; }
+        public string Caption { get; set; }
+        public string Header { get; set; }
+    }
+}

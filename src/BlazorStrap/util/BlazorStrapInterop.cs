@@ -24,5 +24,8 @@ namespace BlazorStrap.util
 
         public Task<bool> Tooltip(string target, ElementRef tooltip, ElementRef arrow, string placement)
             => JSRuntime.InvokeAsync<bool>("blazorStrap.tooltip", target, tooltip, arrow, placement);
+
+        public Task FocusElement(ElementRef el) 
+            => JSRuntime.InvokeAsync<object>("blazorStrap.focusElement", el);
     }
 }

@@ -1,0 +1,97 @@
+﻿@page "/modals"
+@using BlazorStrap.util
+
+<h1>Modals</h1>
+
+<div class="docs-example modal-example">
+    <Modal>
+        <ModalHeader>Modal title</ModalHeader>
+        <ModalBody><p>Modal body text goes here.</p></ModalBody>
+        <ModalFooter>
+            <BlazorButton Color="Color.Primary">Do Something</BlazorButton>
+            <BlazorButton Color="Color.Secondary">Cancel</BlazorButton>
+        </ModalFooter>
+    </Modal>
+</div>
+<PrettyCode CodeFile="/snippets/modals/modals1.html" />
+
+<h3>Live Demo</h3>
+<div class="docs-example">
+    <BlazorButton Color="Color.Primary" OnClick="@(() => LiveDemo.Show())">Launch demo modal</BlazorButton>
+    <Modal @ref="LiveDemo" >
+        <ModalHeader OnClick="@(() => LiveDemo.Hide())">Modal title</ModalHeader>
+        <ModalBody><p>Modal body text goes here.</p></ModalBody>
+        <ModalFooter>
+            <BlazorButton Color="Color.Secondary" OnClick="@(() => LiveDemo.Hide())">Close</BlazorButton>
+            <BlazorButton Color="Color.Primary" OnClick="@(() => LiveDemo.Hide())">Save Changes</BlazorButton>
+        </ModalFooter>
+    </Modal>
+</div>
+<PrettyCode CodeFile="/snippets/modals/modals2.html" />
+
+<h3>Vertically Centered</h3>
+<div class="docs-example">
+    <BlazorButton Color="Color.Primary" OnClick="@onToggle">Launch demo modal</BlazorButton>
+    <Modal @ref="Centered" IsCentered="true">
+        <ModalHeader OnClick="@onToggle">Modal title</ModalHeader>
+        <ModalBody><p>Modal body text goes here.</p></ModalBody>
+        <ModalFooter>
+            <BlazorButton Color="Color.Secondary" OnClick="@onToggle">Close</BlazorButton>
+            <BlazorButton Color="Color.Primary" OnClick="@onToggle">Save Changes</BlazorButton>
+        </ModalFooter>
+    </Modal>
+</div>
+<PrettyCode CodeFile="/snippets/modals/modals3.html" />
+
+<h3>Sizes</h3>
+
+<div class="docs-example">
+    <BlazorButton Color="Color.Primary" OnClick="@onclick3">Large modal</BlazorButton>
+    <Modal @bind-IsOpen="@IsOpen3" Size="Size.Large">
+        <ModalHeader OnClick="@onclick3">Modal title</ModalHeader>
+        <ModalBody><p>Modal body text goes here.</p></ModalBody>
+        <ModalFooter>
+            <BlazorButton Color="Color.Secondary" OnClick="@onclick3">Close</BlazorButton>
+            <BlazorButton Color="Color.Primary" OnClick="@onclick3">Save Changes</BlazorButton>
+        </ModalFooter>
+    </Modal>
+    <BlazorButton Color="Color.Primary" OnClick="@onclick4">Small modal</BlazorButton>
+    <Modal @bind-IsOpen="@IsOpen4" Size="Size.Small">
+        <ModalHeader OnClick="@onclick4">Modal title</ModalHeader>
+        <ModalBody><p>Modal body text goes here.</p></ModalBody>
+        <ModalFooter>
+            <BlazorButton Color="Color.Secondary" OnClick="@onclick4">Close</BlazorButton>
+            <BlazorButton Color="Color.Primary" OnClick="@onclick4">Save Changes</BlazorButton>
+        </ModalFooter>
+    </Modal>
+</div>
+<PrettyCode CodeFile="/snippets/modals/modals4.html" />
+
+<h3>Ignore Click on Back Drop</h3>
+
+<p>You can set <code>IgnoreClickOnBackDrop</code> to prevent the user closing the model by clicking on the back drop.</p>
+
+
+@code {
+
+Modal LiveDemo;
+Modal Centered;
+bool IsOpen { get; set; }
+
+void onToggle(UIMouseEventArgs e)
+{
+    Centered.Toggle();
+}
+bool IsOpen3 { get; set; }
+void onclick3(UIMouseEventArgs e)
+{
+    IsOpen3 = !IsOpen3;
+    StateHasChanged();
+}
+bool IsOpen4 { get; set; }
+void onclick4(UIMouseEventArgs e)
+{
+    IsOpen4 = !IsOpen4;
+    StateHasChanged();
+}
+}

@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using BlazorPrettyCode;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SampleCore;
 
 namespace ServerSideSample
 {
@@ -26,6 +30,23 @@ namespace ServerSideSample
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+            // Server Side Blazor doesn't register HttpClient by default
+            if (!services.Any(x => x.ServiceType == typeof(HttpClient)))
+            {
+                // Setup HttpClient for server side in a client side compatible fashion
+                services.AddScoped<HttpClient>(s =>
+                {
+                    // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.
+                    var uriHelper = s.GetRequiredService<IUriHelper>();
+                    return new HttpClient
+                    {
+                        BaseAddress = new Uri(uriHelper.GetBaseUri())
+                    };
+                });
+            }
+
+            services.AddBlazorPrettyCode();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +70,7 @@ namespace ServerSideSample
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapBlazorHub();
+                endpoints.MapBlazorHub().AddComponent(typeof(App), "app");
                 endpoints.MapFallbackToPage("/_Host");
             });
         }

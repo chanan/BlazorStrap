@@ -1,0 +1,158 @@
+﻿@page "/navs"
+
+<h1>Navs</h1>
+
+<div class="docs-example">
+    <p>As a list:</p>
+    <BlazorNav IsList="true">
+        <NavItem>
+            <BlazorNavLink IsActive="true" href="#">Active</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Another Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink IsDisabled="true" href="#">Disabled</BlazorNavLink>
+        </NavItem>
+    </BlazorNav>
+    <p>As non list:</p>
+    <BlazorNav>
+        <BlazorNavLink IsActive="true" href="#">Active</BlazorNavLink>
+        <BlazorNavLink href="#">Link</BlazorNavLink>
+        <BlazorNavLink href="#">Another Link</BlazorNavLink>
+        <BlazorNavLink IsDisabled="true" href="#">Disabled</BlazorNavLink>
+    </BlazorNav>
+</div>
+<PrettyCode CodeFile="/snippets/navs/navs1.html" />
+
+<h3>Horizontal Alignment</h3>
+
+<div class="docs-example">
+    <BlazorNav IsList="true" Alignment="Alignment.Center">
+        <NavItem>
+            <BlazorNavLink IsActive="true" href="#">Active</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Another Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink IsDisabled="true" href="#">Disabled</BlazorNavLink>
+        </NavItem>
+    </BlazorNav>
+    <BlazorNav IsList="true" Alignment="Alignment.Right">
+        <NavItem>
+            <BlazorNavLink IsActive="true" href="#">Active</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Another Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink IsDisabled="true" href="#">Disabled</BlazorNavLink>
+        </NavItem>
+    </BlazorNav>
+</div>
+<PrettyCode CodeFile="/snippets/navs/navs2.html" />
+
+<h3>Vertical</h3>
+
+<div class="docs-example">
+    <p>As a list:</p>
+    <BlazorNav IsList="true" IsVertical="true">
+        <NavItem>
+            <BlazorNavLink IsActive="true" href="#">Active</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Another Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink IsDisabled="true" href="#">Disabled</BlazorNavLink>
+        </NavItem>
+    </BlazorNav>
+    <p>As non list:</p>
+    <BlazorNav IsVertical="true">
+        <NavItem>
+            <BlazorNavLink IsActive="true" href="#">Active</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Another Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink IsDisabled="true" href="#">Disabled</BlazorNavLink>
+        </NavItem>
+    </BlazorNav>
+</div>
+<PrettyCode CodeFile="/snippets/navs/navs3.html" />
+
+<h3>Tabs</h3>
+
+<div class="docs-example">
+    <BlazorNav IsList="true" IsTabs="true">
+        <NavItem>
+            <BlazorNavLink IsActive="true" href="#">Active</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Another Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink IsDisabled="true" href="#">Disabled</BlazorNavLink>
+        </NavItem>
+    </BlazorNav>
+</div>
+<PrettyCode CodeFile="/snippets/navs/navs4.html" />
+
+<h3>Pills</h3>
+
+<div class="docs-example">
+    <BlazorNav IsList="true" IsPills="true">
+        <NavItem>
+            <BlazorNavLink IsActive="true" href="#">Active</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Another Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink IsDisabled="true" href="#">Disabled</BlazorNavLink>
+        </NavItem>
+    </BlazorNav>
+</div>
+<PrettyCode CodeFile="/snippets/navs/navs5.html" />
+
+<h3>Fill and justify</h3>
+<div class="docs-example">
+    <BlazorNav IsList="true" IsPills="true" IsFill="true">
+        <NavItem>
+            <BlazorNavLink IsActive="true" href="#">Active</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink href="#">Another Link</BlazorNavLink>
+        </NavItem>
+        <NavItem>
+            <BlazorNavLink IsDisabled="true" href="#">Disabled</BlazorNavLink>
+        </NavItem>
+    </BlazorNav>
+</div>
+<PrettyCode CodeFile="/snippets/navs/navs6.html" />
