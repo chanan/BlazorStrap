@@ -15,24 +15,24 @@ else
 }
 
 @code {
-        string classname
-{
-            get
+    string classname
     {
-                var color = Color != Color.None ? $"btn-{Color.ToDescriptionString()}" : null;
-                var split = IsSplit ? "dropdown-toggle-split" : null;
-                var size = Size != Size.None ? $"btn-{Size.ToDescriptionString()}" : null;
-                return $"btn {size} {color} {split} dropdown-toggle {Class}".RemoveUnneededSpaces();
-            }
+        get
+        {
+            var color = Color != Color.None ? $"btn-{Color.ToDescriptionString()}" : null;
+            var split = IsSplit ? "dropdown-toggle-split" : null;
+            var size = Size != Size.None ? $"btn-{Size.ToDescriptionString()}" : null;
+            return $"btn {size} {color} {split} dropdown-toggle {Class}".RemoveUnneededSpaces();
         }
+    }
 
-        //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
-        string Tag => "button";
+    //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
+    string Tag => "button";
 
-        //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
-        string Type => "button";
+    //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
+    string Type => "button";
 
-[Parameter] private Color Color { get; set; } = Color.None;
+    [Parameter] private Color Color { get; set; } = Color.None;
     [Parameter] private Size Size { get; set; } = Size.None;
     //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
     //[Parameter] private bool IsLink { get; set; }
@@ -50,6 +50,7 @@ else
             DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id);
         }
     }
+
     private void onClickEvent(UIMouseEventArgs e)
     {
         if (onclick.HasDelegate)

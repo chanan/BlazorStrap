@@ -7,30 +7,30 @@
 </DynamicElement>
 
 @code {
-    string classname
+        string classname
+{
+            get
     {
-        get
-        {
-            var open = "";
-            if (IsOpen == null)
-            {
-                if (DropDownMenuControl == null)
+                var open = "";
+                if (IsOpen == null)
                 {
-                    open = null;
+                    if (DropDownMenuControl == null)
+                    {
+                        open = null;
+                    }
+                    else
+                    {
+                        open = DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id) ? "show" : null;
+                    }
                 }
                 else
                 {
-                    open = DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id) ? "show" : null;
+                    open = (bool)IsOpen ? "show" : null;
                 }
+                return $"dropdown-menu {open} {Class}".RemoveUnneededSpaces();
             }
-            else
-            {
-                open = (bool)IsOpen ? "show" : null;
-            }
-            return $"dropdown-menu {open} {Class}".RemoveUnneededSpaces();
         }
-    }
-    [Parameter] private bool? IsOpen { get; set; }
+[Parameter] private bool? IsOpen { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private bool AutoClose { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
@@ -65,6 +65,7 @@
         }
 
     }
+
     private void OnTimedEvent(Object source, ElapsedEventArgs e)
     {
         if(DropDownMenuControl != null)

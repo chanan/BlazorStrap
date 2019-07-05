@@ -2,7 +2,7 @@
 @using  BlazorStrap.util
 
 <CascadingValue Value="@DropDownMenuControl">
-    <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+    <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" @onfocusout="@LostFocus">
         @ChildContent
     </DynamicElement>
 </CascadingValue>
@@ -56,6 +56,17 @@
     {
         DropDownMenuControl.Handler.Hide(DropDownMenuControl.Id);
         base.Hide();
+    }
+
+    private void LostFocus()
+    {
+        if (DropDownMenuControl != null)
+        {
+            if (DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id))
+            {
+                Invoke(() => DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id));
+            }
+        }
     }
 
     private void OnToggle(Object Sender, EventArgs e)
