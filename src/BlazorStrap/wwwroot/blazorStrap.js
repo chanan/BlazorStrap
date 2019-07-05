@@ -33,6 +33,9 @@
         }
         reference.addEventListener("mouseover", mouseoverHandler);
         return true;
+    },
+    focusElement: function (element) {
+        element.focus();
     }
 };
 

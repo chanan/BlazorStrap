@@ -45,14 +45,14 @@ namespace BlazorStrap
                 ?? throw new InvalidOperationException($"No value was supplied for required parameter '{nameof(TagName)}'.");
 
             // Combine any explicitly-supplied attributes with the remaining parameters
-            var attributesParam = GetAndRemove<IReadOnlyDictionary<string, object>>(_attributesToRender, nameof(Attributes));
-           
+            IReadOnlyDictionary<string, object> attributesParam = GetAndRemove<IReadOnlyDictionary<string, object>>(_attributesToRender, nameof(Attributes));
+
             if (attributesParam != null)
             {
-                foreach (var kvp in attributesParam)
+                foreach (KeyValuePair<string, object> kvp in attributesParam)
                 {
                     if (kvp.Value != null
-                        && _attributesToRender.TryGetValue(kvp.Key, out var existingValue)
+                        && _attributesToRender.TryGetValue(kvp.Key, out object existingValue)
                         && existingValue != null)
                     {
                         _attributesToRender[kvp.Key] = existingValue.ToString()
@@ -69,7 +69,7 @@ namespace BlazorStrap
 
         private static T GetAndRemove<T>(IDictionary<string, object> values, string key)
         {
-            if (values.TryGetValue(key, out var value))
+            if (values.TryGetValue(key, out object value))
             {
                 values.Remove(key);
                 return (T)value;

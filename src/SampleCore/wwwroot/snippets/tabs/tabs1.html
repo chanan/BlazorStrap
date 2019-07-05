@@ -1,0 +1,31 @@
+﻿<BlazorNav IsTabs>
+    <BlazorNavLink onclick="@onclick1" IsActive="@(active == 1)">Home</BlazorNavLink>
+    <BlazorNavLink onclick="@onclick2" IsActive="@(active == 2)">Profile</BlazorNavLink>
+    <BlazorNavLink onclick="@onclick3" IsActive="@(active == 3)">Contact</BlazorNavLink>
+</BlazorNav>
+<TabContent>
+    <TabPane IsOpen="@(active == 1)">...</TabPane>
+    <TabPane IsOpen="@(active == 2)">...</TabPane>
+    <TabPane IsOpen="@(active == 3)">...</TabPane>
+</TabContent>
+
+@code {
+    private int active = 1;
+    void onclick1(UIMouseEventArgs e)
+    {
+        active = 1;
+        StateHasChanged();
+    }
+
+    void onclick2(UIMouseEventArgs e)
+    {
+        active = 2;
+        StateHasChanged();
+    }
+
+    void onclick3(UIMouseEventArgs e)
+    {
+        active = 3;
+        StateHasChanged();
+    }
+}

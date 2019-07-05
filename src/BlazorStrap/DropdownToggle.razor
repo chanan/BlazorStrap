@@ -3,39 +3,39 @@
 
 @if (IsOpen == null)
 {
-    <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" aria-haspopup="true" aria-expanded="@DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id).ToString()" @onclick="@onClickEvent">
+    <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" aria-haspopup="true" aria-expanded="@DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id).ToString()" @onclick="@onClickEvent" @onkeydown="@Escape">
         @ChildContent
     </DynamicElement>
 }
 else
 {
-    <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" aria-haspopup="true" aria-expanded="@IsOpen.ToString()" @onclick="@onclick">
+    <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" aria-haspopup="true" aria-expanded="@IsOpen.ToString()" @onclick="@onclick" @onkeydown="@Escape">
         @ChildContent
     </DynamicElement>
 }
 
 @code {
-    string classname
+        string classname
+{
+            get
     {
-        get
-        {
-            var color = Color != Color.None ? $"btn-{Color.ToDescriptionString()}" : null;
-            var split = IsSplit ? "dropdown-toggle-split" : null;
-            var size = Size != Size.None ? $"btn-{Size.ToDescriptionString()}" : null;
-            return $"btn {size} {color} {split} dropdown-toggle {Class}".RemoveUnneededSpaces();
+                var color = Color != Color.None ? $"btn-{Color.ToDescriptionString()}" : null;
+                var split = IsSplit ? "dropdown-toggle-split" : null;
+                var size = Size != Size.None ? $"btn-{Size.ToDescriptionString()}" : null;
+                return $"btn {size} {color} {split} dropdown-toggle {Class}".RemoveUnneededSpaces();
+            }
         }
-    }
 
-    //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
-    string Tag => "button";
+        //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
+        string Tag => "button";
 
-    //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
-    string Type => "button";
-    
-    [Parameter] private Color Color { get; set; } = Color.None;
+        //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
+        string Type => "button";
+
+[Parameter] private Color Color { get; set; } = Color.None;
     [Parameter] private Size Size { get; set; } = Size.None;
     //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
-    //[Parameter] private bool IsLink { get; set; } 
+    //[Parameter] private bool IsLink { get; set; }
     [Parameter] private bool IsSplit { get; set; }
     [Parameter] private bool? IsOpen { get; set; }
     [Parameter] private EventCallback<UIMouseEventArgs> onclick { get; set; }
@@ -43,6 +43,13 @@ else
     [Parameter] private RenderFragment ChildContent { get; set; }
     [CascadingParameter] private DropDownMenuControl DropDownMenuControl { get; set; }
 
+    private void Escape(UIKeyboardEventArgs e)
+    {
+        if (e.Key.ToLower() == "escape" && (IsOpen == true || DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id)))
+        {
+            DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id);
+        }
+    }
     private void onClickEvent(UIMouseEventArgs e)
     {
         if (onclick.HasDelegate)

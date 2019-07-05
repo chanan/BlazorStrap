@@ -1,0 +1,19 @@
+﻿@page "/breadcrumbs"
+
+<h1>Breadcrumbs</h1>
+
+<div class="docs-example">
+    <Breadcrumb>
+        <BreadcrumbItem IsActive="true">Home</BreadcrumbItem>
+    </Breadcrumb>
+    <Breadcrumb>
+        <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+        <BreadcrumbItem IsActive="true">Library</BreadcrumbItem>
+    </Breadcrumb>
+    <Breadcrumb>
+        <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+        <BreadcrumbItem><a href="#">Library</a></BreadcrumbItem>
+        <BreadcrumbItem IsActive="true">Data</BreadcrumbItem>
+    </Breadcrumb>
+</div>
+<PrettyCode CodeFile="/snippets/breadcrumbs/breadcrumbs1.html" />

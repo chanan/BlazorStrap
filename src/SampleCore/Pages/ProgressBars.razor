@@ -1,0 +1,67 @@
+﻿@page "/progress"
+
+<h1>Progress</h1>
+
+<div class="docs-example">
+    <div className="text-center">0%</div>
+    <progress />
+    <div className="text-center">25%</div>
+    <Progress Value="25" />
+    <div className="text-center">50%</div>
+    <Progress Value="50" />
+    <div className="text-center">75%</div>
+    <Progress Value="75" />
+    <div className="text-center">100%</div>
+    <Progress Value="100" />
+</div>
+<PrettyCode CodeFile="/snippets/progressbars/progressbars1.html" />
+
+<h3>Labels</h3>
+<div class="docs-example">
+    <Progress Value="25">25%</Progress>
+</div>
+<PrettyCode CodeFile="/snippets/progressbars/progressbars2.html" />
+
+<h3>Height</h3>
+
+<div class="docs-example">
+    <Progress Value="25" style="height: 1px;" />
+    <Progress Value="25" style="height: 20px;" />
+</div>
+<PrettyCode CodeFile="/snippets/progressbars/progressbars3.html" />
+
+<h3>Backgrounds</h3>
+<div class="docs-example">
+    <Progress Value="25" Color="Color.Success" />
+    <Progress Value="50" Color="Color.Info" />
+    <Progress Value="75" Color="Color.Warning" />
+    <Progress Value="100" Color="Color.Danger" />
+</div>
+<PrettyCode CodeFile="/snippets/progressbars/progressbars4.html" />
+
+<h3>Multiple bars</h3>
+<div class="docs-example">
+    <Progress IsMulti="true">
+        <Progress IsBar="true" Value="15" />
+        <Progress IsBar="true" Value="30" Color="Color.Success" />
+        <Progress IsBar="true" Value="20" Color="Color.Info" />
+    </Progress>
+</div>
+<PrettyCode CodeFile="/snippets/progressbars/progressbars5.html" />
+
+<h3>Striped</h3>
+<div class="docs-example">
+    <progress Value="10" IsStriped="true" />
+    <Progress Value="25" Color="Color.Success" IsStriped="true" />
+    <Progress Value="50" Color="Color.Info" IsStriped="true" />
+    <Progress Value="75" Color="Color.Warning" IsStriped="true" />
+    <Progress Value="100" Color="Color.Danger" IsStriped="true" />
+</div>
+<PrettyCode CodeFile="/snippets/progressbars/progressbars6.html" />
+
+<h4>Animated stripes</h4>
+
+<div class="docs-example">
+    <progress Value="75" IsStriped="true" IsAnimated="true" />
+</div>
+<PrettyCode CodeFile="/snippets/progressbars/progressbars7.html" />

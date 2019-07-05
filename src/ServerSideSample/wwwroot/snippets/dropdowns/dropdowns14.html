@@ -1,0 +1,22 @@
+﻿<DropdownMenu Style="position: static; display: block;">
+    <BlazorForm Class="px-4 py-3">
+        <FormGroup>
+            <BlazorLabel for="exampleDropdownFormEmail1">Email address</BlazorLabel>
+            <BlazorInput InputType="InputType.Email" id="exampleDropdownFormEmail1" placeholder="email@example.com" />
+        </FormGroup>
+        <FormGroup>
+            <BlazorLabel for="exampleDropdownFormPassword1">Password</BlazorLabel>
+            <BlazorInput InputType="InputType.Password" id="exampleDropdownFormPassword1" placeholder="Password" />
+        </FormGroup>
+        <FormGroup IsCheck="true">
+            <BlazorInput InputType="InputType.Checkbox" id="dropdownCheck" />
+            <BlazorLabel IsCheck="true" for="dropdownCheck">
+                Remember me
+            </BlazorLabel>
+        </FormGroup>
+        <BlazorButton ButtonType="ButtonType.Submit" Color="Color.Primary">Sign in</BlazorButton>
+    </BlazorForm>
+    <DropdownItem IsDivider="true" />
+    <DropdownItem href="#">New around here? Sign up</DropdownItem>
+    <DropdownItem href="#">Forgot password?</DropdownItem>
+</DropdownMenu>
