@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
     /// <summary>
-    /// The base class for BlazorStrap components.
+    /// The base class for Toggle BlazorStrap components.
     /// </summary>
     public abstract class ToggleableComponentBase : BootstrapComponentBase
     {

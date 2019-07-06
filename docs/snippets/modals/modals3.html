@@ -1,9 +1,18 @@
-﻿<BlazorButton Color="Color.Primary" OnClick="@onclick2">Launch demo modal</BlazorButton>
-<Modal IsOpen="@IsOpen2" IsCentered="true">
-    <ModalHeader OnClick="@onclick2">Modal title</ModalHeader>
+﻿<BlazorButton Color="Color.Primary" OnClick="@onToggle">Launch demo modal</BlazorButton>
+<Modal @ref="Centered" IsCentered="true">
+    <ModalHeader OnClick="@onToggle">Modal title</ModalHeader>
     <ModalBody><p>Modal body text goes here.</p></ModalBody>
     <ModalFooter>
-        <BlazorButton Color="Color.Secondary" OnClick="@onclick2">Close</BlazorButton>
-        <BlazorButton Color="Color.Primary" OnClick="@onclick2">Save Changes</BlazorButton>
+        <BlazorButton Color="Color.Secondary" OnClick="@onToggle">Close</BlazorButton>
+        <BlazorButton Color="Color.Primary" OnClick="@onToggle">Save Changes</BlazorButton>
     </ModalFooter>
 </Modal>
+
+@code {
+    Modal Centered;
+
+    void onToggle(UIMouseEventArgs e)
+    {
+        Centered.Toggle();
+    }
+}
