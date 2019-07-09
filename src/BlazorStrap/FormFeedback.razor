@@ -1,5 +1,4 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 @if (IsValid || IsInvalid)
 {
@@ -9,16 +8,15 @@
 }
 
 @code {
-    string classname
-    {
-        get
-        {
-            var cls = IsTooltip ? "tooltip" : "feedback";
-            var isvalid = IsValid ? $"valid-{cls}" : null;
-            var isinvalid = IsInvalid ? $"invalid-{cls}" : null;
-            return $"{isvalid} {isinvalid} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    string classname =>
+        new CssBuilder()
+            .AddClass("valid-tooltip", IsValid && IsTooltip)
+            .AddClass("valid-feedback", IsValid && !IsTooltip)
+            .AddClass("invalid-tooltip", IsInvalid && IsTooltip)
+            .AddClass("invalid-feedback", IsInvalid && !IsTooltip)
+            .AddClass(Class)
+        .Build();
+
     [Parameter] private bool IsValid { get; set; }
     [Parameter] private bool IsInvalid { get; set; }
     [Parameter] private bool IsTooltip { get; set; }

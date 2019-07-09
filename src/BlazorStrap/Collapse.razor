@@ -1,20 +1,16 @@
 ﻿@inherits ToggleableComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @ChildContent
 </DynamicElement>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            var open = _isOpen ? "show" : null;
-            var navbar = IsNavbar ? "navbar-collapse" : null;
-            return $"collapse {navbar} {open} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    private string classname =>
+        new CssBuilder("collapse")
+            .AddClass("navbar-collapse", IsNavbar)
+            .AddClass("show", IsOpen.HasValue && IsOpen.Value)
+            .AddClass(Class)
+        .Build();
 
     [Parameter] private bool IsNavbar { get; set; }
     [Parameter] private string Class { get; set; }

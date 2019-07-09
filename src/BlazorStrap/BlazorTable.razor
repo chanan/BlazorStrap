@@ -1,5 +1,4 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 @if (IsResponsive)
 {
@@ -17,19 +16,17 @@
 }
 
 @code {
-    string classname
-    {
-        get
-        {
-            var dark = IsDark ? "table-dark" : null;
-            var striped = IsStriped ? "table-striped" : null;
-            var bordered = IsBordered ? "table-bordered" : null;
-            var borderless = IsBorderless ? "table-borderless" : null;
-            var hovarable = IsHovarable ? "table-hover" : null;
-            var small = IsSmall ? "table-sm" : null;
-            return $"table {dark} {striped} {bordered} {borderless} {hovarable} {small} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    string classname =>
+        new CssBuilder("table")
+            .AddClass("table-dark", IsDark)
+            .AddClass("table-striped", IsStriped)
+            .AddClass("table-bordered", IsBordered)
+            .AddClass("table-borderless", IsBorderless)
+            .AddClass("table-hover", IsHovarable)
+            .AddClass("table-sm", IsSmall)
+            .AddClass(Class)
+        .Build();
+
     [Parameter] private bool IsDark { get; set; }
     [Parameter] private bool IsStriped { get; set; }
     [Parameter] private bool IsBordered { get; set; }

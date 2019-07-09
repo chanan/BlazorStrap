@@ -1,5 +1,4 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
     <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
 
@@ -17,22 +16,11 @@
     </DynamicElement>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            var active = IsActive ? "active" : null;
-            return $"carousel-item {active} {Class}".RemoveUnneededSpaces();
-        }
-    }
-
-    private bool AddActionLink
-    {
-        get
-        {
-            return !String.IsNullOrEmpty(ActionLink);
-        }
-    }
+    private string classname =>
+        new CssBuilder("carousel-item")
+            .AddClass("active", IsActive)
+            .AddClass(Class)
+        .Build();
 
     [Parameter] private string src { get; set; }
     [Parameter] private string alt { get; set; }

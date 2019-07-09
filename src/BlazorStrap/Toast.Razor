@@ -1,5 +1,4 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement TagName="div" class="@classname" role="alert" aria-live="assertive" aria-atomic="true" Attributes="@UnknownParameters">
 
@@ -15,9 +14,12 @@
 </DynamicElement>
 
 @code {
-    private string classname => $"toast fade {visible} {Class}".RemoveUnneededSpaces();
-    
-    private string visible => IsVisible && !IsDismissed ? "show" : "hide";
+    private string classname => 
+        new CssBuilder("toast fade")
+            .AddClass("show", IsVisible && !IsDismissed)
+            .AddClass("hide", !IsVisible || IsDismissed)
+            .AddClass(Class)
+        .Build();
 
     [Parameter] private string Class { get; set; }
     [Parameter] private bool IsVisible { get; set; }

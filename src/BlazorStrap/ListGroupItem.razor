@@ -1,22 +1,18 @@
 ﻿@inherits BootstrapComponentBase
-@using BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" @onclick="@OnClick" disabled="@IsDisabled" type="@IsButton">
     @ChildContent
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
-        {
-            var disabled = IsDisabled && ListGroupType != ListGroupType.Button ? "disabled" : null;
-            var active = IsActive ? "active" : null;
-            var action = ListGroupType == ListGroupType.Button || ListGroupType == ListGroupType.Link ? "list-group-item-action" : null;
-            var color = Color != Color.None ? $"list-group-item-{Color.ToDescriptionString()}" : null;
-            return $"list-group-item {color} {action} {active} {disabled} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    string classname =>
+        new CssBuilder("list-group-item")
+            .AddClass($"list-group-item-{Color.ToDescriptionString()}", Color != Color.None)
+            .AddClass("active", IsActive)
+            .AddClass("disabled", IsDisabled && ListGroupType != ListGroupType.Button)
+            .AddClass(Class)
+        .Build();
+
     string Tag => ListGroupType switch 
         {
             ListGroupType.Button => "button",

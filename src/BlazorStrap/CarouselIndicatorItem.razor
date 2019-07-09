@@ -3,11 +3,13 @@
 <DynamicElement Attributes="@UnknownParameters" TagName="li" class="@classname" @onclick="@onclick" />
 
 @code {
-    private string classname => IsActive ? "active" : null;
+    private string classname => 
+        new CssBuilder(string.Empty) //Can be removed once https://github.com/EdCharbeneau/CssBuilder/pull/6 is merged
+            .AddClass("active", IsActive)
+        .Build();
 
     [Parameter] private bool IsActive { get; set; }
     [Parameter] private int Index { get; set; }
-
     [Parameter] private EventCallback<int> ActiveIndexChangedEvent { get; set; }
 
     async Task onclick()

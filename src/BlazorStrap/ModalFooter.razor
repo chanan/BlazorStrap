@@ -1,13 +1,15 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @ChildContent
 </DynamicElement>
 
 @code {
-    string classname => $"modal-footer {Class}".RemoveUnneededSpaces();
-    
+    string classname => 
+        new CssBuilder("modal-footer")
+            .AddClass(Class)
+        .Build();
+            
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

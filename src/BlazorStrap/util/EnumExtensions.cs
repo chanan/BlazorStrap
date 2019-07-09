@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace BlazorStrap.util
+namespace BlazorStrap.Util
 {
     public static class EnumExtensions
     {

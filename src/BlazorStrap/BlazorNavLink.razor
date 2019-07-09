@@ -1,20 +1,16 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="a" class="@classname">
     @ChildContent
 </DynamicElement>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            var active = IsActive ? "active" : null;
-            var disabled = IsDisabled ? "disabled" : null;
-            return $"nav-item nav-link {active} {disabled} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    private string classname =>
+        new CssBuilder("nav-item nav-link")
+            .AddClass("active", IsActive)
+            .AddClass("disabled", IsDisabled)
+        .Build();
+
     [Parameter] private bool IsActive { get; set; }
     [Parameter] private bool IsDisabled { get; set; }
     [Parameter] private string Class { get; set; }

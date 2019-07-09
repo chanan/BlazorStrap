@@ -1,20 +1,17 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="thead" class="@classname">
     @ChildContent
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
-        {
-            var light = TableHeadType == TableHeadType.Light ? "thead-light" : null;
-            var dark = TableHeadType == TableHeadType.Dark ? "thead-dark" : null;
-            return $"{light} {dark} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    string classname =>
+        new CssBuilder()
+            .AddClass("thead-light", TableHeadType == TableHeadType.Light)
+            .AddClass("thead-dark", TableHeadType == TableHeadType.Dark)
+            .AddClass(Class)
+        .Build();
+
     [Parameter] private TableHeadType TableHeadType { get; set; } = TableHeadType.None;
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }

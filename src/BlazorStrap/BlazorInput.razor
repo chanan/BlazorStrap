@@ -1,23 +1,18 @@
 ﻿@inherits BootstrapComponentBase
-@using BlazorStrap.util
-@using Microsoft.AspNetCore.Components
 
-<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex" value="@Value" onchange="@onchange">
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex" value="@Value" @onchange="@onchange">
     @ChildContent
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
-        {
-            var size = Size != Size.None ? $"form-control-{Size.ToDescriptionString()}" : null;
-            var isvalid = IsValid ? "is-valid" : null;
-            var isinvalid = IsInvalid ? "is-invalid" : null;
-            var cls = GetClass();
-            return $"{isvalid} {isinvalid} {cls} {size} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    string classname =>
+        new CssBuilder()
+            .AddClass($"form-control-{Size.ToDescriptionString()}", Size != Size.None)
+            .AddClass("is-valid", IsValid)
+            .AddClass("is-invalid", IsInvalid)
+            .AddClass(GetClass())
+            .AddClass(Class)
+        .Build();
 
     string Tag => InputType switch 
         {

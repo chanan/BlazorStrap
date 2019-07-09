@@ -1,12 +1,15 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname">
     @ChildContent
 </DynamicElement>
 
 @code {
-    string classname => $"{GetClass()} {Class}".RemoveUnneededSpaces();
+    string classname => 
+        new CssBuilder()
+            .AddClass(GetClass())
+            .AddClass(Class)
+        .Build();
     
     string Tag => MediaType switch 
         {

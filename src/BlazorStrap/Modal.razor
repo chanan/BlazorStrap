@@ -1,7 +1,6 @@
 ﻿@inherits ToggleableComponentBase  
-
-@using BlazorStrap.util
 @inject Microsoft.JSInterop.IJSRuntime JSRuntime
+
 <DynamicElement Attributes="@UnknownParameters" style="@styles" TagName="div" class="@classname" tabindex="-1" role="dialog" @onclick="@onclick" @onkeydown="@onEscape">
     <div class="@innerClassname" role="document" @ref="Me" tabindex="-2" >
         <div class="modal-content" @onclick="@dontclick">
@@ -9,12 +8,25 @@
         </div>
     </div>
 </DynamicElement>
+
 @if (_isOpen)
 {
     <div class="modal-backdrop fade show"></div>
 }
 
 @code {
+    string classname =>
+        new CssBuilder("modal")
+            .AddClass("fade show", _isOpen)
+            .AddClass(Class)
+        .Build();
+
+    string innerClassname =>
+        new CssBuilder("modal-dialog")
+            .AddClass($"modal-{Size.ToDescriptionString()}", Size != Size.None)
+            .AddClass( "modal-dialog-centered", IsCentered)
+        .Build();
+
     private ElementRef Me { get; set; }
     protected override async Task OnAfterRenderAsync()
     {
@@ -26,30 +38,13 @@
             JustOpened = false;
         }
     }
-
-    string classname
-    {
-        get
-        {
-            var display = _isOpen ? "fade show" : null;
-            return $"modal {display} {Class}".RemoveUnneededSpaces();
-        }
-    }
-    string innerClassname
-    {
-        get
-        {
-            var center = IsCentered ? "modal-dialog-centered" : null;
-            var size = Size != Size.None ? $"modal-{Size.ToDescriptionString()}" : null;
-            return $"modal-dialog {size} {center}".RemoveUnneededSpaces();
-        }
-    }
+    
     string styles
     {
         get
         {
             var display = _isOpen ? "display: block; padding-right: 17px;" : null;
-            return $"{Style} {display}".RemoveUnneededSpaces();
+            return $"{Style} {display}".Trim();
         }
     }
  
@@ -84,6 +79,4 @@
     {
         _dontclickWasClicked = true;
     }
-
- 
 }

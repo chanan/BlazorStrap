@@ -2,7 +2,7 @@
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
-namespace BlazorStrap.util
+namespace BlazorStrap.Util
 {
     public class BlazorStrapInterop
     {
