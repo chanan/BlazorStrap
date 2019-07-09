@@ -15,10 +15,6 @@
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
   </ItemGroup>
   
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-  
 
 
 </Project>

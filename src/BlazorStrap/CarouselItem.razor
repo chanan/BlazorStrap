@@ -1,10 +1,20 @@
 ﻿@inherits BootstrapComponentBase
 @using  BlazorStrap.util
 
-<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
-    <img class="d-block w-100" src="@src" alt="@alt">
-    @ChildContent
-</DynamicElement>
+    <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+
+        @if (AddActionLink)
+        {
+            <a href="@ActionLink" target="@ActionLinkTarget"><img class="d-block w-100" src="@src" alt="@alt"></a>
+        }
+        else
+        {
+            <img class="d-block w-100" src="@src" alt="@alt">
+        }
+
+
+        @ChildContent
+    </DynamicElement>
 
 @code {
     private string classname
@@ -15,9 +25,20 @@
             return $"carousel-item {active} {Class}".RemoveUnneededSpaces();
         }
     }
+
+    private bool AddActionLink
+    {
+        get
+        {
+            return !String.IsNullOrEmpty(ActionLink);
+        }
+    }
+
     [Parameter] private string src { get; set; }
     [Parameter] private string alt { get; set; }
     [Parameter] private bool IsActive { get; set; }
     [Parameter] private string Class { get; set; }
+    [Parameter] private string ActionLink { get; set; }
+    [Parameter] private string ActionLinkTarget { get; set; } = "_self";
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
