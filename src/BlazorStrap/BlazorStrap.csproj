@@ -28,10 +28,4 @@
     <EmbeddedResource Include="wwwroot\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="*.razor">
-      <Pack>false</Pack>
-    </Content>
-  </ItemGroup>
-
 </Project>

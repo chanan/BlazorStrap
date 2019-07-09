@@ -2,7 +2,7 @@
 using System;
 using System.Text;
 
-namespace BlazorStrap
+namespace BlazorStrap.Util
 {
     public class ColumnBase : BootstrapComponentBase
     {

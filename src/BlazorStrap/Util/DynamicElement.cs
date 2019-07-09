@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BlazorStrap
+namespace BlazorStrap.Util
 {
     /// <summary>
     /// Renders an element with the specified name and attributes. This is useful
