@@ -19,13 +19,13 @@
         function mouseoverHandler() {
             reference.removeEventListener("mouseover", mouseoverHandler);
             reference.addEventListener("mouseout", mouseoutHandler);
-            tooltip.className = "tooltip fade show bs-popover-" + placement;
+            tooltip.className = "tooltip fade show bs-tooltip-" + placement;
             instance = showPopper(reference, tooltip, arrow, placement);
         }
         function mouseoutHandler() {
             reference.removeEventListener("mouseout", mouseoutHandler);
             reference.addEventListener("mouseover", mouseoverHandler);
-            tooltip.className = "tooltip hide";
+            tooltip.className = "tooltip";
             if (instance) {
                 instance.destroy && instance.destroy();
                 instance = undefined;
