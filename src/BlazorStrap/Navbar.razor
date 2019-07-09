@@ -1,24 +1,21 @@
 ﻿@inherits BootstrapComponentBase
-@using BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="nav" class="@classname">
     @ChildContent
 </DynamicElement>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            var color = Color != Color.None ? $"bg-{Color.ToDescriptionString()}" : null;
-            var dark = IsDark ? "navbar-dark" : "navbar-light";
-            var expand = IsExpand ? "navbar-expand-lg" : null;
-            var fixedTop = IsFixedTop ? "fixed-top" : null;
-            var fixedBottom = IsFixedBottom ? "fixed-bottom" : null;
-            var stickyTop = IsStickyTop ? "sticky-top" : null;
-            return $"navbar {fixedTop} {fixedBottom} {stickyTop} {dark} {color} {expand} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    private string classname =>
+        new CssBuilder("navbar")
+            .AddClass("fixed-top", IsFixedTop)
+            .AddClass("fixed-bottom", IsFixedBottom)
+            .AddClass("sticky-top", IsStickyTop)
+            .AddClass("navbar-dark", IsDark)
+            .AddClass("navbar-light", !IsDark)
+            .AddClass($"bg-{Color.ToDescriptionString()}", Color != Color.None)
+            .AddClass("navbar-expand-lg", IsExpand)
+            .AddClass(Class)
+        .Build();
 
     [Parameter] private Color Color { get; set; } = Color.None;
     [Parameter] private bool IsDark { get; set; }

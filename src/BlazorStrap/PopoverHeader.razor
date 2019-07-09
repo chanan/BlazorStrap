@@ -1,5 +1,4 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="h3" class="@classname">
     @ChildContent
@@ -7,9 +6,11 @@
 
 
 @code {
-    private string classname => $"popover-header {Class}".RemoveUnneededSpaces();
+    private string classname => 
+        new CssBuilder("popover-header")
+            .AddClass(Class)
+        .Build();
 
     [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

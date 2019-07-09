@@ -1,5 +1,4 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="a" class="@classname">
     @if (PaginationLinkType == PaginationLinkType.Custom)
@@ -27,7 +26,10 @@
 </DynamicElement>
 
 @code {
-    string classname => $"page-link {Class}".RemoveUnneededSpaces();
+    string classname => 
+        new CssBuilder("page-link")
+            .AddClass(Class)
+        .Build();
     
     [Parameter] private string Href { get; set; }
     [Parameter] private PaginationLinkType PaginationLinkType { get; set; } = PaginationLinkType.Custom;
@@ -52,4 +54,3 @@
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
-

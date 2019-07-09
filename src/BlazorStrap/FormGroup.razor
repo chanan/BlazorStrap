@@ -1,20 +1,18 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @ChildContent
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
-        {
-            var check = IsCheck ? "form-check" : "form-group";
-            var row = IsRow ? "row" : null;
-            return $"{check} {row} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    string classname =>
+        new CssBuilder()
+            .AddClass("form-check", IsCheck)
+            .AddClass("form-group", !IsCheck)
+            .AddClass("row", IsRow)
+            .AddClass(Class)
+        .Build();
+
     [Parameter] private bool IsRow { get; set; }
     [Parameter] private bool IsCheck { get; set; }
     [Parameter] private string Class { get; set; }

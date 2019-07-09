@@ -1,5 +1,5 @@
 ﻿@inherits ToggleableComponentBase
-@using  BlazorStrap.util
+@implements IDisposable
 
 <CascadingValue Value="@DropDownMenuControl">
     <DynamicElement Attributes="@UnknownParameters" TagName="li" class="@classname" @onfocusout="@LostFocus">
@@ -8,26 +8,14 @@
 </CascadingValue>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            var dropdown = IsDropdown ? "dropdown" : null;
-            var show = "";
-            if (IsDropdown)
-            {
-                if (!_manual)
-                {
-                    show = DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id) ? "show" : null;
-                }
-                else
-                {
-                    show = (bool)IsOpen ? "show" : null;
-                }
-            }
-            return $"nav-item {dropdown} {show} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    private string classname =>
+        new CssBuilder("nav-item")
+            .AddClass("dropdown", IsDropdown)
+            .AddClass("show", IsDropdown && !_manual && DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id))
+            .AddClass("show", IsDropdown && _manual && IsOpen.HasValue && IsOpen.Value)
+            .AddClass(Class)
+        .Build();
+   
     [Parameter] private bool IsDropdown { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }

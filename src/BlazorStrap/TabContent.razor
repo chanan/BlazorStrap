@@ -1,12 +1,14 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @ChildContent
 </DynamicElement>
 
 @code {
-    string classname => $"tab-content {Class}".RemoveUnneededSpaces();
+    string classname => 
+        new CssBuilder("tab-content")
+            .AddClass(Class)
+        .Build();
     
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }

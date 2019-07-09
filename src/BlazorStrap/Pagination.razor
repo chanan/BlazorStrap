@@ -1,5 +1,4 @@
 ﻿@inherits BootstrapComponentBase
-@using BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="nav" aria-label="Pagination">
     <ul class="@classname" style="@Style">
@@ -8,15 +7,13 @@
 </DynamicElement>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            var size = Size != Size.None ? $"pagination-{Size.ToDescriptionString()}" : null;
-            var alignment = GetAlignment();
-            return $"pagination {size} {alignment} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    private string classname =>
+        new CssBuilder("pagination")
+            .AddClass($"pagination-{Size.ToDescriptionString()}", Size != Size.None)
+            .AddClass(GetAlignment())
+            .AddClass(Class)
+        .Build();
+
     [Parameter] private Size Size { get; set; } = Size.None;
     [Parameter] private Alignment Alignment { get; set; } = Alignment.Left;
     [Parameter] private string Class { get; set; }

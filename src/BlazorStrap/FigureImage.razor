@@ -1,10 +1,12 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement TagName="img" class="@classname" style="@Style" Attributes="@UnknownParameters" />
 
 @code {
-    string classname => $"figure-img img-fluid rounded {Class}".RemoveUnneededSpaces();
+    string classname =>
+        new CssBuilder("figure-img img-fluid rounded")
+            .AddClass(Class)
+        .Build();
     
     [Parameter] private string Class { get; set; }
     [Parameter] private string Style { get; set; }

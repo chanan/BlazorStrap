@@ -1,5 +1,4 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 @if (IsOpen)
 {
@@ -15,7 +14,12 @@
 }
 
 @code {
-    private string classname => $"alert alert-{Color.ToDescriptionString()} {Class}".RemoveUnneededSpaces();
+    private string classname => 
+        new CssBuilder().AddClass("alert")
+            .AddClass($"alert-{Color.ToDescriptionString()}")
+            .AddClass(Class)
+        .Build();
+
     [Parameter] private Color Color { get; set; } = Color.Primary;
     [Parameter] private bool IsDismissible { get; set; }
     [Parameter] private string Class { get; set; }

@@ -1,6 +1,4 @@
 ﻿@inherits ToggleableComponentBase
-@using BlazorStrap.util
-
 @inject Microsoft.JSInterop.IJSRuntime JSRuntime
 
 @if (_isOpen)
@@ -12,16 +10,14 @@
 }
 
 @code {
+    private string classname =>
+        new CssBuilder("popover")
+            .AddClass($"bs-popover-{Placement.ToDescriptionString()}")
+            .AddClass("show", _isOpen)
+            .AddClass(Class)
+        .Build();
+
     private ElementRef arrow;
-    private string classname
-    {
-        get
-        {
-            var open = _isOpen ? "show" : null;
-            var placement = $"bs-popover-{Placement.ToDescriptionString()}";
-            return $"popover {placement} {open} {Class}".RemoveUnneededSpaces();
-        }
-    }
 
     protected override void OnAfterRender()
     {

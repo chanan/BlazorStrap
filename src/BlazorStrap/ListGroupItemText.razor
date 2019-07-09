@@ -1,12 +1,15 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @ChildContent
 </DynamicElement>
 
 @code {
-    string classname => $"d-flex w-100 justify-content-between {Class}".RemoveUnneededSpaces();
+    string classname => 
+        new CssBuilder("d-flex w-100 justify-content-between")
+            .AddClass(Class)
+        .Build();
+
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }

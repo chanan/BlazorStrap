@@ -1,19 +1,16 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
     @ChildContent
 </DynamicElement>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            var fluid = IsFluid ? "container-fluid" : "container";
-            return $"{fluid} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    private string classname =>
+        new CssBuilder()
+            .AddClass("container", !IsFluid)
+            .AddClass("container-fluid", IsFluid)
+            .AddClass(Class)
+        .Build();
 
     [Parameter] private bool IsFluid { get; set; }
     [Parameter] private string Class { get; set; }

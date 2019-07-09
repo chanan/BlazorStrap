@@ -1,12 +1,14 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="button" class="@classname" aria-label="Toggle navigation" @onclick="@onclick">
     <span class="navbar-toggler-icon"></span>
 </DynamicElement>
 
 @code {
-    private string classname => $"navbar-toggler {Class}".RemoveUnneededSpaces();
+    private string classname => 
+        new CssBuilder("navbar-toggler")
+            .AddClass(Class)
+        .Build();
 
     [Parameter] private EventCallback<UIMouseEventArgs> onclick { get; set; }
     [Parameter] private string Class { get; set; }

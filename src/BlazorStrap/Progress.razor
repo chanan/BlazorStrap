@@ -1,5 +1,4 @@
 ﻿@inherits BootstrapComponentBase
-@using BlazorStrap.util
 
 @if (!IsMulti && !IsBar)
 {
@@ -9,7 +8,7 @@
 }
 @if (IsMulti && !IsBar)
 {
-    <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" style="@Style">
+    <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classnameMulti" style="@Style">
         @ChildContent
     </DynamicElement>
 }
@@ -21,6 +20,19 @@
 }
 
 @code {
+    private string classname =>
+        new CssBuilder("progress-bar")
+            .AddClass("progress-bar-striped", IsStriped)
+            .AddClass("progress-bar-animated", IsAnimated)
+            .AddClass($"bg-{Color.ToDescriptionString()}", Color != Color.None)
+            .AddClass(Class)
+        .Build();
+
+    private string classnameMulti =>
+        new CssBuilder("progress")
+            .AddClass(Class)
+        .Build();
+
     [Parameter] private int Value { get; set; }
     [Parameter] private int Max { get; set; } = 100;
     string styles
@@ -29,18 +41,7 @@
         {
             if (Value == 0) { return null; }
             var percent = Math.Round(((double)Value / (double)Max) * 100);
-            return $"width: {percent}%; {Style}".RemoveUnneededSpaces();
-        }
-    }
-    private string classname
-    {
-        get
-        {
-            if (IsMulti && !IsBar) { return $"progress {Class}"; }
-            var color = Color != Color.None ? $"bg-{Color.ToDescriptionString()}" : null;
-            var striped = IsStriped ? "progress-bar-striped" : null;
-            var animated = IsAnimated ? "progress-bar-animated" : null;
-            return $"progress-bar {striped} {animated} {color} {Class}".RemoveUnneededSpaces();
+            return $"width: {percent}%; {Style}".Trim();
         }
     }
     [Parameter] private Color Color { get; set; } = Color.None;

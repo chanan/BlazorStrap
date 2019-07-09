@@ -1,19 +1,16 @@
 ﻿@inherits BootstrapComponentBase
-@using BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="tr" class="@classname">
     @ChildContent
 </DynamicElement>
 
 @code {
-    string classname
-    {
-        get
-        {
-            var color = Color != Color.None ? $"table-{Color.ToDescriptionString()}" : null;
-            return $"{color} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    string classname =>
+        new CssBuilder()
+            .AddClass($"table-{Color.ToDescriptionString()}", Color != Color.None)
+            .AddClass(Class)
+        .Build();
+
     [Parameter] private Color Color { get; set; } = Color.None;
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }

@@ -1,26 +1,19 @@
 ﻿@inherits BlazorStrap.BootstrapComponentBase
-@using BlazorStrap
-@using BlazorStrap.util
-@using Microsoft.AspNetCore.Components
 
-<DynamicElement TagName="@Tag" @onclick="@onclick" type="@type" class="@classname" disabled="@disabled" role="button" aria-pressed="@pressed" aria-disabled="@disabled" tabindex="@tab" value="@Value" Attributes="@UnknownParameters">
+<DynamicElement TagName="@Tag" @onclick="@OnClick" type="@type" class="@classname" disabled="@disabled" role="button" aria-pressed="@pressed" aria-disabled="@disabled" tabindex="@tab" value="@Value" Attributes="@UnknownParameters">
     @ChildContent
 </DynamicElement>
 
 @code {
-    private string classname
-    {
-        get
-        {
-            var outline = IsOutline ? $"btn-outline-{Color.ToDescriptionString()}" : null;
-            var color = Color != Color.None && !IsOutline ? $"btn-{Color.ToDescriptionString()}" : null;
-            var size = Size != Size.None ? $"btn-{Size.ToDescriptionString()}" : null;
-            var block = IsBlock ? "btn-block" : null;
-            var active = ButtonType == ButtonType.Link && IsActive ? "active" : null;
-            var linkDisabled = ButtonType == ButtonType.Link && IsDisabled ? "disabled" : null;
-            return $"btn {color} {outline} {size} {block} {active} {linkDisabled} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    private string classname =>
+        new CssBuilder("btn")
+            .AddClass( $"btn-outline-{Color.ToDescriptionString()}", IsOutline)
+            .AddClass($"btn-{Color.ToDescriptionString()}", Color != Color.None && !IsOutline)
+            .AddClass($"btn-{Size.ToDescriptionString()}", Size != Size.None)
+            .AddClass("btn-block", IsBlock)
+            .AddClass("active", ButtonType == ButtonType.Link && IsActive)
+            .AddClass("disabled", ButtonType == ButtonType.Link && IsDisabled)
+        .Build();
 
     private string Tag { get; set; } = "button";
 
@@ -39,7 +32,7 @@
             _ => null
         };
 
-    [Parameter] private EventCallback<UIMouseEventArgs> onclick { get; set; }
+    [Parameter] private EventCallback<UIMouseEventArgs> OnClick { get; set; }
     [Parameter] private Color Color { get; set; } = Color.Primary;
 
     private ButtonType _buttonType = ButtonType.Button;

@@ -1,5 +1,4 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="li" class="@classname" aria-current="@aria">
     @ChildContent
@@ -7,14 +6,12 @@
 
 
 @code {
-    private string classname
-    {
-        get
-        {
-            var active = IsActive ? "breadcrumb-item active" : "breadcrumb-item";
-            return $"{active} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    private string classname =>
+        new CssBuilder("breadcrumb-item")
+            .AddClass("active", IsActive)
+            .AddClass(Class)
+        .Build();
+
     private string aria => IsActive ? "page" : null;
     
     [Parameter] private bool IsActive { get; set; }

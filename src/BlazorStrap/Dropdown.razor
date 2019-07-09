@@ -1,5 +1,4 @@
 ﻿@inherits ToggleableComponentBase
-@using  BlazorStrap.util
 
 <CascadingValue Value="@DropDownMenuControl">
     <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" @onfocusout="@LostFocus">
@@ -8,24 +7,16 @@
 </CascadingValue>
 
 @code {
-    string classname
-    {
-        get
-        {
-            var show = "";
-            if (!_manual)
-            {
-                show = DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id) ? "show" : null;
-            }
-            else
-            {
-                show = (bool)IsOpen ? "show" : null;
-            }
-            var baseclass = IsGroup ? "btn-group" : "dropdown";
-            var direction = DropdownDirection != DropdownDirection.Down ? DropdownDirection.ToDescriptionString() : null;
-            return $"{baseclass} {direction} {show} {Class}".RemoveUnneededSpaces();
-        }
-    }
+    string classname =>
+        new CssBuilder()
+            .AddClass("dropdown", !IsGroup)
+            .AddClass("btn-group", IsGroup)
+            .AddClass(DropdownDirection.ToDescriptionString(), DropdownDirection != DropdownDirection.Down)
+            .AddClass("show", !_manual && DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id))
+            .AddClass("show", _manual && IsOpen.HasValue && IsOpen.Value)
+            .AddClass(Class)
+        .Build();
+
     [Parameter] private DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
     [Parameter] private bool IsGroup { get; set; }
     [Parameter] private string Class { get; set; }

@@ -9,13 +9,15 @@
 </DynamicElement>
 
 @code {
-    private string classname => $"carousel-indicators {Class}".RemoveUnneededSpaces();
+    private string classname =>
+        new CssBuilder("carousel-indicators")
+            .AddClass(Class)
+        .Build();
     
     [Parameter] private int NumberOfItems { get; set; }
     [Parameter] private int ActiveIndex { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
-
     [Parameter] private EventCallback<int> ActiveIndexChanged { get; set; }
     [Parameter] private EventCallback<int> ActiveIndexChangedEvent { get; set; }
 

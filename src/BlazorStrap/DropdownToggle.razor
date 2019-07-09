@@ -1,5 +1,4 @@
 ﻿@inherits BootstrapComponentBase
-@using BlazorStrap.util
 
 @if (IsOpen == null)
 {
@@ -15,16 +14,14 @@ else
 }
 
 @code {
-    string classname
-    {
-        get
-        {
-            var color = Color != Color.None ? $"btn-{Color.ToDescriptionString()}" : null;
-            var split = IsSplit ? "dropdown-toggle-split" : null;
-            var size = Size != Size.None ? $"btn-{Size.ToDescriptionString()}" : null;
-            return $"btn {size} {color} {split} dropdown-toggle {Class}".RemoveUnneededSpaces();
-        }
-    }
+    string classname =>
+        new CssBuilder("btn")
+            .AddClass($"btn-{Size.ToDescriptionString()}", Size != Size.None)
+            .AddClass($"btn-{Color.ToDescriptionString()}", Color != Color.None)
+            .AddClass("dropdown-toggle-split", IsSplit)
+            .AddClass("dropdown-toggle")
+            .AddClass(Class)
+        .Build();
 
     //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
     string Tag => "button";

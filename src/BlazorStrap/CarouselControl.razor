@@ -1,5 +1,4 @@
 ﻿@inherits BootstrapComponentBase
-@using  BlazorStrap.util
 
 <DynamicElement Attributes="@UnknownParameters" TagName="a" class="@classname" role="button" @onclick="@_onclick">
     <span class="@iconClassname" aria-hidden="true"></span>
@@ -7,23 +6,19 @@
 </DynamicElement>
 
     @code {
-        private string classname
-        {
-            get
-            {
-                var direction = CarouselDirection == CarouselDirection.Previous ? "prev" : "next";
-                return $"carousel-control-{direction} {Class}".RemoveUnneededSpaces();
-            }
-        }
-        private string iconClassname
-        {
-            get
-            {
-                var direction = CarouselDirection == CarouselDirection.Previous ? "prev" : "next";
-                return $"carousel-control-{direction}-icon".RemoveUnneededSpaces();
-            }
+        private string classname =>
+            new CssBuilder()
+                .AddClass("carousel-control-prev", CarouselDirection == CarouselDirection.Previous)
+                .AddClass("carousel-control-next", CarouselDirection == CarouselDirection.Next)
+                .AddClass(Class)
+            .Build();
 
-        }
+        private string iconClassname =>
+            new CssBuilder()
+                .AddClass("carousel-control-prev-icon",  CarouselDirection == CarouselDirection.Previous)
+                .AddClass("carousel-control-next-icon",  CarouselDirection == CarouselDirection.Next)
+            .Build();
+
         private string directionName => CarouselDirection == CarouselDirection.Previous ? "Previous" : "Next";
         
         [Parameter] private int ActiveIndex { get; set; }
