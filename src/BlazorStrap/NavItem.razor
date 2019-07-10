@@ -52,7 +52,7 @@
 
     private void LostFocus()
     {
-     if(DropDownMenuControl != null && IsDropdown)
+     if(DropDownMenuControl != null && IsDropdown && !_manual)
         {
             if (DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id))
             {
