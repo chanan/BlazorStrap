@@ -4,7 +4,7 @@
 
 @code {
     private string classname => 
-        new CssBuilder(string.Empty) //Can be removed once https://github.com/EdCharbeneau/CssBuilder/pull/6 is merged
+        new CssBuilder()
             .AddClass("active", IsActive)
         .Build();
 
