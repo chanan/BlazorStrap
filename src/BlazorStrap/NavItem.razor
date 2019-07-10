@@ -1,5 +1,6 @@
 ﻿@inherits ToggleableComponentBase
 @implements IDisposable
+@using System.Timers;
 
 <CascadingValue Value="@DropDownMenuControl">
     <DynamicElement Attributes="@UnknownParameters" TagName="li" class="@classname" @onfocusout="@LostFocus">
@@ -15,7 +16,9 @@
             .AddClass("show", IsDropdown && _manual && IsOpen.HasValue && IsOpen.Value)
             .AddClass(Class)
         .Build();
-   
+
+    private System.Timers.Timer _timer = new Timer(100);
+
     [Parameter] private bool IsDropdown { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
@@ -23,6 +26,7 @@
     public DropDownMenuControl DropDownMenuControl { get; set; } = new DropDownMenuControl();
     protected override Task OnInitAsync()
     {
+        _timer.Elapsed += OnTimedEvent;
         if (DropDownMenuHandler != null && IsDropdown && !_manual)
         {
             DropDownMenuControl.Handler = DropDownMenuHandler;
@@ -52,13 +56,19 @@
 
     private void LostFocus()
     {
-     if(DropDownMenuControl != null && IsDropdown && !_manual)
+        if (DropDownMenuControl != null && IsDropdown && !_manual)
         {
             if (DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id))
             {
-                Invoke(() => DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id));
+                _timer.Start();
             }
         }
+    }
+
+    private void OnTimedEvent(Object source, ElapsedEventArgs e)
+    {
+        _timer.Stop();
+        Invoke(() => DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id));
     }
 
     public void Dispose()
@@ -66,6 +76,12 @@
         if (DropDownMenuHandler != null && IsDropdown && IsOpen == null)
         {
             DropDownMenuHandler.RemoveDropDownMenu(DropDownMenuControl.Id);
+        }
+        if (_timer != null)
+        {
+            _timer.Stop();
+            _timer.Dispose();
+            _timer = null;
         }
     }
 }

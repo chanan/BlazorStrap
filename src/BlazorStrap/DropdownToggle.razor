@@ -14,50 +14,51 @@ else
 }
 
 @code {
-    string classname =>
-        new CssBuilder("btn")
-            .AddClass($"btn-{Size.ToDescriptionString()}", Size != Size.None)
-            .AddClass($"btn-{Color.ToDescriptionString()}", Color != Color.None)
-            .AddClass("dropdown-toggle-split", IsSplit)
-            .AddClass("dropdown-toggle")
-            .AddClass(Class)
-        .Build();
+string classname =>
+    new CssBuilder("btn")
+        .AddClass($"btn-{Size.ToDescriptionString()}", Size != Size.None)
+        .AddClass($"btn-{Color.ToDescriptionString()}", Color != Color.None)
+        .AddClass("dropdown-toggle-split", IsSplit)
+        .AddClass("dropdown-toggle")
+        .AddClass(Class)
+    .Build();
 
-    //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
-    string Tag => "button";
+//Link buttons won't work https://github.com/aspnet/Blazor/issues/715
+string Tag => "button";
 
-    //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
-    string Type => "button";
+//Link buttons won't work https://github.com/aspnet/Blazor/issues/715
+string Type => "button";
 
-    [Parameter] private Color Color { get; set; } = Color.None;
-    [Parameter] private Size Size { get; set; } = Size.None;
-    //Link buttons won't work https://github.com/aspnet/Blazor/issues/715
-    //[Parameter] private bool IsLink { get; set; }
-    [Parameter] private bool IsSplit { get; set; }
-    [Parameter] private bool? IsOpen { get; set; }
-    [Parameter] private EventCallback<UIMouseEventArgs> onclick { get; set; }
-    [Parameter] private string Class { get; set; }
-    [Parameter] private RenderFragment ChildContent { get; set; }
-    [CascadingParameter] private DropDownMenuControl DropDownMenuControl { get; set; }
+[Parameter] private Color Color { get; set; } = Color.None;
+[Parameter] private Size Size { get; set; } = Size.None;
+//Link buttons won't work https://github.com/aspnet/Blazor/issues/715
+//[Parameter] private bool IsLink { get; set; }
+[Parameter] private bool IsSplit { get; set; }
+[Parameter] private bool? IsOpen { get; set; }
+[Parameter] private EventCallback<UIMouseEventArgs> onclick { get; set; }
+[Parameter] private string Class { get; set; }
+[Parameter] private RenderFragment ChildContent { get; set; }
+[CascadingParameter] private DropDownMenuControl DropDownMenuControl { get; set; }
 
-    private void Escape(UIKeyboardEventArgs e)
+private void Escape(UIKeyboardEventArgs e)
+{
+    if (e.Key.ToLower() == "escape" && (IsOpen == true || DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id)))
     {
-        if (e.Key.ToLower() == "escape" && (IsOpen == true || DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id)))
-        {
-            DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id);
-        }
+        DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id);
     }
+}
 
-    private void onClickEvent(UIMouseEventArgs e)
+private void onClickEvent(UIMouseEventArgs e)
+{
+    Console.WriteLine("dropdown-toggle onClickEvent");
+    if (onclick.HasDelegate)
     {
-        if (onclick.HasDelegate)
-        {
-            onclick.InvokeAsync(e);
-        }
-        if (DropDownMenuControl.Handler != null && IsOpen == null)
-        {
-            DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id);
-            StateHasChanged();
-        }
+        onclick.InvokeAsync(e);
     }
+    if (DropDownMenuControl.Handler != null && IsOpen == null)
+    {
+        DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id);
+        StateHasChanged();
+    }
+}
 }
