@@ -20,7 +20,7 @@
 
     private System.Timers.Timer _timer = new Timer(100);
 
-    private string Tag => BlazorNavValues.IsList ? "ul" : "nav";
+    private string Tag => BlazorNavValues.IsList ? "li" : "div";
 
     [Parameter] private bool IsDropdown { get; set; }
     [Parameter] private string Class { get; set; }
