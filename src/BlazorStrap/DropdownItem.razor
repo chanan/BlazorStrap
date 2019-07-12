@@ -8,11 +8,10 @@
     string classname =>
         new CssBuilder()
             .AddClass("dropdown-divider", IsDivider)
-            .AddClass(Class, IsDivider)
             .AddClass("dropdown-item", !IsDivider)
             .AddClass("active", !IsDivider && IsActive)
             .AddClass("disabled", !IsDivider && IsActive)
-            .AddClass(Class, !IsDivider)
+            .AddClass(Class)
         .Build();
 
     string Tag

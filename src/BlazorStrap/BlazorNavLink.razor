@@ -9,6 +9,7 @@
         new CssBuilder("nav-item nav-link")
             .AddClass("active", IsActive)
             .AddClass("disabled", IsDisabled)
+            .AddClass(Class)
         .Build();
 
     [Parameter] private bool IsActive { get; set; }

@@ -13,6 +13,7 @@
             .AddClass("btn-block", IsBlock)
             .AddClass("active", ButtonType == ButtonType.Link && IsActive)
             .AddClass("disabled", ButtonType == ButtonType.Link && IsDisabled)
+            .AddClass(Class)
         .Build();
 
     private string Tag { get; set; } = "button";
