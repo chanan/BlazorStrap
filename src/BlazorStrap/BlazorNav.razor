@@ -1,12 +1,12 @@
 ﻿@inherits BootstrapComponentBase
 
-<CascadingValue Value="@DropDownMenuHandler">
+<CascadingValue Value="@BlazorNavValues">
     <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname">
         @ChildContent
     </DynamicElement>
 </CascadingValue>
 @code {
- 
+
     private string classname =>
         new CssBuilder("nav")
             .AddClass("navbar-nav", IsNavbar)
@@ -20,7 +20,18 @@
 
     private string Tag => IsList ? "ul" : "nav";
 
-    [Parameter] private bool IsList { get; set; }
+    private bool _isList;
+    [Parameter] private bool IsList {
+        get
+        {
+            return _isList;
+        }
+        set
+        {
+            _isList = value;
+            BlazorNavValues.IsList = value;
+        }
+    }
     [Parameter] private Alignment Alignment { get; set; } = Alignment.None;
     [Parameter] private bool IsVertical { get; set; }
     [Parameter] private bool IsTabs { get; set; }
@@ -29,7 +40,7 @@
     [Parameter] private bool IsNavbar { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
-    private DropDownMenuHandler DropDownMenuHandler { get; set; } = new DropDownMenuHandler();
+    private BlazorNavValues BlazorNavValues { get; set; } = new BlazorNavValues { DropDownMenuHandler = new DropDownMenuHandler() };
 
     private string GetAlignment()
     {
@@ -38,15 +49,15 @@
         return null;
     }
 
-   protected override void OnInit()
+    protected override void OnInit()
     {
-        DropDownMenuHandler.OnToggle += OnToggle;
+        BlazorNavValues.DropDownMenuHandler.OnToggle += OnToggle;
         base.OnInit();
     }
     private void OnToggle(Object Sender, EventArgs e)
     {
-        DropDownMenuHandler = DropDownMenuHandler;
+        BlazorNavValues.DropDownMenuHandler = BlazorNavValues.DropDownMenuHandler;
         StateHasChanged();
     }
-    
+
 }

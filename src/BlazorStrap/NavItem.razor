@@ -3,7 +3,7 @@
 @using System.Timers;
 
 <CascadingValue Value="@DropDownMenuControl">
-    <DynamicElement Attributes="@UnknownParameters" TagName="li" class="@classname" @onfocusout="@LostFocus" @onmousedown="@(() => _MouseDown = true)">
+    <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" @onfocusout="@LostFocus" @onmousedown="@(() => _MouseDown = true)">
         @ChildContent
     </DynamicElement>
 </CascadingValue>
@@ -20,19 +20,21 @@
 
     private System.Timers.Timer _timer = new Timer(100);
 
+    private string Tag => BlazorNavValues.IsList ? "ul" : "nav";
+
     [Parameter] private bool IsDropdown { get; set; }
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
-    [CascadingParameter] private DropDownMenuHandler DropDownMenuHandler { get; set; }
+    [CascadingParameter] private BlazorNavValues BlazorNavValues { get; set; }
     public DropDownMenuControl DropDownMenuControl { get; set; } = new DropDownMenuControl();
     protected override Task OnInitAsync()
     {
         _timer.Elapsed += OnTimedEvent;
-        if (DropDownMenuHandler != null && IsDropdown && !_manual)
+        if (BlazorNavValues.DropDownMenuHandler != null && IsDropdown && !_manual)
         {
-            DropDownMenuControl.Handler = DropDownMenuHandler;
+            DropDownMenuControl.Handler = BlazorNavValues.DropDownMenuHandler;
             DropDownMenuControl.Id = Guid.NewGuid().ToString();
-            DropDownMenuHandler.AddDropDownMenu(DropDownMenuControl.Id);
+            BlazorNavValues.DropDownMenuHandler.AddDropDownMenu(DropDownMenuControl.Id);
         }
         return base.OnInitAsync();
     }
@@ -75,9 +77,9 @@
 
     public void Dispose()
     {
-        if (DropDownMenuHandler != null && IsDropdown && IsOpen == null)
+        if (BlazorNavValues.DropDownMenuHandler != null && IsDropdown && IsOpen == null)
         {
-            DropDownMenuHandler.RemoveDropDownMenu(DropDownMenuControl.Id);
+            BlazorNavValues.DropDownMenuHandler.RemoveDropDownMenu(DropDownMenuControl.Id);
         }
         if (_timer != null)
         {
