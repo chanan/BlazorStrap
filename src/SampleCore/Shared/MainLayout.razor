@@ -11,9 +11,28 @@
     </div>
 </div>
 
-@code {      
+@code { 
+    private bool isServerSide = false;
+    private bool hasBeendone = false;
+
     protected override async Task OnInitAsync()
     {
-        await BootstrapCSS.SetBootstrapCSS(Theme.United, "4.3.1");
+        try
+        {
+            await BootstrapCSS.SetBootstrapCSS("4.3.1");
+        }
+        catch (Exception)
+        {
+            isServerSide = true;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync()
+    {
+        if (isServerSide && !hasBeendone)
+        {
+            await BootstrapCSS.SetBootstrapCSS("4.3.1");
+            hasBeendone = true;
+        }
     }
 }

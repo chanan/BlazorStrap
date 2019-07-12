@@ -1,0 +1,18 @@
+﻿<BlazorButton Color="Color.Primary" OnClick="@onclick">Launch demo modal</BlazorButton>
+<Modal IsOpen="@IsOpen">
+    <ModalHeader OnClick="@onclick">Modal title</ModalHeader>
+    <ModalBody><p>Modal body text goes here.</p></ModalBody>
+    <ModalFooter>
+        <BlazorButton Color="Color.Secondary" OnClick="@onclick">Close</BlazorButton>
+        <BlazorButton Color="Color.Primary" OnClick="@onclick">Save Changes</BlazorButton>
+    </ModalFooter>
+</Modal>
+
+@code {
+    bool IsOpen { get; set; }
+    void onclick(UIMouseEventArgs e)
+    {
+        IsOpen = !IsOpen;
+        StateHasChanged();
+    }
+}
