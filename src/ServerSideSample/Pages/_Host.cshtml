@@ -9,23 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BlazorStrap Server Side Sample</title>
     <base href="~/" />
-    <environment include="Development">
-        <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="/css/bootstrap/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
-    </environment>
-    <link href="/css/site.css" rel="stylesheet" />
+    <link href="_content/SampleCore/css/site.css" rel="stylesheet" />
 </head>
 <body>
     <app></app>
 
     <script src="_framework/blazor.server.js"></script>
+
+    <!-- BlazorStyled is used by BlazorStrap documentation site -->
     <script src="_content/BlazorStyled/styled.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- The below two files are needed by BlazorStrap -->
     <script src="_content/BlazorStrap/blazorStrap.js"></script>
     <script src="_content/BlazorStrap/popper.min.js"></script>
 </body>

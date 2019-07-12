@@ -1,0 +1,29 @@
+﻿@inject IBootstrapCSS BootstrapCSS
+
+<BlazorForm>
+    <BlazorInput InputType="InputType.Select" Value="@Selected" ValueChanged="@SelectedChanged">
+        @foreach (string theme in themes)
+        {
+            <option value="@theme">@theme</option>
+        }
+    </BlazorInput>
+</BlazorForm>
+
+
+@code {
+    private List<string> themes;
+    private string Selected { get; set; }
+
+    private async void SelectedChanged(string value)
+    {
+        Selected = value;
+        await BootstrapCSS.SetBootstrapCSS(value, "4.3.1");
+    }
+
+
+    protected override void OnInit()
+    {
+        themes = Enum.GetNames(typeof(Theme)).ToList();
+        Selected = BootstrapCSS.CurrentTheme.ToString();
+    }
+}

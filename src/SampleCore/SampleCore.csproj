@@ -14,7 +14,20 @@
   <ItemGroup>
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
   </ItemGroup>
-  
 
+  <ItemGroup>
+    <!-- .js/.css files will be referenced via <script>/<link> tags; other content files will just be included in the app's 'dist' directory without any tags referencing them -->
+    <EmbeddedResource Include="wwwroot\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="wwwroot\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="wwwroot\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\snippets\themes\themes1.html" />
+    <Content Remove="wwwroot\snippets\themes\themes2.html" />
+    <Content Remove="wwwroot\snippets\themes\themes3.html" />
+    <Content Remove="wwwroot\snippets\themes\themes4.html" />
+    <Content Remove="wwwroot\snippets\themes\themes5.html" />
+  </ItemGroup>
 
 </Project>

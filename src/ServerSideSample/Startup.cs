@@ -1,4 +1,5 @@
 using BlazorPrettyCode;
+using BlazorStrap;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -48,6 +49,7 @@ namespace ServerSideSample
                 defaults.DefaultTheme = "SolarizedDark";
                 defaults.ShowLineNumbers = true;
             });
+            services.AddBootstrapCSS();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
