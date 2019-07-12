@@ -37,5 +37,10 @@ namespace BlazorStrap.Util
         {
             return JSRuntime.InvokeAsync<object>("blazorStrap.focusElement", el);
         }
+
+        public Task SetBootstrapCSS(string theme, string version)
+        {
+            return JSRuntime.InvokeAsync<bool>("blazorStrap.setBootstrapCSS", theme, version);
+        }
     }
 }

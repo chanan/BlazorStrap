@@ -1,4 +1,6 @@
-﻿window.blazorStrap = {
+﻿var link;
+
+window.blazorStrap = {
     log: function (message) {
         console.log("message: ", message);
         return true;
@@ -36,6 +38,20 @@
     },
     focusElement: function (element) {
         element.focus();
+    },
+    setBootstrapCSS: function (theme, version) {
+        if (link === undefined) {
+            link = document.createElement('link');
+            document.head.insertBefore(link, document.head.firstChild);
+            link.type = 'text/css';
+            link.rel = 'stylesheet';
+        }
+        if (theme === 'bootstrap') {
+            link.href = `https://stackpath.bootstrapcdn.com/bootstrap/${version}/css/bootstrap.min.css`;
+        } else {
+            link.href = `https://stackpath.bootstrapcdn.com/bootswatch/${version}/${theme}/bootstrap.min.css`;
+        }
+        return true;
     }
 };
 

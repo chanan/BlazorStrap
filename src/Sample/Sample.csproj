@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
     <ProjectReference Include="..\SampleCore\SampleCore.csproj" />
   </ItemGroup>
 
