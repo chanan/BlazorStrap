@@ -3,12 +3,13 @@
 @using System.Timers;
 
 <CascadingValue Value="@DropDownMenuControl">
-    <DynamicElement Attributes="@UnknownParameters" TagName="li" class="@classname" @onfocusout="@LostFocus">
+    <DynamicElement Attributes="@UnknownParameters" TagName="li" class="@classname" @onfocusout="@LostFocus" @onmousedown="@(() => _MouseDown = true)">
         @ChildContent
     </DynamicElement>
 </CascadingValue>
 
 @code {
+    private bool _MouseDown = false;
     private string classname =>
         new CssBuilder("nav-item")
             .AddClass("dropdown", IsDropdown)
@@ -56,13 +57,14 @@
 
     private void LostFocus()
     {
-        if (DropDownMenuControl != null && IsDropdown && !_manual)
+        if (DropDownMenuControl != null && IsDropdown && !_manual && !_MouseDown)
         {
             if (DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id))
             {
                 _timer.Start();
             }
         }
+        _MouseDown = false;
     }
 
     private void OnTimedEvent(Object source, ElapsedEventArgs e)
