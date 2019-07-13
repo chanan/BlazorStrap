@@ -1,0 +1,84 @@
+@inherits LayoutComponentBase
+@inject IBootstrapCSS BootstrapCSS
+
+<Navbar IsFixedTop="true" IsDark="true" Class="navbar-expand flex-column flex-md-row bd-navbar">
+    <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Blazorstrap"><img src="_content/samplecore/logo-inverted.svg" width="36" height="36" alt="BlazorStrap"></a>
+    <div class="navbar-nav-scroll">
+        <BlazorNav IsList="true" class="navbar-nav bd-navbar-nav flex-row">
+            <NavItem>
+                <BlazorNavLink Href="/">Home</BlazorNavLink>
+            </NavItem>
+            <NavItem>
+                <BlazorNavLink Href="/">Documentation</BlazorNavLink>
+            </NavItem>
+            <NavItem IsDropdown="true">
+                <DropdownToggle Color="Color.Light" IsLink="true">Themes</DropdownToggle>
+                <ThemeSwitcher IsDropDown="true" />
+            </NavItem>
+        </BlazorNav>
+    </div>
+
+    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+        <li class="nav-item">
+            <a class="nav-link p-2" href="https://github.com/twbs/bootstrap" target="_blank" rel="noopener" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" class="navbar-nav-svg" viewBox="0 0 512 499.36" role="img" focusable="false"><title>GitHub</title><path fill="currentColor" fill-rule="evenodd" d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z"></path></svg></a>
+        </li>
+    </ul>
+
+    <a class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3" href="/docs/4.3/getting-started/download/">Download</a>
+</Navbar>
+
+
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <form class="bd-search d-flex align-items-center">
+                <span class="algolia-autocomplete" style="position: relative; display: inline-block; direction: ltr;"><input type="search" class="form-control ds-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" data-docs-version="4.3" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: normal; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="ds-dropdown-menu" role="listbox" id="algolia-autocomplete-listbox-0" style="position: absolute; top: 100%; z-index: 100; display: none; left: 0px; right: auto;"><div class="ds-dataset-1"></div></span></span>
+                <button class="btn btn-link bd-search-docs-toggle d-md-none p-0 ml-3" type="button" data-toggle="collapse" data-target="#bd-docs-nav" aria-controls="bd-docs-nav" aria-expanded="false" aria-label="Toggle docs navigation"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img" focusable="false"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button>
+            </form>
+            <nav class="collapse bd-links" id="bd-docs-nav">
+                <NavMenu />
+            </nav>
+        </div>
+
+        @if (false == true)
+        {
+            <div class="d-none d-xl-block col-xl-2 bd-toc">
+                TODO add support for this
+                <ul class="section-nav">
+                    <li class="toc-entry toc-h2"><a href="#containers">Containers</a></li>
+                    <li class="toc-entry toc-h2"><a href="#responsive-breakpoints">Responsive breakpoints</a></li>
+                    <li class="toc-entry toc-h2"><a href="#z-index">Z-index</a></li>
+                </ul>
+            </div>
+        }
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+            @Body
+        </main>
+    </div>
+</div>
+
+@code {
+    private bool isServerSide = false;
+    private bool hasBeendone = false;
+
+    protected override async Task OnInitAsync()
+    {
+        try
+        {
+            await BootstrapCSS.SetBootstrapCSS("4.3.1");
+        }
+        catch (Exception)
+        {
+            isServerSide = true;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync()
+    {
+        if (isServerSide && !hasBeendone)
+        {
+            await BootstrapCSS.SetBootstrapCSS("4.3.1");
+            hasBeendone = true;
+        }
+    }
+}
