@@ -1,6 +1,6 @@
 ﻿@inherits BootstrapComponentBase
 
-<DynamicElement Attributes="@UnknownParameters" TagName="a" class="@classname">
+<DynamicElement Attributes="@UnknownParameters" TagName="a" class="@classname" disabled="@disabled">
     @ChildContent
 </DynamicElement>
 
@@ -11,6 +11,8 @@
             .AddClass("disabled", IsDisabled)
             .AddClass(Class)
         .Build();
+
+    private string disabled => IsDisabled ? "disabled" : null;
 
     [Parameter] private bool IsActive { get; set; }
     [Parameter] private bool IsDisabled { get; set; }
