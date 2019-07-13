@@ -1,8 +1,13 @@
 ﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">BlazorStrap</a>
-    <button class="navbar-toggler" @onclick=@ToggleNavMenu>
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="d-flex">
+        <button class="navbar-toggler float-right" @onclick=@ToggleNavMenu>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand align-middle" href="/">
+            <img src="_content/SampleCore/logo-inverted.svg" alt="logo" class="sidebar-logo" />
+        </a>
+        <a class="navbar-brand" href="/">BlazorStrap</a>
+    </div>
 </div>
 
 <div class=@(collapseNavMenu ? "collapse" : null) @onclick=@ToggleNavMenu>

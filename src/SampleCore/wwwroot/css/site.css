@@ -359,3 +359,11 @@ h1, h2, h3 {
 h3 {
     margin-top: 10px;
 }
+
+.sidebar-logo {
+    height: 32px;
+}
+
+.main-logo {
+    height: 100px;
+}
