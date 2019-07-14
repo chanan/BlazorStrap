@@ -1,0 +1,15 @@
+@namespace BlazorStrap
+@inherits CodeBSTab;
+
+<CascadingValue Value="@this">
+    @if (Parent.IsList)
+    {
+    <DynamicElement Attributes="@UnknownParameters" TagName="il" class="@classname">
+        @ChildContent
+    </DynamicElement>
+    }
+    else
+    {
+        @ChildContent
+    }
+</CascadingValue>
