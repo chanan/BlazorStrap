@@ -5,11 +5,12 @@
 </DynamicElement>
 
 @code {
-    string classname => 
-        new CssBuilder("tab-content")
-            .AddClass(Class)
-        .Build();
-    
+        string classname =>
+    new CssBuilder("tab-content")
+        .AddClass(Class)
+    .Build();
+
+
     [Parameter] private string Class { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
 }
