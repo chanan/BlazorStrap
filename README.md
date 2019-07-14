@@ -7,7 +7,7 @@ Bootstrap 4 Components for Blazor Framework
 [![NuGet Pre Release](https://img.shields.io/nuget/vpre/BlazorStrap.svg)](https://www.nuget.org/packages/BlazorStrap/)
 
 ## Docs
-https://chanan.github.io/BlazorStrap/
+https://blazorstrap.io
 
 ## BlazorStyled
 
