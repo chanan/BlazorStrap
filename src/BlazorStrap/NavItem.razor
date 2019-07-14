@@ -38,7 +38,7 @@
 
     public void MouseDown()
     {
-        if (!_manual)
+        if (!_manual && IsDropdown)
         {
             _MouseDown = DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id) && true;
         }
