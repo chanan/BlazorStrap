@@ -1,0 +1,15 @@
+﻿@namespace BlazorStrap
+@inherits CodeBSDropdownToggle
+
+@if (IsOpen == null)
+{
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" href="@href" type="@Type" aria-haspopup="true" aria-expanded="@DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id).ToString()" @onclick="@onClickEvent" @onkeydown="@Escape">
+    @ChildContent
+</DynamicElement>
+}
+else
+{
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" href="@href" type="@Type" aria-haspopup="true" aria-expanded="@IsOpen.ToString()" @onclick="@onclick" @onkeydown="@Escape">
+    @ChildContent
+</DynamicElement>
+}
