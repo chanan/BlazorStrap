@@ -1,10 +1,8 @@
 ﻿@page "/tabs"
-
-<h1>Tabs</h1>
-
+<h1>Tabs <Badge Color="Color.Danger">Decrepit</Badge></h1>
 <div class="docs-example">
     <BlazorNav IsTabs="true">
-         <BlazorNavLink onclick="@onclick1" IsActive="@(active == 1)">Home</BlazorNavLink>
+        <BlazorNavLink onclick="@onclick1" IsActive="@(active == 1)">Home</BlazorNavLink>
         <BlazorNavLink onclick="@onclick2" IsActive="@(active == 2)">Profile</BlazorNavLink>
         <BlazorNavLink onclick="@onclick3" IsActive="@(active == 3)">Contact</BlazorNavLink>
     </BlazorNav>
