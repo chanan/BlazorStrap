@@ -2,68 +2,116 @@
 using BlazorStrap.Util;
 using BlazorComponentUtilities;
 using System;
+using System.Collections.Generic;
+using System.Timers;
 
 namespace BlazorStrap 
 {
     public class CodeBSDropdown : ToggleableComponentBase
     {
-        protected string classname =>
-     new CssBuilder()
-         .AddClass("dropdown", !IsGroup)
-         .AddClass("btn-group", IsGroup)
-         .AddClass(DropdownDirection.ToDescriptionString(), DropdownDirection != DropdownDirection.Down)
-         .AddClass("show", !_manual && DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id))
-         .AddClass("show", _manual && IsOpen.HasValue && IsOpen.Value)
-         .AddClass(Class)
-     .Build();
+        private System.Timers.Timer _timer = new System.Timers.Timer(1000);
+        private CodeBSDropdownMenu _selected;
+        //Prevents NULL
+        private CodeBSDropdownMenu _dropDownMenu { get; set; } = new BSDropdownMenu();
 
+        public CodeBSDropdownMenu DropDownMenu
+        {
+            get
+            {
+                return _dropDownMenu;
+            }
+            set
+            {
+                _dropDownMenu = value;
+                StateHasChanged();
+            }
+        }
+        public CodeBSDropdownMenu Selected
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                _selected = value;
+                StateHasChanged();
+            }
+        }
+
+        protected string classname =>
+        new CssBuilder()
+            .AddClass("dropdown", !IsGroup)
+            .AddClass("btn-group", IsGroup)
+            .AddClass("dropdown-submenu", IsSubmenu)
+            .AddClass(DropdownDirection.ToDescriptionString(), DropdownDirection != DropdownDirection.Down)
+            .AddClass("show", !_manual && Selected != null)
+            .AddClass("show", _manual && IsOpen.HasValue && IsOpen.Value)
+            .AddClass(Class)
+        .Build();
+
+        internal bool IsSubmenu;
         [Parameter] protected DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
         [Parameter] protected bool IsGroup { get; set; }
         [Parameter] protected string Class { get; set; }
         [Parameter] protected RenderFragment ChildContent { get; set; }
-        internal DropDownMenuControl DropDownMenuControl { get; set; } = new DropDownMenuControl();
+        [CascadingParameter] protected BSDropdown Dropdown { get; set; }
+        [CascadingParameter] internal BSNavItem NavItem { get; set; }
 
+        private bool _prevent;
         protected override void OnInit()
         {
-            DropDownMenuControl.Handler.OnToggle += OnToggle;
-            DropDownMenuControl.Id = Guid.NewGuid().ToString();
-            DropDownMenuControl.Handler.AddDropDownMenu(DropDownMenuControl.Id);
+            _timer.Elapsed += OnTimedEvent;
+            if (Dropdown != null || NavItem != null)
+            {
+                IsSubmenu = true;
+            }
             base.OnInit();
         }
 
-        public override void Toggle()
+        internal void PreventFocusOut()
         {
-            DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id);
-            base.Toggle();
+            Console.WriteLine(Class + "PreVenting");
+            _prevent = true;
+            _GotFocus();
+            Dropdown?.PreventFocusOut();
         }
-
-        public override void Show()
+        internal void GotFocus()
         {
-            DropDownMenuControl.Handler.Show(DropDownMenuControl.Id);
-            base.Show();
+            _GotFocus();
         }
-
-        public override void Hide()
+        internal void _GotFocus(string t = "")
         {
-            DropDownMenuControl.Handler.Hide(DropDownMenuControl.Id);
-            base.Hide();
+            Dropdown?._GotFocus(t + "T");
+            _timer.Stop();
+            _timer.Interval = 500;
         }
-
         protected void LostFocus()
         {
-            if (DropDownMenuControl != null)
+            if (!_prevent)
             {
-                if (DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id))
-                {
-                    Invoke(() => DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id));
-                }
+                Console.WriteLine(Class + "Lost Focus");
+                _timer.Start();
             }
+            _prevent = false;
+        } 
+
+        protected void Close()
+        {
+            Selected = null;
         }
 
-        private void OnToggle(Object Sender, EventArgs e)
+        private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            DropDownMenuControl.Handler = DropDownMenuControl.Handler;
-            StateHasChanged();
+            if (!_manual)
+            {
+                Invoke(() => Close());
+            }
+            _timer.Stop();
+            _timer.Interval = 1000;
         }
+
+
+       
     }
 }

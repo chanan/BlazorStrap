@@ -8,15 +8,15 @@ namespace BlazorStrap
     public class CodeBSDropdownToggle : BootstrapComponentBase
     {
        protected string classname =>
-     new CssBuilder()
-         .AddClass("btn", !IsLink)
-         .AddClass($"btn-{Size.ToDescriptionString()}", !IsLink && Size != Size.None)
-         .AddClass($"btn-{Color.ToDescriptionString()}", !IsLink && Color != Color.None)
-         .AddClass("dropdown-toggle-split", IsSplit)
-         .AddClass("dropdown-toggle")
-         .AddClass("nav-link", IsLink)
-         .AddClass(Class)
-     .Build();
+         new CssBuilder()
+             .AddClass("btn", !IsLink)
+             .AddClass($"btn-{Size.ToDescriptionString()}", !IsLink && Size != Size.None)
+             .AddClass($"btn-{Color.ToDescriptionString()}", !IsLink && Color != Color.None)
+             .AddClass("dropdown-toggle-split", IsSplit)
+             .AddClass("dropdown-toggle")
+             .AddClass("nav-link", IsLink)
+             .AddClass(Class)
+         .Build();
 
         protected string Tag => IsLink ? "a" : "button";
         protected string Type => IsLink ? null : "button";
@@ -30,27 +30,30 @@ namespace BlazorStrap
         [Parameter] protected EventCallback<UIMouseEventArgs> onclick { get; set; }
         [Parameter] protected string Class { get; set; }
         [Parameter] protected RenderFragment ChildContent { get; set; }
-        [CascadingParameter] internal DropDownMenuControl DropDownMenuControl { get; set; }
+        [CascadingParameter] internal CodeBSDropdownMenu DropdownMenu { get; set; }
+        [CascadingParameter] internal CodeBSDropdown Dropdown { get; set; }
 
+        protected void GotFocus()
+        {
+            Dropdown.PreventFocusOut();
+        }
         protected void Escape(UIKeyboardEventArgs e)
         {
-            if (e.Key.ToLower() == "escape" && (IsOpen == true || DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id)))
+            if (e.Key.ToLower() == "escape" && (IsOpen == true || DropdownMenu.Open))
             {
-                DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id);
+                DropdownMenu.Hide();
             }
         }
 
         protected void onClickEvent(UIMouseEventArgs e)
         {
-            Console.WriteLine("dropdown-toggle onClickEvent");
             if (onclick.HasDelegate)
             {
                 onclick.InvokeAsync(e);
             }
-            if (DropDownMenuControl.Handler != null && IsOpen == null)
+            if (IsOpen == null)
             {
-                DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id);
-                StateHasChanged();
+                DropdownMenu.Toggle();
             }
         }
     }

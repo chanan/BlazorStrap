@@ -1,7 +1,8 @@
 ﻿@namespace BlazorStrap
 @inherits CodeBSDropdownItem
 
-<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" @onclick="@onClickEvent">
-    @ChildContent
-</DynamicElement>
-
+    <CascadingValue Value="@this">
+        <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" @onclick="@onClickEvent" >
+            @ChildContent
+        </DynamicElement>
+    </CascadingValue>

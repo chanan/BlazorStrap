@@ -2,11 +2,26 @@
 using BlazorStrap.Util;
 using BlazorComponentUtilities;
 using System;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
     public class CodeBSNav : BootstrapComponentBase
     {
+        private CodeBSNavItem _selected;
+        internal List<CodeBSNavItem> Navitems { get; set; } = new List<CodeBSNavItem>();
+        public CodeBSNavItem Selected
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                _selected = value;
+                StateHasChanged();
+            }
+        }
         protected private string classname =>
         new CssBuilder("nav")
             .AddClass("navbar-nav", IsNavbar)
@@ -20,20 +35,7 @@ namespace BlazorStrap
 
         protected string Tag => IsList ? "ul" : "nav";
 
-        private bool _isList;
-        [Parameter]
-        private bool IsList
-        {
-            get
-            {
-                return _isList;
-            }
-            set
-            {
-                _isList = value;
-                BlazorNavValues.IsList = value;
-            }
-        }
+        [Parameter] internal bool IsList { get;set;} 
         [Parameter] protected Alignment Alignment { get; set; } = Alignment.None;
         [Parameter] protected bool IsVertical { get; set; }
         [Parameter] protected bool IsTabs { get; set; }
@@ -42,7 +44,6 @@ namespace BlazorStrap
         [Parameter] protected bool IsNavbar { get; set; }
         [Parameter] protected string Class { get; set; }
         [Parameter] protected RenderFragment ChildContent { get; set; }
-        internal BlazorNavValues BlazorNavValues { get; set; } = new BlazorNavValues { DropDownMenuHandler = new DropDownMenuHandler() };
 
         private string GetAlignment()
         {
@@ -53,12 +54,7 @@ namespace BlazorStrap
 
         protected override void OnInit()
         {
-            BlazorNavValues.DropDownMenuHandler.OnToggle += OnToggle;
             base.OnInit();
-        }
-        private void OnToggle(Object Sender, EventArgs e)
-        {
-            StateHasChanged();
         }
     }
 }

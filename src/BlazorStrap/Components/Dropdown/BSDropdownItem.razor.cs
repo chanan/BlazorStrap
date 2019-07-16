@@ -33,6 +33,7 @@ namespace BlazorStrap
                 else { return null; }
             }
         }
+        internal bool HasSubMenu {get;set;}
         [Parameter] protected bool IsDivider { get; set; }
         [Parameter] protected bool IsDisabled { get; set; }
         [Parameter] protected bool IsButton { get; set; }
@@ -41,19 +42,18 @@ namespace BlazorStrap
         [Parameter] protected EventCallback<UIMouseEventArgs> OnClick { get; set; }
         [Parameter] protected string Class { get; set; }
         [Parameter] protected RenderFragment ChildContent { get; set; }
-        [CascadingParameter] internal DropDownMenuControl DropDownMenuControl { get; set; }
+        [CascadingParameter] internal CodeBSDropdown DropDown { get; set; }
 
         protected void onClickEvent(UIMouseEventArgs e)
-        {
+        { 
             if (OnClick.HasDelegate)
             {
                 OnClick.InvokeAsync(e);
             }
-            if (!StayOpen)
+            if (!StayOpen && !DropDown.IsSubmenu && !HasSubMenu)
             {
-                if (DropDownMenuControl != null)
-                    DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id);
+                DropDown.Selected = null;
             }
         }
     }
-    }
+}

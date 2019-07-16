@@ -3,34 +3,69 @@ using BlazorStrap.Util;
 using BlazorComponentUtilities;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
     public class CodeBSNavItem : ToggleableComponentBase
     {
+
+        private CodeBSDropdownMenu _selected;
+        //Prevents NULL
+        private CodeBSDropdownMenu _dropDownMenu { get; set; } = new BSDropdownMenu();
+
+        public CodeBSDropdownMenu DropDownMenu
+        {
+            get
+            {
+                return _dropDownMenu;
+            }
+            set
+            {
+                _dropDownMenu = value;
+                StateHasChanged();
+            }
+        }
+        public CodeBSDropdownMenu Selected
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    _selected = null;
+                    Nav.Selected = null;
+                }
+                else
+                {
+                    Nav.Selected = this;
+                    _selected = value;
+                }
+            }
+        }
         private bool _MouseDown = false;
         protected string classname =>
             new CssBuilder("nav-item")
                 .AddClass("dropdown", IsDropdown)
-                .AddClass("show", IsDropdown && !_manual && DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id))
+                .AddClass("show", IsDropdown && !_manual && Nav?.Selected == this)
                 .AddClass("show", IsDropdown && _manual && IsOpen.HasValue && IsOpen.Value)
                 .AddClass(Class)
             .Build();
 
-        protected string Tag => BlazorNavValues.IsList ? "li" : "div";
+        protected string Tag => Nav.IsList ? "li" : "div";
 
         [Parameter] protected bool IsDropdown { get; set; }
         [Parameter] protected string Class { get; set; }
         [Parameter] protected RenderFragment ChildContent { get; set; }
-        [CascadingParameter] internal BlazorNavValues BlazorNavValues { get; set; }
-        public DropDownMenuControl DropDownMenuControl { get; set; } = new DropDownMenuControl();
+        [CascadingParameter] internal BSNav Nav { get; set; }
         protected override Task OnInitAsync()
         {
-            if (BlazorNavValues.DropDownMenuHandler != null && IsDropdown && !_manual)
+            if (IsDropdown && !_manual)
             {
-                DropDownMenuControl.Handler = BlazorNavValues.DropDownMenuHandler;
-                DropDownMenuControl.Id = Guid.NewGuid().ToString();
-                BlazorNavValues.DropDownMenuHandler.AddDropDownMenu(DropDownMenuControl.Id);
+                Nav.Navitems.Add(this);
             }
             return base.OnInitAsync();
         }
@@ -39,7 +74,7 @@ namespace BlazorStrap
         {
             if (!_manual && IsDropdown)
             {
-                _MouseDown = DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id) && true;
+                _MouseDown = Nav.Selected == this && true;
             }
             else
             {
@@ -49,29 +84,36 @@ namespace BlazorStrap
 
         public override void Toggle()
         {
-            DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id);
+            if (Nav.Selected == this)
+            {
+                Selected = null;
+            }
+            else
+            {
+                Selected = DropDownMenu;
+            }
             base.Toggle();
         }
 
         public override void Show()
         {
-            DropDownMenuControl.Handler.Show(DropDownMenuControl.Id);
+            Selected = DropDownMenu;
             base.Show();
         }
 
         public override void Hide()
         {
-            DropDownMenuControl.Handler.Hide(DropDownMenuControl.Id);
+            Selected = null;
             base.Hide();
         }
 
         protected void LostFocus()
         {
-            if (DropDownMenuControl != null && IsDropdown && !_manual && !_MouseDown)
+            if (IsDropdown && !_manual && !_MouseDown)
             {
-                if (DropDownMenuControl.Handler.IsOpen(DropDownMenuControl.Id))
+                if (Nav.Selected == this)
                 {
-                    Invoke(() => DropDownMenuControl.Handler.Toggle(DropDownMenuControl.Id));
+                    Selected = null;
                 }
             }
             _MouseDown = false;
@@ -79,11 +121,10 @@ namespace BlazorStrap
 
         public void Dispose()
         {
-            if (BlazorNavValues.DropDownMenuHandler != null && IsDropdown && IsOpen == null)
+            if (IsDropdown && IsOpen == null)
             {
-                BlazorNavValues.DropDownMenuHandler.RemoveDropDownMenu(DropDownMenuControl.Id);
+                Nav.Navitems.Remove(this);
             }
-
         }
     }
 }

@@ -1,7 +1,22 @@
 ﻿@page "/dropdowns"
 
 <h1>Dropdowns</h1>
-
+   <BSDropdown Class="FirstMenu">
+        <BSDropdownToggle>Dropdown</BSDropdownToggle>
+        <BSDropdownMenu>
+            <BSDropdownItem Href="javascript:void(0)">
+                <BSDropdown>
+                    <BSDropdownToggle>Dropdown</BSDropdownToggle>
+                    <BSDropdownMenu>
+                        <BSDropdownItem Href="#">Action</BSDropdownItem>
+                        <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                        <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+                    </BSDropdownMenu>
+                </BSDropdown>
+            </BSDropdownItem>
+            
+        </BSDropdownMenu>
+    </BSDropdown>
 <div class="docs-example">
     <BSDropdown>
         <BSDropdownToggle>Dropdown</BSDropdownToggle>
