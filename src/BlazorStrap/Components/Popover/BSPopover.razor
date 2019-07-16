@@ -1,0 +1,10 @@
+﻿@namespace BlazorStrap
+@inherits CodeBSPopover
+
+@if (_isOpen)
+{
+    <DynamicElement Id="@Id" Attributes="@UnknownParameters" TagName="div" class="@classname" role="tooltip" @onclick="@onclick">
+        <div @ref="arrow" class="arrow"></div>
+        @ChildContent
+    </DynamicElement>
+}

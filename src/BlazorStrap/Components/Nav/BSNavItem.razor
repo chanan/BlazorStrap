@@ -1,0 +1,8 @@
+﻿@namespace BlazorStrap
+@inherits CodeBSNavItem
+
+<CascadingValue Value="@DropDownMenuControl">
+    <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" @onfocusout="@LostFocus" @onmousedown="@MouseDown">
+        @ChildContent
+    </DynamicElement>
+</CascadingValue>

@@ -1,0 +1,9 @@
+﻿@namespace BlazorStrap
+@inherits CodeBSCarouselIndicators
+
+<DynamicElement Attributes="@UnknownParameters" TagName="ol" class="@classname">
+    @for (var i = 0; i < NumberOfItems; i++)
+    {
+        <BSCarouselIndicatorItem IsActive="@(i == ActiveIndex)" Index="@i" ActiveIndexChangedEvent="@ClickEventActiveIndex" />
+    }
+</DynamicElement>

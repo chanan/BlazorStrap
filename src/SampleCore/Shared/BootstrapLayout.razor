@@ -1,19 +1,19 @@
 @inherits LayoutComponentBase
 @inject IBootstrapCSS BootstrapCSS
 
-<Navbar IsFixedTop="true" IsDark="true" Class="navbar-expand flex-column flex-md-row bd-navbar">
+<BSNavbar IsFixedTop="true" IsDark="true" Class="navbar-expand flex-column flex-md-row bd-navbar">
     <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Blazorstrap"><img src="_content/samplecore/logo-inverted.svg" width="36" height="36" alt="BlazorStrap"></a>
     <div class="navbar-nav-scroll">
-        <BlazorNav IsList="true" class="navbar-nav bd-navbar-nav flex-row">
-            <NavItem>
-                <BlazorNavLink Href="/">Home</BlazorNavLink>
-            </NavItem>
+        <BSNav IsList="true" class="navbar-nav bd-navbar-nav flex-row">
+            <BSNavItem>
+                <BSNavLink Href="/">Home</BSNavLink>
+            </BSNavItem>
 
-            <NavItem IsDropdown="true">
-                <DropdownToggle Color="Color.Light" IsLink="true">Themes</DropdownToggle>
+            <BSNavItem IsDropdown="true">
+                <BSDropdownToggle Color="Color.Light" IsLink="true">Themes</BSDropdownToggle>
                 <ThemeSwitcher IsDropDown="true" />
-            </NavItem>
-        </BlazorNav>
+            </BSNavItem>
+        </BSNav>
     </div>
 
     <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
@@ -23,7 +23,7 @@
     </ul>
 
     <a class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3" href="https://www.nuget.org/packages/BlazorStrap/">Download</a>
-</Navbar>
+</BSNavbar>
 
 
 <div class="container-fluid">

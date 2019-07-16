@@ -1,9 +1,9 @@
 ﻿@page "/samples/form"
 
-<BlazorForm @OnSubmit="@OnSubmit">
-    <BlazorInput InputType="InputType.Text" @bind-value="@test" />
-    <BlazorButton Color="Color.Primary" ButtonType="ButtonType.Submit">Submit</BlazorButton>
-</BlazorForm>
+<BSForm @OnSubmit="@OnSubmit">
+    <BSInput InputType="InputType.Text" @bind-value="@test" />
+    <BSButton Color="Color.Primary" ButtonType="ButtonType.Submit">Submit</BSButton>
+</BSForm>
 
     <div>
         @test
