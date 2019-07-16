@@ -1,14 +1,14 @@
-﻿<Carousel NumberOfItems="@items.Count" bind-ActiveIndex="@ActiveIndex" PauseOnHover="true">
-    <CarouselIndicators NumberOfItems="@items.Count" bind-ActiveIndex="@ActiveIndex" />
+﻿<BSCarousel NumberOfItems="@items.Count" bind-ActiveIndex="@ActiveIndex" PauseOnHover="true">
+    <BSCarouselIndicators NumberOfItems="@items.Count" bind-ActiveIndex="@ActiveIndex" />
     <div class="carousel-inner">
         @for (int i = 0; i < items.Count; i++)
         {
-            <CarouselItem IsActive="@(ActiveIndex == i)" src="@items[i].Source" alt="@items[i].Alt" />
+            <BSCarouselItem IsActive="@(ActiveIndex == i)" src="@items[i].Source" alt="@items[i].Alt" />
         }
     </div>
-    <CarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" bind-ActiveIndex="@ActiveIndex" />
-    <CarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" bind-ActiveIndex="@ActiveIndex" />
-</Carousel>
+    <BSCarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" bind-ActiveIndex="@ActiveIndex" />
+    <BSCarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" bind-ActiveIndex="@ActiveIndex" />
+</BSCarousel>
     
 @code {
     IList<Item> items = new List<Item>
