@@ -19,6 +19,7 @@ namespace BlazorStrap
         }
         protected string classname =>
         new CssBuilder("nav-item")
+            .AddClass("active", Selected)
             .AddClass(Class)
         .Build();
 
