@@ -50,7 +50,7 @@ namespace BlazorStrap
             {
                 OnClick.InvokeAsync(e);
             }
-            if (!StayOpen && !DropDown.IsSubmenu && !HasSubMenu)
+            if (!StayOpen && DropDown?.IsSubmenu == false && !HasSubMenu)
             {
                 DropDown.Selected = null;
             }

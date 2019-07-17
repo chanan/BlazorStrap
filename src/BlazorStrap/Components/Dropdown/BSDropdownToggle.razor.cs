@@ -2,12 +2,14 @@
 using BlazorStrap.Util;
 using BlazorComponentUtilities;
 using System;
+using System.Timers;
 
 namespace BlazorStrap
 {
     public class CodeBSDropdownToggle : BootstrapComponentBase
     {
-       protected string classname =>
+        // Releases hold on sub menus
+        protected string classname =>
          new CssBuilder()
              .AddClass("btn", !IsLink)
              .AddClass($"btn-{Size.ToDescriptionString()}", !IsLink && Size != Size.None)
@@ -30,30 +32,21 @@ namespace BlazorStrap
         [Parameter] protected EventCallback<UIMouseEventArgs> onclick { get; set; }
         [Parameter] protected string Class { get; set; }
         [Parameter] protected RenderFragment ChildContent { get; set; }
-        [CascadingParameter] internal CodeBSDropdownMenu DropdownMenu { get; set; }
-        [CascadingParameter] internal CodeBSDropdown Dropdown { get; set; }
-
-        protected void GotFocus()
-        {
-            Dropdown.PreventFocusOut();
-        }
+        [CascadingParameter] internal CodeBSDropdownMenu Dropdown { get; set; }
         protected void Escape(UIKeyboardEventArgs e)
         {
-            if (e.Key.ToLower() == "escape" && (IsOpen == true || DropdownMenu.Open))
+
+            if (e.Key.ToLower() == "escape" && IsOpen == true)
             {
-                DropdownMenu.Hide();
+                Dropdown.Hide();
             }
         }
 
-        protected void onClickEvent(UIMouseEventArgs e)
+        protected void OnClickEvent()
         {
-            if (onclick.HasDelegate)
-            {
-                onclick.InvokeAsync(e);
-            }
             if (IsOpen == null)
             {
-                DropdownMenu.Toggle();
+                Dropdown.Toggle();
             }
         }
     }

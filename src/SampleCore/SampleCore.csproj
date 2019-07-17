@@ -31,6 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="wwwroot\snippets\dropdowns\dropdowns16.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Pages\Samples\Navbars.razor.removed" />
   </ItemGroup>
 

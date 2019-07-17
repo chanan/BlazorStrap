@@ -52,7 +52,7 @@ namespace BlazorStrap
         {
             if (DropDown != null)
             {
-                DropDown.Selected = this;
+                DropDown.Selected =this;
             }
             if (NavItem != null)
             {

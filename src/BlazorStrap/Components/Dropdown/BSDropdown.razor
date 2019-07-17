@@ -1,10 +1,21 @@
 ﻿@namespace BlazorStrap
 @inherits CodeBSDropdown
 
-<CascadingValue Value="@this">
+    <CascadingValue Value="@this">
         <CascadingValue Value="@DropDownMenu">
-            <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" @onfocusin="@GotFocus" @onfocusout="@LostFocus" >
-                @ChildContent
-            </DynamicElement>
+            @if (IsSubmenu)
+            {
+                <div class="dropdown-item">
+                    <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" @onfocusin="@GotFocus" @onfocusout="@LostFocus">
+                        @ChildContent
+                    </DynamicElement>
+                </div>
+            }
+            else
+            {
+                <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" @onfocusin="@GotFocus" @onfocusout="@LostFocus">
+                    @ChildContent
+                </DynamicElement>
+            }
+        </CascadingValue>
     </CascadingValue>
-</CascadingValue>

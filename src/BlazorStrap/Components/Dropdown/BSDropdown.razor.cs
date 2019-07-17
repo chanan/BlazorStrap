@@ -9,12 +9,12 @@ namespace BlazorStrap
 {
     public class CodeBSDropdown : ToggleableComponentBase
     {
-        private System.Timers.Timer _timer = new System.Timers.Timer(1000);
+        // Prevents rogue closing
+        private System.Timers.Timer _timer = new System.Timers.Timer(250);
         private CodeBSDropdownMenu _selected;
-        //Prevents NULL
         private CodeBSDropdownMenu _dropDownMenu { get; set; } = new BSDropdownMenu();
 
-        public CodeBSDropdownMenu DropDownMenu
+        internal CodeBSDropdownMenu DropDownMenu
         {
             get
             {
@@ -58,7 +58,6 @@ namespace BlazorStrap
         [CascadingParameter] protected BSDropdown Dropdown { get; set; }
         [CascadingParameter] internal BSNavItem NavItem { get; set; }
 
-        private bool _prevent;
         protected override void OnInit()
         {
             _timer.Elapsed += OnTimedEvent;
@@ -68,33 +67,16 @@ namespace BlazorStrap
             }
             base.OnInit();
         }
-
-        internal void PreventFocusOut()
-        {
-            Console.WriteLine(Class + "PreVenting");
-            _prevent = true;
-            _GotFocus();
-            Dropdown?.PreventFocusOut();
-        }
         internal void GotFocus()
         {
-            _GotFocus();
-        }
-        internal void _GotFocus(string t = "")
-        {
-            Dropdown?._GotFocus(t + "T");
+            Dropdown?.GotFocus();
             _timer.Stop();
-            _timer.Interval = 500;
+            _timer.Interval = 250;
         }
         protected void LostFocus()
         {
-            if (!_prevent)
-            {
-                Console.WriteLine(Class + "Lost Focus");
-                _timer.Start();
-            }
-            _prevent = false;
-        } 
+            _timer.Start();
+        }
 
         protected void Close()
         {
@@ -108,10 +90,7 @@ namespace BlazorStrap
                 Invoke(() => Close());
             }
             _timer.Stop();
-            _timer.Interval = 1000;
+            _timer.Interval = 250;
         }
-
-
-       
     }
 }

@@ -1,22 +1,7 @@
 ﻿@page "/dropdowns"
 
 <h1>Dropdowns</h1>
-   <BSDropdown Class="FirstMenu">
-        <BSDropdownToggle>Dropdown</BSDropdownToggle>
-        <BSDropdownMenu>
-            <BSDropdownItem Href="javascript:void(0)">
-                <BSDropdown>
-                    <BSDropdownToggle>Dropdown</BSDropdownToggle>
-                    <BSDropdownMenu>
-                        <BSDropdownItem Href="#">Action</BSDropdownItem>
-                        <BSDropdownItem Href="#">Another Action</BSDropdownItem>
-                        <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
-                    </BSDropdownMenu>
-                </BSDropdown>
-            </BSDropdownItem>
-            
-        </BSDropdownMenu>
-    </BSDropdown>
+
 <div class="docs-example">
     <BSDropdown>
         <BSDropdownToggle>Dropdown</BSDropdownToggle>
@@ -126,7 +111,7 @@
         <BSDropdown>
             <BSButtonGroup>
                 <BSButton Size="Size.Large" Color="Color.Secondary">Large split button</BSButton>
-                <BSDropdownToggle Size="Size.Large" IsSplit="true" Color="Color.Secondary"/>
+                <BSDropdownToggle Size="Size.Large" IsSplit="true" Color="Color.Secondary" />
                 <BSDropdownMenu>
                     <BSDropdownItem Href="#">Action</BSDropdownItem>
                     <BSDropdownItem Href="#">Another Action</BSDropdownItem>
@@ -134,7 +119,7 @@
                     <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
                 </BSDropdownMenu>
             </BSButtonGroup>
-            </BSDropdown>
+        </BSDropdown>
     </BSButtonGroup>
     <BSButtonGroup>
         <BSDropdown>
@@ -148,7 +133,7 @@
         <BSDropdown>
             <BSButtonGroup>
                 <BSButton Size="Size.Small" Color="Color.Secondary">Small split button</BSButton>
-                <BSDropdownToggle Size="Size.Small" IsSplit="true" Color="Color.Secondary"/>
+                <BSDropdownToggle Size="Size.Small" IsSplit="true" Color="Color.Secondary" />
                 <BSDropdownMenu>
                     <BSDropdownItem Href="#">Action</BSDropdownItem>
                     <BSDropdownItem Href="#">Another Action</BSDropdownItem>
@@ -232,6 +217,44 @@
     </BSButtonGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns6.html" />
+
+<h3>Menus with Submenus</h3>
+<p>Menus can have nested Submenus. A Submenu can have a Submenu.  </p>
+<div class="docs-example">
+    <BSDropdown>
+        <BSDropdownToggle Color="Color.Primary">Level 1</BSDropdownToggle>
+        <BSDropdownMenu>
+            <BSDropdownItem Href="#">Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+            <BSDropdown>
+                <BSDropdownToggle Color="Color.Secondary">Level 2</BSDropdownToggle>
+                <BSDropdownMenu>
+                    <BSDropdownItem Href="#">Action</BSDropdownItem>
+                    <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                    <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+                    <BSDropdown>
+                        <BSDropdownToggle Color="Color.Secondary">Level 3</BSDropdownToggle>
+                        <BSDropdownMenu>
+                            <BSDropdownItem Href="#">Action</BSDropdownItem>
+                            <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                            <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+                            <BSDropdown>
+                                <BSDropdownToggle Color="Color.Secondary">Level 4</BSDropdownToggle>
+                                <BSDropdownMenu>
+                                    <BSDropdownItem Href="#">Action</BSDropdownItem>
+                                    <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                                    <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+                                </BSDropdownMenu>
+                            </BSDropdown>
+                        </BSDropdownMenu>
+                    </BSDropdown>
+                </BSDropdownMenu>
+            </BSDropdown>
+        </BSDropdownMenu>
+    </BSDropdown>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns16.html" />
 
 <h3>Menu Items</h3>
 
@@ -348,7 +371,7 @@
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns14.html" />
 
 @code {
-   
+
 
     bool IsOpen12 { get; set; }
     void onclick12(UIMouseEventArgs e)
