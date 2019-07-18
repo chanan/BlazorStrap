@@ -30,4 +30,16 @@
     <Content Remove="wwwroot\snippets\themes\themes5.html" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Remove="wwwroot\snippets\dropdowns\dropdowns16.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\Samples\Navbars.razor.removed" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\Samples\Navbars.razor.removed" />
+  </ItemGroup>
+
 </Project>

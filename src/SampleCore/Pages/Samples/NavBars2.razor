@@ -1,48 +1,48 @@
 ﻿@page "/samples/navbars2"
 
 <div class="headernav">
-    <Container>
-        <Row>
-            <BlazorCol LG="1" XS="3" SM="2" MD="2" Class="logo"><a href="/"><img src="/logo.png" alt="" /></a></BlazorCol>
-            <BlazorCol LG="3" XS="9" SM="5" MD="3" Class="selecttopic">
-                <Dropdown IsOpen="@IsOpen">
-                    <DropdownToggle onclick="@onclick">Borderlands 2 <b class="caret"></b></DropdownToggle>
-                    <DropdownMenu IsOpen="@IsOpen">
-                        <DropdownItem Href="#">Borderlands 1</DropdownItem>
-                        <DropdownItem Href="#">Borderlands 2</DropdownItem>
-                        <DropdownItem Href="#">Borderlands 3</DropdownItem>
-                    </DropdownMenu>
-                </Dropdown>
-            </BlazorCol>
-            <BlazorCol LG="4" MD="3" Class="search hidden-xs hidden-sm">
+    <BSContainer>
+        <BSRow>
+            <BSCol LG="1" XS="3" SM="2" MD="2" Class="logo"><a href="/"><img src="/logo.png" alt="" /></a></BSCol>
+            <BSCol LG="3" XS="9" SM="5" MD="3" Class="selecttopic">
+                <BSDropdown IsOpen="@IsOpen">
+                    <BSDropdownToggle onclick="@onclick">Borderlands 2 <b class="caret"></b></BSDropdownToggle>
+                    <BSDropdownMenu IsOpen="@IsOpen">
+                        <BSDropdownItem Href="#">Borderlands 1</BSDropdownItem>
+                        <BSDropdownItem Href="#">Borderlands 2</BSDropdownItem>
+                        <BSDropdownItem Href="#">Borderlands 3</BSDropdownItem>
+                    </BSDropdownMenu>
+                </BSDropdown>
+            </BSCol>
+            <BSCol LG="4" MD="3" Class="search hidden-xs hidden-sm">
                 <div class="wrap">
-                    <BlazorForm>
+                    <BSForm>
                         <div class="float-left txt"><BlazorInput InputType="InputType.Text" placeholder="Search Topics" /></div>
                         <div class="float-right"><BlazorButton><i class="fa fa-search"></i></BlazorButton></div>
                         <div class="clearfix"></div>
-                    </BlazorForm>
+                    </BSForm>
                 </div>
-            </BlazorCol>
-            <BlazorCol LG="4" XS="12" SM="5" MD="4" Class="avt">
+            </BSCol>
+            <BSCol LG="4" XS="12" SM="5" MD="4" Class="avt">
                 <div class="stnt float-left">
-                    <BlazorForm>
-                        <BlazorButton>Start New Topic</BlazorButton>
-                    </BlazorForm>
+                    <BSForm>
+                        <BSButton>Start New Topic</BSButton>
+                    </BSForm>
                 </div>
-            </BlazorCol>
+            </BSCol>
             <div class="env float-left"><i class="fa fa-envelope"></i></div>
-            <Dropdown IsOpen="@IsOpen2" Class="avatar float-left">
+            <BSDropdown IsOpen="@IsOpen2" Class="avatar float-left">
                 <DropdownToggle @onclick="@onclick2"><img src="/avatar.png" alt="" /> <b class="caret"></b></DropdownToggle>
                 <div class="status-green"></div>
-                <DropdownMenu IsOpen="@IsOpen2">
-                    <DropdownItem Href="#">My Profile</DropdownItem>
-                    <DropdownItem Href="#">Inbox</DropdownItem>
-                    <DropdownItem Href="#">Logout</DropdownItem>
-                    <DropdownItem Href="#">Create Account</DropdownItem>
-                </DropdownMenu>
-            </Dropdown>
-        </Row>
-    </Container>
+                <BSDropdownMenu IsOpen="@IsOpen2">
+                    <BSDropdownItem Href="#">My Profile</BSDropdownItem>
+                    <BSDropdownItem Href="#">Inbox</BSDropdownItem>
+                    <BSDropdownItem Href="#">Logout</BSDropdownItem>
+                    <BSDropdownItem Href="#">Create Account</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSDropdown>
+        </BSRow>
+    </BSContainer>
 </div>
 
 @code {

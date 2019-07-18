@@ -1,12 +1,12 @@
-﻿<ButtonGroup IsVertical="true">
-    <BlazorButton Color="Color.Secondary">1</BlazorButton>
-    <BlazorButton Color="Color.Secondary">2</BlazorButton>
+﻿<BSButtonGroup IsVertical="true">
+    <BSButton Color="Color.Secondary">1</BSButton>
+    <BSButton Color="Color.Secondary">2</BSButton>
 
-    <Dropdown IsGroup="true" IsOpen="@IsOpen1">
-        <DropdownToggle Color="Color.Secondary" onclick="@onclick1" IsOpen="@IsOpen1">Dropdown</DropdownToggle>
-        <DropdownMenu IsOpen="@IsOpen1">
-            <DropdownItem href="#">Dropdown link</DropdownItem>
-            <DropdownItem href="#">Dropdown link</DropdownItem>
-        </DropdownMenu>
-    </Dropdown>
-</ButtonGroup>
+    <BSDropdown IsGroup="true" IsOpen="@IsOpen1">
+        <BSDropdownToggle Color="Color.Secondary" onclick="@onclick1" IsOpen="@IsOpen1">Dropdown</BSDropdownToggle>
+        <BSDropdownMenu IsOpen="@IsOpen1">
+            <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
+            <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
+        </BSDropdownMenu>
+    </BSDropdown>
+</BSButtonGroup>

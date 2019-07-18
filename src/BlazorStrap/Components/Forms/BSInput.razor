@@ -1,0 +1,6 @@
+﻿@namespace BlazorStrap
+@inherits CodeBSInput
+
+<DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex" value="@Value" @onchange="@onchange">
+    @ChildContent
+</DynamicElement>

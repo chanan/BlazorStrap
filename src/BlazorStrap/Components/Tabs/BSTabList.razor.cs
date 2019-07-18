@@ -31,7 +31,7 @@ namespace BlazorStrap
                 _isList = value;
             }
         }
-        [Parameter] private Alignment Alignment { get; set; } = Alignment.None;
+        [Parameter] protected Alignment Alignment { get; set; } = Alignment.None;
         [Parameter] protected bool IsVertical { get; set; }
         [Parameter] protected bool IsPills { get; set; }
         [Parameter] protected bool IsFill { get; set; }

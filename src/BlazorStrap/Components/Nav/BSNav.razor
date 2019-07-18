@@ -1,0 +1,8 @@
+﻿@namespace BlazorStrap
+@inherits CodeBSNav
+
+<CascadingValue Value="@this">
+    <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname">
+        @ChildContent
+    </DynamicElement>
+</CascadingValue>

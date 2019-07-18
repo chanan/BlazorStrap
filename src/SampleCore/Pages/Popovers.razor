@@ -3,34 +3,34 @@
 <h1>Popovers</h1>
 
 <div class="docs-example">
-    <BlazorButton id="popover1" @onclick="@onclick1">Top</BlazorButton>
-    <Popover Target="popover1" IsOpen="@IsOpen1" Placement="Placement.Top">
-        <PopoverHeader>Top Popover</PopoverHeader>
-        <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
-    </Popover>
-    <BlazorButton Id="popover2" @onclick="@onclick2">Bottom</BlazorButton>
-    <Popover Target="popover2" IsOpen="@IsOpen2" Placement="Placement.Bottom">
-        <PopoverHeader>Bottom Popover</PopoverHeader>
-        <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
-    </Popover>
-    <BlazorButton Id="popover3" @onclick="@onclick3">Left</BlazorButton>
-    <Popover Target="popover3" IsOpen="@IsOpen3" Placement="Placement.Left">
-        <PopoverHeader>Left Popover</PopoverHeader>
-        <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
-    </Popover>
-    <BlazorButton Id="popover4" @onclick="@onclick4">Right</BlazorButton>
-    <Popover Target="popover4" IsOpen="@IsOpen4" Placement="Placement.Right">
-        <PopoverHeader>Right Popover</PopoverHeader>
-        <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
-    </Popover>
+    <BSButton id="popover1" @onclick="@onclick1">Top</BSButton>
+    <BSPopover Target="popover1" IsOpen="@IsOpen1" Placement="Placement.Top">
+        <BSPopoverHeader>Top Popover</BSPopoverHeader>
+        <BSPopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</BSPopoverBody>
+    </BSPopover>
+    <BSButton Id="popover2" @onclick="@onclick2">Bottom</BSButton>
+    <BSPopover Target="popover2" IsOpen="@IsOpen2" Placement="Placement.Bottom">
+        <BSPopoverHeader>Bottom Popover</BSPopoverHeader>
+        <BSPopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</BSPopoverBody>
+    </BSPopover>
+    <BSButton Id="popover3" @onclick="@onclick3">Left</BSButton>
+    <BSPopover Target="popover3" IsOpen="@IsOpen3" Placement="Placement.Left">
+        <BSPopoverHeader>Left Popover</BSPopoverHeader>
+        <BSPopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</BSPopoverBody>
+    </BSPopover>
+    <BSButton Id="popover4" @onclick="@onclick4">Right</BSButton>
+    <BSPopover Target="popover4" IsOpen="@IsOpen4" Placement="Placement.Right">
+        <BSPopoverHeader>Right Popover</BSPopoverHeader>
+        <BSPopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</BSPopoverBody>
+    </BSPopover>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/popovers/popovers1.html" />
 
 <h3>Dismiss on Next Click</h3>
 
-<Alert Color="Color.Info">
+<BSAlert Color="Color.Info">
     Dismiss on next click does not work at this time.
-</Alert>
+</BSAlert>
 
 @code {
     bool IsOpen1 { get; set; }

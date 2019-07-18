@@ -3,165 +3,165 @@
 <h1>List Groups</h1>
 
 <div class="docs-example">
-    <ListGroup>
-        <ListGroupItem>Cras justo odio</ListGroupItem>
-        <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-        <ListGroupItem>Morbi leo risus</ListGroupItem>
-        <ListGroupItem>Porta ac consectetur ac</ListGroupItem>
-        <ListGroupItem>Vestibulum at eros</ListGroupItem>
-    </ListGroup>
+    <BSListGroup>
+        <BSListGroupItem>Cras justo odio</BSListGroupItem>
+        <BSListGroupItem>Dapibus ac facilisis in</BSListGroupItem>
+        <BSListGroupItem>Morbi leo risus</BSListGroupItem>
+        <BSListGroupItem>Porta ac consectetur ac</BSListGroupItem>
+        <BSListGroupItem>Vestibulum at eros</BSListGroupItem>
+    </BSListGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups1.html" />
 
 <h3>Active items</h3>
 
 <div class="docs-example">
-    <ListGroup>
-        <ListGroupItem IsActive="true">Cras justo odio</ListGroupItem>
-        <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-        <ListGroupItem>Morbi leo risus</ListGroupItem>
-        <ListGroupItem>Porta ac consectetur ac</ListGroupItem>
-        <ListGroupItem>Vestibulum at eros</ListGroupItem>
-    </ListGroup>
+    <BSListGroup>
+        <BSListGroupItem IsActive="true">Cras justo odio</BSListGroupItem>
+        <BSListGroupItem>Dapibus ac facilisis in</BSListGroupItem>
+        <BSListGroupItem>Morbi leo risus</BSListGroupItem>
+        <BSListGroupItem>Porta ac consectetur ac</BSListGroupItem>
+        <BSListGroupItem>Vestibulum at eros</BSListGroupItem>
+    </BSListGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups2.html" />
 
 <h3>Disabled items</h3>
 
 <div class="docs-example">
-    <ListGroup>
-        <ListGroupItem IsDisabled="true">Cras justo odio</ListGroupItem>
-        <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-        <ListGroupItem>Morbi leo risus</ListGroupItem>
-        <ListGroupItem>Porta ac consectetur ac</ListGroupItem>
-        <ListGroupItem>Vestibulum at eros</ListGroupItem>
-    </ListGroup>
+    <BSListGroup>
+        <BSListGroupItem IsDisabled="true">Cras justo odio</BSListGroupItem>
+        <BSListGroupItem>Dapibus ac facilisis in</BSListGroupItem>
+        <BSListGroupItem>Morbi leo risus</BSListGroupItem>
+        <BSListGroupItem>Porta ac consectetur ac</BSListGroupItem>
+        <BSListGroupItem>Vestibulum at eros</BSListGroupItem>
+    </BSListGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups3.html" />
 
 <h3>Links and buttons</h3>
-<Alert Color=Color.Info>
+<BSAlert Color=Color.Info>
     Currently it is necessary to set ListGroupType on both the group and the list. See: <a href="https://github.com/aspnet/Blazor/issues/650">https://github.com/aspnet/Blazor/issues/650</a>
-</Alert>
+</BSAlert>
 
 <div class="docs-example">
-    <ListGroup ListGroupType="ListGroupType.Link">
-        <ListGroupItem ListGroupType="ListGroupType.Link" Href="#" IsActive="true">Cras justo odio</ListGroupItem>
-        <ListGroupItem ListGroupType="ListGroupType.Link" Href="#">Dapibus ac facilisis in</ListGroupItem>
-        <ListGroupItem ListGroupType="ListGroupType.Link" Href="#">Morbi leo risus</ListGroupItem>
-        <ListGroupItem ListGroupType="ListGroupType.Link" Href="#">Porta ac consectetur ac</ListGroupItem>
-        <ListGroupItem ListGroupType="ListGroupType.Link" Href="#" IsDisabled="true">Vestibulum at eros</ListGroupItem>
-    </ListGroup>
+    <BSListGroup ListGroupType="ListGroupType.Link">
+        <BSListGroupItem ListGroupType="ListGroupType.Link" Href="#" IsActive="true">Cras justo odio</BSListGroupItem>
+        <BSListGroupItem ListGroupType="ListGroupType.Link" Href="#">Dapibus ac facilisis in</BSListGroupItem>
+        <BSListGroupItem ListGroupType="ListGroupType.Link" Href="#">Morbi leo risus</BSListGroupItem>
+        <BSListGroupItem ListGroupType="ListGroupType.Link" Href="#">Porta ac consectetur ac</BSListGroupItem>
+        <BSListGroupItem ListGroupType="ListGroupType.Link" Href="#" IsDisabled="true">Vestibulum at eros</BSListGroupItem>
+    </BSListGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups4.html" />
 
 <div class="docs-example">
-    <ListGroup ListGroupType="ListGroupType.Button">
-        <ListGroupItem ListGroupType="ListGroupType.Button" IsActive="true">Cras justo odio</ListGroupItem>
-        <ListGroupItem ListGroupType="ListGroupType.Button">Dapibus ac facilisis in</ListGroupItem>
-        <ListGroupItem ListGroupType="ListGroupType.Button">Morbi leo risus</ListGroupItem>
-        <ListGroupItem ListGroupType="ListGroupType.Button">Porta ac consectetur ac</ListGroupItem>
-        <ListGroupItem ListGroupType="ListGroupType.Button" IsDisabled="true">Vestibulum at eros</ListGroupItem>
-    </ListGroup>
+    <BSListGroup ListGroupType="ListGroupType.Button">
+        <BSListGroupItem ListGroupType="ListGroupType.Button" IsActive="true">Cras justo odio</BSListGroupItem>
+        <BSListGroupItem ListGroupType="ListGroupType.Button">Dapibus ac facilisis in</BSListGroupItem>
+        <BSListGroupItem ListGroupType="ListGroupType.Button">Morbi leo risus</BSListGroupItem>
+        <BSListGroupItem ListGroupType="ListGroupType.Button">Porta ac consectetur ac</BSListGroupItem>
+        <BSListGroupItem ListGroupType="ListGroupType.Button" IsDisabled="true">Vestibulum at eros</BSListGroupItem>
+    </BSListGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups5.html" />
 
 <h3>Supplying OnClick Handler</h3>
 <div class="docs-example">
-    <ListGroup ListGroupType="ListGroupType.Button">
-        <ListGroupItem ListGroupType="ListGroupType.Button" OnClick="@onclick">Click me</ListGroupItem>
-    </ListGroup>
+    <BSListGroup ListGroupType="ListGroupType.Button">
+        <BSListGroupItem ListGroupType="ListGroupType.Button" OnClick="@onclick">Click me</BSListGroupItem>
+    </BSListGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups6.html" />
 
 <h3>Flush</h3>
 <div class="docs-example">
-    <ListGroup IsFlush="true">
-        <ListGroupItem>Cras justo odio</ListGroupItem>
-        <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-        <ListGroupItem>Morbi leo risus</ListGroupItem>
-        <ListGroupItem>Porta ac consectetur ac</ListGroupItem>
-        <ListGroupItem>Vestibulum at eros</ListGroupItem>
-    </ListGroup>
+    <BSListGroup IsFlush="true">
+        <BSListGroupItem>Cras justo odio</BSListGroupItem>
+        <BSListGroupItem>Dapibus ac facilisis in</BSListGroupItem>
+        <BSListGroupItem>Morbi leo risus</BSListGroupItem>
+        <BSListGroupItem>Porta ac consectetur ac</BSListGroupItem>
+        <BSListGroupItem>Vestibulum at eros</BSListGroupItem>
+    </BSListGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups7.html" />
 
 <h3>Contextual classes</h3>
 <div class="docs-example">
-    <ListGroup >
-        <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-        <ListGroupItem Color="Color.Primary">A simple primary list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Secondary">A simple secondary list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Success">A simple success list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Danger">A simple danger list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Warning">A simple warning list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Info">A simple info list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Light">A simple light list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Dark">A simple dark list group item</ListGroupItem>
-    </ListGroup>
+    <BSListGroup >
+        <BSListGroupItem>Dapibus ac facilisis in</BSListGroupItem>
+        <BSListGroupItem Color="Color.Primary">A simple primary list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Secondary">A simple secondary list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Success">A simple success list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Danger">A simple danger list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Warning">A simple warning list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Info">A simple info list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Light">A simple light list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Dark">A simple dark list group item</BSListGroupItem>
+    </BSListGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups8.html" />
 
 <div class="docs-example">
-    <ListGroup ListGroupType="ListGroupType.Link">
-        <ListGroupItem ListGroupType="ListGroupType.Link" Href="#">Dapibus ac facilisis in</ListGroupItem>
-        <ListGroupItem Color="Color.Primary" ListGroupType="ListGroupType.Link" Href="#">A simple primary list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Secondary" ListGroupType="ListGroupType.Link" Href="#">A simple secondary list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Success" ListGroupType="ListGroupType.Link" Href="#">A simple success list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Danger" ListGroupType="ListGroupType.Link" Href="#">A simple danger list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Warning" ListGroupType="ListGroupType.Link" Href="#">A simple warning list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Info" ListGroupType="ListGroupType.Link" Href="#">A simple info list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Light" ListGroupType="ListGroupType.Link" Href="#">A simple light list group item</ListGroupItem>
-        <ListGroupItem Color="Color.Dark" ListGroupType="ListGroupType.Link" Href="#">A simple dark list group item</ListGroupItem>
-    </ListGroup>
+    <BSListGroup ListGroupType="ListGroupType.Link">
+        <BSListGroupItem ListGroupType="ListGroupType.Link" Href="#">Dapibus ac facilisis in</BSListGroupItem>
+        <BSListGroupItem Color="Color.Primary" ListGroupType="ListGroupType.Link" Href="#">A simple primary list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Secondary" ListGroupType="ListGroupType.Link" Href="#">A simple secondary list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Success" ListGroupType="ListGroupType.Link" Href="#">A simple success list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Danger" ListGroupType="ListGroupType.Link" Href="#">A simple danger list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Warning" ListGroupType="ListGroupType.Link" Href="#">A simple warning list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Info" ListGroupType="ListGroupType.Link" Href="#">A simple info list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Light" ListGroupType="ListGroupType.Link" Href="#">A simple light list group item</BSListGroupItem>
+        <BSListGroupItem Color="Color.Dark" ListGroupType="ListGroupType.Link" Href="#">A simple dark list group item</BSListGroupItem>
+    </BSListGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups9.html" />
 
 <h3>With badges</h3>
-<Alert Color=Color.Info>
+<BSAlert Color=Color.Info>
     For this to work right, a solution for adding custom classes needs to be added to BlazorStrap
-</Alert>
+</BSAlert>
 <div class="docs-example">
-    <ListGroup>
-        <ListGroupItem>Cras justo odio <Badge IsPill="true">14</Badge></ListGroupItem>
-        <ListGroupItem>Dapibus ac facilisis in <Badge IsPill="true">2</Badge></ListGroupItem>
-        <ListGroupItem>Morbi leo risus <Badge IsPill="true">1</Badge></ListGroupItem>
-    </ListGroup>
+    <BSListGroup>
+        <BSListGroupItem>Cras justo odio <Badge IsPill="true">14</Badge></BSListGroupItem>
+        <BSListGroupItem>Dapibus ac facilisis in <Badge IsPill="true">2</Badge></BSListGroupItem>
+        <BSListGroupItem>Morbi leo risus <Badge IsPill="true">1</Badge></BSListGroupItem>
+    </BSListGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups10.html" />
 
 <h3>Custom Content</h3>
-<Alert Color=Color.Info>
+<BSAlert Color=Color.Info>
     For this to work right, a solution for adding custom classes needs to be added to BlazorStrap
-</Alert>
+</BSAlert>
 
 <div class="docs-example">
-    <ListGroup ListGroupType="ListGroupType.Link">
-        <ListGroupItem ListGroupType="ListGroupType.Link" Href="#" IsActive="true">
-            <ListGroupItemHeading>
+    <BSListGroup ListGroupType="ListGroupType.Link">
+        <BSListGroupItem ListGroupType="ListGroupType.Link" Href="#" IsActive="true">
+            <BSListGroupItemHeading>
                 <h5 class="mb-1">List group item heading</h5>
                 <small>3 days ago</small>
-            </ListGroupItemHeading>
+            </BSListGroupItemHeading>
             <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
             <small>Donec id elit non mi porta.</small>
-        </ListGroupItem>
-        <ListGroupItem ListGroupType="ListGroupType.Link" Href="#">
-            <ListGroupItemHeading>
+        </BSListGroupItem>
+        <BSListGroupItem ListGroupType="ListGroupType.Link" Href="#">
+            <BSListGroupItemHeading>
                 <h5 class="mb-1">List group item heading</h5>
                 <small class="text-muted">3 days ago</small>
-            </ListGroupItemHeading>
+            </BSListGroupItemHeading>
             <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
             <small class="text-muted">Donec id elit non mi porta.</small>
-        </ListGroupItem>
-        <ListGroupItem ListGroupType="ListGroupType.Link" Href="#">
-            <ListGroupItemHeading>
+        </BSListGroupItem>
+        <BSListGroupItem ListGroupType="ListGroupType.Link" Href="#">
+            <BSListGroupItemHeading>
                 <h5 class="mb-1">List group item heading</h5>
                 <small class="text-muted">3 days ago</small>
-            </ListGroupItemHeading>
+            </BSListGroupItemHeading>
             <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
             <small class="text-muted">Donec id elit non mi porta.</small>
-        </ListGroupItem>
-    </ListGroup>
+        </BSListGroupItem>
+    </BSListGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups11.html" />
 
@@ -169,12 +169,12 @@
 <div class="docs-example">
     <Row>
         <BlazorCol XS="4">
-            <ListGroup ListGroupType="ListGroupType.Link">
-                <ListGroupItem OnClick="@onclick1" Class="@(active == 1 ? "active" : null)" ListGroupType="ListGroupType.Button">Home</ListGroupItem>
-                <ListGroupItem OnClick="@onclick2" Class="@(active == 2 ? "active" : null)" ListGroupType="ListGroupType.Button">Settings</ListGroupItem>
-                <ListGroupItem OnClick="@onclick3" Class="@(active == 3 ? "active" : null)" ListGroupType="ListGroupType.Button">Profile</ListGroupItem>
-                <ListGroupItem OnClick="@onclick4" Class="@(active == 4 ? "active" : null)" ListGroupType="ListGroupType.Button">Messages</ListGroupItem>
-            </ListGroup>
+            <BSListGroup ListGroupType="ListGroupType.Link">
+                <BSListGroupItem OnClick="@onclick1" Class="@(active == 1 ? "active" : null)" ListGroupType="ListGroupType.Button">Home</BSListGroupItem>
+                <BSListGroupItem OnClick="@onclick2" Class="@(active == 2 ? "active" : null)" ListGroupType="ListGroupType.Button">Settings</BSListGroupItem>
+                <BSListGroupItem OnClick="@onclick3" Class="@(active == 3 ? "active" : null)" ListGroupType="ListGroupType.Button">Profile</BSListGroupItem>
+                <BSListGroupItem OnClick="@onclick4" Class="@(active == 4 ? "active" : null)" ListGroupType="ListGroupType.Button">Messages</BSListGroupItem>
+            </BSListGroup>
         </BlazorCol>
         <BlazorCol XS="8">
             <TabContent>
