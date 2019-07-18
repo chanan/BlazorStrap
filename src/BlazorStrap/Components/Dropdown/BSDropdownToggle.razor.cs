@@ -8,15 +8,16 @@ namespace BlazorStrap
 {
     public class CodeBSDropdownToggle : BootstrapComponentBase
     {
-        // Releases hold on sub menus
         protected string classname =>
          new CssBuilder()
              .AddClass("btn", !IsLink)
+             .AddClass("dropdown-item", Dropdown?.IsSubmenu == true)
              .AddClass($"btn-{Size.ToDescriptionString()}", !IsLink && Size != Size.None)
              .AddClass($"btn-{Color.ToDescriptionString()}", !IsLink && Color != Color.None)
              .AddClass("dropdown-toggle-split", IsSplit)
              .AddClass("dropdown-toggle")
-             .AddClass("nav-link", IsLink)
+             //nav-link should only show on root drop down toggle
+             .AddClass("nav-link", IsLink && Dropdown?.NavItem != null && Dropdown?.IsSubmenu == false) 
              .AddClass(Class)
          .Build();
 

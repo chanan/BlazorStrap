@@ -29,6 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\cromefix.css" />
+    <Content Remove="wwwroot\css\submenu.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Services\" />
   </ItemGroup>
 

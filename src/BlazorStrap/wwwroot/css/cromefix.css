@@ -1,0 +1,4 @@
+﻿div.modal > div:focus,
+div.modal-header > button.close:focus {
+    outline: 0px;
+}

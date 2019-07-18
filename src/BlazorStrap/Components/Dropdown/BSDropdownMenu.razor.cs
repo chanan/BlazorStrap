@@ -27,6 +27,10 @@ namespace BlazorStrap
         {
             get
             {
+                if (DropDown == null)
+                {
+                    return false;
+                }
                 return DropDown.IsSubmenu;
             }
         }
