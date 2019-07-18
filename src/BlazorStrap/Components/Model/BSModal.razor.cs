@@ -56,7 +56,8 @@ namespace BlazorStrap
         {
             if (!IgnoreClickOnBackdrop)
             {
-                if (!_dontclickWasClicked) IsOpen = false;
+                if (!_dontclickWasClicked && _manual) IsOpen = false;
+                else if(!_dontclickWasClicked && !_manual) _isOpen = false;
                 _dontclickWasClicked = false;
                 StateHasChanged();
             }
