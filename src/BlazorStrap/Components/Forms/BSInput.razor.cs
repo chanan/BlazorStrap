@@ -34,8 +34,8 @@ namespace BlazorStrap
         [Parameter] protected bool IsMultipleSelect { get; set; }
         [Parameter] protected int? SelectSize { get; set; }
         [Parameter] protected int? SelectedIndex { get; set; }
-        [Parameter] protected string Value { get; set; }
-        [Parameter] protected EventCallback<string> ValueChanged { get; set; }
+        [Parameter] protected virtual string Value { get; set; }
+        [Parameter] protected virtual EventCallback<string> ValueChanged { get; set; }
         [Parameter] protected string Class { get; set; }
         [Parameter] protected RenderFragment ChildContent { get; set; }
 
