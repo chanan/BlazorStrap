@@ -1,7 +1,7 @@
 ﻿@namespace BlazorStrap
 @inherits CodeBSCarouselControl
 
-<DynamicElement Attributes="@UnknownParameters" TagName="a" class="@classname" role="button" @onclick="@_onclick">
+<DynamicElement @attributes="@UnknownParameters" TagName="a" class="@classname" role="button" @onclick="_onclick">
     <span class="@iconClassname" aria-hidden="true"></span>
     <span class="sr-only">@directionName</span>
 </DynamicElement>

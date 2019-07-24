@@ -9,7 +9,7 @@
         <BSButton Color="Color.Secondary">Right</BSButton>
     </BSButtonGroup>
 </div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroup/ButtonGroup1.html" />
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups1.html" />
 
 <h3>Button toolbar</h3>
 
@@ -31,7 +31,7 @@
         </BSButtonGroup>
     </BSButtonGroup>
 </div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroup/ButtonGroup2.html" />
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups2.html" />
 
 
 <h3>Sizing</h3>
@@ -48,7 +48,7 @@
         <BSButton Color="Color.Secondary">Right</BSButton>
     </BSButtonGroup>
 </div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroup/ButtonGroup3.html" />
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups3.html" />
 
 <h3>Nesting</h3>
 
@@ -58,7 +58,7 @@
         <BSButton Color="Color.Secondary">2</BSButton>
 
         <BSDropdown IsGroup="true" IsOpen="@IsOpen">
-            <DropdownToggle Color="Color.Secondary" @onclick="@onclick" IsOpen="@IsOpen">Dropdown</DropdownToggle>
+            <DropdownToggle Color="Color.Secondary" @onclick="onclick" IsOpen="@IsOpen">Dropdown</DropdownToggle>
             <BSDropdownMenu IsOpen="@IsOpen">
                 <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
                 <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
@@ -66,7 +66,7 @@
         </BSDropdown>
     </BSButtonGroup>
 </div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroup/ButtonGroup4.html" />
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups4.html" />
 
 
 <h3>Vertical Variation</h3>
@@ -77,7 +77,7 @@
         <BSButton Color="Color.Secondary">2</BSButton>
 
         <BSDropdown IsGroup="true" IsOpen="@IsOpen1">
-            <DropdownToggle Color="Color.Secondary" @onclick="@onclick1" IsOpen="@IsOpen1">Dropdown</DropdownToggle>
+            <DropdownToggle Color="Color.Secondary" @onclick="onclick1" IsOpen="@IsOpen1">Dropdown</DropdownToggle>
             <BSDropdownMenu IsOpen="@IsOpen1">
                 <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
                 <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
@@ -85,7 +85,7 @@
         </BSDropdown>
     </BSButtonGroup>
 </div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroup/ButtonGroup5.html" />
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups5.html" />
 
 @code {
     bool IsOpen { get; set; }

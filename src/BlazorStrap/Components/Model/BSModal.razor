@@ -2,9 +2,9 @@
 @inherits CodeBSModal
 
 
-<DynamicElement Attributes="@UnknownParameters" style="@styles" TagName="div" class="@classname" tabindex="-1" role="dialog" @onclick="@onclick" @onkeydown="@onEscape">
+<DynamicElement @attributes="@UnknownParameters" style="@styles" TagName="div" class="@classname" tabindex="-1" role="dialog" @onclick="onclick" @onkeydown="onEscape">
     <div class="@innerClassname" role="document" @ref="Me" tabindex="-2">
-        <div class="modal-content" @onclick="@dontclick">
+        <div class="modal-content" @onclick="dontclick">
             @ChildContent
         </div>
     </div>

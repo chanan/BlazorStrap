@@ -1,7 +1,7 @@
 ﻿@namespace BlazorStrap
 @inherits CodeBSPagination
 
-<DynamicElement Attributes="@UnknownParameters" TagName="nav" aria-label="Pagination">
+<DynamicElement @attributes="@UnknownParameters" TagName="nav" aria-label="Pagination">
     <ul class="@classname" style="@Style">
         @ChildContent
     </ul>

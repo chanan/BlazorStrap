@@ -1,11 +1,11 @@
 ﻿@namespace BlazorStrap
 @inherits CodeBSToast
 
-<DynamicElement TagName="div" class="@classname" role="alert" aria-live="assertive" aria-atomic="true" Attributes="@UnknownParameters">
+<DynamicElement TagName="div" class="@classname" role="alert" aria-live="assertive" aria-atomic="true" @attributes="@UnknownParameters">
 
     <div class="toast-header">
         @BSToastHeader
-        <button @onclick="@onclick" type="button" class="close ml-auto" data-dismiss="toast" aria-label="Close">
+        <button @onclick="onclick" type="button" class="close ml-auto" data-dismiss="toast" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>

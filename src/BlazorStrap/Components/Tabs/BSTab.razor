@@ -4,7 +4,7 @@
 <CascadingValue Value="@this">
     @if (Parent.IsList)
     {
-    <DynamicElement Attributes="@UnknownParameters" TagName="il" class="@classname" >
+    <DynamicElement @attributes="@UnknownParameters" TagName="il" class="@classname" >
         @ChildContent
     </DynamicElement>
     }

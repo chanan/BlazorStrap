@@ -69,7 +69,7 @@
 <h3>Supplying OnClick Handler</h3>
 <div class="docs-example">
     <BSListGroup ListGroupType="ListGroupType.Button">
-        <BSListGroupItem ListGroupType="ListGroupType.Button" OnClick="@onclick">Click me</BSListGroupItem>
+        <BSListGroupItem ListGroupType="ListGroupType.Button" OnClick="onclick">Click me</BSListGroupItem>
     </BSListGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups6.html" />
@@ -170,10 +170,10 @@
     <Row>
         <BlazorCol XS="4">
             <BSListGroup ListGroupType="ListGroupType.Link">
-                <BSListGroupItem OnClick="@onclick1" Class="@(active == 1 ? "active" : null)" ListGroupType="ListGroupType.Button">Home</BSListGroupItem>
-                <BSListGroupItem OnClick="@onclick2" Class="@(active == 2 ? "active" : null)" ListGroupType="ListGroupType.Button">Settings</BSListGroupItem>
-                <BSListGroupItem OnClick="@onclick3" Class="@(active == 3 ? "active" : null)" ListGroupType="ListGroupType.Button">Profile</BSListGroupItem>
-                <BSListGroupItem OnClick="@onclick4" Class="@(active == 4 ? "active" : null)" ListGroupType="ListGroupType.Button">Messages</BSListGroupItem>
+                <BSListGroupItem OnClick="onclick1" Class="@(active == 1 ? "active" : null)" ListGroupType="ListGroupType.Button">Home</BSListGroupItem>
+                <BSListGroupItem OnClick="onclick2" Class="@(active == 2 ? "active" : null)" ListGroupType="ListGroupType.Button">Settings</BSListGroupItem>
+                <BSListGroupItem OnClick="onclick3" Class="@(active == 3 ? "active" : null)" ListGroupType="ListGroupType.Button">Profile</BSListGroupItem>
+                <BSListGroupItem OnClick="onclick4" Class="@(active == 4 ? "active" : null)" ListGroupType="ListGroupType.Button">Messages</BSListGroupItem>
             </BSListGroup>
         </BlazorCol>
         <BlazorCol XS="8">

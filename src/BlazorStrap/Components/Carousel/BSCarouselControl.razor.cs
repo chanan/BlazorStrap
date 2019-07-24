@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util;
+using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System;
 using System.Threading.Tasks;

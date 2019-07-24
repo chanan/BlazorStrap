@@ -1,7 +1,7 @@
 ﻿@namespace BlazorStrap
 @inherits CodeBSCarouselCaption
 
-<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+<DynamicElement @attributes="@UnknownParameters" TagName="div" class="@classname">
     @if (HeaderText != null)
     {
         <h5>@HeaderText</h5>

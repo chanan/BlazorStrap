@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 
-namespace BlazorStrap.Util
+namespace BlazorStrap.Util.Components
 {
     /// <summary>
     /// The base class for Toggle BlazorStrap components.

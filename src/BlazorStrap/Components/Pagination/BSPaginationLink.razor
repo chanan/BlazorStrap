@@ -1,7 +1,7 @@
 ﻿@namespace BlazorStrap
 @inherits CodeBSPaginationLink
 
-<DynamicElement Attributes="@UnknownParameters" TagName="a" class="@classname">
+<DynamicElement @attributes="@UnknownParameters" TagName="a" class="@classname">
     @if (PaginationLinkType == PaginationLinkType.Custom)
     {
         @ChildContent

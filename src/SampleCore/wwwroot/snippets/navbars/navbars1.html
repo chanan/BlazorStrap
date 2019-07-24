@@ -1,6 +1,6 @@
 ﻿<BSNavbar IsExpand="true" IsDark="false" Color="Color.Light">
     <BSNavbarBrand Href="#">Navbar</BSNavbarBrand>
-    <BSNavbarToggler onclick="@onclick" />
+    <BSNavbarToggler onclick="onclick" />
     <BSCollapse isOpen="@IsOpen" IsNavbar="true">
         <BSNav IsList="true" Class="mr-auto" IsNavbar="true">
             <BSNavItem>
@@ -22,7 +22,7 @@
                 </BSDropdownMenu>
             </BSNavItem>
             <BSNavItem IsDropdown="true" IsOpen="@IsOpen">
-                <BSDropdownToggle IsOpen="@IsOpen" onclick="@onclick" Color="Color.Light">User Controlled</BSDropdownToggle>
+                <BSDropdownToggle IsOpen="@IsOpen" onclick="onclick" Color="Color.Light">User Controlled</BSDropdownToggle>
                 <BSDropdownMenu IsOpen="@IsOpen">
                     <BSDropdownItem Href="#">Action</BSDropdownItem>
                     <BSDropdownItem Href="#">Another Action</BSDropdownItem>
