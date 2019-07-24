@@ -22,24 +22,4 @@
     <EmbeddedResource Include="wwwroot\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Remove="wwwroot\snippets\themes\themes1.html" />
-    <Content Remove="wwwroot\snippets\themes\themes2.html" />
-    <Content Remove="wwwroot\snippets\themes\themes3.html" />
-    <Content Remove="wwwroot\snippets\themes\themes4.html" />
-    <Content Remove="wwwroot\snippets\themes\themes5.html" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="wwwroot\snippets\dropdowns\dropdowns16.html" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Pages\Samples\Navbars.razor.removed" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Pages\Samples\Navbars.razor.removed" />
-  </ItemGroup>
-
 </Project>
