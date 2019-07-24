@@ -1,4 +1,5 @@
-﻿using BlazorStrap.Util;
+﻿using BlazorStrap.Util.Components;
+using BlazorStrap.Util;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorStrap

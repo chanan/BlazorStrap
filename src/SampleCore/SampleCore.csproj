@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BlazorPrettyCode" Version="1.0.0-preview6-12" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0-preview6.19307.2" />
+    <PackageReference Include="BlazorPrettyCode" Version="1.0.0-preview7-01" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0-preview7.19365.7" />
   </ItemGroup>
 
 
@@ -28,6 +28,18 @@
     <Content Remove="wwwroot\snippets\themes\themes3.html" />
     <Content Remove="wwwroot\snippets\themes\themes4.html" />
     <Content Remove="wwwroot\snippets\themes\themes5.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="wwwroot\snippets\dropdowns\dropdowns16.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\Samples\Navbars.razor.removed" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\Samples\Navbars.razor.removed" />
   </ItemGroup>
 
 </Project>

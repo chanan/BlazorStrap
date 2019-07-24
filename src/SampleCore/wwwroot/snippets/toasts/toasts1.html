@@ -1,17 +1,17 @@
-﻿<Toast IsVisible="@isVisible">
-    <ToastHeader>I am Heading</ToastHeader>
-    <ToastBody>
+﻿<BSToast IsVisible="@isVisible">
+    <BSToastHeader>I am Heading</BSToastHeader>
+    <BSToastBody>
         <p>Test me</p>
-    </ToastBody>
-</Toast>
+    </BSToastBody>
+</BSToast>
 
-<Toast IsVisible="@isVisible">
-    <ToastHeader>I am also Heading</ToastHeader>
-    <ToastBody>
+<BSToast IsVisible="@isVisible">
+    <BSToastHeader>I am also Heading</BSToastHeader>
+    <BSToastBody>
         Test Me
-    </ToastBody>
-</Toast>
-<BlazorButton @onclick="@onclick">Toggle Toast Visibility</BlazorButton>
+    </BSToastBody>
+</BSToast>
+<BlazorButton @onclick="onclick">Toggle Toast Visibility</BlazorButton>
 
 @code {
     private bool isVisible { get; set; } = true;

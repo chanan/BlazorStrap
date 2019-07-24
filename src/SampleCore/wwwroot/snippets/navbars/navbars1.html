@@ -1,42 +1,42 @@
-﻿<Navbar IsExpand="true" IsDark="false" Color="Color.Light">
-    <NavbarBrand Href="#">Navbar</NavbarBrand>
-    <NavbarToggler onclick="@onclick" />
-    <Collapse isOpen="@IsOpen" IsNavbar="true">
-        <BlazorNav IsList="true" Class="mr-auto" IsNavbar="true">
-            <NavItem>
-                <BlazorNavLink IsActive="true" Href="#">Home</BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink Href="#">Link</BlazorNavLink>
-            </NavItem>
-            <NavItem>
-                <BlazorNavLink IsDisabled="true" Href="#">Disabled</BlazorNavLink>
-            </NavItem>
-            <NavItem IsDropdown="true">
-                <DropdownToggle Color="Color.Light">Dropdown link</DropdownToggle>
-                <DropdownMenu>
-                    <DropdownItem Href="#">Action</DropdownItem>
-                    <DropdownItem Href="#">Another Action</DropdownItem>
-                    <DropdownItem IsDivider="true" />
-                    <DropdownItem Href="#">Yet Another Action</DropdownItem>
-                </DropdownMenu>
-            </NavItem>
-            <NavItem IsDropdown="true" IsOpen="@IsOpen">
-                <DropdownToggle IsOpen="@IsOpen" onclick="@onclick" Color="Color.Light">User Controlled</DropdownToggle>
-                <DropdownMenu IsOpen="@IsOpen">
-                    <DropdownItem Href="#">Action</DropdownItem>
-                    <DropdownItem Href="#">Another Action</DropdownItem>
-                    <DropdownItem IsDivider="true" />
-                    <DropdownItem Href="#">Yet Another Action</DropdownItem>
-                </DropdownMenu>
-            </NavItem>
-        </BlazorNav>
-        <BlazorForm IsInline="true" Class="my-2 my-lg-0">
-            <BlazorInput InputType="InputType.Search" PlaceHolder="Search" Class="mr-sm-2" />
-            <BlazorButton IsOutline="true" Color="Color.Success" ButtonType="ButtonType.Submit" Class="my-2 my-sm-0">Search</BlazorButton>
-        </BlazorForm>
-    </Collapse>
-</Navbar>
+﻿<BSNavbar IsExpand="true" IsDark="false" Color="Color.Light">
+    <BSNavbarBrand Href="#">Navbar</BSNavbarBrand>
+    <BSNavbarToggler onclick="onclick" />
+    <BSCollapse isOpen="@IsOpen" IsNavbar="true">
+        <BSNav IsList="true" Class="mr-auto" IsNavbar="true">
+            <BSNavItem>
+                <BSNavLink IsActive="true" Href="#">Home</BSNavLink>
+            </BSNavItem>
+            <BSNavItem>
+                <BSNavLink Href="#">Link</BSNavLink>
+            </BSNavItem>
+            <BSNavItem>
+                <BSNavLink IsDisabled="true" Href="#">Disabled</BSNavLink>
+            </BSNavItem>
+            <BSNavItem IsDropdown="true">
+                <BSDropdownToggle Color="Color.Light">Dropdown link</BSDropdownToggle>
+                <BSDropdownMenu>
+                    <BSDropdownItem Href="#">Action</BSDropdownItem>
+                    <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                    <BSDropdownItem IsDivider="true" />
+                    <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSNavItem>
+            <BSNavItem IsDropdown="true" IsOpen="@IsOpen">
+                <BSDropdownToggle IsOpen="@IsOpen" onclick="onclick" Color="Color.Light">User Controlled</BSDropdownToggle>
+                <BSDropdownMenu IsOpen="@IsOpen">
+                    <BSDropdownItem Href="#">Action</BSDropdownItem>
+                    <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                    <BSDropdownItem IsDivider="true" />
+                    <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSNavItem>
+        </BSNav>
+        <BSForm IsInline="true" Class="my-2 my-lg-0">
+            <BSInput InputType="InputType.Search" PlaceHolder="Search" Class="mr-sm-2" />
+            <BSButton IsOutline="true" Color="Color.Success" ButtonType="ButtonType.Submit" Class="my-2 my-sm-0">Search</BSButton>
+        </BSForm>
+    </BSCollapse>
+</BSNavbar>
 
 @code {
     bool IsOpen { get; set; } = true;

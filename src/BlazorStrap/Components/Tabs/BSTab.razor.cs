@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util;
+using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System.Threading.Tasks;
 using System;
@@ -19,6 +19,7 @@ namespace BlazorStrap
         }
         protected string classname =>
         new CssBuilder("nav-item")
+            .AddClass("active", Selected)
             .AddClass(Class)
         .Build();
 

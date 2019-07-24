@@ -5,48 +5,48 @@
 <Alert Color="Color.Warning">Form tags are not finished. Binding, specifically of the select tag, still needs work.</Alert>
 
 <div class="docs-example">
-    <BlazorForm>
-        <FormGroup>
-            <BlazorLabel For="exampleInputEmail1">Email address</BlazorLabel>
-            <BlazorInput Id="exampleInputEmail1" InputType="InputType.Email" PlaceHolder="Enter email" />
+    <BSForm>
+        <BSFormGroup>
+            <BSLabel For="exampleInputEmail1">Email address</BSLabel>
+            <BSInput Id="exampleInputEmail1" InputType="InputType.Email" PlaceHolder="Enter email" />
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </FormGroup>
-        <FormGroup>
-            <BlazorLabel For="exampleInputPassword1">Password</BlazorLabel>
-            <BlazorInput Id="exampleInputPassword1" InputType="InputType.Password" PlaceHolder="Password" />
-        </FormGroup>
-        <FormGroup IsCheck="true">
-            <BlazorInput Id="exampleCheck1" InputType="InputType.Checkbox" />
-            <BlazorLabel IsCheck="true" For="exampleCheck1">Check me out</BlazorLabel>
-        </FormGroup>
-        <BlazorButton Color="Color.Primary" ButtonType="ButtonType.Submit">Submit</BlazorButton>
-    </BlazorForm>
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleInputPassword1">Password</BSLabel>
+            <BSInput Id="exampleInputPassword1" InputType="InputType.Password" PlaceHolder="Password" />
+        </BSFormGroup>
+        <BSFormGroup IsCheck="true">
+            <BSInput Id="exampleCheck1" InputType="InputType.Checkbox" />
+            <BSLabel IsCheck="true" For="exampleCheck1">Check me out</BSLabel>
+        </BSFormGroup>
+        <BSButton Color="Color.Primary" ButtonType="ButtonType.Submit">Submit</BSButton>
+    </BSForm>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms1.html" />
 
-<p>Use @@bind-Value to bind to BlazorInput value</p>
+<p>Use @@bind-Value to bind to BSInput value</p>
 
 <div class="docs-example">
-    <BlazorForm>
-        <FormGroup>
-            <BlazorLabel For="exampleFormControlSelect1">Example select</BlazorLabel>
-            <BlazorInput Id="exampleFormControlSelect1" InputType="InputType.Select">
+    <BSForm>
+        <BSFormGroup>
+            <BSLabel For="exampleFormControlSelect1">Example select</BSLabel>
+            <BSInput Id="exampleFormControlSelect1" InputType="InputType.Select">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
-            </BlazorInput>
-        </FormGroup>
-        <FormGroup>
-            <BlazorLabel For="exampleText">Text Area</BlazorLabel>
-            <BlazorInput InputType="InputType.TextArea" Name="text" Id="exampleText" Rows="5" />
-        </FormGroup>
-        <FormGroup>
-            <BlazorLabel For="exampleFormControlFile1">Example file input</BlazorLabel>
-            <BlazorInput InputType="InputType.File" Id="exampleFormControlFile1" />
-        </FormGroup>
-    </BlazorForm>
+            </BSInput>
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleText">Text Area</BSLabel>
+            <BSInput InputType="InputType.TextArea" Name="text" Id="exampleText" Rows="5" />
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleFormControlFile1">Example file input</BSLabel>
+            <BSInput InputType="InputType.File" Id="exampleFormControlFile1" />
+        </BSFormGroup>
+    </BSForm>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms2.html" />
 
@@ -54,157 +54,157 @@
 <h3>Sizing</h3>
 
 <div class="docs-example">
-    <BlazorInput InputType="InputType.Text" Size="Size.Large" PlaceHolder="Size.Large" />
-    <BlazorInput InputType="InputType.Text" PlaceHolder="Default" />
-    <BlazorInput InputType="InputType.Text" Size="Size.Small" PlaceHolder="Size.Small" />
+    <BSInput InputType="InputType.Text" Size="Size.Large" PlaceHolder="Size.Large" />
+    <BSInput InputType="InputType.Text" PlaceHolder="Default" />
+    <BSInput InputType="InputType.Text" Size="Size.Small" PlaceHolder="Size.Small" />
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms3.html" />
 
 <div class="docs-example">
-    <BlazorInput InputType="InputType.Select" Size="Size.Large">
+    <BSInput InputType="InputType.Select" Size="Size.Large">
         <option>Large select</option>
-    </BlazorInput>
-    <BlazorInput InputType="InputType.Select">
+    </BSInput>
+    <BSInput InputType="InputType.Select">
         <option>Default select</option>
-    </BlazorInput>
-    <BlazorInput InputType="InputType.Select" Size="Size.Small">
+    </BSInput>
+    <BSInput InputType="InputType.Select" Size="Size.Small">
         <option>Small select</option>
-    </BlazorInput>
+    </BSInput>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms4.html" />
 
 <h3>Range Inputs</h3>
 
 <div class="docs-example">
-    <BlazorForm>
-        <FormGroup>
-            <BlazorLabel For="formControlRange">Example Range input</BlazorLabel>
-            <BlazorInput InputType="InputType.Range" Id="formControlRange" />
-        </FormGroup>
-    </BlazorForm>
+    <BSForm>
+        <BSFormGroup>
+            <BSLabel For="formControlRange">Example Range input</BSLabel>
+            <BSInput InputType="InputType.Range" Id="formControlRange" />
+        </BSFormGroup>
+    </BSForm>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms5.html" />
 
 <h3>Readonly</h3>
 
 <div class="docs-example">
-    <BlazorInput InputType="InputType.Text" PlaceHolder="Readonly input here…" IsReadonly="true" />
+    <BSInput InputType="InputType.Text" PlaceHolder="Readonly input here…" IsReadonly="true" />
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms6.html" />
 
 <h3>Readonly plain text</h3>
 
 <div class="docs-example">
-    <BlazorForm>
-        <FormGroup IsRow="true">
-            <BlazorLabel For="staticEmail" SM="2">Email</BlazorLabel>
-            <BlazorCol SM="10">
-                <BlazorInput InputType="InputType.Text" IsReadonly="true" IsPlaintext="true" Id="staticEmail" Value="email@example.com" />
-            </BlazorCol>
-        </FormGroup>
-        <FormGroup IsRow="true">
-            <BlazorLabel For="inputPassword" SM="2">Password</BlazorLabel>
-            <BlazorCol SM="10">
-                <BlazorInput InputType="InputType.Password" Id="inputPassword" />
-            </BlazorCol>
-        </FormGroup>
-        <FormGroup IsRow="true">
-            <BlazorCol SM="2" SMOffset="2">
-                <BlazorButton ButtonType="ButtonType.Submit">Submit</BlazorButton>
-            </BlazorCol>
-        </FormGroup>
-    </BlazorForm>
+    <BSForm>
+        <BSFormGroup IsRow="true">
+            <BSLabel For="staticEmail" SM="2">Email</BSLabel>
+            <BSCol SM="10">
+                <BSInput InputType="InputType.Text" IsReadonly="true" IsPlaintext="true" Id="staticEmail" Value="email@example.com" />
+            </BSCol>
+        </BSFormGroup>
+        <BSFormGroup IsRow="true">
+            <BSLabel For="inputPassword" SM="2">Password</BSLabel>
+            <BSCol SM="10">
+                <BSInput InputType="InputType.Password" Id="inputPassword" />
+            </BSCol>
+        </BSFormGroup>
+        <BSFormGroup IsRow="true">
+            <BSCol SM="2" SMOffset="2">
+                <BSButton ButtonType="ButtonType.Submit">Submit</BSButton>
+            </BSCol>
+        </BSFormGroup>
+    </BSForm>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms7.html" />
 
 <h3>Inline Form</h3>
 
 <div class="docs-example">
-    <BlazorForm IsInline="true">
-        <FormGroup Class="mb-2 mr-sm-2 mb-sm-0">
-            <BlazorLabel For="exampleEmail" Class="mr-sm-2">Email</BlazorLabel>
-            <BlazorInput InputType="InputType.Email" Name="email" Id="exampleEmail" PlaceHolder="something@idk.cool" />
-        </FormGroup>
-        <FormGroup Class="mb-2 mr-sm-2 mb-sm-0">
-            <BlazorLabel For="examplePassword" class="mr-sm-2">Password</BlazorLabel>
-            <BlazorInput InputType="InputType.Password" Name="password" Id="examplePassword" PlaceHolder="don't tell!" />
-        </FormGroup>
-        <BlazorButton ButtonType="ButtonType.Submit">Submit</BlazorButton>
-    </BlazorForm>
+    <BSForm IsInline="true">
+        <BSFormGroup Class="mb-2 mr-sm-2 mb-sm-0">
+            <BSLabel For="exampleEmail" Class="mr-sm-2">Email</BSLabel>
+            <BSInput InputType="InputType.Email" Name="email" Id="exampleEmail" PlaceHolder="something@idk.cool" />
+        </BSFormGroup>
+        <BSFormGroup Class="mb-2 mr-sm-2 mb-sm-0">
+            <BSLabel For="examplePassword" class="mr-sm-2">Password</BSLabel>
+            <BSInput InputType="InputType.Password" Name="password" Id="examplePassword" PlaceHolder="don't tell!" />
+        </BSFormGroup>
+        <BSButton ButtonType="ButtonType.Submit">Submit</BSButton>
+    </BSForm>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms8.html" />
 
 <h3>Checkboxes and radios</h3>
 
 <div class="docs-example">
-    <FormGroup IsCheck="true">
-        <BlazorInput InputType="InputType.Checkbox" Id="defaultCheck1" />
-        <BlazorLabel For="defaultCheck1">Default checkbox</BlazorLabel>
-    </FormGroup>
-    <FormGroup IsCheck="true">
-        <BlazorInput InputType="InputType.Checkbox" Id="defaultCheck2" IsDisabled="true" />
-        <BlazorLabel For="defaultCheck2">Disabled checkbox</BlazorLabel>
-    </FormGroup>
+    <BSFormGroup IsCheck="true">
+        <BSInput InputType="InputType.Checkbox" Id="defaultCheck1" />
+        <BSLabel For="defaultCheck1">Default checkbox</BSLabel>
+    </BSFormGroup>
+    <BSFormGroup IsCheck="true">
+        <BSInput InputType="InputType.Checkbox" Id="defaultCheck2" IsDisabled="true" />
+        <BSLabel For="defaultCheck2">Disabled checkbox</BSLabel>
+    </BSFormGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms9.html" />
 
 <div class="docs-example">
-    <FormGroup IsCheck="true">
-        <BlazorInput InputType="InputType.Radio" Name="exampleRadios" Id="exampleRadios1" value="option1" IsChecked="true" />
-        <BlazorLabel For="exampleRadios1">Default radio</BlazorLabel>
-    </FormGroup>
-    <FormGroup IsCheck="true">
-        <BlazorInput InputType="InputType.Radio" Name="exampleRadios" Id="exampleRadios2" value="option2" />
-        <BlazorLabel For="exampleRadios2">Second default radio</BlazorLabel>
-    </FormGroup>
-    <FormGroup IsCheck="true" Class="disabled">
-        <BlazorInput InputType="InputType.Radio" Name="exampleRadios" Id="exampleRadios3" value="option3" IsDisabled="true" />
-        <BlazorLabel For="exampleRadios3">Disabled radio</BlazorLabel>
-    </FormGroup>
+    <BSFormGroup IsCheck="true">
+        <BSInput InputType="InputType.Radio" Name="exampleRadios" Id="exampleRadios1" value="option1" IsChecked="true" />
+        <BSLabel For="exampleRadios1">Default radio</BSLabel>
+    </BSFormGroup>
+    <BSFormGroup IsCheck="true">
+        <BSInput InputType="InputType.Radio" Name="exampleRadios" Id="exampleRadios2" value="option2" />
+        <BSLabel For="exampleRadios2">Second default radio</BSLabel>
+    </BSFormGroup>
+    <BSFormGroup IsCheck="true" Class="disabled">
+        <BSInput InputType="InputType.Radio" Name="exampleRadios" Id="exampleRadios3" value="option3" IsDisabled="true" />
+        <BSLabel For="exampleRadios3">Disabled radio</BSLabel>
+    </BSFormGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms10.html" />
 
 <h3>Form Validation</h3>
 
 <div class="docs-example">
-    <BlazorForm>
-        <FormGroup>
-            <BlazorLabel For="exampleEmail3">Input without validation</BlazorLabel>
-            <BlazorInput InputType="InputType.Text" Id="exampleEmail3" />
-            <FormFeedback>You will not be able to see this</FormFeedback>
-        </FormGroup>
-        <FormGroup>
-            <BlazorLabel For="exampleEmail4">Valid input</BlazorLabel>
-            <BlazorInput IsValid="true" InputType="InputType.Text" Id="exampleEmail4" />
-            <FormFeedback IsValid="true">Sweet! that name is available</FormFeedback>
-        </FormGroup>
-        <FormGroup>
-            <BlazorLabel For="exampleEmail5">Invalid input</BlazorLabel>
-            <BlazorInput IsInvalid="true" InputType="InputType.Text" Id="exampleEmail5" />
-            <FormFeedback IsInvalid="true">Oh noes! that name is already taken</FormFeedback>
-        </FormGroup>
-    </BlazorForm>
+    <BSForm>
+        <BSFormGroup>
+            <BSLabel For="exampleEmail3">Input without validation</BSLabel>
+            <BSInput InputType="InputType.Text" Id="exampleEmail3" />
+            <BSFormFeedback>You will not be able to see this</BSFormFeedback>
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleEmail4">Valid input</BSLabel>
+            <BSInput IsValid="true" InputType="InputType.Text" Id="exampleEmail4" />
+            <BSFormFeedback IsValid="true">Sweet! that name is available</BSFormFeedback>
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleEmail5">Invalid input</BSLabel>
+            <BSInput IsInvalid="true" InputType="InputType.Text" Id="exampleEmail5" />
+            <BSFormFeedback IsInvalid="true">Oh noes! that name is already taken</BSFormFeedback>
+        </BSFormGroup>
+    </BSForm>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms11.html" />
 
 <h4>Form Tooltip Validation</h4>
 <div class="docs-example">
-    <BlazorForm>
-        <FormGroup>
-            <BlazorLabel For="exampleEmail6">Input without validation</BlazorLabel>
-            <BlazorInput InputType="InputType.Text" Id="exampleEmail6" />
-            <FormFeedback IsTooltip="true">You will not be able to see this</FormFeedback>
-        </FormGroup>
-        <FormGroup>
-            <BlazorLabel For="exampleEmail7">Valid input</BlazorLabel>
-            <BlazorInput IsValid="true" InputType="InputType.Text" Id="exampleEmail7" />
-            <FormFeedback IsTooltip="true" IsValid="true">Sweet! that name is available</FormFeedback>
-        </FormGroup>
-        <FormGroup>
-            <BlazorLabel For="exampleEmail8">Invalid input</BlazorLabel>
-            <BlazorInput IsInvalid="true" InputType="InputType.Text" Id="exampleEmail8" />
-            <FormFeedback IsTooltip="true" IsInvalid="true">Oh noes! that name is already taken</FormFeedback>
-        </FormGroup>
-    </BlazorForm>
+    <BSForm>
+        <BSFormGroup>
+            <BSLabel For="exampleEmail6">Input without validation</BSLabel>
+            <BSInput InputType="InputType.Text" Id="exampleEmail6" />
+            <BSFormFeedback IsTooltip="true">You will not be able to see this</BSFormFeedback>
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleEmail7">Valid input</BSLabel>
+            <BSInput IsValid="true" InputType="InputType.Text" Id="exampleEmail7" />
+            <BSFormFeedback IsTooltip="true" IsValid="true">Sweet! that name is available</BSFormFeedback>
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleEmail8">Invalid input</BSLabel>
+            <BSInput IsInvalid="true" InputType="InputType.Text" Id="exampleEmail8" />
+            <BSFormFeedback IsTooltip="true" IsInvalid="true">Oh noes! that name is already taken</BSFormFeedback>
+        </BSFormGroup>
+    </BSForm>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms12.html" />
