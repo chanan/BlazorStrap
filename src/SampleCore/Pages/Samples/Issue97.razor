@@ -1,31 +1,31 @@
 ﻿@page "/samples/issue97"
 
-<Navbar IsExpand="true" IsFixedTop="true" IsDark="true" Color="Color.Dark" class="navbar-expand-md">
-    <NavbarBrand href="#">Brand</NavbarBrand>
-    <NavbarToggler />
-    <Collapse isOpen="true" IsNavbar="true">
-        <BlazorNav IsNavbar="true">
-            <NavItem>
-                <BlazorNavLink IsActive="true" href="#" Match="NavLinkMatch.All">Home</BlazorNavLink>
-            </NavItem>
-            <NavItem IsDropdown="true">
-                <DropdownToggle IsDark="true" IsLink="true">CategoryOne</DropdownToggle>
-                <DropdownMenu>
-                    <DropdownItem href="CategoryOne/Create">Create</DropdownItem>
-                    <DropdownItem href="CategoryOne/Delete">Delete</DropdownItem>
-                    <DropdownItem href="CategoryOne/Rename">Rename</DropdownItem>
-                    <DropdownItem href="CategoryOne/Show">Show</DropdownItem>
-                </DropdownMenu>
-            </NavItem>
-            <NavItem IsDropdown="true">
-                <DropdownToggle IsDark="true">CategoryTwo</DropdownToggle>
-                <DropdownMenu>
-                    <DropdownItem href="CategoryTwo/Create">Create</DropdownItem>
-                    <DropdownItem href="CategoryTwo/Delete">Delete</DropdownItem>
-                    <DropdownItem href="CategoryTwo/Rename">Rename</DropdownItem>
-                    <DropdownItem href="CategoryTwo/Show">Show</DropdownItem>
-                </DropdownMenu>
-            </NavItem>
-        </BlazorNav>
-    </Collapse>
-</Navbar>
+<BSNavbar IsExpand="true" IsFixedTop="true" IsDark="true" Color="Color.Dark" class="navbar-expand-md">
+    <BSNavbarBrand href="#">Brand</BSNavbarBrand>
+    <BSNavbarToggler />
+    <BSCollapse isOpen="true" IsNavbar="true">
+        <BSNav IsNavbar="true">
+            <BSNavItem>
+                <BSNavLink IsActive="true" href="#" Match="NavLinkMatch.All">Home</BSNavLink>
+            </BSNavItem>
+            <BSNavItem IsDropdown="true">
+                <BSDropdownToggle IsDark="true" IsLink="true">CategoryOne</BSDropdownToggle>
+                <BSDropdownMenu>
+                    <BSDropdownItem href="CategoryOne/Create">Create</BSDropdownItem>
+                    <BSDropdownItem href="CategoryOne/Delete">Delete</BSDropdownItem>
+                    <BSDropdownItem href="CategoryOne/Rename">Rename</BSDropdownItem>
+                    <BSDropdownItem href="CategoryOne/Show">Show</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSNavItem>
+            <BSNavItem IsDropdown="true">
+                <BSDropdownToggle IsDark="true">CategoryTwo</BSDropdownToggle>
+                <BSDropdownMenu>
+                    <BSDropdownItem href="CategoryTwo/Create">Create</BSDropdownItem>
+                    <BSDropdownItem href="CategoryTwo/Delete">Delete</BSDropdownItem>
+                    <BSDropdownItem href="CategoryTwo/Rename">Rename</BSDropdownItem>
+                    <BSDropdownItem href="CategoryTwo/Show">Show</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSNavItem>
+        </BSNav>
+    </BSCollapse>
+</BSNavbar>

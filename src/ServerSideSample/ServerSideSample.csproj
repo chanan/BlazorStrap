@@ -9,5 +9,4 @@
     <ProjectReference Include="..\SampleCore\SampleCore.csproj" />
   </ItemGroup>
 
-
 </Project>

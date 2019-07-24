@@ -1,12 +1,12 @@
-﻿<BlazorButton Color="Color.Primary" OnClick="@onclick">Launch demo modal</BlazorButton>
-<Modal IsOpen="@IsOpen">
-    <ModalHeader OnClick="@onclick">Modal title</ModalHeader>
-    <ModalBody><p>Modal body text goes here.</p></ModalBody>
-    <ModalFooter>
-        <BlazorButton Color="Color.Secondary" OnClick="@onclick">Close</BlazorButton>
-        <BlazorButton Color="Color.Primary" OnClick="@onclick">Save Changes</BlazorButton>
-    </ModalFooter>
-</Modal>
+﻿<BSButton Color="Color.Primary" OnClick="onclick">Launch demo modal</BSButton>
+<BSModal IsOpen="@IsOpen">
+    <BSModalHeader OnClick="onclick">Modal title</BSModalHeader>
+    <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+    <BSModalFooter>
+        <BSButton Color="Color.Secondary" OnClick="onclick">Close</BSButton>
+        <BSButton Color="Color.Primary" OnClick="onclick">Save Changes</BSButton>
+    </BSModalFooter>
+</BSModal>
 
 @code {
     bool IsOpen { get; set; }

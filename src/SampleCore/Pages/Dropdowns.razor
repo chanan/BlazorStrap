@@ -3,76 +3,76 @@
 <h1>Dropdowns</h1>
 
 <div class="docs-example">
-    <Dropdown>
-        <DropdownToggle>Dropdown</DropdownToggle>
-        <DropdownMenu>
-            <DropdownItem Href="#">Action</DropdownItem>
-            <DropdownItem Href="#">Another Action</DropdownItem>
-            <DropdownItem Href="#">Yet Another Action</DropdownItem>
-        </DropdownMenu>
-    </Dropdown>
+    <BSDropdown>
+        <BSDropdownToggle>Dropdown</BSDropdownToggle>
+        <BSDropdownMenu>
+            <BSDropdownItem Href="#">Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+        </BSDropdownMenu>
+    </BSDropdown>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns1.html" />
 
-<Alert Color="Color.Info">
+<BSAlert Color="Color.Info">
     Currently only buttons are supported as dropdowns. See: https://github.com/aspnet/Blazor/issues/715
-</Alert>
+</BSAlert>
 
 <h3>Color Variants</h3>
 
 <p>Add the Color attribute to DropDownToggle to set the button color.</p>
 
 <div class="docs-example">
-    <ButtonGroup>
-        <Dropdown>
-            <DropdownToggle Color="Color.Primary">Dropdown</DropdownToggle>
-            <DropdownMenu>
-                <DropdownItem Href="#">Action</DropdownItem>
-                <DropdownItem Href="#">Another Action</DropdownItem>
-                <DropdownItem Href="#">Yet Another Action</DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
-        <Dropdown>
-            <DropdownToggle Color="Color.Secondary">Dropdown</DropdownToggle>
-            <DropdownMenu>
-                <DropdownItem Href="#">Action</DropdownItem>
-                <DropdownItem Href="#">Another Action</DropdownItem>
-                <DropdownItem Href="#">Yet Another Action</DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
-        <Dropdown>
-            <DropdownToggle Color="Color.Success">Dropdown</DropdownToggle>
-            <DropdownMenu>
-                <DropdownItem Href="#">Action</DropdownItem>
-                <DropdownItem Href="#">Another Action</DropdownItem>
-                <DropdownItem Href="#">Yet Another Action</DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
-        <Dropdown>
-            <DropdownToggle Color="Color.Info">Dropdown</DropdownToggle>
-            <DropdownMenu>
-                <DropdownItem Href="#">Action</DropdownItem>
-                <DropdownItem Href="#">Another Action</DropdownItem>
-                <DropdownItem Href="#">Yet Another Action</DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
-        <Dropdown>
-            <DropdownToggle Color="Color.Warning">Dropdown</DropdownToggle>
-            <DropdownMenu>
-                <DropdownItem Href="#">Action</DropdownItem>
-                <DropdownItem Href="#">Another Action</DropdownItem>
-                <DropdownItem Href="#">Yet Another Action</DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
-        <Dropdown>
-            <DropdownToggle Color="Color.Danger">Dropdown</DropdownToggle>
-            <DropdownMenu>
-                <DropdownItem Href="#">Action</DropdownItem>
-                <DropdownItem Href="#">Another Action</DropdownItem>
-                <DropdownItem Href="#">Yet Another Action</DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
-    </ButtonGroup>
+    <BSButtonGroup>
+        <BSDropdown>
+            <BSDropdownToggle Color="Color.Primary">Dropdown</BSDropdownToggle>
+            <BSDropdownMenu>
+                <BSDropdownItem Href="#">Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSDropdown>
+        <BSDropdown>
+            <BSDropdownToggle Color="Color.Secondary">Dropdown</BSDropdownToggle>
+            <BSDropdownMenu>
+                <BSDropdownItem Href="#">Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSDropdown>
+        <BSDropdown>
+            <BSDropdownToggle Color="Color.Success">Dropdown</BSDropdownToggle>
+            <BSDropdownMenu>
+                <BSDropdownItem Href="#">Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSDropdown>
+        <BSDropdown>
+            <BSDropdownToggle Color="Color.Info">Dropdown</BSDropdownToggle>
+            <BSDropdownMenu>
+                <BSDropdownItem Href="#">Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSDropdown>
+        <BSDropdown>
+            <BSDropdownToggle Color="Color.Warning">Dropdown</BSDropdownToggle>
+            <BSDropdownMenu>
+                <BSDropdownItem Href="#">Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSDropdown>
+        <BSDropdown>
+            <BSDropdownToggle Color="Color.Danger">Dropdown</BSDropdownToggle>
+            <BSDropdownMenu>
+                <BSDropdownItem Href="#">Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSDropdown>
+    </BSButtonGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns15.html" />
 
@@ -81,68 +81,68 @@
 <p>Note that you can also make a DropdownItem into a seperator by adding IsDivider="true" to the DropdownItem.</p>
 
 <div class="docs-example">
-    <Dropdown>
-        <ButtonGroup>
-            <BlazorButton Color="Color.Secondary">Action</BlazorButton>
-            <DropdownToggle IsSplit="true" Color="Color.Secondary" />
-            <DropdownMenu>
-                <DropdownItem Href="#">Action</DropdownItem>
-                <DropdownItem Href="#">Another Action</DropdownItem>
-                <DropdownItem IsDivider="true" />
-                <DropdownItem Href="#">Yet Another Action</DropdownItem>
-            </DropdownMenu>
-        </ButtonGroup>
-    </Dropdown>
+    <BSDropdown>
+        <BSButtonGroup>
+            <BSButton Color="Color.Secondary">Action</BSButton>
+            <BSDropdownToggle IsSplit="true" Color="Color.Secondary" />
+            <BSDropdownMenu>
+                <BSDropdownItem Href="#">Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                <BSDropdownItem IsDivider="true" />
+                <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSButtonGroup>
+    </BSDropdown>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns2.html" />
 
 <h3>Sizing</h3>
 
 <div class="docs-example">
-    <ButtonGroup>
-        <Dropdown>
-            <DropdownToggle Color="Color.Secondary" Size="Size.Large">Large button</DropdownToggle>
-            <DropdownMenu>
-                <DropdownItem Href="#">Action</DropdownItem>
-                <DropdownItem Href="#">Another Action</DropdownItem>
-                <DropdownItem Href="#">Yet Another Action</DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
-        <Dropdown>
-            <ButtonGroup>
-                <BlazorButton Size="Size.Large" Color="Color.Secondary">Large split button</BlazorButton>
-                <DropdownToggle Size="Size.Large" IsSplit="true" Color="Color.Secondary"/>
-                <DropdownMenu>
-                    <DropdownItem Href="#">Action</DropdownItem>
-                    <DropdownItem Href="#">Another Action</DropdownItem>
-                    <DropdownItem IsDivider="true" />
-                    <DropdownItem Href="#">Yet Another Action</DropdownItem>
-                </DropdownMenu>
-            </ButtonGroup>
-            </Dropdown>
-    </ButtonGroup>
-    <ButtonGroup>
-        <Dropdown>
-            <DropdownToggle Color="Color.Secondary" Size="Size.Small">Small button</DropdownToggle>
-            <DropdownMenu>
-                <DropdownItem Href="#">Action</DropdownItem>
-                <DropdownItem Href="#">Another Action</DropdownItem>
-                <DropdownItem Href="#">Yet Another Action</DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
-        <Dropdown>
-            <ButtonGroup>
-                <BlazorButton Size="Size.Small" Color="Color.Secondary">Small split button</BlazorButton>
-                <DropdownToggle Size="Size.Small" IsSplit="true" Color="Color.Secondary"/>
-                <DropdownMenu>
-                    <DropdownItem Href="#">Action</DropdownItem>
-                    <DropdownItem Href="#">Another Action</DropdownItem>
-                    <DropdownItem IsDivider="true" />
-                    <DropdownItem Href="#">Yet Another Action</DropdownItem>
-                </DropdownMenu>
-            </ButtonGroup>
-        </Dropdown>
-    </ButtonGroup>
+    <BSButtonGroup>
+        <BSDropdown>
+            <BSDropdownToggle Color="Color.Secondary" Size="Size.Large">Large button</BSDropdownToggle>
+            <BSDropdownMenu>
+                <BSDropdownItem Href="#">Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSDropdown>
+        <BSDropdown>
+            <BSButtonGroup>
+                <BSButton Size="Size.Large" Color="Color.Secondary">Large split button</BSButton>
+                <BSDropdownToggle Size="Size.Large" IsSplit="true" Color="Color.Secondary" />
+                <BSDropdownMenu>
+                    <BSDropdownItem Href="#">Action</BSDropdownItem>
+                    <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                    <BSDropdownItem IsDivider="true" />
+                    <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSButtonGroup>
+        </BSDropdown>
+    </BSButtonGroup>
+    <BSButtonGroup>
+        <BSDropdown>
+            <BSDropdownToggle Color="Color.Secondary" Size="Size.Small">Small button</BSDropdownToggle>
+            <BSDropdownMenu>
+                <BSDropdownItem Href="#">Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSDropdown>
+        <BSDropdown>
+            <BSButtonGroup>
+                <BSButton Size="Size.Small" Color="Color.Secondary">Small split button</BSButton>
+                <BSDropdownToggle Size="Size.Small" IsSplit="true" Color="Color.Secondary" />
+                <BSDropdownMenu>
+                    <BSDropdownItem Href="#">Action</BSDropdownItem>
+                    <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                    <BSDropdownItem IsDivider="true" />
+                    <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSButtonGroup>
+        </BSDropdown>
+    </BSButtonGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns3.html" />
 
@@ -151,118 +151,156 @@
 <h4>Dropup</h4>
 
 <div class="docs-example">
-    <ButtonGroup DropdownDirection="DropdownDirection.Up" IsOpen="@IsOpen12">
-        <DropdownToggle Color="Color.Secondary" onclick="@onclick12" IsOpen="@IsOpen12">Dropup</DropdownToggle>
-        <DropdownMenu IsOpen="@IsOpen12">
-            <DropdownItem Href="#">Action</DropdownItem>
-            <DropdownItem Href="#">Another Action</DropdownItem>
-            <DropdownItem Href="#">Yet Another Action</DropdownItem>
-        </DropdownMenu>
-    </ButtonGroup>
-    <ButtonGroup DropdownDirection="DropdownDirection.Up" IsOpen="@IsOpen13">
-        <BlazorButton Color="Color.Secondary">Split Dropup</BlazorButton>
-        <DropdownToggle IsSplit="true" Color="Color.Secondary" onclick="@onclick13" IsOpen="@IsOpen13" />
-        <DropdownMenu IsOpen="@IsOpen13">
-            <DropdownItem Href="#">Action</DropdownItem>
-            <DropdownItem Href="#">Another Action</DropdownItem>
-            <DropdownItem IsDivider="true" />
-            <DropdownItem Href="#">Yet Another Action</DropdownItem>
-        </DropdownMenu>
-    </ButtonGroup>
+    <BSButtonGroup DropdownDirection="DropdownDirection.Up" IsOpen="@IsOpen12">
+        <BSDropdownToggle Color="Color.Secondary" onclick="onclick12" IsOpen="@IsOpen12">Dropup</BSDropdownToggle>
+        <BSDropdownMenu IsOpen="@IsOpen12">
+            <BSDropdownItem Href="#">Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+        </BSDropdownMenu>
+    </BSButtonGroup>
+    <BSButtonGroup DropdownDirection="DropdownDirection.Up" IsOpen="@IsOpen13">
+        <BSButton Color="Color.Secondary">Split Dropup</BSButton>
+        <BSDropdownToggle IsSplit="true" Color="Color.Secondary" onclick="onclick13" IsOpen="@IsOpen13" />
+        <BSDropdownMenu IsOpen="@IsOpen13">
+            <BSDropdownItem Href="#">Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+            <BSDropdownItem IsDivider="true" />
+            <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+        </BSDropdownMenu>
+    </BSButtonGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns4.html" />
 
 <h4>Dropright</h4>
 
 <div class="docs-example">
-    <ButtonGroup DropdownDirection="DropdownDirection.Right" IsOpen="@IsOpen14">
-        <DropdownToggle Color="Color.Secondary" onclick="@onclick14" IsOpen="@IsOpen14">Dropright</DropdownToggle>
-        <DropdownMenu IsOpen="@IsOpen14">
-            <DropdownItem Href="#">Action</DropdownItem>
-            <DropdownItem Href="#">Another Action</DropdownItem>
-            <DropdownItem Href="#">Yet Another Action</DropdownItem>
-        </DropdownMenu>
-    </ButtonGroup>
-    <ButtonGroup DropdownDirection="DropdownDirection.Right" IsOpen="@IsOpen15">
-        <BlazorButton Color="Color.Secondary">Split Dropright</BlazorButton>
-        <DropdownToggle IsSplit="true" Color="Color.Secondary" onclick="@onclick15" IsOpen="@IsOpen15" />
-        <DropdownMenu IsOpen="@IsOpen15">
-            <DropdownItem Href="#">Action</DropdownItem>
-            <DropdownItem Href="#">Another Action</DropdownItem>
-            <DropdownItem IsDivider="true" />
-            <DropdownItem Href="#">Yet Another Action</DropdownItem>
-        </DropdownMenu>
-    </ButtonGroup>
+    <BSButtonGroup DropdownDirection="DropdownDirection.Right" IsOpen="@IsOpen14">
+        <BSDropdownToggle Color="Color.Secondary" onclick="onclick14" IsOpen="@IsOpen14">Dropright</BSDropdownToggle>
+        <BSDropdownMenu IsOpen="@IsOpen14">
+            <BSDropdownItem Href="#">Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+        </BSDropdownMenu>
+    </BSButtonGroup>
+    <BSButtonGroup DropdownDirection="DropdownDirection.Right" IsOpen="@IsOpen15">
+        <BSButton Color="Color.Secondary">Split Dropright</BSButton>
+        <BSDropdownToggle IsSplit="true" Color="Color.Secondary" onclick="onclick15" IsOpen="@IsOpen15" />
+        <BSDropdownMenu IsOpen="@IsOpen15">
+            <BSDropdownItem Href="#">Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+            <BSDropdownItem IsDivider="true" />
+            <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+        </BSDropdownMenu>
+    </BSButtonGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns5.html" />
 
 <div class="docs-example">
-    <ButtonGroup DropdownDirection="DropdownDirection.Left">
-        <DropdownToggle Color="Color.Secondary" onclick="@onclick17" IsOpen="@IsOpen17">Dropleft</DropdownToggle>
-        <DropdownMenu IsOpen="@IsOpen17">
-            <DropdownItem Href="#">Action</DropdownItem>
-            <DropdownItem Href="#">Another Action</DropdownItem>
-            <DropdownItem Href="#">Yet Another Action</DropdownItem>
-        </DropdownMenu>
-    </ButtonGroup>
-    <ButtonGroup DropdownDirection="DropdownDirection.Left">
-        <DropdownToggle IsSplit="true" Color="Color.Secondary" @onclick="@onclick18" IsOpen="@IsOpen18" />
-        <DropdownMenu IsOpen="@IsOpen18">
-            <DropdownItem Href="#">Action</DropdownItem>
-            <DropdownItem Href="#">Another Action</DropdownItem>
-            <DropdownItem IsDivider="true" />
-            <DropdownItem Href="#">Yet Another Action</DropdownItem>
-        </DropdownMenu>
-        <BlazorButton Color="Color.Secondary">Split Dropleft</BlazorButton>
-    </ButtonGroup>
+    <BSButtonGroup DropdownDirection="DropdownDirection.Left">
+        <BSDropdownToggle Color="Color.Secondary" onclick="onclick17" IsOpen="@IsOpen17">Dropleft</BSDropdownToggle>
+        <BSDropdownMenu IsOpen="@IsOpen17">
+            <BSDropdownItem Href="#">Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+        </BSDropdownMenu>
+    </BSButtonGroup>
+    <BSButtonGroup DropdownDirection="DropdownDirection.Left">
+        <BSDropdownToggle IsSplit="true" Color="Color.Secondary" @onclick="onclick18" IsOpen="@IsOpen18" />
+        <BSDropdownMenu IsOpen="@IsOpen18">
+            <BSDropdownItem Href="#">Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+            <BSDropdownItem IsDivider="true" />
+            <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+        </BSDropdownMenu>
+        <BSButton Color="Color.Secondary">Split Dropleft</BSButton>
+    </BSButtonGroup>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns6.html" />
+
+<h3>Menus with Submenus</h3>
+<p>Menus can have nested Submenus. A Submenu can have a Submenu.  </p>
+<div class="docs-example">
+    <BSDropdown>
+        <BSDropdownToggle Color="Color.Primary">Level 1</BSDropdownToggle>
+        <BSDropdownMenu>
+            <BSDropdownItem Href="#">Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+            <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+            <BSDropdown>
+                <BSDropdownToggle IsLink="true" Color="Color.Secondary">Level 2</BSDropdownToggle>
+                <BSDropdownMenu>
+                    <BSDropdownItem Href="#">Action</BSDropdownItem>
+                    <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                    <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+                    <BSDropdown>
+                        <BSDropdownToggle IsLink="true" Color="Color.Secondary">Level 3</BSDropdownToggle>
+                        <BSDropdownMenu>
+                            <BSDropdownItem Href="#">Action</BSDropdownItem>
+                            <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                            <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+                            <BSDropdown>
+                                <BSDropdownToggle IsLink="true" Color="Color.Secondary">Level 4</BSDropdownToggle>
+                                <BSDropdownMenu>
+                                    <BSDropdownItem Href="#">Action</BSDropdownItem>
+                                    <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                                    <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+                                </BSDropdownMenu>
+                            </BSDropdown>
+                        </BSDropdownMenu>
+                    </BSDropdown>
+                </BSDropdownMenu>
+            </BSDropdown>
+        </BSDropdownMenu>
+    </BSDropdown>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns16.html" />
 
 <h3>Menu Items</h3>
 
 <p>Menu items can be buttons</p>
 
 <div class="docs-example">
-    <Dropdown IsOpen="@IsOpen16">
-        <DropdownToggle Color="Color.Secondary" @onclick="@onclick16" IsOpen="@IsOpen16">Dropdown</DropdownToggle>
-        <DropdownMenu IsOpen="@IsOpen16">
-            <DropdownItem IsButton="true" onclick="@menuButtonClick">Action</DropdownItem>
-            <DropdownItem IsDivider="true" />
-            <DropdownItem IsButton="true" onclick="@menuButtonClick">Yet Another Action</DropdownItem>
-        </DropdownMenu>
-    </Dropdown>
+    <BSDropdown IsOpen="@IsOpen16">
+        <BSDropdownToggle Color="Color.Secondary" @onclick="onclick16" IsOpen="@IsOpen16">Dropdown</BSDropdownToggle>
+        <BSDropdownMenu IsOpen="@IsOpen16">
+            <BSDropdownItem IsButton="true" onclick="@menuButtonClick">Action</BSDropdownItem>
+            <BSDropdownItem IsDivider="true" />
+            <BSDropdownItem IsButton="true" onclick="@menuButtonClick">Yet Another Action</BSDropdownItem>
+        </BSDropdownMenu>
+    </BSDropdown>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns7.html" />
 
 <p>You can also create non-interactive dropdown items with <code class="highlighter-rouge">.dropdown-item-text</code>. Feel free to style further with custom CSS or text utilities.</p>
 
 <div class="docs-example">
-    <DropdownMenu Style="position: static; display: block;">
+    <BSDropdownMenu Style="position: static; display: block;">
         <span class="dropdown-item-text">Dropdown item text</span>
-        <DropdownItem href="#">Action</DropdownItem>
-        <DropdownItem href="#">Another action</DropdownItem>
-        <DropdownItem href="#">Something else here</DropdownItem>
-    </DropdownMenu>
+        <BSDropdownItem href="#">Action</BSDropdownItem>
+        <BSDropdownItem href="#">Another action</BSDropdownItem>
+        <BSDropdownItem href="#">Something else here</BSDropdownItem>
+    </BSDropdownMenu>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns8.html" />
 
 <h3>Active</h3>
 <div class="docs-example">
-    <DropdownMenu Style="position: static; display: block;">
-        <DropdownItem href="#">Regular link</DropdownItem>
-        <DropdownItem IsActive="true" href="#">Active link</DropdownItem>
-        <DropdownItem href="#">Another link</DropdownItem>
-    </DropdownMenu>
+    <BSDropdownMenu Style="position: static; display: block;">
+        <BSDropdownItem href="#">Regular link</BSDropdownItem>
+        <BSDropdownItem IsActive="true" href="#">Active link</BSDropdownItem>
+        <BSDropdownItem href="#">Another link</BSDropdownItem>
+    </BSDropdownMenu>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns9.html" />
 
 <h3>Disabled</h3>
 <div class="docs-example">
-    <DropdownMenu Style="position: static; display: block;">
-        <DropdownItem href="#">Regular link</DropdownItem>
-        <DropdownItem IsDisabled="true" href="#">Disabled link</DropdownItem>
-        <DropdownItem href="#">Another link</DropdownItem>
-    </DropdownMenu>
+    <BSDropdownMenu Style="position: static; display: block;">
+        <BSDropdownItem href="#">Regular link</BSDropdownItem>
+        <BSDropdownItem IsDisabled="true" href="#">Disabled link</BSDropdownItem>
+        <BSDropdownItem href="#">Another link</BSDropdownItem>
+    </BSDropdownMenu>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns10.html" />
 
@@ -270,70 +308,70 @@
 <h4>Headers</h4>
 
 <div class="docs-example">
-    <DropdownMenu Style="position: static; display: block;">
-        <DropdownHeader>Dropdown header</DropdownHeader>
-        <DropdownItem href="#">Action</DropdownItem>
-        <DropdownItem href="#">Another action</DropdownItem>
-    </DropdownMenu>
+    <BSDropdownMenu Style="position: static; display: block;">
+        <BSDropdownHeader>Dropdown header</BSDropdownHeader>
+        <BSDropdownItem href="#">Action</BSDropdownItem>
+        <BSDropdownItem href="#">Another action</BSDropdownItem>
+    </BSDropdownMenu>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns11.html" />
 
 <h4>Dividers</h4>
 
 <div class="docs-example">
-    <DropdownMenu Style="position: static; display: block;">
-        <DropdownItem href="#">Action</DropdownItem>
-        <DropdownItem href="#">Another action</DropdownItem>
-        <DropdownItem Href="#">Something else here</DropdownItem>
-        <DropdownItem IsDivider="true" />
-        <DropdownItem Href="#">Separated link</DropdownItem>
-    </DropdownMenu>
+    <BSDropdownMenu Style="position: static; display: block;">
+        <BSDropdownItem href="#">Action</BSDropdownItem>
+        <BSDropdownItem href="#">Another action</BSDropdownItem>
+        <BSDropdownItem Href="#">Something else here</BSDropdownItem>
+        <BSDropdownItem IsDivider="true" />
+        <BSDropdownItem Href="#">Separated link</BSDropdownItem>
+    </BSDropdownMenu>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns12.html" />
 
 <h4>Text</h4>
 <div class="docs-example">
-    <DropdownMenu Class="p-4 text-muted" Style="position: static; display: block; max-width: 200px;">
+    <BSDropdownMenu Class="p-4 text-muted" Style="position: static; display: block; max-width: 200px;">
         <p>
             Some example text that's free-flowing within the dropdown menu.
         </p>
         <p class="mb-0">
             And this is more example text.
         </p>
-    </DropdownMenu>
+    </BSDropdownMenu>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns13.html" />
 
 <h4>Forms</h4>
 
 <div class="docs-example">
-    <DropdownMenu Style="position: static; display: block;">
-        <BlazorForm Class="px-4 py-3">
-            <FormGroup>
-                <BlazorLabel for="exampleDropdownFormEmail1">Email address</BlazorLabel>
-                <BlazorInput InputType="InputType.Email" id="exampleDropdownFormEmail1" placeholder="email@example.com" />
-            </FormGroup>
-            <FormGroup>
-                <BlazorLabel for="exampleDropdownFormPassword1">Password</BlazorLabel>
-                <BlazorInput InputType="InputType.Password" id="exampleDropdownFormPassword1" placeholder="Password" />
-            </FormGroup>
-            <FormGroup IsCheck="true">
-                <BlazorInput InputType="InputType.Checkbox" id="dropdownCheck" />
-                <BlazorLabel IsCheck="true" for="dropdownCheck">
+    <BSDropdownMenu Style="position: static; display: block;">
+        <BSForm Class="px-4 py-3">
+            <BSFormGroup>
+                <BSLabel for="exampleDropdownFormEmail1">Email address</BSLabel>
+                <BSInput InputType="InputType.Email" id="exampleDropdownFormEmail1" placeholder="email@example.com" />
+            </BSFormGroup>
+            <BSFormGroup>
+                <BSLabel for="exampleDropdownFormPassword1">Password</BSLabel>
+                <BSInput InputType="InputType.Password" id="exampleDropdownFormPassword1" placeholder="Password" />
+            </BSFormGroup>
+            <BSFormGroup IsCheck="true">
+                <BSInput InputType="InputType.Checkbox" id="dropdownCheck" />
+                <BSLabel IsCheck="true" for="dropdownCheck">
                     Remember me
-                </BlazorLabel>
-            </FormGroup>
-            <BlazorButton ButtonType="ButtonType.Submit" Color="Color.Primary">Sign in</BlazorButton>
-        </BlazorForm>
-        <DropdownItem IsDivider="true" />
-        <DropdownItem href="#">New around here? Sign up</DropdownItem>
-        <DropdownItem href="#">Forgot password?</DropdownItem>
-    </DropdownMenu>
+                </BSLabel>
+            </BSFormGroup>
+            <BSButton ButtonType="ButtonType.Submit" Color="Color.Primary">Sign in</BSButton>
+        </BSForm>
+        <BSDropdownItem IsDivider="true" />
+        <BSDropdownItem href="#">New around here? Sign up</BSDropdownItem>
+        <BSDropdownItem href="#">Forgot password?</BSDropdownItem>
+    </BSDropdownMenu>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns14.html" />
 
 @code {
-   
+
 
     bool IsOpen12 { get; set; }
     void onclick12(UIMouseEventArgs e)

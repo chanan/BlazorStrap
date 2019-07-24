@@ -1,23 +1,23 @@
 @inject IBootstrapCSS BootstrapCSS
 @if (!IsDropDown)
 {
-<BlazorForm>
-    <BlazorInput InputType="InputType.Select" Value="@Selected" ValueChanged="@SelectedChanged">
+<BSForm>
+    <BSInput InputType="InputType.Select" Value="@Selected" ValueChanged="@SelectedChanged">
         @foreach (string theme in themes)
 {
             <option value="@theme">@theme</option>
 }
-    </BlazorInput>
-</BlazorForm>
+    </BSInput>
+</BSForm>
 }
 else
 {
-<DropdownMenu>
+<BSDropdownMenu>
     @foreach (string theme in themes)
     {
-        <DropdownItem @onclick="@(() =>SelectedChanged(theme))">@theme</DropdownItem>
+        <BSDropdownItem @onclick="@(() =>SelectedChanged(theme))">@theme</BSDropdownItem>
     }
-</DropdownMenu>
+</BSDropdownMenu>
 }
 
 @code {

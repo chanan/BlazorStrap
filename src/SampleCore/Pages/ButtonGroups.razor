@@ -1,91 +1,91 @@
-﻿@page "/buttongroups"
+﻿@page "/ButtonGroups"
 
 <h1>Button Groups</h1>
 
 <div class="docs-example">
-    <ButtonGroup>
-        <BlazorButton Color="Color.Secondary">Left</BlazorButton>
-        <BlazorButton Color="Color.Secondary">Middle</BlazorButton>
-        <BlazorButton Color="Color.Secondary">Right</BlazorButton>
-    </ButtonGroup>
+    <BSButtonGroup>
+        <BSButton Color="Color.Secondary">Left</BSButton>
+        <BSButton Color="Color.Secondary">Middle</BSButton>
+        <BSButton Color="Color.Secondary">Right</BSButton>
+    </BSButtonGroup>
 </div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/buttongroups/buttongroups1.html" />
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups1.html" />
 
 <h3>Button toolbar</h3>
 
 <div class="docs-example">
-    <ButtonGroup IsToolbar="true">
-        <ButtonGroup Class="mr-2">
-            <BlazorButton Color="Color.Secondary">1</BlazorButton>
-            <BlazorButton Color="Color.Secondary">2</BlazorButton>
-            <BlazorButton Color="Color.Secondary">3</BlazorButton>
-            <BlazorButton Color="Color.Secondary">4</BlazorButton>
-        </ButtonGroup>
-        <ButtonGroup Class="mr-2">
-            <BlazorButton Color="Color.Secondary">5</BlazorButton>
-            <BlazorButton Color="Color.Secondary">6</BlazorButton>
-            <BlazorButton Color="Color.Secondary">7</BlazorButton>
-        </ButtonGroup>
-        <ButtonGroup>
-            <BlazorButton Color="Color.Secondary">8</BlazorButton>
-        </ButtonGroup>
-    </ButtonGroup>
+    <BSButtonGroup IsToolbar="true">
+        <BSButtonGroup Class="mr-2">
+            <BSButton Color="Color.Secondary">1</BSButton>
+            <BSButton Color="Color.Secondary">2</BSButton>
+            <BSButton Color="Color.Secondary">3</BSButton>
+            <BSButton Color="Color.Secondary">4</BSButton>
+        </BSButtonGroup>
+        <BSButtonGroup Class="mr-2">
+            <BSButton Color="Color.Secondary">5</BSButton>
+            <BSButton Color="Color.Secondary">6</BSButton>
+            <BSButton Color="Color.Secondary">7</BSButton>
+        </BSButtonGroup>
+        <BSButtonGroup>
+            <BSButton Color="Color.Secondary">8</BSButton>
+        </BSButtonGroup>
+    </BSButtonGroup>
 </div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/buttongroups/buttongroups2.html" />
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups2.html" />
 
 
 <h3>Sizing</h3>
 
 <div class="docs-example">
-    <ButtonGroup Size="Size.Large">
-        <BlazorButton Color="Color.Secondary">Left</BlazorButton>
-        <BlazorButton Color="Color.Secondary">Middle</BlazorButton>
-        <BlazorButton Color="Color.Secondary">Right</BlazorButton>
-    </ButtonGroup>
-    <ButtonGroup Size="Size.Small">
-        <BlazorButton Color="Color.Secondary">Left</BlazorButton>
-        <BlazorButton Color="Color.Secondary">Middle</BlazorButton>
-        <BlazorButton Color="Color.Secondary">Right</BlazorButton>
-    </ButtonGroup>
+    <BSButtonGroup Size="Size.Large">
+        <BSButton Color="Color.Secondary">Left</BSButton>
+        <BSButton Color="Color.Secondary">Middle</BSButton>
+        <BSButton Color="Color.Secondary">Right</BSButton>
+    </BSButtonGroup>
+    <BSButtonGroup Size="Size.Small">
+        <BSButton Color="Color.Secondary">Left</BSButton>
+        <BSButton Color="Color.Secondary">Middle</BSButton>
+        <BSButton Color="Color.Secondary">Right</BSButton>
+    </BSButtonGroup>
 </div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/buttongroups/buttongroups3.html" />
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups3.html" />
 
 <h3>Nesting</h3>
 
 <div class="docs-example">
-    <ButtonGroup>
-        <BlazorButton Color="Color.Secondary">1</BlazorButton>
-        <BlazorButton Color="Color.Secondary">2</BlazorButton>
+    <BSButtonGroup>
+        <BSButton Color="Color.Secondary">1</BSButton>
+        <BSButton Color="Color.Secondary">2</BSButton>
 
-        <Dropdown IsGroup="true" IsOpen="@IsOpen">
-            <DropdownToggle Color="Color.Secondary" @onclick="@onclick" IsOpen="@IsOpen">Dropdown</DropdownToggle>
-            <DropdownMenu IsOpen="@IsOpen">
-                <DropdownItem href="#">Dropdown link</DropdownItem>
-                <DropdownItem href="#">Dropdown link</DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
-    </ButtonGroup>
+        <BSDropdown IsGroup="true" IsOpen="@IsOpen">
+            <DropdownToggle Color="Color.Secondary" @onclick="onclick" IsOpen="@IsOpen">Dropdown</DropdownToggle>
+            <BSDropdownMenu IsOpen="@IsOpen">
+                <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
+                <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSDropdown>
+    </BSButtonGroup>
 </div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/buttongroups/buttongroups4.html" />
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups4.html" />
 
 
 <h3>Vertical Variation</h3>
 
 <div class="docs-example">
-    <ButtonGroup IsVertical="true">
-        <BlazorButton Color="Color.Secondary">1</BlazorButton>
-        <BlazorButton Color="Color.Secondary">2</BlazorButton>
+    <BSButtonGroup IsVertical="true">
+        <BSButton Color="Color.Secondary">1</BSButton>
+        <BSButton Color="Color.Secondary">2</BSButton>
 
-        <Dropdown IsGroup="true" IsOpen="@IsOpen1">
-            <DropdownToggle Color="Color.Secondary" @onclick="@onclick1" IsOpen="@IsOpen1">Dropdown</DropdownToggle>
-            <DropdownMenu IsOpen="@IsOpen1">
-                <DropdownItem href="#">Dropdown link</DropdownItem>
-                <DropdownItem href="#">Dropdown link</DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
-    </ButtonGroup>
+        <BSDropdown IsGroup="true" IsOpen="@IsOpen1">
+            <DropdownToggle Color="Color.Secondary" @onclick="onclick1" IsOpen="@IsOpen1">Dropdown</DropdownToggle>
+            <BSDropdownMenu IsOpen="@IsOpen1">
+                <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
+                <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSDropdown>
+    </BSButtonGroup>
 </div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/buttongroups/buttongroups5.html" />
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups5.html" />
 
 @code {
     bool IsOpen { get; set; }

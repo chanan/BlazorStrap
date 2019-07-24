@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BlazorPrettyCode" Version="1.0.0-preview6-12" />
+    <PackageReference Include="BlazorPrettyCode" Version="1.0.0-preview7-01" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0-preview7.19365.7" />
   </ItemGroup>
 
@@ -20,14 +20,6 @@
     <EmbeddedResource Include="wwwroot\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="wwwroot\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="wwwroot\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot\snippets\themes\themes1.html" />
-    <Content Remove="wwwroot\snippets\themes\themes2.html" />
-    <Content Remove="wwwroot\snippets\themes\themes3.html" />
-    <Content Remove="wwwroot\snippets\themes\themes4.html" />
-    <Content Remove="wwwroot\snippets\themes\themes5.html" />
   </ItemGroup>
 
 </Project>
