@@ -17,6 +17,7 @@ namespace BlazorStrap
             }
             set
             {
+                _selected?.UnSelected();
                 _selected = value;
                 StateHasChanged();
             }
