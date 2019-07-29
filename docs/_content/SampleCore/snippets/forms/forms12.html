@@ -1,0 +1,17 @@
+﻿<BSForm>
+    <BSFormGroup>
+        <BSLabel For="exampleEmail6">Input without validation</BSLabel>
+        <BSInput InputType="InputType.Text" Id="exampleEmail6" />
+        <FormFeedback IsTooltip="true">You will not be able to see this</FormFeedback>
+    </BSFormGroup>
+    <BSFormGroup>
+        <BSLabel For="exampleEmail7">Valid input</BSLabel>
+        <BSInput IsValid="true" InputType="InputType.Text" Id="exampleEmail7" />
+        <FormFeedback IsTooltip="true" IsValid="true">Sweet! that name is available</FormFeedback>
+    </BSFormGroup>
+    <BSFormGroup>
+        <BSLabel For="exampleEmail8">Invalid input</BSLabel>
+        <BSInput IsInvalid="true" InputType="InputType.Text" Id="exampleEmail8" />
+        <FormFeedback IsTooltip="true" IsInvalid="true">Oh noes! that name is already taken</FormFeedback>
+    </BSFormGroup>
+</BSForm>

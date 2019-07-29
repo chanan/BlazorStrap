@@ -1,6 +1,8 @@
 ﻿using BlazorPrettyCode;
+using BlazorStrap;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using SampleCore;
 
 namespace Sample
 {
@@ -13,6 +15,7 @@ namespace Sample
                 defaults.DefaultTheme = "SolarizedDark";
                 defaults.ShowLineNumbers = true;
             });
+            services.AddBootstrapCSS();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

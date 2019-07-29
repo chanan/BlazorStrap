@@ -1,0 +1,21 @@
+﻿@page "/samples/form"
+
+<BSForm @OnSubmit="@OnSubmit">
+    <BSInput InputType="InputType.Text" @bind-value="@test" />
+    <BSButton Color="Color.Primary" ButtonType="ButtonType.Submit">Submit</BSButton>
+</BSForm>
+
+    <div>
+        @test
+    </div>
+
+    @code {
+        string test = "hello";
+        void OnSubmit()
+        {
+            Console.WriteLine("----------------------------------------------------------------");
+            Console.WriteLine("Form submit");
+            Console.WriteLine("Input: " + test);
+            Console.WriteLine("----------------------------------------------------------------");
+        }
+    }

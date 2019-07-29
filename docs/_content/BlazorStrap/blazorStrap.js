@@ -1,27 +1,56 @@
-﻿window.blazorStrap = {
-    log: function(message) {
+﻿var link;
+
+window.blazorStrap = {
+    log: function (message) {
         console.log("message: ", message);
         return true;
     },
-    changeBody: function(classname) {
+    changeBody: function (classname) {
         document.body.className = classname;
         return true;
     },
-    popper: function(target, popperId, arrow, placement) {
+    popper: function (target, popperId, arrow, placement) {
         var reference = document.getElementById(target);
         var popper = document.getElementById(popperId);
         showPopper(reference, popper, arrow, placement);
         return true;
     },
     tooltip: function (target, tooltip, arrow, placement) {
+        var instance;
         var reference = document.getElementById(target);
-        reference.addEventListener("mouseover", function () {
-            tooltip.className = "tooltip fade show bs-popover-" + placement;
-            showPopper(reference, tooltip, arrow, placement);
-        });
-        reference.addEventListener("mouseout", function () {
-            tooltip.className = "tooltip hide";
-        });
+        function mouseoverHandler() {
+            reference.removeEventListener("mouseover", mouseoverHandler);
+            reference.addEventListener("mouseout", mouseoutHandler);
+            tooltip.className = "tooltip fade show bs-tooltip-" + placement;
+            instance = showPopper(reference, tooltip, arrow, placement);
+        }
+        function mouseoutHandler() {
+            reference.removeEventListener("mouseout", mouseoutHandler);
+            reference.addEventListener("mouseover", mouseoverHandler);
+            tooltip.className = "tooltip";
+            if (instance) {
+                instance.destroy && instance.destroy();
+                instance = undefined;
+            }
+        }
+        reference.addEventListener("mouseover", mouseoverHandler);
+        return true;
+    },
+    focusElement: function (element) {
+        element.focus();
+    },
+    setBootstrapCSS: function (theme, version) {
+        if (link === undefined) {
+            link = document.createElement('link');
+            document.head.insertBefore(link, document.head.firstChild);
+            link.type = 'text/css';
+            link.rel = 'stylesheet';
+        }
+        if (theme === 'bootstrap') {
+            link.href = `https://stackpath.bootstrapcdn.com/bootstrap/${version}/css/bootstrap.min.css`;
+        } else {
+            link.href = `https://stackpath.bootstrapcdn.com/bootswatch/${version}/${theme}/bootstrap.min.css`;
+        }
         return true;
     }
 };
@@ -48,4 +77,5 @@ function showPopper(reference, popper, arrow, placement) {
             }
         }
     );
+    return thePopper;
 }

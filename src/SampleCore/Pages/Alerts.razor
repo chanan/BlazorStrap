@@ -1,0 +1,121 @@
+﻿@page "/alerts"
+
+<h1>Alerts</h1>
+
+<div class="docs-example">
+    <BSAlert Color="Color.Primary">
+        This is a primary alert — check it out!
+    </BSAlert>
+    <BSAlert Color="Color.Secondary">
+        This is a secondary alert — check it out!
+    </BSAlert>
+    <BSAlert Color="Color.Success">
+        This is a success alert — check it out!
+    </BSAlert>
+    <BSAlert Color="Color.Danger">
+        This is a danger alert — check it out!
+    </BSAlert>
+    <BSAlert Color="Color.Warning">
+        This is a warning alert — check it out!
+    </BSAlert>
+    <BSAlert Color="Color.Info">
+        This is a info alert — check it out!
+    </BSAlert>
+    <BSAlert Color="Color.Light">
+        This is a light alert — check it out!
+    </BSAlert>
+    <BSAlert Color="Color.Dark">
+        This is a dark alert — check it out!
+    </BSAlert>
+</div>
+
+<PrettyCode CodeFile="_content/SampleCore/snippets/alerts/alerts1.html" />
+
+<h3>Properties</h3>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Color</td>
+            <td>Color enum</td>
+            <td>Applies the selected color to the alert</td>
+        </tr>
+        <tr>
+            <td>IsDismissible</td>
+            <td>bool</td>
+            <td>Adds the ability to dismiss the alert</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3>Link color</h3>
+<div class="docs-example">
+    <BSAlert Color="Color.Primary">
+        This is a primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </BSAlert>
+    <BSAlert Color="Color.Secondary">
+        This is a secondary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </BSAlert>
+    <BSAlert Color="Color.Success">
+        This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </BSAlert>
+    <BSAlert Color="Color.Danger">
+        This is a danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </BSAlert>
+    <BSAlert Color="Color.Warning">
+        This is a warning alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </BSAlert>
+    <BSAlert Color="Color.Info">
+        This is a info alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </BSAlert>
+    <BSAlert Color="Color.Light">
+        This is a light alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </BSAlert>
+    <BSAlert Color="Color.Dark">
+        This is a dark alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </BSAlert>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/alerts/alerts2.html" />
+
+<h3>Additional content</h3>
+
+<div class="docs-example">
+    <BSAlert Color="Color.Success">
+        <h4 className="alert-heading">Well done!</h4>
+        <p>
+            Aww yeah, you successfully read this important alert message. This example text is going
+            to run a bit longer so that you can see how spacing within an alert works with this kind
+            of content.
+        </p>
+        <hr />
+        <p className="mb-0">
+            Whenever you need to, be sure to use margin utilities to keep things nice and tidy.
+        </p>
+    </BSAlert>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/alerts/alerts3.html" />
+
+<h3>Dismissing</h3>
+
+<div class="docs-example">
+    <BSAlert Color="Color.Info" IsDismissible="true" OnDismiss="@OnDismiss">
+        I am an alert and I can be dismissed!
+    </BSAlert>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/alerts/alerts4.html" />
+
+@code {
+    void OnDismiss()
+    {
+        Console.WriteLine("OnDismiss");
+        StateHasChanged();
+    }
+}

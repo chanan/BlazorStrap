@@ -1,0 +1,78 @@
+﻿@page "/badges"
+
+<h1>Badges</h1>
+
+<div class="docs-example">
+    <h1>Heading <BSBadge Color="Color.Secondary">New</BSBadge></h1>
+    <h2>Heading <BSBadge Color="Color.Secondary">New</BSBadge></h2>
+    <h3>Heading <BSBadge Color="Color.Secondary">New</BSBadge></h3>
+    <h3>Heading <BSBadge Color="Color.Secondary">New</BSBadge></h3>
+    <h5>Heading <BSBadge Color="Color.Secondary">New</BSBadge></h5>
+    <h6>Heading <BSBadge Color="Color.Secondary">New</BSBadge></h6>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/badges/badges1.html" />
+
+<p>Badges can be used as part of links or buttons to provide a counter.</p>
+
+<div class="docs-example">
+    <button type="button" class="btn btn-primary">
+        Profile <BSBadge Color="Color.Light">9</BSBadge>
+        <span class="sr-only">unread messages</span>
+    </button>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/badges/badges2.html" />
+
+
+<h3>Contextual variations</h3>
+
+<div class="docs-example">
+    <BSBadge Color="Color.Primary">Primary</BSBadge>
+    <BSBadge Color="Color.Secondary">Secondary</BSBadge>
+    <BSBadge Color="Color.Success">Success</BSBadge>
+    <BSBadge Color="Color.Danger">Danger</BSBadge>
+    <BSBadge Color="Color.Warning">Warning</BSBadge>
+    <BSBadge Color="Color.Info">Info</BSBadge>
+    <BSBadge Color="Color.Light">Light</BSBadge>
+    <BSBadge Color="Color.Dark">Dark</BSBadge>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/badges/badges3.html" />
+
+
+<h3>Pills</h3>
+
+<div class="docs-example">
+    <BSBadge Color="Color.Primary" IsPill="true">Primary</BSBadge>
+    <BSBadge Color="Color.Secondary" IsPill="true">Secondary</BSBadge>
+    <BSBadge Color="Color.Success" IsPill="true">Success</BSBadge>
+    <BSBadge Color="Color.Danger" IsPill="true">Danger</BSBadge>
+    <BSBadge Color="Color.Warning" IsPill="true">Warning</BSBadge>
+    <BSBadge Color="Color.Info" IsPill="true">Info</BSBadge>
+    <BSBadge Color="Color.Light" IsPill="true">Light</BSBadge>
+    <BSBadge Color="Color.Dark" IsPill="true">Dark</BSBadge>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/badges/badges4.html" />
+
+
+<h3>Links</h3>
+
+<p>Adding <code>Href</code> or <code>onclick</code> will default the badge to a link.</p>
+
+<div class="docs-example">
+    <BSBadge @onclick="onclick" Color="Color.Primary">Primary</BSBadge>
+    <BSBadge Href="#" Color="Color.Secondary">Secondary</BSBadge>
+    <BSBadge Href="#" Color="Color.Success">Success</BSBadge>
+    <BSBadge Href="#" Color="Color.Danger">Danger</BSBadge>
+    <BSBadge Href="#" Color="Color.Warning">Warning</BSBadge>
+    <BSBadge Href="#" Color="Color.Info">Info</BSBadge>
+    <BSBadge Href="#" Color="Color.Light">Light</BSBadge>
+    <BSBadge Href="#" Color="Color.Dark">Dark</BSBadge>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/badges/badges5.html" />
+
+
+@code {
+    void onclick()
+    {
+        Console.WriteLine("Badge clicked");
+    }
+}

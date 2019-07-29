@@ -1,0 +1,18 @@
+﻿<BSButton Color="Color.Primary" OnClick="onclick3">Large modal</BSButton>
+<BSModal IsOpen="@IsOpen3" Size="Size.Large">
+    <BSModalHeader OnClick="onclick3">Modal title</BSModalHeader>
+    <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+    <BSModalFooter>
+        <BSButton Color="Color.Secondary" OnClick="onclick3">Close</BSButton>
+        <BSButton Color="Color.Primary" OnClick="onclick3">Save Changes</BSButton>
+    </BSModalFooter>
+</BSModal>
+<BSButton Color="Color.Primary" OnClick="onclick4">Small modal</BSButton>
+<BSModal IsOpen="@IsOpen4" Size="Size.Small">
+    <BSModalHeader OnClick="onclick4">Modal title</BSModalHeader>
+    <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+    <BSModalFooter>
+        <BSButton Color="Color.Secondary" OnClick="onclick4">Close</BSButton>
+        <BSButton Color="Color.Primary" OnClick="onclick4">Save Changes</BSButton>
+    </BSModalFooter>
+</BSModal>

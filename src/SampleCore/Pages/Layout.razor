@@ -1,0 +1,218 @@
+﻿@page "/layout"
+
+<h1>Layout Components (Container, Row, Col)</h1>
+<div class="docs-example">
+    <BSContainer>
+        <BSRow>
+            <BSCol>.col</BSCol>
+        </BSRow>
+        <BSRow>
+            <BSCol>.col</BSCol>
+            <BSCol>.col</BSCol>
+            <BSCol>.col</BSCol>
+            <BSCol>.col</BSCol>
+        </BSRow>
+        <BSRow>
+            <BSCol XS="3">.col-3</BSCol>
+            <BSCol XS="auto">.col-auto - variable width content</BSCol>
+            <BSCol XS="3">.col-3</BSCol>
+        </BSRow>
+        <BSRow>
+            <BSCol XS="6">.col-6</BSCol>
+            <BSCol XS="6">.col-6</BSCol>
+        </BSRow>
+        <BSRow>
+            <BSCol XS="6" SM="4">.col-6 .col-sm-4</BSCol>
+            <BSCol XS="6" SM="4">.col-6 .col-sm-4</BSCol>
+            <BSCol SM="4">.col-sm-4</BSCol>
+        </BSRow>
+        <BSRow>
+            <BSCol SM="6" SMOrder="2" SMOffset="2">.col-sm-6 .col-sm-order-2 .offset-sm-2</BSCol>
+        </BSRow>
+        <BSRow>
+            <BSCol SM="12" MD="6" MDOffset="3">.col-sm-12 .col-md-6 .offset-md-3</BSCol>
+        </BSRow>
+        <BSRow>
+            <BSCol SM="auto" SMOffset="1">.col-sm .offset-sm-1</BSCol>
+            <BSCol SM="auto" SMOffset="1">.col-sm .offset-sm-1</BSCol>
+        </BSRow>
+    </BSContainer>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/layout/layout1.html" />
+
+<h3>Container Properties</h3>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>IsFluid</td>
+            <td>bool</td>
+            <td>Applies .container-fluid class</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Row Properties</h3>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>NoGutters</td>
+            <td>bool</td>
+            <td>Applies .no-gutters class</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>BSCol Properties</h3>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>XS</td>
+            <td>string</td>
+            <td>Can be "auto" or "1" - "12". Size for xs column size</td>
+        </tr>
+        <tr>
+            <td>XSOrder</td>
+            <td>string</td>
+            <td>Can be "first", "last", or "1" - "12". Order for xs column</td>
+        </tr>
+        <tr>
+            <td>XSOffset</td>
+            <td>string</td>
+            <td>Must be "1" - "12". offset for xs column</td>
+        </tr>
+        <tr>
+            <td>MRAuto</td>
+            <td>bool</td>
+            <td>Applies .mr-auto class</td>
+        </tr>
+        <tr>
+            <td>MLAuto</td>
+            <td>bool</td>
+            <td>Applies .ml-auto class</td>
+        </tr>
+        <tr>
+            <td>SM</td>
+            <td>string</td>
+            <td>Can be "auto" or "1" - "12". Size for sm column size</td>
+        </tr>
+        <tr>
+            <td>SMOrder</td>
+            <td>string</td>
+            <td>Can be "first", "last", or "1" - "12". Order for sm column</td>
+        </tr>
+        <tr>
+            <td>SMOffset</td>
+            <td>string</td>
+            <td>Must be "1" - "12". offset for sm column</td>
+        </tr>
+        <tr>
+            <td>SMMRAuto</td>
+            <td>bool</td>
+            <td>Applies .mr-sm-auto class</td>
+        </tr>
+        <tr>
+            <td>SMMLAuto</td>
+            <td>bool</td>
+            <td>Applies .ml-sm-auto class</td>
+        </tr>
+        <tr>
+            <td>MD</td>
+            <td>string</td>
+            <td>Can be "auto" or "1" - "12". Size for md column size</td>
+        </tr>
+        <tr>
+            <td>MDOrder</td>
+            <td>string</td>
+            <td>Can be "first", "last", or "1" - "12". Order for md column</td>
+        </tr>
+        <tr>
+            <td>MDOffset</td>
+            <td>string</td>
+            <td>Must be "1" - "12". offset for md column</td>
+        </tr>
+        <tr>
+            <td>MDMRAuto</td>
+            <td>bool</td>
+            <td>Applies .mr-md-auto class</td>
+        </tr>
+        <tr>
+            <td>MDMLAuto</td>
+            <td>bool</td>
+            <td>Applies .ml-md-auto class</td>
+        </tr>
+        <tr>
+            <td>LG</td>
+            <td>string</td>
+            <td>Can be "auto" or "1" - "12". Size for lg column size</td>
+        </tr>
+        <tr>
+            <td>LGOrder</td>
+            <td>string</td>
+            <td>Can be "first", "last", or "1" - "12". Order for lg column</td>
+        </tr>
+        <tr>
+            <td>LGOffset</td>
+            <td>string</td>
+            <td>Must be "1" - "12". offset for lg column</td>
+        </tr>
+        <tr>
+            <td>LGMRAuto</td>
+            <td>bool</td>
+            <td>Applies .mr-lg-auto class</td>
+        </tr>
+        <tr>
+            <td>LGMLAuto</td>
+            <td>bool</td>
+            <td>Applies .ml-lg-auto class</td>
+        </tr>
+        <tr>
+            <td>XL</td>
+            <td>string</td>
+            <td>Can be "auto" or "1" - "12". Size for xl column size</td>
+        </tr>
+        <tr>
+            <td>XLOrder</td>
+            <td>string</td>
+            <td>Can be "first", "last", or "1" - "12". Order for xl column</td>
+        </tr>
+        <tr>
+            <td>XLOffset</td>
+            <td>string</td>
+            <td>Must be "1" - "12". offset for xl column</td>
+        </tr>
+        <tr>
+            <td>XLMRAuto</td>
+            <td>bool</td>
+            <td>Applies .mr-xl-auto class</td>
+        </tr>
+        <tr>
+            <td>XLMLAuto</td>
+            <td>bool</td>
+            <td>Applies .ml-xl-auto class</td>
+        </tr>
+    </tbody>
+</table>

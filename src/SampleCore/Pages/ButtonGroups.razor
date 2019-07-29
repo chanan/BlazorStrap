@@ -1,0 +1,104 @@
+﻿@page "/ButtonGroups"
+
+<h1>Button Groups</h1>
+
+<div class="docs-example">
+    <BSButtonGroup>
+        <BSButton Color="Color.Secondary">Left</BSButton>
+        <BSButton Color="Color.Secondary">Middle</BSButton>
+        <BSButton Color="Color.Secondary">Right</BSButton>
+    </BSButtonGroup>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups1.html" />
+
+<h3>Button toolbar</h3>
+
+<div class="docs-example">
+    <BSButtonGroup IsToolbar="true">
+        <BSButtonGroup Class="mr-2">
+            <BSButton Color="Color.Secondary">1</BSButton>
+            <BSButton Color="Color.Secondary">2</BSButton>
+            <BSButton Color="Color.Secondary">3</BSButton>
+            <BSButton Color="Color.Secondary">4</BSButton>
+        </BSButtonGroup>
+        <BSButtonGroup Class="mr-2">
+            <BSButton Color="Color.Secondary">5</BSButton>
+            <BSButton Color="Color.Secondary">6</BSButton>
+            <BSButton Color="Color.Secondary">7</BSButton>
+        </BSButtonGroup>
+        <BSButtonGroup>
+            <BSButton Color="Color.Secondary">8</BSButton>
+        </BSButtonGroup>
+    </BSButtonGroup>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups2.html" />
+
+
+<h3>Sizing</h3>
+
+<div class="docs-example">
+    <BSButtonGroup Size="Size.Large">
+        <BSButton Color="Color.Secondary">Left</BSButton>
+        <BSButton Color="Color.Secondary">Middle</BSButton>
+        <BSButton Color="Color.Secondary">Right</BSButton>
+    </BSButtonGroup>
+    <BSButtonGroup Size="Size.Small">
+        <BSButton Color="Color.Secondary">Left</BSButton>
+        <BSButton Color="Color.Secondary">Middle</BSButton>
+        <BSButton Color="Color.Secondary">Right</BSButton>
+    </BSButtonGroup>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups3.html" />
+
+<h3>Nesting</h3>
+
+<div class="docs-example">
+    <BSButtonGroup>
+        <BSButton Color="Color.Secondary">1</BSButton>
+        <BSButton Color="Color.Secondary">2</BSButton>
+
+        <BSDropdown IsGroup="true" IsOpen="@IsOpen">
+            <DropdownToggle Color="Color.Secondary" @onclick="onclick" IsOpen="@IsOpen">Dropdown</DropdownToggle>
+            <BSDropdownMenu IsOpen="@IsOpen">
+                <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
+                <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSDropdown>
+    </BSButtonGroup>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups4.html" />
+
+
+<h3>Vertical Variation</h3>
+
+<div class="docs-example">
+    <BSButtonGroup IsVertical="true">
+        <BSButton Color="Color.Secondary">1</BSButton>
+        <BSButton Color="Color.Secondary">2</BSButton>
+
+        <BSDropdown IsGroup="true" IsOpen="@IsOpen1">
+            <DropdownToggle Color="Color.Secondary" @onclick="onclick1" IsOpen="@IsOpen1">Dropdown</DropdownToggle>
+            <BSDropdownMenu IsOpen="@IsOpen1">
+                <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
+                <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSDropdown>
+    </BSButtonGroup>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/ButtonGroups/ButtonGroups5.html" />
+
+@code {
+    bool IsOpen { get; set; }
+    void onclick(UIMouseEventArgs e)
+    {
+        IsOpen = !IsOpen;
+        StateHasChanged();
+    }
+
+    bool IsOpen1 { get; set; }
+    void onclick1(UIMouseEventArgs e)
+    {
+        IsOpen1 = !IsOpen1;
+        StateHasChanged();
+    }
+}

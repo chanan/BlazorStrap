@@ -1,0 +1,600 @@
+﻿@page "/tables"
+
+<h1>Tables</h1>
+
+<div class="docs-example">
+    <BSTable>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables1.html" />
+
+<h3>Inverted Color</h3>
+<div class="docs-example">
+    <BSTable IsDark="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables2.html" />
+
+<h3>Table head options</h3>
+<div class="docs-example">
+    <BSTable>
+        <BSTableHead TableHeadType="TableHeadType.Dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </BSTableHead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+    <BSTable>
+        <BSTableHead TableHeadType="TableHeadType.Light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </BSTableHead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables3.html" />
+
+<h3>Striped rows</h3>
+<div class="docs-example">
+    <BSTable IsStriped="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables4.html" />
+
+<div class="docs-example">
+    <BSTable IsStriped="true" IsDark="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables5.html" />
+
+<h3>Bordered table</h3>
+
+<div class="docs-example">
+    <BSTable IsBordered="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables6.html" />
+
+<div class="docs-example">
+    <BSTable IsBordered="true" IsDark="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables7.html" />
+
+<h3>Borderless table</h3>
+
+<div class="docs-example">
+    <BSTable IsBorderless="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables8.html" />
+
+<div class="docs-example">
+    <BSTable IsBorderless="true" IsDark="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables9.html" />
+
+<h3>Hoverable rows</h3>
+
+<div class="docs-example">
+    <BSTable IsHovarable="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables10.html" />
+
+<div class="docs-example">
+    <BSTable IsHovarable="true" IsDark="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables11.html" />
+
+<h3>Small table</h3>
+
+<div class="docs-example">
+    <BSTable IsSmall="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables12.html" />
+
+<div class="docs-example">
+    <BSTable IsSmall="true" IsDark="true">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@@twitter</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables13.html" />
+
+<h3>Contextual classes</h3>
+
+<div class="docs-example">
+    <BSTable>
+        <thead>
+            <tr>
+                <BSTableHeadCell Color="Color.Active">Head</BSTableHeadCell>
+                <BSTableHeadCell>Head</BSTableHeadCell>
+                <BSTableHeadCell Color="Color.Primary">Head</BSTableHeadCell>
+                <BSTableHeadCell Color="Color.Secondary">Head</BSTableHeadCell>
+                <BSTableHeadCell Color="Color.Success">Head</BSTableHeadCell>
+                <BSTableHeadCell Color="Color.Danger">Head</BSTableHeadCell>
+                <BSTableHeadCell Color="Color.Warning">Head</BSTableHeadCell>
+                <BSTableHeadCell Color="Color.Info">Head</BSTableHeadCell>
+                <BSTableHeadCell Color="Color.Light">Head</BSTableHeadCell>
+                <BSTableHeadCell Color="Color.Dark">Head</BSTableHeadCell>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <BSTableCell Color="Color.Active">Cell</BSTableCell>
+                <BSTableCell>Cell</BSTableCell>
+                <BSTableCell Color="Color.Primary">Cell</BSTableCell>
+                <BSTableCell Color="Color.Secondary">Cell</BSTableCell>
+                <BSTableCell Color="Color.Success">Cell</BSTableCell>
+                <BSTableCell Color="Color.Danger">Cell</BSTableCell>
+                <BSTableCell Color="Color.Warning">Cell</BSTableCell>
+                <BSTableCell Color="Color.Info">Cell</BSTableCell>
+                <BSTableCell Color="Color.Light">Cell</BSTableCell>
+                <BSTableCell Color="Color.Dark">Cell</BSTableCell>
+            </tr>
+            <BSTableRow Color="Color.Active">
+                <td colspan="10">Cell</td>
+            </BSTableRow>
+            <BSTableRow>
+                <td colspan="10">Cell</td>
+            </BSTableRow>
+            <BSTableRow Color="Color.Primary">
+                <td colspan="10">Cell</td>
+            </BSTableRow>
+            <BSTableRow Color="Color.Secondary">
+                <td colspan="10">Cell</td>
+            </BSTableRow>
+            <BSTableRow Color="Color.Success">
+                <td colspan="10">Cell</td>
+            </BSTableRow>
+            <BSTableRow Color="Color.Danger">
+                <td colspan="10">Cell</td>
+            </BSTableRow>
+            <BSTableRow Color="Color.Warning">
+                <td colspan="10">Cell</td>
+            </BSTableRow>
+            <BSTableRow Color="Color.Info">
+                <td colspan="10">Cell</td>
+            </BSTableRow>
+            <BSTableRow Color="Color.Light">
+                <td colspan="10">Cell</td>
+            </BSTableRow>
+            <BSTableRow Color="Color.Dark">
+                <td colspan="10">Cell</td>
+            </BSTableRow>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables14.html" />
+
+<h3>Responsive table</h3>
+
+<div class="docs-example">
+    <BSTable IsResponsive="true">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>1</th>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+            </tr>
+        </tbody>
+    </BSTable>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables15.html" />

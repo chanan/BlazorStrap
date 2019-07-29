@@ -1,0 +1,367 @@
+﻿@page "/cards"
+
+<h1>Cards</h1>
+
+<div class="docs-example">
+    <BSCard CardType="CardType.Card">
+        <BSCard CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_162f52d8790%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_162f52d8790%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22107.203125%22%20y%3D%2296.3%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Card image cap" />
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Card title</BSCard>
+            <BSCard CardType="CardType.Subtitle">Card subtitle</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+            <BSButton>Button</BSButton>
+        </BSCard>
+    </BSCard>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/cards/cards1.html" />
+
+<p>CardType.Card is the default and does not need to be specified</p>
+
+<h3>Content Types</h3>
+
+<div class="docs-example">
+    <BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Card title</BSCard>
+            <BSCard CardType="CardType.Subtitle">Card subtitle</BSCard>
+        </BSCard>
+        <BSCard CardType="CardType.Image" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_162f52d8790%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_162f52d8790%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22107.203125%22%20y%3D%2296.3%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Card image cap" />
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+            <BSCard CardType="CardType.Link" href="#">Card Link</BSCard>
+            <BSCard CardType="CardType.Link" href="#">Another Link</BSCard>
+        </BSCard>
+    </BSCard>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/cards/cards2.html" />
+
+<h3>Text alignment</h3>
+
+<div class="docs-example">
+    <BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Special Title Treatment</BSCard>
+            <BSCard CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</BSCard>
+            <BSButton>Go somewhere</BSButton>
+        </BSCard>
+    </BSCard>
+    <BSCard Alignment="Alignment.Center">
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Special Title Treatment</BSCard>
+            <BSCard CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</BSCard>
+            <BSButton>Go somewhere</BSButton>
+        </BSCard>
+    </BSCard>
+    <BSCard Alignment="Alignment.Right">
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Special Title Treatment</BSCard>
+            <BSCard CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</BSCard>
+            <BSButton>Go somewhere</BSButton>
+        </BSCard>
+    </BSCard>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/cards/cards3.html" />
+
+<h3>Header and footer</h3>
+
+<div class="docs-example">
+    <BSCard>
+        <BSCard CardType="CardType.Header">Featured</BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Special title treatment</BSCard>
+            <BSCard CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</BSCard>
+            <BSButton ButtonType="ButtonType.Link" Href="#">Go Somewhere</BSButton>
+        </BSCard>
+        <BSCard CardType="CardType.Footer">Footer</BSCard>
+    </BSCard>
+    <BSCard>
+        <BSCard CardType="CardType.Header" HeadingSize="HeadingSize.H3">Featured</BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Special title treatment</BSCard>
+            <BSCard CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</BSCard>
+            <BSButton ButtonType="ButtonType.Link" Href="#">Go Somewhere</BSButton>
+        </BSCard>
+        <BSCard CardType="CardType.Footer" Class="text-muted">Footer</BSCard>
+    </BSCard>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/cards/cards4.html" />
+
+<h3>Image Caps</h3>
+
+<div class="docs-example">
+    <BSCard>
+        <BSCard CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://via.placeholder.com/318x180" alt="318x180"></BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Card title</BSCard>
+            <BSCard CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</BSCard>
+            <BSCard CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Card title</BSCard>
+            <BSCard CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</BSCard>
+            <BSCard CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></BSCard>
+        </BSCard>
+        <BSCard CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Bottom" src="https://via.placeholder.com/318x180" alt="318x180"></BSCard>
+    </BSCard>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/cards/cards5.html" />
+
+<h3>Image Overlays</h3>
+
+<div class="docs-example">
+    <BSCard>
+        <BSCard CardType="CardType.Image" src="https://via.placeholder.com/318x270" alt="318x270"></BSCard>
+        <BSCard CardType="CardType.ImageOverlay">
+            <BSCard CardType="CardType.Title">Card title</BSCard>
+            <BSCard CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</BSCard>
+            <BSCard CardType="CardType.Text"><small className="text-muted">Last updated 3 mins ago</small></BSCard>
+        </BSCard>
+    </BSCard>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/cards/cards6.html" />
+
+<h3>Background Variants</h3>
+
+<div class="docs-example">
+    <BSCard Color="Color.Primary">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Primary card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Secondary">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Secondary card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Success">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Success card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Danger">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Danger card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Warning">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Warning card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Info">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Info card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Light">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Light card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Dark">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Dark card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/cards/cards7.html" />
+
+<h3>Border</h3>
+
+<div class="docs-example">
+    <BSCard Color="Color.Primary" IsOutline="true">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body" Color="Color.Primary">
+            <BSCard CardType="CardType.Title">Primary card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Secondary" IsOutline="true">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body" Color="Color.Secondary">
+            <BSCard CardType="CardType.Title">Secondary card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Success" IsOutline="true">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body" Color="Color.Success">
+            <BSCard CardType="CardType.Title">Success card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Danger" IsOutline="true">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body" Color="Color.Danger">
+            <BSCard CardType="CardType.Title">Danger card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Warning" IsOutline="true">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body" Color="Color.Warning">
+            <BSCard CardType="CardType.Title">Warning card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Info" IsOutline="true">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body" Color="Color.Info">
+            <BSCard CardType="CardType.Title">Info card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Light" IsOutline="true">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body">
+            <BSCard CardType="CardType.Title">Light card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+    <BSCard Color="Color.Dark" IsOutline="true">
+        <BSCard CardType="CardType.Header">Header</BSCard>
+        <BSCard CardType="CardType.Body" Color="Color.Dark">
+            <BSCard CardType="CardType.Title">Dark card title</BSCard>
+            <BSCard CardType="CardType.Text">Some quick example text to build on the card title and make up the bulk of the card's content.</BSCard>
+        </BSCard>
+    </BSCard>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/cards/cards8.html" />
+
+<h3>Card Groups</h3>
+
+<div class="docs-example">
+    <BSCard CardType="CardType.Group">
+        <BSCard>
+            <BSCard CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://via.placeholder.com/256x180" alt="256x180" />
+            <BSCard CardType="CardType.Body">
+                <BSCard CardType="CardType.Title">Card title</BSCard>
+                <BSCard CardType="CardType.Subtitle">Card subtitle</BSCard>
+                <BSCard CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</BSCard>
+                <BSCard CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></BSCard>
+            </BSCard>
+        </BSCard>
+        <BSCard>
+            <BSCard CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://via.placeholder.com/256x180" alt="256x180" />
+            <BSCard CardType="CardType.Body">
+                <BSCard CardType="CardType.Title">Card title</BSCard>
+                <BSCard CardType="CardType.Subtitle">Card subtitle</BSCard>
+                <BSCard CardType="CardType.Text">This card has supporting text below as a natural lead-in to additional content.</BSCard>
+                <BSCard CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></BSCard>
+            </BSCard>
+            </BSCard>
+        <BSCard>
+            <BSCard CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://via.placeholder.com/256x180" alt="256x180" />
+            <BSCard CardType="CardType.Body">
+                <BSCard CardType="CardType.Title">Card title</BSCard>
+                <BSCard CardType="CardType.Subtitle">Card subtitle</BSCard>
+                <BSCard CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</BSCard>
+                <BSCard CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></BSCard>
+            </BSCard>
+        </BSCard>
+    </BSCard>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/cards/cards9.html" />
+
+<h3>Card Decks</h3>
+
+<div class="docs-example">
+    <BSCard CardType="CardType.Deck">
+        <BSCard>
+            <BSCard CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://via.placeholder.com/256x180" alt="256x180" />
+            <BSCard CardType="CardType.Body">
+                <BSCard CardType="CardType.Title">Card title</BSCard>
+                <BSCard CardType="CardType.Subtitle">Card subtitle</BSCard>
+                <BSCard CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</BSCard>
+                <BSCard CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></BSCard>
+            </BSCard>
+        </BSCard>
+        <BSCard>
+            <BSCard CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://via.placeholder.com/256x180" alt="256x180" />
+            <BSCard CardType="CardType.Body">
+                <BSCard CardType="CardType.Title">Card title</BSCard>
+                <BSCard CardType="CardType.Subtitle">Card subtitle</BSCard>
+                <BSCard CardType="CardType.Text">This card has supporting text below as a natural lead-in to additional content.</BSCard>
+                <BSCard CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></BSCard>
+            </BSCard>
+        </BSCard>
+        <BSCard>
+            <BSCard CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://via.placeholder.com/256x180" alt="256x180" />
+            <BSCard CardType="CardType.Body">
+                <BSCard CardType="CardType.Title">Card title</BSCard>
+                <BSCard CardType="CardType.Subtitle">Card subtitle</BSCard>
+                <BSCard CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</BSCard>
+                <BSCard CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></BSCard>
+            </BSCard>
+        </BSCard>
+    </BSCard>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/cards/cards10.html" />
+
+<h3>Card Columns</h3>
+
+<div class="docs-example">
+    <BSCard CardType="CardType.Columns">
+        <BSCard>
+            <BSCard CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://via.placeholder.com/256x180" alt="Card image cap" />
+            <BSCard CardType="CardType.Body">
+                <BSCard CardType="CardType.Title">Card title</BSCard>
+                <BSCard CardType="CardType.Subtitle">Card subtitle</BSCard>
+                <BSCard CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</BSCard>
+                <BSButton Color="Color.Secondary">Button</BSButton>
+            </BSCard>
+        </BSCard>
+        <BSCard>
+            <BSCard CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://via.placeholder.com/256x180" alt="Card image cap" />
+        </BSCard>
+        <BSCard>
+            <BSCard CardType="CardType.Body">
+                <BSCard CardType="CardType.Title">Card title</BSCard>
+                <BSCard CardType="CardType.Subtitle">Card subtitle</BSCard>
+                <BSCard CardType="CardType.Text">This card has supporting text below as a natural lead-in to additional content.</BSCard>
+                <BSButton Color="Color.Secondary">Button</BSButton>
+            </BSCard>
+        </BSCard>
+        <BSCard IsInverse="true">
+            <BSCard CardType="CardType.Body">
+                <BSCard CardType="CardType.Title">Special Title Treatment</BSCard>
+                <BSCard CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</BSCard>
+                <BSButton Color="Color.Secondary">Button</BSButton>
+            </BSCard>
+        </BSCard>
+        <BSCard>
+            <BSCard CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://via.placeholder.com/256x180" alt="Card image cap" />
+            <BSCard CardType="CardType.Body">
+                <BSCard CardType="CardType.Title">Card title</BSCard>
+                <BSCard CardType="CardType.Subtitle">Card subtitle</BSCard>
+                <BSCard CardType="CardType.Text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</BSCard>
+                <BSButton Color="Color.Secondary">Button</BSButton>
+            </BSCard>
+        </BSCard>
+        <BSCard Color="Color.Primary">
+            <BSCard CardType="CardType.Body">
+                <BSCard CardType="CardType.Title">Special Title Treatment</BSCard>
+                <BSCard CardType="CardType.Text">With supporting text below as a natural lead-in to additional content.</BSCard>
+            </BSCard>
+        </BSCard>
+    </BSCard>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/cards/cards11.html" />

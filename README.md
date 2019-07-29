@@ -7,12 +7,11 @@ Bootstrap 4 Components for Blazor Framework
 [![NuGet Pre Release](https://img.shields.io/nuget/vpre/BlazorStrap.svg)](https://www.nuget.org/packages/BlazorStrap/)
 
 ## Docs
-https://chanan.github.io/BlazorStrap/
+https://blazorstrap.io
 
-## Blazorous
+## BlazorStyled
 
-If you want to manage your styles in code and use dynamic styles you can check out my other project: [Blazorous](https://chanan.github.io/Blazorous/).
-In the future I will show examples of mixing and matching BlazorStrap and Blazorous.
+If you want to manage your styles in code and use dynamic styles you can check out my other project: [BlazorStyled](https://chanan.github.io/BlazorStyled)
 
 ## Change Log
 https://github.com/chanan/BlazorStrap/releases
@@ -47,8 +46,6 @@ https://github.com/chanan/BlazorStrap/releases
 ## Not Done
 
 * Button of type: Checkboxes and Radio buttons
-* Modal - Close by clicking the Esc key
 * Modal - Will currently "clobber" body classes
 * Events on all components that need it (Modal for example)
-* Allow for arbitrary attributes on all components
 * Animations

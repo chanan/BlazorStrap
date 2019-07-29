@@ -1,0 +1,48 @@
+﻿<BSNavbar IsExpand="true" IsDark="false" Color="Color.Light">
+    <BSNavbarBrand Href="#">Navbar</BSNavbarBrand>
+    <BSNavbarToggler onclick="onclick" />
+    <BSCollapse isOpen="@IsOpen" IsNavbar="true">
+        <BSNav IsList="true" Class="mr-auto" IsNavbar="true">
+            <BSNavItem>
+                <BSNavLink IsActive="true" Href="#">Home</BSNavLink>
+            </BSNavItem>
+            <BSNavItem>
+                <BSNavLink Href="#">Link</BSNavLink>
+            </BSNavItem>
+            <BSNavItem>
+                <BSNavLink IsDisabled="true" Href="#">Disabled</BSNavLink>
+            </BSNavItem>
+            <BSNavItem IsDropdown="true">
+                <BSDropdownToggle Color="Color.Light">Dropdown link</BSDropdownToggle>
+                <BSDropdownMenu>
+                    <BSDropdownItem Href="#">Action</BSDropdownItem>
+                    <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                    <BSDropdownItem IsDivider="true" />
+                    <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSNavItem>
+            <BSNavItem IsDropdown="true" IsOpen="@IsOpen">
+                <BSDropdownToggle IsOpen="@IsOpen" onclick="onclick" Color="Color.Light">User Controlled</BSDropdownToggle>
+                <BSDropdownMenu IsOpen="@IsOpen">
+                    <BSDropdownItem Href="#">Action</BSDropdownItem>
+                    <BSDropdownItem Href="#">Another Action</BSDropdownItem>
+                    <BSDropdownItem IsDivider="true" />
+                    <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSNavItem>
+        </BSNav>
+        <BSForm IsInline="true" Class="my-2 my-lg-0">
+            <BSInput InputType="InputType.Search" PlaceHolder="Search" Class="mr-sm-2" />
+            <BSButton IsOutline="true" Color="Color.Success" ButtonType="ButtonType.Submit" Class="my-2 my-sm-0">Search</BSButton>
+        </BSForm>
+    </BSCollapse>
+</BSNavbar>
+
+@code {
+    bool IsOpen { get; set; } = true;
+    void onclick(UIMouseEventArgs e)
+    {
+        IsOpen = !IsOpen;
+        StateHasChanged();
+    }
+}

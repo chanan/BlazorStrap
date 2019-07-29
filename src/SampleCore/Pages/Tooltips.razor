@@ -1,0 +1,19 @@
+﻿@page "/tooltips"
+
+<h1>Tooltips</h1>
+
+<BSAlert Color="Color.Info">Arrow color is grey. Will be fixed in a future update.</BSAlert>
+
+<div class="docs-example">
+    <BSButton Id="tooltip1">Top</BSButton>
+    <BSTooltip Target="tooltip1" Placement="Placement.Top">Tooltip on Top</BSTooltip>
+    <BSButton Id="tooltip2">Bottom</BSButton>
+    <BSTooltip Target="tooltip2" Placement="Placement.Bottom">Tooltip on Bottom</BSTooltip>
+    <BSButton Id="tooltip3">Left</BSButton>
+    <BSTooltip Target="tooltip3" Placement="Placement.Left">Tooltip on Left</BSTooltip>
+    <BSButton Id="tooltip4">Right</BSButton>
+    <BSTooltip Target="tooltip4" Placement="Placement.Right">Tooltip on Right</BSTooltip>
+    <BSButton Id="tooltip5">Tooltip with HTML</BSButton>
+    <BSTooltip Target="tooltip5" Placement="Placement.Top"><em>Tooltip</em> <u>with</u> <b>HTML</b></BSTooltip>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tooltips/tooltips1.html" />

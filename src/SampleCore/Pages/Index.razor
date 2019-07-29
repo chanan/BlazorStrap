@@ -1,0 +1,91 @@
+﻿@page "/"
+
+<div class="d-flex align-items-center">
+    <div><img src="_content/SampleCore/logo.svg" alt="logo" class="main-logo" /></div>
+    <div><h1>BlazorStrap</h1></div>
+</div>
+<p class="lead">Bootstrap 4 Components for Blazor Framework</p>
+
+<h2>BlazorStyled</h2>
+<p>
+    If you want to manage your styles in code and use dynamic styles you can check out my other project: <a href="https://chanan.github.io/BlazorStyled/">BlazorStyled</a>.
+</p>
+
+<h2>Install</h2>
+
+<ol>
+    <li style="margin-bottom: 5px;">Get it from nuget: <a href="https://www.nuget.org/packages/BlazorStrap/"><img src="https://img.shields.io/nuget/vpre/BlazorStrap.svg" /></a></li>
+    <li>Add <mark>@@using BlazorStrap</mark> to your <mark>_Imports.razor</mark></li>
+</ol>
+
+<h3>Server Side Usage</h3>
+
+<p>In addition to the above, modify your <mark>_Host.cshtml</mark> file to include the javascript files used by BlazorStrap. An example of this is in the 
+    <a href="https://github.com/chanan/BlazorStrap/blob/master/src/ServerSideSample/Pages/_Host.cshtml">ServerSideSample project</a>.</p>
+
+<h2>Add the CSS to your project</h2>
+
+<p>Bootstrap 4.3.1 is already included both in Client Side and Server Side projects. However you might not want to use them for various reasons:</p>
+    <ul>
+        <li>You might want use newer versions of bootstrap as they get released</li>
+        <li>You might want to use a bootswatch theme</li>
+        <li>You may prefer to utilize the bootstrap CDN (The Server Side template does but the Client Side doesnt)</li>
+    </ul>
+<p>To solve these problems, BlazorStrap includes an API to load the bootstrap or a bootswatch CSS from the offical Bootstrap CDN. To use this API:</p>
+
+<ol>
+    <li>Remove the link to the bootstrap stylesheet in your <mark>index.html</mark> file (or <mark>_Host.cshtml</mark> file for Server Side projects)</li>
+    <li>Add <mark>services.AddBootstrapCSS();</mark> to your <mark>Startup.cs</mark> file</li>
+    <li>Inject <mark>NootstrapCSS</mark> into <mark>MainLayout.razor</mark> by adding: <mark>@@inject IBootstrapCSS BootstrapCSS</mark></li>
+    <li>Call <mark>await BootstrapCSS.SetBootstrapCSS("4.3.1");</mark></li>
+</ol>
+
+<p>You can even allow your users to swtich themes:</p>
+
+<Row>
+    <BlazorCol LG="4">
+        <ThemeSwitcher />
+    </BlazorCol>
+</Row>
+
+<p>For more information see the <a href="themes">Themes page</a>.</p>
+    
+<h2>Docs</h2>
+
+<ul>
+    <li><a href="alerts">Alerts</a></li>
+    <li><a href="badges">Badges</a></li>
+    <li><a href="breadcrumbs">Breadcrumbs</a></li>
+    <li><a href="buttons">Buttons</a></li>
+    <li><a href="buttongroups">Button Groups</a></li>
+    <li><a href="cards">Cards</a></li>
+    <li><a href="carousels">Carousels</a></li>
+    <li><a href="collapse">Collapse</a></li>
+    <li><a href="dropdowns">Dropdowns</a></li>
+    <li><a href="figures">Figures</a></li>
+    <li><a href="forms">Forms</a></li>
+    <li><a href="images">Images</a></li>
+    <li><a href="jumbotrons">Jumbotrons</a></li>
+    <li><a href="layout">Layout</a></li>
+    <li><a href="listgroups">List Groups</a></li>
+    <li><a href="media">Media</a></li>
+    <li><a href="modals">Modals</a></li>
+    <li><a href="navs">Navs</a></li>
+    <li><a href="navbars">Navbars</a></li>
+    <li><a href="pagination">Pagination</a></li>
+    <li><a href="popovers">Popovers</a></li>
+    <li><a href="progress">Progress</a></li>
+    <li><a href="tables">Tables</a></li>
+    <li><a href="tabs">Tabs</a></li>
+    <li><a href="themes">Themes</a></li>
+    <li><a href="toasts">Toasts</a></li>
+    <li><a href="toggles">Toggles</a></li>
+    <li><a href="tooltips">Tooltips</a></li>
+</ul>
+
+<h2>Github</h2>
+
+<p><a href="https://github.com/chanan/BlazorStrap">https://github.com/chanan/BlazorStrap</a></p>
+<p class="text-center">
+    <a href="https://github.com/chanan/BlazorStrap"><img src="https://img.shields.io/github/stars/chanan/BlazorStrap.svg?style=social&label=Stars" /></a>
+</p>
