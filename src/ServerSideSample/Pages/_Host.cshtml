@@ -16,14 +16,14 @@
     <link rel="stylesheet" href="_content/BlazorStrap/css/submenu.css" />
     <link rel="stylesheet" href="_content/BlazorStrap/css/cromefix.css" />
     <link rel="manifest" href="/site.webmanifest">
+    @(await Html.RenderComponentAsync<BlazorStyled.ServerSideStyled>())
 </head>
 <body>
-    <app></app>
+    app>@(await Html.RenderComponentAsync<SampleCore.App>())</app>
 
     <script src="_framework/blazor.server.js"></script>
 
     <!-- BlazorStyled is used by BlazorStrap documentation site -->
-    <script src="_content/BlazorStyled/styled.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     <!-- The below two files are needed by BlazorStrap -->

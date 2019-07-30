@@ -21,6 +21,7 @@ namespace Sample
         public void Configure(IComponentsApplicationBuilder app)
         {
             app.AddComponent<App>("app");
+            app.AddClientSidePrettyCode();
         }
     }
 }

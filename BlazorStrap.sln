@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29006.145
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap", "src\BlazorStrap\BlazorStrap.csproj", "{051B1529-0E91-4FAA-AB28-4FC4ACD5960F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "src\Sample\Sample.csproj", "{5FC0514A-81B3-4612-B2D1-A956DD2BFA42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientSideSample", "src\Sample\ClientSideSample.csproj", "{5FC0514A-81B3-4612-B2D1-A956DD2BFA42}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8BC77845-4555-4F8B-9502-0F1619F0BA2D}"
 	ProjectSection(SolutionItems) = preProject
