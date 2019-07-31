@@ -18,9 +18,10 @@ namespace BlazorStrap
         [Parameter] protected string Class { get; set; }
         [Parameter] protected bool IsDisabled { get; set; }
         [Parameter] protected RenderFragment ChildContent { get; set; }
-  
+
         protected void Select()
         {
+            
             Parent.Select();
         }
     }

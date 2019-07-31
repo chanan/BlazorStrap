@@ -1,6 +1,8 @@
 ﻿@namespace BlazorStrap
 @inherits CodeBSCarousel
 
-<DynamicElement @attributes="@UnknownParameters" TagName="div" class="@classname" @onmouseover="onmouseover" @onmouseout="onmouseout">
-    @ChildContent
-</DynamicElement>
+    <CascadingValue Value="this">
+        <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@classname" @onmouseover="onmouseover" @onmouseout="onmouseout">
+            @ChildContent
+        </DynamicElement>
+    </CascadingValue>

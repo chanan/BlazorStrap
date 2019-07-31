@@ -2,12 +2,15 @@
 using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
     public class CodeBSTabGroup : BootstrapComponentBase
     {
         public List<CodeBSTab> Tabs = new List<CodeBSTab>();
+        internal List<EventCallback<BSTabEvent>> EventQue { get; set; } = new List<EventCallback<BSTabEvent>>();
+        internal BSTabEvent BSTabEvent { get; set; }
         private CodeBSTab _selected;
         public CodeBSTab Selected
         {
@@ -17,12 +20,32 @@ namespace BlazorStrap
             }
             set
             {
-                _selected?.UnSelected();
+                BSTabEvent = new BSTabEvent() { Activated = value, Deactivated = _selected };
+
+                ShowEvent.InvokeAsync(BSTabEvent);
+                HideEvent.InvokeAsync(BSTabEvent);
+                EventQue.Add(ShownEvent);
+                EventQue.Add(HiddenEvent);
                 _selected = value;
                 StateHasChanged();
             }
         }
 
         [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] protected EventCallback<BSTabEvent> ShowEvent { get; set; }
+        [Parameter] protected EventCallback<BSTabEvent> ShownEvent { get; set; }
+        [Parameter] protected EventCallback<BSTabEvent> HideEvent { get; set; }
+        [Parameter] protected EventCallback<BSTabEvent> HiddenEvent { get; set; }
+
+        protected override Task OnAfterRenderAsync()
+        {
+            for (int i = 0; i < EventQue.Count; i++)
+            {
+                EventQue[i].InvokeAsync(BSTabEvent);
+                EventQue.RemoveAt(i);
+            }
+
+            return base.OnAfterRenderAsync();
+        }
     }
 }

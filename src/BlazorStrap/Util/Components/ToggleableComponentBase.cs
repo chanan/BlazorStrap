@@ -9,6 +9,10 @@ namespace BlazorStrap.Util.Components
     public abstract class ToggleableComponentBase : BootstrapComponentBase
     {
         [Parameter] protected EventCallback<bool> IsOpenChanged { get; set; }
+        [Parameter] protected EventCallback<BSCollapseEvent> ShowEvent { get; set; }
+        [Parameter] protected EventCallback<BSCollapseEvent> ShownEvent { get; set; }
+        [Parameter] protected EventCallback<BSCollapseEvent> HideEvent { get; set; }
+        [Parameter] protected EventCallback<BSCollapseEvent> HiddenEvent { get; set; }
         [Parameter]
         protected bool? IsOpen
         {
@@ -24,6 +28,7 @@ namespace BlazorStrap.Util.Components
                 }
                 if (value != _isOpen)
                 {
+                    
                     _isOpen = value.HasValue ? value.Value : false;
                     IsOpenChanged.InvokeAsync(_isOpen);
                 }
@@ -37,6 +42,10 @@ namespace BlazorStrap.Util.Components
         protected bool _isOpen { get; set; }
         protected bool _manual { get; set; }
         protected bool JustOpened { get; set; }
+
+        internal virtual void Changed()
+        {
+        }
         public virtual void Show()
         {
             if (_manual)
@@ -68,6 +77,16 @@ namespace BlazorStrap.Util.Components
             JustOpened = _isOpen;
             IsOpenChanged.InvokeAsync(_isOpen);
             StateHasChanged();
+        }
+
+        protected override Task OnAfterRenderAsync()
+        {
+            for (int i = 0; i < EventQue.Count; i++)
+            {
+                EventQue[i].InvokeAsync(BSCollapseEvent);
+                EventQue.RemoveAt(i);
+            }
+            return base.OnAfterRenderAsync();
         }
     }
 }

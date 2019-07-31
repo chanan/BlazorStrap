@@ -2,9 +2,9 @@
 
 <h1>Tabs</h1>
 <div class="docs-example">
-    <BSTabGroup>
+    <BSTabGroup Show="@Show" Hidden="@Hidden" Hide="@Hide" Shown="@Shown">
         <BSTabList>
-            <BSTab Show="@Test">
+            <BSTab>
                 <BSTabLabel>Home</BSTabLabel>
                 <BSTabContent>Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.</BSTabContent>
             </BSTab>
@@ -73,8 +73,20 @@
 <PrettyCode CodeFile="_content/SampleCore/snippets/tabs/tabs3.html" />
 
 @code {
-    private void Test (BSTabEvent e)
+    private void Show (BSTabEvent e)
     {
-        Console.WriteLine(e.Id.ToString());
+        Console.WriteLine($"Show   -> Activated: {e.Activated?.Id.ToString()} , Deactivated: {e.Deactivated?.Id.ToString()}");
+    }
+    private void Shown (BSTabEvent e)
+    {
+        Console.WriteLine($"Shown  -> Activated: {e.Activated?.Id.ToString()} , Deactivated: {e.Deactivated?.Id.ToString()}");
+    }
+    private void Hide (BSTabEvent e)
+    {
+        Console.WriteLine($"Hide   ->  Activated: {e.Activated?.Id.ToString()} , Deactivated: {e.Deactivated?.Id.ToString()}");
+    }
+    private void Hidden (BSTabEvent e)
+    {
+        Console.WriteLine($"Hidden -> Activated: {e.Activated?.Id.ToString()} , Deactivated: {e.Deactivated?.Id.ToString()}");
     }
 }
