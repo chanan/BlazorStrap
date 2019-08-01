@@ -22,7 +22,8 @@ namespace BlazorStrap
         [Inject] Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
         protected string classname =>
           new CssBuilder("modal")
-              .AddClass("fade show", _isOpen)
+              .AddClass("fade show", _manual == null && _isOpen)
+              .AddClass("fade show", _manual != null && IsOpen.HasValue && IsOpen.Value)
               .AddClass(Class)
           .Build();
 
@@ -44,7 +45,7 @@ namespace BlazorStrap
             }
             for (int i = 0; i < EventQue.Count; i++)
             {
-                EventQue[i].InvokeAsync(BSModalEvent);
+                await EventQue[i].InvokeAsync(BSModalEvent);
                 EventQue.RemoveAt(i);
             }
         }
@@ -53,7 +54,15 @@ namespace BlazorStrap
         {
             get
             {
-                var display = _isOpen ? "display: block; padding-right: 17px;" : null;
+                var display = "";
+                if (_manual != null)
+                {
+                    display = (IsOpen.HasValue && IsOpen.Value) ? "display: block; padding-right: 17px;" : null;
+                }
+                else
+                {
+                    display = _isOpen ? "display: block; padding-right: 17px;" : null;
+                }
                 return $"{Style} {display}".Trim();
             }
         }
@@ -68,12 +77,7 @@ namespace BlazorStrap
 
         private bool _dontclickWasClicked;
 
-        protected override void OnInit()
-        {
-            OnOpenChangedEvent += OnOpenChanged;
-        }
-
-        private void OnOpenChanged(object sender, bool e)
+        internal override void Changed(bool e)
         {
             BSModalEvent = new BSModalEvent() { Target = this };
             if (e)
@@ -92,8 +96,8 @@ namespace BlazorStrap
         {
             if (!IgnoreClickOnBackdrop)
             {
-                if (!_dontclickWasClicked && _manual) IsOpen = false;
-                else if(!_dontclickWasClicked && !_manual) _isOpen = false;
+                if (!_dontclickWasClicked && _manual != null) IsOpen = false;
+                else if(!_dontclickWasClicked && _manual == null) _isOpen = false;
                 _dontclickWasClicked = false;
                 StateHasChanged();
             }

@@ -7,13 +7,14 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSCollapse : ToggleableComponentBase , IDisposable
+    public class CodeBSCollapse : ToggleableComponentBase 
     {
         [Parameter] protected EventCallback<BSCollapseEvent> ShowEvent { get; set; }
         [Parameter] protected EventCallback<BSCollapseEvent> ShownEvent { get; set; }
         [Parameter] protected EventCallback<BSCollapseEvent> HideEvent { get; set; }
         [Parameter] protected EventCallback<BSCollapseEvent> HiddenEvent { get; set; }
 
+        [CascadingParameter] protected BSNavbar Navbar { get; set; }
         internal BSCollapseEvent BSCollapseEvent { get; set; }
         internal List<EventCallback<BSCollapseEvent>> EventQue { get; set; } = new List<EventCallback<BSCollapseEvent>>();
 
@@ -31,10 +32,20 @@ namespace BlazorStrap
 
         protected override void OnInit()
         {
-            OnOpenChangedEvent += OnOpenChanged;
+            if(IsNavbar && Navbar != null)
+            {
+                Navbar.VisableChange += OnVisableChange;
+            }
         }
 
-        private void OnOpenChanged(object sender, bool e)
+        private void OnVisableChange(object sender, bool e)
+        {
+            _isOpen = e;
+            Invoke(() => { IsOpenChanged.InvokeAsync(e); });
+            
+        }
+
+        internal override void Changed(bool e)
         {
             BSCollapseEvent = new BSCollapseEvent() { Target = this };
             if(e)
@@ -44,6 +55,14 @@ namespace BlazorStrap
             }
             else
             {
+                if (IsNavbar && Navbar != null)
+                {
+                    if (Navbar.HasCollapsed == false)
+                    {
+                        Navbar.HasCollapsed = true;
+                        Navbar.Visable = false;
+                    }
+                }
                 HideEvent.InvokeAsync(BSCollapseEvent);
                 EventQue.Add(HiddenEvent);
             }
@@ -59,9 +78,5 @@ namespace BlazorStrap
             return base.OnAfterRenderAsync();
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

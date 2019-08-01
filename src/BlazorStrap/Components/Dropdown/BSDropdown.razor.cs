@@ -56,8 +56,8 @@ namespace BlazorStrap
             .AddClass("btn-group", IsGroup)
             .AddClass("dropdown-submenu", IsSubmenu)
             .AddClass(DropdownDirection.ToDescriptionString(), DropdownDirection != DropdownDirection.Down)
-            .AddClass("show", !_manual && Selected != null)
-            .AddClass("show", _manual && IsOpen.HasValue && IsOpen.Value)
+            .AddClass("show", _manual == null && Selected != null)
+            .AddClass("show", _manual != null && IsOpen.HasValue && IsOpen.Value)
             .AddClass(Class)
         .Build();
 
@@ -72,7 +72,7 @@ namespace BlazorStrap
         protected override void OnInit()
         {
             _timer.Elapsed += OnTimedEvent;
-            OnOpenChangedEvent += OnOpenChanged;
+            
             if (Dropdown != null || NavItem != null)
             {
                 IsSubmenu = true;
@@ -80,7 +80,7 @@ namespace BlazorStrap
             base.OnInit();
         }
 
-        private void OnOpenChanged(object sender, bool e)
+        internal override void Changed(bool e)
         {
             BSDropdownEvent = new BSDropdownEvent() { Target = this };
             if (e)
@@ -113,7 +113,7 @@ namespace BlazorStrap
 
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            if (!_manual)
+            if (_manual == null)
             {
                 Invoke(() => Close());
             }

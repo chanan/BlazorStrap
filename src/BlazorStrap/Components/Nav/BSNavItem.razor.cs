@@ -50,8 +50,8 @@ namespace BlazorStrap
         protected string classname =>
             new CssBuilder("nav-item")
                 .AddClass("dropdown", IsDropdown)
-                .AddClass("show", IsDropdown && !_manual && Nav?.Selected == this)
-                .AddClass("show", IsDropdown && _manual && IsOpen.HasValue && IsOpen.Value)
+                .AddClass("show", IsDropdown && _manual == null && Nav?.Selected == this)
+                .AddClass("show", IsDropdown && _manual != null && IsOpen.HasValue && IsOpen.Value)
                 .AddClass(Class)
             .Build();
 
@@ -63,7 +63,7 @@ namespace BlazorStrap
         [CascadingParameter] internal BSNav Nav { get; set; }
         protected override Task OnInitAsync()
         {
-            if (IsDropdown && !_manual)
+            if (IsDropdown && _manual == null)
             {
                 Nav.Navitems.Add(this);
             }
@@ -72,7 +72,7 @@ namespace BlazorStrap
 
         protected void MouseDown()
         {
-            if (!_manual && IsDropdown)
+            if (_manual == null && IsDropdown)
             {
                 _MouseDown = Nav.Selected == this && true;
             }
@@ -109,7 +109,7 @@ namespace BlazorStrap
 
         protected void LostFocus()
         {
-            if (IsDropdown && !_manual && !_MouseDown)
+            if (IsDropdown && _manual != null && !_MouseDown)
             {
                 if (Nav.Selected == this)
                 {
