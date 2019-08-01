@@ -8,11 +8,9 @@ namespace BlazorStrap.Util.Components
     /// </summary>
     public abstract class ToggleableComponentBase : BootstrapComponentBase
     {
+        protected EventHandler<bool> OnOpenChangedEvent { get; set; }
         [Parameter] protected EventCallback<bool> IsOpenChanged { get; set; }
-        [Parameter] protected EventCallback<BSCollapseEvent> ShowEvent { get; set; }
-        [Parameter] protected EventCallback<BSCollapseEvent> ShownEvent { get; set; }
-        [Parameter] protected EventCallback<BSCollapseEvent> HideEvent { get; set; }
-        [Parameter] protected EventCallback<BSCollapseEvent> HiddenEvent { get; set; }
+ 
         [Parameter]
         protected bool? IsOpen
         {
@@ -79,14 +77,6 @@ namespace BlazorStrap.Util.Components
             StateHasChanged();
         }
 
-        protected override Task OnAfterRenderAsync()
-        {
-            for (int i = 0; i < EventQue.Count; i++)
-            {
-                EventQue[i].InvokeAsync(BSCollapseEvent);
-                EventQue.RemoveAt(i);
-            }
-            return base.OnAfterRenderAsync();
-        }
+      
     }
 }

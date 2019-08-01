@@ -5,11 +5,20 @@ using BlazorComponentUtilities;
 using System;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
     public class CodeBSModal : ToggleableComponentBase
     {
+        [Parameter] protected EventCallback<BSModalEvent> ShowEvent { get; set; }
+        [Parameter] protected EventCallback<BSModalEvent> ShownEvent { get; set; }
+        [Parameter] protected EventCallback<BSModalEvent> HideEvent { get; set; }
+        [Parameter] protected EventCallback<BSModalEvent> HiddenEvent { get; set; }
+
+        internal BSModalEvent BSModalEvent { get; set; }
+        internal List<EventCallback<BSModalEvent>> EventQue { get; set; } = new List<EventCallback<BSModalEvent>>();
+
         [Inject] Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
         protected string classname =>
           new CssBuilder("modal")
@@ -33,6 +42,11 @@ namespace BlazorStrap
                 await new BlazorStrapInterop(JSRuntime).FocusElement(Me);
                 JustOpened = false;
             }
+            for (int i = 0; i < EventQue.Count; i++)
+            {
+                EventQue[i].InvokeAsync(BSModalEvent);
+                EventQue.RemoveAt(i);
+            }
         }
 
         protected string styles
@@ -53,6 +67,27 @@ namespace BlazorStrap
         [Parameter] protected bool IgnoreEscape { get; set; }
 
         private bool _dontclickWasClicked;
+
+        protected override void OnInit()
+        {
+            OnOpenChangedEvent += OnOpenChanged;
+        }
+
+        private void OnOpenChanged(object sender, bool e)
+        {
+            BSModalEvent = new BSModalEvent() { Target = this };
+            if (e)
+            {
+                ShowEvent.InvokeAsync(BSModalEvent);
+                EventQue.Add(ShownEvent);
+            }
+            else
+            {
+                HideEvent.InvokeAsync(BSModalEvent);
+                EventQue.Add(HiddenEvent);
+            }
+        }
+
         protected void onclick()
         {
             if (!IgnoreClickOnBackdrop)
@@ -76,5 +111,6 @@ namespace BlazorStrap
         {
             _dontclickWasClicked = true;
         }
+
     }
 }

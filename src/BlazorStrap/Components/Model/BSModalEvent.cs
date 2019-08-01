@@ -5,8 +5,8 @@ using System;
 
 namespace BlazorStrap
 {
-    public class BSCollapseEvent
+    public class BSModalEvent
     {
-        public CodeBSCollapse Target { get; set; }
+        public CodeBSModal Target { get; set; }
     }
 }

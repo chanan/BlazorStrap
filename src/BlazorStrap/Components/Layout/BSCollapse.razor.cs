@@ -9,6 +9,11 @@ namespace BlazorStrap
 {
     public class CodeBSCollapse : ToggleableComponentBase , IDisposable
     {
+        [Parameter] protected EventCallback<BSCollapseEvent> ShowEvent { get; set; }
+        [Parameter] protected EventCallback<BSCollapseEvent> ShownEvent { get; set; }
+        [Parameter] protected EventCallback<BSCollapseEvent> HideEvent { get; set; }
+        [Parameter] protected EventCallback<BSCollapseEvent> HiddenEvent { get; set; }
+
         internal BSCollapseEvent BSCollapseEvent { get; set; }
         internal List<EventCallback<BSCollapseEvent>> EventQue { get; set; } = new List<EventCallback<BSCollapseEvent>>();
 
@@ -26,12 +31,22 @@ namespace BlazorStrap
 
         protected override void OnInit()
         {
-            IsOpenChanged
+            OnOpenChangedEvent += OnOpenChanged;
         }
 
         private void OnOpenChanged(object sender, bool e)
         {
-
+            BSCollapseEvent = new BSCollapseEvent() { Target = this };
+            if(e)
+            {
+                ShowEvent.InvokeAsync(BSCollapseEvent);
+                EventQue.Add(ShownEvent);
+            }
+            else
+            {
+                HideEvent.InvokeAsync(BSCollapseEvent);
+                EventQue.Add(HiddenEvent);
+            }
         }
 
         protected override Task OnAfterRenderAsync()
