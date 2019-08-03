@@ -21,6 +21,7 @@ namespace BlazorStrap
 
         protected void Select()
         {
+            
             Parent.Select();
         }
     }

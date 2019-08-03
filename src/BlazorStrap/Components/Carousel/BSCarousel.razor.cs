@@ -53,6 +53,10 @@ namespace BlazorStrap
             if (PauseOnHover && _timer != null) { _timer.Start(); }
         }
 
+        internal void FireEvent(int newIndex, int OldIndex)
+        {
+
+        }
         public void Dispose()
         {
             if (_timer != null)

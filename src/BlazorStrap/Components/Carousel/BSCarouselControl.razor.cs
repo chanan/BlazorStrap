@@ -27,6 +27,7 @@ namespace BlazorStrap
         [Parameter] protected int NumberOfItems { get; set; }
         [Parameter] protected CarouselDirection CarouselDirection { get; set; } = CarouselDirection.Previous;
         [Parameter] protected string Class { get; set; }
+        [CascadingParameter] internal BSCarousel Parent { get; set; }
 
         [Parameter] protected EventCallback<int> ActiveIndexChanged { get; set; }
 
@@ -34,6 +35,7 @@ namespace BlazorStrap
         {
             if (CarouselDirection == CarouselDirection.Previous)
             {
+
                 if (ActiveIndex == 0) { ActiveIndex = NumberOfItems - 1; }
                 else { ActiveIndex = ActiveIndex - 1; }
             }
