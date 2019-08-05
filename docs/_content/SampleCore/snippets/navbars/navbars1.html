@@ -1,7 +1,7 @@
 ﻿<BSNavbar IsExpand="true" IsDark="false" Color="Color.Light">
     <BSNavbarBrand Href="#">Navbar</BSNavbarBrand>
     <BSNavbarToggler onclick="onclick" />
-    <BSCollapse isOpen="@IsOpen" IsNavbar="true">
+    <BSCollapse isOpen="@IsOpen" IsNavbar="true" IsOpenChanged="OpenChanged">
         <BSNav IsList="true" Class="mr-auto" IsNavbar="true">
             <BSNavItem>
                 <BSNavLink IsActive="true" Href="#">Home</BSNavLink>
@@ -21,9 +21,9 @@
                     <BSDropdownItem Href="#">Yet Another Action</BSDropdownItem>
                 </BSDropdownMenu>
             </BSNavItem>
-            <BSNavItem IsDropdown="true" IsOpen="@IsOpen">
-                <BSDropdownToggle IsOpen="@IsOpen" onclick="onclick" Color="Color.Light">User Controlled</BSDropdownToggle>
-                <BSDropdownMenu IsOpen="@IsOpen">
+            <BSNavItem IsDropdown="true" IsOpen="@IsOpen2">
+                <BSDropdownToggle IsOpen="@IsOpen2" onclick="onclick2" Color="Color.Light">User Controlled</BSDropdownToggle>
+                <BSDropdownMenu IsOpen="@IsOpen2">
                     <BSDropdownItem Href="#">Action</BSDropdownItem>
                     <BSDropdownItem Href="#">Another Action</BSDropdownItem>
                     <BSDropdownItem IsDivider="true" />
@@ -44,5 +44,20 @@
     {
         IsOpen = !IsOpen;
         StateHasChanged();
+        Console.WriteLine("Navbar Class->" + IsOpen.ToString());
+    }
+    void OpenChanged(bool e)
+    {
+        IsOpen = e;
+        Invoke(StateHasChanged);
+        Console.WriteLine("OpenChanged->" + IsOpen.ToString());
+    }
+
+    bool IsOpen2 { get; set; } = true;
+    void onclick2(UIMouseEventArgs e)
+    {
+        IsOpen2 = !IsOpen2;
+        StateHasChanged();
+
     }
 }
