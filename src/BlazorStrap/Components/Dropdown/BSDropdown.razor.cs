@@ -11,7 +11,7 @@ namespace BlazorStrap
 {
     public class CodeBSDropdown : ToggleableComponentBase
     {
-
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] protected EventCallback<BSDropdownEvent> ShowEvent { get; set; }
         [Parameter] protected EventCallback<BSDropdownEvent> ShownEvent { get; set; }
         [Parameter] protected EventCallback<BSDropdownEvent> HideEvent { get; set; }

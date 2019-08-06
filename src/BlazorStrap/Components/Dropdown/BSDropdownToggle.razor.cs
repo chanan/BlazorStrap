@@ -4,11 +4,13 @@ using BlazorStrap.Util;
 using BlazorComponentUtilities;
 using System;
 using System.Timers;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSDropdownToggle : BootstrapComponentBase
+    public class CodeBSDropdownToggle : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
          new CssBuilder()
              .AddClass("btn", !IsLink)

@@ -2,11 +2,13 @@
 using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSFigureCaption : BootstrapComponentBase
-    { 
+    public class CodeBSFigureCaption : ComponentBase
+    {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("figure-caption")
             .AddClass(GetAlignment())

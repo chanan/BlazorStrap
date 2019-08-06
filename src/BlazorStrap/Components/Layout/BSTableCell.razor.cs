@@ -3,11 +3,13 @@ using BlazorStrap.Util.Components;
 using BlazorStrap.Util;
 using BlazorComponentUtilities;
 using System;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSTableCell : BootstrapComponentBase
+    public class CodeBSTableCell : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder()
             .AddClass($"table-{Color.ToDescriptionString()}", Color != Color.None)

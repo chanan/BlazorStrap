@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public class CodeBSTabGroup : BootstrapComponentBase
+    public class CodeBSTabGroup : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         public List<CodeBSTab> Tabs = new List<CodeBSTab>();
         internal List<EventCallback<BSTabEvent>> EventQue { get; set; } = new List<EventCallback<BSTabEvent>>();
         internal BSTabEvent BSTabEvent { get; set; }

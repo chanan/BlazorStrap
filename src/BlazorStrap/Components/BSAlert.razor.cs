@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public class CodeBSAlert : BootstrapComponentBase
+    public class CodeBSAlert : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         internal BSAlertEvent BSAlertEvent { get; set; }
         internal List<EventCallback<BSAlertEvent>> EventQue { get; set; } = new List<EventCallback<BSAlertEvent>>();
         protected string classname =>

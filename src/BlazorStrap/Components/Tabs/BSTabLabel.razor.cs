@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSTabLabel : BootstrapComponentBase
+    public class CodeBSTabLabel : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         public RenderFragment Content { get; set; }
         protected string classname =>
         new CssBuilder("nav-item nav-link")

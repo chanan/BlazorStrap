@@ -3,11 +3,13 @@ using BlazorStrap.Util.Components;
 using BlazorStrap.Util;
 using BlazorComponentUtilities;
 using System;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSCard : BootstrapComponentBase
+    public class CodeBSCard : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
               new CssBuilder()
                   .AddClass(GetClass())

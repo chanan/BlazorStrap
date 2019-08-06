@@ -2,12 +2,14 @@
 using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSMedia : BootstrapComponentBase
+    public class CodeBSMedia : ComponentBase
     {
-         protected string classname =>
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        protected string classname =>
          new CssBuilder()
              .AddClass(GetClass())
              .AddClass(Class)

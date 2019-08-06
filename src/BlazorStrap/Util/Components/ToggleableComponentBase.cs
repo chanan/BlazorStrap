@@ -6,7 +6,7 @@ namespace BlazorStrap.Util.Components
     /// <summary>
     /// The base class for Toggle BlazorStrap components.
     /// </summary>
-    public abstract class ToggleableComponentBase : BootstrapComponentBase
+    public abstract class ToggleableComponentBase : ComponentBase
     {
         [Parameter] protected EventCallback<bool> IsOpenChanged { get; set; }
  
@@ -31,7 +31,14 @@ namespace BlazorStrap.Util.Components
                
                 if (value == true)
                 {
-                    JustOpened = true;
+                    if (JustOpened)
+                    {
+                        JustOpened = false;
+                    }
+                    else
+                    {
+                        JustOpened = true;
+                    }
                 }
             }
         }

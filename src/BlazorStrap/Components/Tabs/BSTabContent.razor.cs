@@ -2,11 +2,13 @@
 using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSTabContent : BootstrapComponentBase
+    public class CodeBSTabContent : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         public string classname =>
             new CssBuilder("tab-content")
                 .AddClass(Class)

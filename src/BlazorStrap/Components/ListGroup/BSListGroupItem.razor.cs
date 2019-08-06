@@ -3,11 +3,13 @@ using BlazorStrap.Util.Components;
 using BlazorStrap.Util;
 using BlazorComponentUtilities;
 using System;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSListGroupItem : BootstrapComponentBase
+    public class CodeBSListGroupItem : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("list-group-item")
             .AddClass($"list-group-item-{Color.ToDescriptionString()}", Color != Color.None)

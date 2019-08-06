@@ -6,8 +6,9 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSNav : BootstrapComponentBase
+    public class CodeBSNav : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         private CodeBSNavItem _selected;
         internal List<CodeBSNavItem> Navitems { get; set; } = new List<CodeBSNavItem>();
         public CodeBSNavItem Selected

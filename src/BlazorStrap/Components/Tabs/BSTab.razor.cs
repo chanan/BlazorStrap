@@ -8,8 +8,9 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSTab : BootstrapComponentBase, IDisposable
+    public class CodeBSTab : ComponentBase, IDisposable
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         public RenderFragment Content { get; set; }
         public bool Selected
         {

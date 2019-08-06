@@ -9,6 +9,7 @@ namespace BlazorStrap
 {
     public class CodeBSNavItem : ToggleableComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
 
         private CodeBSDropdownMenu _selected;
         //Prevents NULL

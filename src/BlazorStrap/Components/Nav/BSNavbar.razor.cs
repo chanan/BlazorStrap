@@ -4,11 +4,13 @@ using BlazorStrap.Util;
 using BlazorComponentUtilities;
 using System;
 using System.Timers;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSNavbar : BootstrapComponentBase
+    public class CodeBSNavbar : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         private System.Timers.Timer _timer = new System.Timers.Timer(250);
         
         private bool _visable { get; set; }
