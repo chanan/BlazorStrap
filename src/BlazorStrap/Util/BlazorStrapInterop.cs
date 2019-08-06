@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
 using System.Threading.Tasks;
 
 namespace BlazorStrap.Util
 {
     public class BlazorStrapInterop
     {
+        public static EventHandler OnEscapeEvent { get; set; }
         private IJSRuntime JSRuntime { get; set; }
 
         public BlazorStrapInterop(IJSRuntime jsRuntime)
@@ -13,11 +15,25 @@ namespace BlazorStrap.Util
             JSRuntime = jsRuntime;
         }
 
+        [JSInvokable]
+        public static Task OnEscape()
+        {
+            OnEscapeEvent?.Invoke(null, new EventArgs());
+            return default;
+        }
         public Task<bool> ChangeBody(string classname)
         {
             return JSRuntime.InvokeAsync<bool>("blazorStrap.changeBody", classname);
         }
+        public Task<bool> ChangeBodyModal(string padding)
+        {
+            return JSRuntime.InvokeAsync<bool>("blazorStrap.changeBodyModal", padding);
+        }
 
+        public Task ModalEscapeKey()
+        {
+            return JSRuntime.InvokeAsync<string>("blazorStrap.modelEscape");
+        }
         public Task<bool> Log(string message)
         {
             return JSRuntime.InvokeAsync<bool>("blazorStrap.log", message);

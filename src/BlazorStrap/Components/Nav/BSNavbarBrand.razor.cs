@@ -2,11 +2,13 @@
 using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSNavbarBrand : BootstrapComponentBase
+    public class CodeBSNavbarBrand : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("navbar-brand")
             .AddClass(Class)

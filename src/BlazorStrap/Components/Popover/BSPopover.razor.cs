@@ -3,11 +3,13 @@ using BlazorStrap.Util.Components;
 using BlazorStrap.Util;
 using BlazorComponentUtilities;
 using System;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
     public class CodeBSPopover : ToggleableComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         [Inject] Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
         protected string classname =>
         new CssBuilder("popover")

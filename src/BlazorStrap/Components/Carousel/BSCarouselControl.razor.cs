@@ -3,11 +3,13 @@ using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSCarouselControl : BootstrapComponentBase
+    public class CodeBSCarouselControl : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
          new CssBuilder()
              .AddClass("carousel-control-prev", CarouselDirection == CarouselDirection.Previous)
@@ -27,6 +29,7 @@ namespace BlazorStrap
         [Parameter] protected int NumberOfItems { get; set; }
         [Parameter] protected CarouselDirection CarouselDirection { get; set; } = CarouselDirection.Previous;
         [Parameter] protected string Class { get; set; }
+        [CascadingParameter] internal BSCarousel Parent { get; set; }
 
         [Parameter] protected EventCallback<int> ActiveIndexChanged { get; set; }
 
@@ -34,6 +37,7 @@ namespace BlazorStrap
         {
             if (CarouselDirection == CarouselDirection.Previous)
             {
+
                 if (ActiveIndex == 0) { ActiveIndex = NumberOfItems - 1; }
                 else { ActiveIndex = ActiveIndex - 1; }
             }

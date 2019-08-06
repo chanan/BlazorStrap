@@ -2,11 +2,13 @@
 using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSPaginationLink : BootstrapComponentBase
+    public class CodeBSPaginationLink : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("page-link")
             .AddClass(Class)

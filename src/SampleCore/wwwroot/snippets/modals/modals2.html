@@ -1,18 +1,13 @@
-﻿<BSButton Color="Color.Primary" OnClick="onclick">Launch demo modal</BSButton>
-<BSModal IsOpen="@IsOpen">
-    <BSModalHeader OnClick="onclick">Modal title</BSModalHeader>
-    <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
-    <BSModalFooter>
-        <BSButton Color="Color.Secondary" OnClick="onclick">Close</BSButton>
-        <BSButton Color="Color.Primary" OnClick="onclick">Save Changes</BSButton>
-    </BSModalFooter>
-</BSModal>
+﻿ <BSButton Color="Color.Primary" OnClick="@(() => LiveDemo.Show())">Launch demo modal</BSButton>
+    <BSModal @ref="LiveDemo">
+        <BSModalHeader OnClick="@(() => LiveDemo.Hide())">Modal title</BSModalHeader>
+        <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+        <BSModalFooter>
+            <BSButton Color="Color.Secondary" OnClick="@(() => LiveDemo.Hide())">Close</BSButton>
+            <BSButton Color="Color.Primary" OnClick="@(() => LiveDemo.Hide())">Save Changes</BSButton>
+        </BSModalFooter>
+    </BSModal>
 
 @code {
-    bool IsOpen { get; set; }
-    void onclick(UIMouseEventArgs e)
-    {
-        IsOpen = !IsOpen;
-        StateHasChanged();
-    }
+    BSModal LiveDemo;
 }
