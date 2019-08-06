@@ -34,14 +34,26 @@ namespace BlazorStrap
             .Build();
 
         protected ElementRef Me { get; set; }
+        private bool Closed { get; set; }
         protected override async Task OnAfterRenderAsync()
         {
-            await new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
             // Sets Focus inside model so escape key can work.
             if (JustOpened)
             {
-                await new BlazorStrapInterop(JSRuntime).FocusElement(Me);
+                await new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
+                await new BlazorStrapInterop(JSRuntime).ChangeBodyModal(_isOpen ? "17px" : null);
+                if (!IgnoreEscape)
+                {
+                    await new BlazorStrapInterop(JSRuntime).ModalEscapeKey();
+                    BlazorStrapInterop.OnEscapeEvent += OnEscape;
+                }
                 JustOpened = false;
+            }
+            else if (Closed)
+            {
+                Closed = false;
+                await new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
+                await new BlazorStrapInterop(JSRuntime).ChangeBodyModal(_isOpen ? "17px" : null);
             }
             for (int i = 0; i < EventQue.Count; i++)
             {
@@ -75,8 +87,6 @@ namespace BlazorStrap
         [Parameter] protected bool IgnoreClickOnBackdrop { get; set; }
         [Parameter] protected bool IgnoreEscape { get; set; }
 
-        private bool _dontclickWasClicked;
-
         internal override void Changed(bool e)
         {
             BSModalEvent = new BSModalEvent() { Target = this };
@@ -87,34 +97,31 @@ namespace BlazorStrap
             }
             else
             {
+                Closed = true;
                 HideEvent.InvokeAsync(BSModalEvent);
                 EventQue.Add(HiddenEvent);
             }
         }
 
-        protected void onclick()
+        protected void OnBackdropClick()
         {
             if (!IgnoreClickOnBackdrop)
             {
-                if (!_dontclickWasClicked && _manual != null) IsOpen = false;
-                else if(!_dontclickWasClicked && _manual == null) _isOpen = false;
-                _dontclickWasClicked = false;
+                Closed = true;
+                if (_manual != null) IsOpen = false;
+                else if(_manual == null) _isOpen = false;
                 StateHasChanged();
             }
         }
-        protected void onEscape(UIKeyboardEventArgs e)
+        protected void OnEscape(object sender, EventArgs e)
         {
-            if (e.Key.ToLower() == "escape" && !IgnoreEscape)
-            {
-                _isOpen = false;
-                IsOpenChanged.InvokeAsync(false);
-                StateHasChanged();
-            }
+            _isOpen = false;
+            Closed = true;
+            IsOpenChanged.InvokeAsync(false);
+            BlazorStrapInterop.OnEscapeEvent -= OnEscape;
+            Invoke(StateHasChanged);
         }
-        protected void dontclick(UIMouseEventArgs e)
-        {
-            _dontclickWasClicked = true;
-        }
+       
 
     }
 }

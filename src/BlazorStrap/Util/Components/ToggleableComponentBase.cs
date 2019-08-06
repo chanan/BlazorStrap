@@ -31,7 +31,14 @@ namespace BlazorStrap.Util.Components
                
                 if (value == true)
                 {
-                    JustOpened = true;
+                    if (JustOpened)
+                    {
+                        JustOpened = false;
+                    }
+                    else
+                    {
+                        JustOpened = true;
+                    }
                 }
             }
         }
