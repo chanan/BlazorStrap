@@ -3,11 +3,13 @@ using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSToast : BootstrapComponentBase
+    public class CodeBSToast : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("toast fade")
             .AddClass("show", IsVisible && !IsDismissed)

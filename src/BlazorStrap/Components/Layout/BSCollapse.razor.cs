@@ -9,6 +9,7 @@ namespace BlazorStrap
 {
     public class CodeBSCollapse : ToggleableComponentBase 
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] protected EventCallback<BSCollapseEvent> ShowEvent { get; set; }
         [Parameter] protected EventCallback<BSCollapseEvent> ShownEvent { get; set; }
         [Parameter] protected EventCallback<BSCollapseEvent> HideEvent { get; set; }

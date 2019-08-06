@@ -11,6 +11,7 @@ namespace BlazorStrap
 {
     public class CodeBSModal : ToggleableComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] protected EventCallback<BSModalEvent> ShowEvent { get; set; }
         [Parameter] protected EventCallback<BSModalEvent> ShownEvent { get; set; }
         [Parameter] protected EventCallback<BSModalEvent> HideEvent { get; set; }

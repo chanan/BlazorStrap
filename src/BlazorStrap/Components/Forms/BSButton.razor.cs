@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public class CodeBSButton : BootstrapComponentBase
+    public class CodeBSButton : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("btn")
           .AddClass($"btn-outline-{Color.ToDescriptionString()}", IsOutline)

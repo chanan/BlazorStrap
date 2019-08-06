@@ -3,11 +3,13 @@ using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System;
 using System.Timers;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSCarousel : BootstrapComponentBase , IDisposable
+    public class CodeBSCarousel : ComponentBase , IDisposable
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("carousel slide")
         .AddClass(Class)

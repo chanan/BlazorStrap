@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSTabList : BootstrapComponentBase
+    public class CodeBSTabList : ComponentBase
     {
-
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
             new CssBuilder("nav")
                 .AddClass("nav-tabs", !IsPills)

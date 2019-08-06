@@ -2,11 +2,13 @@
 using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSTable : BootstrapComponentBase
+    public class CodeBSTable : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("table")
             .AddClass("table-dark", IsDark)
