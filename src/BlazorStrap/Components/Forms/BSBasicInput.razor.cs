@@ -10,33 +10,20 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace BlazorStrap
 {
-    public class BSInput<T> : InputBase<T>
+    public class BSBasicInput : ComponentBase
     {
-        private bool Clean = true;
-        // [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+         [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         [CascadingParameter] EditContext MyEditContext { get; set; }
         protected string classname =>
         new CssBuilder()
            .AddClass($"form-control-{Size.ToDescriptionString()}", Size != Size.None)
            .AddClass("is-valid", IsValid)
            .AddClass("is-invalid", IsInvalid)
-           .AddClass("is-valid", MyEditContext != null && GetErrorCount() == 0 && !Clean )
-           .AddClass("is-invalid", MyEditContext != null && GetErrorCount() > 0)
+        
            .AddClass(GetClass())
            .AddClass(Class)
          .Build();
-
-        protected int GetErrorCount()
-        {
-            int i = 0;
-           
-            foreach (var message in MyEditContext.GetValidationMessages(_fieldIdentifier))
-            {
-                i++;
-            }
-            Clean = false;
-            return i;
-        }
+             
         protected string Tag => InputType switch
         {
             InputType.Select => "select",
@@ -45,10 +32,11 @@ namespace BlazorStrap
         };
         private FieldIdentifier _fieldIdentifier;
 
+        [Parameter] protected Expression<Func<object>> For { get; set; }
         [Parameter] protected InputType InputType { get; set; } = InputType.Text;
         [Parameter] protected Size Size { get; set; } = Size.None;
-        [Parameter] protected string InputValue { get; set; }
-        [Parameter] public EventCallback<string> InputValueChanged { get; set; }
+        [Parameter] protected string Value { get; set; }
+        [Parameter] public EventCallback<string> ValueChanged { get; set; }
         [Parameter] protected bool IsReadonly { get; set; }
         [Parameter] protected bool IsPlaintext { get; set; }
         [Parameter] protected bool IsDisabled { get; set; }
@@ -58,21 +46,19 @@ namespace BlazorStrap
         [Parameter] protected bool IsMultipleSelect { get; set; }
         [Parameter] protected int? SelectSize { get; set; }
         [Parameter] protected int? SelectedIndex { get; set; }
-        
-       // [Parameter] protected string Class { get; set; }
+        [Parameter] protected string Class { get; set; }
+
+        // [Parameter] protected string Class { get; set; }
         [Parameter] protected RenderFragment ChildContent { get; set; }
 
         protected string Type => InputType.ToDescriptionString();
 
         protected override void OnParametersSet()
         {
-
-
-            //if (For != null)
-           /// {
-
-                _fieldIdentifier = FieldIdentifier.Create(ValueExpression);
-           // }
+            if (For != null)
+            {
+                _fieldIdentifier = FieldIdentifier.Create(For);
+            }
         }
         private string GetClass() => this.InputType switch
         {
@@ -85,14 +71,14 @@ namespace BlazorStrap
 
         protected void onchange(UIChangeEventArgs e)
         {
-            InputValueChanged.InvokeAsync((string)e.Value);
-            InputValue = (string)e.Value;
+            ValueChanged.InvokeAsync((string)e.Value);
+            Value = (string)e.Value;
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             builder.OpenElement(0, Tag);
-            builder.AddMultipleAttributes(1, AdditionalAttributes);
+            builder.AddMultipleAttributes(1, UnknownParameters);
             builder.AddAttribute(2, "class", classname);
             builder.AddAttribute(3, "type", Type);
             builder.AddAttribute(4, "readonly", IsReadonly);
@@ -109,36 +95,8 @@ namespace BlazorStrap
 
         public void ForceValidate()
         {
-            Invoke(() => MyEditContext.Validate());
+            MyEditContext?.Validate();
             StateHasChanged();
-        }
-
-        protected override bool TryParseValueFromString(string value, out T result, out string validationErrorMessage)
-        {
-            if (typeof(T) == typeof(string))
-            {
-                result = (T)(object)value;
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T).IsEnum)
-            {
-                // There's no non-generic Enum.TryParse (https://github.com/dotnet/corefx/issues/692)
-                try
-                {
-                    result = (T)Enum.Parse(typeof(T), value);
-                    validationErrorMessage = null;
-                    return true;
-                }
-                catch (ArgumentException)
-                {
-                    result = default;
-                    validationErrorMessage = $"The {FieldIdentifier.FieldName} field is not valid.";
-                    return false;
-                }
-            }
-
-            throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
         }
     }
 }

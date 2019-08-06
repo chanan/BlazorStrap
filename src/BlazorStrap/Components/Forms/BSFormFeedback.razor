@@ -1,9 +1,0 @@
-﻿@namespace BlazorStrap
-@inherits CodeBSFormFeedback
-
-@if (IsValid || IsInvalid)
-{
-    <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@classname">
-        @ChildContent
-    </DynamicElement>
-}
