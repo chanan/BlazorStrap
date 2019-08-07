@@ -31,7 +31,7 @@ window.blazorStrap = {
         function mouseoutHandler() {
             reference.removeEventListener("mouseout", mouseoutHandler);
             reference.addEventListener("mouseover", mouseoverHandler);
-            tooltip.className = "tooltip";
+            tooltip.className = "tooltip d-none";
             if (instance) {
                 instance.destroy && instance.destroy();
                 instance = undefined;
