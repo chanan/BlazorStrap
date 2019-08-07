@@ -1,4 +1,4 @@
-﻿<BSForm Model="@formsModelVal" ValidateOnChange="true">
+﻿<BSForm Model="@formsModelVal">
         <DataAnnotationsValidator />
         <BSFormGroup>
             <BSLabel For="exampleEmail3">Input without validation</BSLabel>
@@ -6,12 +6,12 @@
         </BSFormGroup>
         <BSFormGroup>
             <BSLabel For="exampleEmail4">Valid input</BSLabel>
-            <BSInput InputType="InputType.Text" Id="exampleEmail4" @bind-Value="@formsModelVal.Valid" />
+            <BSInput InputType="InputType.Text" Id="exampleEmail4" @bind-Value="@formsModelVal.Valid"  ValidateOnChange="true"/>
             <BSFormFeedback For="@(() => formsModelVal.Valid)" ValidMessage="Sweet! that name is available"/>
         </BSFormGroup>
         <BSFormGroup>
             <BSLabel For="exampleEmail5">Invalid input</BSLabel>
-            <BSInput InputType="InputType.Text" Id="exampleEmail5" @bind-Value="@formsModelVal.InValid" @ref="@validation"  />
+            <BSInput InputType="InputType.Text" Id="exampleEmail5" @bind-Value="@formsModelVal.InValid" @ref="@validation"  ValidateOnChange="true"/>
             <BSFormFeedback For="@(() => formsModelVal.InValid)" ValidMessage="Sweet! you fixed the issue" />
         </BSFormGroup>
     </BSForm>

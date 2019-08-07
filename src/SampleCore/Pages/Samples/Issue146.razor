@@ -1,0 +1,82 @@
+﻿@page "/samples/issue146"
+
+
+<div class="docs-example">
+    <BSDropdownMenu Style="position: static; display: block;">
+        <BSForm Class="px-4 py-3" Model="@formsModel">
+            <BSInput InputType="InputType.Email" id="exampleDropdownFormEmail1" placeholder="email@example.com" @bind-Value="formsModel.Blank" />
+           
+        </BSForm>
+        <BSDropdownItem IsDivider="true" />
+        <BSDropdownItem href="#">New around here? Sign up</BSDropdownItem>
+        <BSDropdownItem href="#">Forgot password?</BSDropdownItem>
+    </BSDropdownMenu>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns14.html" />
+@code {
+    private FormsModel formsModel = new FormsModel();
+
+    bool IsOpen12 { get; set; }
+    void onclick12(UIMouseEventArgs e)
+    {
+        IsOpen12 = !IsOpen12;
+        StateHasChanged();
+    }
+
+    bool IsOpen13 { get; set; }
+    void onclick13(UIMouseEventArgs e)
+    {
+        IsOpen13 = !IsOpen13;
+        StateHasChanged();
+    }
+
+    bool IsOpen14 { get; set; }
+    void onclick14(UIMouseEventArgs e)
+    {
+        IsOpen14 = !IsOpen14;
+        StateHasChanged();
+    }
+
+    bool IsOpen15 { get; set; }
+    void onclick15(UIMouseEventArgs e)
+    {
+        IsOpen15 = !IsOpen15;
+        StateHasChanged();
+    }
+
+    bool IsOpen16 { get; set; }
+    void onclick16(UIMouseEventArgs e)
+    {
+        IsOpen16 = !IsOpen16;
+        StateHasChanged();
+    }
+
+    bool IsOpen17 { get; set; }
+    void onclick17(UIMouseEventArgs e)
+    {
+        IsOpen17 = !IsOpen17;
+        StateHasChanged();
+    }
+
+    bool IsOpen18 { get; set; }
+    void onclick18(UIMouseEventArgs e)
+    {
+        IsOpen18 = !IsOpen18;
+        StateHasChanged();
+    }
+
+    void menuButtonClick(UIMouseEventArgs e)
+    {
+        Console.WriteLine("Clicked on menu item");
+    }
+
+
+     public class FormsModel
+    {
+
+        public string Blank { get; set; }
+
+
+    }
+
+}

@@ -33,7 +33,7 @@ namespace BlazorStrap
         [Parameter] protected bool IsLink { get; set; }
         [Parameter] protected bool IsSplit { get; set; }
         [Parameter] protected bool? IsOpen { get; set; }
-        [Parameter] protected EventCallback<UIMouseEventArgs> onclick { get; set; }
+        [Parameter] protected EventCallback<UIMouseEventArgs> OnClick { get; set; }
         [Parameter] protected string Class { get; set; }
         [Parameter] protected RenderFragment ChildContent { get; set; }
         [CascadingParameter] internal CodeBSDropdownMenu Dropdown { get; set; }

@@ -17,14 +17,13 @@ namespace BlazorStrap
         private bool Touched = false;
         // [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         [CascadingParameter] EditContext MyEditContext { get; set; }
-        [CascadingParameter] bool ValidateOnChange { get; set; }
         protected string classname =>
         new CssBuilder()
            .AddClass($"form-control-{Size.ToDescriptionString()}", Size != Size.None)
            .AddClass("is-valid", IsValid)
            .AddClass("is-invalid", IsInvalid)
-           .AddClass("is-valid", MyEditContext != null && Regex.IsMatch(GetErrorCount(), @"\bvalid\b") && Touched )
-           .AddClass("is-invalid", MyEditContext != null && Regex.IsMatch(GetErrorCount(), @"\binvalid\b"))
+           .AddClass("is-valid", Regex.IsMatch(GetErrorCount(), @"\bvalid\b") && Touched )
+           .AddClass("is-invalid", Regex.IsMatch(GetErrorCount(), @"\binvalid\b"))
            .AddClass(GetClass())
            .AddClass(Class)
          .Build();
@@ -36,8 +35,9 @@ namespace BlazorStrap
                 Clean = false;
                 return "";
             }
-            Console.WriteLine(MyEditContext.FieldClass(_fieldIdentifier).ToLower());
-            return MyEditContext.FieldClass(_fieldIdentifier).ToLower();
+            return "";
+            //Console.WriteLine(MyEditContext.FieldClass(_fieldIdentifier).ToLower());
+            //return MyEditContext.FieldClass(_fieldIdentifier).ToLower();
         }
         protected string Tag => InputType switch
         {
@@ -60,16 +60,17 @@ namespace BlazorStrap
         [Parameter] protected bool IsMultipleSelect { get; set; }
         [Parameter] protected int? SelectSize { get; set; }
         [Parameter] protected int? SelectedIndex { get; set; }
+        [Parameter] protected bool ValidateOnChange { get; set; }
 
-        // [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+            // [Parameter] protected string Class { get; set; }
+            [Parameter] protected RenderFragment ChildContent { get; set; }
 
         protected string Type => InputType.ToDescriptionString();
 
 
         protected override void OnInit()
         {
-            MyEditContext.OnValidationRequested += MyEditContext_OnValidationRequested;
+         //   MyEditContext.OnValidationRequested += MyEditContext_OnValidationRequested;
         }
 
         private void MyEditContext_OnValidationRequested(object sender, ValidationRequestedEventArgs e)
@@ -94,8 +95,8 @@ namespace BlazorStrap
         {
             if(ValidateOnChange)
             {
-                Invoke(() => MyEditContext.Validate());
-                StateHasChanged();
+               Invoke(() => MyEditContext.Validate());
+               StateHasChanged();
             }
             CurrentValueAsString = e.Value.ToString();
             InputValueChanged.InvokeAsync((string)e.Value);
@@ -104,21 +105,21 @@ namespace BlazorStrap
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            builder.OpenElement(0, Tag);
-            builder.AddMultipleAttributes(1, AdditionalAttributes);
-            builder.AddAttribute(2, "class", classname);
-            builder.AddAttribute(3, "type", Type);
-            builder.AddAttribute(4, "readonly", IsReadonly);
-            builder.AddAttribute(5, "disabled", IsDisabled);
-            builder.AddAttribute(6, "multiple", IsMultipleSelect);
-            builder.AddAttribute(7, "size", SelectSize);
-            builder.AddAttribute(8, "selectedIndex", SelectedIndex);
-            builder.AddAttribute(9, "value", Value);
-            builder.AddAttribute(10, "onchange", onchange);
-            builder.AddAttribute(11, "onfocus", () => { Touched = true; StateHasChanged(); });
-            builder.AddAttribute(12, "ChildContent", ChildContent);
-            builder.CloseElement();
 
+                builder.OpenElement(0, Tag);
+                builder.AddMultipleAttributes(1, AdditionalAttributes);
+                builder.AddAttribute(2, "class", classname);
+                builder.AddAttribute(3, "type", Type);
+                builder.AddAttribute(4, "readonly", IsReadonly);
+                builder.AddAttribute(5, "disabled", IsDisabled);
+                builder.AddAttribute(6, "multiple", IsMultipleSelect);
+                builder.AddAttribute(7, "size", SelectSize);
+                builder.AddAttribute(8, "selectedIndex", SelectedIndex);
+                builder.AddAttribute(9, "value", Value);
+                builder.AddAttribute(10, "onchange", onchange);
+                builder.AddAttribute(11, "onfocus", () => { Touched = true; StateHasChanged(); });
+                builder.AddAttribute(12, "ChildContent", ChildContent);
+                builder.CloseElement();
         }
 
         public void ForceValidate()

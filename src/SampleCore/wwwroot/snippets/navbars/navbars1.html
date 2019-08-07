@@ -31,8 +31,8 @@
                 </BSDropdownMenu>
             </BSNavItem>
         </BSNav>
-        <BSForm IsInline="true" Class="my-2 my-lg-0">
-            <BSInput InputType="InputType.Search" PlaceHolder="Search" Class="mr-sm-2" />
+        <BSForm IsInline="true" Class="my-2 my-lg-0" Model="@formsModel">
+            <BSInput InputType="InputType.Search" PlaceHolder="Search" Class="mr-sm-2" @bind-Value="formsModel.Blank"/>
             <BSButton IsOutline="true" Color="Color.Success" ButtonType="ButtonType.Submit" Class="my-2 my-sm-0">Search</BSButton>
         </BSForm>
     </BSCollapse>
