@@ -1,14 +1,10 @@
 ﻿@page "/samples/issue146"
-
+@layout Layout104
 
 <div class="docs-example">
     <BSDropdownMenu Style="position: static; display: block;">
-        <BSForm Class="px-4 py-3" Model="@formsModel">
-            <BSInput InputType="InputType.Email" id="exampleDropdownFormEmail1" placeholder="email@example.com" @bind-Value="formsModel.Blank" />
-           
-        </BSForm>
         <BSDropdownItem IsDivider="true" />
-        <BSDropdownItem href="#">New around here? Sign up</BSDropdownItem>
+        <BSDropdownItem href="/samples/issue146">New around here? Sign up</BSDropdownItem>
         <BSDropdownItem href="#">Forgot password?</BSDropdownItem>
     </BSDropdownMenu>
 </div>
@@ -71,7 +67,7 @@
     }
 
 
-     public class FormsModel
+    public class FormsModel
     {
 
         public string Blank { get; set; }

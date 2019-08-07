@@ -6,6 +6,11 @@
  * For details, see https://creativecommons.org/licenses/by/3.0/.
  */
 
+.nav-link.active 
+{
+    background-color: lavender;
+}
+
 .bd-navbar {
     min-height: 4rem;
     background-color: #563d7c;
@@ -428,8 +433,9 @@
 @media (min-width:768px) {
     @supports ((position: -webkit-sticky) or (position: sticky)) {
         .bd-links {
-            max-height: calc(100vh - 9rem);
-            overflow-y: auto
+            /*   max-height: calc(100vh - 9rem);*/
+              max-height: calc(100vh - 4rem);
+            overflow-y: auto;
         }
     }
 }
