@@ -1,20 +1,20 @@
 ﻿<BSForm Model="@formsModelVal" ValidateOnChange="true">
-    <DataAnnotationsValidator />
-    <BSFormGroup>
-        <BSLabel For="exampleEmail3">Input without validation</BSLabel>
-        <BSBasicInput InputType="InputType.Text" Id="exampleEmail3" />
-    </BSFormGroup>
-    <BSFormGroup>
-        <BSLabel For="exampleEmail4">Valid input</BSLabel>
-        <BSInput InputType="InputType.Text" Id="exampleEmail4" @bind-Value="@formsModelVal.Valid" />
-        <BSFormFeedback For="@(() => formsModelVal.Valid)">Sweet! that name is available</BSFormFeedback>
-    </BSFormGroup>
-    <BSFormGroup>
-        <BSLabel For="exampleEmail5">Invalid input</BSLabel>
-        <BSInput InputType="InputType.Text" Id="exampleEmail5" @bind-Value="@formsModelVal.InValid"  @ref="@validation"/>
-        <BSFormFeedback For="@(() => formsModelVal.InValid)" />
-    </BSFormGroup>
-</BSForm>
+        <DataAnnotationsValidator />
+        <BSFormGroup>
+            <BSLabel For="exampleEmail3">Input without validation</BSLabel>
+            <BSBasicInput InputType="InputType.Text" Id="exampleEmail3" />
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleEmail4">Valid input</BSLabel>
+            <BSInput InputType="InputType.Text" Id="exampleEmail4" @bind-Value="@formsModelVal.Valid" />
+            <BSFormFeedback For="@(() => formsModelVal.Valid)" ValidMessage="Sweet! that name is available"/>
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleEmail5">Invalid input</BSLabel>
+            <BSInput InputType="InputType.Text" Id="exampleEmail5" @bind-Value="@formsModelVal.InValid" @ref="@validation"  />
+            <BSFormFeedback For="@(() => formsModelVal.InValid)" ValidMessage="Sweet! you fixed the issue" />
+        </BSFormGroup>
+    </BSForm>
 
 @code
 {
