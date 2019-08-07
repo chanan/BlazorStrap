@@ -1,17 +1,45 @@
-﻿<BSForm>
-    <BSFormGroup>
-        <BSLabel For="exampleEmail6">Input without validation</BSLabel>
-        <BSInput InputType="InputType.Text" Id="exampleEmail6" />
-        <FormFeedback IsTooltip="true">You will not be able to see this</FormFeedback>
-    </BSFormGroup>
-    <BSFormGroup>
-        <BSLabel For="exampleEmail7">Valid input</BSLabel>
-        <BSInput IsValid="true" InputType="InputType.Text" Id="exampleEmail7" />
-        <FormFeedback IsTooltip="true" IsValid="true">Sweet! that name is available</FormFeedback>
-    </BSFormGroup>
-    <BSFormGroup>
-        <BSLabel For="exampleEmail8">Invalid input</BSLabel>
-        <BSInput IsInvalid="true" InputType="InputType.Text" Id="exampleEmail8" />
-        <FormFeedback IsTooltip="true" IsInvalid="true">Oh noes! that name is already taken</FormFeedback>
-    </BSFormGroup>
+﻿<BSForm Model="@formsModelValTT">
+    <DataAnnotationsValidator />
+    <BSRow>
+        <BSFormGroup Class="col-md-12">
+            <BSLabel For="exampleEmail6">Input without validation</BSLabel>
+            <BSBasicInput InputType="InputType.Text" Id="exampleEmail6" />
+        </BSFormGroup>
+        <BSFormGroup Class="col-md-12">
+            <BSLabel For="exampleEmail7">Valid input</BSLabel>
+            <BSInput InputType="InputType.Text" Id="exampleEmail7" @bind-Value="@formsModelValTT.Valid" />
+            <BSFormFeedback For="@(() => formsModelValTT.Valid)" IsTooltip="true">Sweet! that name is available</BSFormFeedback>
+        </BSFormGroup>
+        <BSFormGroup Class="col-md-12">
+            <BSLabel For="exampleEmail8">Invalid input</BSLabel>
+            <BSInput InputType="InputType.Text" Id="exampleEmail8" @bind-Value="@formsModelValTT.InValid" @ref="@validationTT" />
+            <BSFormFeedback For="@(() => formsModelValTT.InValid)" IsTooltip="true" />
+        </BSFormGroup>
+    </BSRow>
 </BSForm>
+
+@code
+{
+    private FormsModel formsModelValTT = new FormsModel();
+    BSInput<string> validationTT;
+    bool First = true;
+    protected override void OnAfterRender()
+    {
+        if (First)
+        {
+            First = false;
+            validationTT?.ForceValidate();
+            StateHasChanged();
+        }
+    }
+
+    public class FormsModel
+    {
+
+        public string Valid { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Oh noes! that name is already taken")]
+        public string InValid { get; set; }
+        public string Blank { get; set; }
+        public string Email { get; set; } = "email@example.com";
+    }
+}

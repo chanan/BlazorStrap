@@ -6,32 +6,33 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.RenderTree;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 
 namespace BlazorStrap
 {
     public class BSFormFeedback<T> : ValidationMessage<T> 
     {
         private bool Clean = true;
+        private bool Touched = false;
         private FieldIdentifier _fieldIdentifier;
         ///  [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder()
-            .AddClass("valid-tooltip", MyEditContext != null &&  GetErrorCount() == 0 && !Clean && IsTooltip)
-            .AddClass("valid-feedback", MyEditContext != null && GetErrorCount() == 0 && !Clean && !IsTooltip)
-            .AddClass("invalid-tooltip", MyEditContext != null && GetErrorCount() > 0 && IsTooltip)
-            .AddClass("invalid-feedback", MyEditContext != null &&  GetErrorCount() > 0  && !IsTooltip)
+            .AddClass("valid-tooltip", MyEditContext != null && Regex.IsMatch(GetErrorCount(), @"\bvalid\b") && IsTooltip)
+            .AddClass("valid-feedback", MyEditContext != null && Regex.IsMatch(GetErrorCount(), @"\bvalid\b") && !IsTooltip)
+            .AddClass("invalid-tooltip", MyEditContext != null && Regex.IsMatch(GetErrorCount(), @"\binvalid\b") && IsTooltip)
+            .AddClass("invalid-feedback", MyEditContext != null && Regex.IsMatch(GetErrorCount(), @"\binvalid\b") && !IsTooltip)
             .AddClass(Class)
         .Build();
 
-        protected int GetErrorCount()
+        protected string GetErrorCount()
         {
-            int i = 0;
-            foreach (var message in MyEditContext.GetValidationMessages(_fieldIdentifier))
+            if (Clean)
             {
-                i++;
+                Clean = false;
+                return "";
             }
-            Clean = false;
-            return i;
+            return MyEditContext.FieldClass(_fieldIdentifier).ToLower();
         }
 
         [CascadingParameter] EditContext MyEditContext { get; set; }
@@ -39,6 +40,7 @@ namespace BlazorStrap
         [Parameter] protected bool IsInvalid { get; set; }
         [Parameter] protected bool IsTooltip { get; set; }
         [Parameter] protected string Class { get; set; }
+        [Parameter] protected string ValidMessage { get; set; }
         [Parameter] protected RenderFragment ChildContent { get; set; }
 
         protected override void OnParametersSet()
@@ -50,14 +52,25 @@ namespace BlazorStrap
         }
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            builder.OpenElement(0, "div");
-            builder.AddAttribute(1, "class", classname);
-            builder.OpenComponent<ValidationMessage<T>>(2);
-            builder.AddMultipleAttributes(3, AdditionalAttributes);
-            builder.AddAttribute(4, "For", For);
-            builder.AddAttribute(5, "ChildContent", ChildContent);
-            builder.CloseComponent();
-            builder.CloseElement();
+            ;
+            if (Regex.IsMatch(GetErrorCount(), @"\bvalid\b"))
+            {
+                builder.OpenElement(0, "div");
+                builder.AddAttribute(1, "class", classname);
+                builder.AddContent(6, ValidMessage);
+                builder.CloseElement();
+            }
+            else
+            {
+                builder.OpenElement(0, "div");
+                builder.AddAttribute(1, "class", classname);
+                builder.OpenComponent<ValidationMessage<T>>(2);
+                builder.AddMultipleAttributes(3, AdditionalAttributes);
+                builder.AddAttribute(4, "For", For);
+                builder.CloseComponent();
+                builder.AddContent(5, ChildContent);
+                builder.CloseElement();
+            }
         }
 
        

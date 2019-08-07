@@ -5,7 +5,8 @@
         
         <BSFormGroup>
             <BSLabel For="Name">Name</BSLabel>
-            <BSInput Id="Name" InputType="InputType.Text" @bind-Value="myModel.Name" />
+            <BSInput Id="Name" InputType="InputType.Text" @bind-Value="myModel.Name" @ref="blah" />
+            
             <BSFormFeedback For="@(() => myModel.Name)" />
         </BSFormGroup>
         <BSFormGroup>
@@ -15,9 +16,14 @@
 
 @code
 {
+    BSInput<string> blah { get; set; }
     private MyModel myModel { get; set; } = new MyModel();
     Dictionary<string, string> Errors { get; set; } = new Dictionary<string, string>();
 
+    protected override void OnAfterRender()
+    {
+        blah.ForceValidate();
+    }
     private void HandleValidSubmit()
     {
         Console.WriteLine("OnValidSubmit");
@@ -35,5 +41,5 @@
         this.StateHasChanged();
     }
 
-   
+
 }

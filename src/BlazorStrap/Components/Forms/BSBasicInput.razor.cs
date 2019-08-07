@@ -71,8 +71,8 @@ namespace BlazorStrap
 
         protected void onchange(UIChangeEventArgs e)
         {
-            ValueChanged.InvokeAsync((string)e.Value);
-            Value = (string)e.Value;
+            ValueChanged.InvokeAsync(e.Value.ToString());
+            Value = e.Value.ToString();
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)

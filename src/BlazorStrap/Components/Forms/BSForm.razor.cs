@@ -21,24 +21,30 @@ namespace BlazorStrap
 
         [Parameter] protected bool IsInline { get; set; }
         [Parameter] protected string Class { get; set; }
-
-       
+        [Parameter] protected bool ValidateOnChange { get; set; }
+        private RenderFragment Form { get; set; }
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            builder.OpenComponent<EditForm>(0);
-            builder.AddMultipleAttributes(1, AdditionalAttributes);
-            builder.AddAttribute(2, "class", classname);
-            builder.AddAttribute(3, "EditContext", EditContext);
-            builder.AddAttribute(4, "Model", Model);
-            builder.AddAttribute(5, "OnSubmit", OnSubmit);
-            builder.AddAttribute(6, "OnValidSubmit", OnValidSubmit);
-            builder.AddAttribute(7, "OnInvalidSubmit", OnInvalidSubmit);
-            builder.AddAttribute(8, "ChildContent", ChildContent);
+            Form = formBuilder =>
+            {
+                formBuilder.OpenComponent<EditForm>(0);
+                formBuilder.AddMultipleAttributes(1, AdditionalAttributes);
+                formBuilder.AddAttribute(2, "class", classname);
+                formBuilder.AddAttribute(3, "EditContext", EditContext);
+                formBuilder.AddAttribute(4, "Model", Model);
+                formBuilder.AddAttribute(5, "OnSubmit", OnSubmit);
+                formBuilder.AddAttribute(6, "OnValidSubmit", OnValidSubmit);
+                formBuilder.AddAttribute(7, "OnInvalidSubmit", OnInvalidSubmit);
+                formBuilder.AddAttribute(8, "ChildContent", ChildContent);
+                formBuilder.CloseComponent();
+            };
+            builder.OpenComponent<CascadingValue<bool>>(0);
+            builder.AddAttribute(1, "Value", ValidateOnChange);
+            builder.AddAttribute(2, "ChildContent", Form);
             builder.CloseComponent();
-
         }
 
-      //   [Parameter] protected RenderFragment MyChildContent { get; set; }
+        //   [Parameter] protected RenderFragment MyChildContent { get; set; }
 
 
         /*async Task InternalOnSubmit(object e)
@@ -49,4 +55,5 @@ namespace BlazorStrap
             }
         }*/
     }
+  
 }
