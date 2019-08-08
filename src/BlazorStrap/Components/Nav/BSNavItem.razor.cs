@@ -81,7 +81,10 @@ namespace BlazorStrap
             }
             else
             {
-                _MouseDown = IsOpen.Value && true;
+                if (IsOpen != null)
+                {
+                    _MouseDown = IsOpen.Value && true;
+                }
             }
         }
 

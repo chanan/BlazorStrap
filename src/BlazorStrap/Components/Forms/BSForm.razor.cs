@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Forms;
+using System.Timers;
 
 namespace BlazorStrap
 {
     public class BSForm : EditForm
     {
 
-        //[Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder()
             .AddClass("form-inline", IsInline)
@@ -21,34 +21,45 @@ namespace BlazorStrap
 
         [Parameter] protected bool IsInline { get; set; }
         [Parameter] protected string Class { get; set; }
-       
+        [Parameter] protected bool ValidateOnInit { get; set; }
+        private bool First = true;
         private RenderFragment Form { get; set; }
+        private EditContext MyEditContext { get; set; }
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+            Form = Formbuilder =>
+            {
+                Formbuilder.OpenComponent<EditForm>(0);
+                Formbuilder.AddMultipleAttributes(1, AdditionalAttributes);
+                Formbuilder.AddAttribute(2, "class", classname);
+                Formbuilder.AddAttribute(3, "Model", Model);
+                Formbuilder.AddAttribute(4, "OnSubmit", OnSubmit);
+                Formbuilder.AddAttribute(5, "OnValidSubmit", OnValidSubmit);
+                Formbuilder.AddAttribute(6, "OnInvalidSubmit", OnInvalidSubmit);
+                Formbuilder.AddAttribute(7, "ChildContent", ChildContent);
+                Formbuilder.CloseComponent();
+            };
 
-            builder.OpenComponent<EditForm>(0);
-            builder.AddMultipleAttributes(1, AdditionalAttributes);
-            builder.AddAttribute(2, "class", classname);
-            builder.AddAttribute(3, "EditContext", EditContext);
-            builder.AddAttribute(4, "Model", Model);
-            builder.AddAttribute(5, "OnSubmit", OnSubmit);
-            builder.AddAttribute(6, "OnValidSubmit", OnValidSubmit);
-            builder.AddAttribute(7, "OnInvalidSubmit", OnInvalidSubmit);
-            builder.AddAttribute(8, "ChildContent", ChildContent);
+            builder.OpenComponent<CascadingValue<BSForm>>(3);
+            builder.AddAttribute(4, "IsFixed", true);
+            builder.AddAttribute(5, "Value", this);
+            builder.AddAttribute(6, RenderTreeBuilder.ChildContent, Form);
             builder.CloseComponent();
-           
+
         }
 
-        //   [Parameter] protected RenderFragment MyChildContent { get; set; }
-
-
-        /*async Task InternalOnSubmit(object e)
+        public void FormIsReady(EditContext e)
         {
-            if(OnSubmit.HasDelegate)
+            MyEditContext = e;
+            if (ValidateOnInit)
             {
-                await OnSubmit.InvokeAsync(EventCallback.Empty);
+                ForceValidate();
             }
-        }*/
+        }
+        public void ForceValidate()
+        {
+            Invoke(() => MyEditContext?.Validate());
+                StateHasChanged();
+        }
     }
-  
 }

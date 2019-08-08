@@ -17,6 +17,7 @@ namespace BlazorStrap
         private bool Touched = false;
         // [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         [CascadingParameter] EditContext MyEditContext { get; set; }
+        [CascadingParameter] BSForm Parent { get; set; }
         protected string classname =>
         new CssBuilder()
            .AddClass($"form-control-{Size.ToDescriptionString()}", Size != Size.None)
@@ -35,9 +36,7 @@ namespace BlazorStrap
                 Clean = false;
                 return "";
             }
-            return "";
-            //Console.WriteLine(MyEditContext.FieldClass(_fieldIdentifier).ToLower());
-            //return MyEditContext.FieldClass(_fieldIdentifier).ToLower();
+            return MyEditContext.FieldClass(_fieldIdentifier).ToLower();
         }
         protected string Tag => InputType switch
         {
@@ -70,7 +69,9 @@ namespace BlazorStrap
 
         protected override void OnInit()
         {
-         //   MyEditContext.OnValidationRequested += MyEditContext_OnValidationRequested;
+            MyEditContext.OnValidationRequested += MyEditContext_OnValidationRequested;
+            //Preview 7 workaround
+            Parent.FormIsReady(MyEditContext);
         }
 
         private void MyEditContext_OnValidationRequested(object sender, ValidationRequestedEventArgs e)
