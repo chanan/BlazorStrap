@@ -9,6 +9,10 @@ window.blazorStrap = {
         document.body.className = classname;
         return true;
     },
+    changeBodyModal: function (padding) {
+        document.body.style.paddingRight = padding;
+        return true;
+    },
     popper: function (target, popperId, arrow, placement) {
         var reference = document.getElementById(target);
         var popper = document.getElementById(popperId);
@@ -27,7 +31,7 @@ window.blazorStrap = {
         function mouseoutHandler() {
             reference.removeEventListener("mouseout", mouseoutHandler);
             reference.addEventListener("mouseover", mouseoverHandler);
-            tooltip.className = "tooltip";
+            tooltip.className = "tooltip d-none";
             if (instance) {
                 instance.destroy && instance.destroy();
                 instance = undefined;
@@ -35,6 +39,14 @@ window.blazorStrap = {
         }
         reference.addEventListener("mouseover", mouseoverHandler);
         return true;
+    },
+    modelEscape: function () {
+        document.body.onkeydown = function (e) {
+            if (e.key == "Escape") {
+                document.body.onkeydown = null;
+                DotNet.invokeMethodAsync("BlazorStrap", "OnEscape");
+            }
+        };
     },
     focusElement: function (element) {
         element.focus();
