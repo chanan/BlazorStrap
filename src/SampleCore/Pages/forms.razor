@@ -167,7 +167,7 @@
 <h3>Form Validation</h3>
 
 <div class="docs-example">
-    <BSForm Model="@formsModelVal" >
+    <BSForm Model="@formsModelVal" ValidateOnInit="true">
         <DataAnnotationsValidator />
         <BSFormGroup>
             <BSLabel For="exampleEmail3">Input without validation</BSLabel>
@@ -180,7 +180,7 @@
         </BSFormGroup>
         <BSFormGroup>
             <BSLabel For="exampleEmail5">Invalid input</BSLabel>
-            <BSInput InputType="InputType.Text" Id="exampleEmail5" @bind-Value="@formsModelVal.InValid" @ref="@validation" ValidateOnChange="true" />
+            <BSInput InputType="InputType.Text" Id="exampleEmail5" @bind-Value="@formsModelVal.InValid" ValidateOnChange="true" />
             <BSFormFeedback For="@(() => formsModelVal.InValid)" ValidMessage="Sweet! you fixed the issue" />
         </BSFormGroup>
     </BSForm>
@@ -189,7 +189,7 @@
 
 <h4>Form Tooltip Validation</h4>
 <div class="docs-example">
-    <BSForm Model="@formsModelValTT">
+    <BSForm Model="@formsModelValTT" ValidateOnInit="true">
         <DataAnnotationsValidator />
         <BSRow>
             <BSFormGroup Class="col-md-12">
@@ -198,12 +198,12 @@
             </BSFormGroup>
             <BSFormGroup Class="col-md-12">
                 <BSLabel For="exampleEmail7">Valid input</BSLabel>
-                <BSInput InputType="InputType.Text" Id="exampleEmail7" @bind-Value="@formsModelValTT.Valid" />
+                <BSInput InputType="InputType.Text" Id="exampleEmail7" @bind-Value="@formsModelValTT.Valid"/>
                 <BSFormFeedback For="@(() => formsModelValTT.Valid)" IsTooltip="true"  ValidMessage="Sweet! that name is available"/>
             </BSFormGroup>
             <BSFormGroup Class="col-md-12">
                 <BSLabel For="exampleEmail8">Invalid input</BSLabel>
-                <BSInput InputType="InputType.Text" Id="exampleEmail8" @bind-Value="@formsModelValTT.InValid" @ref="@validationTT" />
+                <BSInput InputType="InputType.Text" Id="exampleEmail8" @bind-Value="@formsModelValTT.InValid"/>
                 <BSFormFeedback For="@(() => formsModelValTT.InValid)" IsTooltip="true" ValidMessage="Sweet! you fixed the issue"  />
             </BSFormGroup>
         </BSRow>
@@ -214,21 +214,6 @@
 
 @code
 {
-    BSInput<string> validation;
-    BSInput<string> validationTT;
-    bool First = true;
-    protected override void OnAfterRender()
-    {
-        if (First)
-        {
-            First = false;
-            validation?.ForceValidate();
-            validationTT?.ForceValidate();
-            StateHasChanged();
-        }
-
-    }
-
     private FormsModel formsModel = new FormsModel();
     private FormsModel formsModelVal = new FormsModel();
     private FormsModel formsModelValTT = new FormsModel();

@@ -1,25 +1,25 @@
-﻿<BSForm Model="@formsModelVal">
-        <DataAnnotationsValidator />
-        <BSFormGroup>
-            <BSLabel For="exampleEmail3">Input without validation</BSLabel>
-            <BSBasicInput InputType="InputType.Text" Id="exampleEmail3" />
-        </BSFormGroup>
-        <BSFormGroup>
-            <BSLabel For="exampleEmail4">Valid input</BSLabel>
-            <BSInput InputType="InputType.Text" Id="exampleEmail4" @bind-Value="@formsModelVal.Valid"  ValidateOnChange="true"/>
-            <BSFormFeedback For="@(() => formsModelVal.Valid)" ValidMessage="Sweet! that name is available"/>
-        </BSFormGroup>
-        <BSFormGroup>
-            <BSLabel For="exampleEmail5">Invalid input</BSLabel>
-            <BSInput InputType="InputType.Text" Id="exampleEmail5" @bind-Value="@formsModelVal.InValid" @ref="@validation"  ValidateOnChange="true"/>
-            <BSFormFeedback For="@(() => formsModelVal.InValid)" ValidMessage="Sweet! you fixed the issue" />
-        </BSFormGroup>
-    </BSForm>
+﻿<BSForm Model="@formsModelVal" @ref="@validation" >
+    <DataAnnotationsValidator />
+    <BSFormGroup>
+        <BSLabel For="exampleEmail3">Input without validation</BSLabel>
+        <BSBasicInput InputType="InputType.Text" Id="exampleEmail3" />
+    </BSFormGroup>
+    <BSFormGroup>
+        <BSLabel For="exampleEmail4">Valid input</BSLabel>
+        <BSInput InputType="InputType.Text" Id="exampleEmail4" @bind-Value="@formsModelVal.Valid" ValidateOnChange="true"/>
+        <BSFormFeedback For="@(() => formsModelVal.Valid)" ValidMessage="Sweet! that name is available"/>
+    </BSFormGroup>
+    <BSFormGroup>
+        <BSLabel For="exampleEmail5">Invalid input</BSLabel>
+        <BSInput InputType="InputType.Text" Id="exampleEmail5" @bind-Value="@formsModelVal.InValid" ValidateOnChange="true" />
+        <BSFormFeedback For="@(() => formsModelVal.InValid)" ValidMessage="Sweet! you fixed the issue" />
+    </BSFormGroup>
+</BSForm>
 
 @code
 {
     private FormsModel formsModelVal = new FormsModel();
-    BSInput<string> validation;
+    BSForm validation;
     bool First = true;
     protected override void OnAfterRender()
     {
