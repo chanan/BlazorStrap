@@ -31,6 +31,7 @@ namespace BlazorStrap
         [Parameter] public string Id { get; set; } = Guid.NewGuid().ToString();
         [Parameter] protected string Class { get; set; }
         [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] protected string Name { get; set; }
 
 
 
@@ -46,6 +47,12 @@ namespace BlazorStrap
 
         public void Select()
         {
+            if (Group.Disposing)
+            {
+                //Unlocks tab updates. This prevents rouge mouse clicks.
+                Group.Disposing = false;
+                return;
+            }
             Group.Selected = this;
         }
         public void UpdateContent()
@@ -61,8 +68,13 @@ namespace BlazorStrap
 
         public void Dispose()
         {
+            //Prevent blazor form removing the wrong tab
+            if (Group.Disposing) return;
+            //Locks updates when deleting tabs
+            
             Group.Tabs.Remove(this);
             Group.Selected = (Group.Selected == this) ? Group.Tabs.FirstOrDefault() : Group.Selected;
+            Group.Disposing = true;
         }
     }
 }
