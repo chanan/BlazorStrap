@@ -88,7 +88,7 @@ namespace BlazorStrap
             builder.AddAttribute(8, "selectedIndex", SelectedIndex);
             builder.AddAttribute(8, "value", Value);
             builder.AddAttribute(9, "onchange", onchange);
-            builder.AddAttribute(10, "ChildContent", ChildContent);
+            builder.AddContent(10, ChildContent);
             builder.CloseElement();
 
         }

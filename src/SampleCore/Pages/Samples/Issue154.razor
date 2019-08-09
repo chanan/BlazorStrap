@@ -1,0 +1,49 @@
+@page "/samples/issue154"
+@layout Layout104
+<BSTabGroup >
+    <BSTabList>
+        @foreach (var tab in _tabList)
+        {
+            <BSTab Name="@tab.Label" @key="tab">
+                <BSTabLabel>@tab.Label <strong @onclick="() => RemoveTab(tab.Id)">X</strong></BSTabLabel>
+                <BSTabContent>@tab.Content</BSTabContent>
+            </BSTab>
+        }
+    </BSTabList>
+    <BSTabSelectedContent />
+    </BSTabGroup>
+
+    @code{
+            private class SimpleTab
+            {
+                public string Id { get; set; }
+                public string Label { get; set; }
+                public string Content { get; set; }
+
+            public SimpleTab(string label, string content)
+            {
+                this.Id = Guid.NewGuid().ToString();
+                this.Label = label;
+                this.Content = content;
+            }
+        }
+
+        private List<SimpleTab>
+            _tabList = new List<SimpleTab>
+                {
+        new SimpleTab("Tab1", "Content One"),
+        new SimpleTab("Tab2", "Content Two"),
+        new SimpleTab("Tab3", "Content Three"),
+        new SimpleTab("Tab4", "Content Four")
+                    };
+
+        private void RemoveTab(string tabId)
+        {
+            var tab = this._tabList.FirstOrDefault(x => x.Id == tabId);
+            if (tab != null)
+            {
+                this._tabList.Remove(tab);
+            }
+            StateHasChanged();
+        }
+    }

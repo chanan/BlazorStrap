@@ -23,12 +23,12 @@ namespace BlazorStrap
            .AddClass($"form-control-{Size.ToDescriptionString()}", Size != Size.None)
            .AddClass("is-valid", IsValid)
            .AddClass("is-invalid", IsInvalid)
-           .AddClass("is-valid", Regex.IsMatch(GetErrorCount(), @"\bvalid\b") && Touched )
-           .AddClass("is-invalid", Regex.IsMatch(GetErrorCount(), @"\binvalid\b"))
+           .AddClass("is-valid", Regex.IsMatch(GetErrorCount(), @"\bvalid\b") && Touched && !Parent.UserValidation )
+           .AddClass("is-invalid", Regex.IsMatch(GetErrorCount(), @"\binvalid\b") && !Parent.UserValidation)
            .AddClass(GetClass())
            .AddClass(Class)
          .Build();
-
+        
         protected string GetErrorCount()
         {
             if(Clean)
@@ -106,7 +106,6 @@ namespace BlazorStrap
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-
                 builder.OpenElement(0, Tag);
                 builder.AddMultipleAttributes(1, AdditionalAttributes);
                 builder.AddAttribute(2, "class", classname);
@@ -119,7 +118,7 @@ namespace BlazorStrap
                 builder.AddAttribute(9, "value", Value);
                 builder.AddAttribute(10, "onchange", onchange);
                 builder.AddAttribute(11, "onfocus", () => { Touched = true; StateHasChanged(); });
-                builder.AddAttribute(12, "ChildContent", ChildContent);
+                builder.AddContent(12, ChildContent);
                 builder.CloseElement();
         }
 

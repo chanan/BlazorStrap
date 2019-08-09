@@ -1,4 +1,4 @@
-﻿<BSForm Model="@formsModelVal" @ref="@validation" >
+﻿<BSForm Model="@formsModelVal" ValidateOnInit="true">
     <DataAnnotationsValidator />
     <BSFormGroup>
         <BSLabel For="exampleEmail3">Input without validation</BSLabel>
@@ -19,17 +19,6 @@
 @code
 {
     private FormsModel formsModelVal = new FormsModel();
-    BSForm validation;
-    bool First = true;
-    protected override void OnAfterRender()
-    {
-        if (First)
-        {
-            First = false;
-            validation?.ForceValidate();
-            StateHasChanged();
-        }
-    }
 
     public class FormsModel
     {

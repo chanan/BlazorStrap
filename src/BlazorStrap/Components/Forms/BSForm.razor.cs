@@ -18,10 +18,11 @@ namespace BlazorStrap
             .AddClass("form-inline", IsInline)
             .AddClass(Class)
         .Build();
-
+        [Parameter] public bool UserValidation { get; set; }
+        [Parameter] protected bool ValidateOnInit { get; set; }
         [Parameter] protected bool IsInline { get; set; }
         [Parameter] protected string Class { get; set; }
-        [Parameter] protected bool ValidateOnInit { get; set; }
+        
         private bool First = true;
         private RenderFragment Form { get; set; }
         private EditContext MyEditContext { get; set; }
