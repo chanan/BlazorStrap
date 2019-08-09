@@ -118,7 +118,7 @@ namespace BlazorStrap
                 builder.AddAttribute(9, "value", Value);
                 builder.AddAttribute(10, "onchange", onchange);
                 builder.AddAttribute(11, "onfocus", () => { Touched = true; StateHasChanged(); });
-                builder.AddAttribute(12, "ChildContent", ChildContent);
+                builder.AddContent(12, ChildContent);
                 builder.CloseElement();
         }
 
