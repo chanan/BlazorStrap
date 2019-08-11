@@ -1,40 +1,28 @@
-﻿<BSForm Model="@formsModelValTT">
-        <DataAnnotationsValidator />
-        <BSRow>
-            <BSFormGroup Class="col-md-12">
-                <BSLabel For="exampleEmail6">Input without validation</BSLabel>
-                <BSBasicInput InputType="InputType.Text" Id="exampleEmail6" />
-            </BSFormGroup>
-            <BSFormGroup Class="col-md-12">
-                <BSLabel For="exampleEmail7">Valid input</BSLabel>
-                <BSInput InputType="InputType.Text" Id="exampleEmail7" @bind-Value="@formsModelValTT.Valid" />
-                <BSFormFeedback For="@(() => formsModelValTT.Valid)" IsTooltip="true"  ValidMessage="Sweet! that name is available"/>
-            </BSFormGroup>
-            <BSFormGroup Class="col-md-12">
-                <BSLabel For="exampleEmail8">Invalid input</BSLabel>
-                <BSInput InputType="InputType.Text" Id="exampleEmail8" @bind-Value="@formsModelValTT.InValid" @ref="@validationTT" />
-                <BSFormFeedback For="@(() => formsModelValTT.InValid)" IsTooltip="true" ValidMessage="Sweet! you fixed the issue"  />
-            </BSFormGroup>
-        </BSRow>
-    </BSForm>
+﻿<BSForm Model="@formsModelValTT" ValidateOnInit="true">
+    <DataAnnotationsValidator />
+    <BSRow>
+        <BSFormGroup Class="col-md-12">
+            <BSLabel For="exampleEmail6">Input without validation</BSLabel>
+            <BSBasicInput InputType="InputType.Text" Id="exampleEmail6" />
+        </BSFormGroup>
+        <BSFormGroup Class="col-md-12">
+            <BSLabel For="exampleEmail7">Valid input</BSLabel>
+            <BSInput InputType="InputType.Text" Id="exampleEmail7" @bind-Value="@formsModelValTT.Valid"/>
+            <BSFormFeedback For="@(() => formsModelValTT.Valid)" IsTooltip="true"  ValidMessage="Sweet! that name is available"/>
+        </BSFormGroup>
+        <BSFormGroup Class="col-md-12">
+            <BSLabel For="exampleEmail8">Invalid input</BSLabel>
+            <BSInput InputType="InputType.Text" Id="exampleEmail8" @bind-Value="@formsModelValTT.InValid"/>
+            <BSFormFeedback For="@(() => formsModelValTT.InValid)" IsTooltip="true" ValidMessage="Sweet! you fixed the issue"  />
+        </BSFormGroup>
+    </BSRow>
+</BSForm>
 @code
 {
     private FormsModel formsModelValTT = new FormsModel();
-    BSInput<string> validationTT;
-    bool First = true;
-    protected override void OnAfterRender()
-    {
-        if (First)
-        {
-            First = false;
-            validationTT?.ForceValidate();
-            StateHasChanged();
-        }
-    }
-
+   
     public class FormsModel
     {
-
         public string Valid { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Oh noes! that name is already taken")]
         public string InValid { get; set; }
