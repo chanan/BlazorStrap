@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Components.RenderTree;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace BlazorStrap
 {
@@ -23,20 +24,20 @@ namespace BlazorStrap
            .AddClass($"form-control-{Size.ToDescriptionString()}", Size != Size.None)
            .AddClass("is-valid", IsValid)
            .AddClass("is-invalid", IsInvalid)
-           .AddClass("is-valid", Regex.IsMatch(GetErrorCount(), @"\bvalid\b") && Touched && (!Parent?.UserValidation ?? false))
-           .AddClass("is-invalid", Regex.IsMatch(GetErrorCount(), @"\binvalid\b") && (!Parent?.UserValidation ?? false))
+           .AddClass("is-valid", Touched && (!Parent?.UserValidation ?? false) && !HasValidationErrors())
+           .AddClass("is-invalid", (!Parent?.UserValidation ?? false) && HasValidationErrors())
            .AddClass(GetClass())
            .AddClass(Class)
          .Build();
         
-        protected string GetErrorCount()
+        protected bool HasValidationErrors()
         {
-            if(Clean)
+            if(Clean || MyEditContext == null)
             {
                 Clean = false;
-                return "";
+                return false;
             }
-            return MyEditContext.FieldClass(_fieldIdentifier).ToLower();
+            return MyEditContext.GetValidationMessages(base.FieldIdentifier).Any();
         }
         protected string Tag => InputType switch
         {
