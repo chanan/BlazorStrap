@@ -34,10 +34,11 @@ namespace BlazorStrap
                 Formbuilder.AddMultipleAttributes(1, AdditionalAttributes);
                 Formbuilder.AddAttribute(2, "class", classname);
                 Formbuilder.AddAttribute(3, "Model", Model);
-                Formbuilder.AddAttribute(4, "OnSubmit", OnSubmit);
-                Formbuilder.AddAttribute(5, "OnValidSubmit", OnValidSubmit);
-                Formbuilder.AddAttribute(6, "OnInvalidSubmit", OnInvalidSubmit);
-                Formbuilder.AddAttribute(7, "ChildContent", ChildContent);
+                Formbuilder.AddAttribute(4, "EditContext", EditContext);
+                Formbuilder.AddAttribute(5, "OnSubmit", OnSubmit);
+                Formbuilder.AddAttribute(6, "OnValidSubmit", OnValidSubmit);
+                Formbuilder.AddAttribute(7, "OnInvalidSubmit", OnInvalidSubmit);
+                Formbuilder.AddAttribute(8, "ChildContent", ChildContent);
                 Formbuilder.CloseComponent();
             };
 
