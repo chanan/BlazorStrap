@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.RenderTree;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace BlazorStrap
 {
@@ -17,10 +18,10 @@ namespace BlazorStrap
         ///  [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder()
-            .AddClass("valid-tooltip", MyEditContext != null && Regex.IsMatch(GetErrorCount(), @"\bvalid\b") && IsTooltip)
-            .AddClass("valid-feedback", MyEditContext != null && Regex.IsMatch(GetErrorCount(), @"\bvalid\b") && !IsTooltip)
-            .AddClass("invalid-tooltip", MyEditContext != null && Regex.IsMatch(GetErrorCount(), @"\binvalid\b") && IsTooltip)
-            .AddClass("invalid-feedback", MyEditContext != null && Regex.IsMatch(GetErrorCount(), @"\binvalid\b") && !IsTooltip)
+            .AddClass("valid-tooltip", IsTooltip && !HasValidationErrors())
+            .AddClass("valid-feedback", !IsTooltip && !HasValidationErrors())
+            .AddClass("invalid-tooltip", IsTooltip && HasValidationErrors())
+            .AddClass("invalid-feedback", !IsTooltip && HasValidationErrors())
 
             .AddClass("valid-tooltip", (Parent?.UserValidation ?? false) && IsValid && IsTooltip)
             .AddClass("valid-feedback", (Parent?.UserValidation ?? false) && IsValid && !IsTooltip)
@@ -29,14 +30,14 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
-        protected string GetErrorCount()
+        protected bool HasValidationErrors()
         {
-            if (Clean)
+            if(Clean || MyEditContext == null)
             {
                 Clean = false;
-                return "";
+                return false;
             }
-            return MyEditContext.FieldClass(_fieldIdentifier).ToLower();
+            return MyEditContext.GetValidationMessages(_fieldIdentifier).Any();
         }
 
         [CascadingParameter] BSForm Parent { get; set; }
@@ -66,7 +67,7 @@ namespace BlazorStrap
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             ;
-            if ((Regex.IsMatch(GetErrorCount(), @"\bvalid\b") || IsValid == true ) && IsInvalid == false)
+            if ((IsValid == true || !HasValidationErrors()) && IsInvalid == false)
             {
                 builder.OpenElement(0, "div");
                 builder.AddAttribute(1, "class", classname);
