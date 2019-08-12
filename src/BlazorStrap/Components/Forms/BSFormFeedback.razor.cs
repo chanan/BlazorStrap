@@ -22,10 +22,10 @@ namespace BlazorStrap
             .AddClass("invalid-tooltip", MyEditContext != null && Regex.IsMatch(GetErrorCount(), @"\binvalid\b") && IsTooltip)
             .AddClass("invalid-feedback", MyEditContext != null && Regex.IsMatch(GetErrorCount(), @"\binvalid\b") && !IsTooltip)
 
-            .AddClass("valid-tooltip", Parent.UserValidation && IsValid && IsTooltip)
-            .AddClass("valid-feedback", Parent.UserValidation && IsValid && !IsTooltip)
-            .AddClass("invalid-tooltip", Parent.UserValidation && IsInvalid && IsTooltip)
-            .AddClass("invalid-feedback", Parent.UserValidation && IsInvalid && !IsTooltip)
+            .AddClass("valid-tooltip", (Parent?.UserValidation ?? false) && IsValid && IsTooltip)
+            .AddClass("valid-feedback", (Parent?.UserValidation ?? false) && IsValid && !IsTooltip)
+            .AddClass("invalid-tooltip", (Parent?.UserValidation ?? false) && IsInvalid && IsTooltip)
+            .AddClass("invalid-feedback", (Parent?.UserValidation ?? false) && IsInvalid && !IsTooltip)
             .AddClass(Class)
         .Build();
 

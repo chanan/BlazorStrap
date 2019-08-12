@@ -23,8 +23,8 @@ namespace BlazorStrap
            .AddClass($"form-control-{Size.ToDescriptionString()}", Size != Size.None)
            .AddClass("is-valid", IsValid)
            .AddClass("is-invalid", IsInvalid)
-           .AddClass("is-valid", Regex.IsMatch(GetErrorCount(), @"\bvalid\b") && Touched && !Parent.UserValidation )
-           .AddClass("is-invalid", Regex.IsMatch(GetErrorCount(), @"\binvalid\b") && !Parent.UserValidation)
+           .AddClass("is-valid", Regex.IsMatch(GetErrorCount(), @"\bvalid\b") && Touched && (!Parent?.UserValidation ?? false))
+           .AddClass("is-invalid", Regex.IsMatch(GetErrorCount(), @"\binvalid\b") && (!Parent?.UserValidation ?? false))
            .AddClass(GetClass())
            .AddClass(Class)
          .Build();
@@ -71,7 +71,8 @@ namespace BlazorStrap
         {
             MyEditContext.OnValidationRequested += MyEditContext_OnValidationRequested;
             //Preview 7 workaround
-            Parent.FormIsReady(MyEditContext);
+            if (Parent !=null)
+               Parent.FormIsReady(MyEditContext);
         }
 
         private void MyEditContext_OnValidationRequested(object sender, ValidationRequestedEventArgs e)
