@@ -2,7 +2,7 @@
 @inherits CodeBSDropdownItem
 
     <CascadingValue Value="@this">
-        <DynamicElement @attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" @onclick="onClickEvent" >
+        <DynamicElement @attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" @onclick="onClickEvent" href="@Href">
             @ChildContent
         </DynamicElement>
     </CascadingValue>

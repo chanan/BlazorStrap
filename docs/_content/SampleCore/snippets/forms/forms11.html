@@ -1,17 +1,32 @@
-﻿<BSForm>
+﻿<BSForm Model="@formsModelVal" ValidateOnInit="true">
+    <DataAnnotationsValidator />
     <BSFormGroup>
         <BSLabel For="exampleEmail3">Input without validation</BSLabel>
-        <BSInput InputType="InputType.Text" Id="exampleEmail3" />
-        <FormFeedback>You will not be able to see this</FormFeedback>
+        <BSBasicInput InputType="InputType.Text" Id="exampleEmail3" />
     </BSFormGroup>
     <BSFormGroup>
         <BSLabel For="exampleEmail4">Valid input</BSLabel>
-        <BSInput IsValid="true" InputType="InputType.Text" Id="exampleEmail4" />
-        <FormFeedback IsValid="true">Sweet! that name is available</FormFeedback>
+        <BSInput InputType="InputType.Text" Id="exampleEmail4" @bind-Value="@formsModelVal.Valid" ValidateOnChange="true"/>
+        <BSFormFeedback For="@(() => formsModelVal.Valid)" ValidMessage="Sweet! that name is available"/>
     </BSFormGroup>
     <BSFormGroup>
         <BSLabel For="exampleEmail5">Invalid input</BSLabel>
-        <BSInput IsInvalid="true" InputType="InputType.Text" Id="exampleEmail5" />
-        <FormFeedback IsInvalid="true">Oh noes! that name is already taken</FormFeedback>
+        <BSInput InputType="InputType.Text" Id="exampleEmail5" @bind-Value="@formsModelVal.InValid" ValidateOnChange="true" />
+        <BSFormFeedback For="@(() => formsModelVal.InValid)" ValidMessage="Sweet! you fixed the issue" />
     </BSFormGroup>
 </BSForm>
+
+@code
+{
+    private FormsModel formsModelVal = new FormsModel();
+
+    public class FormsModel
+    {
+
+        public string Valid { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Oh noes! that name is already taken")]
+        public string InValid { get; set; }
+        public string Blank { get; set; }
+        public string Email { get; set; } = "email@example.com";
+    }
+}

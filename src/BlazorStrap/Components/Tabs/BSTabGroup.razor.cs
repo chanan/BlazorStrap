@@ -8,6 +8,7 @@ namespace BlazorStrap
 {
     public class CodeBSTabGroup : ComponentBase
     {
+        internal bool Disposing = false;
         [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
         public List<CodeBSTab> Tabs = new List<CodeBSTab>();
         internal List<EventCallback<BSTabEvent>> EventQue { get; set; } = new List<EventCallback<BSTabEvent>>();
@@ -21,6 +22,7 @@ namespace BlazorStrap
             }
             set
             {
+                if (Disposing) return;
                 BSTabEvent = new BSTabEvent() { Activated = value, Deactivated = _selected };
 
                 ShowEvent.InvokeAsync(BSTabEvent);

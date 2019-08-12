@@ -1,7 +1,7 @@
-﻿<BSForm>
+﻿<BSForm Model="@formsModel">
     <BSFormGroup>
         <BSLabel For="exampleFormControlSelect1">Example select</BSLabel>
-        <BSInput Id="exampleFormControlSelect1" InputType="InputType.Select">
+        <BSInput Id="exampleFormControlSelect1" InputType="InputType.Select" @bind-Value="formsModel.Blank">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -11,10 +11,10 @@
     </BSFormGroup>
     <BSFormGroup>
         <BSLabel For="exampleText">Text Area</BSLabel>
-        <BSInput InputType="InputType.TextArea" Name="text" Id="exampleText" Rows="5" />
+        <BSInput InputType="InputType.TextArea" Name="text" Id="exampleText" Rows="5" @bind-Value="formsModel.Blank"/>
     </BSFormGroup>
     <BSFormGroup>
         <BSLabel For="exampleFormControlFile1">Example file input</BSLabel>
-        <BSInput InputType="InputType.File" Id="exampleFormControlFile1" />
+        <BSInput InputType="InputType.File" Id="exampleFormControlFile1" @bind-Value="formsModel.Blank"/>
     </BSFormGroup>
 </BSForm>

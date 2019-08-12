@@ -1,7 +1,7 @@
 ﻿@namespace BlazorStrap
 @inherits CodeBSTooltip
 
-<div @ref="tooltip" class="tooltip" role="tooltip">
+<div @ref="tooltip" class="tooltip d-none" role="tooltip">
     <div @ref="arrow" class="arrow"></div>
     <div class="tooltip-inner">@ChildContent</div>
 </div>

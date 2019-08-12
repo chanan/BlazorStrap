@@ -24,7 +24,7 @@ namespace BlazorStrap
         private System.Timers.Timer _timer = new System.Timers.Timer(250);
         private CodeBSDropdownMenu _selected;
         private CodeBSDropdownMenu _dropDownMenu { get; set; } = new BSDropdownMenu();
-
+        public bool Active = false;
         internal CodeBSDropdownMenu DropDownMenu
         {
             get
@@ -58,6 +58,7 @@ namespace BlazorStrap
             .AddClass(DropdownDirection.ToDescriptionString(), DropdownDirection != DropdownDirection.Down)
             .AddClass("show", _manual == null && Selected != null)
             .AddClass("show", _manual != null && IsOpen.HasValue && IsOpen.Value)
+            .AddClass("active", Active)
             .AddClass(Class)
         .Build();
 

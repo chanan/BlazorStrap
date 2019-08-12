@@ -26,6 +26,7 @@ namespace BlazorStrap
             _ => "li"
         };
 
+        protected string href =>  ListGroupType == ListGroupType.Link ? "javascript:void(0)" : null;
         protected string IsButton => Tag == "button" ? "button" : "";
 
         [Parameter] protected bool IsActive { get; set; }

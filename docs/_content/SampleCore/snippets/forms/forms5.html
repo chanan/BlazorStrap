@@ -1,6 +1,6 @@
-﻿<BSForm>
+﻿<BSForm Model="@formsModel">
     <BSFormGroup>
         <BSLabel For="formControlRange">Example Range input</BSLabel>
-        <BSInput InputType="InputType.Range" Id="formControlRange" />
+        <BSInput InputType="InputType.Range" Id="formControlRange" @bind-Value="formsModel.Blank"/>
     </BSFormGroup>
 </BSForm>

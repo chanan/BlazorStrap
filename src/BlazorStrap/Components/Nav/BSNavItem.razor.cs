@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSNavItem : ToggleableComponentBase
+    public class CodeBSNavItem : ToggleableComponentBase , IDisposable
     {
         [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
 
@@ -48,11 +48,13 @@ namespace BlazorStrap
             }
         }
         private bool _MouseDown = false;
+        public bool Active = false;
         protected string classname =>
             new CssBuilder("nav-item")
                 .AddClass("dropdown", IsDropdown)
                 .AddClass("show", IsDropdown && _manual == null && Nav?.Selected == this)
                 .AddClass("show", IsDropdown && _manual != null && IsOpen.HasValue && IsOpen.Value)
+                .AddClass("active", Active)
                 .AddClass(Class)
             .Build();
 
@@ -79,7 +81,10 @@ namespace BlazorStrap
             }
             else
             {
-                _MouseDown = IsOpen.Value && true;
+                if (IsOpen != null)
+                {
+                    _MouseDown = IsOpen.Value && true;
+                }
             }
         }
 

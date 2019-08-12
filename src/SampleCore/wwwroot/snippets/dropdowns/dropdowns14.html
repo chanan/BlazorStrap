@@ -1,15 +1,15 @@
 ﻿<BSDropdownMenu Style="position: static; display: block;">
-    <BSForm Class="px-4 py-3">
+    <BSForm Class="px-4 py-3" Model="@formsModel">
         <BSFormGroup>
             <BSLabel for="exampleDropdownFormEmail1">Email address</BSLabel>
-            <BSInput InputType="InputType.Email" id="exampleDropdownFormEmail1" placeholder="email@example.com" />
+            <BSInput InputType="InputType.Email" id="exampleDropdownFormEmail1" placeholder="email@example.com" @bind-Value="formsModel.Blank"/>
         </BSFormGroup>
         <BSFormGroup>
             <BSLabel for="exampleDropdownFormPassword1">Password</BSLabel>
-            <BSInput InputType="InputType.Password" id="exampleDropdownFormPassword1" placeholder="Password" />
+            <BSInput InputType="InputType.Password" id="exampleDropdownFormPassword1" placeholder="Password" @bind-Value="formsModel.Blank"/>
         </BSFormGroup>
         <BSFormGroup IsCheck="true">
-            <BSInput InputType="InputType.Checkbox" id="dropdownCheck" />
+            <BSInput InputType="InputType.Checkbox" id="dropdownCheck" @bind-Value="formsModel.Blank"/>
             <BSLabel IsCheck="true" for="dropdownCheck">
                 Remember me
             </BSLabel>

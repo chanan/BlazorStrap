@@ -1,13 +1,13 @@
 @inject IBootstrapCSS BootstrapCSS
 @if (!IsDropDown)
 {
-<BSForm>
-    <BSInput InputType="InputType.Select" Value="@Selected" ValueChanged="@SelectedChanged">
+<BSForm Model="formsModel">
+    <BSBasicInput InputType="InputType.Select" Value="@Selected" ValueChanged="@SelectedChanged">
         @foreach (string theme in themes)
 {
             <option value="@theme">@theme</option>
 }
-    </BSInput>
+    </BSBasicInput>
 </BSForm>
 }
 else
@@ -21,6 +21,7 @@ else
 }
 
 @code {
+    private ThemeSwitcherModel formsModel = new ThemeSwitcherModel();
     [Parameter]
     private bool IsDropDown { get; set; }
     private List<string> themes;
@@ -37,5 +38,10 @@ else
     {
         themes = Enum.GetNames(typeof(Theme)).ToList();
         Selected = BootstrapCSS.CurrentTheme.ToString();
+    }
+
+    public class ThemeSwitcherModel
+    {
+        public string Blank { get; set; }
     }
 }
