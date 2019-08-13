@@ -10,7 +10,7 @@ namespace BlazorStrap
 {
     public class CodeBSDropdownToggle : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
          new CssBuilder()
              .AddClass("btn", !IsLink)
@@ -28,14 +28,14 @@ namespace BlazorStrap
         protected string Type => IsLink ? null : "button";
         protected string href => IsLink ? "javascript:void(0)" : null;
 
-        [Parameter] protected Color Color { get; set; } = Color.None;
-        [Parameter] protected Size Size { get; set; } = Size.None;
-        [Parameter] protected bool IsLink { get; set; }
-        [Parameter] protected bool IsSplit { get; set; }
-        [Parameter] protected bool? IsOpen { get; set; }
-        [Parameter] protected EventCallback<UIMouseEventArgs> OnClick { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public Color Color { get; set; } = Color.None;
+        [Parameter] public Size Size { get; set; } = Size.None;
+        [Parameter] public bool IsLink { get; set; }
+        [Parameter] public bool IsSplit { get; set; }
+        [Parameter] public bool? IsOpen { get; set; }
+        [Parameter] public EventCallback<UIMouseEventArgs> OnClick { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] internal CodeBSDropdownMenu Dropdown { get; set; }
         protected void Escape(UIKeyboardEventArgs e)
         {

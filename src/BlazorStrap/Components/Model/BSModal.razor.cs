@@ -11,11 +11,11 @@ namespace BlazorStrap
 {
     public class CodeBSModal : ToggleableComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
-        [Parameter] protected EventCallback<BSModalEvent> ShowEvent { get; set; }
-        [Parameter] protected EventCallback<BSModalEvent> ShownEvent { get; set; }
-        [Parameter] protected EventCallback<BSModalEvent> HideEvent { get; set; }
-        [Parameter] protected EventCallback<BSModalEvent> HiddenEvent { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter] public EventCallback<BSModalEvent> ShowEvent { get; set; }
+        [Parameter] public EventCallback<BSModalEvent> ShownEvent { get; set; }
+        [Parameter] public EventCallback<BSModalEvent> HideEvent { get; set; }
+        [Parameter] public EventCallback<BSModalEvent> HiddenEvent { get; set; }
 
         internal BSModalEvent BSModalEvent { get; set; }
         internal List<EventCallback<BSModalEvent>> EventQue { get; set; } = new List<EventCallback<BSModalEvent>>();
@@ -34,7 +34,7 @@ namespace BlazorStrap
                 .AddClass("modal-dialog-centered", IsCentered)
             .Build();
 
-        protected ElementRef Me { get; set; }
+        protected ElementReference Me { get; set; }
         private bool Closed { get; set; }
         protected override async Task OnAfterRenderAsync()
         {
@@ -80,13 +80,13 @@ namespace BlazorStrap
             }
         }
 
-        [Parameter] protected bool IsCentered { get; set; }
-        [Parameter] protected Size Size { get; set; } = Size.None;
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected string Style { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
-        [Parameter] protected bool IgnoreClickOnBackdrop { get; set; }
-        [Parameter] protected bool IgnoreEscape { get; set; }
+        [Parameter] public bool IsCentered { get; set; }
+        [Parameter] public Size Size { get; set; } = Size.None;
+        [Parameter] public string Class { get; set; }
+        [Parameter] public string Style { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
+        [Parameter] public bool IgnoreClickOnBackdrop { get; set; }
+        [Parameter] public bool IgnoreEscape { get; set; }
 
         internal override void Changed(bool e)
         {
@@ -120,7 +120,7 @@ namespace BlazorStrap
             Closed = true;
             IsOpenChanged.InvokeAsync(false);
             BlazorStrapInterop.OnEscapeEvent -= OnEscape;
-            Invoke(StateHasChanged);
+            InvokeAsync(StateHasChanged);
         }
        
 

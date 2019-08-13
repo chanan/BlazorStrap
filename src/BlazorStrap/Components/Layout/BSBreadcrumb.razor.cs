@@ -8,14 +8,14 @@ namespace BlazorStrap
 {
     public class CodeBsBreadcrumb : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder()
            .AddClass("breadcrumb")
            .AddClass(Class)
         .Build();
 
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
     }
 }

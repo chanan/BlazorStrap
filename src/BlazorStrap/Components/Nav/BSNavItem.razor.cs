@@ -9,7 +9,8 @@ namespace BlazorStrap
 {
     public class CodeBSNavItem : ToggleableComponentBase , IDisposable
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        internal bool IsSubmenu;
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
 
         private CodeBSDropdownMenu _selected;
         //Prevents NULL
@@ -52,6 +53,7 @@ namespace BlazorStrap
         protected string classname =>
             new CssBuilder("nav-item")
                 .AddClass("dropdown", IsDropdown)
+                .AddClass("dropdown-submenu", IsSubmenu)
                 .AddClass("show", IsDropdown && _manual == null && Nav?.Selected == this)
                 .AddClass("show", IsDropdown && _manual != null && IsOpen.HasValue && IsOpen.Value)
                 .AddClass("active", Active)
@@ -60,17 +62,22 @@ namespace BlazorStrap
 
         protected string Tag => Nav.IsList ? "li" : "div";
 
-        [Parameter] protected bool IsDropdown { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public bool IsDropdown { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] internal BSNav Nav { get; set; }
-        protected override Task OnInitAsync()
+        [CascadingParameter] internal BSNavItem NavItem { get; set; }
+        protected override Task OnInitializedAsync()
         {
             if (IsDropdown && _manual == null)
             {
                 Nav.Navitems.Add(this);
             }
-            return base.OnInitAsync();
+            if ( NavItem != null)
+            {
+                IsSubmenu = true;
+            }
+            return base.OnInitializedAsync();
         }
 
         protected void MouseDown()

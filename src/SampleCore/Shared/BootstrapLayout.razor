@@ -58,7 +58,7 @@
 @code {
     private bool isServerSide = false;
     private bool hasBeendone = false;
-    protected override async Task OnInitAsync()
+    protected override Task OnInitializedAsync()
     {
         try
         {
@@ -68,6 +68,7 @@
         {
        //     isServerSide = true;
         }
+        return base.OnInitializedAsync();
     }
 
     protected override async Task OnAfterRenderAsync()

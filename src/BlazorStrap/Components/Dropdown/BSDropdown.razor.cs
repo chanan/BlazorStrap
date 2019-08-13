@@ -11,11 +11,11 @@ namespace BlazorStrap
 {
     public class CodeBSDropdown : ToggleableComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
-        [Parameter] protected EventCallback<BSDropdownEvent> ShowEvent { get; set; }
-        [Parameter] protected EventCallback<BSDropdownEvent> ShownEvent { get; set; }
-        [Parameter] protected EventCallback<BSDropdownEvent> HideEvent { get; set; }
-        [Parameter] protected EventCallback<BSDropdownEvent> HiddenEvent { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter] public EventCallback<BSDropdownEvent> ShowEvent { get; set; }
+        [Parameter] public EventCallback<BSDropdownEvent> ShownEvent { get; set; }
+        [Parameter] public EventCallback<BSDropdownEvent> HideEvent { get; set; }
+        [Parameter] public EventCallback<BSDropdownEvent> HiddenEvent { get; set; }
 
         internal BSDropdownEvent BSDropdownEvent { get; set; }
         internal List<EventCallback<BSDropdownEvent>> EventQue { get; set; } = new List<EventCallback<BSDropdownEvent>>();
@@ -63,14 +63,14 @@ namespace BlazorStrap
         .Build();
 
         internal bool IsSubmenu;
-        [Parameter] protected DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
-        [Parameter] protected bool IsGroup { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
+        [Parameter] public bool IsGroup { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] protected BSDropdown Dropdown { get; set; }
         [CascadingParameter] internal BSNavItem NavItem { get; set; }
 
-        protected override void OnInit()
+        protected override void OnInitialized()
         {
             _timer.Elapsed += OnTimedEvent;
             
@@ -78,7 +78,7 @@ namespace BlazorStrap
             {
                 IsSubmenu = true;
             }
-            base.OnInit();
+            base.OnInitialized();
         }
 
         internal override void Changed(bool e)
@@ -116,7 +116,7 @@ namespace BlazorStrap
         {
             if (_manual == null)
             {
-                Invoke(() => Close());
+                InvokeAsync(() => Close());
             }
             _timer.Stop();
             _timer.Interval = 250;

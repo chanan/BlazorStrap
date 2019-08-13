@@ -4,7 +4,7 @@
 @if (_isOpen)
 {
     <DynamicElement Id="@Id" @attributes="@UnknownParameters" TagName="div" class="@classname" role="tooltip" @onclick="onclick">
-        <div @ref="arrow" class="arrow"></div>
+        <div @ref:suppressField="arrow" class="arrow"></div>
         @ChildContent
     </DynamicElement>
 }

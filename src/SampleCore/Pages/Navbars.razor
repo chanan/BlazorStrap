@@ -2,9 +2,9 @@
 
 <h1>Navbars</h1>
 
-<Alert Color="Color.Info">
+<BSAlert Color="Color.Info">
     Navbar toggle needs more work
-</Alert>
+</BSAlert>
 
 <div class="docs-example">
     <BSNavbar IsExpand="true" IsDark="false" Color="Color.Light">
@@ -61,7 +61,7 @@
     void OpenChanged(bool e)
     {
         IsOpen = e;
-        Invoke(StateHasChanged);
+        InvokeAsync(StateHasChanged);
         Console.WriteLine("OpenChanged->" + IsOpen.ToString());
     }
 

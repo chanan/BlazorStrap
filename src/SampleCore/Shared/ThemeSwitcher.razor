@@ -34,7 +34,7 @@ else
     }
 
 
-    protected override void OnInit()
+    protected override void OnInitialized ()
     {
         themes = Enum.GetNames(typeof(Theme)).ToList();
         Selected = BootstrapCSS.CurrentTheme.ToString();

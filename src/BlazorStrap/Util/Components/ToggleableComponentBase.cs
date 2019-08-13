@@ -8,10 +8,10 @@ namespace BlazorStrap.Util.Components
     /// </summary>
     public abstract class ToggleableComponentBase : ComponentBase
     {
-        [Parameter] protected EventCallback<bool> IsOpenChanged { get; set; }
+        [Parameter] public EventCallback<bool> IsOpenChanged { get; set; }
  
         [Parameter]
-        protected bool? IsOpen
+        public bool? IsOpen
         {
             get
             {

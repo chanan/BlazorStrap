@@ -8,7 +8,7 @@ namespace BlazorStrap
 {
     public class CodeBSCarouselItem : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("carousel-item")
         .AddClass("active", IsActive)
@@ -23,12 +23,12 @@ namespace BlazorStrap
             }
         }
 
-        [Parameter] protected string src { get; set; }
-        [Parameter] protected string alt { get; set; }
-        [Parameter] protected bool IsActive { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected string ActionLink { get; set; }
-        [Parameter] protected string ActionLinkTarget { get; set; } = "_self";
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public string src { get; set; }
+        [Parameter] public string alt { get; set; }
+        [Parameter] public bool IsActive { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public string ActionLink { get; set; }
+        [Parameter] public string ActionLinkTarget { get; set; } = "_self";
+        [Parameter] public RenderFragment ChildContent { get; set; }
     }
 }

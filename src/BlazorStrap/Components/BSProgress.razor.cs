@@ -9,7 +9,7 @@ namespace BlazorStrap
 {
     public class CodeBSProgress : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("progress-bar")
             .AddClass("progress-bar-striped", IsStriped)
@@ -23,8 +23,8 @@ namespace BlazorStrap
                 .AddClass(Class)
             .Build();
 
-        [Parameter] protected int Value { get; set; }
-        [Parameter] protected int Max { get; set; } = 100;
+        [Parameter] public int Value { get; set; }
+        [Parameter] public int Max { get; set; } = 100;
         protected string styles
         {
             get
@@ -34,13 +34,13 @@ namespace BlazorStrap
                 return $"width: {percent}%; {Style}".Trim();
             }
         }
-        [Parameter] protected Color Color { get; set; } = Color.None;
-        [Parameter] protected bool IsMulti { get; set; }
-        [Parameter] protected bool IsBar { get; set; }
-        [Parameter] protected bool IsStriped { get; set; }
-        [Parameter] protected bool IsAnimated { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected string Style { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public Color Color { get; set; } = Color.None;
+        [Parameter] public bool IsMulti { get; set; }
+        [Parameter] public bool IsBar { get; set; }
+        [Parameter] public bool IsStriped { get; set; }
+        [Parameter] public bool IsAnimated { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public string Style { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
     }
 }

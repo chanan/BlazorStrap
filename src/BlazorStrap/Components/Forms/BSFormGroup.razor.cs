@@ -8,7 +8,7 @@ namespace BlazorStrap
 {
     public class CodeBSFormGroup : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder()
             .AddClass("form-check", IsCheck)
@@ -17,9 +17,9 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
-        [Parameter] protected bool IsRow { get; set; }
-        [Parameter] protected bool IsCheck { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public bool IsRow { get; set; }
+        [Parameter] public bool IsCheck { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
     }
 }

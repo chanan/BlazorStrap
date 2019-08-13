@@ -39,17 +39,17 @@ namespace BlazorStrap.Util
             return JSRuntime.InvokeAsync<bool>("blazorStrap.log", message);
         }
 
-        public Task<bool> Popper(string target, string popper, ElementRef arrow, string placement)
+        public Task<bool> Popper(string target, string popper, ElementReference arrow, string placement)
         {
             return JSRuntime.InvokeAsync<bool>("blazorStrap.popper", target, popper, arrow, placement);
         }
 
-        public Task<bool> Tooltip(string target, ElementRef tooltip, ElementRef arrow, string placement)
+        public Task<bool> Tooltip(string target, ElementReference tooltip, ElementReference arrow, string placement)
         {
             return JSRuntime.InvokeAsync<bool>("blazorStrap.tooltip", target, tooltip, arrow, placement);
         }
 
-        public Task FocusElement(ElementRef el)
+        public Task FocusElement(ElementReference el)
         {
             return JSRuntime.InvokeAsync<object>("blazorStrap.focusElement", el);
         }

@@ -9,7 +9,7 @@ namespace BlazorStrap
     public class CodeBSTabGroup : ComponentBase
     {
         internal bool Disposing = false;
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         public List<CodeBSTab> Tabs = new List<CodeBSTab>();
         internal List<EventCallback<BSTabEvent>> EventQue { get; set; } = new List<EventCallback<BSTabEvent>>();
         internal BSTabEvent BSTabEvent { get; set; }
@@ -34,11 +34,11 @@ namespace BlazorStrap
             }
         }
 
-        [Parameter] protected RenderFragment ChildContent { get; set; }
-        [Parameter] protected EventCallback<BSTabEvent> ShowEvent { get; set; }
-        [Parameter] protected EventCallback<BSTabEvent> ShownEvent { get; set; }
-        [Parameter] protected EventCallback<BSTabEvent> HideEvent { get; set; }
-        [Parameter] protected EventCallback<BSTabEvent> HiddenEvent { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
+        [Parameter] public EventCallback<BSTabEvent> ShowEvent { get; set; }
+        [Parameter] public EventCallback<BSTabEvent> ShownEvent { get; set; }
+        [Parameter] public EventCallback<BSTabEvent> HideEvent { get; set; }
+        [Parameter] public EventCallback<BSTabEvent> HiddenEvent { get; set; }
 
         protected override Task OnAfterRenderAsync()
         {

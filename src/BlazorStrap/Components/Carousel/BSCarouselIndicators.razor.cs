@@ -8,18 +8,18 @@ namespace BlazorStrap
 {
     public class CodeBSCarouselIndicators : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("carousel-indicators")
         .AddClass(Class)
         .Build();
 
-        [Parameter] protected int NumberOfItems { get; set; }
-        [Parameter] protected int ActiveIndex { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
-        [Parameter] protected EventCallback<int> ActiveIndexChanged { get; set; }
-        [Parameter] protected EventCallback<int> ActiveIndexChangedEvent { get; set; }
+        [Parameter] public int NumberOfItems { get; set; }
+        [Parameter] public int ActiveIndex { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
+        [Parameter] public EventCallback<int> ActiveIndexChanged { get; set; }
+        [Parameter] public EventCallback<int> ActiveIndexChangedEvent { get; set; }
 
         protected void ClickEventActiveIndex(int index)
         {

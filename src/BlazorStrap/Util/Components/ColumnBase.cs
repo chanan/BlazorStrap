@@ -71,7 +71,7 @@ namespace BlazorStrap.Util.Components
 
         private string xs;
         [Parameter]
-        protected string XS
+        public string XS
         {
             get => xs;
 
@@ -85,7 +85,7 @@ namespace BlazorStrap.Util.Components
 
         private string sm;
         [Parameter]
-        protected string SM
+        public string SM
         {
             get => sm;
 
@@ -99,7 +99,7 @@ namespace BlazorStrap.Util.Components
 
         private string md;
         [Parameter]
-        protected string MD
+        public string MD
         {
             get => md;
 
@@ -113,7 +113,7 @@ namespace BlazorStrap.Util.Components
 
         private string lg;
         [Parameter]
-        protected string LG
+        public string LG
         {
             get => lg;
 
@@ -127,7 +127,7 @@ namespace BlazorStrap.Util.Components
 
         private string xl;
         [Parameter]
-        protected string XL
+        public string XL
         {
             get => xl;
 
@@ -141,7 +141,7 @@ namespace BlazorStrap.Util.Components
 
         private string xsorder;
         [Parameter]
-        protected string XSOrder
+        public string XSOrder
         {
             get => xsorder;
 
@@ -156,7 +156,7 @@ namespace BlazorStrap.Util.Components
 
         private string smorder;
         [Parameter]
-        protected string SMOrder
+        public string SMOrder
         {
             get => smorder;
 
@@ -171,7 +171,7 @@ namespace BlazorStrap.Util.Components
 
         private string mdorder;
         [Parameter]
-        protected string MDOrder
+        public string MDOrder
         {
             get => mdorder;
 
@@ -186,7 +186,7 @@ namespace BlazorStrap.Util.Components
 
         private string lgorder;
         [Parameter]
-        protected string LGOrder
+        public string LGOrder
         {
             get => lgorder;
 
@@ -201,7 +201,7 @@ namespace BlazorStrap.Util.Components
 
         private string xlorder;
         [Parameter]
-        protected string XLOrder
+        public string XLOrder
         {
             get => xlorder;
 
@@ -216,7 +216,7 @@ namespace BlazorStrap.Util.Components
 
         private string xsoffset;
         [Parameter]
-        protected string XSOffset
+        public string XSOffset
         {
             get => xsoffset;
 
@@ -230,7 +230,7 @@ namespace BlazorStrap.Util.Components
 
         private string smoffset;
         [Parameter]
-        protected string SMOffset
+        public string SMOffset
         {
             get => smoffset;
 
@@ -244,7 +244,7 @@ namespace BlazorStrap.Util.Components
 
         private string mdoffset;
         [Parameter]
-        protected string MDOffset
+        public string MDOffset
         {
             get => mdoffset;
 
@@ -258,7 +258,7 @@ namespace BlazorStrap.Util.Components
 
         private string lgoffset;
         [Parameter]
-        protected string LGOffset
+        public string LGOffset
         {
             get => lgoffset;
 
@@ -272,7 +272,7 @@ namespace BlazorStrap.Util.Components
 
         private string xloffset;
         [Parameter]
-        protected string XLOffset
+        public string XLOffset
         {
             get => xloffset;
 
@@ -284,15 +284,15 @@ namespace BlazorStrap.Util.Components
             };
         }
 
-        [Parameter] protected bool MRAuto { get; set; }
-        [Parameter] protected bool MLAuto { get; set; }
-        [Parameter] protected bool SMMRAuto { get; set; }
-        [Parameter] protected bool SMMLAuto { get; set; }
-        [Parameter] protected bool MDMRAuto { get; set; }
-        [Parameter] protected bool MDMLAuto { get; set; }
-        [Parameter] protected bool LGMRAuto { get; set; }
-        [Parameter] protected bool LGMLAuto { get; set; }
-        [Parameter] protected bool XLMRAuto { get; set; }
-        [Parameter] protected bool XLMLAuto { get; set; }
+        [Parameter] public bool MRAuto { get; set; }
+        [Parameter] public bool MLAuto { get; set; }
+        [Parameter] public bool SMMRAuto { get; set; }
+        [Parameter] public bool SMMLAuto { get; set; }
+        [Parameter] public bool MDMRAuto { get; set; }
+        [Parameter] public bool MDMLAuto { get; set; }
+        [Parameter] public bool LGMRAuto { get; set; }
+        [Parameter] public bool LGMLAuto { get; set; }
+        [Parameter] public bool XLMRAuto { get; set; }
+        [Parameter] public bool XLMLAuto { get; set; }
     }
 }

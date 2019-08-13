@@ -9,7 +9,7 @@ namespace BlazorStrap
 {
     public class CodeBSPopover : ToggleableComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Inject] Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
         protected string classname =>
         new CssBuilder("popover")
@@ -18,7 +18,7 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
-        protected ElementRef arrow;
+        protected ElementReference arrow;
 
         protected override void OnAfterRender()
         {
@@ -30,11 +30,11 @@ namespace BlazorStrap
         }
         protected string Id => Target + "-popover";
 
-        [Parameter] protected Placement Placement { get; set; } = Placement.Auto;
-        [Parameter] protected string Target { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected string Style { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public Placement Placement { get; set; } = Placement.Auto;
+        [Parameter] public string Target { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public string Style { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
         protected void onclick()
         {

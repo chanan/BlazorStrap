@@ -7,7 +7,7 @@ namespace BlazorStrap
 {
     public class CodeBSTabList : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
             new CssBuilder("nav")
                 .AddClass("nav-tabs", !IsPills)
@@ -21,7 +21,7 @@ namespace BlazorStrap
 
         private bool _isList;
         [Parameter]
-        internal bool IsList
+        public bool IsList
         {
             get
             {
@@ -32,12 +32,12 @@ namespace BlazorStrap
                 _isList = value;
             }
         }
-        [Parameter] protected Alignment Alignment { get; set; } = Alignment.None;
-        [Parameter] protected bool IsVertical { get; set; }
-        [Parameter] protected bool IsPills { get; set; }
-        [Parameter] protected bool IsFill { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public Alignment Alignment { get; set; } = Alignment.None;
+        [Parameter] public bool IsVertical { get; set; }
+        [Parameter] public bool IsPills { get; set; }
+        [Parameter] public bool IsFill { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
         private string GetAlignment()
         {

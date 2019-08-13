@@ -10,7 +10,7 @@ namespace BlazorStrap
 {
     public class CodeBSNavbar : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         private System.Timers.Timer _timer = new System.Timers.Timer(250);
         
         private bool _visable { get; set; }
@@ -27,15 +27,15 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
-        [Parameter] protected Color Color { get; set; } = Color.None;
-        [Parameter] protected bool IsDark { get; set; }
-        [Parameter] protected bool IsExpand { get; set; }
+        [Parameter] public Color Color { get; set; } = Color.None;
+        [Parameter] public bool IsDark { get; set; }
+        [Parameter] public bool IsExpand { get; set; }
 
-        [Parameter] protected bool IsFixedTop { get; set; }
-        [Parameter] protected bool IsFixedBottom { get; set; }
-        [Parameter] protected bool IsStickyTop { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public bool IsFixedTop { get; set; }
+        [Parameter] public bool IsFixedBottom { get; set; }
+        [Parameter] public bool IsStickyTop { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
         internal bool HasCollapsed { get; set; }
         internal EventHandler<bool> VisableChange { get; set; }
@@ -49,7 +49,7 @@ namespace BlazorStrap
         }
         
 
-        protected override void OnInit()
+        protected override void OnInitialized()
         {
             _timer.Elapsed += OnTimedEvent;
         }

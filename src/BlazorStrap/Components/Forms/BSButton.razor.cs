@@ -10,7 +10,7 @@ namespace BlazorStrap
 {
     public class CodeBSButton : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("btn")
           .AddClass($"btn-outline-{Color.ToDescriptionString()}", IsOutline)
@@ -39,12 +39,12 @@ namespace BlazorStrap
             _ => null
         };
 
-        [Parameter] protected EventCallback<UIMouseEventArgs> OnClick { get; set; }
-        [Parameter] protected Color Color { get; set; } = Color.Primary;
+        [Parameter] public EventCallback<UIMouseEventArgs> OnClick { get; set; }
+        [Parameter] public Color Color { get; set; } = Color.Primary;
 
         private ButtonType _buttonType = ButtonType.Button;
         [Parameter]
-        private ButtonType ButtonType
+        public ButtonType ButtonType
         {
             get => _buttonType;
             set
@@ -63,13 +63,13 @@ namespace BlazorStrap
                 };
             }
         }
-        [Parameter] protected bool IsOutline { get; set; }
-        [Parameter] protected Size Size { get; set; } = Size.None;
-        [Parameter] protected bool IsBlock { get; set; }
-        [Parameter] protected string Value { get; set; }
-        [Parameter] protected bool IsActive { get; set; }
-        [Parameter] protected bool IsDisabled { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public bool IsOutline { get; set; }
+        [Parameter] public Size Size { get; set; } = Size.None;
+        [Parameter] public bool IsBlock { get; set; }
+        [Parameter] public string Value { get; set; }
+        [Parameter] public bool IsActive { get; set; }
+        [Parameter] public bool IsDisabled { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
     }
 }

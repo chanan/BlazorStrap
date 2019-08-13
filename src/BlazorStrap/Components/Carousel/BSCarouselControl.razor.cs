@@ -9,7 +9,7 @@ namespace BlazorStrap
 {
     public class CodeBSCarouselControl : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
          new CssBuilder()
              .AddClass("carousel-control-prev", CarouselDirection == CarouselDirection.Previous)
@@ -25,13 +25,13 @@ namespace BlazorStrap
 
         protected string directionName => CarouselDirection == CarouselDirection.Previous ? "Previous" : "Next";
 
-        [Parameter] protected int ActiveIndex { get; set; }
-        [Parameter] protected int NumberOfItems { get; set; }
-        [Parameter] protected CarouselDirection CarouselDirection { get; set; } = CarouselDirection.Previous;
-        [Parameter] protected string Class { get; set; }
+        [Parameter] public int ActiveIndex { get; set; }
+        [Parameter] public int NumberOfItems { get; set; }
+        [Parameter] public CarouselDirection CarouselDirection { get; set; } = CarouselDirection.Previous;
+        [Parameter] public string Class { get; set; }
         [CascadingParameter] internal BSCarousel Parent { get; set; }
 
-        [Parameter] protected EventCallback<int> ActiveIndexChanged { get; set; }
+        [Parameter] public EventCallback<int> ActiveIndexChanged { get; set; }
 
         protected async Task _onclick(UIMouseEventArgs e)
         {

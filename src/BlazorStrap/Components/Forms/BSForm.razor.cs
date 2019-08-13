@@ -19,11 +19,10 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
         [Parameter] public bool UserValidation { get; set; }
-        [Parameter] protected bool ValidateOnInit { get; set; }
-        [Parameter] protected bool IsInline { get; set; }
-        [Parameter] protected string Class { get; set; }
+        [Parameter] public bool ValidateOnInit { get; set; }
+        [Parameter] public bool IsInline { get; set; }
+        [Parameter] public string Class { get; set; }
         
-        private bool First = true;
         private RenderFragment Form { get; set; }
         private EditContext MyEditContext { get; set; }
         protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -45,7 +44,7 @@ namespace BlazorStrap
             builder.OpenComponent<CascadingValue<BSForm>>(3);
             builder.AddAttribute(4, "IsFixed", true);
             builder.AddAttribute(5, "Value", this);
-            builder.AddAttribute(6, RenderTreeBuilder.ChildContent, Form);
+            builder.AddContent(6, Form);
             builder.CloseComponent();
 
         }
@@ -60,8 +59,8 @@ namespace BlazorStrap
         }
         public void ForceValidate()
         {
-            Invoke(() => MyEditContext?.Validate());
-                StateHasChanged();
+            InvokeAsync(() => MyEditContext?.Validate());
+            StateHasChanged();
         }
     }
 }

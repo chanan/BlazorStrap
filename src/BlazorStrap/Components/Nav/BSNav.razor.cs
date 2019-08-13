@@ -8,7 +8,7 @@ namespace BlazorStrap
 {
     public class CodeBSNav : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         private CodeBSNavItem _selected;
         internal List<CodeBSNavItem> Navitems { get; set; } = new List<CodeBSNavItem>();
         public CodeBSNavItem Selected
@@ -36,15 +36,15 @@ namespace BlazorStrap
 
         protected string Tag => IsList ? "ul" : "nav";
 
-        [Parameter] internal bool IsList { get;set;} 
-        [Parameter] protected Alignment Alignment { get; set; } = Alignment.None;
-        [Parameter] protected bool IsVertical { get; set; }
-        [Parameter] protected bool IsTabs { get; set; }
-        [Parameter] protected bool IsPills { get; set; }
-        [Parameter] protected bool IsFill { get; set; }
-        [Parameter] protected bool IsNavbar { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public bool IsList { get;set;} 
+        [Parameter] public Alignment Alignment { get; set; } = Alignment.None;
+        [Parameter] public bool IsVertical { get; set; }
+        [Parameter] public bool IsTabs { get; set; }
+        [Parameter] public bool IsPills { get; set; }
+        [Parameter] public bool IsFill { get; set; }
+        [Parameter] public bool IsNavbar { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
         private string GetAlignment()
         {
@@ -53,9 +53,9 @@ namespace BlazorStrap
             return null;
         }
 
-        protected override void OnInit()
+        protected override void OnInitialized()
         {
-            base.OnInit();
+            base.OnInitialized();
         }
     }
 }

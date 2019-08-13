@@ -8,7 +8,7 @@ namespace BlazorStrap
 {
     public class CodeBSListGroup : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder()
             .AddClass("list-group list-group-flush", IsFlush)
@@ -18,9 +18,9 @@ namespace BlazorStrap
 
         protected string Tag => ListGroupType == ListGroupType.List ? "ul" : "div";
 
-        [Parameter] protected ListGroupType ListGroupType { get; set; } = ListGroupType.List;
-        [Parameter] protected bool IsFlush { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public ListGroupType ListGroupType { get; set; } = ListGroupType.List;
+        [Parameter] public bool IsFlush { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
     }
 }

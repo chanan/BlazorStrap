@@ -8,14 +8,14 @@ namespace BlazorStrap
 {
     public class CodeBSPaginationLink : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("page-link")
             .AddClass(Class)
         .Build();
 
-        [Parameter] protected string Href { get; set; }
-        [Parameter] protected PaginationLinkType PaginationLinkType { get; set; } = PaginationLinkType.Custom;
+        [Parameter] public string Href { get; set; }
+        [Parameter] public PaginationLinkType PaginationLinkType { get; set; } = PaginationLinkType.Custom;
         private string label
         {
             get
@@ -34,7 +34,7 @@ namespace BlazorStrap
                 return null;
             }
         }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
     }
 }

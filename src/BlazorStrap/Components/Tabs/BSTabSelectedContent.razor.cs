@@ -8,10 +8,10 @@ namespace BlazorStrap
 {
     public class CodeBSTabSelectedContent : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [CascadingParameter] protected BSTabGroup Group { get; set; }
 
-        protected override void OnInit()
+        protected override void OnInitialized()
         {
             if(Group != null)
             {

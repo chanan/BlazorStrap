@@ -4,7 +4,7 @@
 
 <DynamicElement @attributes="@UnknownParameters" style="@styles" TagName="div" class="@classname" tabindex="-1" role="dialog" @onfocus="OnBackdropClick" >
     <div class="@innerClassname" role="document"  tabindex="-2">
-        <div class="modal-content"  @ref="Me">
+        <div class="modal-content"  @ref:suppressField="Me">
             @ChildContent
         </div>
     </div>

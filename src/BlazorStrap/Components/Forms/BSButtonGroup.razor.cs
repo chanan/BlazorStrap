@@ -9,7 +9,7 @@ namespace BlazorStrap
 {
     public class CodeBSButtonGroup : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder()
             .AddClass("btn-toolbar", IsToolbar)
@@ -22,13 +22,13 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
-        [Parameter] protected bool IsOpen { get; set; }
-        [Parameter] protected bool IsToggle { get; set; }
-        [Parameter] protected bool IsToolbar { get; set; }
-        [Parameter] protected bool IsVertical { get; set; }
-        [Parameter] protected DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
-        [Parameter] protected Size Size { get; set; } = Size.None;
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public bool IsOpen { get; set; }
+        [Parameter] public bool IsToggle { get; set; }
+        [Parameter] public bool IsToolbar { get; set; }
+        [Parameter] public bool IsVertical { get; set; }
+        [Parameter] public DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
+        [Parameter] public Size Size { get; set; } = Size.None;
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
     }
 }

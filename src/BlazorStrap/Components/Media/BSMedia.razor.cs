@@ -8,7 +8,7 @@ namespace BlazorStrap
 {
     public class CodeBSMedia : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
          new CssBuilder()
              .AddClass(GetClass())
@@ -26,10 +26,10 @@ namespace BlazorStrap
             _ => "div"
         };
 
-        [Parameter] protected MediaType MediaType { get; set; } = MediaType.Media;
-        [Parameter] protected VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public MediaType MediaType { get; set; } = MediaType.Media;
+        [Parameter] public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
         private string GetVerticalAlignmnet()
         {

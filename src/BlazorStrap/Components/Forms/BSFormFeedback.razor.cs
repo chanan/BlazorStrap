@@ -15,7 +15,7 @@ namespace BlazorStrap
     {
         private bool Clean = true;
         private FieldIdentifier _fieldIdentifier;
-        ///  [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        ///  [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder()
             .AddClass("valid-tooltip", IsTooltip && !HasValidationErrors())
@@ -42,20 +42,20 @@ namespace BlazorStrap
 
         [CascadingParameter] BSForm Parent { get; set; }
         [CascadingParameter] EditContext MyEditContext { get; set; }
-        [Parameter] protected bool IsValid { get; set; }
-        [Parameter] protected bool IsInvalid { get; set; }
-        [Parameter] protected bool IsTooltip { get; set; }
-        [Parameter] protected string Class { get; set; }
+        [Parameter] public bool IsValid { get; set; }
+        [Parameter] public bool IsInvalid { get; set; }
+        [Parameter] public bool IsTooltip { get; set; }
+        [Parameter] public string Class { get; set; }
 
         /// <summary>
         /// ValidMessage is the string that gets returned if validation is valid.
         /// </summary>
-        [Parameter] protected string ValidMessage { get; set; }
+        [Parameter] public string ValidMessage { get; set; }
         /// <summary>
         /// InvalidMessage is the string that gets returned if validation is invalid.
         /// </summary>
-        [Parameter] protected string InvalidMessage { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public string InvalidMessage { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
         protected override void OnParametersSet()
         {

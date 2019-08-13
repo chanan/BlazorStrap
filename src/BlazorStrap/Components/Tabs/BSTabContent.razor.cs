@@ -8,20 +8,20 @@ namespace BlazorStrap
 {
     public class CodeBSTabContent : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         public string classname =>
             new CssBuilder("tab-content")
                 .AddClass(Class)
                 .Build();
 
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] protected BSTab Parent { get; set; }
-        protected override Task OnInitAsync()
+        protected override Task OnInitializedAsync()
         {
             Parent.Content = ChildContent;
             Parent.UpdateContent();
-            return base.OnInitAsync();
+            return base.OnInitializedAsync();
         }
     }
 }

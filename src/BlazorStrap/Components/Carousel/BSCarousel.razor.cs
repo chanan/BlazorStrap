@@ -9,24 +9,24 @@ namespace BlazorStrap
 {
     public class CodeBSCarousel : ComponentBase , IDisposable
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("carousel slide")
         .AddClass(Class)
         .Build();
 
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
-        [Parameter] protected int Interval { get; set; } = 5000;
-        [Parameter] protected bool PauseOnHover { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
+        [Parameter] public int Interval { get; set; } = 5000;
+        [Parameter] public bool PauseOnHover { get; set; }
 
-        [Parameter] protected int NumberOfItems { get; set; }
-        [Parameter] protected int ActiveIndex { get; set; }
-        [Parameter] protected EventCallback<int> ActiveIndexChangedEvent { get; set; }
+        [Parameter] public int NumberOfItems { get; set; }
+        [Parameter] public int ActiveIndex { get; set; }
+        [Parameter] public EventCallback<int> ActiveIndexChangedEvent { get; set; }
 
         private Timer _timer;
 
-        protected override void OnInit()
+        protected override void OnInitialized()
         {
             if (_timer == null)
             {

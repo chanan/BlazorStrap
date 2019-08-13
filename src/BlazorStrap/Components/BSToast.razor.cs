@@ -9,7 +9,7 @@ namespace BlazorStrap
 {
     public class CodeBSToast : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("toast fade")
             .AddClass("show", IsVisible && !IsDismissed)
@@ -17,16 +17,16 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected bool IsVisible { get; set; }
-        [Parameter] protected RenderFragment BSToastHeader { get; set; }
-        [Parameter] protected RenderFragment BSToastBody { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public bool IsVisible { get; set; }
+        [Parameter] public RenderFragment BSToastHeader { get; set; }
+        [Parameter] public RenderFragment BSToastBody { get; set; }
 
         /// <summary>
         /// Gets or sets an action to be invoked when the alert is dismissed.
         ///
         ///</summary>
-        [Parameter] protected EventCallback OnDismiss { get; set; }
+        [Parameter] public EventCallback OnDismiss { get; set; }
 
         private bool IsDismissed { get; set; } = false;
 

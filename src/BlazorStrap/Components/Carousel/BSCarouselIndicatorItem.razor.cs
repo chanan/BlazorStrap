@@ -9,15 +9,15 @@ namespace BlazorStrap
 {
     public class CodeBSCarouselIndicatorItem : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder()
         .AddClass("active", IsActive)
         .Build();
 
-        [Parameter] protected bool IsActive { get; set; }
-        [Parameter] protected int Index { get; set; }
-        [Parameter] protected EventCallback<int> ActiveIndexChangedEvent { get; set; }
+        [Parameter] public bool IsActive { get; set; }
+        [Parameter] public int Index { get; set; }
+        [Parameter] public EventCallback<int> ActiveIndexChangedEvent { get; set; }
 
         protected async Task onclick()
         {

@@ -9,11 +9,11 @@ namespace BlazorStrap
 {
     public class CodeBSCollapse : ToggleableComponentBase 
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
-        [Parameter] protected EventCallback<BSCollapseEvent> ShowEvent { get; set; }
-        [Parameter] protected EventCallback<BSCollapseEvent> ShownEvent { get; set; }
-        [Parameter] protected EventCallback<BSCollapseEvent> HideEvent { get; set; }
-        [Parameter] protected EventCallback<BSCollapseEvent> HiddenEvent { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter] public EventCallback<BSCollapseEvent> ShowEvent { get; set; }
+        [Parameter] public EventCallback<BSCollapseEvent> ShownEvent { get; set; }
+        [Parameter] public EventCallback<BSCollapseEvent> HideEvent { get; set; }
+        [Parameter] public EventCallback<BSCollapseEvent> HiddenEvent { get; set; }
 
         [CascadingParameter] protected BSNavbar Navbar { get; set; }
         internal BSCollapseEvent BSCollapseEvent { get; set; }
@@ -26,12 +26,12 @@ namespace BlazorStrap
              .AddClass(Class)
          .Build();
 
-        [Parameter] protected bool IsNavbar { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public bool IsNavbar { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
     
 
-        protected override void OnInit()
+        protected override void OnInitialized()
         {
             if(IsNavbar && Navbar != null)
             {
@@ -42,7 +42,7 @@ namespace BlazorStrap
         private void OnVisableChange(object sender, bool e)
         {
             _isOpen = e;
-            Invoke(() => { IsOpenChanged.InvokeAsync(e); });
+            InvokeAsync(() => { IsOpenChanged.InvokeAsync(e); });
             
         }
 

@@ -8,7 +8,7 @@ namespace BlazorStrap
 {
     public class CodeBSTable : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("table")
             .AddClass("table-dark", IsDark)
@@ -20,14 +20,14 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
-        [Parameter] protected bool IsDark { get; set; }
-        [Parameter] protected bool IsStriped { get; set; }
-        [Parameter] protected bool IsBordered { get; set; }
-        [Parameter] protected bool IsBorderless { get; set; }
-        [Parameter] protected bool IsHovarable { get; set; }
-        [Parameter] protected bool IsSmall { get; set; }
-        [Parameter] protected bool IsResponsive { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public bool IsDark { get; set; }
+        [Parameter] public bool IsStriped { get; set; }
+        [Parameter] public bool IsBordered { get; set; }
+        [Parameter] public bool IsBorderless { get; set; }
+        [Parameter] public bool IsHovarable { get; set; }
+        [Parameter] public bool IsSmall { get; set; }
+        [Parameter] public bool IsResponsive { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
     }
 }

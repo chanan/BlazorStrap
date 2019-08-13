@@ -12,7 +12,7 @@ namespace BlazorStrap
 {
     public class BSBasicInput : ComponentBase
     {
-         [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [CascadingParameter] EditContext MyEditContext { get; set; }
         protected string classname =>
         new CssBuilder()
@@ -32,24 +32,24 @@ namespace BlazorStrap
         };
         private FieldIdentifier _fieldIdentifier;
 
-        [Parameter] protected Expression<Func<object>> For { get; set; }
-        [Parameter] protected InputType InputType { get; set; } = InputType.Text;
-        [Parameter] protected Size Size { get; set; } = Size.None;
-        [Parameter] protected string Value { get; set; }
-        [Parameter] public EventCallback<string> ValueChanged { get; set; }
-        [Parameter] protected bool IsReadonly { get; set; }
-        [Parameter] protected bool IsPlaintext { get; set; }
-        [Parameter] protected bool IsDisabled { get; set; }
-        [Parameter] protected bool IsChecked { get; set; }
-        [Parameter] protected bool IsValid { get; set; }
-        [Parameter] protected bool IsInvalid { get; set; }
-        [Parameter] protected bool IsMultipleSelect { get; set; }
-        [Parameter] protected int? SelectSize { get; set; }
-        [Parameter] protected int? SelectedIndex { get; set; }
-        [Parameter] protected string Class { get; set; }
+        [Parameter] public Expression<Func<object>> For { get; set; }
+        [Parameter] public InputType InputType { get; set; } = InputType.Text;
+        [Parameter] public Size Size { get; set; } = Size.None;
+        [Parameter] public virtual string Value { get; set; }
+        [Parameter] public virtual EventCallback<string> ValueChanged { get; set; }
+        [Parameter] public bool IsReadonly { get; set; }
+        [Parameter] public bool IsPlaintext { get; set; }
+        [Parameter] public bool IsDisabled { get; set; }
+        [Parameter] public bool IsChecked { get; set; }
+        [Parameter] public bool IsValid { get; set; }
+        [Parameter] public bool IsInvalid { get; set; }
+        [Parameter] public bool IsMultipleSelect { get; set; }
+        [Parameter] public int? SelectSize { get; set; }
+        [Parameter] public int? SelectedIndex { get; set; }
+        [Parameter] public string Class { get; set; }
 
-        // [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        // [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
         protected string Type => InputType.ToDescriptionString();
 
@@ -87,7 +87,7 @@ namespace BlazorStrap
             builder.AddAttribute(7, "size", SelectSize);
             builder.AddAttribute(8, "selectedIndex", SelectedIndex);
             builder.AddAttribute(8, "value", Value);
-            builder.AddAttribute(9, "onchange", onchange);
+            builder.AddAttribute(9, "onchange", EventCallback.Factory.Create(this, onchange));
             builder.AddContent(10, ChildContent);
             builder.CloseElement();
 

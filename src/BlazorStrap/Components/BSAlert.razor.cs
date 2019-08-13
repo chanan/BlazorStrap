@@ -10,7 +10,7 @@ namespace BlazorStrap
 {
     public class CodeBSAlert : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         internal BSAlertEvent BSAlertEvent { get; set; }
         internal List<EventCallback<BSAlertEvent>> EventQue { get; set; } = new List<EventCallback<BSAlertEvent>>();
         protected string classname =>
@@ -19,18 +19,18 @@ namespace BlazorStrap
            .AddClass(Class)
        .Build();
 
-        [Parameter] protected Color Color { get; set; } = Color.Primary;
-        [Parameter] protected bool IsDismissible { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public Color Color { get; set; } = Color.Primary;
+        [Parameter] public bool IsDismissible { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
-        [Parameter] protected EventCallback<BSAlertEvent> CloseEvent { get; set; }
-        [Parameter] protected EventCallback<BSAlertEvent> ClosedEvent { get; set; }
+        [Parameter] public EventCallback<BSAlertEvent> CloseEvent { get; set; }
+        [Parameter] public EventCallback<BSAlertEvent> ClosedEvent { get; set; }
 
         /// <summary>
         /// Gets or sets an action to be invoked when the alert is dismissed.
         /// </summary>
-        [Parameter] protected EventCallback OnDismiss { get; set; }
+        [Parameter] public EventCallback OnDismiss { get; set; }
 
         protected bool IsOpen { get; set; } = true;
 

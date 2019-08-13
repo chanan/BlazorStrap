@@ -7,7 +7,7 @@ namespace BlazorStrap
 {
     public class CodeBSTabLabel : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         public RenderFragment Content { get; set; }
         protected string classname =>
         new CssBuilder("nav-item nav-link")
@@ -17,9 +17,9 @@ namespace BlazorStrap
         .Build();
 
         [CascadingParameter] protected BSTab Parent { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected bool IsDisabled { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public bool IsDisabled { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
         protected void Select()
         {

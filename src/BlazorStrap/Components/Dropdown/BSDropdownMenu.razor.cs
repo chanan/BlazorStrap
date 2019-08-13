@@ -9,7 +9,7 @@ namespace BlazorStrap
 {
     public class CodeBSDropdownMenu : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
              new CssBuilder("dropdown-menu")
                  .AddClass("show", !IsOpen.HasValue && DropDown?.Selected == this)
@@ -18,10 +18,10 @@ namespace BlazorStrap
                  .AddClass(Class)
              .Build();
 
-        [Parameter] protected bool? IsOpen { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected bool AutoClose { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public bool? IsOpen { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public bool AutoClose { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] internal BSDropdown DropDown { get; set; }
         [CascadingParameter] internal BSNavItem NavItem { get; set; }
 
@@ -101,7 +101,7 @@ namespace BlazorStrap
                 }
             }
         }
-        protected override void OnInit()
+        protected override void OnInitialized()
         {
             if (DropDown != null)
             {
@@ -115,7 +115,7 @@ namespace BlazorStrap
             {
                 _timer.Elapsed += OnTimedEvent;
             }
-            base.OnInit();
+            base.OnInitialized();
         }
         public void MouseOut(UIMouseEventArgs e)
         {

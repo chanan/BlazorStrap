@@ -9,12 +9,12 @@ namespace BlazorStrap
 {
     public class CodeBSTooltip : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Inject] Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
         //Didnt change this to use DynamicElement so that ref will still work
 
-        protected ElementRef tooltip;
-        protected ElementRef arrow;
+        protected ElementReference tooltip;
+        protected ElementReference arrow;
         protected override void OnAfterRender()
         {
             if (Target != null)
@@ -24,9 +24,9 @@ namespace BlazorStrap
             }
         }
 
-        [Parameter] protected Placement Placement { get; set; } = Placement.Auto;
-        [Parameter] protected string Title { get; set; }
-        [Parameter] protected string Target { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public Placement Placement { get; set; } = Placement.Auto;
+        [Parameter] public string Title { get; set; }
+        [Parameter] public string Target { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
     }
 }

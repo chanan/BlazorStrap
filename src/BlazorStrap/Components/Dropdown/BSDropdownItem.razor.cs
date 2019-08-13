@@ -12,7 +12,7 @@ namespace BlazorStrap
     {
         [Inject] private IUriHelper UriHelper { get; set; }
 
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
                new CssBuilder()
                    .AddClass("dropdown-divider", IsDivider)
@@ -40,15 +40,15 @@ namespace BlazorStrap
             }
         }
         internal bool HasSubMenu {get;set;}
-        [Parameter] protected bool IsDivider { get; set; }
-        [Parameter] protected bool IsDisabled { get; set; }
-        [Parameter] protected bool IsButton { get; set; }
-        [Parameter] protected bool IsActive { get; set; }
-        [Parameter] protected bool StayOpen { get; set; }
-        [Parameter] protected string Href { get; set; } = "javascript:void(0)";
-        [Parameter] protected EventCallback<UIMouseEventArgs> OnClick { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public bool IsDivider { get; set; }
+        [Parameter] public bool IsDisabled { get; set; }
+        [Parameter] public bool IsButton { get; set; }
+        [Parameter] public bool IsActive { get; set; }
+        [Parameter] public bool StayOpen { get; set; }
+        [Parameter] public string Href { get; set; } = "javascript:void(0)";
+        [Parameter] public EventCallback<UIMouseEventArgs> OnClick { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] internal CodeBSDropdown DropDown { get; set; }
 
         protected void onClickEvent(UIMouseEventArgs e)
@@ -63,7 +63,7 @@ namespace BlazorStrap
             }
         }
 
-        protected override void OnInit()
+        protected override void OnInitialized()
         {
             UriHelper.OnLocationChanged += OnLocationChanged;
             OnLocationChanged(this, new LocationChangedEventArgs(UriHelper.GetAbsoluteUri(), true));

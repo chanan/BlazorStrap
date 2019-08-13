@@ -9,7 +9,7 @@ namespace BlazorStrap
 {
     public class CodeBSBadge : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder().AddClass("badge")
             .AddClass("badge-pill", IsPill)
@@ -19,11 +19,11 @@ namespace BlazorStrap
 
         protected string Tag { get; set; } = "span";
 
-        [Parameter] protected Color Color { get; set; } = Color.Primary;
-        [Parameter] protected bool IsPill { get; set; }
+        [Parameter] public Color Color { get; set; } = Color.Primary;
+        [Parameter] public bool IsPill { get; set; }
         private string _href;
         [Parameter]
-        protected string Href
+        public string Href
         {
             get => _href;
             set
@@ -35,7 +35,7 @@ namespace BlazorStrap
         }
         private EventCallback<UIMouseEventArgs> _onlick { get; set; }
         [Parameter]
-        protected EventCallback<UIMouseEventArgs> onclick
+        public EventCallback<UIMouseEventArgs> onclick
         {
             get => _onlick;
 
@@ -46,8 +46,8 @@ namespace BlazorStrap
                 else { Tag = "span"; }
             }
         }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
         protected void _onclick(UIMouseEventArgs e)
         {

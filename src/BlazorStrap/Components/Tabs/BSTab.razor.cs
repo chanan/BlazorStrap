@@ -10,7 +10,7 @@ namespace BlazorStrap
 {
     public class CodeBSTab : ComponentBase, IDisposable
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         public RenderFragment Content { get; set; }
         public bool Selected
         {
@@ -29,20 +29,20 @@ namespace BlazorStrap
         [CascadingParameter] protected BSTabGroup Group { get; set; }
         [CascadingParameter] protected BSTabList Parent { get; set; }
         [Parameter] public string Id { get; set; } = Guid.NewGuid().ToString();
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
-        [Parameter] protected string Name { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
+        [Parameter] public string Name { get; set; }
 
 
 
-        protected override Task OnInitAsync()
+        protected override Task OnInitializedAsync()
         {
             Group.Tabs.Add(this);
             if (Group.Selected == null)
             {
                 Group.Selected = this;
             }
-            return base.OnInitAsync();
+            return base.OnInitializedAsync();
         }
 
         public void Select()

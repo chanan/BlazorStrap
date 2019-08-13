@@ -8,7 +8,7 @@ namespace BlazorStrap
 {
     public class CodeBSImage : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder()
             .AddClass("rounded", IsRounded)
@@ -18,11 +18,11 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
-        [Parameter] protected bool IsThumbnail { get; set; }
-        [Parameter] protected bool IsResponsive { get; set; }
-        [Parameter] protected bool IsRounded { get; set; }
-        [Parameter] protected Alignment Alignment { get; set; }
-        [Parameter] protected string Class { get; set; }
+        [Parameter] public bool IsThumbnail { get; set; }
+        [Parameter] public bool IsResponsive { get; set; }
+        [Parameter] public bool IsRounded { get; set; }
+        [Parameter] public Alignment Alignment { get; set; }
+        [Parameter] public string Class { get; set; }
 
         private string GetAlignment()
         {

@@ -9,7 +9,7 @@ namespace BlazorStrap
 {
     public class CodeBSListGroupItem : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
         new CssBuilder("list-group-item")
             .AddClass($"list-group-item-{Color.ToDescriptionString()}", Color != Color.None)
@@ -29,12 +29,12 @@ namespace BlazorStrap
         protected string href =>  ListGroupType == ListGroupType.Link ? "javascript:void(0)" : null;
         protected string IsButton => Tag == "button" ? "button" : "";
 
-        [Parameter] protected bool IsActive { get; set; }
-        [Parameter] protected bool IsDisabled { get; set; }
-        [Parameter] protected ListGroupType ListGroupType { get; set; } = ListGroupType.List;
-        [Parameter] protected EventCallback<UIMouseEventArgs> OnClick { get; set; }
-        [Parameter] protected Color Color { get; set; } = Color.None;
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public bool IsActive { get; set; }
+        [Parameter] public bool IsDisabled { get; set; }
+        [Parameter] public ListGroupType ListGroupType { get; set; } = ListGroupType.List;
+        [Parameter] public EventCallback<UIMouseEventArgs> OnClick { get; set; }
+        [Parameter] public Color Color { get; set; } = Color.None;
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
     }
 }

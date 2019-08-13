@@ -9,7 +9,7 @@ namespace BlazorStrap
 {
     public class CodeBSCard : ComponentBase
     {
-        [Parameter(CaptureUnmatchedValues = true)] protected IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
               new CssBuilder()
                   .AddClass(GetClass())
@@ -27,15 +27,15 @@ namespace BlazorStrap
             _ => "div"
         };
 
-        [Parameter] protected CardType CardType { get; set; } = CardType.Card;
-        [Parameter] protected VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
-        [Parameter] protected Alignment Alignment { get; set; } = Alignment.Left;
-        [Parameter] protected HeadingSize HeadingSize { get; set; } = HeadingSize.None;
-        [Parameter] protected bool IsInverse { get; set; }
-        [Parameter] protected Color Color { get; set; } = Color.None;
-        [Parameter] protected bool IsOutline { get; set; }
-        [Parameter] protected string Class { get; set; }
-        [Parameter] protected RenderFragment ChildContent { get; set; }
+        [Parameter] public CardType CardType { get; set; } = CardType.Card;
+        [Parameter] public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
+        [Parameter] public Alignment Alignment { get; set; } = Alignment.Left;
+        [Parameter] public HeadingSize HeadingSize { get; set; } = HeadingSize.None;
+        [Parameter] public bool IsInverse { get; set; }
+        [Parameter] public Color Color { get; set; } = Color.None;
+        [Parameter] public bool IsOutline { get; set; }
+        [Parameter] public string Class { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
         private string GetImageVerticalAlignmnet() => this.VerticalAlignment switch
         {
