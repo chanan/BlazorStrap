@@ -3,9 +3,9 @@
 
 @if (IsOpen == null)
 { 
-<DynamicElement @attributes="@UnknownParameters" TagName="@Tag" class="@classname" href="@href" type="@Type" aria-haspopup="true" aria-expanded="@Dropdown.Open.ToString()" @onclick="OnClickEvent" @onkeydown="Escape" >
-    @ChildContent
-</DynamicElement>
+    <DynamicElement @attributes="@UnknownParameters" TagName="@Tag" class="@classname" href="@href" type="@Type" aria-haspopup="true" aria-expanded="@Dropdown.Open.ToString()" @onclick="OnClickEvent" @onkeydown="Escape">
+        @ChildContent
+    </DynamicElement>
 }
 else
 {

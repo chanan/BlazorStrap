@@ -44,7 +44,7 @@ namespace BlazorStrap
             builder.OpenComponent<CascadingValue<BSForm>>(3);
             builder.AddAttribute(4, "IsFixed", true);
             builder.AddAttribute(5, "Value", this);
-            builder.AddContent(6, Form);
+            builder.AddAttribute(6, "ChildContent", Form);
             builder.CloseComponent();
 
         }
