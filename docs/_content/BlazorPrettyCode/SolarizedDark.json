@@ -1,0 +1,56 @@
+{
+  "Name": "Solarized Dark",
+  "Settings": [
+    {
+      "Settings": {
+        "background-color": "#002B36",
+        "color": "#93A1A1",
+        "font-family": "'Fira Code'"
+      }
+    },
+    {
+      "Name": "Text",
+      "Settings": { "color": "#B9C0BB" }
+    },
+    {
+      "Name": "Tag symbols",
+      "Settings": { "color": "#657B83" }
+    },
+    {
+      "Name": "Tag name",
+      "Settings": { "color": "#268BD2" }
+    },
+    {
+      "Name": "Attribute name",
+      "Settings": { "color": "#93A1A1" }
+    },
+    {
+      "Name": "Attribute value",
+      "Settings": { "color": "#2AA198" }
+    },
+    {
+      "Name": "String",
+      "Settings": { "color": "#2AA198" }
+    },
+    {
+      "Name": "Razor Keyword",
+      "Settings": {
+        "color": "#859900"
+      }
+    },
+    {
+      "Name": "Row Highlight",
+      "Settings": {
+        "background-color": "yellow",
+        "color": "black"
+      }
+    },
+    {
+      "Name": "Font",
+      "Settings": {
+        "font-family": "Fira Code",
+        "font-weight": "400"
+      }
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "Name": "Pretty Code - Default",
+  "Settings": [
+    {
+      "Settings": {
+        "background-color": "rgba(238,238,238,0.92)",
+        "color": "#000",
+        "font-family": "'Fira Code'"
+      }
+    },
+    {
+      "Name": "Text",
+      "Settings": { "color": "#000" }
+    },
+    {
+      "Name": "Tag symbols",
+      "Settings": { "color": "#03c" }
+    },
+    {
+      "Name": "Tag name",
+      "Settings": { "color": "#03c" }
+    },
+    {
+      "Name": "Attribute name",
+      "Settings": {
+        "color": "#36c",
+        "font-style": "italic"
+      }
+    },
+    {
+      "Name": "Attribute value",
+      "Settings": { "color": "#093" }
+    },
+    {
+      "Name": "String",
+      "Settings": { "color": "#093" }
+    },
+    {
+      "Name": "Razor Keyword",
+      "Settings": {
+        "background-color": "yellow",
+        "color": "black"
+      }
+    },
+    {
+      "Name": "Row Highlight",
+      "Settings": {
+        "background-color": "yellow",
+        "color": "black"
+      }
+    },
+    {
+      "Name": "Font",
+      "Settings": {
+        "font-family": "Fira Code",
+        "font-weight": "400"
+      }
+    }
+  ]
+}
