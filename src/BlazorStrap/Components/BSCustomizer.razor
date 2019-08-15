@@ -1,0 +1,14 @@
+﻿@namespace BlazorStrap
+@inherits CodeBSCustomizer
+    <style>
+        :root {
+            @foreach (var prop in Config.GetType().GetProperties())
+            {
+                    string value = (string)prop.GetValue(Config);
+                    if (value != null)
+                    {
+                        @("--" + prop.Name.ToLower().Replace("_", "-") + ": " + value + "!important;") 
+                    }
+            }
+        }
+    </style>

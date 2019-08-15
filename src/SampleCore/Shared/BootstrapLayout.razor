@@ -1,6 +1,6 @@
 @inherits LayoutComponentBase
 @inject IBootstrapCSS BootstrapCSS
-
+<BSCustomizer Config="MyConfig"></BSCustomizer>
 <BSNavbar IsFixedTop="true" IsDark="true" Class="navbar-expand flex-column flex-md-row bd-navbar">
     <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Blazorstrap"><img src="_content/SampleCore/logo-inverted.svg" width="36" height="36" alt="BlazorStrap"></a>
     <div class="navbar-nav-scroll">
@@ -56,17 +56,18 @@
 </div>
 
 @code {
+    private BSCustomizerConfig MyConfig = new BSCustomizerConfig() { Primary = "Red" };
     private bool isServerSide = false;
     private bool hasBeendone = false;
     protected override Task OnInitializedAsync()
     {
         try
         {
-         //   await BootstrapCSS.SetBootstrapCSS("4.3.1");
+            //   await BootstrapCSS.SetBootstrapCSS("4.3.1");
         }
         catch (Exception)
         {
-       //     isServerSide = true;
+            //     isServerSide = true;
         }
         return base.OnInitializedAsync();
     }
