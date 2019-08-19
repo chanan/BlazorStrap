@@ -24,8 +24,9 @@ namespace BlazorStrap
             }
         }
         protected private string classname =>
-        new CssBuilder("nav")
-            .AddClass("navbar-nav", IsNavbar)
+        new CssBuilder()
+            .AddClass("nav", !RemoveDefaultClass)
+            .AddClass("navbar-nav", IsNavbar )
             .AddClass("nav-tabs", IsTabs)
             .AddClass("nav-pills", IsPills)
             .AddClass("nav-fill", IsFill)
@@ -36,7 +37,8 @@ namespace BlazorStrap
 
         protected string Tag => IsList ? "ul" : "nav";
 
-        [Parameter] public bool IsList { get;set;} 
+        [Parameter] public bool IsList { get;set;}
+        [Parameter] public bool RemoveDefaultClass { get; set; }
         [Parameter] public Alignment Alignment { get; set; } = Alignment.None;
         [Parameter] public bool IsVertical { get; set; }
         [Parameter] public bool IsTabs { get; set; }

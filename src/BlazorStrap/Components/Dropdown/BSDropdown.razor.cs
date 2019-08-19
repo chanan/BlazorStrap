@@ -46,7 +46,7 @@ namespace BlazorStrap
             set
             {
                 _selected = value;
-                StateHasChanged();
+                InvokeAsync(StateHasChanged);
             }
         }
 
