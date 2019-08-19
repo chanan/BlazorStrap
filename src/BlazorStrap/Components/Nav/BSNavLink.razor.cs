@@ -13,8 +13,11 @@ namespace BlazorStrap
         [Inject] private IUriHelper UriHelper { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [CascadingParameter] BSNavItem Parent { get; set; }
+        [CascadingParameter] BSCollapseItem CollapseItem { get; set; }
+        [CascadingParameter] BSListItem ListItem { get; set; }
         protected string classname =>
-        new CssBuilder("nav-item nav-link")
+        new CssBuilder()
+            .AddClass("nav-item nav-link", !RemoveDefaultClass)
             .AddClass("active", IsActive)
             .AddClass("disabled", IsDisabled)
             .AddClass(Class)
@@ -22,6 +25,7 @@ namespace BlazorStrap
 
         protected string disabled => IsDisabled ? "disabled" : null;
 
+        [Parameter] public bool RemoveDefaultClass { get; set; }
         [Parameter] public bool IsActive { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
         [Parameter] public string Class { get; set; }
@@ -32,6 +36,7 @@ namespace BlazorStrap
         {
             UriHelper.OnLocationChanged += OnLocationChanged;
             OnLocationChanged(this, new LocationChangedEventArgs(UriHelper.GetAbsoluteUri(), true));
+            OnLocationChanged(this, new LocationChangedEventArgs(UriHelper.GetAbsoluteUri(), true));
         }
         public void Dispose()
         {
@@ -41,15 +46,20 @@ namespace BlazorStrap
         public void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
             var active = e.Location.MatchActiveRoute(UriHelper.GetBaseUri() + Href);
-            if (active != IsActive)
-            {
+          
                 if (Parent != null)
                 {
                     Parent.Active = active;
                 }
+                if(CollapseItem != null)
+                {
+                    CollapseItem.Active = active;
+                }
+                if(ListItem != null)
+                {
+                    ListItem.Active = active;
+                }
                 IsActive = active;
-                StateHasChanged();
-            }
         }
     }
 }

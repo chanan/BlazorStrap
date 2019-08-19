@@ -49,19 +49,30 @@ namespace BlazorStrap
             }
         }
         private bool _MouseDown = false;
-        public bool Active = false;
+        private bool _active;
+        public bool Active
+        {
+            get { return _active; }
+            set
+            {
+                _active = value;
+                StateHasChanged();
+            }
+        }
         protected string classname =>
-            new CssBuilder("nav-item")
+            new CssBuilder()
+                .AddClass("nav-item", !RemoveDefaultClass)
                 .AddClass("dropdown", IsDropdown)
                 .AddClass("dropdown-submenu", IsSubmenu)
                 .AddClass("show", IsDropdown && _manual == null && Nav?.Selected == this)
                 .AddClass("show", IsDropdown && _manual != null && IsOpen.HasValue && IsOpen.Value)
-                .AddClass("active", Active)
+                .AddClass("active", _active)
                 .AddClass(Class)
             .Build();
 
         protected string Tag => Nav.IsList ? "li" : "div";
 
+        [Parameter] public bool RemoveDefaultClass { get; set; }
         [Parameter] public bool IsDropdown { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }

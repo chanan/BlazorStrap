@@ -86,7 +86,10 @@ namespace BlazorStrap.Util.Components
             IsOpenChanged.InvokeAsync(_isOpen);
             StateHasChanged();
         }
-
+        public virtual bool GetStatus()
+        {
+            return _isOpen;
+        }
       
     }
 }

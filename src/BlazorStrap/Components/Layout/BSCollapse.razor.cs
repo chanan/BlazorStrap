@@ -14,15 +14,17 @@ namespace BlazorStrap
         [Parameter] public EventCallback<BSCollapseEvent> ShownEvent { get; set; }
         [Parameter] public EventCallback<BSCollapseEvent> HideEvent { get; set; }
         [Parameter] public EventCallback<BSCollapseEvent> HiddenEvent { get; set; }
-
+        [Parameter] public bool IsList { get; set; }
         [CascadingParameter] protected BSNavbar Navbar { get; set; }
         internal BSCollapseEvent BSCollapseEvent { get; set; }
         internal List<EventCallback<BSCollapseEvent>> EventQue { get; set; } = new List<EventCallback<BSCollapseEvent>>();
 
+        [CascadingParameter] internal CodeBSCollapseItem CollapseItem { get; set; }
+        protected string Tag => IsList ? "li" : "div";
         protected string classname =>
          new CssBuilder("collapse")
              .AddClass("navbar-collapse", IsNavbar)
-             .AddClass("show", IsOpen.HasValue && IsOpen.Value)
+             .AddClass("show", IsOpen.HasValue && IsOpen.Value || _isOpen)
              .AddClass(Class)
          .Build();
 
@@ -36,6 +38,10 @@ namespace BlazorStrap
             if(IsNavbar && Navbar != null)
             {
                 Navbar.VisableChange += OnVisableChange;
+            }
+            if(CollapseItem != null)
+            {
+                CollapseItem.Collapse = this;
             }
         }
 
