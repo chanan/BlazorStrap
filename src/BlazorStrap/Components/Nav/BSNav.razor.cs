@@ -21,9 +21,8 @@ namespace BlazorStrap
             }
             set
             {
-                _selected.Hide();
                 _selected = value;
-                InvokeAsync(() => StateHasChanged());
+               InvokeAsync(StateHasChanged);
             }
         }
         protected private string classname =>
@@ -74,7 +73,8 @@ namespace BlazorStrap
         }
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            Selected = null;
+            if(Selected != null)
+            Selected.Selected = null;
             _timer.Stop();
             _timer.Interval = 250;
         }
