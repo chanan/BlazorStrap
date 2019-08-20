@@ -61,7 +61,7 @@ namespace BlazorStrap.Util.Components
             JustOpened = true;
             Changed(true);
             IsOpenChanged.InvokeAsync(true);
-            StateHasChanged();
+            InvokeAsync(() => StateHasChanged());
         }
         public virtual void Hide()
         {
@@ -72,7 +72,7 @@ namespace BlazorStrap.Util.Components
             _isOpen = false;
             Changed(false);
             IsOpenChanged.InvokeAsync(false);
-            StateHasChanged();
+            InvokeAsync(() => StateHasChanged());
         }
         public virtual void Toggle()
         {
@@ -84,7 +84,7 @@ namespace BlazorStrap.Util.Components
             JustOpened = _isOpen;
             Changed(_isOpen);
             IsOpenChanged.InvokeAsync(_isOpen);
-            StateHasChanged();
+            InvokeAsync(() => StateHasChanged());
         }
         public virtual bool GetStatus()
         {

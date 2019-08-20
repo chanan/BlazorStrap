@@ -3,12 +3,14 @@ using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System;
 using System.Collections.Generic;
+using System.Timers;
 
 namespace BlazorStrap
 {
     public class CodeBSNav : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
+        private System.Timers.Timer _timer = new System.Timers.Timer(250);
         private CodeBSNavItem _selected;
         internal List<CodeBSNavItem> Navitems { get; set; } = new List<CodeBSNavItem>();
         public CodeBSNavItem Selected
@@ -19,8 +21,9 @@ namespace BlazorStrap
             }
             set
             {
+                _selected.Hide();
                 _selected = value;
-                StateHasChanged();
+                InvokeAsync(() => StateHasChanged());
             }
         }
         protected private string classname =>
@@ -48,6 +51,16 @@ namespace BlazorStrap
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
 
+        internal void GotFocus()
+        {
+            _timer.Stop();
+            _timer.Interval = 250;
+        }
+        protected void LostFocus()
+        {
+            _timer.Start();
+        }
+
         private string GetAlignment()
         {
             if (Alignment == Alignment.Center) { return "justify-content-center"; }
@@ -57,7 +70,13 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
-            base.OnInitialized();
+            _timer.Elapsed += OnTimedEvent;
+        }
+        private void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            Selected = null;
+            _timer.Stop();
+            _timer.Interval = 250;
         }
     }
 }

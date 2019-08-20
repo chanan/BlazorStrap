@@ -71,6 +71,7 @@ namespace BlazorStrap
             {
                 Visable = false;
             }
+            
             _timer.Stop();
             _timer.Interval = 250;
         }
