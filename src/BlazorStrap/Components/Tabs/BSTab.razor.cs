@@ -57,12 +57,19 @@ namespace BlazorStrap
         }
         public void UpdateContent()
         {
-            Group.Tabs.First(q => q == this).Content = Content;
-            if (this == Group.Selected)
+            try
             {
-                Group.Selected = null;
-                Group.Selected = this;
-                StateHasChanged();
+                Group.Tabs.First(q => q == this).Content = Content;
+                if (this == Group.Selected)
+                {
+                    Group.Selected = null;
+                    Group.Selected = this;
+                    StateHasChanged();
+                }
+            }
+            catch
+            {
+
             }
         }
 
