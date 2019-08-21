@@ -30,7 +30,7 @@ namespace BlazorStrap
                 EventQue.Add(ShownEvent);
                 EventQue.Add(HiddenEvent);
                 _selected = value;
-                StateHasChanged();
+                InvokeAsync(StateHasChanged);
             }
         }
 
