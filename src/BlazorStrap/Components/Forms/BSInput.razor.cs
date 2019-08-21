@@ -155,7 +155,24 @@ namespace BlazorStrap
                     return false;
                 }
             }
-
+            else if(typeof(T) == typeof(int))
+            {
+                result = (T)(object)Convert.ToInt32(value);
+                validationErrorMessage = null;
+                return true;
+            }
+            else if (typeof(T) == typeof(long))
+            {
+                result = (T)(object)Convert.ToInt64(value);
+                validationErrorMessage = null;
+                return true;
+            }
+            else if (typeof(T) == typeof(double))
+            {
+                result = (T)(object)Convert.ToDouble(value);
+                validationErrorMessage = null;
+                return true;
+            }
             throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
         }
     }
