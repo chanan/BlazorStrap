@@ -45,28 +45,36 @@ namespace BlazorStrap
             }
             else
             {
-                // Sets Focus inside model so escape key can work.
-                if (JustOpened)
+                // This try can be removed after they fix prerendering
+                try
                 {
-                    await new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
-                    await new BlazorStrapInterop(JSRuntime).ChangeBodyModal(_isOpen ? "17px" : null);
-                    if (!IgnoreEscape)
+                    // Sets Focus inside model so escape key can work.
+                    if (JustOpened)
                     {
-                        await new BlazorStrapInterop(JSRuntime).ModalEscapeKey();
-                        BlazorStrapInterop.OnEscapeEvent += OnEscape;
+                        await new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
+                        await new BlazorStrapInterop(JSRuntime).ChangeBodyModal(_isOpen ? "17px" : null);
+                        if (!IgnoreEscape)
+                        {
+                            await new BlazorStrapInterop(JSRuntime).ModalEscapeKey();
+                            BlazorStrapInterop.OnEscapeEvent += OnEscape;
+                        }
+                        JustOpened = false;
                     }
-                    JustOpened = false;
+                    else if (Closed)
+                    {
+                        Closed = false;
+                        await new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
+                        await new BlazorStrapInterop(JSRuntime).ChangeBodyModal(_isOpen ? "17px" : null);
+                    }
+                    for (int i = 0; i < EventQue.Count; i++)
+                    {
+                        await EventQue[i].InvokeAsync(BSModalEvent);
+                        EventQue.RemoveAt(i);
+                    }
                 }
-                else if (Closed)
+                catch
                 {
-                    Closed = false;
-                    await new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
-                    await new BlazorStrapInterop(JSRuntime).ChangeBodyModal(_isOpen ? "17px" : null);
-                }
-                for (int i = 0; i < EventQue.Count; i++)
-                {
-                    await EventQue[i].InvokeAsync(BSModalEvent);
-                    EventQue.RemoveAt(i);
+
                 }
             }
         }
