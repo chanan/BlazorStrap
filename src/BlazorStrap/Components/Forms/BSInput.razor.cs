@@ -173,6 +173,12 @@ namespace BlazorStrap
                 validationErrorMessage = null;
                 return true;
             }
+            else if (typeof(T) == typeof(Guid))
+            {
+                result = (T)(object)Guid.Parse(value);
+                validationErrorMessage = null;
+                return true;
+            }
             throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
         }
     }
