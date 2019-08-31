@@ -24,7 +24,7 @@ Use With:
 		@if (TimeStamp.HasValue)
 		{
 			//ToDo: For best results, use "PrettyDate" C# Extension on `DateTime.ToString()`
-			<small class="text-muted">@TimeStamp.Value.ToString()</small>
+			<small class="text-muted">@TimeStamp.Value.ToString(DateFormat)</small>
 		}
 		<button @onclick="onclick" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
