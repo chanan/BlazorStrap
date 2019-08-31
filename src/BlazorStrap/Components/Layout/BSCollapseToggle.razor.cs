@@ -36,8 +36,6 @@ namespace BlazorStrap
         [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] internal BSCollapseItem CollapseItem { get; set; }
         [CascadingParameter] internal BSCollapseGroup CollapseGroup { get; set; }
-
-        //private bool hasRendered = false;
        
         protected void OnClickEvent()
         {
