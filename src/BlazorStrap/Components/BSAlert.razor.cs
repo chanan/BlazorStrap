@@ -15,6 +15,7 @@ namespace BlazorStrap
         internal List<EventCallback<BSAlertEvent>> EventQue { get; set; } = new List<EventCallback<BSAlertEvent>>();
         protected string classname =>
        new CssBuilder().AddClass("alert")
+           .AddClass(IsDismissible? "alert-dismissible" : "")
            .AddClass($"alert-{Color.ToDescriptionString()}")
            .AddClass(Class)
        .Build();
