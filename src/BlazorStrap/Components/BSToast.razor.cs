@@ -16,7 +16,7 @@ namespace BlazorStrap
             .AddClass("hide", !IsVisible || IsDismissed)
             .AddClass(Class)
         .Build();
-
+        [Parameter] public string DateFormat {get; set;} = null;
         [Parameter] public string ImgSrc { get; set; }
         [Parameter] public string ImgDescription { get; set; }
         [Parameter] public DateTime? TimeStamp { get; set; }
