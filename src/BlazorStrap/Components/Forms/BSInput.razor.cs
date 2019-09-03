@@ -175,7 +175,27 @@ namespace BlazorStrap
             }
             else if (typeof(T) == typeof(Guid))
             {
-                result = (T)(object)Guid.Parse(value);
+                try
+                { 
+                    result = (T)(object)Guid.Parse(value);
+                }
+                catch
+                {
+                    throw new InvalidOperationException($"Could not parse input. Invalid Guid format.");
+                }
+                validationErrorMessage = null;
+                return true;
+            }
+            else if (typeof(T) == typeof(DateTime))
+            {
+                try
+                {
+                    result = (T)(object)DateTime.Parse(value);
+                }
+                catch
+                {
+                    throw new InvalidOperationException($"Could not parse input. Invalid DateTime format.");
+                }
                 validationErrorMessage = null;
                 return true;
             }
