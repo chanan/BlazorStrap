@@ -19,6 +19,8 @@ namespace BlazorStrap
           .AddClass("btn-block", IsBlock)
           .AddClass("active", ButtonType == ButtonType.Link && IsActive)
           .AddClass("disabled", ButtonType == ButtonType.Link && IsDisabled)
+          .AddClass("valid", IsValid)
+          .AddClass("invalid", IsInvalid)
           .AddClass(Class)
         .Build();
 
@@ -70,6 +72,8 @@ namespace BlazorStrap
         [Parameter] public bool IsActive { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
         [Parameter] public string Class { get; set; }
+        [Parameter] public bool IsValid { get; set; }
+        [Parameter] public bool IsInvalid { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
     }
 }
