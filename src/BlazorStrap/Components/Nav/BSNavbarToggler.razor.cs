@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class BSNavbarTogglerBase  : ComponentBase
+    public abstract class BSNavbarTogglerBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>

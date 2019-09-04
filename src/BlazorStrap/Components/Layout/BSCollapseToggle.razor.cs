@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace BlazorStrap
 {
-    public class BSCollapseToggleBase  : ComponentBase
+    public abstract class BSCollapseToggleBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>

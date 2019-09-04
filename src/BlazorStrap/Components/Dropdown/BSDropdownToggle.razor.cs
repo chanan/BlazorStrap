@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class BSDropdownToggleBase  : ComponentBase
+    public abstract class BSDropdownToggleBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>

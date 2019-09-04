@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class BSNavItemBase : ToggleableComponentBase , IDisposable
+    public abstract class BSNavItemBase : ToggleableComponentBase , IDisposable
     {
         internal bool IsSubmenu;
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }

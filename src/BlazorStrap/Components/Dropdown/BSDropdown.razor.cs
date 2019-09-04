@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap 
 {
-    public class BSDropdownBase : ToggleableComponentBase
+    public abstract class BSDropdownBase : ToggleableComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] public EventCallback<BSDropdownEvent> ShowEvent { get; set; }

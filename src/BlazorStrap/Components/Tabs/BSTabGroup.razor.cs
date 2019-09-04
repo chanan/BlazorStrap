@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public class BSTabGroupBase  : ComponentBase
+    public abstract class BSTabGroupBase : ComponentBase
     {
         internal bool Disposing = false;
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }

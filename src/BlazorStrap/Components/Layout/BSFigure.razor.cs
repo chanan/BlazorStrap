@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class BSFigureBase  : ComponentBase
+    public abstract class BSFigureBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>

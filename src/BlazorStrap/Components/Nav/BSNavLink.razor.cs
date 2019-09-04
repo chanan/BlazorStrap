@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace BlazorStrap
 {
-    public class BSNavLinkBase  : ComponentBase, IDisposable
+    public abstract class BSNavLinkBase : ComponentBase, IDisposable
     {
         [Inject] private IUriHelper UriHelper { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }

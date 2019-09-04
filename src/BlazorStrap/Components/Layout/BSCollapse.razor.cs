@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class BSCollapseBase : ToggleableComponentBase 
+    public abstract class BSCollapseBase : ToggleableComponentBase 
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] public EventCallback<BSCollapseEvent> ShowEvent { get; set; }

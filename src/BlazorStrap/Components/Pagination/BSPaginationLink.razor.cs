@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class BSPaginationLinkBase  : ComponentBase
+    public abstract class BSPaginationLinkBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>

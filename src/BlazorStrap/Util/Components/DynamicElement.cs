@@ -11,7 +11,7 @@ namespace BlazorStrap.Util.Components
     /// when you want to combine a set of attributes declared at compile time with
     /// another set determined at runtime.
     /// </summary>
-    public class DynamicElement  : ComponentBase
+    public class DynamicElement : ComponentBase
     {
         /// <summary>
         /// Gets or sets the name of the element to render.

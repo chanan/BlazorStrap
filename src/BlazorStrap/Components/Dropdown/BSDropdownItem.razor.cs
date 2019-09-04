@@ -8,7 +8,7 @@ using BlazorStrap.Util;
 
 namespace BlazorStrap
 {
-    public class BSDropdownItemBase  : ComponentBase, IDisposable
+    public abstract class BSDropdownItemBase : ComponentBase, IDisposable
     {
         [Inject] private IUriHelper UriHelper { get; set; }
 

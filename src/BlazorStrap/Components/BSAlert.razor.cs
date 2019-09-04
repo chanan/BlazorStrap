@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public class BSAlertBase  : ComponentBase
+    public abstract class BSAlertBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         internal BSAlertEvent BSAlertEvent { get; set; }

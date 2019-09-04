@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class BSDropdownHeaderBase  : ComponentBase
+    public abstract class BSDropdownHeaderBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>

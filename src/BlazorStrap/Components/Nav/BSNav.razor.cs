@@ -7,7 +7,7 @@ using System.Timers;
 
 namespace BlazorStrap
 {
-    public class BSNavBase  : ComponentBase
+    public abstract class BSNavBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         private System.Timers.Timer _timer = new System.Timers.Timer(250);

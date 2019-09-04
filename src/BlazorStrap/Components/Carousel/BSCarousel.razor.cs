@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System;
-using System.Timers;
 using System.Collections.Generic;
+using System.Timers;
 
 namespace BlazorStrap
 {
-    public class BSCarouselBase  : ComponentBase , IDisposable
+    public abstract class BSCarouselBase : ComponentBase, IDisposable
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
+
         protected string classname =>
         new CssBuilder("carousel slide")
         .AddClass(Class)
@@ -57,8 +57,8 @@ namespace BlazorStrap
 
         internal void FireEvent(int newIndex, int OldIndex)
         {
-
         }
+
         public void Dispose()
         {
             if (_timer != null)

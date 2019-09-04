@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class BSTabBase  : ComponentBase, IDisposable
+    public abstract class BSTabBase : ComponentBase, IDisposable
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         public RenderFragment Content { get; set; }

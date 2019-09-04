@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BlazorStrap.Components.Forms
 {
-    public class BSValidationSummary  : ComponentBase
+    public class BSValidationSummary : ComponentBase
     {
         [CascadingParameter] EditContext CurrentEditContext { get; set; }
         /// <summary>

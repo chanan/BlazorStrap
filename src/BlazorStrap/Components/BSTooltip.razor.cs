@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class BSTooltipBase  : ComponentBase
+    public abstract class BSTooltipBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Inject] Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }

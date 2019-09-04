@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap 
 {
-    public class BSCollapseItemBase  : ComponentBase
+    public abstract class BSCollapseItemBase : ComponentBase
     {
         [Parameter] public RenderFragment ChildContent { get; set; }
         internal BSCollapseBase Collapse { get; set; }
