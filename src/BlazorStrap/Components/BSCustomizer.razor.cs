@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BlazorStrap
 {
-    public class CodeBSCustomizer : ComponentBase
+    public class BSCustomizerBase  : ComponentBase
     {
         [Parameter] public BSCustomizerConfig Config  { get; set; } = new BSCustomizerConfig();
     }

@@ -7,6 +7,6 @@ namespace BlazorStrap
 {
     public class BSDropdownEvent
     {
-        public CodeBSDropdown Target { get; set; }
+        public BSDropdownBase Target { get; set; }
     }
 }

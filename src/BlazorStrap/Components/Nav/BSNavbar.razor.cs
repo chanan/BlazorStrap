@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSNavbar : ComponentBase
+    public class BSNavbarBase  : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         private System.Timers.Timer _timer = new System.Timers.Timer(250);

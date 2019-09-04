@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSModal : ToggleableComponentBase
+    public class BSModalBase : ToggleableComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] public EventCallback<BSModalEvent> ShowEvent { get; set; }

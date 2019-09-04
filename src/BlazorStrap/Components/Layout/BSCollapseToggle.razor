@@ -1,5 +1,5 @@
 ﻿@namespace BlazorStrap
-@inherits CodeBSCollapseToggle
+@inherits BSCollapseToggleBase
 
         <DynamicElement @attributes="@UnknownParameters" TagName="@Tag" class="@classname" href="@href" type="@Type" @onclick="OnClickEvent" data-toggle="collapse" aria-expanded="@CollapseItem?.Collapse?.GetStatus().ToString().ToLower()">
             @ChildContent

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap 
 {
-    public class CodeBSDropdown : ToggleableComponentBase
+    public class BSDropdownBase : ToggleableComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] public EventCallback<BSDropdownEvent> ShowEvent { get; set; }
@@ -22,10 +22,10 @@ namespace BlazorStrap
 
         // Prevents rogue closing
         private System.Timers.Timer _timer = new System.Timers.Timer(250);
-        private CodeBSDropdownMenu _selected;
-        private CodeBSDropdownMenu _dropDownMenu { get; set; } = new BSDropdownMenu();
+        private BSDropdownMenuBase _selected;
+        private BSDropdownMenuBase _dropDownMenu { get; set; } = new BSDropdownMenu();
         public bool Active = false;
-        internal CodeBSDropdownMenu DropDownMenu
+        internal BSDropdownMenuBase DropDownMenu
         {
             get
             {
@@ -37,7 +37,7 @@ namespace BlazorStrap
                 StateHasChanged();
             }
         }
-        public CodeBSDropdownMenu Selected
+        public BSDropdownMenuBase Selected
         {
             get
             {

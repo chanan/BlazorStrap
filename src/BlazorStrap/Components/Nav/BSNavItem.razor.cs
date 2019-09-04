@@ -7,16 +7,16 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSNavItem : ToggleableComponentBase , IDisposable
+    public class BSNavItemBase : ToggleableComponentBase , IDisposable
     {
         internal bool IsSubmenu;
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
 
-        private CodeBSDropdownMenu _selected;
+        private BSDropdownMenuBase _selected;
         //Prevents NULL
-        private CodeBSDropdownMenu _dropDownMenu { get; set; } = new BSDropdownMenu();
+        private BSDropdownMenuBase _dropDownMenu { get; set; } = new BSDropdownMenu();
 
-        public CodeBSDropdownMenu DropDownMenu
+        public BSDropdownMenuBase DropDownMenu
         {
             get
             {
@@ -28,7 +28,7 @@ namespace BlazorStrap
                 StateHasChanged();
             }
         }
-        public CodeBSDropdownMenu Selected
+        public BSDropdownMenuBase Selected
         {
             get
             {

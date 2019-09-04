@@ -8,6 +8,6 @@ namespace BlazorStrap
 {
     public class BSAlertEvent
     {
-        public CodeBSAlert Target { get; set; }
+        public BSAlertBase Target { get; set; }
     }
 }

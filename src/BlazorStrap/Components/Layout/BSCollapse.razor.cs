@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public class CodeBSCollapse : ToggleableComponentBase 
+    public class BSCollapseBase : ToggleableComponentBase 
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] public EventCallback<BSCollapseEvent> ShowEvent { get; set; }
@@ -19,7 +19,7 @@ namespace BlazorStrap
         internal BSCollapseEvent BSCollapseEvent { get; set; }
         internal List<EventCallback<BSCollapseEvent>> EventQue { get; set; } = new List<EventCallback<BSCollapseEvent>>();
 
-        [CascadingParameter] internal CodeBSCollapseItem CollapseItem { get; set; }
+        [CascadingParameter] internal BSCollapseItem CollapseItem { get; set; }
         protected string Tag => IsList ? "li" : "div";
         protected string classname =>
          new CssBuilder("collapse")

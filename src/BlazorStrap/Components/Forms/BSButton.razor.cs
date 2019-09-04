@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public class CodeBSButton : ComponentBase
+    public class BSButtonBase  : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>

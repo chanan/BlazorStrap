@@ -7,13 +7,13 @@ using System.Timers;
 
 namespace BlazorStrap
 {
-    public class CodeBSNav : ComponentBase
+    public class BSNavBase  : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         private System.Timers.Timer _timer = new System.Timers.Timer(250);
-        private CodeBSNavItem _selected;
-        internal List<CodeBSNavItem> Navitems { get; set; } = new List<CodeBSNavItem>();
-        public CodeBSNavItem Selected
+        private BSNavItemBase _selected;
+        internal List<BSNavItemBase> Navitems { get; set; } = new List<BSNavItemBase>();
+        public BSNavItemBase Selected
         {
             get
             {

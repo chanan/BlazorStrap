@@ -1,4 +1,5 @@
 @inherits LayoutComponentBase
+@inject IUriHelper navmanager
 @inject IBootstrapCSS BootstrapCSS
 
 <BSNavbar IsFixedTop="true" IsDark="true" Class="navbar-expand flex-column flex-md-row bd-navbar">
@@ -70,6 +71,7 @@
         }
         return base.OnInitializedAsync();
     }
+
 
     protected override async Task OnAfterRenderAsync()
     {

@@ -2,7 +2,7 @@
 {
     public class BSTabEvent 
     {
-        public CodeBSTab Activated { get; set; }
-        public CodeBSTab Deactivated { get; set; }
+        public BSTabBase Activated { get; set; }
+        public BSTabBase Deactivated { get; set; }
     }
 }

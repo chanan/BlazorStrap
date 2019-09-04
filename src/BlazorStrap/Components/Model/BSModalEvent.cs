@@ -7,6 +7,6 @@ namespace BlazorStrap
 {
     public class BSModalEvent
     {
-        public CodeBSModal Target { get; set; }
+        public BSModalBase Target { get; set; }
     }
 }

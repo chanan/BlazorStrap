@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap 
 {
-    public class CodeBSCollapseGroup : ComponentBase
+    public class BSCollapseGroupBase  : ComponentBase
     {
         [Parameter] public RenderFragment ChildContent { get; set; }
 
-        private CodeBSCollapseItem _selected;
+        private BSCollapseItem _selected;
 
-        public CodeBSCollapseItem Selected
+        public BSCollapseItem Selected
         {
             get
             {

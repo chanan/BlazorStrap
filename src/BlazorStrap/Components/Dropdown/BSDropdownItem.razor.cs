@@ -8,7 +8,7 @@ using BlazorStrap.Util;
 
 namespace BlazorStrap
 {
-    public class CodeBSDropdownItem : ComponentBase, IDisposable
+    public class BSDropdownItemBase  : ComponentBase, IDisposable
     {
         [Inject] private IUriHelper UriHelper { get; set; }
 
@@ -49,7 +49,7 @@ namespace BlazorStrap
         [Parameter] public EventCallback<UIMouseEventArgs> OnClick { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
-        [CascadingParameter] internal CodeBSDropdown DropDown { get; set; }
+        [CascadingParameter] internal BSDropdown DropDown { get; set; }
 
         protected void onClickEvent(UIMouseEventArgs e)
         { 

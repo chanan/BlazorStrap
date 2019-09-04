@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace BlazorStrap
 {
-    public class BSBasicInput : ComponentBase
+    public class BSBasicInput  : ComponentBase
     {
          [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [CascadingParameter] EditContext MyEditContext { get; set; }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace BlazorStrap
 {
-    public class CodeBSNavLink : ComponentBase, IDisposable
+    public class BSNavLinkBase  : ComponentBase, IDisposable
     {
         [Inject] private IUriHelper UriHelper { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
@@ -60,6 +60,7 @@ namespace BlazorStrap
                     ListItem.Active = active;
                 }
                 IsActive = active;
+            StateHasChanged();
         }
     }
 }

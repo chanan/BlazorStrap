@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace BlazorStrap
 {
-    public class CodeBSCollapseToggle : ComponentBase
+    public class BSCollapseToggleBase  : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
@@ -37,8 +37,6 @@ namespace BlazorStrap
         [CascadingParameter] internal BSCollapseItem CollapseItem { get; set; }
         [CascadingParameter] internal BSCollapseGroup CollapseGroup { get; set; }
 
-        private bool hasRendered = false;
-       
         protected void OnClickEvent()
         {
             if(CollapseGroup != null)

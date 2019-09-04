@@ -7,6 +7,6 @@ namespace BlazorStrap
 {
     public class BSCollapseEvent
     {
-        public CodeBSCollapse Target { get; set; }
+        public BSCollapseBase Target { get; set; }
     }
 }

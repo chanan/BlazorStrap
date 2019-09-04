@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public class CodeBSTabGroup : ComponentBase
+    public class BSTabGroupBase  : ComponentBase
     {
         internal bool Disposing = false;
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        public List<CodeBSTab> Tabs = new List<CodeBSTab>();
+        public List<BSTabBase> Tabs = new List<BSTabBase>();
         internal List<EventCallback<BSTabEvent>> EventQue { get; set; } = new List<EventCallback<BSTabEvent>>();
         internal BSTabEvent BSTabEvent { get; set; }
-        private CodeBSTab _selected;
-        public CodeBSTab Selected
+        private BSTabBase _selected;
+        public BSTabBase Selected
         {
             get
             {
