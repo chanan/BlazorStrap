@@ -36,10 +36,10 @@ namespace ServerSideSample
                 services.AddScoped<HttpClient>(s =>
                 {
                     // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.
-                    IUriHelper uriHelper = s.GetRequiredService<IUriHelper>();
+                    NavigationManager navman = s.GetRequiredService<NavigationManager>();
                     return new HttpClient
                     {
-                        BaseAddress = new Uri(uriHelper.GetBaseUri())
+                        BaseAddress = new Uri(navman.BaseUri)
                     };
                 });
             }

@@ -16,7 +16,7 @@
 @code {
     private bool isVisible { get; set; } = true;
 
-    void onclick(UIMouseEventArgs e)
+    void onclick(MouseEventArgs e)
 	{
 		isVisible = !isVisible;
 		StateHasChanged();

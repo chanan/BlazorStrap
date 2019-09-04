@@ -13,7 +13,6 @@
 
 @code { 
     private bool isServerSide = false;
-    private bool hasBeendone = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -27,12 +26,11 @@
         }
     }
 
-    protected override async Task OnAfterRenderAsync()
+    protected override async Task OnAfterRenderAsync(bool firstrun)
     {
-        if (isServerSide && !hasBeendone)
+        if (isServerSide && firstrun)
         {
             await BootstrapCSS.SetBootstrapCSS("4.3.1");
-            hasBeendone = true;
         }
     }
 }

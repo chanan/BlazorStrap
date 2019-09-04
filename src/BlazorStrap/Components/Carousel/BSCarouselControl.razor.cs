@@ -4,6 +4,7 @@ using BlazorComponentUtilities;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
@@ -33,7 +34,7 @@ namespace BlazorStrap
 
         [Parameter] public EventCallback<int> ActiveIndexChanged { get; set; }
 
-        protected async Task _onclick(UIMouseEventArgs e)
+        protected async Task _onclick(MouseEventArgs e)
         {
             if (CarouselDirection == CarouselDirection.Previous)
             {

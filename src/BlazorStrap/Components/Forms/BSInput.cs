@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using Microsoft.AspNetCore.Components.RenderTree;
 using System.Text.RegularExpressions;
 using System.Linq;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazorStrap
 {
@@ -109,20 +110,29 @@ namespace BlazorStrap
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+            try
+            {
                 builder.OpenElement(0, Tag);
-                builder.AddMultipleAttributes(1, AdditionalAttributes);
-                builder.AddAttribute(2, "class", classname);
-                builder.AddAttribute(3, "type", Type);
-                builder.AddAttribute(4, "readonly", IsReadonly);
-                builder.AddAttribute(5, "disabled", IsDisabled);
-                builder.AddAttribute(6, "multiple", IsMultipleSelect);
-                builder.AddAttribute(7, "size", SelectSize);
-                builder.AddAttribute(8, "selectedIndex", SelectedIndex);
-                builder.AddAttribute(9, "value", Value);
+            builder.AddMultipleAttributes(1, AdditionalAttributes);
+            builder.AddAttribute(2, "class", classname);
+            builder.AddAttribute(3, "type", Type);
+            builder.AddAttribute(4, "readonly", IsReadonly);
+            builder.AddAttribute(5, "disabled", IsDisabled);
+            builder.AddAttribute(6, "multiple", IsMultipleSelect);
+            builder.AddAttribute(7, "size", SelectSize);
+            builder.AddAttribute(8, "selectedIndex", SelectedIndex);
+            builder.AddAttribute(9, "value", Value);
+           
                 builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
                 builder.AddAttribute(11, "onfocus", EventCallback.Factory.Create(this, () => { Touched = true; StateHasChanged(); }));
+           
             builder.AddContent(12, ChildContent);
-                builder.CloseElement();
+            builder.CloseElement();
+            }
+            catch
+            {
+
+            }
         }
 
         public void ForceValidate()

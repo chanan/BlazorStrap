@@ -4,6 +4,7 @@ using BlazorComponentUtilities;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
@@ -14,10 +15,10 @@ namespace BlazorStrap
           new CssBuilder("navbar-toggler")
               .AddClass(Class)
           .Build();
-        [Parameter] public EventCallback<UIMouseEventArgs> OnClick { get; set; }
+        [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public string Class { get; set; }
 
-        protected async Task Clicked(UIMouseEventArgs e)
+        protected async Task Clicked(MouseEventArgs e)
         {
             await OnClick.InvokeAsync(e);
         }

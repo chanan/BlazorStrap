@@ -3,6 +3,7 @@ using BlazorStrap.Util.Components;
 using BlazorComponentUtilities;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
@@ -19,7 +20,7 @@ namespace BlazorStrap
                 .AddClass(HeadingClass)
             .Build();
 
-        [Parameter] public EventCallback<UIMouseEventArgs> OnClick { get; set; }
+        [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public string HeadingClass { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }

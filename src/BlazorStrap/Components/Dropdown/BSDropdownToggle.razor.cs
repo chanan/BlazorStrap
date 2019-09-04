@@ -5,6 +5,7 @@ using BlazorComponentUtilities;
 using System;
 using System.Timers;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
@@ -33,11 +34,11 @@ namespace BlazorStrap
         [Parameter] public bool IsLink { get; set; }
         [Parameter] public bool IsSplit { get; set; }
         [Parameter] public bool? IsOpen { get; set; }
-        [Parameter] public EventCallback<UIMouseEventArgs> OnClick { get; set; }
+        [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] internal BSDropdownMenuBase Dropdown { get; set; }
-        protected void Escape(UIKeyboardEventArgs e)
+        protected void Escape(KeyboardEventArgs e)
         {
 
             if (e.Key.ToLower() == "escape" && IsOpen == true)

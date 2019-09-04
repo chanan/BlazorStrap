@@ -37,7 +37,7 @@ namespace BlazorStrap
         protected ElementReference Me { get; set; }
         private bool Closed { get; set; }
         private bool HasRendered { get; set; }
-        protected override async Task OnAfterRenderAsync()
+        protected override async Task OnAfterRenderAsync(bool firstrun)
         {
             if (!HasRendered)
             {

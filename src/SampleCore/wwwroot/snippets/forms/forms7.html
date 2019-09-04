@@ -1,14 +1,14 @@
-﻿<BSForm Model="@formsModel">
+﻿<BSBasicForm>
     <BSFormGroup IsRow="true">
         <BSLabel For="staticEmail" SM="2">Email</BSLabel>
         <BSCol SM="10">
-            <BSInput InputType="InputType.Text" IsReadonly="true" IsPlaintext="true" Id="staticEmail" @bind-Value="formsModel.Email" />
+            <BSBasicInput InputType="InputType.Text" IsReadonly="true" IsPlaintext="true" Id="staticEmail"/>
         </BSCol>
     </BSFormGroup>
     <BSFormGroup IsRow="true">
         <BSLabel For="inputPassword" SM="2">Password</BSLabel>
         <BSCol SM="10">
-            <BSInput InputType="InputType.Password" Id="inputPassword" @bind-Value="formsModel.Blank"/>
+            <BSBasicInput InputType="InputType.Password" Id="inputPassword"  />
         </BSCol>
     </BSFormGroup>
     <BSFormGroup IsRow="true">
@@ -16,4 +16,4 @@
             <BSButton ButtonType="ButtonType.Submit">Submit</BSButton>
         </BSCol>
     </BSFormGroup>
-</BSForm>
+</BSBasicForm>

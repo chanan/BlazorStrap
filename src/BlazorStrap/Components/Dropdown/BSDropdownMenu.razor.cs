@@ -4,6 +4,7 @@ using BlazorComponentUtilities;
 using System;
 using System.Timers;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
@@ -117,7 +118,7 @@ namespace BlazorStrap
             }
             base.OnInitialized();
         }
-        public void MouseOut(UIMouseEventArgs e)
+        public void MouseOut(MouseEventArgs e)
         {
             if (AutoClose)
             {
@@ -125,7 +126,7 @@ namespace BlazorStrap
             }
         }
 
-        public void MouseOver(UIMouseEventArgs e)
+        public void MouseOver(MouseEventArgs e)
         {
             if (AutoClose)
             {

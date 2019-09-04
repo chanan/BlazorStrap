@@ -43,7 +43,7 @@ namespace BlazorStrap
             CloseEvent.InvokeAsync(BSAlertEvent);
             EventQue.Add(ClosedEvent);
         }
-        protected override Task OnAfterRenderAsync()
+        protected override Task OnAfterRenderAsync(bool firstrun)
         {
             for (int i = 0; i < EventQue.Count; i++)
             {
@@ -51,7 +51,7 @@ namespace BlazorStrap
                 EventQue.RemoveAt(i);
             }
 
-            return base.OnAfterRenderAsync();
+            return base.OnAfterRenderAsync(false);
         }
     }
 }

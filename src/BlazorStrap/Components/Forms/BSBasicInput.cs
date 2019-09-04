@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Components.Forms;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazorStrap
 {
@@ -69,7 +70,7 @@ namespace BlazorStrap
             _ => IsPlaintext ? "form-control-plaintext" : "form-control"
         };
 
-        protected void onchange(UIChangeEventArgs e)
+        protected void onchange(ChangeEventArgs e)
         {
             ValueChanged.InvokeAsync(e.Value.ToString());
             Value = e.Value.ToString();

@@ -77,7 +77,7 @@
         <BSButton Color="Color.Secondary">2</BSButton>
 
         <BSDropdown IsGroup="true" IsOpen="@IsOpen1">
-            <DropdownToggle Color="Color.Secondary" @onclick="onclick1" IsOpen="@IsOpen1">Dropdown</DropdownToggle>
+            <BSDropdownToggle Color="Color.Secondary" @onclick="onclick1" IsOpen="@IsOpen1">Dropdown</BSDropdownToggle>
             <BSDropdownMenu IsOpen="@IsOpen1">
                 <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
                 <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
@@ -89,14 +89,14 @@
 
 @code {
     bool IsOpen { get; set; }
-    void onclick(UIMouseEventArgs e)
+    void onclick(MouseEventArgs e)
     {
         IsOpen = !IsOpen;
         StateHasChanged();
     }
 
     bool IsOpen1 { get; set; }
-    void onclick1(UIMouseEventArgs e)
+    void onclick1(MouseEventArgs e)
     {
         IsOpen1 = !IsOpen1;
         StateHasChanged();

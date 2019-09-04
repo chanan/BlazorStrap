@@ -48,12 +48,12 @@
 @code {
     bool IsOpen { get; set; }
     bool IsOpen2 { get; set; }
-    void onclick(UIMouseEventArgs e)
+    void onclick(MouseEventArgs e)
     {
         IsOpen = !IsOpen;
         StateHasChanged();
     }
-    void onclick2(UIMouseEventArgs e)
+    void onclick2(MouseEventArgs e)
     {
         IsOpen2 = !IsOpen2;
         StateHasChanged();

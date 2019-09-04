@@ -15,10 +15,10 @@
     <link rel="stylesheet" href="_content/Samplecore/css/demo.css" />
     <link rel="stylesheet" href="_content/BlazorStrap/css/submenu.css" />
     <link rel="manifest" href="/site.webmanifest">
-    @(await Html.RenderComponentAsync<BlazorStyled.ServerSideStyled>())
+    @(await Html.RenderComponentAsync<BlazorStyled.ServerSideStyled>(RenderMode.ServerPrerendered))
 </head>
 <body>
-    <app>@(await Html.RenderComponentAsync<SampleCore.App>())</app>
+    <app>@(await Html.RenderComponentAsync<SampleCore.App>(RenderMode.ServerPrerendered))</app>
 
     <script src="_framework/blazor.server.js"></script>
 

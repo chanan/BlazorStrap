@@ -5,12 +5,13 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components.Routing;
 using BlazorStrap.Util;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
     public abstract class BSDropdownItemBase : ComponentBase, IDisposable
     {
-        [Inject] private IUriHelper UriHelper { get; set; }
+        [Inject] private NavigationManager UriHelper { get; set; }
 
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
@@ -46,12 +47,12 @@ namespace BlazorStrap
         [Parameter] public bool IsActive { get; set; }
         [Parameter] public bool StayOpen { get; set; }
         [Parameter] public string Href { get; set; } = "javascript:void(0)";
-        [Parameter] public EventCallback<UIMouseEventArgs> OnClick { get; set; }
+        [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] internal BSDropdown DropDown { get; set; }
 
-        protected void onClickEvent(UIMouseEventArgs e)
+        protected void onClickEvent(MouseEventArgs e)
         { 
             if (OnClick.HasDelegate)
             {
@@ -65,18 +66,18 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
-            UriHelper.OnLocationChanged += OnLocationChanged;
-            OnLocationChanged(this, new LocationChangedEventArgs(UriHelper.GetAbsoluteUri(), true));
+            UriHelper.LocationChanged += OnLocationChanged;
+            OnLocationChanged(this, new LocationChangedEventArgs(UriHelper.Uri, true));
         }
         public void Dispose()
         {
-            UriHelper.OnLocationChanged -= OnLocationChanged;
+            UriHelper.LocationChanged -= OnLocationChanged;
         }
 
         public void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
 
-            var active = e.Location.MatchActiveRoute(UriHelper.GetBaseUri() + Href);
+            var active = e.Location.MatchActiveRoute(UriHelper.BaseUri + Href);
             if (active != IsActive)
             {
                 if (DropDown != null)

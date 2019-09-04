@@ -5,6 +5,7 @@ using BlazorStrap.Util;
 using BlazorComponentUtilities;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
@@ -41,7 +42,7 @@ namespace BlazorStrap
             _ => null
         };
 
-        [Parameter] public EventCallback<UIMouseEventArgs> OnClick { get; set; }
+        [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public Color Color { get; set; } = Color.Primary;
 
         private ButtonType _buttonType = ButtonType.Button;

@@ -31,7 +31,7 @@
 <h3>Vertically Centered</h3>
 <div class="docs-example">
     <BSButton Color="Color.Primary" OnClick="@onToggle">Launch demo modal</BSButton>
-    <BSModal @ref:suppressField @ref="Centered" IsCentered="true">
+    <BSModal @ref="Centered" IsCentered="true">
         <BSModalHeader OnClick="@onToggle">Modal title</BSModalHeader>
         <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
         <BSModalFooter>
@@ -77,20 +77,21 @@
 
 @code {
 
+    BSModal LiveDemo { get; set; }
     bool IsOpen { get; set; }
     BSModal Centered;
-    void onToggle(UIMouseEventArgs e)
+    void onToggle(MouseEventArgs e)
     {
         Centered.Toggle();
     }
     bool IsOpen3 { get; set; }
-    void onclick3(UIMouseEventArgs e)
+    void onclick3(MouseEventArgs e)
     {
         IsOpen3 = !IsOpen3;
         StateHasChanged();
     }
     bool IsOpen4 { get; set; }
-    void onclick4(UIMouseEventArgs e)
+    void onclick4(MouseEventArgs e)
     {
         IsOpen4 = !IsOpen4;
         StateHasChanged();

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.RenderTree;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Linq;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazorStrap
 {

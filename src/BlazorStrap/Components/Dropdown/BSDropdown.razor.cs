@@ -122,14 +122,14 @@ namespace BlazorStrap
             _timer.Interval = 250;
         }
 
-        protected override Task OnAfterRenderAsync()
+        protected override Task OnAfterRenderAsync(bool firstrun)
         {
             for (int i = 0; i < EventQue.Count; i++)
             {
                 EventQue[i].InvokeAsync(BSDropdownEvent);
                 EventQue.RemoveAt(i);
             }
-            return base.OnAfterRenderAsync();
+            return base.OnAfterRenderAsync(false);
         }
     }
 }

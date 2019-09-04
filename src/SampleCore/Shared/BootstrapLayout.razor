@@ -1,5 +1,4 @@
 @inherits LayoutComponentBase
-@inject IUriHelper navmanager
 @inject IBootstrapCSS BootstrapCSS
 
 <BSNavbar IsFixedTop="true" IsDark="true" Class="navbar-expand flex-column flex-md-row bd-navbar">
@@ -58,7 +57,6 @@
 
 @code {
     private bool isServerSide = false;
-    private bool hasBeendone = false;
     protected override Task OnInitializedAsync()
     {
         try
@@ -73,12 +71,11 @@
     }
 
 
-    protected override async Task OnAfterRenderAsync()
+    protected override async Task OnAfterRenderAsync(bool firstrun)
     {
-        if (!hasBeendone)
+        if (firstrun)
         {
             await BootstrapCSS.SetBootstrapCSS("4.3.1");
-            hasBeendone = true;
         }
     }
 }

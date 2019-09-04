@@ -1,11 +1,11 @@
-﻿<BSForm IsInline="true" Model="@formsModel">
+﻿<BSBasicForm IsInline="true">
     <BSFormGroup Class="mb-2 mr-sm-2 mb-sm-0">
         <BSLabel For="exampleEmail" Class="mr-sm-2">Email</BSLabel>
-        <BSInput InputType="InputType.Email" Name="email" Id="exampleEmail" PlaceHolder="something@idk.cool" @bind-Value="formsModel.Blank"/>
+        <BSBasicInput InputType="InputType.Email" Name="email" Id="exampleEmail" PlaceHolder="something@idk.cool"/>
     </BSFormGroup>
     <BSFormGroup Class="mb-2 mr-sm-2 mb-sm-0">
         <BSLabel For="examplePassword" class="mr-sm-2">Password</BSLabel>
-        <BSInput InputType="InputType.Password" Name="password" Id="examplePassword" PlaceHolder="don't tell!" @bind-Value="formsModel.Blank"/>
+        <BSBasicInput InputType="InputType.Password" Name="password" Id="examplePassword" PlaceHolder="don't tell!" />
     </BSFormGroup>
     <BSButton ButtonType="ButtonType.Submit">Submit</BSButton>
-</BSForm>
+</BSBasicForm>

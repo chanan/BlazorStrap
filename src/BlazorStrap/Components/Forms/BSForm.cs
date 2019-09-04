@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Forms;
 using System.Timers;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazorStrap
 {
@@ -27,6 +28,24 @@ namespace BlazorStrap
         private EditContext MyEditContext { get; set; }
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+            if(Model == null)
+            {
+                Form = Formbuilder =>
+                {
+                    Formbuilder.OpenComponent<EditForm>(0);
+                    Formbuilder.AddMultipleAttributes(1, AdditionalAttributes);
+                    Formbuilder.AddAttribute(2, "class", classname);
+                    Formbuilder.AddAttribute(3, "ChildContent", ChildContent);
+                    Formbuilder.CloseComponent();
+                };
+
+                builder.OpenComponent<CascadingValue<BSForm>>(3);
+                builder.AddAttribute(4, "IsFixed", true);
+                builder.AddAttribute(5, "Value", this);
+                builder.AddAttribute(6, "ChildContent", Form);
+                builder.CloseComponent();
+                return;
+            }
             Form = Formbuilder =>
             {
                 Formbuilder.OpenComponent<EditForm>(0);

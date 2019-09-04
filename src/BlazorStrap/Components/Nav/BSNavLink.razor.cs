@@ -10,7 +10,7 @@ namespace BlazorStrap
 {
     public abstract class BSNavLinkBase : ComponentBase, IDisposable
     {
-        [Inject] private IUriHelper UriHelper { get; set; }
+        [Inject] private NavigationManager UriHelper { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [CascadingParameter] BSNavItem Parent { get; set; }
         [CascadingParameter] BSCollapseItem CollapseItem { get; set; }
@@ -34,18 +34,18 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
-            UriHelper.OnLocationChanged += OnLocationChanged;
-            OnLocationChanged(this, new LocationChangedEventArgs(UriHelper.GetAbsoluteUri(), true));
-            OnLocationChanged(this, new LocationChangedEventArgs(UriHelper.GetAbsoluteUri(), true));
+            UriHelper.LocationChanged += OnLocationChanged;
+            OnLocationChanged(this, new LocationChangedEventArgs(UriHelper.Uri, true));
+            OnLocationChanged(this, new LocationChangedEventArgs(UriHelper.Uri, true));
         }
         public void Dispose()
         {
-            UriHelper.OnLocationChanged -= OnLocationChanged;
+            UriHelper.LocationChanged -= OnLocationChanged;
         }
 
         public void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
-            var active = e.Location.MatchActiveRoute(UriHelper.GetBaseUri() + Href);
+            var active = e.Location.MatchActiveRoute(UriHelper.BaseUri + Href);
           
                 if (Parent != null)
                 {

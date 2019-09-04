@@ -20,7 +20,7 @@ namespace BlazorStrap
 
         protected ElementReference arrow;
 
-        protected override void OnAfterRender()
+        protected override void OnAfterRender(bool firstrun)
         {
             if (IsOpen ?? false || _isOpen)
             {

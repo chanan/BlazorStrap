@@ -75,14 +75,14 @@ namespace BlazorStrap
             }
         }
 
-        protected override Task OnAfterRenderAsync()
+        protected override Task OnAfterRenderAsync(bool firstrun)
         {
             for (int i = 0; i < EventQue.Count; i++)
             {
                 EventQue[i].InvokeAsync(BSCollapseEvent);
                 EventQue.RemoveAt(i);
             }
-            return base.OnAfterRenderAsync();
+            return base.OnAfterRenderAsync(false);
         }
 
     }

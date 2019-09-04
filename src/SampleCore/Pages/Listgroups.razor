@@ -190,31 +190,31 @@ Review <div class="docs-example">
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups12.html" />-->
 
 @code {
-    void onclick(UIMouseEventArgs e)
+    void onclick(MouseEventArgs e)
     {
         Console.WriteLine("Button was clicked!");
     }
 
     private int active = 1;
-    void onclick1(UIMouseEventArgs e)
+    void onclick1(MouseEventArgs e)
     {
         active = 1;
         StateHasChanged();
     }
 
-    void onclick2(UIMouseEventArgs e)
+    void onclick2(MouseEventArgs e)
     {
         active = 2;
         StateHasChanged();
     }
 
-    void onclick3(UIMouseEventArgs e)
+    void onclick3(MouseEventArgs e)
     {
         active = 3;
         StateHasChanged();
     }
 
-    void onclick4(UIMouseEventArgs e)
+    void onclick4(MouseEventArgs e)
     {
         active = 4;
         StateHasChanged();

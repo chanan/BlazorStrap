@@ -4,6 +4,7 @@ using BlazorStrap.Util;
 using BlazorComponentUtilities;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
@@ -33,9 +34,9 @@ namespace BlazorStrap
                 else { Tag = "span"; }
             }
         }
-        private EventCallback<UIMouseEventArgs> _onlick { get; set; }
+        private EventCallback<MouseEventArgs> _onlick { get; set; }
         [Parameter]
-        public EventCallback<UIMouseEventArgs> onclick
+        public EventCallback<MouseEventArgs> onclick
         {
             get => _onlick;
 
@@ -49,7 +50,7 @@ namespace BlazorStrap
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
 
-        protected void _onclick(UIMouseEventArgs e)
+        protected void _onclick(MouseEventArgs e)
         {
             if (onclick.HasDelegate) onclick.InvokeAsync(e);
         }

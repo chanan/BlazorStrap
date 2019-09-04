@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="BlazorComponentUtilities" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0-preview8.19405.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0-preview9.19424.4" />
   </ItemGroup>
 
   <ItemGroup>

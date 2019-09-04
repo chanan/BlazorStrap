@@ -40,7 +40,7 @@ namespace BlazorStrap
         [Parameter] public EventCallback<BSTabEvent> HideEvent { get; set; }
         [Parameter] public EventCallback<BSTabEvent> HiddenEvent { get; set; }
 
-        protected override Task OnAfterRenderAsync()
+        protected override Task OnAfterRenderAsync(bool firstrun)
         {
             for (int i = 0; i < EventQue.Count; i++)
             {
@@ -48,7 +48,7 @@ namespace BlazorStrap
                 EventQue.RemoveAt(i);
             }
 
-            return base.OnAfterRenderAsync();
+            return base.OnAfterRenderAsync(false);
         }
     }
 }

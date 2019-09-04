@@ -4,6 +4,7 @@ using BlazorStrap.Util;
 using BlazorComponentUtilities;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
@@ -32,7 +33,7 @@ namespace BlazorStrap
         [Parameter] public bool IsActive { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
         [Parameter] public ListGroupType ListGroupType { get; set; } = ListGroupType.List;
-        [Parameter] public EventCallback<UIMouseEventArgs> OnClick { get; set; }
+        [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public Color Color { get; set; } = Color.None;
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
