@@ -1,32 +1,16 @@
-﻿<BSForm Model="@formsModel">
+﻿<BSBasicForm >
     <BSFormGroup>
         <BSLabel For="exampleInputEmail1">Email address</BSLabel>
-        <BSInput Id="exampleInputEmail1" InputType="InputType.Email" PlaceHolder="Enter email" @bind-Value="formsModel.Blank"/>
+        <BSBasicInput Id="exampleInputEmail1" InputType="InputType.Email" PlaceHolder="Enter email"  />
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </BSFormGroup>
     <BSFormGroup>
         <BSLabel For="exampleInputPassword1">Password</BSLabel>
-        <BSInput Id="exampleInputPassword1" InputType="InputType.Password" PlaceHolder="Password" @bind-Value="formsModel.Blank" />
+        <BSBasicInput Id="exampleInputPassword1" InputType="InputType.Password" PlaceHolder="Password" />
     </BSFormGroup>
     <BSFormGroup IsCheck="true">
-        <BSInput Id="exampleCheck1" InputType="InputType.Checkbox" @bind-Value="formsModel.Blank"/>
+        <BSBasicInput Id="exampleCheck1" InputType="InputType.Checkbox" />
         <BSLabel IsCheck="true" For="exampleCheck1">Check me out</BSLabel>
     </BSFormGroup>
     <BSButton Color="Color.Primary" ButtonType="ButtonType.Submit">Submit</BSButton>
-</BSForm>
-
-@code 
-{
-    private FormsModel formsModel = new FormsModel();
-    
-    public class FormsModel
-    {
-
-        public string Valid { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Oh noes! that name is already taken")]
-        public string InValid { get; set; }
-        public string Blank { get; set; }
-        public string Email { get; set; } = "email@example.com";
-
-    }
-}
+</BSBasicForm>

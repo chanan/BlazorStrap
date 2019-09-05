@@ -40,7 +40,7 @@
 
 @code {
     bool IsOpen { get; set; } = true;
-    void onclick(UIMouseEventArgs e)
+    void onclick(MouseEventArgs e)
     {
         IsOpen = !IsOpen;
         StateHasChanged();
@@ -54,7 +54,7 @@
     }
 
     bool IsOpen2 { get; set; } = true;
-    void onclick2(UIMouseEventArgs e)
+    void onclick2(MouseEventArgs e)
     {
         IsOpen2 = !IsOpen2;
         StateHasChanged();
