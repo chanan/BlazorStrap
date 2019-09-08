@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BlazorStrap.Components.Forms
+namespace BlazorStrap
 {
     public class BSValidationSummary : ComponentBase
     {
