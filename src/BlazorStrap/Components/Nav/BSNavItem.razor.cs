@@ -12,7 +12,7 @@ namespace BlazorStrap
         internal bool IsSubmenu;
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
 
-        public BSDropdownMenuBase _selected;
+        private BSDropdownMenuBase _selected;
         //Prevents NULL
         private BSDropdownMenuBase _dropDownMenu { get; set; } = new BSDropdownMenu();
 
