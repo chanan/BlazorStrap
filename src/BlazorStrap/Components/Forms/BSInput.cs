@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components.RenderTree;
 using System.Text.RegularExpressions;
 using System.Linq;
 using Microsoft.AspNetCore.Components.Rendering;
+using System.Globalization;
 
 namespace BlazorStrap
 {
@@ -69,7 +70,7 @@ namespace BlazorStrap
 
         protected string Type => InputType.ToDescriptionString();
 
-
+        private const string DateFormat = "yyyy-MM-dd"; 
         protected override void OnInitialized()
         {
             MyEditContext.OnValidationRequested += MyEditContext_OnValidationRequested;
@@ -113,27 +114,51 @@ namespace BlazorStrap
             try
             {
                 builder.OpenElement(0, Tag);
-            builder.AddMultipleAttributes(1, AdditionalAttributes);
-            builder.AddAttribute(2, "class", classname);
-            builder.AddAttribute(3, "type", Type);
-            builder.AddAttribute(4, "readonly", IsReadonly);
-            builder.AddAttribute(5, "disabled", IsDisabled);
-            builder.AddAttribute(6, "multiple", IsMultipleSelect);
-            builder.AddAttribute(7, "size", SelectSize);
-            builder.AddAttribute(8, "selectedIndex", SelectedIndex);
-            builder.AddAttribute(9, "value", Value);
-           
+                builder.AddMultipleAttributes(1, AdditionalAttributes);
+                builder.AddAttribute(2, "class", classname);
+                builder.AddAttribute(3, "type", Type);
+                builder.AddAttribute(4, "readonly", IsReadonly);
+                builder.AddAttribute(5, "disabled", IsDisabled);
+                builder.AddAttribute(6, "multiple", IsMultipleSelect);
+                builder.AddAttribute(7, "size", SelectSize);
+                builder.AddAttribute(8, "selectedIndex", SelectedIndex);
+                builder.AddAttribute(4, "value", BindConverter.FormatValue(CurrentValueAsString));
                 builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
                 builder.AddAttribute(11, "onfocus", EventCallback.Factory.Create(this, () => { Touched = true; StateHasChanged(); }));
-                builder.AddAttribute(11, "onblur", EventCallback.Factory.Create(this, () => { Touched = true; MyEditContext.Validate();  StateHasChanged(); }));
-
+                builder.AddAttribute(11, "onblur", EventCallback.Factory.Create(this, () => { Touched = true; MyEditContext.Validate(); StateHasChanged(); }));
                 builder.AddContent(12, ChildContent);
-            builder.CloseElement();
+                builder.CloseElement();
             }
             catch
             {
 
             }
+        }
+        
+        protected override string FormatValueAsString(T value)
+        {
+            switch (value)
+            {
+                case null:
+                    return null;
+                case int @int:
+                    return BindConverter.FormatValue(@int, CultureInfo.InvariantCulture);
+                case long @long:
+                    return BindConverter.FormatValue(@long, CultureInfo.InvariantCulture);
+                case float @float:
+                    return BindConverter.FormatValue(@float, CultureInfo.InvariantCulture);
+                case double @double:
+                    return BindConverter.FormatValue(@double, CultureInfo.InvariantCulture);
+                case decimal @decimal:
+                    return BindConverter.FormatValue(@decimal, CultureInfo.InvariantCulture);
+                case DateTime dateTimeValue:
+                    return BindConverter.FormatValue(dateTimeValue, DateFormat, CultureInfo.InvariantCulture);
+                case DateTimeOffset dateTimeOffsetValue:
+                    return BindConverter.FormatValue(dateTimeOffsetValue, DateFormat, CultureInfo.InvariantCulture);
+                default:
+                    return base.FormatValueAsString(value);
+            }
+            
         }
 
         public void ForceValidate()
