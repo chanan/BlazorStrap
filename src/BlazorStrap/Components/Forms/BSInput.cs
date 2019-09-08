@@ -125,8 +125,9 @@ namespace BlazorStrap
            
                 builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
                 builder.AddAttribute(11, "onfocus", EventCallback.Factory.Create(this, () => { Touched = true; StateHasChanged(); }));
-           
-            builder.AddContent(12, ChildContent);
+                builder.AddAttribute(11, "onblur", EventCallback.Factory.Create(this, () => { Touched = true; MyEditContext.Validate();  StateHasChanged(); }));
+
+                builder.AddContent(12, ChildContent);
             builder.CloseElement();
             }
             catch
