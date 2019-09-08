@@ -224,18 +224,62 @@ namespace BlazorStrap
             }
             else if (typeof(T) == typeof(DateTime))
             {
-                try
+                if (TryParseDateTime(value, out result))
                 {
-                    result = (T)(object)DateTime.Parse(value);
+                    validationErrorMessage = null;
+                    return true;
                 }
-                catch
+                else
                 {
-                    throw new InvalidOperationException($"Could not parse input. Invalid DateTime format.");
+                    validationErrorMessage = string.Format("The {0} field must be a date.", FieldIdentifier.FieldName);
+                    return false;
                 }
-                validationErrorMessage = null;
-                return true;
+            }
+            else if (typeof(T) == typeof(DateTimeOffset))
+            {
+                if (TryParseDateTimeOffset(value, out result))
+                {
+                    validationErrorMessage = null;
+                    return true;
+                }
+                else
+                {
+                    validationErrorMessage = string.Format("The {0} field must be a date.", FieldIdentifier.FieldName);
+                    return false;
+                }
             }
             throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
+        }
+
+
+        static bool TryParseDateTime(string value, out T result)
+        {
+            var success = BindConverter.TryConvertToDateTime(value, CultureInfo.InvariantCulture, DateFormat, out var parsedValue);
+            if (success)
+            {
+                result = (T)(object)parsedValue;
+                return true;
+            }
+            else
+            {
+                result = default;
+                return false;
+            }
+        }
+
+        static bool TryParseDateTimeOffset(string value, out T result)
+        {
+            var success = BindConverter.TryConvertToDateTimeOffset(value, CultureInfo.InvariantCulture, DateFormat, out var parsedValue);
+            if (success)
+            {
+                result = (T)(object)parsedValue;
+                return true;
+            }
+            else
+            {
+                result = default;
+                return false;
+            }
         }
     }
 }
