@@ -1,6 +1,6 @@
 ﻿@namespace BlazorStrap
 @inherits BSListGroupItemBase
 
-<DynamicElement @attributes="@UnknownParameters" href="@href" TagName="@Tag" class="@classname" @onclick="OnClick" disabled="@IsDisabled" type="@IsButton">
+<DynamicElement @attributes="@UnknownParameters" href="@(Href != null && Href != "#" ? Href : href)" TagName="@Tag" class="@classname" @onclick="OnClick" disabled="@IsDisabled" type="@IsButton">
     @ChildContent
 </DynamicElement>
