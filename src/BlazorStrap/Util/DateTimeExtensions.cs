@@ -79,6 +79,25 @@ namespace BlazorStrap.Util
 				return string.Format("{0} weeks ago",
 				Math.Ceiling((double)dayDiff / 7));
 			}
+			//if (dayDiff < 60) //2 months
+			//{
+			//	return string.Format("1 month ago");
+			//}
+			if (dayDiff < 330) //11 months
+			{
+				//if (dayDiff < 365) 
+				return string.Format("{0} months ago",
+				Math.Ceiling((double)dayDiff / 30));
+			}
+			if (dayDiff < 365 * 2)
+			{
+				return string.Format("1 year ago");
+			}
+			if (dayDiff > 365 * 2)
+			{
+				return string.Format("{0} years ago",
+				Math.Ceiling((double)dayDiff / 365));
+			}
 			return null;
 		}
 	}
