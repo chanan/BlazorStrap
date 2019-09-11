@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components.RenderTree;
 using System.Text.RegularExpressions;
 using System.Linq;
 using Microsoft.AspNetCore.Components.Rendering;
+using System.Globalization;
 
 namespace BlazorStrap
 {
@@ -69,7 +70,7 @@ namespace BlazorStrap
 
         protected string Type => InputType.ToDescriptionString();
 
-
+        private const string DateFormat = "yyyy-MM-dd"; 
         protected override void OnInitialized()
         {
             MyEditContext.OnValidationRequested += MyEditContext_OnValidationRequested;
@@ -113,26 +114,51 @@ namespace BlazorStrap
             try
             {
                 builder.OpenElement(0, Tag);
-            builder.AddMultipleAttributes(1, AdditionalAttributes);
-            builder.AddAttribute(2, "class", classname);
-            builder.AddAttribute(3, "type", Type);
-            builder.AddAttribute(4, "readonly", IsReadonly);
-            builder.AddAttribute(5, "disabled", IsDisabled);
-            builder.AddAttribute(6, "multiple", IsMultipleSelect);
-            builder.AddAttribute(7, "size", SelectSize);
-            builder.AddAttribute(8, "selectedIndex", SelectedIndex);
-            builder.AddAttribute(9, "value", Value);
-           
+                builder.AddMultipleAttributes(1, AdditionalAttributes);
+                builder.AddAttribute(2, "class", classname);
+                builder.AddAttribute(3, "type", Type);
+                builder.AddAttribute(4, "readonly", IsReadonly);
+                builder.AddAttribute(5, "disabled", IsDisabled);
+                builder.AddAttribute(6, "multiple", IsMultipleSelect);
+                builder.AddAttribute(7, "size", SelectSize);
+                builder.AddAttribute(8, "selectedIndex", SelectedIndex);
+                builder.AddAttribute(4, "value", BindConverter.FormatValue(CurrentValueAsString));
                 builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
                 builder.AddAttribute(11, "onfocus", EventCallback.Factory.Create(this, () => { Touched = true; StateHasChanged(); }));
-           
-            builder.AddContent(12, ChildContent);
-            builder.CloseElement();
+                builder.AddAttribute(11, "onblur", EventCallback.Factory.Create(this, () => { Touched = true; MyEditContext.Validate(); StateHasChanged(); }));
+                builder.AddContent(12, ChildContent);
+                builder.CloseElement();
             }
             catch
             {
 
             }
+        }
+        
+        protected override string FormatValueAsString(T value)
+        {
+            switch (value)
+            {
+                case null:
+                    return null;
+                case int @int:
+                    return BindConverter.FormatValue(@int, CultureInfo.InvariantCulture);
+                case long @long:
+                    return BindConverter.FormatValue(@long, CultureInfo.InvariantCulture);
+                case float @float:
+                    return BindConverter.FormatValue(@float, CultureInfo.InvariantCulture);
+                case double @double:
+                    return BindConverter.FormatValue(@double, CultureInfo.InvariantCulture);
+                case decimal @decimal:
+                    return BindConverter.FormatValue(@decimal, CultureInfo.InvariantCulture);
+                case DateTime dateTimeValue:
+                    return BindConverter.FormatValue(dateTimeValue, DateFormat, CultureInfo.InvariantCulture);
+                case DateTimeOffset dateTimeOffsetValue:
+                    return BindConverter.FormatValue(dateTimeOffsetValue, DateFormat, CultureInfo.InvariantCulture);
+                default:
+                    return base.FormatValueAsString(value);
+            }
+            
         }
 
         public void ForceValidate()
@@ -198,18 +224,62 @@ namespace BlazorStrap
             }
             else if (typeof(T) == typeof(DateTime))
             {
-                try
+                if (TryParseDateTime(value, out result))
                 {
-                    result = (T)(object)DateTime.Parse(value);
+                    validationErrorMessage = null;
+                    return true;
                 }
-                catch
+                else
                 {
-                    throw new InvalidOperationException($"Could not parse input. Invalid DateTime format.");
+                    validationErrorMessage = string.Format("The {0} field must be a date.", FieldIdentifier.FieldName);
+                    return false;
                 }
-                validationErrorMessage = null;
-                return true;
+            }
+            else if (typeof(T) == typeof(DateTimeOffset))
+            {
+                if (TryParseDateTimeOffset(value, out result))
+                {
+                    validationErrorMessage = null;
+                    return true;
+                }
+                else
+                {
+                    validationErrorMessage = string.Format("The {0} field must be a date.", FieldIdentifier.FieldName);
+                    return false;
+                }
             }
             throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
+        }
+
+
+        static bool TryParseDateTime(string value, out T result)
+        {
+            var success = BindConverter.TryConvertToDateTime(value, CultureInfo.InvariantCulture, DateFormat, out var parsedValue);
+            if (success)
+            {
+                result = (T)(object)parsedValue;
+                return true;
+            }
+            else
+            {
+                result = default;
+                return false;
+            }
+        }
+
+        static bool TryParseDateTimeOffset(string value, out T result)
+        {
+            var success = BindConverter.TryConvertToDateTimeOffset(value, CultureInfo.InvariantCulture, DateFormat, out var parsedValue);
+            if (success)
+            {
+                result = (T)(object)parsedValue;
+                return true;
+            }
+            else
+            {
+                result = default;
+                return false;
+            }
         }
     }
 }

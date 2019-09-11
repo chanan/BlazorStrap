@@ -32,6 +32,13 @@ namespace BlazorStrap
         {
             get
             {
+                if(Nav != null)
+                {
+                    if(Nav.Selected != this)
+                    {
+                        return null;
+                    }
+                }
                 return _selected;
             }
             set

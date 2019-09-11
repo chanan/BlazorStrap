@@ -32,6 +32,7 @@ namespace BlazorStrap
 
         [Parameter] public bool IsActive { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
+        [Parameter] public string Href { get; set; }
         [Parameter] public ListGroupType ListGroupType { get; set; } = ListGroupType.List;
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public Color Color { get; set; } = Color.None;
