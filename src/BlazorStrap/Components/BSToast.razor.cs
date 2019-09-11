@@ -16,8 +16,9 @@ namespace BlazorStrap
             .AddClass("hide", !IsVisible || IsDismissed)
             .AddClass(Class)
         .Build();
-        [Parameter] public string DateFormat {get; set;} = "dd/MM/yyyy h:mm tt";
-        [Parameter] public string ImgSrc { get; set; }
+		//For better results, use "PrettyDate" C# Extension for `DateTime.ToString()`
+		//[Parameter] public string DateFormat {get; set;} = "dd/MM/yyyy h:mm tt";
+		[Parameter] public string ImgSrc { get; set; }
         [Parameter] public string ImgDescription { get; set; }
         [Parameter] public DateTime? TimeStamp { get; set; }
         [Parameter] public string Class { get; set; }
