@@ -175,6 +175,18 @@ namespace BlazorStrap
                 validationErrorMessage = null;
                 return true;
             }
+            else if(value == null && typeof(DateTime) != typeof(T) && typeof(DateTimeOffset) != typeof(T)) 
+            {
+                result = (T)(object)default;
+                validationErrorMessage = null;
+                return true;
+            }
+            else if(value == "" && typeof(DateTime) != typeof(T) && typeof(DateTimeOffset) != typeof(T))
+            {
+                result = (T)(object)default;
+                validationErrorMessage = null;
+                return true;
+            }
             else if (typeof(T).IsEnum)
             {
                 // There's no non-generic Enum.TryParse (https://github.com/dotnet/corefx/issues/692)
