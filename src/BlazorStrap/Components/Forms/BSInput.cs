@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Linq;
 using Microsoft.AspNetCore.Components.Rendering;
 using System.Globalization;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
@@ -97,6 +98,12 @@ namespace BlazorStrap
             _ => IsPlaintext ? "form-control-plaintext" : "form-control"
         };
 
+        protected void OnClick(MouseEventArgs e)
+        {
+            var tmp = (bool)(object)Value;
+            Value = (T)(object)(!tmp);
+            ValueChanged.InvokeAsync(Value);
+        }
         protected void OnChange(string e)
         {
             if(ValidateOnChange)
@@ -122,8 +129,17 @@ namespace BlazorStrap
                 builder.AddAttribute(6, "multiple", IsMultipleSelect);
                 builder.AddAttribute(7, "size", SelectSize);
                 builder.AddAttribute(8, "selectedIndex", SelectedIndex);
-                builder.AddAttribute(4, "value", BindConverter.FormatValue(CurrentValueAsString));
-                builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
+                if (InputType == InputType.Checkbox)
+                {
+                    builder.AddAttribute(9, "checked", BindConverter.FormatValue(CurrentValue));
+                   builder.AddAttribute(10, "onclick", EventCallback.Factory.Create(this, OnClick));
+                }
+                else
+                {
+                    builder.AddAttribute(9, "value", BindConverter.FormatValue(CurrentValueAsString));
+                    builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
+                }
+                
                 builder.AddAttribute(11, "onfocus", EventCallback.Factory.Create(this, () => { Touched = true; StateHasChanged(); }));
                 builder.AddAttribute(11, "onblur", EventCallback.Factory.Create(this, () => { Touched = true; MyEditContext.Validate(); StateHasChanged(); }));
                 builder.AddContent(12, ChildContent);
