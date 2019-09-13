@@ -42,6 +42,10 @@
 </head>
 <body>
     <app>Loading...</app>
+    
+    <!-- temporary WORKAROUND for Safari https://github.com/mono/mono/issues/15588#issuecomment-529056521 -->
+    <script>var Module;</script>
+    
     <script src="_framework/blazor.webassembly.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
