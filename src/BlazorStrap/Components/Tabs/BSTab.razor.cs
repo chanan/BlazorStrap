@@ -64,7 +64,7 @@ namespace BlazorStrap
                 {
                     Group.Selected = null;
                     Group.Selected = this;
-                    StateHasChanged();
+                    InvokeAsync(StateHasChanged);
                 }
             }
             catch

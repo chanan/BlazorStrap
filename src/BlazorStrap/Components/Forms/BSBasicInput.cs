@@ -5,6 +5,7 @@ using BlazorComponentUtilities;
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Web;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Rendering;
@@ -70,10 +71,16 @@ namespace BlazorStrap
             _ => IsPlaintext ? "form-control-plaintext" : "form-control"
         };
 
-        protected void onchange(ChangeEventArgs e)
+        protected void OnChange(ChangeEventArgs e)
         {
             ValueChanged.InvokeAsync(e.Value.ToString());
             Value = e.Value.ToString();
+        }
+        protected void OnClick(MouseEventArgs e)
+        {
+            var tmp = Convert.ToBoolean(Value);
+            Value = (!tmp).ToString().ToLower();
+            ValueChanged.InvokeAsync(Value);
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -87,8 +94,16 @@ namespace BlazorStrap
             builder.AddAttribute(6, "multiple", IsMultipleSelect);
             builder.AddAttribute(7, "size", SelectSize);
             builder.AddAttribute(8, "selectedIndex", SelectedIndex);
-            builder.AddAttribute(8, "value", Value);
-            builder.AddAttribute(9, "onchange", EventCallback.Factory.Create(this, onchange));
+            if (InputType == InputType.Checkbox)
+            {
+                builder.AddAttribute(8, "checked", Convert.ToBoolean(Value));
+                builder.AddAttribute(9, "onclick", EventCallback.Factory.Create(this, OnClick));
+            }
+            else
+            {
+                builder.AddAttribute(8, "value", Value);
+                builder.AddAttribute(9, "onchange", EventCallback.Factory.Create(this, OnChange));
+            }
             builder.AddContent(10, ChildContent);
             builder.CloseElement();
 

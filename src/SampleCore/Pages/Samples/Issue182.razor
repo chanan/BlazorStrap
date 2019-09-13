@@ -1,0 +1,29 @@
+@page "/samples/issue182"
+
+Manual State: @manual <br />
+<BSBasicInput InputType="InputType.Checkbox" @bind-Value="@manual" ></BSBasicInput><br />
+
+Model State: @auto.Check  <br />
+<BSForm Model="auto">
+    <BSInput InputType="InputType.Checkbox" @bind-Value="auto.Check" @onblur="StateHasChanged"></BSInput><br />
+</BSForm>
+
+@code
+{
+    string manual {
+        get{
+            return _manual.ToString();
+        }
+        set{
+            _manual = Convert.ToBoolean(value);
+            StateHasChanged();
+        }
+    }
+    bool _manual = false;
+    Auto auto = new Auto();
+
+    public class Auto
+    {
+        public bool Check { get; set; } = false;
+    }
+}
