@@ -1,0 +1,74 @@
+@page "/samples/issue187"
+<BSRow>
+    <BSCol MD="5">
+        <h3>Non Nullable</h3>
+        Int - @Model.Int.ToString()
+        <br />
+        Long - @Model.Long.ToString()
+        <br />
+        Double - @Model.Double.ToString()
+        <br />
+        Guid - @Model.Guid.ToString()
+        <br />
+        DateTime - @Model.DateTime.ToString()
+        <br />
+        <h3>Nullable</h3>
+        Int? - @(Model.NInt == null ? "Null" : Model.NInt.ToString())
+        <br />
+        Long? -  @(Model.NLong == null ? "Null" : Model.NLong.ToString())
+        <br />
+        Double? -  @(Model.NDouble == null ? "Null" : Model.NDouble.ToString())
+        <br />
+        Guid? - @(Model.NGuid == null ? "Null" : Model.NGuid.ToString())
+        <br />
+        DateTime? -  @(Model.NDateTime == null ? "Null" : Model.NDateTime.ToString())
+        <br />
+    </BSCol>
+    <BSCol MD="7">
+        <BSForm Model="Model">
+            <BSLabel>Int</BSLabel>
+            <BSInput InputType="InputType.Text" @bind-Value="Model.Int"></BSInput>
+            <BSLabel>Long</BSLabel>
+            <BSInput InputType="InputType.Text" @bind-Value="Model.Long"></BSInput>
+            <BSLabel>Double</BSLabel>
+            <BSInput InputType="InputType.Text" @bind-Value="Model.Double"></BSInput>
+            <BSLabel>Guid</BSLabel>
+            <BSInput InputType="InputType.Text" @bind-Value="Model.Guid"></BSInput>
+            <BSLabel>DateTime</BSLabel>
+            <BSInput InputType="InputType.Text" @bind-Value="Model.DateTime"></BSInput>
+            <BSLabel>Int?</BSLabel>
+            <BSInput InputType="InputType.Text" @bind-Value="Model.NInt"></BSInput>
+            <BSLabel>Long?</BSLabel>
+            <BSInput InputType="InputType.Text" @bind-Value="Model.NLong"></BSInput>
+            <BSLabel>Double?</BSLabel>
+            <BSInput InputType="InputType.Text" @bind-Value="Model.NDouble"></BSInput>
+            <BSLabel>Guid?</BSLabel>
+            <BSInput InputType="InputType.Text" @bind-Value="Model.NGuid"></BSInput>
+            <BSLabel>DateTime?</BSLabel>
+            <BSInput InputType="InputType.Text" @bind-Value="Model.NDateTime"></BSInput>
+        </BSForm>
+    </BSCol>
+</BSRow>
+
+
+
+
+
+@code {
+    private NullableTest Model { get; set; } = new NullableTest();
+
+    public class NullableTest
+    {
+        public int Int { get; set; }
+        public long Long { get; set; }
+        public double Double { get; set; }
+        public Guid Guid { get; set; }
+        public DateTime DateTime { get; set; }
+
+        public int? NInt { get; set; }
+        public long? NLong { get; set; }
+        public Double? NDouble { get; set; }
+        public Guid? NGuid { get; set; }
+        public DateTime? NDateTime { get; set; }
+    }
+}
