@@ -52,6 +52,7 @@ namespace BlazorStrap
 
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
         [Parameter] public Size Size { get; set; } = Size.None;
+        
         [Parameter] public string InputValue { get; set; }
         [Parameter] public EventCallback<string> InputValueChanged { get; set; }
         [Parameter] public bool IsReadonly { get; set; }
@@ -185,21 +186,22 @@ namespace BlazorStrap
 
         protected override bool TryParseValueFromString(string value, out T result, out string validationErrorMessage)
         {
+            var type = typeof(T);
             if (typeof(T) == typeof(string))
             {
                 result = (T)(object)value;
                 validationErrorMessage = null;
                 return true;
             }
-            else if(value == null && typeof(DateTime) != typeof(T) && typeof(DateTimeOffset) != typeof(T)) 
+            else if(value == null && (Nullable.GetUnderlyingType(type) != null)) 
             {
-                result = (T)(object)default;
+                result = (T)(object)default(T);
                 validationErrorMessage = null;
                 return true;
             }
             else if(value == "" && typeof(DateTime) != typeof(T) && typeof(DateTimeOffset) != typeof(T))
             {
-                result = (T)(object)default;
+                result = (T)(object)default(T);
                 validationErrorMessage = null;
                 return true;
             }
@@ -219,25 +221,25 @@ namespace BlazorStrap
                     return false;
                 }
             }
-            else if(typeof(T) == typeof(int))
+            else if(typeof(T) == typeof(int) || typeof(T) == typeof(int?))
             {
                 result = (T)(object)Convert.ToInt32(value);
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T) == typeof(long))
+            else if (typeof(T) == typeof(long) || typeof(T) == typeof(long?))
             {
                 result = (T)(object)Convert.ToInt64(value);
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T) == typeof(double))
+            else if (typeof(T) == typeof(double) || typeof(T) == typeof(double?))
             {
                 result = (T)(object)Convert.ToDouble(value);
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T) == typeof(Guid))
+            else if (typeof(T) == typeof(Guid) || typeof(T) == typeof(Guid?))
             {
                 try
                 { 
@@ -250,7 +252,7 @@ namespace BlazorStrap
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T) == typeof(DateTime))
+            else if (typeof(T) == typeof(DateTime) || typeof(T) == typeof(DateTime?))
             {
                 if (TryParseDateTime(value, out result))
                 {
@@ -263,7 +265,7 @@ namespace BlazorStrap
                     return false;
                 }
             }
-            else if (typeof(T) == typeof(DateTimeOffset))
+            else if (typeof(T) == typeof(DateTimeOffset) || typeof(T) == typeof(DateTimeOffset?))
             {
                 if (TryParseDateTimeOffset(value, out result))
                 {
