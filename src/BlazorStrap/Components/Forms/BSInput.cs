@@ -52,9 +52,6 @@ namespace BlazorStrap
 
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
         [Parameter] public Size Size { get; set; } = Size.None;
-        
-        [Parameter] public string InputValue { get; set; }
-        [Parameter] public EventCallback<string> InputValueChanged { get; set; }
         [Parameter] public bool IsReadonly { get; set; }
         [Parameter] public bool IsPlaintext { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
