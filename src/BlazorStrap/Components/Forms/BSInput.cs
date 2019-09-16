@@ -110,8 +110,6 @@ namespace BlazorStrap
                 StateHasChanged();
             }
             CurrentValueAsString = e;
-            InputValueChanged.InvokeAsync(e);
-            InputValue = e;
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
