@@ -230,7 +230,13 @@ namespace BlazorStrap
             }
             else if (typeof(T) == typeof(double) || typeof(T) == typeof(double?))
             {
-                result = (T)(object)Convert.ToDouble(value);
+                result = (T)(object)double.Parse(value, CultureInfo.InvariantCulture);
+                validationErrorMessage = null;
+                return true;
+            }
+            else if (typeof(T) == typeof(decimal) || typeof(T) == typeof(decimal?))
+            {
+                result = (T)(object)decimal.Parse(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
