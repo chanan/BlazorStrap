@@ -14,7 +14,7 @@ namespace BlazorStrap
         protected string classname =>
         new CssBuilder("popover")
             .AddClass($"bs-popover-{Placement.ToDescriptionString()}")
-            .AddClass("show", IsOpen ?? false || _isOpen)
+            .AddClass("show", (IsOpen ?? false))
             .AddClass(Class)
         .Build();
 
@@ -22,7 +22,7 @@ namespace BlazorStrap
 
         protected override void OnAfterRender(bool firstrun)
         {
-            if (IsOpen ?? false || _isOpen)
+            if ((IsOpen ?? false))
             {
                 var placement = Placement.ToDescriptionString();
                 new BlazorStrapInterop(JSRuntime).Popper(Target, Id, arrow, placement);

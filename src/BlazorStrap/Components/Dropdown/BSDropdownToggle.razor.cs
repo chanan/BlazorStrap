@@ -27,32 +27,38 @@ namespace BlazorStrap
 
         protected string Tag => IsLink ? "a" : "button";
         protected string Type => IsLink ? null : "button";
-        protected string href => IsLink ? "javascript:void(0)" : null;
+        protected string Href => IsLink ? "javascript:void(0)" : null;
 
         [Parameter] public Color Color { get; set; } = Color.None;
         [Parameter] public Size Size { get; set; } = Size.None;
         [Parameter] public bool IsLink { get; set; }
-        [Parameter] public bool IsSplit { get; set; }
+
+        [Obsolete("This Parameter is no longer require and will be removed soon")]
         [Parameter] public bool? IsOpen { get; set; }
+        [Parameter] public bool IsSplit { get; set; }
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] internal BSDropdownMenuBase Dropdown { get; set; }
         protected void Escape(KeyboardEventArgs e)
         {
-
-            if (e.Key.ToLower() == "escape" && IsOpen == true)
-            {
-                Dropdown.Hide();
-            }
+            if (Dropdown == null)
+                return;
+                if (e.Key.ToLower() == "escape")
+                {
+                    Dropdown.Hide();
+                }
         }
 
-        protected void OnClickEvent()
+        protected void OnClickEvent(MouseEventArgs e)
         {
-            if (IsOpen == null)
-            {
-                Dropdown.Toggle();
-            }
+            OnClick.InvokeAsync(e);
+            if (Dropdown == null)
+                return;
+            if (!Dropdown.Manual)
+                {
+                    Dropdown.Toggle();
+                }
         }
     }
 }

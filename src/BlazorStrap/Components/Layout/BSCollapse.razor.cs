@@ -24,7 +24,7 @@ namespace BlazorStrap
         protected string classname =>
          new CssBuilder("collapse")
              .AddClass("navbar-collapse", IsNavbar)
-             .AddClass("show", IsOpen.HasValue && IsOpen.Value || _isOpen)
+             .AddClass("show", (IsOpen ?? false))
              .AddClass(Class)
          .Build();
 
@@ -47,7 +47,7 @@ namespace BlazorStrap
 
         private void OnVisableChange(object sender, bool e)
         {
-            _isOpen = e;
+            IsOpen = e;
             InvokeAsync(() => { IsOpenChanged.InvokeAsync(e); });
             
         }

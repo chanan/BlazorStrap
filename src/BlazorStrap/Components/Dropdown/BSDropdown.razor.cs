@@ -21,10 +21,10 @@ namespace BlazorStrap
         internal List<EventCallback<BSDropdownEvent>> EventQue { get; set; } = new List<EventCallback<BSDropdownEvent>>();
 
         // Prevents rogue closing
-        private System.Timers.Timer _timer = new System.Timers.Timer(250);
         private BSDropdownMenuBase _selected;
         private BSDropdownMenuBase _dropDownMenu { get; set; } = new BSDropdownMenu();
         public bool Active = false;
+        private bool ShouldClose = false;
         internal BSDropdownMenuBase DropDownMenu
         {
             get
@@ -49,15 +49,21 @@ namespace BlazorStrap
                 InvokeAsync(StateHasChanged);
             }
         }
-
+        protected void MouseLeave()
+        {
+            ShouldClose = true;
+        }
+        protected void MouseEnter()
+        {
+            ShouldClose = false;
+        }
         protected string classname =>
         new CssBuilder()
             .AddClass("dropdown", !IsGroup)
             .AddClass("btn-group", IsGroup)
             .AddClass("dropdown-submenu", IsSubmenu)
             .AddClass(DropdownDirection.ToDescriptionString(), DropdownDirection != DropdownDirection.Down)
-            .AddClass("show", _manual == null && Selected != null)
-            .AddClass("show", _manual != null && IsOpen.HasValue && IsOpen.Value)
+            .AddClass("show", Selected != null || (IsOpen ?? false))
             .AddClass("active", Active)
             .AddClass(Class)
         .Build();
@@ -72,8 +78,6 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
-            _timer.Elapsed += OnTimedEvent;
-            
             if (Dropdown != null || NavItem != null)
             {
                 IsSubmenu = true;
@@ -96,30 +100,18 @@ namespace BlazorStrap
             }
         }
 
-        internal void GotFocus()
-        {
-            Dropdown?.GotFocus();
-            _timer.Stop();
-            _timer.Interval = 250;
-        }
+        
         protected void LostFocus()
         {
-            _timer.Start();
+            if(ShouldClose)
+            {
+                Close();
+            }
         }
 
         protected void Close()
         {
             Selected = null;
-        }
-
-        private void OnTimedEvent(Object source, ElapsedEventArgs e)
-        {
-            if (_manual == null)
-            {
-                InvokeAsync(() => Close());
-            }
-            _timer.Stop();
-            _timer.Interval = 250;
         }
 
         protected override Task OnAfterRenderAsync(bool firstrun)

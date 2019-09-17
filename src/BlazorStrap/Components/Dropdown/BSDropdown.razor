@@ -4,7 +4,7 @@
 <CascadingValue Value="@this">
     <CascadingValue Value="@DropDownMenu">
 
-        <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@classname" @onfocusin="GotFocus" @onfocusout="LostFocus">
+        <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@classname" @onfocusout="LostFocus" @onmouseleave="MouseLeave" @onmouseenter="MouseEnter">
             @ChildContent
         </DynamicElement>
 
