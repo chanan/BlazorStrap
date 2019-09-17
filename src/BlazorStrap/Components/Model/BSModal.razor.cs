@@ -35,50 +35,22 @@ namespace BlazorStrap
             .Build();
 
         protected ElementReference Me { get; set; }
-        private bool Closed { get; set; }
-        private bool HasRendered { get; set; }
-        protected override async Task OnAfterRenderAsync(bool firstrun)
+        private bool IsInitialized { get; set; }
+        protected override Task OnAfterRenderAsync(bool firstrun)
         {
-            if (!HasRendered)
+            // This is models like the demo where they are open prior to the page drawing.
+            if (firstrun)
             {
-                HasRendered = true;
+                IsInitialized = true;
             }
-            else
+            for (int i = 0; i < EventQue.Count; i++)
             {
-                // This try can be removed after they fix prerendering
-                try
-                {
-                    // Sets Focus inside model so escape key can work.
-                    if (JustOpened)
-                    {
-                        await new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
-                        await new BlazorStrapInterop(JSRuntime).ChangeBodyModal(_isOpen ? "17px" : null);
-                        if (!IgnoreEscape)
-                        {
-                            await new BlazorStrapInterop(JSRuntime).ModalEscapeKey();
-                            BlazorStrapInterop.OnEscapeEvent += OnEscape;
-                        }
-                        JustOpened = false;
-                    }
-                    else if (Closed)
-                    {
-                        Closed = false;
-                        await new BlazorStrapInterop(JSRuntime).ChangeBody(_isOpen ? "modal-open" : null);
-                        await new BlazorStrapInterop(JSRuntime).ChangeBodyModal(_isOpen ? "17px" : null);
-                    }
-                    for (int i = 0; i < EventQue.Count; i++)
-                    {
-                        await EventQue[i].InvokeAsync(BSModalEvent);
-                        EventQue.RemoveAt(i);
-                    }
-                }
-                catch
-                {
+                EventQue[i].InvokeAsync(BSModalEvent);
+                EventQue.RemoveAt(i);
+            }
 
-                }
-            }
+            return base.OnAfterRenderAsync(false);
         }
-
         protected string styles
         {
             get
@@ -106,16 +78,30 @@ namespace BlazorStrap
 
         internal override void Changed(bool e)
         {
+           ChangedAsync(e);
+        }
+        internal async Task ChangedAsync(bool e)
+        {
+            if(!IsInitialized)
+            {
+                return;
+            }
             BSModalEvent = new BSModalEvent() { Target = this };
             if (e)
             {
-                ShowEvent.InvokeAsync(BSModalEvent);
+                await new BlazorStrapInterop(JSRuntime).ChangeBody("modal-open");
+                if (!IgnoreEscape)
+                {
+                    await new BlazorStrapInterop(JSRuntime).ModalEscapeKey();
+                    BlazorStrapInterop.OnEscapeEvent += OnEscape;
+                }
+                await ShowEvent.InvokeAsync(BSModalEvent);
                 EventQue.Add(ShownEvent);
             }
             else
             {
-                Closed = true;
-                HideEvent.InvokeAsync(BSModalEvent);
+                await new BlazorStrapInterop(JSRuntime).ChangeBody(null);
+                await HideEvent.InvokeAsync(BSModalEvent);
                 EventQue.Add(HiddenEvent);
             }
         }
@@ -124,17 +110,15 @@ namespace BlazorStrap
         {
             if (!IgnoreClickOnBackdrop)
             {
-                Closed = true;
-                if (_manual != null) IsOpen = false;
-                else if(_manual == null) _isOpen = false;
+                if (_manual != null) IsOpenChanged.InvokeAsync(false); 
+                if(_manual == null)  Hide();
                 StateHasChanged();
             }
         }
         protected void OnEscape(object sender, EventArgs e)
         {
-            _isOpen = false;
-            Closed = true;
-            IsOpenChanged.InvokeAsync(false);
+            if (_manual != null) IsOpenChanged.InvokeAsync(false);
+            if (_manual == null) Hide();
             BlazorStrapInterop.OnEscapeEvent -= OnEscape;
             InvokeAsync(StateHasChanged);
         }
