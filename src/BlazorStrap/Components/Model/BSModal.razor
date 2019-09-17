@@ -10,7 +10,7 @@
     </div>
 </DynamicElement>
 
-@if (_isOpen)
+@if (_isOpen || (IsOpen ?? false) )
 {
     <div class="modal-backdrop fade show" ></div>
 }
