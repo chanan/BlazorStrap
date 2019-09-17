@@ -15,81 +15,40 @@ namespace BlazorStrap.Util.Components
         {
             get
             {
-                return _manual;
+                return _isOpen;
             }
             set
             {
-                if (value != _manual)
-                {
-                    Changed(value.Value);
-                    StateHasChanged();
-                }
                 if (value != null)
                 {
-                    _manual = value;
-                }
-               
-                if (value == true)
-                {
-                    if (JustOpened)
-                    {
-                        JustOpened = false;
-                    }
-                    else
-                    {
-                        JustOpened = true;
-                    }
+                    Manual = true;
+                    Changed(value ?? false);
+                    _isOpen = value ?? false;
+                    StateHasChanged();
                 }
             }
         }
 
-        protected bool _isOpen { get; set; }
-       
-        protected bool? _manual { get; set; }
-        protected bool JustOpened { get; set; }
+        public bool Manual { get; set; } = false;
+        private bool _isOpen { get; set; }
 
         internal virtual void Changed(bool e)
         {
         }
         public virtual void Show()
         {
-            if (_manual != null)
-            {
-                throw new InvalidOperationException("Boolean IsOpen and @Ref show/hide/toggle. May not be used together. ");
-            }
             _isOpen = true;
-            JustOpened = true;
-            Changed(true);
             IsOpenChanged.InvokeAsync(true);
-            StateHasChanged();
         }
         public virtual void Hide()
         {
-            if (_manual != null )
-            {
-                throw new InvalidOperationException("Boolean IsOpen and @Ref show/hide/toggle. May not be used together. ");
-            }
             _isOpen = false;
-            Changed(false);
             IsOpenChanged.InvokeAsync(false);
-            StateHasChanged();
         }
         public virtual void Toggle()
         {
-            if (_manual != null)
-            {
-                throw new InvalidOperationException("Boolean IsOpen and @Ref show/hide/toggle. May not be used together. ");
-            }
             _isOpen = !_isOpen;
-            JustOpened = _isOpen;
-            Changed(_isOpen);
             IsOpenChanged.InvokeAsync(_isOpen);
-            StateHasChanged();
         }
-        public virtual bool GetStatus()
-        {
-            return _isOpen;
-        }
-      
     }
 }

@@ -17,8 +17,8 @@ namespace BlazorStrap
              .AddClass("btn", !IsLink)
              .AddClass($"btn-{Size.ToDescriptionString()}", !IsLink && Size != Size.None)
              .AddClass($"btn-{Color.ToDescriptionString()}", !IsLink && Color != Color.None)
-             .AddClass(HiddenClass ?? "" , !CollapseItem?.Collapse?.GetStatus() ?? false && HiddenClass != null)
-             .AddClass(ShownClass ?? "", CollapseItem?.Collapse?.GetStatus() ?? false && ShownClass != null)
+             .AddClass(HiddenClass ?? "" , CollapseItem?.Collapse?.IsOpen ?? false && HiddenClass != null)
+             .AddClass(ShownClass ?? "", CollapseItem?.Collapse?.IsOpen ?? false && ShownClass != null)
              .AddClass("active", CollapseItem?.Active ?? false)
              .AddClass(Class)
          .Build();

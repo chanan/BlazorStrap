@@ -13,6 +13,7 @@ namespace BlazorStrap
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
 
         private BSDropdownMenuBase _selected;
+        private bool ShouldClose = false;
         //Prevents NULL
         private BSDropdownMenuBase _dropDownMenu { get; set; } = new BSDropdownMenu();
 
@@ -34,7 +35,7 @@ namespace BlazorStrap
             {
                 if(Nav != null)
                 {
-                    if(Nav.Selected != this)
+                    if(Nav.Selected != this )
                     {
                         return null;
                     }
@@ -55,7 +56,6 @@ namespace BlazorStrap
                 }
             }
         }
-        private bool _MouseDown = false;
         private bool _active;
         public bool Active
         {
@@ -71,23 +71,22 @@ namespace BlazorStrap
                 .AddClass("nav-item", !RemoveDefaultClass)
                 .AddClass("dropdown", IsDropdown)
                 .AddClass("dropdown-submenu", IsSubmenu)
-                .AddClass("show", IsDropdown && _manual == null && Nav?.Selected == this)
-                .AddClass("show", IsDropdown && _manual != null && IsOpen.HasValue && IsOpen.Value)
+                .AddClass("show", IsDropdown && (Nav?.Selected == this || (IsOpen ?? false)))
                 .AddClass("active", _active)
                 .AddClass(Class)
             .Build();
 
         protected string Tag => Nav.IsList ? "li" : "div";
-
         [Parameter] public bool RemoveDefaultClass { get; set; }
         [Parameter] public bool IsDropdown { get; set; }
+        [Parameter] public bool CloseOnFocusout { get; set; } = true;
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] internal BSNav Nav { get; set; }
         [CascadingParameter] internal BSNavItem NavItem { get; set; }
         protected override Task OnInitializedAsync()
         {
-            if (IsDropdown && _manual == null)
+            if (IsDropdown && !Manual)
             {
                 Nav.Navitems.Add(this);
             }
@@ -98,21 +97,14 @@ namespace BlazorStrap
             return base.OnInitializedAsync();
         }
 
-        protected void MouseDown()
+        protected void MouseLeave()
         {
-            if (_manual == null && IsDropdown)
-            {
-                _MouseDown = Nav.Selected == this && true;
-            }
-            else
-            {
-                if (IsOpen != null)
-                {
-                    _MouseDown = IsOpen.Value && true;
-                }
-            }
+            ShouldClose = true;
         }
-
+        protected void MouseEnter()
+        {
+            ShouldClose = false;
+        }
         public override void Toggle()
         {
             if (Nav.Selected == this)
@@ -140,19 +132,29 @@ namespace BlazorStrap
 
         protected void LostFocus()
         {
-            if (IsDropdown && _manual != null && !_MouseDown)
+            if (!CloseOnFocusout)
+            {
+                return;
+            }
+            if (ShouldClose)
             {
                 if (Nav.Selected == this)
                 {
                     Selected = null;
                 }
+                else
+                {
+                    if(Manual)
+                    {
+                        Hide();
+                    }
+                }
             }
-            _MouseDown = false;
         }
 
         public void Dispose()
         {
-            if (IsDropdown && IsOpen == null)
+            if (IsDropdown)
             {
                 Nav.Navitems.Remove(this);
             }

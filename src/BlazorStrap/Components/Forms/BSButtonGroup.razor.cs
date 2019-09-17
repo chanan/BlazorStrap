@@ -30,5 +30,6 @@ namespace BlazorStrap
         [Parameter] public Size Size { get; set; } = Size.None;
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
+
     }
 }

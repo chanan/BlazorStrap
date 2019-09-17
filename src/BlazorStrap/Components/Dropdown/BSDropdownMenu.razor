@@ -1,6 +1,6 @@
 ﻿@namespace BlazorStrap
 @inherits BSDropdownMenuBase
 
-    <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@classname" @onmouseout="MouseOut" @onmouseover="MouseOver">
+    <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@classname" @onmouseleave="MouseOut">
         @ChildContent
     </DynamicElement>

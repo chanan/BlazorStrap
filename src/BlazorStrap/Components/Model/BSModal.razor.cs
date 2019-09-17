@@ -23,8 +23,7 @@ namespace BlazorStrap
         [Inject] Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
         protected string classname =>
           new CssBuilder("modal")
-              .AddClass("fade show", _manual == null && _isOpen)
-              .AddClass("fade show", _manual != null && IsOpen.HasValue && IsOpen.Value)
+              .AddClass("fade show", (IsOpen ?? false))
               .AddClass(Class)
           .Build();
 
@@ -55,15 +54,7 @@ namespace BlazorStrap
         {
             get
             {
-                var display = "";
-                if (_manual != null)
-                {
-                    display = (IsOpen.HasValue && IsOpen.Value) ? "display: block; padding-right: 17px;" : null;
-                }
-                else
-                {
-                    display = _isOpen ? "display: block; padding-right: 17px;" : null;
-                }
+                var display = (IsOpen ?? false) ? "display: block; padding-right: 17px;" : null;
                 return $"{Style} {display}".Trim();
             }
         }
@@ -110,15 +101,13 @@ namespace BlazorStrap
         {
             if (!IgnoreClickOnBackdrop)
             {
-                if (_manual != null) IsOpenChanged.InvokeAsync(false); 
-                if(_manual == null)  Hide();
+                Hide();
                 StateHasChanged();
             }
         }
         protected void OnEscape(object sender, EventArgs e)
         {
-            if (_manual != null) IsOpenChanged.InvokeAsync(false);
-            if (_manual == null) Hide();
+            Hide();
             BlazorStrapInterop.OnEscapeEvent -= OnEscape;
             InvokeAsync(StateHasChanged);
         }
