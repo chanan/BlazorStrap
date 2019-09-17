@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BlazorPrettyCode" Version="1.0.0-preview9-01" />
+    <PackageReference Include="BlazorPrettyCode" Version="1.0.0-rc1-01" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0-rc1.19457.4" />
   </ItemGroup>
 
