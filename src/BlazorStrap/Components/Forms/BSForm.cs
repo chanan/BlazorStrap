@@ -28,7 +28,7 @@ namespace BlazorStrap
         private EditContext MyEditContext { get; set; }
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            if(Model == null)
+            if(Model == null && EditContext == null)
             {
                 Form = Formbuilder =>
                 {
