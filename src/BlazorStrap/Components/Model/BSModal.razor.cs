@@ -80,7 +80,7 @@ namespace BlazorStrap
             BSModalEvent = new BSModalEvent() { Target = this };
             if (e)
             {
-                await new BlazorStrapInterop(JSRuntime).ChangeBody("modal-open");
+                await new BlazorStrapInterop(JSRuntime).AddBodyClass("modal-open");
                 if (!IgnoreEscape)
                 {
                     await new BlazorStrapInterop(JSRuntime).ModalEscapeKey();
@@ -91,7 +91,7 @@ namespace BlazorStrap
             }
             else
             {
-                await new BlazorStrapInterop(JSRuntime).ChangeBody(null);
+                await new BlazorStrapInterop(JSRuntime).RemoveBodyClass("modal-open");
                 await HideEvent.InvokeAsync(BSModalEvent);
                 EventQue.Add(HiddenEvent);
             }
@@ -105,11 +105,11 @@ namespace BlazorStrap
                 StateHasChanged();
             }
         }
-        protected void OnEscape(object sender, EventArgs e)
+        protected async Task OnEscape()
         {
             Hide();
             BlazorStrapInterop.OnEscapeEvent -= OnEscape;
-            InvokeAsync(StateHasChanged);
+            await InvokeAsync(StateHasChanged);
         }
        
 

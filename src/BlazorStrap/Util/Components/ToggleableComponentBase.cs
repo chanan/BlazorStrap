@@ -22,9 +22,12 @@ namespace BlazorStrap.Util.Components
                 if (value != null)
                 {
                     Manual = true;
-                    Changed(value ?? false);
+                    if (value.Value != _isOpen)
+                    {
+                        Changed(value ?? false);
+                        StateHasChanged();
+                    }
                     _isOpen = value ?? false;
-                    StateHasChanged();
                 }
             }
         }
@@ -38,16 +41,19 @@ namespace BlazorStrap.Util.Components
         public virtual void Show()
         {
             _isOpen = true;
+            if(!Manual) Changed(_isOpen);
             IsOpenChanged.InvokeAsync(true);
         }
         public virtual void Hide()
         {
             _isOpen = false;
+            if (!Manual) Changed(_isOpen);
             IsOpenChanged.InvokeAsync(false);
         }
         public virtual void Toggle()
         {
             _isOpen = !_isOpen;
+            if (!Manual) Changed(_isOpen);
             IsOpenChanged.InvokeAsync(_isOpen);
         }
     }

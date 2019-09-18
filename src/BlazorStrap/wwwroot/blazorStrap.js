@@ -1,16 +1,65 @@
 ﻿var link;
 
 window.blazorStrap = {
+    animationEvent: function (event) {
+        DotNet.invokeMethodAsync("BlazorStrap", "OnAnimationEnd", event.target.id);
+    },
     log: function (message) {
         console.log("message: ", message);
         return true;
     },
-    changeBody: function (classname) {
+    addEventAnimationEnd(el) {
+        el.addEventListener('animationend', window.blazorStrap.animationEvent);
+        el.addEventListener('transitionend', window.blazorStrap.animationEvent);
+        return true;
+    },
+    removeEventAnimationEnd(el) {
+        el.removeEventListener('animationend', window.blazorStrap.animationEvent);
+        el.removeEventListener('transitionend', window.blazorStrap.animationEvent);
+        return true;
+    },
+    addClass2Elements: function (el,el2, classname) {
+        el.classList.add(classname);
+        el2.classList.add(classname);
+        return true;
+    },
+    removeClass2Elements: function (el, el2, classname) {
+        el.classList.remove(classname);
+        el2.classList.remove(classname);
+        return true;
+    },
+    addClass: function (el, classname) {
+        el.classList.add(classname);
+        DotNet.invokeMethodAsync("BlazorStrap", "OnAddClass", el.id, classname);
+        return true;
+    },
+    removeClass: function (el, classname) {
+        el.classList.remove(classname);
+        return true;
+    },
+    addBodyClass: function (classname) {
+        if (classname == "modal-open") {
+            this.changeBodyPaddingRight("17px");
+        }
+        document.body.classList.add(classname);
+        return true;
+    },
+    removeBodyClass: function (classname) {
+        if (classname == "modal-open") {
+            this.changeBodyPaddingRight("");
+        }
+        document.body.classList.remove(classname);
+        return true;
+    },
+    changeBodyClass: function (classname) {
         document.body.className = classname;
         return true;
     },
-    changeBodyModal: function (padding) {
-        document.body.style.paddingRight = padding;
+    changeBodyPaddingRight: function (padding) {
+        var dpi = window.devicePixelRatio;
+        if (dpi == 1 || !padding) {
+            document.body.style.paddingRight = padding;
+        }
         return true;
     },
     popper: function (target, popperId, arrow, placement) {
@@ -91,3 +140,4 @@ function showPopper(reference, popper, arrow, placement) {
     );
     return thePopper;
 }
+

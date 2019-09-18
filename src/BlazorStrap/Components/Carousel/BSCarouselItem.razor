@@ -1,18 +1,14 @@
 ﻿@namespace BlazorStrap
 @inherits BSCarouselItemBase
 
-<DynamicElement @attributes="@UnknownParameters" TagName="div" class="@classname">
+<DynamicElement @attributes="@UnknownParameters" TagName="div" class="@Classname"@bind-ElementRef="MyRef" id="@MyRef.Id">
     @if (AddActionLink)
     {
-        <a href="@ActionLink" target="@ActionLinkTarget"><img class="d-block w-100" src="@src" alt="@alt"></a>
+        <a href="@ActionLink" target="@ActionLinkTarget"><img class="d-block w-100" src="@Src" alt="@Alt"></a>
     }
     else
     {
-        <img class="d-block w-100" src="@src" alt="@alt">
+        <img class="d-block w-100" src="@Src" alt="@Alt">
     }
     @ChildContent
 </DynamicElement>
-
-@code {
-
-}

@@ -2,7 +2,7 @@
 @inherits BSCarouselBase
 
     <CascadingValue Value="this">
-        <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@classname" @onmouseover="onmouseover" @onmouseout="onmouseout">
+        <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@classname" @onmouseenter="OnMouseEnter" @onmouseleave="OnMouseLeave" @onkeypress="OnKeyPress">
             @ChildContent
         </DynamicElement>
     </CascadingValue>
