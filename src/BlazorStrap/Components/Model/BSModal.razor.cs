@@ -126,7 +126,10 @@ namespace BlazorStrap
                 await new BlazorStrapInterop(JSRuntime).AddEventAnimationEnd(MyRef);
             }
             else
+            {
                 CanShow = true;
+                return;
+            }
             BSModalEvent = new BSModalEvent() { Target = this };
             if (e)
             {

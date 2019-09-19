@@ -46,6 +46,7 @@ namespace BlazorStrap
             set
             {
                 _selected = value;
+                if(_selected != null) _selected.Changed(true);
                 InvokeAsync(StateHasChanged);
             }
         }

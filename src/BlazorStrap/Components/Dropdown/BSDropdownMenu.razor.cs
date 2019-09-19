@@ -5,18 +5,21 @@ using System;
 using System.Timers;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components.Web;
+using BlazorStrap.Util;
+using System.Threading.Tasks;
+using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public abstract class BSDropdownMenuBase : ToggleableComponentBase
+    public abstract class BSDropdownMenuBase : ToggleableComponentBase, IDisposable
     {
+        [Inject] private Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
              new CssBuilder("dropdown-menu")
-                 .AddClass(AnimationClass, !DisableAnimations)
                  .AddClass("show", DropDown?.Selected == this)
-                 .AddClass("show", NavItem?.Selected == this)
-                 .AddClass("show", NavItem?.Selected != this && DropDown?.Selected != this && (IsOpen ?? false))
+                 .AddClass("show", NavItem?.Selected == this )
+                 .AddClass("show", NavItem?.Selected != this && DropDown?.Selected != this && (IsOpen ?? false) )
                  .AddClass(Class)
              .Build();
 
@@ -53,6 +56,9 @@ namespace BlazorStrap
                 return false;
             }
         }
+
+        public BSModalEvent BSModalEvent { get; private set; }
+      
         public override void Show()
         {
             if (DropDown != null)
@@ -110,7 +116,11 @@ namespace BlazorStrap
             {
                 NavItem.DropDownMenu = this;
             }
-           
+            if (AnimationClass == null)
+            {
+                AnimationClass = "fade";
+            }
+
             base.OnInitialized();
         }
         public void MouseOut(EventArgs e)
