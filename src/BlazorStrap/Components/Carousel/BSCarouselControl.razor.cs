@@ -35,14 +35,17 @@ namespace BlazorStrap
 
         protected async Task OnClick(MouseEventArgs e)
         {
+            if (Parent.AnimationRunning) return;
             if (CarouselDirection == CarouselDirection.Previous)
             {
+                Parent.Direction = 1;
                 Parent.ResetTimer();
                 if (Parent.ActiveIndex == 0) { Parent.ActiveIndex = NumberOfItems - 1; }
                 else { Parent.ActiveIndex = Parent.ActiveIndex - 1; }
             }
             else
             {
+                Parent.Direction = 0;
                 Parent.ResetTimer();
                 if (Parent.ActiveIndex == NumberOfItems - 1) { Parent.ActiveIndex = 0; }
                 else { Parent.ActiveIndex = Parent.ActiveIndex + 1; }

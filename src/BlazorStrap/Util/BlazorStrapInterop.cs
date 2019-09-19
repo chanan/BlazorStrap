@@ -35,6 +35,14 @@ namespace BlazorStrap.Util
             OnAnimationEndEvent?.Invoke(id);
             return Task.CompletedTask;
         }
+        public ValueTask<int> getScrollHeight(ElementReference el)
+        {
+            return JSRuntime.InvokeAsync<int>("blazorStrap.getScrollHeight");
+        }
+        public ValueTask<bool> SetStyle(ElementReference el, string key, string value)
+        {
+            return JSRuntime.InvokeAsync<bool>("blazorStrap.setStyle", el, key, value);
+        }
         public ValueTask<bool> AddEventAnimationEnd(ElementReference el)
         {
             return JSRuntime.InvokeAsync<bool>("blazorStrap.addEventAnimationEnd", el);

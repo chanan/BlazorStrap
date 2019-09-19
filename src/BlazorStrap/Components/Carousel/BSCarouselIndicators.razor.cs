@@ -9,7 +9,7 @@ namespace BlazorStrap
     public abstract class BSCarouselIndicatorsBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder("carousel-indicators")
         .AddClass(Class)
         .Build();
@@ -20,6 +20,7 @@ namespace BlazorStrap
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public EventCallback<int> ActiveIndexChanged { get; set; }
         [Parameter] public EventCallback<int> ActiveIndexChangedEvent { get; set; }
+
 
         protected void ClickEventActiveIndex(int index)
         {

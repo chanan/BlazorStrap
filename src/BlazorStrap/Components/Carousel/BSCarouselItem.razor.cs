@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using BlazorStrap.Util;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace BlazorStrap
 {
@@ -16,7 +17,7 @@ namespace BlazorStrap
         protected ElementReference MyRef { get; set; } 
         protected string Classname =>
         new CssBuilder("carousel-item")
-        .AddClass("active", Parent.CarouselItems[Parent.ActiveIndex] == this )
+        .AddClass("active", Parent.ActiveIndex < Parent.CarouselItems.Count ? (Parent.CarouselItems[Parent.ActiveIndex] == this) : false )
         .AddClass(Class)
         .Build();
         
@@ -27,7 +28,7 @@ namespace BlazorStrap
                 return !String.IsNullOrEmpty(ActionLink);
             }
         }
-
+        [Parameter] public int Interval { get; set; } = 5000;
         [Parameter] public string Src { get; set; }
         [Parameter] public string Alt { get; set; }
         [Parameter] public string Class { get; set; }
@@ -40,22 +41,32 @@ namespace BlazorStrap
             Parent.ActiveIndexChanged += OnActiveIndexChanged;
             BlazorStrapInterop.OnAnimationEndEvent += OnAnimationEnd;
         }
-
       
         private async Task OnActiveIndexChanged()
         {
+            foreach (var item in Parent.CarouselItems)
+            {
+                await new BlazorStrapInterop(JSRuntime).RemoveClass(item.MyRef, "carousel-item-left carousel-item-right carousel-item-prev carousel-item-next");
+            }
+
             if (Parent.CarouselItems[Parent.ActiveIndex] == this)
             {
+                Parent.AnimationRunning = true;
+                Console.WriteLine(MyRef.Id + "-Start - " + Parent.ActiveIndex.ToString());
                 var js = new BlazorStrapInterop(JSRuntime);
                 if (Parent.Direction == 0)
                 {
                     var oldindex = 0;
-                    if (Parent.ActiveIndex == 0) { oldindex = Parent.NumberOfItems -1; }
+                    if (Parent.ActiveIndex == 0) { oldindex = Parent.NumberOfItems - 1; }
                     else { oldindex = Parent.ActiveIndex - 1; }
 
                     if (await js.AddClass(MyRef, "carousel-item-next"))
                     {
-                        await js.AddClass2Elements(MyRef, Parent.CarouselItems[oldindex].MyRef, "carousel-item-left");
+                        new Task(async () =>
+                        {
+                            await Task.Delay(100);
+                            await js.AddClass2Elements(MyRef, Parent.CarouselItems[oldindex].MyRef, "carousel-item-left");
+                        }).Start();
                     }
                 }
                 else if (Parent.Direction == 1)
@@ -65,38 +76,41 @@ namespace BlazorStrap
                         oldindex = 0;
                     if (await js.AddClass(MyRef, "carousel-item-prev"))
                     {
-                        await js.AddClass2Elements(MyRef, Parent.CarouselItems[oldindex].MyRef, "carousel-item-right");
+                        new Task(async () =>
+                        {
+                            await Task.Delay(100);
+                            await js.AddClass2Elements(MyRef, Parent.CarouselItems[oldindex].MyRef, "carousel-item-right");
+                        }).Start();
                     }
                 }
-                await new BlazorStrapInterop(JSRuntime).AddEventAnimationEnd(MyRef);
             }
-            
         }
 
         private async Task OnAnimationEnd(string id)
         {
-            var found = false;
-            foreach(var item in Parent.CarouselItems)
+            if (Parent.CarouselItems[Parent.ActiveIndex] != this) return;
+            var count = Parent.CarouselItems.Where(q => q.MyRef.Id == id).Count();
+            if (count > 0 )
             {
-                if (id == item.MyRef.Id)
-                    found = true;
-            }
-            if (!found)
-                return;
-
-            var js = new BlazorStrapInterop(JSRuntime);
-            await js.RemoveClass(MyRef, "carousel-item-left");
-            await js.RemoveClass(MyRef, "carousel-item-right");
-            await js.RemoveClass(MyRef, "carousel-item-prev");
-            await js.RemoveClass(MyRef, "carousel-item-next");
-            if (MyRef.Id == id)
-            {
-                await js.AddClass(MyRef, "active");
-                await js.RemoveEventAnimationEnd(MyRef);
+                foreach (var item in Parent.CarouselItems)
+                {
+                    await new BlazorStrapInterop(JSRuntime).RemoveClass(item.MyRef, "carousel-item-left carousel-item-right carousel-item-prev carousel-item-next");
+                }
+                await new BlazorStrapInterop(JSRuntime).AddClass(MyRef, "active");
+                Parent.AnimationRunning = false;
+                Parent.ResetTimer();
                 await Parent.Refresh();
             }
         }
-       
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if(firstRender)
+            {
+                await new BlazorStrapInterop(JSRuntime).AddEventAnimationEnd(MyRef);
+            }
+           
+        }
         public void Dispose()
         {
             Parent.ActiveIndexChanged -= OnActiveIndexChanged;

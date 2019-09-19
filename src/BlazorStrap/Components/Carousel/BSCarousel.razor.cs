@@ -11,8 +11,10 @@ namespace BlazorStrap
 {
     public abstract class BSCarouselBase : ComponentBase, IDisposable
     {
+        
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         public List<BSCarouselItemBase> CarouselItems { get; set; } = new List<BSCarouselItemBase>();
+        public List<BSCarouselIndicatorItemBase> CarouselIndicatorItems { get; set; } = new List<BSCarouselIndicatorItemBase>();
         private int LastNumberItems { get; set; } = 0;
 
         protected string classname =>
@@ -24,7 +26,7 @@ namespace BlazorStrap
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public int Interval { get; set; } = 5000;
-        private string _pause { get; set; }
+        private string _pause { get; set; } = "hover";
 
         [Parameter]
         public string Pause
@@ -40,7 +42,7 @@ namespace BlazorStrap
                 {
                     if (_pause == "true")
                         Timer?.Start();
-                    else
+                    else if (_pause == "false")
                         Timer?.Stop();
                 }
             }
@@ -51,6 +53,7 @@ namespace BlazorStrap
         [Parameter] public bool Fade { get; set; } = false;
         [Parameter] public bool Ride { get; set; } = false;
         [Parameter] public bool Touch { get; set; } = true;
+        public bool AnimationRunning { get; set; } = false;
         private int _numberOfItems { get; set; }
 
         [Parameter]
@@ -102,6 +105,7 @@ namespace BlazorStrap
 
         private async void OnTimerEvent(object source, ElapsedEventArgs e)
         {
+            if (AnimationRunning) return;
             if (ActiveIndex == NumberOfItems - 1 && (Ride || !Wrap))
             {
                 Timer.Stop();
@@ -142,13 +146,13 @@ namespace BlazorStrap
 
         protected void OnMouseLeave()
         {
-            if (_pause == "hover" && Timer != null) { Timer.Start(); }
+            if (_pause == "hover" && Timer != null) { ResetTimer(); }
         }
 
         public void ResetTimer()
         {
             Timer.Stop();
-            Timer.Interval = Interval;
+            Timer.Interval = CarouselItems[ActiveIndex].Interval;
             Timer.Start();
         }
 

@@ -13,6 +13,7 @@ namespace BlazorStrap
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string classname =>
              new CssBuilder("dropdown-menu")
+                 .AddClass(AnimationClass, !DisableAnimations)
                  .AddClass("show", DropDown?.Selected == this)
                  .AddClass("show", NavItem?.Selected == this)
                  .AddClass("show", NavItem?.Selected != this && DropDown?.Selected != this && (IsOpen ?? false))
@@ -52,7 +53,7 @@ namespace BlazorStrap
                 return false;
             }
         }
-        internal void Show()
+        public override void Show()
         {
             if (DropDown != null)
             {
@@ -63,7 +64,7 @@ namespace BlazorStrap
                 NavItem.Selected = this;
             }
         }
-        internal void Hide()
+        public override void Hide()
         {
             if (DropDown?.Selected == this)
             {
@@ -74,7 +75,7 @@ namespace BlazorStrap
                 NavItem.Selected = null;
             }
         }
-        internal void Toggle()
+        public override void Toggle()
         {
             if (DropDown != null)
             {

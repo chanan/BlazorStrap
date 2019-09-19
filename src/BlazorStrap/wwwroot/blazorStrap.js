@@ -2,7 +2,21 @@
 
 window.blazorStrap = {
     animationEvent: function (event) {
-        DotNet.invokeMethodAsync("BlazorStrap", "OnAnimationEnd", event.target.id);
+        if (event.target.hasAttributes()) {
+            var name = "";
+            var attrs = event.target.attributes;
+            for (var i = 0; i < attrs.length; ++i) {
+                 name = attrs[i].name;
+                if (name.includes("_bl_")) {
+                    name = name.replace("_bl_", "");
+                    break;
+                }
+            }
+            DotNet.invokeMethodAsync("BlazorStrap", "OnAnimationEnd", name);
+        }
+        else {
+            DotNet.invokeMethodAsync("BlazorStrap", "OnAnimationEnd", event.target.id);
+        }
     },
     log: function (message) {
         console.log("message: ", message);
@@ -29,12 +43,26 @@ window.blazorStrap = {
         return true;
     },
     addClass: function (el, classname) {
-        el.classList.add(classname);
+        var r = classname.split(" ");
+        for (var i = 0; i < r.length; ++i) {
+            el.classList.add(r[i]);
+        }
         DotNet.invokeMethodAsync("BlazorStrap", "OnAddClass", el.id, classname);
         return true;
     },
+    getScrollHeight: function (el) {
+        return el.scrollHeight;
+        
+    },
+    setStyle: function (el, key, value) {
+        el.style[key] = value;
+        return true;
+    },
     removeClass: function (el, classname) {
-        el.classList.remove(classname);
+        var r = classname.split(" ");
+        for (var i = 0; i < r.length; ++i) {
+            el.classList.remove(r[i]);
+        }
         return true;
     },
     addBodyClass: function (classname) {

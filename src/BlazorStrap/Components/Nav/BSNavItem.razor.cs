@@ -1,19 +1,20 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSNavItemBase : ToggleableComponentBase , IDisposable
+    public abstract class BSNavItemBase : ToggleableComponentBase, IDisposable
     {
         internal bool IsSubmenu;
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
 
         private BSDropdownMenuBase _selected;
         private bool ShouldClose = false;
+
         //Prevents NULL
         private BSDropdownMenuBase _dropDownMenu { get; set; } = new BSDropdownMenu();
 
@@ -29,13 +30,14 @@ namespace BlazorStrap
                 StateHasChanged();
             }
         }
+
         public BSDropdownMenuBase Selected
         {
             get
             {
-                if(Nav != null)
+                if (Nav != null)
                 {
-                    if(Nav.Selected != this )
+                    if (Nav.Selected != this)
                     {
                         return null;
                     }
@@ -56,7 +58,9 @@ namespace BlazorStrap
                 }
             }
         }
+
         private bool _active;
+
         public bool Active
         {
             get { return _active; }
@@ -66,8 +70,10 @@ namespace BlazorStrap
                 StateHasChanged();
             }
         }
+
         protected string classname =>
             new CssBuilder()
+                .AddClass(AnimationClass, !DisableAnimations)
                 .AddClass("nav-item", !RemoveDefaultClass)
                 .AddClass("dropdown", IsDropdown)
                 .AddClass("dropdown-submenu", IsSubmenu)
@@ -84,13 +90,14 @@ namespace BlazorStrap
         [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] internal BSNav Nav { get; set; }
         [CascadingParameter] internal BSNavItem NavItem { get; set; }
+
         protected override Task OnInitializedAsync()
         {
             if (IsDropdown && !Manual)
             {
                 Nav.Navitems.Add(this);
             }
-            if ( NavItem != null)
+            if (NavItem != null)
             {
                 IsSubmenu = true;
             }
@@ -101,10 +108,12 @@ namespace BlazorStrap
         {
             ShouldClose = true;
         }
+
         protected void MouseEnter()
         {
             ShouldClose = false;
         }
+
         public override void Toggle()
         {
             if (Nav.Selected == this)
@@ -144,7 +153,7 @@ namespace BlazorStrap
                 }
                 else
                 {
-                    if(Manual)
+                    if (Manual)
                     {
                         Hide();
                     }

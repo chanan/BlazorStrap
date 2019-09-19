@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
+using System.Threading.Tasks;
 
 namespace BlazorStrap.Util.Components
 {
@@ -8,8 +9,11 @@ namespace BlazorStrap.Util.Components
     /// </summary>
     public abstract class ToggleableComponentBase : ComponentBase
     {
+        internal ElementReference MyRef { get; set; }
         [Parameter] public EventCallback<bool> IsOpenChanged { get; set; }
- 
+        [Parameter] public string AnimationClass { get; set; } 
+        [Parameter] public bool DisableAnimations { get; set; }
+
         [Parameter]
         public bool? IsOpen
         {
@@ -35,8 +39,9 @@ namespace BlazorStrap.Util.Components
         public bool Manual { get; set; } = false;
         private bool _isOpen { get; set; }
 
-        internal virtual void Changed(bool e)
+        internal virtual Task Changed(bool e)
         {
+            return Task.CompletedTask;
         }
         public virtual void Show()
         {

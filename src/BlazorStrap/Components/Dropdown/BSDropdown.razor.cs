@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap 
 {
-    public abstract class BSDropdownBase : ToggleableComponentBase
+    public abstract class BSDropdownBase : ToggleableComponentBase , IDisposable
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] public EventCallback<BSDropdownEvent> ShowEvent { get; set; }
@@ -60,6 +60,7 @@ namespace BlazorStrap
         protected string classname =>
         new CssBuilder()
             .AddClass("dropdown", !IsGroup)
+            .AddClass(AnimationClass, !DisableAnimations)
             .AddClass("btn-group", IsGroup)
             .AddClass("dropdown-submenu", IsSubmenu)
             .AddClass(DropdownDirection.ToDescriptionString(), DropdownDirection != DropdownDirection.Down)
@@ -82,21 +83,40 @@ namespace BlazorStrap
             {
                 IsSubmenu = true;
             }
+            BlazorStrapInterop.OnAnimationEndEvent += OnAnimationEnd;
             base.OnInitialized();
         }
+        private async Task OnAnimationEnd(string id)
+        {
+            BSDropdownEvent = new BSDropdownEvent() { Target = this };
+            if (id != MyRef.Id)
+            {
+                if (IsOpen ?? false)
+                {
+                    await ShownEvent.InvokeAsync(BSDropdownEvent);
+                }
+                else
+                {
+                    await HiddenEvent.InvokeAsync(BSDropdownEvent);
+                }
+            }
 
-        internal override void Changed(bool e)
+        }
+
+        public void Dispose()
+        {
+            BlazorStrapInterop.OnAnimationEndEvent -= OnAnimationEnd;
+        }
+        internal override async Task Changed(bool e)
         {
             BSDropdownEvent = new BSDropdownEvent() { Target = this };
             if (e)
             {
-                ShowEvent.InvokeAsync(BSDropdownEvent);
-                EventQue.Add(ShownEvent);
+                await ShowEvent.InvokeAsync(BSDropdownEvent);
             }
             else
             {
-                HideEvent.InvokeAsync(BSDropdownEvent);
-                EventQue.Add(HiddenEvent);
+                await HideEvent.InvokeAsync(BSDropdownEvent);
             }
         }
 
