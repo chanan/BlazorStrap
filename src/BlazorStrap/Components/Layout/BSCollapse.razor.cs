@@ -52,12 +52,12 @@ namespace BlazorStrap
             
         }
 
-        internal override void Changed(bool e)
+        internal override async Task Changed(bool e)
         {
             BSCollapseEvent = new BSCollapseEvent() { Target = this };
             if(e)
             {
-                ShowEvent.InvokeAsync(BSCollapseEvent);
+                await ShowEvent.InvokeAsync(BSCollapseEvent);
                 EventQue.Add(ShownEvent);
             }
             else
@@ -70,7 +70,7 @@ namespace BlazorStrap
                         Navbar.Visable = false;
                     }
                 }
-                HideEvent.InvokeAsync(BSCollapseEvent);
+                await HideEvent.InvokeAsync(BSCollapseEvent);
                 EventQue.Add(HiddenEvent);
             }
         }

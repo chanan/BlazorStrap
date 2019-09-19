@@ -1,17 +1,17 @@
-﻿<BSCarousel NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" PauseOnHover="true">
-    <BSCarouselIndicators NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" />
-    <div class="carousel-inner">
-        @foreach(var item in items)
-        {
-            i++;
-            <BSCarouselItem IsActive="@(SecondIndex == i)" src="@item.Source" alt="@item.Alt">
-                <BSCarouselCaption CaptionText="@item.Caption" HeaderText="@item.Header" />
-            </BSCarouselItem>
-        }
-    </div>
-    <BSCarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" />
-    <BSCarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" />
-</BSCarousel>
+﻿ <BSCarousel NumberOfItems="@items.Count" Fade="true">
+        <BSCarouselIndicators NumberOfItems="@items.Count" ActiveIndexChangedEvent="@indexChanged" />
+        <div class="carousel-inner">
+            @for (int i = 0; i < items.Count; i++)
+            {
+                Item item = items[i];
+                <BSCarouselItem src="@item.Source" alt="@item.Alt">
+                    <BSCarouselCaption CaptionText="@item.Caption" HeaderText="@item.Header" />
+                </BSCarouselItem>
+            }
+        </div>
+        <BSCarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" />
+        <BSCarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" />
+    </BSCarousel>
     
 @code {
     int i = 0;
@@ -36,13 +36,6 @@
             Header = "Slide 3 Header"
         }
     };
-
-    private int _secondIndex;
-    int SecondIndex
-    {
-        get => _secondIndex;
-        set { _secondIndex = value; StateHasChanged(); }
-    }
 
     class Item
     {

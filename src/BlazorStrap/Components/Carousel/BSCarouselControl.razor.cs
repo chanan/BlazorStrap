@@ -11,22 +11,21 @@ namespace BlazorStrap
     public abstract class BSCarouselControlBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
          new CssBuilder()
              .AddClass("carousel-control-prev", CarouselDirection == CarouselDirection.Previous)
              .AddClass("carousel-control-next", CarouselDirection == CarouselDirection.Next)
              .AddClass(Class)
          .Build();
 
-        protected string iconClassname =>
+        protected string IconClassname =>
             new CssBuilder()
                 .AddClass("carousel-control-prev-icon", CarouselDirection == CarouselDirection.Previous)
                 .AddClass("carousel-control-next-icon", CarouselDirection == CarouselDirection.Next)
             .Build();
 
-        protected string directionName => CarouselDirection == CarouselDirection.Previous ? "Previous" : "Next";
+        protected string DirectionName => CarouselDirection == CarouselDirection.Previous ? "Previous" : "Next";
 
-        [Parameter] public int ActiveIndex { get; set; }
         [Parameter] public int NumberOfItems { get; set; }
         [Parameter] public CarouselDirection CarouselDirection { get; set; } = CarouselDirection.Previous;
         [Parameter] public string Class { get; set; }
@@ -34,21 +33,25 @@ namespace BlazorStrap
 
         [Parameter] public EventCallback<int> ActiveIndexChanged { get; set; }
 
-        protected async Task _onclick(MouseEventArgs e)
+        protected async Task OnClick(MouseEventArgs e)
         {
+            if (Parent.AnimationRunning) return;
             if (CarouselDirection == CarouselDirection.Previous)
             {
-
-                if (ActiveIndex == 0) { ActiveIndex = NumberOfItems - 1; }
-                else { ActiveIndex = ActiveIndex - 1; }
+                Parent.Direction = 1;
+                Parent.ResetTimer();
+                if (Parent.ActiveIndex == 0) { Parent.ActiveIndex = NumberOfItems - 1; }
+                else { Parent.ActiveIndex = Parent.ActiveIndex - 1; }
             }
             else
             {
-                if (ActiveIndex == NumberOfItems - 1) { ActiveIndex = 0; }
-                else { ActiveIndex = ActiveIndex + 1; }
+                Parent.Direction = 0;
+                Parent.ResetTimer();
+                if (Parent.ActiveIndex == NumberOfItems - 1) { Parent.ActiveIndex = 0; }
+                else { Parent.ActiveIndex = Parent.ActiveIndex + 1; }
 
             }
-            await ActiveIndexChanged.InvokeAsync(ActiveIndex);
+            await ActiveIndexChanged.InvokeAsync(Parent.ActiveIndex);
         }
     }
 }

@@ -1,16 +1,93 @@
 ﻿var link;
 
 window.blazorStrap = {
+    animationEvent: function (event) {
+        if (event.target.hasAttributes()) {
+            var name = "";
+            var attrs = event.target.attributes;
+            for (var i = 0; i < attrs.length; ++i) {
+                 name = attrs[i].name;
+                if (name.includes("_bl_")) {
+                    name = name.replace("_bl_", "");
+                    break;
+                }
+            }
+            DotNet.invokeMethodAsync("BlazorStrap", "OnAnimationEnd", name);
+        }
+        else {
+            DotNet.invokeMethodAsync("BlazorStrap", "OnAnimationEnd", event.target.id);
+        }
+    },
     log: function (message) {
         console.log("message: ", message);
         return true;
     },
-    changeBody: function (classname) {
+    addEventAnimationEnd(el) {
+        el.addEventListener('animationend', window.blazorStrap.animationEvent);
+        el.addEventListener('transitionend', window.blazorStrap.animationEvent);
+        return true;
+    },
+    removeEventAnimationEnd(el) {
+        el.removeEventListener('animationend', window.blazorStrap.animationEvent);
+        el.removeEventListener('transitionend', window.blazorStrap.animationEvent);
+        return true;
+    },
+    addClass2Elements: function (el,el2, classname) {
+        el.classList.add(classname);
+        el2.classList.add(classname);
+        return true;
+    },
+    removeClass2Elements: function (el, el2, classname) {
+        el.classList.remove(classname);
+        el2.classList.remove(classname);
+        return true;
+    },
+    addClass: function (el, classname) {
+        var r = classname.split(" ");
+        for (var i = 0; i < r.length; ++i) {
+            el.classList.add(r[i]);
+        }
+        DotNet.invokeMethodAsync("BlazorStrap", "OnAddClass", el.id, classname);
+        return true;
+    },
+    getScrollHeight: function (el) {
+        return el.scrollHeight;
+        
+    },
+    setStyle: function (el, key, value) {
+        el.style[key] = value;
+        return true;
+    },
+    removeClass: function (el, classname) {
+        var r = classname.split(" ");
+        for (var i = 0; i < r.length; ++i) {
+            el.classList.remove(r[i]);
+        }
+        return true;
+    },
+    addBodyClass: function (classname) {
+        if (classname == "modal-open") {
+            this.changeBodyPaddingRight("17px");
+        }
+        document.body.classList.add(classname);
+        return true;
+    },
+    removeBodyClass: function (classname) {
+        if (classname == "modal-open") {
+            this.changeBodyPaddingRight("");
+        }
+        document.body.classList.remove(classname);
+        return true;
+    },
+    changeBodyClass: function (classname) {
         document.body.className = classname;
         return true;
     },
-    changeBodyModal: function (padding) {
-        document.body.style.paddingRight = padding;
+    changeBodyPaddingRight: function (padding) {
+        var dpi = window.devicePixelRatio;
+        if (dpi == 1 || !padding) {
+            document.body.style.paddingRight = padding;
+        }
         return true;
     },
     popper: function (target, popperId, arrow, placement) {
@@ -91,3 +168,4 @@ function showPopper(reference, popper, arrow, placement) {
     );
     return thePopper;
 }
+

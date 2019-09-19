@@ -17,7 +17,7 @@
     <link rel="manifest" href="/site.webmanifest">
     @(await Html.RenderComponentAsync<BlazorStyled.ServerSideStyled>(RenderMode.ServerPrerendered))
 </head>
-<body>
+<body class="Hello">
     <app>@(await Html.RenderComponentAsync<SampleCore.App>(RenderMode.ServerPrerendered))</app>
 
     <script src="_framework/blazor.server.js"></script>

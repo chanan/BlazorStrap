@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
+using BlazorStrap.Util.Components;
+using Microsoft.AspNetCore.Components;
 using System;
-using System.Threading.Tasks;
-using Microsoft.JSInterop;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSModalBase : ToggleableComponentBase
+    public abstract class BSModalBase : ToggleableComponentBase, IDisposable
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter] public bool NoBackdrop { get; set; }
         [Parameter] public EventCallback<BSModalEvent> ShowEvent { get; set; }
         [Parameter] public EventCallback<BSModalEvent> ShownEvent { get; set; }
         [Parameter] public EventCallback<BSModalEvent> HideEvent { get; set; }
@@ -20,10 +20,13 @@ namespace BlazorStrap
         internal BSModalEvent BSModalEvent { get; set; }
         internal List<EventCallback<BSModalEvent>> EventQue { get; set; } = new List<EventCallback<BSModalEvent>>();
 
-        [Inject] Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
+        [Inject] private Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
+
         protected string classname =>
           new CssBuilder("modal")
-              .AddClass("fade show", (IsOpen ?? false))
+              .AddClass(AnimationClass, !DisableAnimations)
+              .AddClass("show", (IsOpen?? false) && DisableAnimations)
+              .AddClass("show", CanShow && !DisableAnimations)
               .AddClass(Class)
           .Build();
 
@@ -35,6 +38,7 @@ namespace BlazorStrap
 
         protected ElementReference Me { get; set; }
         private bool IsInitialized { get; set; }
+
         protected override Task OnAfterRenderAsync(bool firstrun)
         {
             // This is models like the demo where they are open prior to the page drawing.
@@ -50,11 +54,16 @@ namespace BlazorStrap
 
             return base.OnAfterRenderAsync(false);
         }
+
         protected string styles
         {
             get
             {
-                var display = (IsOpen ?? false) ? "display: block; padding-right: 17px;" : null;
+                var display = "";
+                if (DisableAnimations || (IsOpen ?? true))
+                    display = (IsOpen ?? false) ? "display: block; padding-right: 17px;" : null;
+                else
+                    display = (CanShow || Drawing) ? "display: block; padding-right: 17px;" : null;
                 return $"{Style} {display}".Trim();
             }
         }
@@ -67,33 +76,87 @@ namespace BlazorStrap
         [Parameter] public bool IgnoreClickOnBackdrop { get; set; }
         [Parameter] public bool IgnoreEscape { get; set; }
 
-        internal override void Changed(bool e)
+        private bool CanShow { get; set; }
+        private bool Drawing { get; set; }
+        protected override void OnInitialized()
         {
-           ChangedAsync(e);
-        }
-        internal async Task ChangedAsync(bool e)
-        {
-            if(!IsInitialized)
+            if(AnimationClass == null)
             {
+                AnimationClass = "fade";
+            }
+            base.OnInitialized();
+            BlazorStrapInterop.OnAnimationEndEvent += OnAnimationEnd;
+        }
+
+        private async Task OnAnimationEnd(string id)
+        {
+            BSModalEvent = new BSModalEvent() { Target = this };
+            if (id != MyRef.Id)
+            {
+                await new BlazorStrapInterop(JSRuntime).RemoveEventAnimationEnd(MyRef);
+                if (IsOpen ?? false)
+                {
+                    await ShownEvent.InvokeAsync(BSModalEvent);
+                }
+                else
+                {
+                    await HiddenEvent.InvokeAsync(BSModalEvent);
+                }
+                CanShow = IsOpen ?? false;
+                Drawing = false;
+                await InvokeAsync(StateHasChanged);
+            }
+            
+        }
+
+        public void Dispose()
+        {
+            BlazorStrapInterop.OnAnimationEndEvent -= OnAnimationEnd;
+        }
+
+        internal override async Task Changed(bool e)
+        {
+            if (!IsInitialized)
+            {
+                return;
+            }
+            if (!DisableAnimations)
+            {
+                Drawing = true;
+                await new BlazorStrapInterop(JSRuntime).AddEventAnimationEnd(MyRef);
+            }
+            else
+            {
+                CanShow = true;
                 return;
             }
             BSModalEvent = new BSModalEvent() { Target = this };
             if (e)
             {
-                await new BlazorStrapInterop(JSRuntime).ChangeBody("modal-open");
+                await new BlazorStrapInterop(JSRuntime).AddBodyClass("modal-open");
                 if (!IgnoreEscape)
                 {
                     await new BlazorStrapInterop(JSRuntime).ModalEscapeKey();
                     BlazorStrapInterop.OnEscapeEvent += OnEscape;
                 }
+                new Task(async () =>
+                {
+                    await Task.Delay(300);
+                    CanShow = true;
+                    await InvokeAsync(StateHasChanged);
+                }).Start();
                 await ShowEvent.InvokeAsync(BSModalEvent);
-                EventQue.Add(ShownEvent);
             }
             else
             {
-                await new BlazorStrapInterop(JSRuntime).ChangeBody(null);
+                await new BlazorStrapInterop(JSRuntime).RemoveClass(MyRef, "show");
+                new Task(async () =>
+                {
+                    await Task.Delay(300);
+                    await new BlazorStrapInterop(JSRuntime).RemoveBodyClass("modal-open");
+                }).Start();
+                
                 await HideEvent.InvokeAsync(BSModalEvent);
-                EventQue.Add(HiddenEvent);
             }
         }
 
@@ -105,13 +168,12 @@ namespace BlazorStrap
                 StateHasChanged();
             }
         }
-        protected void OnEscape(object sender, EventArgs e)
+
+        protected async Task OnEscape()
         {
             Hide();
             BlazorStrapInterop.OnEscapeEvent -= OnEscape;
-            InvokeAsync(StateHasChanged);
+            await InvokeAsync(StateHasChanged);
         }
-       
-
     }
 }
