@@ -4,7 +4,7 @@ namespace BlazorStrap
 {
     public abstract class BSCustomizerBase : ComponentBase
     {
-        [Parameter] public BSCustomizerConfig Config  { get; set; } = new BSCustomizerConfig();
+        [Parameter] public BSCustomizerConfig Config { get; set; } = new BSCustomizerConfig();
     }
     public class BSCustomizerConfig
     {

@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
@@ -16,7 +15,7 @@ namespace BlazorStrap
             .AddClass("hide", !IsVisible || _isDismissed)
             .AddClass(Class)
         .Build();
-        [Parameter] public string DateFormat {get; set;} = "dd/MM/yyyy h:mm tt";
+        [Parameter] public string DateFormat { get; set; } = "dd/MM/yyyy h:mm tt";
         [Parameter] public string ImgSrc { get; set; }
         [Parameter] public string ImgDescription { get; set; }
         [Parameter] public DateTime? TimeStamp { get; set; }

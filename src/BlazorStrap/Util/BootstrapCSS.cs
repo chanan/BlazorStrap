@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap.Util
 {
-    public class BootstrapCSS : IBootstrapCSS
+    class BootstrapCSS : IBootstrapCSS
     {
-        private BlazorStrapInterop _blazorStrapInterop;
-        private CurrentTheme _currentTheme;
+        private readonly BlazorStrapInterop _blazorStrapInterop;
+        private readonly CurrentTheme _currentTheme;
 
         public BootstrapCSS(BlazorStrapInterop blazorStrapInterop, CurrentTheme currentTheme)
         {
@@ -38,12 +38,6 @@ namespace BlazorStrap.Util
             return SetBootstrapCSS(theme.ToString().ToLowerInvariant(), version);
         }
 
-        public Theme CurrentTheme
-        {
-            get
-            {
-                return _currentTheme.Theme;
-            }
-        }
+        public Theme CurrentTheme => _currentTheme.Theme;
     }
 }

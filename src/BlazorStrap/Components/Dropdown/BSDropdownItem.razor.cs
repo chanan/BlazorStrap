@@ -23,21 +23,9 @@ namespace BlazorStrap
                    .AddClass(Class)
                .Build();
 
-        protected string Tag
-        {
-            get
-            {
-                return IsDivider ? "div" : IsButton ? "button" : "a";
-            }
-        }
+        protected string Tag => IsDivider ? "div" : IsButton ? "button" : "a";
 
-        protected string Type
-        {
-            get
-            {
-                return IsButton ? "button" : null;
-            }
-        }
+        protected string Type => IsButton ? "button" : null;
 
         internal bool HasSubMenu { get; set; }
         [Parameter] public bool IsDivider { get; set; }

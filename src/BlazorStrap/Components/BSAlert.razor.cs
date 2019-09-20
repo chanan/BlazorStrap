@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
-using System;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -26,7 +24,7 @@ namespace BlazorStrap
         internal List<EventCallback<BSAlertEvent>> EventQue { get; set; } = new List<EventCallback<BSAlertEvent>>();
         protected string Classname =>
        new CssBuilder().AddClass("alert")
-           .AddClass(IsDismissible? "alert-dismissible" : "")
+           .AddClass(IsDismissible ? "alert-dismissible" : "")
            .AddClass($"alert-{Color.ToDescriptionString()}")
            .AddClass(Class)
        .Build();

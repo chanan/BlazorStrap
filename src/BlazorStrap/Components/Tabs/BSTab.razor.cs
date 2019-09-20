@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
-using System.Threading.Tasks;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
@@ -12,13 +11,7 @@ namespace BlazorStrap
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         public RenderFragment Content { get; set; }
-        public bool Selected
-        {
-            get
-            {
-                return (Group != null) ? Group.Selected == this : false;
-            }
-        }
+        public bool Selected => (Group != null) ? Group.Selected == this : false;
         protected string Classname =>
         new CssBuilder("nav-item")
             .AddClass("active", Selected)
@@ -71,12 +64,12 @@ namespace BlazorStrap
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-          
+
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if(disposing)
+            if (disposing)
             {
                 //Prevent blazor form removing the wrong tab
                 if (Group.Disposing) return;

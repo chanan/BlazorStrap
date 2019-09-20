@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 
@@ -30,7 +29,7 @@ namespace BlazorStrap
             get
             {
                 if (Value == 0) { return null; }
-                var percent = Math.Round(((double)Value / (double)Max) * 100);
+                var percent = Math.Round((Value / (double)Max) * 100);
                 return $"width: {percent}%; {Style}".Trim();
             }
         }

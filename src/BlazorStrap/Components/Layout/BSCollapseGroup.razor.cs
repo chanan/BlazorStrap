@@ -10,10 +10,7 @@ namespace BlazorStrap
 
         public BSCollapseItem Selected
         {
-            get
-            {
-                return _selected;
-            }
+            get => _selected;
             set
             {
                 if (value == null)

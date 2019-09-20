@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorStrap.Util;
-using BlazorComponentUtilities;
-using System;
+﻿using BlazorStrap.Util;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 namespace BlazorStrap

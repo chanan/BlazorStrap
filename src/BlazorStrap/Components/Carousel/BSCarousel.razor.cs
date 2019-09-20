@@ -16,7 +16,7 @@ namespace BlazorStrap
 
         public int ActiveIndex
         {
-            get { return _activeIndex; }
+            get => _activeIndex;
             set { _activeIndex = value; ActiveIndexChanged.Invoke(); }
         }
 
@@ -33,7 +33,7 @@ namespace BlazorStrap
         [Parameter]
         public int NumberOfItems
         {
-            get { return _numberOfItems; }
+            get => _numberOfItems;
             set
             {
                 if (_lastNumberItems != _numberOfItems)
@@ -49,10 +49,7 @@ namespace BlazorStrap
         [Parameter]
         public string Pause
         {
-            get
-            {
-                return _pause;
-            }
+            get => _pause;
             set
             {
                 _pause = value;

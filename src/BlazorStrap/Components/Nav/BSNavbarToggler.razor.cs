@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
-using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {

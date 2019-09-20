@@ -75,7 +75,7 @@ namespace BlazorStrap
 
         protected override Task OnAfterRenderAsync(bool firstrun)
         {
-            for (int i = 0; i < EventQue.Count; i++)
+            for (var i = 0; i < EventQue.Count; i++)
             {
                 EventQue[i].InvokeAsync(BSCollapseEvent);
                 EventQue.RemoveAt(i);

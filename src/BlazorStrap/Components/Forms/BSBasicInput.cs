@@ -14,7 +14,7 @@ namespace BlazorStrap
     public class BSBasicInput : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        [CascadingParameter] private EditContext MyEditContext { get; set; }
+        [CascadingParameter] protected EditContext MyEditContext { get; set; }
 
         protected string Classname =>
         new CssBuilder()
@@ -33,7 +33,7 @@ namespace BlazorStrap
             _ => "input"
         };
 
-        private FieldIdentifier _fieldIdentifier;
+        private FieldIdentifier _fieldIdentifier { get; set; }
 
         [Parameter] public Expression<Func<object>> For { get; set; }
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
@@ -64,14 +64,17 @@ namespace BlazorStrap
             }
         }
 
-        private string GetClass() => this.InputType switch
+        private string GetClass()
         {
-            InputType.Checkbox => "form-check-input",
-            InputType.Radio => "form-check-input",
-            InputType.File => "form-control-file",
-            InputType.Range => "form-control-range",
-            _ => IsPlaintext ? "form-control-plaintext" : "form-control"
-        };
+            return InputType switch
+            {
+                InputType.Checkbox => "form-check-input",
+                InputType.Radio => "form-check-input",
+                InputType.File => "form-control-file",
+                InputType.Range => "form-control-range",
+                _ => IsPlaintext ? "form-control-plaintext" : "form-control"
+            };
+        }
 
         protected void OnChange(ChangeEventArgs e)
         {

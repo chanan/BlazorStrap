@@ -11,8 +11,8 @@ namespace BlazorStrap.Util
             return input switch
             {
                 null => throw new ArgumentNullException(nameof(input)),
-                "" => throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Properties.Resources.cannot_be_empty, nameof(input)) , nameof(input)),
-                _ => input?.FirstCharToUpper().ToString(CultureInfo.InvariantCulture) + input.Substring(1),
+                "" => throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Properties.Resources.cannot_be_empty, nameof(input)), nameof(input)),
+                _ => input.First().ToString(CultureInfo.InvariantCulture).ToUpperInvariant() + input.Substring(1),
             };
         }
     }

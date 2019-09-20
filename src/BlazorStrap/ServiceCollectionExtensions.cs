@@ -1,5 +1,4 @@
-﻿using BlazorStrap.Util.Components;
-using BlazorStrap.Util;
+﻿using BlazorStrap.Util;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorStrap
@@ -9,7 +8,7 @@ namespace BlazorStrap
         public static IServiceCollection AddBootstrapCSS(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<CurrentTheme>();
-            serviceCollection.AddTransient <BlazorStrapInterop>();
+            serviceCollection.AddTransient<BlazorStrapInterop>();
             serviceCollection.AddTransient<IBootstrapCSS, BootstrapCSS>();
             return serviceCollection;
         }

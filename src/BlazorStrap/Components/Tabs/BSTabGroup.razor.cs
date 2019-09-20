@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,10 +14,7 @@ namespace BlazorStrap
         private BSTabBase _selected;
         public BSTabBase Selected
         {
-            get
-            {
-                return _selected;
-            }
+            get => _selected;
             set
             {
                 if (Disposing) return;

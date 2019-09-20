@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Timers;
@@ -15,20 +14,17 @@ namespace BlazorStrap
         internal List<BSNavItemBase> Navitems { get; set; } = new List<BSNavItemBase>();
         public BSNavItemBase Selected
         {
-            get
-            {
-                return _selected;
-            }
+            get => _selected;
             set
             {
                 _selected = value;
-               InvokeAsync(StateHasChanged);
+                InvokeAsync(StateHasChanged);
             }
         }
         protected string Classname =>
         new CssBuilder()
             .AddClass("nav", !RemoveDefaultClass)
-            .AddClass("navbar-nav", IsNavbar )
+            .AddClass("navbar-nav", IsNavbar)
             .AddClass("nav-tabs", IsTabs)
             .AddClass("nav-pills", IsPills)
             .AddClass("nav-fill", IsFill)
@@ -39,7 +35,7 @@ namespace BlazorStrap
 
         protected string Tag => IsList ? "ul" : "nav";
 
-        [Parameter] public bool IsList { get;set;}
+        [Parameter] public bool IsList { get; set; }
         [Parameter] public bool RemoveDefaultClass { get; set; }
         [Parameter] public Alignment Alignment { get; set; } = Alignment.None;
         [Parameter] public bool IsVertical { get; set; }
@@ -57,7 +53,8 @@ namespace BlazorStrap
         }
         protected void LostFocus()
         {
-            _timer.Start();
+            
+            _timer?.Start();
         }
 
         private string GetAlignment()
@@ -71,8 +68,8 @@ namespace BlazorStrap
         }
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            if(Selected != null)
-            Selected.Selected = null;
+            if (Selected != null)
+                Selected.Selected = null;
             _timer.Stop();
             _timer.Interval = 250;
         }
@@ -85,10 +82,10 @@ namespace BlazorStrap
 
         protected virtual void Dispose(bool disposing)
         {
-            if(disposing)
+            if (disposing)
             {
-                _timer.Dispose();
-                _selected.Dispose();
+                _timer?.Dispose();
+                _selected?.Dispose();
             }
         }
     }

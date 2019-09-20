@@ -26,21 +26,9 @@ namespace BlazorStrap
         [CascadingParameter] internal BSNavItem NavItem { get; set; }
         [CascadingParameter] internal BSButtonGroup ButtonGroup { get; set; }
 
-        internal bool IsSubmenu
-        {
-            get
-            {
-                return DropDown == null ? false : DropDown.IsSubmenu;
-            }
-        }
+        internal bool IsSubmenu => DropDown == null ? false : DropDown.IsSubmenu;
 
-        internal bool Open
-        {
-            get
-            {
-                return DropDown?.Selected == this ? true : NavItem?.Selected == this;
-            }
-        }
+        internal bool Open => DropDown?.Selected == this ? true : NavItem?.Selected == this;
 
         public BSModalEvent BSModalEvent { get; private set; }
 

@@ -20,10 +20,7 @@ namespace BlazorStrap
 
         public BSDropdownMenuBase DropDownMenu
         {
-            get
-            {
-                return _dropDownMenu;
-            }
+            get => _dropDownMenu;
             set
             {
                 _dropDownMenu = value;
@@ -63,7 +60,7 @@ namespace BlazorStrap
 
         public bool Active
         {
-            get { return _active; }
+            get => _active;
             set
             {
                 _active = value;
@@ -172,7 +169,7 @@ namespace BlazorStrap
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-            
+
         }
     }
 }

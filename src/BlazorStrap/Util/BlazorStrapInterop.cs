@@ -8,9 +8,9 @@ namespace BlazorStrap.Util
     public class BlazorStrapInterop
     {
         public static Func<Task> OnEscapeEvent { get; set; }
-        
-        public static Func<string,Task> OnAnimationEndEvent { get; set; }
-        public static Func<string, string,Task> OnAddClassEvent { get; set; }
+
+        public static Func<string, Task> OnAnimationEndEvent { get; set; }
+        public static Func<string, string, Task> OnAddClassEvent { get; set; }
         protected IJSRuntime JSRuntime { get; }
 
         public BlazorStrapInterop(IJSRuntime jsRuntime)

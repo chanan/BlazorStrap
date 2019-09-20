@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
-using System;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 namespace BlazorStrap
@@ -14,7 +12,7 @@ namespace BlazorStrap
         private bool _active = false;
         public bool Active
         {
-            get { return _active; }
+            get => _active;
             set
             {
                 _active = value;

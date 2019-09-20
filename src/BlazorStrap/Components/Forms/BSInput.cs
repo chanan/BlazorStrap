@@ -89,14 +89,17 @@ namespace BlazorStrap
             _fieldIdentifier = FieldIdentifier.Create(ValueExpression);
         }
 
-        private string GetClass() => this.InputType switch
+        private string GetClass()
         {
-            InputType.Checkbox => "form-check-input",
-            InputType.Radio => "form-check-input",
-            InputType.File => "form-control-file",
-            InputType.Range => "form-control-range",
-            _ => IsPlaintext ? "form-control-plaintext" : "form-control"
-        };
+            return InputType switch
+            {
+                InputType.Checkbox => "form-check-input",
+                InputType.Radio => "form-check-input",
+                InputType.File => "form-control-file",
+                InputType.Range => "form-control-range",
+                _ => IsPlaintext ? "form-control-plaintext" : "form-control"
+            };
+        }
 
         protected void OnClick(MouseEventArgs e)
         {

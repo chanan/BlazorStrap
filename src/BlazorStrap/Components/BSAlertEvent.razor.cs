@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorStrap.Util;
-using BlazorComponentUtilities;
-using System;
-
-namespace BlazorStrap
+﻿namespace BlazorStrap
 {
     public class BSAlertEvent
     {

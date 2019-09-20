@@ -22,13 +22,7 @@ namespace BlazorStrap
         .AddClass(Class)
         .Build();
 
-        protected bool AddActionLink
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(ActionLink);
-            }
-        }
+        protected bool AddActionLink => !string.IsNullOrEmpty(ActionLink);
 
         [Parameter] public int Interval { get; set; } = 5000;
         [Parameter] public string Src { get; set; }

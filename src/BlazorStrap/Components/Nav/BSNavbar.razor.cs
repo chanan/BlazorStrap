@@ -9,7 +9,7 @@ namespace BlazorStrap
 {
     public abstract class BSNavbarBase : ComponentBase, IDisposable
     {
-        private Timer _timer = new Timer(250);
+        private readonly Timer _timer = new Timer(250);
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public Color Color { get; set; } = Color.None;
@@ -22,7 +22,7 @@ namespace BlazorStrap
         internal bool HasCollapsed { get; set; }
         internal bool Visable
         {
-            get { return _visable; }
+            get => _visable;
             set
             {
                 VisableChange.Invoke(this, value);

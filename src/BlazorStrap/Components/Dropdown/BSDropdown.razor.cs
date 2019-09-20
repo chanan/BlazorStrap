@@ -28,10 +28,7 @@ namespace BlazorStrap
 
         internal BSDropdownMenuBase DropDownMenu
         {
-            get
-            {
-                return _dropDownMenu;
-            }
+            get => _dropDownMenu;
             set
             {
                 _dropDownMenu = value;
@@ -41,10 +38,7 @@ namespace BlazorStrap
 
         public BSDropdownMenuBase Selected
         {
-            get
-            {
-                return _selected;
-            }
+            get => _selected;
             set
             {
                 _selected = value;

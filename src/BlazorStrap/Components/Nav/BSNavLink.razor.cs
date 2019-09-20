@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
+﻿using BlazorComponentUtilities;
+using BlazorStrap.Util;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 using System;
 using System.Collections.Generic;
-using BlazorStrap.Util;
-using Microsoft.AspNetCore.Components.Routing;
 
 namespace BlazorStrap
 {
@@ -55,20 +54,20 @@ namespace BlazorStrap
         public void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
             var active = e?.Location.MatchActiveRoute(UriHelper.BaseUri + Href) ?? false;
-          
-                if (Parent != null)
-                {
-                    Parent.Active = active;
-                }
-                if(CollapseItem != null)
-                {
-                    CollapseItem.Active = active;
-                }
-                if(ListItem != null)
-                {
-                    ListItem.Active = active;
-                }
-                IsActive = active;
+
+            if (Parent != null)
+            {
+                Parent.Active = active;
+            }
+            if (CollapseItem != null)
+            {
+                CollapseItem.Active = active;
+            }
+            if (ListItem != null)
+            {
+                ListItem.Active = active;
+            }
+            IsActive = active;
             StateHasChanged();
         }
     }

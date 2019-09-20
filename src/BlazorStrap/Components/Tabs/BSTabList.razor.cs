@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 namespace BlazorStrap
@@ -23,14 +22,8 @@ namespace BlazorStrap
         [Parameter]
         public bool IsList
         {
-            get
-            {
-                return _isList;
-            }
-            set
-            {
-                _isList = value;
-            }
+            get => _isList;
+            set => _isList = value;
         }
         [Parameter] public Alignment Alignment { get; set; } = Alignment.None;
         [Parameter] public bool IsVertical { get; set; }
