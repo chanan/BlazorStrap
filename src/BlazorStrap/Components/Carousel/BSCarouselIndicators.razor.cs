@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
-using System;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 namespace BlazorStrap
@@ -9,6 +7,7 @@ namespace BlazorStrap
     public abstract class BSCarouselIndicatorsBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
+
         protected string Classname =>
         new CssBuilder("carousel-indicators")
         .AddClass(Class)
@@ -20,7 +19,6 @@ namespace BlazorStrap
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public EventCallback<int> ActiveIndexChanged { get; set; }
         [Parameter] public EventCallback<int> ActiveIndexChangedEvent { get; set; }
-
 
         protected void ClickEventActiveIndex(int index)
         {

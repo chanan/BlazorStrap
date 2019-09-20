@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
+using BlazorStrap.Util.Components;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
-using System.Timers;
 using System.Threading.Tasks;
 
-namespace BlazorStrap 
+namespace BlazorStrap
 {
-    public abstract class BSDropdownBase : ToggleableComponentBase , IDisposable
+    public abstract class BSDropdownBase : ToggleableComponentBase, IDisposable
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] public EventCallback<BSDropdownEvent> ShowEvent { get; set; }
@@ -22,9 +21,11 @@ namespace BlazorStrap
 
         // Prevents rogue closing
         private BSDropdownMenuBase _selected;
+
         private BSDropdownMenuBase _dropDownMenu { get; set; } = new BSDropdownMenu();
-        public bool Active = false;
-        private bool ShouldClose = false;
+        public bool Active { get; set; } = false;
+        private bool _shouldClose { get; set; } = false;
+
         internal BSDropdownMenuBase DropDownMenu
         {
             get
@@ -37,6 +38,7 @@ namespace BlazorStrap
                 StateHasChanged();
             }
         }
+
         public BSDropdownMenuBase Selected
         {
             get
@@ -46,19 +48,22 @@ namespace BlazorStrap
             set
             {
                 _selected = value;
-                if(_selected != null) _selected.Changed(true);
+                if (_selected != null) _selected.Changed(true);
                 InvokeAsync(StateHasChanged);
             }
         }
+
         protected void MouseLeave()
         {
-            ShouldClose = true;
+            _shouldClose = true;
         }
+
         protected void MouseEnter()
         {
-            ShouldClose = false;
+            _shouldClose = false;
         }
-        protected string classname =>
+
+        protected string Classname =>
         new CssBuilder()
             .AddClass("dropdown", !IsGroup)
             .AddClass(AnimationClass, !DisableAnimations)
@@ -70,7 +75,7 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
-        internal bool IsSubmenu;
+        internal bool IsSubmenu { get; set; }
         [Parameter] public DropdownDirection DropdownDirection { get; set; } = DropdownDirection.Down;
         [Parameter] public bool IsGroup { get; set; }
         [Parameter] public string Class { get; set; }
@@ -87,6 +92,7 @@ namespace BlazorStrap
             BlazorStrapInterop.OnAnimationEndEvent += OnAnimationEnd;
             base.OnInitialized();
         }
+
         private async Task OnAnimationEnd(string id)
         {
             BSDropdownEvent = new BSDropdownEvent() { Target = this };
@@ -94,37 +100,45 @@ namespace BlazorStrap
             {
                 if (IsOpen ?? false)
                 {
-                    await ShownEvent.InvokeAsync(BSDropdownEvent);
+                    await ShownEvent.InvokeAsync(BSDropdownEvent).ConfigureAwait(false);
                 }
                 else
                 {
-                    await HiddenEvent.InvokeAsync(BSDropdownEvent);
+                    await HiddenEvent.InvokeAsync(BSDropdownEvent).ConfigureAwait(false);
                 }
             }
+        }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                BlazorStrapInterop.OnAnimationEndEvent -= OnAnimationEnd;
+            }
         }
 
         public void Dispose()
         {
-            BlazorStrapInterop.OnAnimationEndEvent -= OnAnimationEnd;
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
         internal override async Task Changed(bool e)
         {
             BSDropdownEvent = new BSDropdownEvent() { Target = this };
             if (e)
             {
-                await ShowEvent.InvokeAsync(BSDropdownEvent);
+                await ShowEvent.InvokeAsync(BSDropdownEvent).ConfigureAwait(false);
             }
             else
             {
-                await HideEvent.InvokeAsync(BSDropdownEvent);
+                await HideEvent.InvokeAsync(BSDropdownEvent).ConfigureAwait(false);
             }
         }
 
-        
         protected void LostFocus()
         {
-            if(ShouldClose)
+            if (_shouldClose)
             {
                 Close();
             }
@@ -137,7 +151,7 @@ namespace BlazorStrap
 
         protected override Task OnAfterRenderAsync(bool firstrun)
         {
-            for (int i = 0; i < EventQue.Count; i++)
+            for (var i = 0; i < EventQue.Count; i++)
             {
                 EventQue[i].InvokeAsync(BSDropdownEvent);
                 EventQue.RemoveAt(i);

@@ -19,7 +19,7 @@ namespace BlazorStrap
                 return (Group != null) ? Group.Selected == this : false;
             }
         }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder("nav-item")
             .AddClass("active", Selected)
             .AddClass(Class)
@@ -57,31 +57,34 @@ namespace BlazorStrap
         }
         public void UpdateContent()
         {
-            try
+            if (Group == null) return;
+            Group.Tabs.First(q => q == this).Content = Content;
+            if (this == Group.Selected)
             {
-                Group.Tabs.First(q => q == this).Content = Content;
-                if (this == Group.Selected)
-                {
-                    Group.Selected = null;
-                    Group.Selected = this;
-                    InvokeAsync(StateHasChanged);
-                }
-            }
-            catch
-            {
-
+                Group.Selected = null;
+                Group.Selected = this;
+                InvokeAsync(StateHasChanged);
             }
         }
 
         public void Dispose()
         {
-            //Prevent blazor form removing the wrong tab
-            if (Group.Disposing) return;
-            //Locks updates when deleting tabs
-            
-            Group.Tabs.Remove(this);
-            Group.Selected = (Group.Selected == this) ? Group.Tabs.FirstOrDefault() : Group.Selected;
-            Group.Disposing = true;
+            Dispose(true);
+            GC.SuppressFinalize(this);
+          
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if(disposing)
+            {
+                //Prevent blazor form removing the wrong tab
+                if (Group.Disposing) return;
+                //Locks updates when deleting tabs
+                Group.Tabs.Remove(this);
+                Group.Selected = (Group.Selected == this) ? Group.Tabs.FirstOrDefault() : Group.Selected;
+                Group.Disposing = true;
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap.Util
 {
-    class BootstrapCSS : IBootstrapCSS
+    public class BootstrapCSS : IBootstrapCSS
     {
         private BlazorStrapInterop _blazorStrapInterop;
         private CurrentTheme _currentTheme;
@@ -27,15 +27,15 @@ namespace BlazorStrap.Util
 
         public async Task SetBootstrapCSS(string theme, string version)
         {
-            Theme enumTheme = (Theme)Enum.Parse(typeof(Theme), theme.FirstCharToUpper());
+            var enumTheme = (Theme)Enum.Parse(typeof(Theme), theme.FirstCharToUpper());
             _currentTheme.Theme = enumTheme;
-            await _blazorStrapInterop.SetBootstrapCSS(theme.ToLower(), version);
+            await _blazorStrapInterop.SetBootstrapCSS(theme.ToLowerInvariant(), version);
         }
 
         public Task SetBootstrapCSS(Theme theme, string version)
         {
             _currentTheme.Theme = theme;
-            return SetBootstrapCSS(theme.ToString().ToLower(), version);
+            return SetBootstrapCSS(theme.ToString().ToLowerInvariant(), version);
         }
 
         public Theme CurrentTheme

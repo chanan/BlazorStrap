@@ -12,7 +12,7 @@ namespace BlazorStrap
     public abstract class BSCollapseToggleBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
          new CssBuilder()
              .AddClass("btn", !IsLink)
              .AddClass($"btn-{Size.ToDescriptionString()}", !IsLink && Size != Size.None)

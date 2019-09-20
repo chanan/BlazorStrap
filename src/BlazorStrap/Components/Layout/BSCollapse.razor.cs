@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
-using System;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSCollapseBase : ToggleableComponentBase 
+    public abstract class BSCollapseBase : ToggleableComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] public EventCallback<BSCollapseEvent> ShowEvent { get; set; }
@@ -21,7 +20,8 @@ namespace BlazorStrap
 
         [CascadingParameter] internal BSCollapseItem CollapseItem { get; set; }
         protected string Tag => IsList ? "li" : "div";
-        protected string classname =>
+
+        protected string Classname =>
          new CssBuilder("collapse")
              .AddClass("navbar-collapse", IsNavbar)
              .AddClass("show", (IsOpen ?? false))
@@ -31,15 +31,14 @@ namespace BlazorStrap
         [Parameter] public bool IsNavbar { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
-    
 
         protected override void OnInitialized()
         {
-            if(IsNavbar && Navbar != null)
+            if (IsNavbar && Navbar != null)
             {
                 Navbar.VisableChange += OnVisableChange;
             }
-            if(CollapseItem != null)
+            if (CollapseItem != null)
             {
                 CollapseItem.Collapse = this;
             }
@@ -49,15 +48,14 @@ namespace BlazorStrap
         {
             IsOpen = e;
             InvokeAsync(() => { IsOpenChanged.InvokeAsync(e); });
-            
         }
 
         internal override async Task Changed(bool e)
         {
             BSCollapseEvent = new BSCollapseEvent() { Target = this };
-            if(e)
+            if (e)
             {
-                await ShowEvent.InvokeAsync(BSCollapseEvent);
+                await ShowEvent.InvokeAsync(BSCollapseEvent).ConfigureAwait(false);
                 EventQue.Add(ShownEvent);
             }
             else
@@ -70,7 +68,7 @@ namespace BlazorStrap
                         Navbar.Visable = false;
                     }
                 }
-                await HideEvent.InvokeAsync(BSCollapseEvent);
+                await HideEvent.InvokeAsync(BSCollapseEvent).ConfigureAwait(false);
                 EventQue.Add(HiddenEvent);
             }
         }
@@ -84,6 +82,5 @@ namespace BlazorStrap
             }
             return base.OnAfterRenderAsync(false);
         }
-
     }
 }

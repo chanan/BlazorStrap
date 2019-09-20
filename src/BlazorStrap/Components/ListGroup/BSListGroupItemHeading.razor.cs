@@ -9,7 +9,7 @@ namespace BlazorStrap
     public abstract class BSListGroupItemHeadingBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder("d-flex w-100 justify-content-between")
             .AddClass(Class)
         .Build();

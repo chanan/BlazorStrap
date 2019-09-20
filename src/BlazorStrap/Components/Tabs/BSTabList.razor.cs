@@ -8,7 +8,7 @@ namespace BlazorStrap
     public abstract class BSTabListBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
             new CssBuilder("nav")
                 .AddClass("nav-tabs", !IsPills)
                 .AddClass("nav-pills", IsPills)

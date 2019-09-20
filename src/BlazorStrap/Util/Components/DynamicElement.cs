@@ -28,7 +28,7 @@ namespace BlazorStrap.Util.Components
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             base.BuildRenderTree(builder);
-            builder.OpenElement(0, TagName);
+            builder?.OpenElement(0, TagName);
             builder.AddMultipleAttributes(1, MyParams);
             builder.AddContent(3, ChildContent);
             builder.AddElementReferenceCapture(2, capturedRef =>

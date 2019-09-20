@@ -11,7 +11,7 @@ namespace BlazorStrap
     public abstract class BSBadgeBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder().AddClass("badge")
             .AddClass("badge-pill", IsPill)
             .AddClass($"badge-{Color.ToDescriptionString()}")
@@ -30,29 +30,27 @@ namespace BlazorStrap
             set
             {
                 _href = value;
-                if (value != null || onclick.HasDelegate) { Tag = "a"; }
-                else { Tag = "span"; }
+                Tag = value != null || OnClick.HasDelegate ? "a" : "span";
             }
         }
-        private EventCallback<MouseEventArgs> _onlick { get; set; }
+        private EventCallback<MouseEventArgs> _onClick { get; set; }
         [Parameter]
-        public EventCallback<MouseEventArgs> onclick
+        public EventCallback<MouseEventArgs> OnClick
         {
-            get => _onlick;
+            get => _onClick;
 
             set
             {
-                _onlick = value;
-                if (value.HasDelegate || Href != null) { Tag = "a"; }
-                else { Tag = "span"; }
+                _onClick = value;
+                Tag = value.HasDelegate || Href != null ? "a" : "span";
             }
         }
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
 
-        protected void _onclick(MouseEventArgs e)
+        protected void MyOnClick(MouseEventArgs e)
         {
-            if (onclick.HasDelegate) onclick.InvokeAsync(e);
+            if (OnClick.HasDelegate) OnClick.InvokeAsync(e);
         }
     }
 }

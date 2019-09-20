@@ -10,7 +10,7 @@ namespace BlazorStrap
     public abstract class BSProgressBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder("progress-bar")
             .AddClass("progress-bar-striped", IsStriped)
             .AddClass("progress-bar-animated", IsAnimated)
@@ -18,7 +18,7 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
-        protected string classnameMulti =>
+        protected string ClassnameMulti =>
             new CssBuilder("progress")
                 .AddClass(Class)
             .Build();

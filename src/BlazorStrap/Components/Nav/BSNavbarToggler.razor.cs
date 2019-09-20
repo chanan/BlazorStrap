@@ -11,7 +11,7 @@ namespace BlazorStrap
     public abstract class BSNavbarTogglerBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
           new CssBuilder("navbar-toggler")
               .AddClass(Class)
           .Build();
@@ -20,7 +20,7 @@ namespace BlazorStrap
 
         protected async Task Clicked(MouseEventArgs e)
         {
-            await OnClick.InvokeAsync(e);
+            await OnClick.InvokeAsync(e).ConfigureAwait(false);
         }
     }
 }

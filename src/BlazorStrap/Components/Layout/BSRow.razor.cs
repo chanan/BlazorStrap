@@ -9,7 +9,7 @@ namespace BlazorStrap
     public abstract class BSRowBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder()
             .AddClass("row no-gutters", NoGutters)
             .AddClass("row", !NoGutters)

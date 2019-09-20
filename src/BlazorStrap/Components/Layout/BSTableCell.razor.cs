@@ -10,7 +10,7 @@ namespace BlazorStrap
     public abstract class BSTableCellBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder()
             .AddClass($"table-{Color.ToDescriptionString()}", Color != Color.None)
             .AddClass(Class)

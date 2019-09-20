@@ -22,7 +22,7 @@ namespace BlazorStrap
             }
         }
 
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder()
             .AddClass("active", _active)
             .AddClass(Class)

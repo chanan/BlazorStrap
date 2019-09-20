@@ -9,7 +9,7 @@ namespace BlazorStrap
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         public RenderFragment Content { get; set; }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder("nav-item nav-link")
             .AddClass("active", (Parent != null) ? Parent.Selected : false)
             .AddClass("disabled", IsDisabled)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 
 namespace BlazorStrap.Util
@@ -7,12 +8,12 @@ namespace BlazorStrap.Util
     {
         public static string FirstCharToUpper(this string input)
         {
-            switch (input)
+            return input switch
             {
-                case null: throw new ArgumentNullException(nameof(input));
-                case "": throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input));
-                default: return input.First().ToString().ToUpper() + input.Substring(1);
-            }
+                null => throw new ArgumentNullException(nameof(input)),
+                "" => throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Properties.Resources.cannot_be_empty, nameof(input)) , nameof(input)),
+                _ => input?.FirstCharToUpper().ToString(CultureInfo.InvariantCulture) + input.Substring(1),
+            };
         }
     }
 }

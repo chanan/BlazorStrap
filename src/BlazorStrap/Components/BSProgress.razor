@@ -4,18 +4,18 @@
 @if (!IsMulti && !IsBar)
 {
     <DynamicElement style="@Style" @attributes="@UnknownParameters" TagName="div" class="progress">
-        <div class="@classname" style="@styles" role="progressbar" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
+        <div class="@Classname" style="@styles" role="progressbar" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">@ChildContent</div>
     </DynamicElement>
 }
 @if (IsMulti && !IsBar)
 {
-    <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@classnameMulti" style="@Style">
+    <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@ClassnameMulti" style="@Style">
         @ChildContent
     </DynamicElement>
 }
 @if (!IsMulti && IsBar)
 {
-    <DynamicElement style="@styles" @attributes="@UnknownParameters" TagName="div" class="@classname" role="progressbar" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">
+    <DynamicElement style="@styles" @attributes="@UnknownParameters" TagName="div" class="@Classname" role="progressbar" aria-valuenow="@Value" aria-valuemin="0" aria-valuemax="@Max">
         @ChildContent
     </DynamicElement>
 }

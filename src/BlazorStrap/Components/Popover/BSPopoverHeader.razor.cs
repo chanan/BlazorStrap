@@ -9,7 +9,7 @@ namespace BlazorStrap
     public abstract class BSPopoverHeaderBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder("popover-header")
             .AddClass(Class)
         .Build();

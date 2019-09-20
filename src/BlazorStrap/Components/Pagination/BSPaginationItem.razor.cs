@@ -9,7 +9,7 @@ namespace BlazorStrap
     public abstract class BSPaginationItemBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder("page-item")
             .AddClass("active", IsActive)
             .AddClass("disabled", IsDisabled)

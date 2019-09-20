@@ -14,7 +14,7 @@ Use With:
 </div>
 *@
 
-<DynamicElement TagName="div" class="@classname" role="alert" aria-live="assertive" aria-atomic="true" @attributes="@UnknownParameters">
+<DynamicElement TagName="div" class="@Classname" role="alert" aria-live="assertive" aria-atomic="true" @attributes="@UnknownParameters">
 	<div class="toast-header">
 		@if (!string.IsNullOrWhiteSpace(ImgSrc))
 		{
@@ -26,7 +26,7 @@ Use With:
 			//ToDo: For best results, use "PrettyDate" C# Extension on `DateTime.ToString()`
 			<small class="text-muted">@TimeStamp.Value.ToString(DateFormat)</small>
 		}
-		<button @onclick="onclick" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+		<button @onclick="OnClick" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
 	</div>

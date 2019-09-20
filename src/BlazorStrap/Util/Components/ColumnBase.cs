@@ -8,7 +8,7 @@ namespace BlazorStrap.Util.Components
     {
         internal string GetColumnClass(string defaultClass = "col")
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
             AppendProperty(sb, "col-", XS);
             AppendProperty(sb, "order-", XSOrder);
@@ -43,7 +43,7 @@ namespace BlazorStrap.Util.Components
             return sb.Length == 0 ? defaultClass : sb.ToString();
         }
 
-        private void AppendProperty(StringBuilder sb, string prefix, string value)
+        private static void AppendProperty(StringBuilder sb, string prefix, string value)
         {
             if (value != null)
             {
@@ -56,7 +56,7 @@ namespace BlazorStrap.Util.Components
             }
         }
 
-        private void AppendBoolProperty(StringBuilder sb, string value, bool shouldAppend)
+        private static void AppendBoolProperty(StringBuilder sb, string value, bool shouldAppend)
         {
             if (shouldAppend)
             {
@@ -69,218 +69,218 @@ namespace BlazorStrap.Util.Components
             }
         }
 
-        private string xs;
+        private string _xs;
         [Parameter]
         public string XS
         {
-            get => xs;
+            get => _xs;
 
-            set => xs = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _xs = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
                 (false, "auto") => "auto",
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(XS))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12_Auto, nameof(XS))
             };
         }
 
-        private string sm;
+        private string _sm;
         [Parameter]
         public string SM
         {
-            get => sm;
+            get => _sm;
 
-            set => sm = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _sm = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
                 (false, "auto") => "auto",
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(SM))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12_Auto, nameof(SM))
             };
         }
 
-        private string md;
+        private string _md;
         [Parameter]
         public string MD
         {
-            get => md;
+            get => _md;
 
-            set => md = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _md = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
                 (false, "auto") => "auto",
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(MD))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12_Auto, nameof(MD))
             };
         }
 
-        private string lg;
+        private string _lg;
         [Parameter]
         public string LG
         {
-            get => lg;
+            get => _lg;
 
-            set => lg = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _lg = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
                 (false, "auto") => "auto",
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(LG))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12_Auto, nameof(LG))
             };
         }
 
-        private string xl;
+        private string _xl;
         [Parameter]
         public string XL
         {
-            get => xl;
+            get => _xl;
 
-            set => xl = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _xl = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
                 (false, "auto") => "auto",
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be \"auto\" or between 1 and 12", nameof(XL))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12_Auto, nameof(XL))
             };
         }
 
-        private string xsorder;
+        private string _xsorder;
         [Parameter]
         public string XSOrder
         {
-            get => xsorder;
+            get => _xsorder;
 
-            set => xsorder = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _xsorder = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
                 (false, "first") => "first",
                 (false, "last") => "last",
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(XSOrder))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12_Last_First, nameof(XSOrder))
             };
         }
 
-        private string smorder;
+        private string _smorder;
         [Parameter]
         public string SMOrder
         {
-            get => smorder;
+            get => _smorder;
 
-            set => smorder = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _smorder = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
                 (false, "first") => "first",
                 (false, "last") => "last",
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(SMOrder))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12_Last_First, nameof(SMOrder))
             };
         }
 
-        private string mdorder;
+        private string _mdorder;
         [Parameter]
         public string MDOrder
         {
-            get => mdorder;
+            get => _mdorder;
 
-            set => mdorder = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _mdorder = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
                 (false, "first") => "first",
                 (false, "last") => "last",
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(MDOrder))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12_Last_First, nameof(MDOrder))
             };
         }
 
-        private string lgorder;
+        private string _lgorder;
         [Parameter]
         public string LGOrder
         {
-            get => lgorder;
+            get => _lgorder;
 
-            set => lgorder = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _lgorder = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
                 (false, "first") => "first",
                 (false, "last") => "last",
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(LGOrder))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12_Last_First, nameof(LGOrder))
             };
         }
 
-        private string xlorder;
+        private string _xlorder;
         [Parameter]
         public string XLOrder
         {
-            get => xlorder;
+            get => _xlorder;
 
-            set => xlorder = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _xlorder = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
                 (false, "first") => "first",
                 (false, "last") => "last",
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be \"last\", \"first\", or between 1 and 12", nameof(XLOrder))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12_Last_First, nameof(XLOrder))
             };
         }
 
-        private string xsoffset;
+        private string _xsoffset;
         [Parameter]
         public string XSOffset
         {
-            get => xsoffset;
+            get => _xsoffset;
 
-            set => xsoffset = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _xsoffset = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
-                (false, _) => throw new ArgumentException("Must be between 1 and 12", nameof(XSOffset)),
+                (false, _) => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(XSOffset)),
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be between 1 and 12", nameof(XSOffset))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(XSOffset))
             };
         }
 
-        private string smoffset;
+        private string _smoffset;
         [Parameter]
         public string SMOffset
         {
-            get => smoffset;
+            get => _smoffset;
 
-            set => smoffset = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _smoffset = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
-                (false, _) => throw new ArgumentException("Must be between 1 and 12", nameof(SMOffset)),
+                (false, _) => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(SMOffset)),
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be between 1 and 12", nameof(SMOffset))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(SMOffset))
             };
         }
 
-        private string mdoffset;
+        private string _mdoffset;
         [Parameter]
         public string MDOffset
         {
-            get => mdoffset;
+            get => _mdoffset;
 
-            set => mdoffset = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _mdoffset = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
-                (false, _) => throw new ArgumentException("Must be between 1 and 12", nameof(MDOffset)),
+                (false, _) => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(MDOffset)),
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be between 1 and 12", nameof(MDOffset))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(MDOffset))
             };
         }
 
-        private string lgoffset;
+        private string _lgoffset;
         [Parameter]
         public string LGOffset
         {
-            get => lgoffset;
+            get => _lgoffset;
 
-            set => lgoffset = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _lgoffset = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
-                (false, _) => throw new ArgumentException("Must be between 1 and 12", nameof(LGOffset)),
+                (false, _) => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(LGOffset)),
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be between 1 and 12", nameof(LGOffset))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(LGOffset))
             };
         }
 
-        private string xloffset;
+        private string _xloffset;
         [Parameter]
         public string XLOffset
         {
-            get => xloffset;
+            get => _xloffset;
 
-            set => xloffset = (int.TryParse(value, out int ivalue), value.ToLowerInvariant()) switch
+            set => _xloffset = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
-                (false, _) => throw new ArgumentException("Must be between 1 and 12", nameof(XLOffset)),
+                (false, _) => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(XLOffset)),
                 (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException("Must be between 1 and 12", nameof(XLOffset))
+                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(XLOffset))
             };
         }
 

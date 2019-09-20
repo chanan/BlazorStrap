@@ -9,7 +9,7 @@ namespace BlazorStrap
     public abstract class BSTabContentBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        public string classname =>
+        public string Classname =>
             new CssBuilder("tab-content")
                 .AddClass(Class)
                 .Build();

@@ -1,6 +1,6 @@
 ﻿namespace BlazorStrap.Util
 {
-    class CurrentTheme
+    public class CurrentTheme
     {
         public Theme Theme { get; set; } = Theme.Bootstrap;
     }

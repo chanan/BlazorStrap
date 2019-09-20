@@ -4,14 +4,14 @@
 @if (IsResponsive)
 {
     <div class="table-responsive">
-        <DynamicElement @attributes="@UnknownParameters" TagName="table" class="@classname">
+        <DynamicElement @attributes="@UnknownParameters" TagName="table" class="@Classname">
             @ChildContent
         </DynamicElement>
     </div>
 }
 @if (!IsResponsive)
 {
-    <DynamicElement @attributes="@UnknownParameters" TagName="table" class="@classname">
+    <DynamicElement @attributes="@UnknownParameters" TagName="table" class="@Classname">
         @ChildContent
     </DynamicElement>
 }

@@ -11,7 +11,7 @@ namespace BlazorStrap
     public abstract class BSListGroupItemBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder("list-group-item")
             .AddClass($"list-group-item-{Color.ToDescriptionString()}", Color != Color.None)
             .AddClass("active", IsActive)

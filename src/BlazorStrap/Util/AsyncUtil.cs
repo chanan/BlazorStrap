@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,6 +23,7 @@ namespace BlazorStrap.Util
                 .Unwrap()
                 .GetAwaiter()
                 .GetResult();
+
         /// <summary>
         /// Executes an async Task<T> method which has a T return type synchronously
         /// USAGE: T result = AsyncUtil.RunSync(() => AsyncMethod<T>());

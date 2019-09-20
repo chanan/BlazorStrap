@@ -8,9 +8,9 @@ namespace BlazorStrap
 {
     public abstract class BSTabGroupBase : ComponentBase
     {
-        internal bool Disposing = false;
+        internal bool Disposing { get; set; } = false;
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        public List<BSTabBase> Tabs = new List<BSTabBase>();
+        public List<BSTabBase> Tabs { get; set; } = new List<BSTabBase>();
         internal List<EventCallback<BSTabEvent>> EventQue { get; set; } = new List<EventCallback<BSTabEvent>>();
         internal BSTabEvent BSTabEvent { get; set; }
         private BSTabBase _selected;
@@ -42,7 +42,7 @@ namespace BlazorStrap
 
         protected override Task OnAfterRenderAsync(bool firstrun)
         {
-            for (int i = 0; i < EventQue.Count; i++)
+            for (var i = 0; i < EventQue.Count; i++)
             {
                 EventQue[i].InvokeAsync(BSTabEvent);
                 EventQue.RemoveAt(i);

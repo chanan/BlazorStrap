@@ -9,7 +9,7 @@ namespace BlazorStrap
     public abstract class BSTableBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder("table")
             .AddClass("table-dark", IsDark)
             .AddClass("table-striped", IsStriped)

@@ -1,37 +1,38 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Components.Web;
+using System.Globalization;
 using System.Linq.Expressions;
-using Microsoft.AspNetCore.Components.RenderTree;
-using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazorStrap
 {
     public class BSBasicInput : ComponentBase
     {
-         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        [CascadingParameter] EditContext MyEditContext { get; set; }
-        protected string classname =>
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
+        [CascadingParameter] private EditContext MyEditContext { get; set; }
+
+        protected string Classname =>
         new CssBuilder()
            .AddClass($"form-control-{Size.ToDescriptionString()}", Size != Size.None)
            .AddClass("is-valid", IsValid)
            .AddClass("is-invalid", IsInvalid)
-        
+
            .AddClass(GetClass())
            .AddClass(Class)
          .Build();
-             
+
         protected string Tag => InputType switch
         {
             InputType.Select => "select",
             InputType.TextArea => "textarea",
             _ => "input"
         };
+
         private FieldIdentifier _fieldIdentifier;
 
         [Parameter] public Expression<Func<object>> For { get; set; }
@@ -62,6 +63,7 @@ namespace BlazorStrap
                 _fieldIdentifier = FieldIdentifier.Create(For);
             }
         }
+
         private string GetClass() => this.InputType switch
         {
             InputType.Checkbox => "form-check-input",
@@ -73,21 +75,22 @@ namespace BlazorStrap
 
         protected void OnChange(ChangeEventArgs e)
         {
-            ValueChanged.InvokeAsync(e.Value.ToString());
-            Value = e.Value.ToString();
+            ValueChanged.InvokeAsync(e?.Value.ToString());
+            Value = e?.Value.ToString();
         }
+
         protected void OnClick(MouseEventArgs e)
         {
-            var tmp = Convert.ToBoolean(Value);
-            Value = (!tmp).ToString().ToLower();
+            var tmp = Convert.ToBoolean(Value, CultureInfo.InvariantCulture);
+            Value = (!tmp).ToString(CultureInfo.InvariantCulture).ToLowerInvariant();
             ValueChanged.InvokeAsync(Value);
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            builder.OpenElement(0, Tag);
+            builder?.OpenElement(0, Tag);
             builder.AddMultipleAttributes(1, UnknownParameters);
-            builder.AddAttribute(2, "class", classname);
+            builder.AddAttribute(2, "class", Classname);
             builder.AddAttribute(3, "type", Type);
             builder.AddAttribute(4, "readonly", IsReadonly);
             builder.AddAttribute(5, "disabled", IsDisabled);
@@ -96,7 +99,7 @@ namespace BlazorStrap
             builder.AddAttribute(8, "selectedIndex", SelectedIndex);
             if (InputType == InputType.Checkbox)
             {
-                builder.AddAttribute(8, "checked", Convert.ToBoolean(Value));
+                builder.AddAttribute(8, "checked", Convert.ToBoolean(Value, CultureInfo.InvariantCulture));
                 builder.AddAttribute(9, "onclick", EventCallback.Factory.Create(this, OnClick));
             }
             else
@@ -106,7 +109,6 @@ namespace BlazorStrap
             }
             builder.AddContent(10, ChildContent);
             builder.CloseElement();
-
         }
 
         public void ForceValidate()
