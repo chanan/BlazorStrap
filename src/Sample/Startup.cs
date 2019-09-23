@@ -1,5 +1,6 @@
 ﻿using BlazorPrettyCode;
 using BlazorStrap;
+using BlazorStyled;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using SampleCore;
@@ -21,7 +22,7 @@ namespace Sample
         public void Configure(IComponentsApplicationBuilder app)
         {
             app.AddComponent<App>("app");
-            app.AddClientSidePrettyCode();
+            app.AddComponent<ClientSideStyled>("#styled");
         }
     }
 }
