@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
-using System;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 namespace BlazorStrap
@@ -9,7 +7,7 @@ namespace BlazorStrap
     public abstract class BSTableHeadBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
              new CssBuilder()
                  .AddClass("thead-light", TableHeadType == TableHeadType.Light)
                  .AddClass("thead-dark", TableHeadType == TableHeadType.Dark)

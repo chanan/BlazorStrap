@@ -2,7 +2,7 @@
 @if (!IsDropDown)
 {
 <BSForm Model="formsModel">
-    <BSBasicInput InputType="InputType.Select" Value="@Selected" ValueChanged="@SelectedChanged">
+    <BSBasicInput InputType="InputType.Select" Value="Selected" ValueChanged="@((string value) => SelectedChanged(value))">
         @foreach (string theme in themes)
 {
             <option value="@theme">@theme</option>
@@ -26,8 +26,8 @@ else
     public bool IsDropDown { get; set; }
     private List<string> themes;
     private string Selected { get; set; }
-
-    private async void SelectedChanged(string value)
+    
+    private async Task SelectedChanged(string value)
     {
         Selected = value;
         await BootstrapCSS.SetBootstrapCSS(value, "4.3.1");

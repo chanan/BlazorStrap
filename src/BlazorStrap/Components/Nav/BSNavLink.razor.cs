@@ -1,21 +1,20 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
+﻿using BlazorComponentUtilities;
+using BlazorStrap.Util;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 using System;
 using System.Collections.Generic;
-using BlazorStrap.Util;
-using Microsoft.AspNetCore.Components.Routing;
 
 namespace BlazorStrap
 {
     public abstract class BSNavLinkBase : ComponentBase, IDisposable
     {
-        [Inject] private NavigationManager UriHelper { get; set; }
+        [Inject] protected NavigationManager UriHelper { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        [CascadingParameter] BSNavItem Parent { get; set; }
-        [CascadingParameter] BSCollapseItem CollapseItem { get; set; }
-        [CascadingParameter] BSListItem ListItem { get; set; }
-        protected string classname =>
+        [CascadingParameter] protected BSNavItem Parent { get; set; }
+        [CascadingParameter] protected BSCollapseItem CollapseItem { get; set; }
+        [CascadingParameter] protected BSListItem ListItem { get; set; }
+        protected string Classname =>
         new CssBuilder()
             .AddClass("nav-item nav-link", !RemoveDefaultClass)
             .AddClass("active", IsActive)
@@ -23,7 +22,7 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
-        protected string disabled => IsDisabled ? "disabled" : null;
+        protected string Disabled => IsDisabled ? "disabled" : null;
 
         [Parameter] public bool RemoveDefaultClass { get; set; }
         [Parameter] public bool IsActive { get; set; }
@@ -40,26 +39,35 @@ namespace BlazorStrap
         }
         public void Dispose()
         {
-            UriHelper.LocationChanged -= OnLocationChanged;
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                UriHelper.LocationChanged -= OnLocationChanged;
+            }
         }
 
         public void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
-            var active = e.Location.MatchActiveRoute(UriHelper.BaseUri + Href);
-          
-                if (Parent != null)
-                {
-                    Parent.Active = active;
-                }
-                if(CollapseItem != null)
-                {
-                    CollapseItem.Active = active;
-                }
-                if(ListItem != null)
-                {
-                    ListItem.Active = active;
-                }
-                IsActive = active;
+            var active = e?.Location.MatchActiveRoute(UriHelper.BaseUri + Href) ?? false;
+
+            if (Parent != null)
+            {
+                Parent.Active = active;
+            }
+            if (CollapseItem != null)
+            {
+                CollapseItem.Active = active;
+            }
+            if (ListItem != null)
+            {
+                ListItem.Active = active;
+            }
+            IsActive = active;
             StateHasChanged();
         }
     }

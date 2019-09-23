@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace BlazorStrap
@@ -13,7 +10,7 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
-            if(Group != null)
+            if (Group != null)
             {
 
             }

@@ -1,38 +1,32 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.RenderTree;
-using Microsoft.AspNetCore.Components.Routing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using System;
 
 namespace BlazorStrap.Util
 {
     public static class NavHelper
     {
-        //private static string _hrefAbsolute;                                                                                   
-
-
-        public static bool MatchActiveRoute(this string currentUriAbsolute, string _hrefAbsolute)
+        public static bool MatchActiveRoute(this string currentUriAbsolute, string hrefAbsolute)
         {
-            _hrefAbsolute = _hrefAbsolute.Replace("://", ":///");
-            _hrefAbsolute = _hrefAbsolute.Replace("//", "/");
+            hrefAbsolute = hrefAbsolute?.Replace("://", ":///");
+            hrefAbsolute = hrefAbsolute?.Replace("//", "/");
 
-            if(_hrefAbsolute.ToLower() == currentUriAbsolute.ToLower())
+            if (hrefAbsolute.ToUpperInvariant() == currentUriAbsolute?.ToUpperInvariant())
             {
                 return true;
             }
-            if (currentUriAbsolute.Length == _hrefAbsolute?.Length - 1)
+            if (currentUriAbsolute.Length == hrefAbsolute?.Length - 1)
             {
-                if (_hrefAbsolute[_hrefAbsolute.Length - 1] == '/'
-                    && _hrefAbsolute.StartsWith(currentUriAbsolute, StringComparison.Ordinal))
+                if (hrefAbsolute[hrefAbsolute.Length - 1] == '/'
+                    && hrefAbsolute.StartsWith(currentUriAbsolute, StringComparison.Ordinal))
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        public static bool MatchActiveRoute(this Uri currentUriAbsolute, string hrefAbsolute)
+        {
+            return MatchActiveRoute(currentUriAbsolute?.AbsoluteUri, hrefAbsolute);
         }
     }
 }

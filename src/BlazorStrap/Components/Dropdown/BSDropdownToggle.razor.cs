@@ -1,18 +1,17 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
-using System;
-using System.Timers;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
     public abstract class BSDropdownToggleBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+
+        protected string Classname =>
          new CssBuilder()
              .AddClass("btn", !IsLink)
              .AddClass("dropdown-item", Dropdown?.IsSubmenu == true)
@@ -21,7 +20,7 @@ namespace BlazorStrap
              .AddClass("dropdown-toggle-split", IsSplit)
              .AddClass("dropdown-toggle")
              //nav-link should only show on root drop down toggle
-             .AddClass("nav-link", IsLink && Dropdown?.NavItem != null && Dropdown?.IsSubmenu == false) 
+             .AddClass("nav-link", IsLink && Dropdown?.NavItem != null && Dropdown?.IsSubmenu == false)
              .AddClass(Class)
          .Build();
 
@@ -35,19 +34,21 @@ namespace BlazorStrap
 
         [Obsolete("This Parameter is no longer require and will be removed soon")]
         [Parameter] public bool? IsOpen { get; set; }
+
         [Parameter] public bool IsSplit { get; set; }
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] internal BSDropdownMenuBase Dropdown { get; set; }
+
         protected void Escape(KeyboardEventArgs e)
         {
             if (Dropdown == null)
                 return;
-                if (e.Key.ToLower() == "escape")
-                {
-                    Dropdown.Hide();
-                }
+            if (e?.Key.ToUpperInvariant() == "ESCAPE")
+            {
+                Dropdown.Hide();
+            }
         }
 
         protected void OnClickEvent(MouseEventArgs e)
@@ -56,9 +57,9 @@ namespace BlazorStrap
             if (Dropdown == null)
                 return;
             if (!Dropdown.Manual)
-                {
-                    Dropdown.Toggle();
-                }
+            {
+                Dropdown.Toggle();
+            }
         }
     }
 }

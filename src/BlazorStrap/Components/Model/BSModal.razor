@@ -2,8 +2,8 @@
 @inherits BSModalBase
 
 
-<DynamicElement @attributes="@UnknownParameters" style="@styles" TagName="div" class="@classname" tabindex="-1" role="dialog" @onfocus="OnBackdropClick" @bind-ElementRef="MyRef" >
-    <div class="@innerClassname" role="document"  tabindex="-2">
+<DynamicElement @attributes="@UnknownParameters" style="@Styles" TagName="div" class="@Classname" tabindex="-1" role="dialog" @onfocus="OnBackdropClick" @bind-ElementRef="MyRef" >
+    <div class="@InnerClassname" role="document"  tabindex="-2">
         <div class="modal-content"  @ref="Me">
             @ChildContent
         </div>

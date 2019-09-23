@@ -9,21 +9,18 @@ namespace BlazorStrap
 {
     public abstract class BSNavItemBase : ToggleableComponentBase, IDisposable
     {
-        internal bool IsSubmenu;
+        internal bool IsSubmenu { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
 
         private BSDropdownMenuBase _selected;
-        private bool ShouldClose = false;
+        private bool _shouldClose { get; set; } = false;
 
         //Prevents NULL
         private BSDropdownMenuBase _dropDownMenu { get; set; } = new BSDropdownMenu();
 
         public BSDropdownMenuBase DropDownMenu
         {
-            get
-            {
-                return _dropDownMenu;
-            }
+            get => _dropDownMenu;
             set
             {
                 _dropDownMenu = value;
@@ -63,7 +60,7 @@ namespace BlazorStrap
 
         public bool Active
         {
-            get { return _active; }
+            get => _active;
             set
             {
                 _active = value;
@@ -71,7 +68,7 @@ namespace BlazorStrap
             }
         }
 
-        protected string classname =>
+        protected string Classname =>
             new CssBuilder()
                 .AddClass(AnimationClass, !DisableAnimations)
                 .AddClass("nav-item", !RemoveDefaultClass)
@@ -106,12 +103,12 @@ namespace BlazorStrap
 
         protected void MouseLeave()
         {
-            ShouldClose = true;
+            _shouldClose = true;
         }
 
         protected void MouseEnter()
         {
-            ShouldClose = false;
+            _shouldClose = false;
         }
 
         public override void Toggle()
@@ -145,7 +142,7 @@ namespace BlazorStrap
             {
                 return;
             }
-            if (ShouldClose)
+            if (_shouldClose)
             {
                 if (Nav.Selected == this)
                 {
@@ -161,12 +158,18 @@ namespace BlazorStrap
             }
         }
 
-        public void Dispose()
+        protected virtual void Dispose(bool disposing)
         {
-            if (IsDropdown)
+            if (IsDropdown && disposing)
             {
                 Nav.Navitems.Remove(this);
             }
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+
         }
     }
 }

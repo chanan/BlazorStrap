@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
-using System;
+using BlazorStrap.Util.Components;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 namespace BlazorStrap
@@ -10,8 +9,8 @@ namespace BlazorStrap
     public abstract class BSPopoverBase : ToggleableComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        [Inject] Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
-        protected string classname =>
+        [Inject] protected Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
+        protected string Classname =>
         new CssBuilder("popover")
             .AddClass($"bs-popover-{Placement.ToDescriptionString()}")
             .AddClass(AnimationClass, !DisableAnimations)
@@ -19,14 +18,14 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
-        protected ElementReference arrow;
+        protected ElementReference Arrow { get; set; }
 
         protected override void OnAfterRender(bool firstrun)
         {
             if ((IsOpen ?? false))
             {
                 var placement = Placement.ToDescriptionString();
-                new BlazorStrapInterop(JSRuntime).Popper(Target, Id, arrow, placement);
+                new BlazorStrapInterop(JSRuntime).Popper(Target, Id, Arrow, placement);
             }
         }
         protected string Id => Target + "-popover";
@@ -37,7 +36,7 @@ namespace BlazorStrap
         [Parameter] public string Style { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
 
-        protected void onclick()
+        protected void OnClick()
         {
             Hide();
         }

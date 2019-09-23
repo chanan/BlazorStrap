@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
-using System;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 namespace BlazorStrap
@@ -10,7 +8,7 @@ namespace BlazorStrap
     public abstract class BSPaginationBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
          new CssBuilder("pagination")
              .AddClass($"pagination-{Size.ToDescriptionString()}", Size != Size.None)
              .AddClass(GetAlignment())

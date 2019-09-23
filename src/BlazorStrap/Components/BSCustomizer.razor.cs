@@ -4,7 +4,7 @@ namespace BlazorStrap
 {
     public abstract class BSCustomizerBase : ComponentBase
     {
-        [Parameter] public BSCustomizerConfig Config  { get; set; } = new BSCustomizerConfig();
+        [Parameter] public BSCustomizerConfig Config { get; set; } = new BSCustomizerConfig();
     }
     public class BSCustomizerConfig
     {
@@ -20,7 +20,7 @@ namespace BlazorStrap
         public string Cyan { get; set; }
         public string White { get; set; }
         public string Gray { get; set; }
-        public string Gray_dark { get; set; }
+        public string GrayDark { get; set; }
         public string Primary { get; set; }
         public string Secondary { get; set; }
         public string Success { get; set; }
@@ -29,11 +29,11 @@ namespace BlazorStrap
         public string Danger { get; set; }
         public string Light { get; set; }
         public string Dark { get; set; }
-        public string Breakpoint_xs { get; set; }
-        public string Breakpoint_sm { get; set; }
-        public string Breakpoint_md { get; set; }
-        public string Breakpoint_lg { get; set; }
-        public string Breakpoint_xl { get; set; }
+        public string BreakpointXS { get; set; }
+        public string BreakpointSM { get; set; }
+        public string BreakpointMS { get; set; }
+        public string BreakpointLG { get; set; }
+        public string BreakpointXL { get; set; }
 
     }
 }

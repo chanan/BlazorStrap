@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
-using System;
-using System.Threading.Tasks;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
     public abstract class BSCarouselIndicatorItemBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
+
         protected string Classname =>
         new CssBuilder()
         .AddClass("active", Parent.ActiveIndex < Parent.CarouselIndicatorItems.Count ? (Parent.CarouselIndicatorItems[Parent.ActiveIndex] == this) : false)
@@ -24,9 +23,10 @@ namespace BlazorStrap
         {
             Parent.CarouselIndicatorItems.Add(this);
         }
+
         protected async Task OnClick()
         {
-            await ActiveIndexChangedEvent.InvokeAsync(Index);
+            await ActiveIndexChangedEvent.InvokeAsync(Index).ConfigureAwait(false);
         }
     }
 }

@@ -1,53 +1,53 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
-using System;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using System.Linq.Expressions;
-using Microsoft.AspNetCore.Components.RenderTree;
-using System.Text.RegularExpressions;
-using System.Linq;
 using Microsoft.AspNetCore.Components.Rendering;
-using System.Globalization;
 using Microsoft.AspNetCore.Components.Web;
+using System;
+using System.Globalization;
+using System.Linq;
 
 namespace BlazorStrap
 {
     public class BSInput<T> : InputBase<T>
     {
-        private bool Clean = true;
-        private bool Touched = false;
+        private bool _clean = true;
+        private bool _touched = false;
+
         // [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        [CascadingParameter] EditContext MyEditContext { get; set; }
-        [CascadingParameter] BSForm Parent { get; set; }
-        protected string classname =>
+        [CascadingParameter] protected EditContext MyEditContext { get; set; }
+
+        [CascadingParameter] protected BSForm Parent { get; set; }
+
+        protected string Classname =>
         new CssBuilder()
            .AddClass($"form-control-{Size.ToDescriptionString()}", Size != Size.None)
            .AddClass("is-valid", IsValid)
            .AddClass("is-invalid", IsInvalid)
-           .AddClass("is-valid", Touched && (!Parent?.UserValidation ?? false) && !HasValidationErrors())
+           .AddClass("is-valid", _touched && (!Parent?.UserValidation ?? false) && !HasValidationErrors())
            .AddClass("is-invalid", (!Parent?.UserValidation ?? false) && HasValidationErrors())
            .AddClass(GetClass())
            .AddClass(Class)
          .Build();
-        
+
         protected bool HasValidationErrors()
         {
-            if(Clean || MyEditContext == null)
+            if (_clean || MyEditContext == null)
             {
-                Clean = false;
+                _clean = false;
                 return false;
             }
             return MyEditContext.GetValidationMessages(base.FieldIdentifier).Any();
         }
+
         protected string Tag => InputType switch
         {
             InputType.Select => "select",
             InputType.TextArea => "textarea",
             _ => "input"
         };
+
         private FieldIdentifier _fieldIdentifier;
 
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
@@ -69,32 +69,37 @@ namespace BlazorStrap
 
         protected string Type => InputType.ToDescriptionString();
 
-        private const string DateFormat = "yyyy-MM-dd"; 
+        private const string _dateFormat = "yyyy-MM-dd";
+
         protected override void OnInitialized()
         {
             MyEditContext.OnValidationRequested += MyEditContext_OnValidationRequested;
             //Preview 7 workaround
-            if (Parent !=null)
-               Parent.FormIsReady(MyEditContext);
+            if (Parent != null)
+                Parent.FormIsReady(MyEditContext);
         }
 
         private void MyEditContext_OnValidationRequested(object sender, ValidationRequestedEventArgs e)
         {
-            Touched = true;
+            _touched = true;
         }
 
         protected override void OnParametersSet()
         {
             _fieldIdentifier = FieldIdentifier.Create(ValueExpression);
         }
-        private string GetClass() => this.InputType switch
+
+        private string GetClass()
         {
-            InputType.Checkbox => "form-check-input",
-            InputType.Radio => "form-check-input",
-            InputType.File => "form-control-file",
-            InputType.Range => "form-control-range",
-            _ => IsPlaintext ? "form-control-plaintext" : "form-control"
-        };
+            return InputType switch
+            {
+                InputType.Checkbox => "form-check-input",
+                InputType.Radio => "form-check-input",
+                InputType.File => "form-control-file",
+                InputType.Range => "form-control-range",
+                _ => IsPlaintext ? "form-control-plaintext" : "form-control"
+            };
+        }
 
         protected void OnClick(MouseEventArgs e)
         {
@@ -102,9 +107,10 @@ namespace BlazorStrap
             Value = (T)(object)(!tmp);
             ValueChanged.InvokeAsync(Value);
         }
+
         protected void OnChange(string e)
         {
-            if(ValidateOnChange)
+            if (ValidateOnChange)
             {
                 InvokeAsync(() => MyEditContext.Validate());
                 StateHasChanged();
@@ -114,63 +120,46 @@ namespace BlazorStrap
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            try
+            builder?.OpenElement(0, Tag);
+            builder.AddMultipleAttributes(1, AdditionalAttributes);
+            builder.AddAttribute(2, "class", Classname);
+            builder.AddAttribute(3, "type", Type);
+            builder.AddAttribute(4, "readonly", IsReadonly);
+            builder.AddAttribute(5, "disabled", IsDisabled);
+            builder.AddAttribute(6, "multiple", IsMultipleSelect);
+            builder.AddAttribute(7, "size", SelectSize);
+            builder.AddAttribute(8, "selectedIndex", SelectedIndex);
+            if (InputType == InputType.Checkbox)
             {
-                builder.OpenElement(0, Tag);
-                builder.AddMultipleAttributes(1, AdditionalAttributes);
-                builder.AddAttribute(2, "class", classname);
-                builder.AddAttribute(3, "type", Type);
-                builder.AddAttribute(4, "readonly", IsReadonly);
-                builder.AddAttribute(5, "disabled", IsDisabled);
-                builder.AddAttribute(6, "multiple", IsMultipleSelect);
-                builder.AddAttribute(7, "size", SelectSize);
-                builder.AddAttribute(8, "selectedIndex", SelectedIndex);
-                if (InputType == InputType.Checkbox)
-                {
-                    builder.AddAttribute(9, "checked", BindConverter.FormatValue(CurrentValue));
-                   builder.AddAttribute(10, "onclick", EventCallback.Factory.Create(this, OnClick));
-                }
-                else
-                {
-                    builder.AddAttribute(9, "value", BindConverter.FormatValue(CurrentValueAsString));
-                    builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
-                }
-                
-                builder.AddAttribute(11, "onfocus", EventCallback.Factory.Create(this, () => { Touched = true; StateHasChanged(); }));
-                builder.AddAttribute(11, "onblur", EventCallback.Factory.Create(this, () => { Touched = true; MyEditContext.Validate(); StateHasChanged(); }));
-                builder.AddContent(12, ChildContent);
-                builder.CloseElement();
+                builder.AddAttribute(9, "checked", BindConverter.FormatValue(CurrentValue));
+                builder.AddAttribute(10, "onclick", EventCallback.Factory.Create(this, OnClick));
             }
-            catch
+            else
             {
+                builder.AddAttribute(9, "value", BindConverter.FormatValue(CurrentValueAsString));
+                builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
+            }
 
-            }
+            builder.AddAttribute(11, "onfocus", EventCallback.Factory.Create(this, () => { _touched = true; StateHasChanged(); }));
+            builder.AddAttribute(11, "onblur", EventCallback.Factory.Create(this, () => { _touched = true; MyEditContext.Validate(); StateHasChanged(); }));
+            builder.AddContent(12, ChildContent);
+            builder.CloseElement();
         }
-        
+
         protected override string FormatValueAsString(T value)
         {
-            switch (value)
+            return value switch
             {
-                case null:
-                    return null;
-                case int @int:
-                    return BindConverter.FormatValue(@int, CultureInfo.InvariantCulture);
-                case long @long:
-                    return BindConverter.FormatValue(@long, CultureInfo.InvariantCulture);
-                case float @float:
-                    return BindConverter.FormatValue(@float, CultureInfo.InvariantCulture);
-                case double @double:
-                    return BindConverter.FormatValue(@double, CultureInfo.InvariantCulture);
-                case decimal @decimal:
-                    return BindConverter.FormatValue(@decimal, CultureInfo.InvariantCulture);
-                case DateTime dateTimeValue:
-                    return BindConverter.FormatValue(dateTimeValue, DateFormat, CultureInfo.InvariantCulture);
-                case DateTimeOffset dateTimeOffsetValue:
-                    return BindConverter.FormatValue(dateTimeOffsetValue, DateFormat, CultureInfo.InvariantCulture);
-                default:
-                    return base.FormatValueAsString(value);
-            }
-            
+                null => null,
+                int @int => BindConverter.FormatValue(@int, CultureInfo.InvariantCulture),
+                long @long => BindConverter.FormatValue(@long, CultureInfo.InvariantCulture),
+                float @float => BindConverter.FormatValue(@float, CultureInfo.InvariantCulture),
+                double @double => BindConverter.FormatValue(@double, CultureInfo.InvariantCulture),
+                decimal @decimal => BindConverter.FormatValue(@decimal, CultureInfo.InvariantCulture),
+                DateTime dateTimeValue => BindConverter.FormatValue(dateTimeValue, _dateFormat, CultureInfo.InvariantCulture),
+                DateTimeOffset dateTimeOffsetValue => BindConverter.FormatValue(dateTimeOffsetValue, _dateFormat, CultureInfo.InvariantCulture),
+                _ => base.FormatValueAsString(value),
+            };
         }
 
         public void ForceValidate()
@@ -181,20 +170,20 @@ namespace BlazorStrap
 
         protected override bool TryParseValueFromString(string value, out T result, out string validationErrorMessage)
         {
-            var type = typeof(T);
+            Type type = typeof(T);
             if (typeof(T) == typeof(string))
             {
                 result = (T)(object)value;
                 validationErrorMessage = null;
                 return true;
             }
-            else if(value == null && (Nullable.GetUnderlyingType(type) != null)) 
+            else if (value == null && (Nullable.GetUnderlyingType(type) != null))
             {
                 result = (T)(object)default(T);
                 validationErrorMessage = null;
                 return true;
             }
-            else if(value == "" && typeof(DateTime) != typeof(T) && typeof(DateTimeOffset) != typeof(T))
+            else if (value?.Length == 0 && typeof(DateTime) != typeof(T) && typeof(DateTimeOffset) != typeof(T))
             {
                 result = (T)(object)default(T);
                 validationErrorMessage = null;
@@ -216,15 +205,15 @@ namespace BlazorStrap
                     return false;
                 }
             }
-            else if(typeof(T) == typeof(int) || typeof(T) == typeof(int?))
+            else if (typeof(T) == typeof(int) || typeof(T) == typeof(int?))
             {
-                result = (T)(object)Convert.ToInt32(value);
+                result = (T)(object)Convert.ToInt32(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
             else if (typeof(T) == typeof(long) || typeof(T) == typeof(long?))
             {
-                result = (T)(object)Convert.ToInt64(value);
+                result = (T)(object)Convert.ToInt64(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
@@ -243,12 +232,12 @@ namespace BlazorStrap
             else if (typeof(T) == typeof(Guid) || typeof(T) == typeof(Guid?))
             {
                 try
-                { 
+                {
                     result = (T)(object)Guid.Parse(value);
                 }
                 catch
                 {
-                    throw new InvalidOperationException($"Could not parse input. Invalid Guid format.");
+                    throw new InvalidOperationException(Properties.Resources.Could_not_parse_input__Invalid_Guid_format);
                 }
                 validationErrorMessage = null;
                 return true;
@@ -262,7 +251,7 @@ namespace BlazorStrap
                 }
                 else
                 {
-                    validationErrorMessage = string.Format("The {0} field must be a date.", FieldIdentifier.FieldName);
+                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a date.", FieldIdentifier.FieldName);
                     return false;
                 }
             }
@@ -275,17 +264,16 @@ namespace BlazorStrap
                 }
                 else
                 {
-                    validationErrorMessage = string.Format("The {0} field must be a date.", FieldIdentifier.FieldName);
+                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a date.", FieldIdentifier.FieldName);
                     return false;
                 }
             }
             throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
         }
 
-
-        static bool TryParseDateTime(string value, out T result)
+        private static bool TryParseDateTime(string value, out T result)
         {
-            var success = BindConverter.TryConvertToDateTime(value, CultureInfo.InvariantCulture, DateFormat, out var parsedValue);
+            var success = BindConverter.TryConvertToDateTime(value, CultureInfo.InvariantCulture, _dateFormat, out DateTime parsedValue);
             if (success)
             {
                 result = (T)(object)parsedValue;
@@ -298,9 +286,9 @@ namespace BlazorStrap
             }
         }
 
-        static bool TryParseDateTimeOffset(string value, out T result)
+        private static bool TryParseDateTimeOffset(string value, out T result)
         {
-            var success = BindConverter.TryConvertToDateTimeOffset(value, CultureInfo.InvariantCulture, DateFormat, out var parsedValue);
+            var success = BindConverter.TryConvertToDateTimeOffset(value, CultureInfo.InvariantCulture, _dateFormat, out DateTimeOffset parsedValue);
             if (success)
             {
                 result = (T)(object)parsedValue;

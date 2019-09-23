@@ -1,18 +1,16 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using System.Collections.Generic;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
-using System;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
     public abstract class BSButtonBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+
+        protected string Classname =>
         new CssBuilder("btn")
           .AddClass($"btn-outline-{Color.ToDescriptionString()}", IsOutline)
           .AddClass($"btn-{Color.ToDescriptionString()}", Color != Color.None && !IsOutline)
@@ -46,6 +44,7 @@ namespace BlazorStrap
         [Parameter] public Color Color { get; set; } = Color.Primary;
 
         private ButtonType _buttonType = ButtonType.Button;
+
         [Parameter]
         public ButtonType ButtonType
         {
@@ -66,6 +65,7 @@ namespace BlazorStrap
                 };
             }
         }
+
         [Parameter] public bool IsOutline { get; set; }
         [Parameter] public Size Size { get; set; } = Size.None;
         [Parameter] public bool IsBlock { get; set; }

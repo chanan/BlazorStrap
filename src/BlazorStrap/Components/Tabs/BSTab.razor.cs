@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
-using System.Threading.Tasks;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
@@ -12,14 +11,8 @@ namespace BlazorStrap
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         public RenderFragment Content { get; set; }
-        public bool Selected
-        {
-            get
-            {
-                return (Group != null) ? Group.Selected == this : false;
-            }
-        }
-        protected string classname =>
+        public bool Selected => (Group != null) ? Group.Selected == this : false;
+        protected string Classname =>
         new CssBuilder("nav-item")
             .AddClass("active", Selected)
             .AddClass(Class)
@@ -57,31 +50,34 @@ namespace BlazorStrap
         }
         public void UpdateContent()
         {
-            try
+            if (Group == null) return;
+            Group.Tabs.First(q => q == this).Content = Content;
+            if (this == Group.Selected)
             {
-                Group.Tabs.First(q => q == this).Content = Content;
-                if (this == Group.Selected)
-                {
-                    Group.Selected = null;
-                    Group.Selected = this;
-                    InvokeAsync(StateHasChanged);
-                }
-            }
-            catch
-            {
-
+                Group.Selected = null;
+                Group.Selected = this;
+                InvokeAsync(StateHasChanged);
             }
         }
 
         public void Dispose()
         {
-            //Prevent blazor form removing the wrong tab
-            if (Group.Disposing) return;
-            //Locks updates when deleting tabs
-            
-            Group.Tabs.Remove(this);
-            Group.Selected = (Group.Selected == this) ? Group.Tabs.FirstOrDefault() : Group.Selected;
-            Group.Disposing = true;
+            Dispose(true);
+            GC.SuppressFinalize(this);
+
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                //Prevent blazor form removing the wrong tab
+                if (Group.Disposing) return;
+                //Locks updates when deleting tabs
+                Group.Tabs.Remove(this);
+                Group.Selected = (Group.Selected == this) ? Group.Tabs.FirstOrDefault() : Group.Selected;
+                Group.Disposing = true;
+            }
         }
     }
 }

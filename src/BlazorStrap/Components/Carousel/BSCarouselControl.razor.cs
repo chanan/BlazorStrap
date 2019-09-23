@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
-using System;
-using System.Threading.Tasks;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Components.Web;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
     public abstract class BSCarouselControlBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
+
         protected string Classname =>
          new CssBuilder()
              .AddClass("carousel-control-prev", CarouselDirection == CarouselDirection.Previous)
@@ -33,25 +31,22 @@ namespace BlazorStrap
 
         [Parameter] public EventCallback<int> ActiveIndexChanged { get; set; }
 
-        protected async Task OnClick(MouseEventArgs e)
+        protected async Task OnClick()
         {
             if (Parent.AnimationRunning) return;
             if (CarouselDirection == CarouselDirection.Previous)
             {
                 Parent.Direction = 1;
                 Parent.ResetTimer();
-                if (Parent.ActiveIndex == 0) { Parent.ActiveIndex = NumberOfItems - 1; }
-                else { Parent.ActiveIndex = Parent.ActiveIndex - 1; }
+                Parent.ActiveIndex = Parent.ActiveIndex == 0 ? NumberOfItems - 1 : Parent.ActiveIndex - 1;
             }
             else
             {
                 Parent.Direction = 0;
                 Parent.ResetTimer();
-                if (Parent.ActiveIndex == NumberOfItems - 1) { Parent.ActiveIndex = 0; }
-                else { Parent.ActiveIndex = Parent.ActiveIndex + 1; }
-
+                Parent.ActiveIndex = Parent.ActiveIndex == NumberOfItems - 1 ? 0 : Parent.ActiveIndex + 1;
             }
-            await ActiveIndexChanged.InvokeAsync(Parent.ActiveIndex);
+            await ActiveIndexChanged.InvokeAsync(Parent.ActiveIndex).ConfigureAwait(false);
         }
     }
 }

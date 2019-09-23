@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 namespace BlazorStrap
@@ -8,7 +7,7 @@ namespace BlazorStrap
     public abstract class BSTabListBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
             new CssBuilder("nav")
                 .AddClass("nav-tabs", !IsPills)
                 .AddClass("nav-pills", IsPills)
@@ -23,14 +22,8 @@ namespace BlazorStrap
         [Parameter]
         public bool IsList
         {
-            get
-            {
-                return _isList;
-            }
-            set
-            {
-                _isList = value;
-            }
+            get => _isList;
+            set => _isList = value;
         }
         [Parameter] public Alignment Alignment { get; set; } = Alignment.None;
         [Parameter] public bool IsVertical { get; set; }

@@ -1,13 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorStrap.Util;
-using BlazorComponentUtilities;
-using System;
-using System.Collections.Generic;
-using System.Timers;
-using System.Threading.Tasks;
 
-namespace BlazorStrap 
+namespace BlazorStrap
 {
     public abstract class BSCollapseGroupBase : ComponentBase
     {
@@ -17,10 +10,7 @@ namespace BlazorStrap
 
         public BSCollapseItem Selected
         {
-            get
-            {
-                return _selected;
-            }
+            get => _selected;
             set
             {
                 if (value == null)

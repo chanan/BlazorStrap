@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,11 +18,14 @@ namespace BlazorStrap.Util
         /// </summary>
         /// <param name="task">Task method to execute</param>
         public static void RunSync(Func<Task> task)
-            => _taskFactory
-                .StartNew(task)
-                .Unwrap()
-                .GetAwaiter()
-                .GetResult();
+        {
+            _taskFactory
+                           .StartNew(task)
+                           .Unwrap()
+                           .GetAwaiter()
+                           .GetResult();
+        }
+
         /// <summary>
         /// Executes an async Task<T> method which has a T return type synchronously
         /// USAGE: T result = AsyncUtil.RunSync(() => AsyncMethod<T>());
@@ -33,10 +34,12 @@ namespace BlazorStrap.Util
         /// <param name="task">Task<T> method to execute</param>
         /// <returns></returns>
         public static TResult RunSync<TResult>(Func<Task<TResult>> task)
-            => _taskFactory
-                .StartNew(task)
-                .Unwrap()
-                .GetAwaiter()
-                .GetResult();
+        {
+            return _taskFactory
+                           .StartNew(task)
+                           .Unwrap()
+                           .GetAwaiter()
+                           .GetResult();
+        }
     }
 }

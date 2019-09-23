@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
 using System.Threading.Tasks;
 
 namespace BlazorStrap.Util.Components
@@ -11,16 +10,13 @@ namespace BlazorStrap.Util.Components
     {
         internal ElementReference MyRef { get; set; }
         [Parameter] public EventCallback<bool> IsOpenChanged { get; set; }
-        [Parameter] public string AnimationClass { get; set; } 
+        [Parameter] public string AnimationClass { get; set; }
         [Parameter] public bool DisableAnimations { get; set; }
 
         [Parameter]
         public bool? IsOpen
         {
-            get
-            {
-                return _isOpen;
-            }
+            get => _isOpen;
             set
             {
                 if (value != null)
@@ -46,7 +42,7 @@ namespace BlazorStrap.Util.Components
         public virtual void Show()
         {
             _isOpen = true;
-            if(!Manual) Changed(_isOpen);
+            if (!Manual) Changed(_isOpen);
             IsOpenChanged.InvokeAsync(true);
         }
         public virtual void Hide()

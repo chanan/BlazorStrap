@@ -1,13 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorStrap.Util;
-using BlazorComponentUtilities;
-using System;
-using System.Collections.Generic;
-using System.Timers;
-using System.Threading.Tasks;
 
-namespace BlazorStrap 
+namespace BlazorStrap
 {
     public abstract class BSCollapseItemBase : ComponentBase
     {
@@ -17,7 +10,7 @@ namespace BlazorStrap
         private bool _active = false;
         public bool Active
         {
-            get { return _active; }
+            get => _active;
             set
             {
                 _active = value;

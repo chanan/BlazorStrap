@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
-using System;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System.Collections.Generic;
 
 namespace BlazorStrap
 {
     public abstract class BSListGroupItemBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder("list-group-item")
             .AddClass($"list-group-item-{Color.ToDescriptionString()}", Color != Color.None)
             .AddClass("active", IsActive)
@@ -27,7 +25,7 @@ namespace BlazorStrap
             _ => "li"
         };
 
-        protected string href =>  ListGroupType == ListGroupType.Link ? "javascript:void(0)" : null;
+        protected string href => ListGroupType == ListGroupType.Link ? "javascript:void(0)" : null;
         protected string IsButton => Tag == "button" ? "button" : "";
 
         [Parameter] public bool IsActive { get; set; }

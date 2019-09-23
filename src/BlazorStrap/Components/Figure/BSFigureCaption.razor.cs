@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
-using System;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 namespace BlazorStrap
@@ -9,9 +7,10 @@ namespace BlazorStrap
     public abstract class BSFigureCaptionBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+
+        protected string Classname =>
         new CssBuilder("figure-caption")
-            .AddClass(GetAlignment())
+            .AddClass(GetAlignmentAsString())
             .AddClass(Class)
             .Build();
 
@@ -19,11 +18,10 @@ namespace BlazorStrap
         [Parameter] public string Class { get; set; }
         [Parameter] public string Style { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
-        protected string GetAlignment()
+
+        protected string GetAlignmentAsString()
         {
-            if (Alignment == Alignment.Center) { return "text-center"; }
-            if (Alignment == Alignment.Right) { return "text-right"; }
-            return null;
+            return Alignment == Alignment.Center ? "text-center" : Alignment == Alignment.Right ? "text-right" : null;
         }
     }
 }

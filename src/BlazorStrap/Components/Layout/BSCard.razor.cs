@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
-using System;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 namespace BlazorStrap
@@ -10,7 +8,8 @@ namespace BlazorStrap
     public abstract class BSCardBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+
+        protected string Classname =>
               new CssBuilder()
                   .AddClass(GetClass())
                   .AddClass(Class)
@@ -37,19 +36,25 @@ namespace BlazorStrap
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
 
-        private string GetImageVerticalAlignmnet() => this.VerticalAlignment switch
+        private string GetImageVerticalAlignmnet()
         {
-            VerticalAlignment.Top => "-top",
-            VerticalAlignment.Bottom => "-bottom",
-            _ => null
-        };
+            return VerticalAlignment switch
+            {
+                VerticalAlignment.Top => "-top",
+                VerticalAlignment.Bottom => "-bottom",
+                _ => null
+            };
+        }
 
-        private string GetCardAlignmnet() => this.Alignment switch
+        private string GetCardAlignmnet()
         {
-            Alignment.Center => "text-center",
-            Alignment.Right => "text-right",
-            _ => null
-        };
+            return Alignment switch
+            {
+                Alignment.Center => "text-center",
+                Alignment.Right => "text-right",
+                _ => null
+            };
+        }
 
         private string GetCardColor()
         {
@@ -61,26 +66,27 @@ namespace BlazorStrap
 
         private string GetTextColor()
         {
-            if (IsOutline) { return null; }
-            if (Color == Color.None || Color == Color.Light) { return null; }
-            return $"text-{Color.ToDescriptionString()}";
+            return IsOutline ? null : Color == Color.None || Color == Color.Light ? null : $"text-{Color.ToDescriptionString()}";
         }
 
-        private string GetClass() => this.CardType switch
+        private string GetClass()
         {
-            CardType.Body => $"card-body {GetTextColor()}",
-            CardType.Card => $"card {GetCardColor()} {GetCardAlignmnet()} {(IsInverse ? "bg-dark text-white" : null)}",
-            CardType.Image => $"card-img{GetImageVerticalAlignmnet()}",
-            CardType.Title => "card-title",
-            CardType.Subtitle => "card-subtitle mb-2 text-muted",
-            CardType.Link => "card-link",
-            CardType.Header => "card-header",
-            CardType.Footer => "card-footer",
-            CardType.ImageOverlay => "card-img-overlay",
-            CardType.Group => "card-group",
-            CardType.Deck => "card-deck",
-            CardType.Columns => "card-columns",
-            _ => null
-        };
+            return CardType switch
+            {
+                CardType.Body => $"card-body {GetTextColor()}",
+                CardType.Card => $"card {GetCardColor()} {GetCardAlignmnet()} {(IsInverse ? "bg-dark text-white" : null)}",
+                CardType.Image => $"card-img{GetImageVerticalAlignmnet()}",
+                CardType.Title => "card-title",
+                CardType.Subtitle => "card-subtitle mb-2 text-muted",
+                CardType.Link => "card-link",
+                CardType.Header => "card-header",
+                CardType.Footer => "card-footer",
+                CardType.ImageOverlay => "card-img-overlay",
+                CardType.Group => "card-group",
+                CardType.Deck => "card-deck",
+                CardType.Columns => "card-columns",
+                _ => null
+            };
+        }
     }
 }

@@ -1,28 +1,24 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
-using System;
-using System.Timers;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Components.Routing;
 
 namespace BlazorStrap
 {
     public abstract class BSCollapseToggleBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
          new CssBuilder()
              .AddClass("btn", !IsLink)
              .AddClass($"btn-{Size.ToDescriptionString()}", !IsLink && Size != Size.None)
              .AddClass($"btn-{Color.ToDescriptionString()}", !IsLink && Color != Color.None)
-             .AddClass(HiddenClass ?? "" , CollapseItem?.Collapse?.IsOpen ?? false && HiddenClass != null)
+             .AddClass(HiddenClass ?? "", CollapseItem?.Collapse?.IsOpen ?? false && HiddenClass != null)
              .AddClass(ShownClass ?? "", CollapseItem?.Collapse?.IsOpen ?? false && ShownClass != null)
              .AddClass("active", CollapseItem?.Active ?? false)
              .AddClass(Class)
          .Build();
-        
+
         protected string Tag => IsLink ? "a" : "button";
         protected string Type => IsLink ? null : "button";
         protected string href => IsLink ? "javascript:void(0)" : null;
@@ -39,9 +35,9 @@ namespace BlazorStrap
 
         protected void OnClickEvent()
         {
-            if(CollapseGroup != null)
+            if (CollapseGroup != null)
             {
-                if(CollapseGroup.Selected != CollapseItem)
+                if (CollapseGroup.Selected != CollapseItem)
                 {
                     CollapseGroup.Selected = CollapseItem;
                 }
@@ -54,6 +50,6 @@ namespace BlazorStrap
             CollapseItem.Collapse.Toggle();
         }
 
-       
+
     }
 }

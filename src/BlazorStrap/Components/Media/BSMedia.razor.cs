@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
-using BlazorComponentUtilities;
-using System;
+﻿using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 namespace BlazorStrap
@@ -9,7 +7,7 @@ namespace BlazorStrap
     public abstract class BSMediaBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
          new CssBuilder()
              .AddClass(GetClass())
              .AddClass(Class)
@@ -39,14 +37,17 @@ namespace BlazorStrap
             return null;
         }
 
-        private string GetClass() => this.MediaType switch
+        private string GetClass()
         {
-            MediaType.Media => "media",
-            MediaType.Heading => "mt-0 mb-1",
-            MediaType.Image => $"{GetVerticalAlignmnet()} mr-3",
-            MediaType.List => "list-unstyled",
-            MediaType.ListItem => "media",
-            _ => "media"
-        };
+            return MediaType switch
+            {
+                MediaType.Media => "media",
+                MediaType.Heading => "mt-0 mb-1",
+                MediaType.Image => $"{GetVerticalAlignmnet()} mr-3",
+                MediaType.List => "list-unstyled",
+                MediaType.ListItem => "media",
+                _ => "media"
+            };
+        }
     }
 }

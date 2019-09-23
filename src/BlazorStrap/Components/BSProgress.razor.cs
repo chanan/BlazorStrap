@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorStrap.Util.Components;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
-using BlazorComponentUtilities;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 
@@ -10,7 +9,7 @@ namespace BlazorStrap
     public abstract class BSProgressBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string classname =>
+        protected string Classname =>
         new CssBuilder("progress-bar")
             .AddClass("progress-bar-striped", IsStriped)
             .AddClass("progress-bar-animated", IsAnimated)
@@ -18,7 +17,7 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
-        protected string classnameMulti =>
+        protected string ClassnameMulti =>
             new CssBuilder("progress")
                 .AddClass(Class)
             .Build();
@@ -30,7 +29,7 @@ namespace BlazorStrap
             get
             {
                 if (Value == 0) { return null; }
-                var percent = Math.Round(((double)Value / (double)Max) * 100);
+                var percent = Math.Round((Value / (double)Max) * 100);
                 return $"width: {percent}%; {Style}".Trim();
             }
         }

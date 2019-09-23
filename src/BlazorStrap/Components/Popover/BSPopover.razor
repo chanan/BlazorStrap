@@ -3,8 +3,8 @@
 
 @if ((IsOpen ?? false))
 {
-    <DynamicElement Id="@Id" @attributes="@UnknownParameters" TagName="div" class="@classname" role="tooltip" @onclick="onclick">
-        <div @ref="arrow" class="arrow"></div>
+    <DynamicElement Id="@Id" @attributes="@UnknownParameters" TagName="div" class="@Classname" role="tooltip" @onclick="OnClick">
+        <div @ref="Arrow" class="arrow"></div>
         @ChildContent
     </DynamicElement>
 }

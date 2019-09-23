@@ -32,22 +32,22 @@ window.blazorStrap = {
         el.removeEventListener('transitionend', window.blazorStrap.animationEvent);
         return true;
     },
-    addClass2Elements: function (el,el2, classname) {
-        el.classList.add(classname);
-        el2.classList.add(classname);
+    addClass2Elements: function (el,el2, Classname) {
+        el.classList.add(Classname);
+        el2.classList.add(Classname);
         return true;
     },
-    removeClass2Elements: function (el, el2, classname) {
-        el.classList.remove(classname);
-        el2.classList.remove(classname);
+    removeClass2Elements: function (el, el2, Classname) {
+        el.classList.remove(Classname);
+        el2.classList.remove(Classname);
         return true;
     },
-    addClass: function (el, classname) {
-        var r = classname.split(" ");
+    addClass: function (el, Classname) {
+        var r = Classname.split(" ");
         for (var i = 0; i < r.length; ++i) {
             el.classList.add(r[i]);
         }
-        DotNet.invokeMethodAsync("BlazorStrap", "OnAddClass", el.id, classname);
+        DotNet.invokeMethodAsync("BlazorStrap", "OnAddClass", el.id, Classname);
         return true;
     },
     getScrollHeight: function (el) {
@@ -58,29 +58,29 @@ window.blazorStrap = {
         el.style[key] = value;
         return true;
     },
-    removeClass: function (el, classname) {
-        var r = classname.split(" ");
+    removeClass: function (el, Classname) {
+        var r = Classname.split(" ");
         for (var i = 0; i < r.length; ++i) {
             el.classList.remove(r[i]);
         }
         return true;
     },
-    addBodyClass: function (classname) {
-        if (classname == "modal-open") {
+    addBodyClass: function (Classname) {
+        if (Classname == "modal-open") {
             this.changeBodyPaddingRight("17px");
         }
-        document.body.classList.add(classname);
+        document.body.classList.add(Classname);
         return true;
     },
-    removeBodyClass: function (classname) {
-        if (classname == "modal-open") {
+    removeBodyClass: function (Classname) {
+        if (Classname == "modal-open") {
             this.changeBodyPaddingRight("");
         }
-        document.body.classList.remove(classname);
+        document.body.classList.remove(Classname);
         return true;
     },
-    changeBodyClass: function (classname) {
-        document.body.className = classname;
+    changeBodyClass: function (Classname) {
+        document.body.className = Classname;
         return true;
     },
     changeBodyPaddingRight: function (padding) {
