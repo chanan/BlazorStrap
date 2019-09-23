@@ -1,0 +1,49 @@
+@page "/samples/issue206"
+
+String State: @stringbind - Conversion Error: @stringerror <br />
+<BSBasicInput InputType="InputType.Text" @bind-Value="@stringbind" ConversionError="@(value => {stringerror = value;})" ></BSBasicInput><br />
+
+Bool State: @boolbind - Conversion Error: @boolerror<br />
+<BSBasicInput InputType="InputType.Checkbox" @bind-Value="@boolbind" ConversionError="@(value => {boolerror = value;})"></BSBasicInput><br />
+
+Number State: @numberbind - Conversion Error: @numbererror<br />
+<BSBasicInput InputType="InputType.Number" @bind-Value="@numberbind" ConversionError="@(value => {numbererror = value;})"></BSBasicInput><br />
+
+Long State: @longbind - Conversion Error: @longerror<br />
+<BSBasicInput InputType="InputType.Number" @bind-Value="@longbind" ConversionError="@(value => {longerror = value;})"></BSBasicInput><br />
+
+Double State: @doublebind - Conversion Error: @doubleerror<br />
+<BSBasicInput InputType="InputType.Number" @bind-Value="@doublebind" ConversionError="@(value => {doubleerror = value;})"></BSBasicInput><br />
+
+Guid State: @guidbind - Conversion Error: @guiderror<br />
+<BSBasicInput InputType="InputType.Text" @bind-Value="@guidbind" ConversionError="@(value => {guiderror = value;})"></BSBasicInput><br />
+
+Date State: @dateTimebind - Conversion Error: @dateTimeerror<br />
+<BSBasicInput InputType="InputType.Date" @bind-Value="@dateTimebind" ConversionError="@(value => {dateTimeerror = value;})"></BSBasicInput><br />
+
+
+@code
+{
+    bool boolbind = false;
+    string stringbind;
+    int numberbind;
+    long longbind;
+    double doublebind;
+    Guid guidbind = Guid.NewGuid();
+    DateTime dateTimebind = DateTime.Now;
+
+    string boolerror;
+    string stringerror;
+    string numbererror;
+    string longerror;
+    string doubleerror;
+    string guiderror ;
+    string dateTimeerror;
+
+    Auto auto = new Auto();
+
+    public class Auto
+    {
+        public bool Check { get; set; } = false;
+    }
+}
