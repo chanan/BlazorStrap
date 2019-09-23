@@ -1,14 +1,14 @@
-﻿    <BSCarousel NumberOfItems="@items.Count">
-        <BSCarouselIndicators NumberOfItems="@items.Count" />
-        <div class="carousel-inner">
-            @for (int i = 0; i < items.Count; i++)
-            {
-                <BSCarouselItem src="@items[i].Source" alt="@items[i].Alt" ActionLink="@items[i].ActionLink" ActionLinkTarget="@items[i].ActionLinkTarget" />
-            }
-        </div>
-        <BSCarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" />
-        <BSCarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" />
-    </BSCarousel>
+﻿<BSCarousel NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" PauseOnHover="true">
+    <BSCarouselIndicators NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" />
+    <div class="carousel-inner">
+        @for (int i = 0; i < items.Count; i++)
+        {
+            <BSCarouselItem IsActive="@(ActiveIndex == i)" src="@items[i].Source" alt="@items[i].Alt" ActionLink="@items[i].ActionLink" ActionLinkTarget="@items[i].ActionLinkTarget" />
+        }
+    </div>
+    <BSCarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" />
+    <BSCarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" bind-ActiveIndex="@SecondIndex" />
+</BSCarousel>
 
 @code {
     int i = 0;
@@ -40,6 +40,13 @@
                 ActionLinkTarget = "_blank"
             }
         };
+
+        private int _secondIndex;
+        int SecondIndex
+        {
+            get => _secondIndex;
+            set { _secondIndex = value; StateHasChanged(); }
+        }
 
         class Item
         {
