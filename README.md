@@ -16,7 +16,7 @@ If you want to manage your styles in code and use dynamic styles you can check o
 ## Change Log
 https://github.com/chanan/BlazorStrap/releases
 
-## Done:
+## Components:
 * Alerts
 * Badges
 * Breadcrumbs
@@ -42,10 +42,3 @@ https://github.com/chanan/BlazorStrap/releases
 * Tables
 * Tabs
 * Tooltip
-
-## Not Done
-
-* Button of type: Checkboxes and Radio buttons
-* Modal - Will currently "clobber" body classes
-* Events on all components that need it (Modal for example)
-* Animations
