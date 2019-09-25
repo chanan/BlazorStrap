@@ -137,7 +137,11 @@ window.blazorStrap = {
         }
         if (theme === 'bootstrap') {
             link.href = `https://stackpath.bootstrapcdn.com/bootstrap/${version}/css/bootstrap.min.css`;
-        } else {
+        }
+        else if (theme === 'custom') {
+            link.href = version;
+        }
+        else {
             link.href = `https://stackpath.bootstrapcdn.com/bootswatch/${version}/${theme}/bootstrap.min.css`;
         }
         return true;

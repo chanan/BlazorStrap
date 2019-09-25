@@ -38,6 +38,17 @@ namespace BlazorStrap.Util
             return SetBootstrapCSS(theme.ToString().ToLowerInvariant(), version);
         }
 
+        /// <summary>
+        /// Allows the theme to be set to a custom Link vs Bootstrap/BootsWatch CDNs
+        /// </summary>
+        /// <param name="url">Url to custom bootstrap stylesheet</param>
+        /// <returns></returns>
+        public async Task SetCustomBootstrapCSS(string url)
+        {
+            _currentTheme.Theme = Theme.Custom;
+            await _blazorStrapInterop.SetBootstrapCSS("custom", url);
+        }
+
         public Theme CurrentTheme => _currentTheme.Theme;
     }
 }

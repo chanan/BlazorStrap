@@ -23,6 +23,7 @@
         Spacelab,
         Superhero,
         United,
-        Yeti
+        Yeti,
+        Custom
     }
 }
