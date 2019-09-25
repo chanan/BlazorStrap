@@ -6,6 +6,12 @@ Bootstrap 4 Components for Blazor Framework
 
 [![NuGet Pre Release](https://img.shields.io/nuget/vpre/BlazorStrap.svg)](https://www.nuget.org/packages/BlazorStrap/)
 
+## Server Side Blazor
+> Add <script src="_content/BlazorStrap/blazorStrap.js"></script>  to your _host.cshtml
+
+## Animations
+> Animations are enabled by default and require the blazorstrap.js to be loaded.You can disable them by passing DisableAnimations="true" into the component.
+
 ## Docs
 https://blazorstrap.io
 
