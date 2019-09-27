@@ -57,7 +57,7 @@ namespace BlazorStrap
                     ButtonType.Button => "button",
                     ButtonType.Link => "a",
                     ButtonType.Input => "input",
-                    ButtonType.Submit => "input",
+                    ButtonType.Submit => "button",
                     ButtonType.Reset => "input",
                     ButtonType.Radio => "input",
                     ButtonType.Checkbox => "input",
