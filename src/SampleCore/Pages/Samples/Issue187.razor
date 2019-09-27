@@ -1,4 +1,5 @@
 @page "/samples/issue187"
+@using System.ComponentModel.DataAnnotations
 <BSRow>
     <BSCol MD="5">
         <h3>Non Nullable</h3>
@@ -26,6 +27,13 @@
     </BSCol>
     <BSCol MD="7">
         <BSForm Model="Model">
+            <DataAnnotationsValidator />
+            <BSLabel>String</BSLabel>
+            <BSInput InputType="InputType.Text" @bind-Value="Model.T"></BSInput>
+            <BSLabel>String</BSLabel>
+            <BSInput InputType="InputType.Text" @bind-Value="Model.T1"></BSInput>
+            <BSLabel>String</BSLabel>
+            <BSInput InputType="InputType.Text" @bind-Value="Model.T2"></BSInput>
             <BSLabel>Int</BSLabel>
             <BSInput InputType="InputType.Text" @bind-Value="Model.Int"></BSInput>
             <BSLabel>Long</BSLabel>
@@ -59,16 +67,32 @@
 
     public class NullableTest
     {
-        public int Int { get; set; }
-        public long Long { get; set; }
-        public double Double { get; set; }
-        public Guid Guid { get; set; }
-        public DateTime DateTime { get; set; }
+         [Required]
+        public string T { get; set; }
+         [Required]
+        public string T1 { get; set; }
 
+         [Required]
+        public string T2 { get; set; }
+        [Required]
+        public int Int { get; set; }
+        [Required]
+        public long Long { get; set; }
+        [Required]
+        public double Double { get; set; }
+        [Required]
+        public Guid Guid { get; set; }
+        [Required]
+        public DateTime DateTime { get; set; }
+        [Required]
         public int? NInt { get; set; }
+        [Required]
         public long? NLong { get; set; }
+        [Required]
         public Double? NDouble { get; set; }
+        [Required]
         public Guid? NGuid { get; set; }
+        [Required]
         public DateTime? NDateTime { get; set; }
     }
 }

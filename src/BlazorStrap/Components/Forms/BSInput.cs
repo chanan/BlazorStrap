@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 
 namespace BlazorStrap
 {
@@ -48,7 +49,6 @@ namespace BlazorStrap
             _ => "input"
         };
 
-        private FieldIdentifier _fieldIdentifier;
 
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
         [Parameter] public Size Size { get; set; } = Size.None;
@@ -84,11 +84,7 @@ namespace BlazorStrap
             _touched = true;
         }
 
-        protected override void OnParametersSet()
-        {
-            _fieldIdentifier = FieldIdentifier.Create(ValueExpression);
-        }
-
+       
         private string GetClass()
         {
             return InputType switch
@@ -140,8 +136,7 @@ namespace BlazorStrap
                 builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
             }
 
-            builder.AddAttribute(11, "onfocus", EventCallback.Factory.Create(this, () => { _touched = true; StateHasChanged(); }));
-            builder.AddAttribute(11, "onblur", EventCallback.Factory.Create(this, () => { _touched = true; MyEditContext.Validate(); StateHasChanged(); }));
+            builder.AddAttribute(11, "onblur", EventCallback.Factory.Create(this, () => { _touched = true; ValidateField(base.FieldIdentifier) ; }));
             builder.AddContent(12, ChildContent);
             builder.CloseElement();
         }
@@ -237,7 +232,8 @@ namespace BlazorStrap
                 }
                 catch
                 {
-                    throw new InvalidOperationException(Properties.Resources.Could_not_parse_input__Invalid_Guid_format);
+                    result = (T)(object)new Guid();
+                    validationErrorMessage = "Invalid Guid format";
                 }
                 validationErrorMessage = null;
                 return true;
@@ -299,6 +295,13 @@ namespace BlazorStrap
                 result = default;
                 return false;
             }
+        }
+    
+        private void ValidateField(FieldIdentifier fieldIdentifier)
+        {
+            var OnFieldChanged = (MulticastDelegate)MyEditContext.GetType().GetField("OnFieldChanged", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(MyEditContext);
+            OnFieldChanged?.DynamicInvoke(new object[] { this, new FieldChangedEventArgs(fieldIdentifier) });
+            StateHasChanged();
         }
     }
 }
