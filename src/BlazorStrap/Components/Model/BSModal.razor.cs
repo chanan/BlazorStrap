@@ -28,7 +28,6 @@ namespace BlazorStrap
 
         protected string Classname =>
           new CssBuilder("modal")
-              .AddClass(AnimationClass, !DisableAnimations)
               .AddClass("show", _toggleShow)
               //.AddClass("show", _canShow && !DisableAnimations)
               .AddClass(Class)
@@ -95,6 +94,7 @@ namespace BlazorStrap
                     await InvokeAsync(StateHasChanged).ConfigureAwait(false);
                 }).Start();
                 await HideEvent.InvokeAsync(BSModalEvent).ConfigureAwait(false);
+                await new BlazorStrapInterop(JSRuntime).RemoveBodyClass("modal-open");
             }
         }
        

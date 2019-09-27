@@ -70,7 +70,6 @@ namespace BlazorStrap
 
         protected string Classname =>
             new CssBuilder()
-                .AddClass(AnimationClass, !DisableAnimations)
                 .AddClass("nav-item", !RemoveDefaultClass)
                 .AddClass("dropdown", IsDropdown)
                 .AddClass("dropdown-submenu", IsSubmenu)
