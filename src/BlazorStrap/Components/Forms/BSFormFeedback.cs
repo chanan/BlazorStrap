@@ -8,36 +8,36 @@ namespace BlazorStrap
 {
     public class BSFormFeedback<T> : ValidationMessage<T>
     {
-        private bool Clean = true;
+        private bool _clean = true;
         private FieldIdentifier _fieldIdentifier;
 
         ///  [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string Classname =>
         new CssBuilder()
-            .AddClass("valid-tooltip", IsTooltip && !HasValidationErrors())
-            .AddClass("valid-feedback", !IsTooltip && !HasValidationErrors())
-            .AddClass("invalid-tooltip", IsTooltip && HasValidationErrors())
-            .AddClass("invalid-feedback", !IsTooltip && HasValidationErrors())
+            .AddClass("valid-tooltip", IsTooltip && !HasValidationErrors() && Parent != null && (!Parent?.UserValidation ?? false))
+            .AddClass("valid-feedback", !IsTooltip && !HasValidationErrors() && Parent != null && (!Parent?.UserValidation ?? false))
+            .AddClass("invalid-tooltip", IsTooltip && HasValidationErrors() && Parent != null && (!Parent?.UserValidation ?? false))
+            .AddClass("invalid-feedback", !IsTooltip && HasValidationErrors() && Parent != null && (!Parent?.UserValidation ?? false))
 
-            .AddClass("valid-tooltip", (Parent?.UserValidation ?? false) && IsValid && IsTooltip)
-            .AddClass("valid-feedback", (Parent?.UserValidation ?? false) && IsValid && !IsTooltip)
-            .AddClass("invalid-tooltip", (Parent?.UserValidation ?? false) && IsInvalid && IsTooltip)
-            .AddClass("invalid-feedback", (Parent?.UserValidation ?? false) && IsInvalid && !IsTooltip)
+            .AddClass("valid-tooltip", ((Parent?.UserValidation ?? false) || Parent is null ) && IsValid && IsTooltip)
+            .AddClass("valid-feedback", ((Parent?.UserValidation ?? false) || Parent is null) && IsValid && !IsTooltip)
+            .AddClass("invalid-tooltip", ((Parent?.UserValidation ?? false) || Parent is null) && IsInvalid && IsTooltip)
+            .AddClass("invalid-feedback", ((Parent?.UserValidation ?? false) || Parent is null) && IsInvalid && !IsTooltip)
             .AddClass(Class)
         .Build();
 
         protected bool HasValidationErrors()
         {
-            if (Clean || MyEditContext == null)
+            if (_clean || MyEditContext == null)
             {
-                Clean = false;
+                _clean = false;
                 return false;
             }
             return MyEditContext.GetValidationMessages(_fieldIdentifier).Any();
         }
 
-        [CascadingParameter] private BSForm Parent { get; set; }
-        [CascadingParameter] private EditContext MyEditContext { get; set; }
+        [CascadingParameter] protected BSForm Parent { get; set; }
+        [CascadingParameter] protected EditContext MyEditContext { get; set; }
         [Parameter] public bool IsValid { get; set; }
         [Parameter] public bool IsInvalid { get; set; }
         [Parameter] public bool IsTooltip { get; set; }

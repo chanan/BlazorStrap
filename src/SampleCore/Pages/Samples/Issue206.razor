@@ -2,8 +2,8 @@
 
 
 String State: @stringbind - Conversion Error: @stringerror <br />
-<BSBasicInput InputType="InputType.Text" @bind-Value="@stringbind" ConversionError="@(value => {stringerror = value;})" ></BSBasicInput><br />
-
+<BSBasicInput InputType="InputType.Text" @bind-Value="@stringbind" ConversionError="@(value => {stringerror = value;})" IsInvalid="true"></BSBasicInput><br />
+<BSFormFeedback For="@(() => stringbind)" InvalidMessage="Invalid Testing" ValidMessage="Testing" IsInvalid="true"/>
 Bool State: @boolbind - Conversion Error: @boolerror<br />
 <BSBasicInput InputType="InputType.Checkbox" @bind-Value="@boolbind" ConversionError="@(value => {boolerror = value;})"></BSBasicInput><br />
 
