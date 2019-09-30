@@ -60,7 +60,6 @@ namespace BlazorStrap
         protected string Classname =>
         new CssBuilder()
             .AddClass("dropdown", !IsGroup)
-            .AddClass(AnimationClass, !DisableAnimations)
             .AddClass("btn-group", IsGroup)
             .AddClass("dropdown-submenu", IsSubmenu)
             .AddClass(DropdownDirection.ToDescriptionString(), DropdownDirection != DropdownDirection.Down)

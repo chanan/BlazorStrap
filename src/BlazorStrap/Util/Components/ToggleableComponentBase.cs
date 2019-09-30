@@ -11,7 +11,6 @@ namespace BlazorStrap.Util.Components
         internal ElementReference MyRef { get; set; }
         [Parameter] public EventCallback<bool> IsOpenChanged { get; set; }
         [Parameter] public string AnimationClass { get; set; }
-        [Parameter] public bool DisableAnimations { get; set; }
 
         [Parameter]
         public bool? IsOpen

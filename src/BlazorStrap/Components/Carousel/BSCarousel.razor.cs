@@ -17,10 +17,9 @@ namespace BlazorStrap
         public int ActiveIndex
         {
             get => _activeIndex;
-            set { _activeIndex = value; ActiveIndexChanged.Invoke(); }
+            set { _activeIndex = value; ActiveIndexChanged?.Invoke(); DoAnimations(); }
         }
 
-        [Parameter] public EventCallback<int> ActiveIndexChangedEvent { get; set; }
         public bool AnimationRunning { get; set; } = false;
         public List<BSCarouselIndicatorItemBase> CarouselIndicatorItems { get; } = new List<BSCarouselIndicatorItemBase>();
         public List<BSCarouselItemBase> CarouselItems { get; } = new List<BSCarouselItemBase>();
@@ -122,6 +121,64 @@ namespace BlazorStrap
             }
         }
 
+        private async Task DoAnimations()
+        {
+            if (CarouselItems.Count == 0) return;
+            Timer.Stop();
+            Timer.Interval = CarouselItems[ActiveIndex].Interval;
+            if (Direction == 0)
+            {
+                var oldindex = ActiveIndex == 0 ? NumberOfItems - 1 : ActiveIndex - 1;
+                new Task(async () =>
+                {
+                    AnimationRunning = true;
+                    await CarouselItems[ActiveIndex].Clean().ConfigureAwait(false);
+                    CarouselItems[ActiveIndex].Next = true;
+                    await CarouselItems[ActiveIndex].StateChanged().ConfigureAwait(false);
+                    await Task.Delay(300).ConfigureAwait(false);  // Gives animation time to shift and be ready to slide.
+                    CarouselItems[ActiveIndex].Left = true;
+                    CarouselItems[oldindex].Left = true;
+                    await CarouselItems[ActiveIndex].StateChanged().ConfigureAwait(false); // makes sure there is no gap
+                    await InvokeAsync(StateHasChanged).ConfigureAwait(false);
+                }).Start();
+            }
+            else if (Direction == 1)
+            {
+                var oldindex = (ActiveIndex == NumberOfItems - 1) ? 0 : ActiveIndex + 1;
+                new Task(async () =>
+                {
+                    AnimationRunning = true;
+                    await CarouselItems[ActiveIndex].Clean().ConfigureAwait(false);
+                    CarouselItems[ActiveIndex].Prev = true;
+                    await CarouselItems[ActiveIndex].StateChanged().ConfigureAwait(false);
+                    await Task.Delay(300).ConfigureAwait(false);  // Gives animation time to shift and be ready to slide.
+                    CarouselItems[ActiveIndex].Right = true;
+                    CarouselItems[oldindex].Right = true;
+                    await CarouselItems[ActiveIndex].StateChanged().ConfigureAwait(false); // makes sure there is no gap
+                    await InvokeAsync(StateHasChanged).ConfigureAwait(false);
+                }).Start();
+            }
+        }
+
+        public async Task AnimationEnd(BSCarouselItemBase sender)
+        {
+            if (sender == CarouselItems[ActiveIndex])
+            {
+                AnimationRunning = false;
+                int oldindex = -1;
+                if (Direction == 0)
+                    oldindex = ActiveIndex == 0 ? NumberOfItems - 1 : ActiveIndex - 1;
+                else if (Direction == 1)
+                    oldindex = (ActiveIndex == NumberOfItems - 1) ? 0 : ActiveIndex + 1;
+
+                await CarouselItems[oldindex].Clean().ConfigureAwait(false);
+                await CarouselItems[oldindex].StateChanged().ConfigureAwait(false);
+                await CarouselItems[ActiveIndex].Clean().ConfigureAwait(false);
+                CarouselItems[ActiveIndex].Active = true;
+                await InvokeAsync(StateHasChanged).ConfigureAwait(false);
+                Timer.Start();
+            }
+        }
         protected async Task OnKeyPress(KeyboardEventArgs e)
         {
             if (!Keyboard) return;
@@ -139,7 +196,6 @@ namespace BlazorStrap
                 else
                     ActiveIndex++;
             }
-            await ActiveIndexChangedEvent.InvokeAsync(ActiveIndex).ConfigureAwait(false);
         }
 
         protected void OnMouseEnter()
@@ -172,7 +228,6 @@ namespace BlazorStrap
             ActiveIndex = ActiveIndex == NumberOfItems - 1 ? 0 : ActiveIndex + 1;
             Direction = 0;
             await OnSlide.InvokeAsync(null).ConfigureAwait(false);
-            await ActiveIndexChangedEvent.InvokeAsync(ActiveIndex).ConfigureAwait(false);
         }
     }
 }

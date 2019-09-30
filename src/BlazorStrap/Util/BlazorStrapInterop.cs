@@ -23,34 +23,6 @@ namespace BlazorStrap.Util
             OnEscapeEvent?.Invoke();
             return Task.CompletedTask;
         }
-        [JSInvokable]
-        public static Task OnAddClass(string id, string Classname)
-        {
-            OnAddClassEvent?.Invoke(id, Classname);
-            return Task.CompletedTask;
-        }
-        [JSInvokable]
-        public static Task OnAnimationEnd(string id)
-        {
-            OnAnimationEndEvent?.Invoke(id);
-            return Task.CompletedTask;
-        }
-        public ValueTask<int> GetScrollHeight(ElementReference el)
-        {
-            return JSRuntime.InvokeAsync<int>("blazorStrap.getScrollHeight", el);
-        }
-        public ValueTask<bool> SetStyle(ElementReference el, string key, string value)
-        {
-            return JSRuntime.InvokeAsync<bool>("blazorStrap.setStyle", el, key, value);
-        }
-        public ValueTask<bool> AddEventAnimationEnd(ElementReference el)
-        {
-            return JSRuntime.InvokeAsync<bool>("blazorStrap.addEventAnimationEnd", el);
-        }
-        public ValueTask<bool> RemoveEventAnimationEnd(ElementReference el)
-        {
-            return JSRuntime.InvokeAsync<bool>("blazorStrap.removeEventAnimationEnd", el);
-        }
         /// <summary>
         /// Use for animated classes only. Blazor can not track classes added this way.
         /// </summary>
@@ -67,18 +39,6 @@ namespace BlazorStrap.Util
         /// <param name="id"></param>
         /// <param name="Classname"></param>
         /// <returns></returns>
-        public ValueTask<bool> RemoveClass(ElementReference el, string Classname)
-        {
-            return JSRuntime.InvokeAsync<bool>("blazorStrap.removeClass", el, Classname);
-        }
-        public ValueTask<bool> AddClass2Elements(ElementReference el, ElementReference el2, string Classname)
-        {
-            return JSRuntime.InvokeAsync<bool>("blazorStrap.addClass2Elements", el, el2, Classname);
-        }
-        public ValueTask<bool> RemoveClass2Elements(ElementReference el, ElementReference el2, string Classname)
-        {
-            return JSRuntime.InvokeAsync<bool>("blazorStrap.removeClass2Elements", el, el2, Classname);
-        }
         public ValueTask<bool> AddBodyClass(string Classname)
         {
             return JSRuntime.InvokeAsync<bool>("blazorStrap.addBodyClass", Classname);
@@ -86,10 +46,6 @@ namespace BlazorStrap.Util
         public ValueTask<bool> RemoveBodyClass(string Classname)
         {
             return JSRuntime.InvokeAsync<bool>("blazorStrap.removeBodyClass", Classname);
-        }
-        public ValueTask<bool> ChangeBodyClass(string Classname)
-        {
-            return JSRuntime.InvokeAsync<bool>("blazorStrap.changeBodyClass", Classname);
         }
         /// <summary>
         /// Primary use is with modals when the scroll bar is hidden

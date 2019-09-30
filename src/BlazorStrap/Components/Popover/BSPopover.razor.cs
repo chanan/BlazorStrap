@@ -13,7 +13,6 @@ namespace BlazorStrap
         protected string Classname =>
         new CssBuilder("popover")
             .AddClass($"bs-popover-{Placement.ToDescriptionString()}")
-            .AddClass(AnimationClass, !DisableAnimations)
             .AddClass("show", (IsOpen ?? false))
             .AddClass(Class)
         .Build();

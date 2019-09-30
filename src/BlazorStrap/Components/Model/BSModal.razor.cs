@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSModalBase : ToggleableComponentBase, IDisposable
+    public abstract class BSModalBase : ToggleableComponentBase
     {
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public string Class { get; set; }
@@ -28,9 +28,8 @@ namespace BlazorStrap
 
         protected string Classname =>
           new CssBuilder("modal")
-              .AddClass(AnimationClass, !DisableAnimations)
-              .AddClass("show", (IsOpen ?? false) && DisableAnimations)
-              .AddClass("show", _canShow && !DisableAnimations)
+              .AddClass("show", _toggleShow)
+              //.AddClass("show", _canShow && !DisableAnimations)
               .AddClass(Class)
           .Build();
 
@@ -46,22 +45,16 @@ namespace BlazorStrap
         {
             get
             {
-                var display = DisableAnimations || (IsOpen ?? true)
-                    ? (IsOpen ?? false) ? "display: block; padding-right: 17px;" : null
-                    : (_canShow || _drawing) ? "display: block; padding-right: 17px;" : null;
+             //   var display = DisableAnimations || (IsOpen ?? true)
+                 //   ? (IsOpen ?? false) ? "display: block; padding-right: 17px;" : null
+                var display= (_toggleModel) ? "display: block; padding-right: 17px;" : null;
                 return $"{Style} {display}".Trim();
             }
         }
 
-        private bool _canShow { get; set; }
-        private bool _drawing { get; set; }
+        private bool _toggleShow { get; set; }
+        private bool _toggleModel { get; set; }
         private bool _isInitialized { get; set; }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
 
         internal override async Task Changed(bool e)
         {
@@ -69,54 +62,42 @@ namespace BlazorStrap
             {
                 return;
             }
-            if (!DisableAnimations)
-            {
-                _drawing = true;
-                await new BlazorStrapInterop(JSRuntime).AddEventAnimationEnd(MyRef);
-            }
-            else
-            {
-                _canShow = true;
-                return;
-            }
+           
             BSModalEvent = new BSModalEvent() { Target = this };
             if (e)
             {
                 await new BlazorStrapInterop(JSRuntime).AddBodyClass("modal-open");
                 if (!IgnoreEscape)
                 {
+                    //TODO: This sucks make it better
                     await new BlazorStrapInterop(JSRuntime).ModalEscapeKey();
                     BlazorStrapInterop.OnEscapeEvent += OnEscape;
                 }
                 new Task(async () =>
                 {
+                    _toggleModel = true;
+                    await InvokeAsync(StateHasChanged).ConfigureAwait(false);
                     await Task.Delay(300).ConfigureAwait(false);
-                    _canShow = true;
+                    _toggleShow = e;
                     await InvokeAsync(StateHasChanged).ConfigureAwait(false);
                 }).Start();
                 await ShowEvent.InvokeAsync(BSModalEvent).ConfigureAwait(false);
             }
             else
             {
-                await new BlazorStrapInterop(JSRuntime).RemoveClass(MyRef, "show");
                 new Task(async () =>
                 {
+                    _toggleShow = e;
+                    await InvokeAsync(StateHasChanged).ConfigureAwait(false);
                     await Task.Delay(300).ConfigureAwait(false);
-                    await new BlazorStrapInterop(JSRuntime).RemoveBodyClass("modal-open");
+                    _toggleModel = false;
+                    await InvokeAsync(StateHasChanged).ConfigureAwait(false);
                 }).Start();
-
                 await HideEvent.InvokeAsync(BSModalEvent).ConfigureAwait(false);
+                await new BlazorStrapInterop(JSRuntime).RemoveBodyClass("modal-open");
             }
         }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                BlazorStrapInterop.OnAnimationEndEvent -= OnAnimationEnd;
-            }
-        }
-
+       
         protected override Task OnAfterRenderAsync(bool firstrun)
         {
             // This is models like the demo where they are open prior to the page drawing.
@@ -155,27 +136,6 @@ namespace BlazorStrap
                 AnimationClass = "fade";
             }
             base.OnInitialized();
-            BlazorStrapInterop.OnAnimationEndEvent += OnAnimationEnd;
-        }
-
-        private async Task OnAnimationEnd(string id)
-        {
-            BSModalEvent = new BSModalEvent() { Target = this };
-            if (id != MyRef.Id)
-            {
-                await new BlazorStrapInterop(JSRuntime).RemoveEventAnimationEnd(MyRef);
-                if (IsOpen ?? false)
-                {
-                    await ShownEvent.InvokeAsync(BSModalEvent).ConfigureAwait(false);
-                }
-                else
-                {
-                    await HiddenEvent.InvokeAsync(BSModalEvent).ConfigureAwait(false);
-                }
-                _canShow = IsOpen ?? false;
-                _drawing = false;
-                await InvokeAsync(StateHasChanged).ConfigureAwait(false);
-            }
         }
     }
 }
