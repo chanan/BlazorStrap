@@ -5,6 +5,8 @@ Bootstrap 4 Components for Blazor Framework
 ## Install
 
 [![NuGet Pre Release](https://img.shields.io/nuget/vpre/BlazorStrap.svg)](https://www.nuget.org/packages/BlazorStrap/)
+![Nuget](https://img.shields.io/nuget/dt/BlazorStrap)
+![GitHub stars](https://img.shields.io/github/stars/chanan/BlazorStrap?color=orange)
 
 ## Server Side Blazor
 > Add <script src="_content/BlazorStrap/blazorStrap.js"></script>  to your _host.cshtml
