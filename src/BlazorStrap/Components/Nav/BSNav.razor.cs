@@ -2,15 +2,14 @@
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
-using System.Timers;
 
 namespace BlazorStrap
 {
     public abstract class BSNavBase : ComponentBase, IDisposable
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        private Timer _timer { get; set; } = new Timer(250);
         private BSNavItemBase _selected;
+        private bool _disposed;
         internal List<BSNavItemBase> Navitems { get; set; } = new List<BSNavItemBase>();
         public BSNavItemBase Selected
         {
@@ -46,17 +45,6 @@ namespace BlazorStrap
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
 
-        internal void GotFocus()
-        {
-            _timer.Stop();
-            _timer.Interval = 250;
-        }
-        protected void LostFocus()
-        {
-            
-            _timer?.Start();
-        }
-
         private string GetAlignment()
         {
             return Alignment == Alignment.Center ? "justify-content-center" : Alignment == Alignment.Right ? "justify-content-end" : null;
@@ -64,14 +52,6 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
-            _timer.Elapsed += OnTimedEvent;
-        }
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
-        {
-            if (Selected != null)
-                Selected.Selected = null;
-            _timer.Stop();
-            _timer.Interval = 250;
         }
 
         public void Dispose()
@@ -84,7 +64,6 @@ namespace BlazorStrap
         {
             if (disposing)
             {
-                _timer?.Dispose();
                 _selected?.Dispose();
             }
         }
