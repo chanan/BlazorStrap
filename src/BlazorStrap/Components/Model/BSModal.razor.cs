@@ -27,7 +27,7 @@ namespace BlazorStrap
         internal List<EventCallback<BSModalEvent>> EventQue { get; set; } = new List<EventCallback<BSModalEvent>>();
 
         protected string Classname =>
-          new CssBuilder("modal")
+          new CssBuilder("modal fade")
               .AddClass("show", _toggleShow)
               //.AddClass("show", _canShow && !DisableAnimations)
               .AddClass(Class)
