@@ -7,9 +7,8 @@ using System.Timers;
 
 namespace BlazorStrap
 {
-    public abstract class BSNavbarBase : ComponentBase, IDisposable
+    public abstract class BSNavbarBase : ComponentBase
     {
-        private readonly Timer _timer = new Timer(250);
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public Color Color { get; set; } = Color.None;
@@ -44,44 +43,5 @@ namespace BlazorStrap
         .Build();
 
         private bool _visable { get; set; }
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        internal void GotFocus()
-        {
-            _timer.Stop();
-            _timer.Interval = 250;
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _timer.Dispose();
-            }
-        }
-
-        protected void LostFocus()
-        {
-            _timer.Start();
-        }
-
-        protected override void OnInitialized()
-        {
-            _timer.Elapsed += OnTimedEvent;
-        }
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
-        {
-            if (HasCollapsed)
-            {
-                Visable = false;
-            }
-
-            _timer.Stop();
-            _timer.Interval = 250;
-        }
     }
 }
