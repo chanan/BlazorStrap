@@ -25,14 +25,14 @@ namespace BlazorStrap
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public string Name { get; set; }
-        [Parameter] public bool? SetSelected { get; set; }
+        [Parameter] public bool? InitialSelection { get; set; }
 
 
 
         protected override Task OnInitializedAsync()
         {
             Group.Tabs.Add(this);
-            if (Group.Selected == null || SetSelected.GetValueOrDefault())
+            if (Group.Selected == null || InitialSelection.GetValueOrDefault())
             {
                 Group.Selected = this;
             }
