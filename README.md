@@ -12,7 +12,7 @@ Bootstrap 4 Components for Blazor Framework
 > Add <script src="_content/BlazorStrap/blazorStrap.js"></script>  to your _host.cshtml
 
 ## Animations
-> Animations are enabled by default and require the blazorstrap.js to be loaded.You can disable them by passing DisableAnimations="true" into the component.
+> Animations are always on as they no longer require javascript to function.
 
 ## Docs
 https://blazorstrap.io
