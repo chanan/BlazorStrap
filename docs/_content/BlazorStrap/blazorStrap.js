@@ -22,49 +22,6 @@ window.blazorStrap = {
         console.log("message: ", message);
         return true;
     },
-    addEventAnimationEnd(el) {
-        el.addEventListener('animationend', window.blazorStrap.animationEvent);
-        el.addEventListener('transitionend', window.blazorStrap.animationEvent);
-        return true;
-    },
-    removeEventAnimationEnd(el) {
-        el.removeEventListener('animationend', window.blazorStrap.animationEvent);
-        el.removeEventListener('transitionend', window.blazorStrap.animationEvent);
-        return true;
-    },
-    addClass2Elements: function (el,el2, Classname) {
-        el.classList.add(Classname);
-        el2.classList.add(Classname);
-        return true;
-    },
-    removeClass2Elements: function (el, el2, Classname) {
-        el.classList.remove(Classname);
-        el2.classList.remove(Classname);
-        return true;
-    },
-    addClass: function (el, Classname) {
-        var r = Classname.split(" ");
-        for (var i = 0; i < r.length; ++i) {
-            el.classList.add(r[i]);
-        }
-        DotNet.invokeMethodAsync("BlazorStrap", "OnAddClass", el.id, Classname);
-        return true;
-    },
-    getScrollHeight: function (el) {
-        return el.scrollHeight;
-        
-    },
-    setStyle: function (el, key, value) {
-        el.style[key] = value;
-        return true;
-    },
-    removeClass: function (el, Classname) {
-        var r = Classname.split(" ");
-        for (var i = 0; i < r.length; ++i) {
-            el.classList.remove(r[i]);
-        }
-        return true;
-    },
     addBodyClass: function (Classname) {
         if (Classname == "modal-open") {
             this.changeBodyPaddingRight("17px");
@@ -77,10 +34,6 @@ window.blazorStrap = {
             this.changeBodyPaddingRight("");
         }
         document.body.classList.remove(Classname);
-        return true;
-    },
-    changeBodyClass: function (Classname) {
-        document.body.className = Classname;
         return true;
     },
     changeBodyPaddingRight: function (padding) {

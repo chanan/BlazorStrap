@@ -41,7 +41,8 @@ namespace BlazorStrap
         [Parameter] public Expression<Func<object>> For { get; set; }
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
         [Parameter] public Size Size { get; set; } = Size.None;
-        [Parameter] public virtual T Value { get; set; } 
+        [Parameter] public virtual T Value { get; set; }
+        [Parameter] public virtual T RadioValue { get; set; }
         [Parameter] public virtual EventCallback<T> ValueChanged { get; set; }
         [Parameter] public EventCallback<string> ConversionError { get; set; }
         [Parameter] public bool IsReadonly { get; set; }
@@ -87,9 +88,17 @@ namespace BlazorStrap
 
         protected void OnClick(MouseEventArgs e)
         {
-            var tmp = (bool)(object)Value;
-            Value = (T)(object)(!tmp);
-            ValueChanged.InvokeAsync(Value);
+            if (InputType == InputType.Radio)
+            {
+                Value = (T)(object)(RadioValue);
+                ValueChanged.InvokeAsync(Value);
+            }
+            else
+            { 
+                var tmp = (bool)(object)Value;
+                Value = (T)(object)(!tmp);
+                ValueChanged.InvokeAsync(Value);
+            }
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -112,10 +121,25 @@ namespace BlazorStrap
                 builder.AddAttribute(8, "checked", Convert.ToBoolean(Value, CultureInfo.InvariantCulture));
                 builder.AddAttribute(9, "onclick", EventCallback.Factory.Create(this, OnClick));
             }
+            else if(InputType == InputType.Radio)
+            {
+                if (RadioValue != null)
+                {
+                    if (RadioValue.Equals(Value))
+                    {
+                        builder.AddAttribute(8, "checked", true);
+                        builder.AddAttribute(9, "onclick", EventCallback.Factory.Create(this, OnClick));
+                    }
+                    else
+                    {
+                        builder.AddAttribute(8, "checked", false);
+                        builder.AddAttribute(9, "onclick", EventCallback.Factory.Create(this, OnClick));
+                    }
+                }
+            }
             else
             {
                 builder.AddAttribute(8, "value", BindConverter.FormatValue(CurrentValueAsString));
-
                 builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
             }
             builder.AddContent(10, ChildContent);

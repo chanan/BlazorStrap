@@ -1,12 +1,12 @@
 ﻿<BSFormGroup IsCheck="true">
-    <BSBasicInput InputType="InputType.Radio" Name="exampleRadios" Id="exampleRadios1" InputValue="option1" IsChecked="true" Value="string.Empty"/>
+    <BSBasicInput InputType="InputType.Radio" Id="exampleRadios1" RadioValue="@(" option1")" @bind-Value="RadioVlaue" />
     <BSLabel For="exampleRadios1">Default radio</BSLabel>
 </BSFormGroup>
 <BSFormGroup IsCheck="true">
-    <BSBasicInput InputType="InputType.Radio" Name="exampleRadios" Id="exampleRadios2" InputValue="option2" Value="string.Empty"/>
+    <BSBasicInput InputType="InputType.Radio" Id="exampleRadios2" RadioValue="@(" option2")" @bind-Value="RadioVlaue" />
     <BSLabel For="exampleRadios2">Second default radio</BSLabel>
 </BSFormGroup>
 <BSFormGroup IsCheck="true" Class="disabled">
-    <BSBasicInput InputType="InputType.Radio" Name="exampleRadios" Id="exampleRadios3" InputValue="option3" IsDisabled="true" Value="string.Empty"/>
+    <BSBasicInput InputType="InputType.Radio" Id="exampleRadios3" RadioValue="@(" option3")" IsDisabled="true" @bind-Value="RadioVlaue" />
     <BSLabel For="exampleRadios3">Disabled radio</BSLabel>
 </BSFormGroup>

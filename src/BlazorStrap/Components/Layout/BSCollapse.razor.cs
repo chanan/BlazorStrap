@@ -36,7 +36,7 @@ namespace BlazorStrap
         {
             if (IsNavbar && Navbar != null)
             {
-                Navbar.VisableChange += OnVisableChange;
+                Navbar.VisibleChange += OnVisibleChange;
             }
             if (CollapseItem != null)
             {
@@ -44,7 +44,7 @@ namespace BlazorStrap
             }
         }
 
-        private void OnVisableChange(object sender, bool e)
+        private void OnVisibleChange(object sender, bool e)
         {
             IsOpen = e;
             InvokeAsync(() => { IsOpenChanged.InvokeAsync(e); });
@@ -65,7 +65,7 @@ namespace BlazorStrap
                     if (Navbar.HasCollapsed == false)
                     {
                         Navbar.HasCollapsed = true;
-                        Navbar.Visable = false;
+                        Navbar.Visible = false;
                     }
                 }
                 await HideEvent.InvokeAsync(BSCollapseEvent).ConfigureAwait(false);

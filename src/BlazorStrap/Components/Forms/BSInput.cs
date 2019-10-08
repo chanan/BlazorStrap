@@ -52,6 +52,7 @@ namespace BlazorStrap
 
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
         [Parameter] public Size Size { get; set; } = Size.None;
+        [Parameter] public virtual T RadioValue { get; set; }
         [Parameter] public bool IsReadonly { get; set; }
         [Parameter] public bool IsPlaintext { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
@@ -99,9 +100,17 @@ namespace BlazorStrap
 
         protected void OnClick(MouseEventArgs e)
         {
-            var tmp = (bool)(object)Value;
-            Value = (T)(object)(!tmp);
-            ValueChanged.InvokeAsync(Value);
+            if (InputType == InputType.Radio)
+            {
+                Value = (T)(object)(RadioValue);
+                ValueChanged.InvokeAsync(Value);
+            }
+            else
+            {
+                var tmp = (bool)(object)Value;
+                Value = (T)(object)(!tmp);
+                ValueChanged.InvokeAsync(Value);
+            }
         }
 
         protected void OnChange(string e)
@@ -129,6 +138,19 @@ namespace BlazorStrap
             {
                 builder.AddAttribute(9, "checked", BindConverter.FormatValue(CurrentValue));
                 builder.AddAttribute(10, "onclick", EventCallback.Factory.Create(this, OnClick));
+            }
+            else if (InputType == InputType.Radio)
+            {
+                if (RadioValue.Equals(Value))
+                {
+                    builder.AddAttribute(8, "checked", true);
+                    builder.AddAttribute(9, "onclick", EventCallback.Factory.Create(this, OnClick));
+                }
+                else
+                {
+                    builder.AddAttribute(8, "checked", false);
+                    builder.AddAttribute(9, "onclick", EventCallback.Factory.Create(this, OnClick));
+                }
             }
             else
             {

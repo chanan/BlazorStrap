@@ -17,31 +17,33 @@ namespace BlazorStrap
         [Parameter] public bool IsFixedBottom { get; set; }
         [Parameter] public bool IsFixedTop { get; set; }
         [Parameter] public bool IsStickyTop { get; set; }
+        [Parameter] public bool HideLight { get; set; } = false;
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         internal bool HasCollapsed { get; set; }
-        internal bool Visable
+        internal bool Visible
         {
-            get => _visable;
+            get => _visible;
             set
             {
-                VisableChange.Invoke(this, value);
-                _visable = value;
+                VisibleChange.Invoke(this, value);
+                _visible = value;
             }
         }
 
-        internal EventHandler<bool> VisableChange { get; set; }
+
+        internal EventHandler<bool> VisibleChange { get; set; }
         protected string Classname =>
         new CssBuilder("navbar")
             .AddClass("fixed-top", IsFixedTop)
             .AddClass("fixed-bottom", IsFixedBottom)
             .AddClass("sticky-top", IsStickyTop)
             .AddClass("navbar-dark", IsDark)
-            .AddClass("navbar-light", !IsDark)
+            .AddClass("navbar-light", !IsDark && !HideLight)
             .AddClass($"bg-{Color.ToDescriptionString()}", Color != Color.None)
             .AddClass("navbar-expand-lg", IsExpand)
             .AddClass(Class)
         .Build();
 
-        private bool _visable { get; set; }
+        private bool _visible { get; set; }
     }
 }
