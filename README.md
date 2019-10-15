@@ -4,7 +4,8 @@ Bootstrap 4 Components for Blazor Framework
 
 ## Install
 
-[![NuGet Pre Release](https://img.shields.io/nuget/vpre/BlazorStrap.svg)](https://www.nuget.org/packages/BlazorStrap/)
+[![NuGet Pre Release](https://img.shields.io/nuget/v/BlazorStrap.svg)](https://www.nuget.org/packages/BlazorStrap/)
+[![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/BlazorStrap?color=orange)](https://www.nuget.org/packages/BlazorStrap/)
 ![Nuget](https://img.shields.io/nuget/dt/BlazorStrap)
 ![GitHub stars](https://img.shields.io/github/stars/chanan/BlazorStrap?color=orange)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/BlazorStrap/community)
