@@ -26,14 +26,21 @@ namespace BlazorStrap
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+            RenderFragment _form;
+            _form = Formbuilder =>
+            {
+                Formbuilder.OpenElement(0, "form");
+                Formbuilder.AddMultipleAttributes(1, AdditionalAttributes);
+                Formbuilder.AddAttribute(2, "class", Classname);
+                Formbuilder.AddAttribute(3, "OnSubmit", OnSubmit);
+                Formbuilder.AddContent(4, ChildContent);
+                Formbuilder.CloseElement();
+            };
+
             builder?.OpenComponent<CascadingValue<BSBasicForm>>(0);
             builder.AddAttribute(1, "Value", this);
-            builder.OpenElement(2, "form");
-            builder.AddMultipleAttributes(3, AdditionalAttributes);
-            builder.AddAttribute(4, "IsFixed", true);
-            builder.AddAttribute(5, "OnSubmit", OnSubmit);
-            builder.AddAttribute(6, "ChildContent", ChildContent);
-            builder.CloseElement();
+            builder.AddAttribute(2, "IsFixed", true);
+            builder.AddAttribute(3, "ChildContent", _form);
             builder.CloseComponent();
         }
     }

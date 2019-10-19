@@ -1,0 +1,14 @@
+﻿@page "/samples/issue229"
+<BSBasicForm>
+    <BSFormGroup IsRow="true">
+        <BSLabel For="name" SM="2">Name</BSLabel>
+        <BSCol SM="10">
+            <BSBasicInput InputType="InputType.Text" IsReadonly="true" IsPlaintext="true" Id="name" Value="Name" />
+        </BSCol>
+    </BSFormGroup>
+</BSBasicForm>
+
+@code
+{
+    private string Name { get; set; } = "bob";
+}
