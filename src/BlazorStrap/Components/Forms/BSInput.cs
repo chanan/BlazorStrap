@@ -286,6 +286,21 @@ namespace BlazorStrap
                     return false;
                 }
             }
+            else if (type.GenericTypeArguments.Length > 0 && type.GenericTypeArguments[0].IsEnum)
+            {
+                try
+                {
+                    result = (T)Enum.Parse(type.GenericTypeArguments[0].UnderlyingSystemType, value);
+                    validationErrorMessage = null;
+                    return true;
+                }
+                catch (ArgumentException)
+                {
+                    result = default;
+                    validationErrorMessage = $"The {FieldIdentifier.FieldName} field is not valid.";
+                    return false;
+                }
+            }
             throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
         }
 
