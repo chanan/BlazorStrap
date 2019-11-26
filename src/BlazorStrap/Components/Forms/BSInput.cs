@@ -144,13 +144,13 @@ namespace BlazorStrap
             {
                 if (RadioValue.Equals(Value))
                 {
-                    builder.AddAttribute(8, "checked", true);
-                    builder.AddAttribute(9, "onclick", EventCallback.Factory.Create(this, OnClick));
+                    builder.AddAttribute(9, "checked", true);
+                    builder.AddAttribute(10, "onclick", EventCallback.Factory.Create(this, OnClick));
                 }
                 else
                 {
-                    builder.AddAttribute(8, "checked", false);
-                    builder.AddAttribute(9, "onclick", EventCallback.Factory.Create(this, OnClick));
+                    builder.AddAttribute(9, "checked", false);
+                    builder.AddAttribute(10, "onclick", EventCallback.Factory.Create(this, OnClick));
                 }
             }
             else
