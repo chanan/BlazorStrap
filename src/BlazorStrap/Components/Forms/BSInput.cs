@@ -52,6 +52,7 @@ namespace BlazorStrap
 
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
         [Parameter] public Size Size { get; set; } = Size.None;
+        [Parameter] public string MaxDate { get; set; } = "9999-12-31";
         [Parameter] public virtual T RadioValue { get; set; }
         [Parameter] public bool IsReadonly { get; set; }
         [Parameter] public bool IsPlaintext { get; set; }
@@ -156,10 +157,15 @@ namespace BlazorStrap
             {
                 builder.AddAttribute(9, "value", BindConverter.FormatValue(CurrentValueAsString));
                 builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
+
+                if (InputType == InputType.Date && !String.IsNullOrEmpty(MaxDate))
+                {
+                   builder.AddAttribute(11, "max", MaxDate);
+                }
             }
 
-            builder.AddAttribute(11, "onblur", EventCallback.Factory.Create(this, () => { _touched = true; ValidateField(base.FieldIdentifier) ; }));
-            builder.AddContent(12, ChildContent);
+            builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, () => { _touched = true; ValidateField(base.FieldIdentifier) ; }));
+            builder.AddContent(13, ChildContent);
             builder.CloseElement();
         }
 
