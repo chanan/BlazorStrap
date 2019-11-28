@@ -19,7 +19,7 @@ namespace BlazorStrap
                    .AddClass("dropdown-divider", IsDivider)
                    .AddClass("dropdown-item", !IsDivider)
                    .AddClass("active", !IsDivider && IsActive)
-                   .AddClass("disabled", !IsDivider && IsActive)
+                   .AddClass("disabled", IsDisabled)
                    .AddClass(Class)
                .Build();
 
