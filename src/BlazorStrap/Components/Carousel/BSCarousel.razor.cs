@@ -106,6 +106,9 @@ namespace BlazorStrap
         public void ResetTimer()
         {
             Timer.Stop();
+            if (Interval == 0)
+                return;
+
             Timer.Interval = CarouselItems[ActiveIndex].Interval;
             Timer.Start();
         }
@@ -117,6 +120,8 @@ namespace BlazorStrap
                 Timer = new Timer(Interval);
                 Timer.Elapsed += OnTimerEvent;
                 Timer.AutoReset = true;
+                if (Interval == 0)
+                    return;
                 Timer.Start();
             }
         }
@@ -212,6 +217,8 @@ namespace BlazorStrap
         {
             if (Ride && ActiveIndex == 0)
             {
+                if (Interval == 0)
+                    return;
                 Timer.Start();
             }
         }
