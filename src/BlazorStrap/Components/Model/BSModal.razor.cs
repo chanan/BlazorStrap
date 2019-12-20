@@ -23,6 +23,7 @@ namespace BlazorStrap
         [Parameter] public Size Size { get; set; } = Size.None;
         [Parameter] public string Style { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
+        [Parameter] public bool IsChildModal { get; set; }
         internal BSModalEvent BSModalEvent { get; set; }
         internal List<EventCallback<BSModalEvent>> EventQue { get; set; } = new List<EventCallback<BSModalEvent>>();
 
@@ -94,7 +95,10 @@ namespace BlazorStrap
                     await InvokeAsync(StateHasChanged).ConfigureAwait(false);
                 }).Start();
                 await HideEvent.InvokeAsync(BSModalEvent).ConfigureAwait(false);
-                await new BlazorStrapInterop(JSRuntime).RemoveBodyClass("modal-open");
+                if (!IsChildModal)
+                {
+                    await new BlazorStrapInterop(JSRuntime).RemoveBodyClass("modal-open");
+                }
             }
         }
        
