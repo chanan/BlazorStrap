@@ -16,13 +16,13 @@
 
 <h3>Live Demo</h3>
 <div class="docs-example">
-    <BSButton Color="Color.Primary" OnClick="@(() => LiveDemo.Show())">Launch demo modal</BSButton>
+    <BSButton Color="Color.Primary" @onclick="@(() => LiveDemo.Show())">Launch demo modal</BSButton>
     <BSModal @ref="LiveDemo">
-        <BSModalHeader OnClick="@(() => LiveDemo.Hide())">Modal title</BSModalHeader>
+        <BSModalHeader @onclick="@(() => LiveDemo.Hide())">Modal title</BSModalHeader>
         <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
         <BSModalFooter>
-            <BSButton Color="Color.Secondary" OnClick="@(() => LiveDemo.Hide())">Close</BSButton>
-            <BSButton Color="Color.Primary" OnClick="@(() => LiveDemo.Hide())">Save Changes</BSButton>
+            <BSButton Color="Color.Secondary" @onclick="@(() => LiveDemo.Hide())">Close</BSButton>
+            <BSButton Color="Color.Primary" @onclick="@(() => LiveDemo.Hide())">Save Changes</BSButton>
         </BSModalFooter>
     </BSModal>
 </div>
@@ -30,13 +30,13 @@
 
 <h3>Vertically Centered</h3>
 <div class="docs-example">
-    <BSButton Color="Color.Primary" OnClick="@onToggle">Launch demo modal</BSButton>
+    <BSButton Color="Color.Primary" @onclick="@onToggle">Launch demo modal</BSButton>
     <BSModal @ref="Centered" IsCentered="true">
-        <BSModalHeader OnClick="@onToggle">Modal title</BSModalHeader>
+        <BSModalHeader @onclick="@onToggle">Modal title</BSModalHeader>
         <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
         <BSModalFooter>
-            <BSButton Color="Color.Secondary" OnClick="@onToggle">Close</BSButton>
-            <BSButton Color="Color.Primary" OnClick="@onToggle">Save Changes</BSButton>
+            <BSButton Color="Color.Secondary" @onclick="@onToggle">Close</BSButton>
+            <BSButton Color="Color.Primary" @onclick="@onToggle">Save Changes</BSButton>
         </BSModalFooter>
     </BSModal>
 </div>
@@ -45,22 +45,22 @@
 <h3>Sizes</h3>
 
 <div class="docs-example">
-    <BSButton Color="Color.Primary" OnClick="onclick3">Large modal</BSButton>
+    <BSButton Color="Color.Primary" @onclick="onclick3">Large modal</BSButton>
     <BSModal @bind-IsOpen="@IsOpen3" Size="Size.Large">
-        <BSModalHeader OnClick="onclick3">Modal title</BSModalHeader>
+        <BSModalHeader @onclick="onclick3">Modal title</BSModalHeader>
         <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
         <BSModalFooter>
-            <BSButton Color="Color.Secondary" OnClick="onclick3">Close</BSButton>
-            <BSButton Color="Color.Primary" OnClick="onclick3">Save Changes</BSButton>
+            <BSButton Color="Color.Secondary" @onclick="onclick3">Close</BSButton>
+            <BSButton Color="Color.Primary" @onclick="onclick3">Save Changes</BSButton>
         </BSModalFooter>
     </BSModal>
-    <BSButton Color="Color.Primary" OnClick="onclick4">Small modal</BSButton>
+    <BSButton Color="Color.Primary" @onclick="onclick4">Small modal</BSButton>
     <BSModal @bind-IsOpen="@IsOpen4" Size="Size.Small">
-        <BSModalHeader OnClick="onclick4">Modal title</BSModalHeader>
+        <BSModalHeader @onclick="onclick4">Modal title</BSModalHeader>
         <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
         <BSModalFooter>
-            <BSButton Color="Color.Secondary" OnClick="onclick4">Close</BSButton>
-            <BSButton Color="Color.Primary" OnClick="onclick4">Save Changes</BSButton>
+            <BSButton Color="Color.Secondary" @onclick="onclick4">Close</BSButton>
+            <BSButton Color="Color.Primary" @onclick="onclick4">Save Changes</BSButton>
         </BSModalFooter>
     </BSModal>
 </div>

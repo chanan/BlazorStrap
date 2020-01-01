@@ -1,10 +1,10 @@
-﻿<BSButton Color="Color.Primary" OnClick="@onToggle">Launch demo modal</BSButton>
+﻿<BSButton Color="Color.Primary" @onclick="@onToggle">Launch demo modal</BSButton>
 <BSModal @ref="Centered" IsCentered="true">
-    <BSModalHeader OnClick="@onToggle">Modal title</BSModalHeader>
+    <BSModalHeader @onclick="@onToggle">Modal title</BSModalHeader>
     <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
     <BSModalFooter>
-        <BSButton Color="Color.Secondary" OnClick="@onToggle">Close</BSButton>
-        <BSButton Color="Color.Primary" OnClick="@onToggle">Save Changes</BSButton>
+        <BSButton Color="Color.Secondary" @onclick="@onToggle">Close</BSButton>
+        <BSButton Color="Color.Primary" @onclick="@onToggle">Save Changes</BSButton>
     </BSModalFooter>
 </BSModal>
 
