@@ -18,7 +18,7 @@
 <div class="docs-example">
     <BSButton Color="Color.Primary" @onclick="@(() => LiveDemo.Show())">Launch demo modal</BSButton>
     <BSModal @ref="LiveDemo">
-        <BSModalHeader @onclick="@(() => LiveDemo.Hide())">Modal title</BSModalHeader>
+        <BSModalHeader OnClick="@(() => LiveDemo.Hide())">Modal title</BSModalHeader>
         <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
         <BSModalFooter>
             <BSButton Color="Color.Secondary" @onclick="@(() => LiveDemo.Hide())">Close</BSButton>
@@ -32,7 +32,7 @@
 <div class="docs-example">
     <BSButton Color="Color.Primary" @onclick="@onToggle">Launch demo modal</BSButton>
     <BSModal @ref="Centered" IsCentered="true">
-        <BSModalHeader @onclick="@onToggle">Modal title</BSModalHeader>
+        <BSModalHeader OnClick="@onToggle">Modal title</BSModalHeader>
         <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
         <BSModalFooter>
             <BSButton Color="Color.Secondary" @onclick="@onToggle">Close</BSButton>
@@ -47,7 +47,7 @@
 <div class="docs-example">
     <BSButton Color="Color.Primary" @onclick="onclick3">Large modal</BSButton>
     <BSModal @bind-IsOpen="@IsOpen3" Size="Size.Large">
-        <BSModalHeader @onclick="onclick3">Modal title</BSModalHeader>
+        <BSModalHeader OnClick="onclick3">Modal title</BSModalHeader>
         <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
         <BSModalFooter>
             <BSButton Color="Color.Secondary" @onclick="onclick3">Close</BSButton>
@@ -56,7 +56,7 @@
     </BSModal>
     <BSButton Color="Color.Primary" @onclick="onclick4">Small modal</BSButton>
     <BSModal @bind-IsOpen="@IsOpen4" Size="Size.Small">
-        <BSModalHeader @onclick="onclick4">Modal title</BSModalHeader>
+        <BSModalHeader OnClick="onclick4">Modal title</BSModalHeader>
         <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
         <BSModalFooter>
             <BSButton Color="Color.Secondary" @onclick="onclick4">Close</BSButton>
