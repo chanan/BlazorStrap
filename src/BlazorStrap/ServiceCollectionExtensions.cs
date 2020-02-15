@@ -5,11 +5,11 @@ namespace BlazorStrap
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddBootstrapCSS(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddBootstrapCss(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<CurrentTheme>();
             serviceCollection.AddTransient<BlazorStrapInterop>();
-            serviceCollection.AddTransient<IBootstrapCSS, BootstrapCSS>();
+            serviceCollection.AddTransient<IBootstrapCss, BootstrapCss>();
             return serviceCollection;
         }
     }
