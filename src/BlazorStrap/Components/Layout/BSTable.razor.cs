@@ -22,7 +22,7 @@ namespace BlazorStrap
         [Parameter] public bool IsStriped { get; set; }
         [Parameter] public bool IsBordered { get; set; }
         [Parameter] public bool IsBorderless { get; set; }
-        [Parameter] public bool IsHovarable { get; set; }
+        [Parameter] public bool IsHoverable { get; set; }
         [Parameter] public bool IsSmall { get; set; }
         [Parameter] public bool IsResponsive { get; set; }
         [Parameter] public string Class { get; set; }
