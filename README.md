@@ -10,8 +10,13 @@ Bootstrap 4 Components for Blazor Framework
 ![GitHub stars](https://img.shields.io/github/stars/chanan/BlazorStrap?color=orange)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/BlazorStrap/community)
 
-## Server Side Blazor
-> Add <script src="_content/BlazorStrap/blazorStrap.js"></script>  to your _host.cshtml
+### Blazor WebAssembly (Client-side Blazor)
+
+> Add <script src="_content/BlazorStrap/blazorStrap.js"></script> inside the `<head>` element of your `wwwroot/index.html`.
+
+### Blazor Server (Server-side Blazor)
+
+> Add <script src="_content/BlazorStrap/blazorStrap.js"></script> inside the `<head>` element of your `Pages/_Host.cshtml`.
 
 ## Animations
 > Animations are always on as they no longer require javascript to function.
