@@ -1,0 +1,27 @@
+﻿@namespace BlazorStrap
+@inherits BSPaginationLinkBase
+
+<DynamicElement @attributes="@UnknownParameters" TagName="a" class="@Classname" href="@Href">
+    @if (PaginationLinkType == PaginationLinkType.Custom)
+    {
+        @ChildContent
+    }
+    @if (PaginationLinkType == PaginationLinkType.NextIcon)
+    {
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+    }
+    @if (PaginationLinkType == PaginationLinkType.PreviousIcon)
+    {
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+    }
+    @if (PaginationLinkType == PaginationLinkType.NextText)
+    {
+        <span>Next</span>
+    }
+    @if (PaginationLinkType == PaginationLinkType.PreviousText)
+    {
+        <span>Previous</span>
+    }
+</DynamicElement>

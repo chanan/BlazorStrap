@@ -1,0 +1,8 @@
+﻿<BSDropdown IsOpen="@IsOpen16">
+    <BSDropdownToggle Color="Color.Secondary" @onclick="onclick16">Dropdown</BSDropdownToggle>
+    <BSDropdownMenu @bind-IsOpen="@IsOpen16">
+        <BSDropdownItem IsButton="true" @onclick="@menuButtonClick">Action</BSDropdownItem>
+        <BSDropdownItem IsDivider="true" />
+        <BSDropdownItem IsButton="true" @onclick="@menuButtonClick">Yet Another Action</BSDropdownItem>
+    </BSDropdownMenu>
+</BSDropdown>

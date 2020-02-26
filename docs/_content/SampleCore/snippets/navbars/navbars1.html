@@ -1,0 +1,63 @@
+﻿<BSNavbar IsExpand="true" IsDark="false" Color="Color.Light">
+    <BSNavbarBrand Href="javascript:void(0);">Navbar</BSNavbarBrand>
+    <BSNavbarToggler @onclick="onclick" />
+    <BSCollapse isOpen="@IsOpen" IsNavbar="true" IsOpenChanged="OpenChanged">
+        <BSNav IsList="true" Class="mr-auto" IsNavbar="true">
+            <BSNavItem>
+                <BSNavLink IsActive="true" Href="javascript:void(0);">Home</BSNavLink>
+            </BSNavItem>
+            <BSNavItem>
+                <BSNavLink Href="javascript:void(0);">Link</BSNavLink>
+            </BSNavItem>
+            <BSNavItem>
+                <BSNavLink IsDisabled="true" Href="javascript:void(0);">Disabled</BSNavLink>
+            </BSNavItem>
+            <BSNavItem IsDropdown="true">
+                <BSDropdownToggle Color="Color.Light">Dropdown link</BSDropdownToggle>
+                <BSDropdownMenu>
+                    <BSDropdownItem Href="javascript:void(0);">Action</BSDropdownItem>
+                    <BSDropdownItem Href="javascript:void(0);">Another Action</BSDropdownItem>
+                    <BSDropdownItem IsDivider="true" />
+                    <BSDropdownItem Href="javascript:void(0);">Yet Another Action</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSNavItem>
+            <BSNavItem IsDropdown="true" @bind-IsOpen="@IsOpen2" CloseOnFocusout="false">
+                <BSDropdownToggle @onclick="onclick2" Color="Color.Light">User Controlled</BSDropdownToggle>
+                <BSDropdownMenu @bind-IsOpen="@IsOpen2">
+                    <BSDropdownItem Href="javascript:void(0);">Action</BSDropdownItem>
+                    <BSDropdownItem Href="javascript:void(0);">Another Action</BSDropdownItem>
+                    <BSDropdownItem IsDivider="true" />
+                    <BSDropdownItem Href="javascript:void(0);">Yet Another Action</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSNavItem>
+        </BSNav>
+        <BSForm IsInline="true" Class="my-2 my-lg-0" Model="@formsModel">
+            <BSInput InputType="InputType.Search" PlaceHolder="Search" Class="mr-sm-2" @bind-Value="formsModel.Blank"/>
+            <BSButton IsOutline="true" Color="Color.Success" ButtonType="ButtonType.Submit" Class="my-2 my-sm-0">Search</BSButton>
+        </BSForm>
+    </BSCollapse>
+</BSNavbar>
+
+@code {
+    bool IsOpen { get; set; } = true;
+    void onclick(MouseEventArgs e)
+    {
+        IsOpen = !IsOpen;
+        StateHasChanged();
+        Console.WriteLine("Navbar Class->" + IsOpen.ToString());
+    }
+    void OpenChanged(bool e)
+    {
+        IsOpen = e;
+        Invoke(StateHasChanged);
+        Console.WriteLine("OpenChanged->" + IsOpen.ToString());
+    }
+
+    bool IsOpen2 { get; set; } = true;
+    void onclick2(MouseEventArgs e)
+    {
+        IsOpen2 = !IsOpen2;
+        StateHasChanged();
+
+    }
+}

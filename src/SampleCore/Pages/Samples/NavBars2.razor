@@ -1,0 +1,61 @@
+﻿@page "/samples/navbars2"
+
+<div class="headernav">
+    <BSContainer>
+        <BSRow>
+            <BSCol LG="1" XS="3" SM="2" MD="2" Class="logo"><a href="/"><img src="/logo.png" alt="" /></a></BSCol>
+            <BSCol LG="3" XS="9" SM="5" MD="3" Class="selecttopic">
+                <BSDropdown IsOpen="@IsOpen">
+                    <BSDropdownToggle onclick="onclick">Borderlands 2 <b class="caret"></b></BSDropdownToggle>
+                    <BSDropdownMenu IsOpen="@IsOpen">
+                        <BSDropdownItem Href="#">Borderlands 1</BSDropdownItem>
+                        <BSDropdownItem Href="#">Borderlands 2</BSDropdownItem>
+                        <BSDropdownItem Href="#">Borderlands 3</BSDropdownItem>
+                    </BSDropdownMenu>
+                </BSDropdown>
+            </BSCol>
+            <BSCol LG="4" MD="3" Class="search hidden-xs hidden-sm">
+                <div class="wrap">
+                    <BSForm>
+                        <div class="float-left txt"><BSBasicInput InputType="InputType.Text" placeholder="Search Topics" Value="string.Empty"/></div>
+                        <div class="float-right"><BSButton><i class="fa fa-search"></i></BSButton></div>
+                        <div class="clearfix"></div>
+                    </BSForm>
+                </div>
+            </BSCol>
+            <BSCol LG="4" XS="12" SM="5" MD="4" Class="avt">
+                <div class="stnt float-left">
+                    <BSForm>
+                        <BSButton>Start New Topic</BSButton>
+                    </BSForm>
+                </div>
+            </BSCol>
+            <div class="env float-left"><i class="fa fa-envelope"></i></div>
+            <BSDropdown IsOpen="@IsOpen2" Class="avatar float-left">
+                <DropdownToggle @onclick="onclick2"><img src="/avatar.png" alt="" /> <b class="caret"></b></DropdownToggle>
+                <div class="status-green"></div>
+                <BSDropdownMenu IsOpen="@IsOpen2">
+                    <BSDropdownItem Href="#">My Profile</BSDropdownItem>
+                    <BSDropdownItem Href="#">Inbox</BSDropdownItem>
+                    <BSDropdownItem Href="#">Logout</BSDropdownItem>
+                    <BSDropdownItem Href="#">Create Account</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSDropdown>
+        </BSRow>
+    </BSContainer>
+</div>
+
+@code {
+    bool IsOpen { get; set; }
+    bool IsOpen2 { get; set; }
+    void onclick(MouseEventArgs e)
+    {
+        IsOpen = !IsOpen;
+        StateHasChanged();
+    }
+    void onclick2(MouseEventArgs e)
+    {
+        IsOpen2 = !IsOpen2;
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,47 @@
+@page "/samples/radios"
+String State: @stringbind
+<br />
+<BSFormGroup IsCheck="true" Class="form-check-inline" >
+    <BSLabel IsCheck="true">Test</BSLabel>
+    <BSBasicInput InputType="InputType.Radio" @bind-Value="@stringbind" RadioValue="@("Test")" />
+</BSFormGroup>
+<BSFormGroup IsCheck="true" Class="form-check-inline">
+    <BSLabel IsCheck="true">Test 2</BSLabel>
+    <BSBasicInput InputType="InputType.Radio" @bind-Value="@stringbind" RadioValue="@("Test2")" />
+</BSFormGroup>
+<BSFormGroup IsCheck="true" Class="form-check-inline">
+    <BSLabel IsCheck="true">Test 3</BSLabel>
+    <BSBasicInput InputType="InputType.Radio" @bind-Value="@stringbind" RadioValue="@("Test3")" />
+</BSFormGroup>
+<br />
+<br />
+<br />
+
+        RadioTest State: @radioTest.Value
+<BSForm Model="radioTest">
+    <BSFormGroup IsCheck="true" Class="form-check-inline">
+        <BSLabel IsCheck="true">Test 4</BSLabel>
+        <BSBasicInput InputType="InputType.Radio" @bind-Value="@radioTest.Value" RadioValue="@("Test4")" />
+    </BSFormGroup>
+    <BSFormGroup IsCheck="true" Class="form-check-inline">
+        <BSLabel IsCheck="true">Test 5</BSLabel>
+        <BSBasicInput InputType="InputType.Radio" @bind-Value="@radioTest.Value" RadioValue="@("Test5")" />
+    </BSFormGroup>
+    <BSFormGroup IsCheck="true" Class="form-check-inline">
+        <BSLabel IsCheck="true">Test 6</BSLabel>
+        <BSBasicInput InputType="InputType.Radio" @bind-Value="@radioTest.Value" RadioValue="@("Test6")" />
+    </BSFormGroup>
+</BSForm>
+
+        @code
+{
+            string stringbind;
+
+
+            RadioTest radioTest = new RadioTest();
+
+            public class RadioTest
+            {
+                public string Value { get; set; }
+            }
+        }

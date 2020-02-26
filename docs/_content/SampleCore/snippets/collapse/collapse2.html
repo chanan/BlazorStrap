@@ -1,0 +1,47 @@
+﻿<div class="accordion">
+    <BSCard CardType="CardType.Card">
+        <BSCard CardType="CardType.Header"><BSButton ButtonType="ButtonType.Button" OnClick="@accordianClick1" Color="Color.None" Class="btn-link">Collapsible Group Item #1</BSButton></BSCard>
+        <BSCollapse IsOpen="@IsOpen1">
+            <BSCard CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</BSCard>
+        </BSCollapse>
+    </BSCard>
+    <BSCard CardType="CardType.Card">
+        <BSCard CardType="CardType.Header"><BSButton ButtonType="ButtonType.Button" OnClick="@accordianClick2" Color="Color.None" Class="btn-link">Collapsible Group Item #2</BSButton></BSCard>
+        <BSCollapse IsOpen="@IsOpen2">
+            <BSCard CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</BSCard>
+        </BSCollapse>
+    </BSCard>
+    <BSCard CardType="CardType.Card">
+        <BSCard CardType="CardType.Header"><BSButton ButtonType="ButtonType.Button" OnClick="@accordianClick3" Color="Color.None" Class="btn-link">Collapsible Group Item #3</BSButton></BSCard>
+        <BSCollapse IsOpen="@IsOpen3">
+            <BSCard CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</BSCard>
+        </BSCollapse>
+    </BSCard>
+</div>
+
+@code {
+    bool IsOpen1 { get; set; } = true;
+    bool IsOpen2 { get; set; }
+    bool IsOpen3 { get; set; }
+    void accordianClick1(MouseEventArgs e)
+    {
+        IsOpen1 = true;
+        IsOpen2 = false;
+        IsOpen3 = false;
+        StateHasChanged();
+    }
+    void accordianClick2(MouseEventArgs e)
+    {
+        IsOpen1 = false;
+        IsOpen2 = true;
+        IsOpen3 = false;
+        StateHasChanged();
+    }
+    void accordianClick3(MouseEventArgs e)
+    {
+        IsOpen1 = false;
+        IsOpen2 = false;
+        IsOpen3 = true;
+        StateHasChanged();
+    }
+}

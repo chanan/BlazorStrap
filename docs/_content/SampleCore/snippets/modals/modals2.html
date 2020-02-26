@@ -1,0 +1,13 @@
+﻿ <BSButton Color="Color.Primary" OnClick="@(() => LiveDemo.Show())">Launch demo modal</BSButton>
+    <BSModal @ref="LiveDemo">
+        <BSModalHeader OnClick="@(() => LiveDemo.Hide())">Modal title</BSModalHeader>
+        <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+        <BSModalFooter>
+            <BSButton Color="Color.Secondary" OnClick="@(() => LiveDemo.Hide())">Close</BSButton>
+            <BSButton Color="Color.Primary" OnClick="@(() => LiveDemo.Hide())">Save Changes</BSButton>
+        </BSModalFooter>
+    </BSModal>
+
+@code {
+    BSModal LiveDemo;
+}

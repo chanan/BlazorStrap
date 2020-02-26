@@ -1,0 +1,69 @@
+{
+  "Name": "Solarized Dark",
+  "Settings": [
+    {
+      "Settings": {
+        "background-color": "#002B36",
+        "color": "#93A1A1",
+        "font-family": "Fira Code"
+      }
+    },
+    {
+      "Name": "Text",
+      "Settings": { "color": "#B9C0BB" }
+    },
+    {
+      "Name": "Tag symbols",
+      "Settings": { "color": "#657B83" }
+    },
+    {
+      "Name": "Tag name",
+      "Settings": { "color": "#268BD2" }
+    },
+    {
+      "Name": "Attribute name",
+      "Settings": { "color": "#93A1A1" }
+    },
+    {
+      "Name": "Attribute value",
+      "Settings": { "color": "#2AA198" }
+    },
+    {
+      "Name": "String",
+      "Settings": { "color": "#2AA198" }
+    },
+    {
+      "Name": "Razor Keyword",
+      "Settings": {
+        "color": "#859900"
+      }
+    },
+    {
+      "Name": "Row Highlight",
+      "Settings": {
+        "background-color": "yellow",
+        "color": "black"
+      }
+    },
+    {
+      "Name": "Font",
+      "Settings": {
+        "font-family": "Fira Code",
+        "font-style": "normal",
+        "font-weight": "400",
+        "src": "url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/eot/FiraCode-Bold.eot'), url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/eot/FiraCode-Bold.eot') format('embedded-opentype'), url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/woff2/FiraCode-Bold.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/woff/FiraCode-Bold.woff') format('woff'), url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/ttf/FiraCode-Bold.ttf') format('truetype')",
+        "unicode-range": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+      }
+    },
+    {
+      "Name": "Font",
+      "Settings": {
+        "font-family": "Fira Code",
+        "font-style": "normal",
+        "font-weight": "700",
+        "src": "url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/eot/FiraCode-Bold.eot'), url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/eot/FiraCode-Bold.eot') format('embedded-opentype'), url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/woff2/FiraCode-Bold.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/woff/FiraCode-Bold.woff') format('woff'), url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/ttf/FiraCode-Bold.ttf') format('truetype')",
+        "unicode-range": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+      }
+    }
+  ]
+}

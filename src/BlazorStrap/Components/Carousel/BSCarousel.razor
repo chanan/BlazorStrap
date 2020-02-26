@@ -1,0 +1,8 @@
+﻿@namespace BlazorStrap
+@inherits BSCarouselBase
+
+<CascadingValue Value="this">
+    <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@Classname" @onmouseenter="OnMouseEnter" @onmouseleave="OnMouseLeave" @onkeypress="OnKeyPress">
+        @ChildContent
+    </DynamicElement>
+</CascadingValue>

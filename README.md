@@ -4,20 +4,34 @@ Bootstrap 4 Components for Blazor Framework
 
 ## Install
 
-[![NuGet Pre Release](https://img.shields.io/nuget/vpre/BlazorStrap.svg)](https://www.nuget.org/packages/BlazorStrap/)
+[![NuGet Pre Release](https://img.shields.io/nuget/v/BlazorStrap.svg)](https://www.nuget.org/packages/BlazorStrap/)
+[![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/BlazorStrap?color=orange)](https://www.nuget.org/packages/BlazorStrap/)
+![Nuget](https://img.shields.io/nuget/dt/BlazorStrap)
+![GitHub stars](https://img.shields.io/github/stars/chanan/BlazorStrap?color=orange)
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/BlazorStrap/community)
+
+### Blazor WebAssembly (Client-side Blazor)
+
+> Add <script src="_content/BlazorStrap/blazorStrap.js"></script> inside the `<head>` element of your `wwwroot/index.html`.
+
+### Blazor Server (Server-side Blazor)
+
+> Add <script src="_content/BlazorStrap/blazorStrap.js"></script> inside the `<head>` element of your `Pages/_Host.cshtml`.
+
+## Animations
+> Animations are always on as they no longer require javascript to function.
 
 ## Docs
-https://chanan.github.io/BlazorStrap/
+https://blazorstrap.io
 
-## Blazorous
+## BlazorStyled
 
-If you want to manage your styles in code and use dynamic styles you can check out my other project: [Blazorous](https://chanan.github.io/Blazorous/).
-In the future I will show examples of mixing and matching BlazorStrap and Blazorous.
+If you want to manage your styles in code and use dynamic styles you can check out my other project: [BlazorStyled](https://chanan.github.io/BlazorStyled)
 
 ## Change Log
 https://github.com/chanan/BlazorStrap/releases
 
-## Done:
+## Components:
 * Alerts
 * Badges
 * Breadcrumbs
@@ -43,12 +57,3 @@ https://github.com/chanan/BlazorStrap/releases
 * Tables
 * Tabs
 * Tooltip
-
-## Not Done
-
-* Button of type: Checkboxes and Radio buttons
-* Modal - Close by clicking the Esc key
-* Modal - Will currently "clobber" body classes
-* Events on all components that need it (Modal for example)
-* Allow for arbitrary attributes on all components
-* Animations

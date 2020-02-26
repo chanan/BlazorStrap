@@ -1,0 +1,57 @@
+﻿using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace BlazorStrap
+{
+    public abstract class BSTabGroupBase : ComponentBase
+    {
+        internal bool Disposing { get; set; } = false;
+        internal bool HasRendered { get; set; } = false;
+        [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
+        public List<BSTabBase> Tabs { get; set; } = new List<BSTabBase>();
+        internal List<EventCallback<BSTabEvent>> EventQue { get; set; } = new List<EventCallback<BSTabEvent>>();
+        internal BSTabEvent BSTabEvent { get; set; }
+        private BSTabBase _selected;
+        public BSTabBase Selected
+        {
+            get => _selected;
+            set
+            {
+                if (Disposing) return;
+                BSTabEvent = new BSTabEvent() { Activated = value, Deactivated = _selected };
+
+                if (HasRendered)
+                {
+                    InvokeAsync(() => ShowEvent.InvokeAsync(BSTabEvent));
+                    InvokeAsync(() => HideEvent.InvokeAsync(BSTabEvent));
+                    EventQue.Add(ShownEvent);
+                    EventQue.Add(HiddenEvent);
+                }
+                _selected = value;
+                InvokeAsync(StateHasChanged);
+            }
+        }
+
+        [Parameter] public RenderFragment ChildContent { get; set; }
+        [Parameter] public EventCallback<BSTabEvent> ShowEvent { get; set; }
+        [Parameter] public EventCallback<BSTabEvent> ShownEvent { get; set; }
+        [Parameter] public EventCallback<BSTabEvent> HideEvent { get; set; }
+        [Parameter] public EventCallback<BSTabEvent> HiddenEvent { get; set; }
+
+        protected override Task OnAfterRenderAsync(bool firstrun)
+        {
+            if (firstrun)
+            {
+                HasRendered = true;
+            }
+            for (var i = 0; i < EventQue.Count; i++)
+            {
+                EventQue[i].InvokeAsync(BSTabEvent);
+                EventQue.RemoveAt(i);
+            }
+
+            return base.OnAfterRenderAsync(false);
+        }
+    }
+}

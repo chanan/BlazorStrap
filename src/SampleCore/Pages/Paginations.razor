@@ -1,0 +1,146 @@
+﻿@page "/pagination"
+
+<h1>Pagination</h1>
+
+<div class="docs-example">
+    <BSPagination>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.PreviousText" />
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.Custom">1</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.Custom">2</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.Custom">3</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.NextText" />
+        </BSPaginationItem>
+    </BSPagination>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/pagination/pagination1.html" />
+
+<p>PaginationLinkType="PaginationLinkType.Custom" is the default and does not need to be specified.</p>
+
+<h3>Working with icons</h3>
+
+<div class="docs-example">
+    <BSPagination>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.PreviousIcon" />
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#">1</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#">2</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#">3</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.NextIcon" />
+        </BSPaginationItem>
+    </BSPagination>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/pagination/pagination2.html" />
+
+<h3>Disabled and active states</h3>
+
+<div class="docs-example">
+    <BSPagination>
+        <BSPaginationItem IsDisabled="true">
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.PreviousText" />
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#">1</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem IsActive="true">
+            <BSPaginationLink Href="#">2 <span class="sr-only">(current)</span></BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#">3</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.NextText" />
+        </BSPaginationItem>
+    </BSPagination>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/pagination/pagination3.html" />
+
+<h3>Sizing</h3>
+<div class="docs-example">
+    <BSPagination Size="Size.Large">
+        <BSPaginationItem IsDisabled="true">
+            <BSPaginationLink Href="#">1</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#">2</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#">3</BSPaginationLink>
+        </BSPaginationItem>
+    </BSPagination>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/pagination/pagination4.html" />
+
+<div class="docs-example">
+    <BSPagination Size="Size.Small">
+        <BSPaginationItem IsDisabled="true">
+            <BSPaginationLink Href="#">1</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#">2</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#">3</BSPaginationLink>
+        </BSPaginationItem>
+    </BSPagination>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/pagination/pagination5.html" />
+
+<h3>Alignment</h3>
+<div class="docs-example">
+    <BSPagination Alignment="Alignment.Center">
+        <BSPaginationItem IsDisabled="true">
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.PreviousText" />
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.Custom">1</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.Custom">2</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.Custom">3</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.NextText" />
+        </BSPaginationItem>
+    </BSPagination>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/pagination/pagination6.html" />
+
+<div class="docs-example">
+    <BSPagination Alignment="Alignment.Right">
+        <BSPaginationItem IsDisabled="true">
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.PreviousText" />
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.Custom">1</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.Custom">2</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.Custom">3</BSPaginationLink>
+        </BSPaginationItem>
+        <BSPaginationItem>
+            <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.NextText" />
+        </BSPaginationItem>
+    </BSPagination>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/pagination/pagination7.html" />

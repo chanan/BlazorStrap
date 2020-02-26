@@ -1,0 +1,11 @@
+﻿<BSAlert Color="Color.Info" IsDismissible="true" OnDismiss="@OnDismiss">
+    I am an alert and I can be dismissed!
+</BSAlert>
+
+@code {
+    void OnDismiss()
+    {
+        Console.WriteLine("OnDismiss");
+        StateHasChanged();
+    }
+}

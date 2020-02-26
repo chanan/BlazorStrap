@@ -1,0 +1,22 @@
+﻿<BSDropdownMenu Style="position: static; display: block;">
+    <BSForm Class="px-4 py-3" Model="@formsModel">
+        <BSFormGroup>
+            <BSLabel for="exampleDropdownFormEmail1">Email address</BSLabel>
+            <BSInput InputType="InputType.Email" id="exampleDropdownFormEmail1" placeholder="email@example.com" @bind-Value="formsModel.Blank"/>
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel for="exampleDropdownFormPassword1">Password</BSLabel>
+            <BSInput InputType="InputType.Password" id="exampleDropdownFormPassword1" placeholder="Password" @bind-Value="formsModel.Blank"/>
+        </BSFormGroup>
+        <BSFormGroup IsCheck="true">
+            <BSInput InputType="InputType.Checkbox" id="dropdownCheck" @bind-Value="formsModel.Blank"/>
+            <BSLabel IsCheck="true" for="dropdownCheck">
+                Remember me
+            </BSLabel>
+        </BSFormGroup>
+        <BSButton ButtonType="ButtonType.Submit" Color="Color.Primary">Sign in</BSButton>
+    </BSForm>
+    <BSDropdownItem IsDivider="true" />
+    <BSDropdownItem href="javascript:void(0);">New around here? Sign up</BSDropdownItem>
+    <BSDropdownItem href="javascript:void(0);">Forgot password?</BSDropdownItem>
+</BSDropdownMenu>

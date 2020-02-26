@@ -1,0 +1,11 @@
+﻿@namespace BlazorStrap
+@inherits BSDropdownBase
+
+<CascadingValue Value="@this">
+    <CascadingValue Value="@DropDownMenu">
+
+        <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@Classname" @onfocusout="LostFocus" @onmouseleave="MouseLeave" @onmouseenter="MouseEnter" @bind-ElementRef="MyRef">
+            @ChildContent
+        </DynamicElement>
+    </CascadingValue>
+</CascadingValue>

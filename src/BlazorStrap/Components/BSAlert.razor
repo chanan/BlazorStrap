@@ -1,0 +1,15 @@
+﻿@namespace BlazorStrap
+@inherits BSAlertBase
+
+@if (IsOpen)
+{
+    <DynamicElement TagName="div" class="@Classname" role="alert" @attributes="@UnknownParameters">
+        @ChildContent
+        @if (IsDismissible)
+        {
+            <button @onclick="OnClick" type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        }
+    </DynamicElement>
+}

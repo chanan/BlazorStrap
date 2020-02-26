@@ -1,0 +1,53 @@
+@page "/themes"
+
+<h1>Themes</h1>
+
+<p>You can use BlazorStrap to load and manage bootstrap and bootswatch themes. In order to use themes, you will need to setup BlazorStrap to manage the CSS for bootstrap</p>
+
+<h2>Client Side Setup</h2>
+
+<ol>
+    <li>Remove the link to the bootstrap stylesheet in your <mark>index.html</mark> file</li>
+    <li>Add <mark>services.AddBootstrapCSS();</mark> to your <mark>Startup.cs</mark> file</li>
+    <li>Inject <mark>NootstrapCSS</mark> into <mark>MainLayout.razor</mark> by adding: <mark>@@inject IBootstrapCSS BootstrapCSS</mark></li>
+    <li>Call <mark>await BootstrapCSS.SetBootstrapCSS();</mark> (See API below for options)</li>
+</ol>
+
+<PrettyCode CodeFile="_content/SampleCore/snippets/themes/themes1.html" Title="Startup.cs" HighlightLines="5" />
+<PrettyCode CodeFile="_content/SampleCore/snippets/themes/themes2.html" Title="MainLayout.razor" HighlightLines="2,15" />
+
+<h2>Client Side Setup</h2>
+
+<ol>
+    <li>Remove the link to the bootstrap stylesheet in your <mark>_Host.cshtml</mark> file</li>
+    <li>Add <mark>services.AddBootstrapCSS();</mark> to your <mark>Startup.cs</mark> file</li>
+    <li>Inject <mark>NootstrapCSS</mark> into <mark>MainLayout.razor</mark> by adding: <mark>@@inject IBootstrapCSS BootstrapCSS</mark></li>
+    <li>Call <mark>await BootstrapCSS.SetBootstrapCSS();</mark> (See API below for options)</li>
+</ol>
+
+<PrettyCode CodeFile="_content/SampleCore/snippets/themes/themes3.html" Title="Startup.cs" HighlightLines="16" />
+<PrettyCode CodeFile="_content/SampleCore/snippets/themes/themes4.html" Title="MainLayout.razor" HighlightLines="2, 19" />
+
+<h2>API</h2>
+
+<ul>
+    <li><code>BootstrapCSS.SetBootstrapCSS();</code> - Sets your site's CSS to the latest bootstrap CSS</li>
+    <li><code>BootstrapCSS.SetBootstrapCSS("version number");</code> - Sets your site's CSS to the the version of bootstrap CSS you supply (using "latest" will use latest version)</li>
+    <li><code>BootstrapCSS.SetBootstrapCSS("theme", "version number");</code> - Sets your site's CSS to the the version of the named bootswatch CSS you supply</li>
+    <li><code>BootstrapCSS.SetBootstrapCSS(Theme theme, "version number");</code> - Sets your site's CSS to the the version of the named bootswatch CSS you supply via an enum</li>
+    <li><code>Theme CurrentTheme { get; }</code> - Returns the current theme as an enum</li>
+</ul>
+
+<BSAlert Color="Color.Warning">Using "latest" version is dangerous as Bootstrap might change and break your site. It is better to "hardcode" the version number.</BSAlert>
+
+<h2>Theme Switching</h2>
+
+<p>
+    You can also switch themes dynamically. an example of this is the <a href="https://github.com/chanan/BlazorStrap/blob/master/src/SampleCore/Shared/ThemeSwitcher.razor">ThemeSwitcher</a>
+    used on this documentation site.
+</p>
+
+<div class="docs-example">
+    <ThemeSwitcher />
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/themes/themes5.html" />

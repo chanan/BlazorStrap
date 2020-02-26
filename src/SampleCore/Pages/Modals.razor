@@ -1,0 +1,99 @@
+﻿@page "/modals"
+
+<h1>Modals</h1>
+
+<div class="docs-example modal-example">
+    <BSModal IsOpen="true" NoBackdrop="true" Class="show"> 
+        <BSModalHeader>Modal title</BSModalHeader>
+        <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+        <BSModalFooter>
+            <BSButton Color="Color.Primary">Do Something</BSButton>
+            <BSButton Color="Color.Secondary">Cancel</BSButton>
+        </BSModalFooter>
+    </BSModal>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/modals/modals1.html" />
+
+<h3>Live Demo</h3>
+<div class="docs-example">
+    <BSButton Color="Color.Primary" @onclick="@(() => LiveDemo.Show())">Launch demo modal</BSButton>
+    <BSModal @ref="LiveDemo">
+        <BSModalHeader OnClick="@(() => LiveDemo.Hide())">Modal title</BSModalHeader>
+        <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+        <BSModalFooter>
+            <BSButton Color="Color.Secondary" @onclick="@(() => LiveDemo.Hide())">Close</BSButton>
+            <BSButton Color="Color.Primary" @onclick="@(() => LiveDemo.Hide())">Save Changes</BSButton>
+        </BSModalFooter>
+    </BSModal>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/modals/modals2.html" />
+
+<h3>Vertically Centered</h3>
+<div class="docs-example">
+    <BSButton Color="Color.Primary" @onclick="@onToggle">Launch demo modal</BSButton>
+    <BSModal @ref="Centered" IsCentered="true">
+        <BSModalHeader OnClick="@onToggle">Modal title</BSModalHeader>
+        <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+        <BSModalFooter>
+            <BSButton Color="Color.Secondary" @onclick="@onToggle">Close</BSButton>
+            <BSButton Color="Color.Primary" @onclick="@onToggle">Save Changes</BSButton>
+        </BSModalFooter>
+    </BSModal>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/modals/modals3.html" />
+
+<h3>Sizes</h3>
+
+<div class="docs-example">
+    <BSButton Color="Color.Primary" @onclick="onclick3">Large modal</BSButton>
+    <BSModal @bind-IsOpen="@IsOpen3" Size="Size.Large">
+        <BSModalHeader OnClick="onclick3">Modal title</BSModalHeader>
+        <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+        <BSModalFooter>
+            <BSButton Color="Color.Secondary" @onclick="onclick3">Close</BSButton>
+            <BSButton Color="Color.Primary" @onclick="onclick3">Save Changes</BSButton>
+        </BSModalFooter>
+    </BSModal>
+    <BSButton Color="Color.Primary" @onclick="onclick4">Small modal</BSButton>
+    <BSModal @bind-IsOpen="@IsOpen4" Size="Size.Small">
+        <BSModalHeader OnClick="onclick4">Modal title</BSModalHeader>
+        <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+        <BSModalFooter>
+            <BSButton Color="Color.Secondary" @onclick="onclick4">Close</BSButton>
+            <BSButton Color="Color.Primary" @onclick="onclick4">Save Changes</BSButton>
+        </BSModalFooter>
+    </BSModal>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/modals/modals4.html" />
+
+<h3>Ignore Click on Back Drop</h3>
+
+<p>You can set <code>IgnoreClickOnBackDrop</code> to prevent the user closing the model by clicking on the back drop.</p>
+
+<h3>Ignore Escape Key</h3>
+
+<p>You can set <code>IgnoreEscape</code> to prevent the user closing the model by clicking the Escape key.</p>
+
+
+@code {
+
+    BSModal LiveDemo { get; set; }
+    bool IsOpen { get; set; }
+    BSModal Centered;
+    void onToggle(MouseEventArgs e)
+    {
+        Centered.Toggle();
+    }
+    bool IsOpen3 { get; set; }
+    void onclick3(MouseEventArgs e)
+    {
+        IsOpen3 = !IsOpen3;
+        StateHasChanged();
+    }
+    bool IsOpen4 { get; set; }
+    void onclick4(MouseEventArgs e)
+    {
+        IsOpen4 = !IsOpen4;
+        StateHasChanged();
+    }
+}

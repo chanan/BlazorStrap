@@ -1,0 +1,94 @@
+﻿@page "/buttons"
+
+<h1>Buttons</h1>
+
+<div class="docs-example">
+    <BSButton Color="Color.Primary">primary</BSButton>
+    <BSButton Color="Color.Secondary">secondary</BSButton>
+    <BSButton Color="Color.Success">success</BSButton>
+    <BSButton Color="Color.Info">info</BSButton>
+    <BSButton Color="Color.Warning">warning</BSButton>
+    <BSButton Color="Color.Danger">danger</BSButton>
+    <BSButton Color="Color.Light">light</BSButton>
+    <BSButton Color="Color.Dark">dark</BSButton>
+    <BSButton Color="Color.Link">link</BSButton>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/buttons/buttons1.html" />
+
+<h3>Supplying OnClick Handler</h3>
+<div class="docs-example">
+    <BSButton @onclick="onclick">Click Me</BSButton>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/buttons/buttons2.html" />
+
+<h3>Button tags</h3>
+
+<div class="docs-example">
+    <BSButton ButtonType="ButtonType.Link" Href="#">Link</BSButton>
+    <BSButton ButtonType="ButtonType.Button">Button</BSButton>
+    <BSButton ButtonType="ButtonType.Input" Value="Input" />
+    <BSButton ButtonType="ButtonType.Submit" Value="Submit" />
+    <BSButton ButtonType="ButtonType.Reset" Value="Reset" />
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/buttons/buttons3.html" />
+
+<h3>Outline Buttons</h3>
+
+<div class="docs-example">
+    <BSButton IsOutline="true" Color="Color.Primary">primary</BSButton>
+    <BSButton IsOutline="true" Color="Color.Secondary">secondary</BSButton>
+    <BSButton IsOutline="true" Color="Color.Success">success</BSButton>
+    <BSButton IsOutline="true" Color="Color.Info">info</BSButton>
+    <BSButton IsOutline="true" Color="Color.Warning">warning</BSButton>
+    <BSButton IsOutline="true" Color="Color.Danger">danger</BSButton>
+    <BSButton IsOutline="true" Color="Color.Light">light</BSButton>
+    <BSButton IsOutline="true" Color="Color.Dark">dark</BSButton>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/buttons/buttons4.html" />
+<h3>Sizes</h3>
+
+<div class="docs-example">
+    <BSButton Color="Color.Primary" Size="Size.Large">Large Button</BSButton>
+    <BSButton Color="Color.Secondary" Size="Size.Large">Large Button</BSButton>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/buttons/buttons5.html" />
+
+<div class="docs-example">
+    <BSButton Color="Color.Primary" Size="Size.Small">Small Button</BSButton>
+    <BSButton Color="Color.Secondary" Size="Size.Small">Small Button</BSButton>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/buttons/buttons6.html" />
+
+<div class="docs-example">
+    <BSButton Color="Color.Primary" Size="Size.Large" IsBlock="true">Block Level Button</BSButton>
+    <BSButton Color="Color.Secondary" Size="Size.Large" IsBlock="true">Block Level Button</BSButton>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/buttons/buttons7.html" />
+
+<h3>Active State</h3>
+<div class="docs-example">
+    <BSButton ButtonType="ButtonType.Link" Href="#" Color="Color.Primary" Size="Size.Large" IsActive="true">Primary Link</BSButton>
+    <BSButton ButtonType="ButtonType.Link" Href="#" Color="Color.Secondary" Size="Size.Large" IsActive="true">Link</BSButton>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/buttons/buttons8.html" />
+
+<h3>Disabled State</h3>
+<div class="docs-example">
+    <BSButton Color="Color.Primary" Size="Size.Large" IsDisabled="true">Primary Button</BSButton>
+    <BSButton Color="Color.Secondary" Size="Size.Large" IsDisabled="true">Button</BSButton>
+    <BSButton ButtonType="ButtonType.Link" Href="#" Color="Color.Primary" Size="Size.Large" IsDisabled="true">Primary Link</BSButton>
+    <BSButton ButtonType="ButtonType.Link" Href="#" Color="Color.Secondary" Size="Size.Large" IsDisabled="true">Link</BSButton>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/buttons/buttons9.html" />
+
+<h3>Checkbox and radio buttons</h3>
+
+<BSAlert Color="Color.Info">Checkboxes and Radio aren't support yet by BlazorStrap</BSAlert>
+
+
+@code {
+    void onclick(MouseEventArgs e)
+    {
+        Console.WriteLine("Button was clicked!");
+    }
+}

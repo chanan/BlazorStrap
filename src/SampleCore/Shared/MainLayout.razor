@@ -1,0 +1,36 @@
+@inherits LayoutComponentBase
+@inject IBootstrapCSS BootstrapCSS
+
+<div class="sidebar" style="overflow-y: auto">
+    <NavMenu />
+</div>
+
+<div class="main container">
+    <div class="content px-4">
+        @Body
+    </div>
+</div>
+
+@code { 
+    private bool isServerSide = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await BootstrapCSS.SetBootstrapCSS("4.3.1");
+        }
+        catch (Exception)
+        {
+            isServerSide = true;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstrun)
+    {
+        if (isServerSide && firstrun)
+        {
+            await BootstrapCSS.SetBootstrapCSS("4.3.1");
+        }
+    }
+}

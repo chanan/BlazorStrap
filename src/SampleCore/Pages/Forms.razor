@@ -1,0 +1,236 @@
+﻿@page "/forms"
+@using System.ComponentModel.DataAnnotations;
+<h1>Forms</h1>
+
+<BSAlert Color="Color.Warning">Form tags are not finished. Binding, specifically of the select tag, still needs work.</BSAlert>
+
+<div class="docs-example">
+    <BSBasicForm >
+        <BSFormGroup>
+            <BSLabel For="exampleInputEmail1">Email address</BSLabel>
+            <BSBasicInput Id="exampleInputEmail1" InputType="InputType.Email" PlaceHolder="Enter email" Value="string.Empty"  />
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleInputPassword1">Password</BSLabel>
+            <BSBasicInput Id="exampleInputPassword1" InputType="InputType.Password" PlaceHolder="Password" Value="string.Empty"/>
+        </BSFormGroup>
+        <BSFormGroup IsCheck="true">
+            <BSBasicInput Id="exampleCheck1" InputType="InputType.Checkbox" Value="string.Empty"/>
+            <BSLabel IsCheck="true" For="exampleCheck1">Check me out</BSLabel>
+        </BSFormGroup>
+        <BSButton Color="Color.Primary" ButtonType="ButtonType.Submit">Submit</BSButton>
+    </BSBasicForm>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms1.html" />
+
+<p>Use @@bind-Value to bind to BSInput value</p>
+
+<div class="docs-example">
+    <BSBasicForm>
+        <BSFormGroup>
+            <BSLabel For="exampleFormControlSelect1">Example select</BSLabel>
+            <BSBasicInput Id="exampleFormControlSelect1" InputType="InputType.Select" Value="string.Empty" >
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </BSBasicInput>
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleText">Text Area</BSLabel>
+            <BSBasicInput InputType="InputType.TextArea" Name="text" Id="exampleText" Rows="5" Value="string.Empty"/>
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleFormControlFile1">Example file input</BSLabel>
+            <BSBasicInput InputType="InputType.File" Id="exampleFormControlFile1" Value="string.Empty" />
+        </BSFormGroup>
+    </BSBasicForm>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms2.html" />
+
+
+<h3>Sizing</h3>
+
+<div class="docs-example">
+    <BSBasicInput InputType="InputType.Text" Size="Size.Large" PlaceHolder="Size.Large" Value="string.Empty"/>
+    <BSBasicInput InputType="InputType.Text" PlaceHolder="Default" Value="string.Empty"/>
+    <BSBasicInput InputType="InputType.Text" Size="Size.Small" PlaceHolder="Size.Small" Value="string.Empty"/>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms3.html" />
+
+<div class="docs-example">
+    <BSBasicInput InputType="InputType.Select" Size="Size.Large" Value="string.Empty">
+        <option>Large select</option>
+    </BSBasicInput>
+    <BSBasicInput InputType="InputType.Select" Value="string.Empty">
+        <option>Default select</option>
+    </BSBasicInput>
+    <BSBasicInput InputType="InputType.Select" Size="Size.Small" Value="string.Empty">
+        <option>Small select</option>
+    </BSBasicInput>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms4.html" />
+
+<h3>Range Inputs</h3>
+
+<div class="docs-example">
+    <BSBasicForm>
+        <BSFormGroup>
+            <BSLabel For="formControlRange">Example Range input</BSLabel>
+            <BSBasicInput InputType="InputType.Range" Id="formControlRange" Value="string.Empty"/>
+        </BSFormGroup>
+    </BSBasicForm>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms5.html" />
+
+<h3>Readonly</h3>
+
+<div class="docs-example">
+    <BSBasicInput InputType="InputType.Text" PlaceHolder="Readonly input here…" IsReadonly="true" Value="string.Empty"/>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms6.html" />
+
+<h3>Readonly plain text</h3>
+
+<div class="docs-example">
+    <BSBasicForm>
+        <BSFormGroup IsRow="true">
+            <BSLabel For="staticEmail" SM="2">Email</BSLabel>
+            <BSCol SM="10">
+                <BSBasicInput InputType="InputType.Text" IsReadonly="true" IsPlaintext="true" Id="staticEmail" Value="string.Empty"/>
+            </BSCol>
+        </BSFormGroup>
+        <BSFormGroup IsRow="true">
+            <BSLabel For="inputPassword" SM="2">Password</BSLabel>
+            <BSCol SM="10">
+                <BSBasicInput InputType="InputType.Password" Id="inputPassword" Value="string.Empty"/>
+            </BSCol>
+        </BSFormGroup>
+        <BSFormGroup IsRow="true">
+            <BSCol SM="2" SMOffset="2">
+                <BSButton ButtonType="ButtonType.Submit">Submit</BSButton>
+            </BSCol>
+        </BSFormGroup>
+    </BSBasicForm>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms7.html" />
+
+<h3>Inline Form</h3>
+
+<div class="docs-example">
+    <BSBasicForm IsInline="true">
+        <BSFormGroup Class="mb-2 mr-sm-2 mb-sm-0">
+            <BSLabel For="exampleEmail" Class="mr-sm-2">Email</BSLabel>
+            <BSBasicInput InputType="InputType.Email" Name="email" Id="exampleEmail" PlaceHolder="something@idk.cool" Value="string.Empty"/>
+        </BSFormGroup>
+        <BSFormGroup Class="mb-2 mr-sm-2 mb-sm-0">
+            <BSLabel For="examplePassword" class="mr-sm-2">Password</BSLabel>
+            <BSBasicInput InputType="InputType.Password" Name="password" Id="examplePassword" PlaceHolder="don't tell!" Value="string.Empty"/>
+        </BSFormGroup>
+        <BSButton ButtonType="ButtonType.Submit">Submit</BSButton>
+    </BSBasicForm>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms8.html" />
+
+<h3>Checkboxes and radios</h3>
+
+<div class="docs-example">
+    <BSFormGroup IsCheck="true">
+        <BSBasicInput InputType="InputType.Checkbox" Id="defaultCheck1" Value="false"/>
+        <BSLabel For="defaultCheck1">Default checkbox</BSLabel>
+    </BSFormGroup>
+    <BSFormGroup IsCheck="true">
+        <BSBasicInput InputType="InputType.Checkbox" Id="defaultCheck2" IsDisabled="true" Value="false"/>
+        <BSLabel For="defaultCheck2">Disabled checkbox</BSLabel>
+    </BSFormGroup>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms9.html" />
+
+<div class="docs-example">
+    <BSFormGroup IsCheck="true">
+        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios1" RadioValue="@("option1")" @bind-Value="RadioVlaue"/>
+        <BSLabel For="exampleRadios1">Default radio</BSLabel>
+    </BSFormGroup>
+    <BSFormGroup IsCheck="true">
+        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios2" RadioValue="@("option2")" @bind-Value="RadioVlaue"/>
+        <BSLabel For="exampleRadios2">Second default radio</BSLabel>
+    </BSFormGroup>
+    <BSFormGroup IsCheck="true" Class="disabled">
+        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios3" RadioValue="@("option3")" IsDisabled="true" @bind-Value="RadioVlaue"/>
+        <BSLabel For="exampleRadios3">Disabled radio</BSLabel>
+    </BSFormGroup>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms10.html" />
+
+<h3>Form Validation</h3>
+
+<div class="docs-example">
+    <BSForm Model="@formsModelVal" ValidateOnInit="true">
+        <DataAnnotationsValidator />
+        <BSFormGroup>
+            <BSLabel For="exampleEmail3">Input without validation</BSLabel>
+            <BSBasicInput InputType="InputType.Text" Id="exampleEmail3" Value="string.Empty"/>
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleEmail4">Valid input</BSLabel>
+            <BSInput InputType="InputType.Text" Id="exampleEmail4" @bind-Value="@formsModelVal.Valid" ValidateOnChange="true"/>
+            <BSFormFeedback For="@(() => formsModelVal.Valid)" ValidMessage="Sweet! that name is available"/>
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleEmail5">Invalid input</BSLabel>
+            <BSInput InputType="InputType.Text" Id="exampleEmail5" @bind-Value="@formsModelVal.InValid" ValidateOnChange="true" />
+            <BSFormFeedback For="@(() => formsModelVal.InValid)" ValidMessage="Sweet! you fixed the issue" />
+        </BSFormGroup>
+    </BSForm>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms11.html" />
+
+<h4>Form Tooltip Validation</h4>
+<div class="docs-example">
+    <BSForm Model="@formsModelValTT" ValidateOnInit="true">
+        <DataAnnotationsValidator />
+        <BSRow>
+            <BSFormGroup Class="col-md-12">
+                <BSLabel For="exampleEmail6">Input without validation</BSLabel>
+                <BSBasicInput InputType="InputType.Text" Id="exampleEmail6" Value="string.Empty"/>
+            </BSFormGroup>
+            <BSFormGroup Class="col-md-12">
+                <BSLabel For="exampleEmail7">Valid input</BSLabel>
+                <BSInput InputType="InputType.Text" Id="exampleEmail7" @bind-Value="@formsModelValTT.Valid" />
+                <BSFormFeedback For="@(() => formsModelValTT.Valid)" IsTooltip="true" ValidMessage="Sweet! that name is available" />
+            </BSFormGroup>
+            <BSFormGroup Class="col-md-12">
+                <BSLabel For="exampleEmail8">Invalid input</BSLabel>
+                <BSInput InputType="InputType.Text" Id="exampleEmail8" @bind-Value="@formsModelValTT.InValid" />
+                <BSFormFeedback For="@(() => formsModelValTT.InValid)" IsTooltip="true" ValidMessage="Sweet! you fixed the issue" />
+            </BSFormGroup>
+            <BSFormGroup Class="col-md-12">
+                <BSLabel For="exampleEmail7">Date input</BSLabel>
+                <BSInput InputType="InputType.Date" Id="exampleEmail7" @bind-Value="@formsModelValTT.Date" />
+                <BSFormFeedback For="@(() => formsModelValTT.Date)" IsTooltip="true" ValidMessage="Sweet! that name is available" />
+            </BSFormGroup>
+        </BSRow>
+    </BSForm>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms12.html" />
+
+
+@code
+{
+    private string RadioVlaue = "option1";
+    private FormsModel formsModelVal = new FormsModel();
+    private FormsModel formsModelValTT = new FormsModel();
+
+    public class FormsModel
+    {
+
+        public string Valid { get; set; }
+        public DateTime Date { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Oh noes! that name is already taken")]
+        public string InValid { get; set; }
+        public string Blank { get; set; }
+        public string Email { get; set; } = "email@example.com";
+    }
+}

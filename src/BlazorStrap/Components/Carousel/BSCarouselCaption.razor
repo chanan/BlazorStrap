@@ -1,0 +1,13 @@
+﻿@namespace BlazorStrap
+@inherits BSCarouselCaptionBase
+
+<DynamicElement @attributes="@UnknownParameters" TagName="div" class="@Classname">
+    @if (HeaderText != null)
+    {
+        <h5>@HeaderText</h5>
+    }
+    @if (CaptionText != null)
+    {
+        <p>@CaptionText</p>
+    }
+</DynamicElement>

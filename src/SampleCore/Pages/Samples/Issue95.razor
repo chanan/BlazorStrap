@@ -1,0 +1,31 @@
+@page "/samples/issue95"
+
+<BSNavbar IsExpand="true">
+    <BSNavbarBrand href="#">Brand</BSNavbarBrand>
+    <BSNavbarToggler />
+    <BSCollapse isOpen="true" IsNavbar="true">
+        <BSNav IsList="true" IsNavbar="true">
+            <BSNavItem>
+                <BSNavLink IsActive="true" href="#" Match="NavLinkMatch.All">Home</BSNavLink>
+            </BSNavItem>
+            <BSNavItem IsDropdown="true">
+                <BSDropdownToggle>CategoryOne</BSDropdownToggle>
+                <BSDropdownMenu>
+                    <BSDropdownItem href="https://www.microsoft.com/">Create</BSDropdownItem>
+                    <BSDropdownItem href="CategoryOne/Delete">Delete</BSDropdownItem>
+                    <BSDropdownItem href="CategoryOne/Rename">Rename</BSDropdownItem>
+                    <BSDropdownItem href="CategoryOne/Show">Show</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSNavItem>
+            <BSNavItem IsDropdown="true">
+                <BSDropdownToggle>CategoryTwo</BSDropdownToggle>
+                <BSDropdownMenu>
+                    <BSDropdownItem href="CategoryTwo/Create">Create</BSDropdownItem>
+                    <BSDropdownItem href="CategoryTwo/Delete">Delete</BSDropdownItem>
+                    <BSDropdownItem href="CategoryTwo/Rename">Rename</BSDropdownItem>
+                    <BSDropdownItem href="CategoryTwo/Show">Show</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSNavItem>
+        </BSNav>
+    </BSCollapse>
+</BSNavbar>

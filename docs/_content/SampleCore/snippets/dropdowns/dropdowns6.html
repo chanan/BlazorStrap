@@ -1,0 +1,18 @@
+﻿<BSButtonGroup DropdownDirection="DropdownDirection.Left">
+    <BSDropdownToggle Color="Color.Secondary" @onclick="onclick17">Dropleft</BSDropdownToggle>
+    <BSDropdownMenu IsOpen="@IsOpen17">
+        <BSDropdownItem Href="javascript:void(0);">Action</BSDropdownItem>
+        <BSDropdownItem Href="javascript:void(0);">Another Action</BSDropdownItem>
+        <BSDropdownItem Href="javascript:void(0);">Yet Another Action</BSDropdownItem>
+    </BSDropdownMenu>
+</BSButtonGroup>
+<BSButtonGroup DropdownDirection="DropdownDirection.Left">
+    <BSDropdownToggle IsSplit="true" Color="Color.Secondary" @onclick="onclick18"/>
+    <BSDropdownMenu IsOpen="@IsOpen18">
+        <BSDropdownItem Href="javascript:void(0);">Action</BSDropdownItem>
+        <BSDropdownItem Href="javascript:void(0);">Another Action</BSDropdownItem>
+        <BSDropdownItem IsDivider="true" />
+        <BSDropdownItem Href="javascript:void(0);">Yet Another Action</BSDropdownItem>
+    </BSDropdownMenu>
+    <BSButton Color="Color.Secondary">Split Dropleft</BSButton>
+</BSButtonGroup>

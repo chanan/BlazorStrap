@@ -1,0 +1,64 @@
+﻿@page "/popovers"
+
+<h1 style="margin-bottom: 2em;">Popovers</h1>
+
+
+<div class="docs-example">
+    <BSButton id="popover1" @onclick="onclick1">Top</BSButton>
+    <BSPopover Target="popover1" IsOpen="@IsOpen1" Placement="Placement.Top">
+        <BSPopoverHeader>Top Popover</BSPopoverHeader>
+        <BSPopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</BSPopoverBody>
+    </BSPopover>
+    <BSButton Id="popover2" @onclick="onclick2">Bottom</BSButton>
+    <BSPopover Target="popover2" IsOpen="@IsOpen2" Placement="Placement.Bottom">
+        <BSPopoverHeader>Bottom Popover</BSPopoverHeader>
+        <BSPopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</BSPopoverBody>
+    </BSPopover>
+    <BSButton Id="popover3" @onclick="onclick3">Left</BSButton>
+    <BSPopover Target="popover3" IsOpen="@IsOpen3" Placement="Placement.Left">
+        <BSPopoverHeader>Left Popover</BSPopoverHeader>
+        <BSPopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</BSPopoverBody>
+    </BSPopover>
+    <BSButton Id="popover4" @onclick="onclick4">Right</BSButton>
+    <BSPopover Target="popover4" IsOpen="@IsOpen4" Placement="Placement.Right">
+        <BSPopoverHeader>Right Popover</BSPopoverHeader>
+        <BSPopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</BSPopoverBody>
+    </BSPopover>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/popovers/popovers1.html" />
+
+<h3>Dismiss on Next Click</h3>
+
+<BSAlert Color="Color.Info">
+    Dismiss on next click does not work at this time.
+</BSAlert>
+
+@code {
+    bool IsOpen1 { get; set; }
+    void onclick1(MouseEventArgs e)
+    {
+        IsOpen1 = !IsOpen1;
+        StateHasChanged();
+    }
+
+    bool IsOpen2 { get; set; }
+    void onclick2(MouseEventArgs e)
+    {
+        IsOpen2 = !IsOpen2;
+        StateHasChanged();
+    }
+
+    bool IsOpen3 { get; set; }
+    void onclick3(MouseEventArgs e)
+    {
+        IsOpen3 = !IsOpen3;
+        StateHasChanged();
+    }
+
+    bool IsOpen4 { get; set; }
+    void onclick4(MouseEventArgs e)
+    {
+        IsOpen4 = !IsOpen4;
+        StateHasChanged();
+    }
+}

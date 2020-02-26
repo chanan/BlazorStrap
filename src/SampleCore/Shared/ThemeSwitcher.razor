@@ -1,0 +1,47 @@
+@inject IBootstrapCSS BootstrapCSS
+@if (!IsDropDown)
+{
+<BSForm Model="formsModel">
+    <BSBasicInput InputType="InputType.Select" Value="Selected" ValueChanged="@((string value) => SelectedChanged(value))">
+        @foreach (string theme in themes)
+{
+            <option value="@theme">@theme</option>
+}
+    </BSBasicInput>
+</BSForm>
+}
+else
+{
+<BSDropdownMenu>
+    @foreach (string theme in themes)
+    {
+        <BSDropdownItem @onclick="@(() =>SelectedChanged(theme))">@theme</BSDropdownItem>
+    }
+</BSDropdownMenu>
+}
+
+@code {
+    private ThemeSwitcherModel formsModel = new ThemeSwitcherModel();
+    [Parameter]
+    public bool IsDropDown { get; set; }
+    private List<string> themes;
+    private string Selected { get; set; }
+    
+    private async Task SelectedChanged(string value)
+    {
+        Selected = value;
+        await BootstrapCSS.SetBootstrapCSS(value, "4.3.1");
+    }
+
+
+    protected override void OnInitialized ()
+    {
+        themes = Enum.GetNames(typeof(Theme)).ToList();
+        Selected = BootstrapCSS.CurrentTheme.ToString();
+    }
+
+    public class ThemeSwitcherModel
+    {
+        public string Blank { get; set; }
+    }
+}

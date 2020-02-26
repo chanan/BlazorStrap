@@ -1,0 +1,31 @@
+﻿@page "/samples/issue97"
+
+<BSNavbar IsExpand="true" IsFixedTop="true" IsDark="true" Color="Color.Dark" class="navbar-expand-md">
+    <BSNavbarBrand href="#">Brand</BSNavbarBrand>
+    <BSNavbarToggler />
+    <BSCollapse isOpen="true" IsNavbar="true">
+        <BSNav IsNavbar="true">
+            <BSNavItem>
+                <BSNavLink IsActive="true" href="#" Match="NavLinkMatch.All">Home</BSNavLink>
+            </BSNavItem>
+            <BSNavItem IsDropdown="true">
+                <BSDropdownToggle IsDark="true" IsLink="true">CategoryOne</BSDropdownToggle>
+                <BSDropdownMenu>
+                    <BSDropdownItem href="CategoryOne/Create">Create</BSDropdownItem>
+                    <BSDropdownItem href="CategoryOne/Delete">Delete</BSDropdownItem>
+                    <BSDropdownItem href="CategoryOne/Rename">Rename</BSDropdownItem>
+                    <BSDropdownItem href="CategoryOne/Show">Show</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSNavItem>
+            <BSNavItem IsDropdown="true">
+                <BSDropdownToggle IsDark="true">CategoryTwo</BSDropdownToggle>
+                <BSDropdownMenu>
+                    <BSDropdownItem href="CategoryTwo/Create">Create</BSDropdownItem>
+                    <BSDropdownItem href="CategoryTwo/Delete">Delete</BSDropdownItem>
+                    <BSDropdownItem href="CategoryTwo/Rename">Rename</BSDropdownItem>
+                    <BSDropdownItem href="CategoryTwo/Show">Show</BSDropdownItem>
+                </BSDropdownMenu>
+            </BSNavItem>
+        </BSNav>
+    </BSCollapse>
+</BSNavbar>

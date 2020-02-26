@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Components.Builder;
+﻿using BlazorPrettyCode;
+using BlazorStrap;
+using BlazorStyled;
+using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using SampleCore;
 
 namespace Sample
 {
@@ -7,11 +11,18 @@ namespace Sample
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddBlazorPrettyCode(defaults =>
+            {
+                defaults.DefaultTheme = "SolarizedDark";
+                defaults.ShowLineNumbers = true;
+            });
+            services.AddBootstrapCSS();
         }
 
         public void Configure(IComponentsApplicationBuilder app)
         {
             app.AddComponent<App>("app");
+            app.AddComponent<ClientSideStyled>("#styled");
         }
     }
 }

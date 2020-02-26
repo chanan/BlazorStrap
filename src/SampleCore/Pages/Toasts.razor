@@ -1,0 +1,34 @@
+﻿@page "/toasts"
+
+<h1>Toasts</h1>
+
+<BSAlert Color="Color.Info">Click the '&times;' button to dismiss the toast forever :(</BSAlert>
+<div class="docs-example">
+
+    <BSToast IsVisible="@isVisible">
+        <BSToastHeader>I am Heading</BSToastHeader>
+        <BSToastBody>
+            <p>Test me </p>
+        </BSToastBody>
+    </BSToast>
+
+    <BSToast IsVisible="@isVisible">
+        <BSToastHeader>I am also Heading</BSToastHeader>
+        <BSToastBody>
+            Test Me
+        </BSToastBody>
+    </BSToast>
+
+    <BSButton @onclick="onclick">Toggle Toast Visibility</BSButton>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/toasts/toasts1.html" />
+
+@code {
+    private bool isVisible { get; set; } = true;
+
+    void onclick(MouseEventArgs e)
+    {
+        isVisible = !isVisible;
+        StateHasChanged();
+    }
+}

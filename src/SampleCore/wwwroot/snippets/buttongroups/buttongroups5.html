@@ -1,0 +1,12 @@
+﻿<BSButtonGroup IsVertical="true">
+    <BSButton Color="Color.Secondary">1</BSButton>
+    <BSButton Color="Color.Secondary">2</BSButton>
+
+    <BSDropdown IsGroup="true" IsOpen="@IsOpen1">
+        <BSDropdownToggle Color="Color.Secondary" onclick="onclick1" IsOpen="@IsOpen1">Dropdown</BSDropdownToggle>
+        <BSDropdownMenu IsOpen="@IsOpen1">
+            <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
+            <BSDropdownItem href="#">Dropdown link</BSDropdownItem>
+        </BSDropdownMenu>
+    </BSDropdown>
+</BSButtonGroup>

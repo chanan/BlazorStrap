@@ -1,0 +1,25 @@
+﻿@page "/samples/issue146"
+@layout Layout104
+
+<BSForm Model="@FormModel" ValidateOnInit="true" UserValidation="true">
+    <BSRow>
+        <BSFormGroup Class="col-md-12">
+            <BSLabel For="exampleEmail8">Valid input</BSLabel>
+            <BSInput IsValid="true" InputType="InputType.Text" Id="exampleEmail8" @bind-Value="@FormModel.Name" />
+            <BSFormFeedback IsValid="true" For="@(() => FormModel.Name)" ValidMessage="Sweet! you fixed the issue" InvalidMessage="Oh no something is wrong"/>
+        </BSFormGroup>
+    </BSRow>
+</BSForm>
+<BSForm Model="@FormModel" ValidateOnInit="true" UserValidation="true">
+    <BSRow>
+        <BSFormGroup Class="col-md-12">
+            <BSLabel For="exampleEmail8">Invalid input</BSLabel>
+            <BSInput IsInvalid="true" InputType="InputType.Text" Id="exampleEmail8" @bind-Value="@FormModel.Name" />
+            <BSFormFeedback IsInvalid="true" For="@(() => FormModel.Name)" ValidMessage="Sweet! you fixed the issue" InvalidMessage="Oh no something is wrong" />
+        </BSFormGroup>
+    </BSRow>
+</BSForm>
+@code
+{
+    MyModel FormModel = new MyModel();
+}

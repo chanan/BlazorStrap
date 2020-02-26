@@ -1,0 +1,16 @@
+@namespace BlazorStrap
+@inherits BSTabBase
+
+
+<CascadingValue Value="@this">
+    @if (Parent.IsList)
+    {
+    <DynamicElement @attributes="@UnknownParameters" TagName="li" class="@Classname" >
+        @ChildContent
+    </DynamicElement>
+    }
+    else
+    {
+        @ChildContent
+    }
+</CascadingValue>

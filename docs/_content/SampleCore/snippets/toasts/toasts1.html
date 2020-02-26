@@ -1,0 +1,24 @@
+﻿<BSToast IsVisible="@isVisible">
+    <BSToastHeader>I am Heading</BSToastHeader>
+    <BSToastBody>
+        <p>Test me</p>
+    </BSToastBody>
+</BSToast>
+
+<BSToast IsVisible="@isVisible">
+    <BSToastHeader>I am also Heading</BSToastHeader>
+    <BSToastBody>
+        Test Me
+    </BSToastBody>
+</BSToast>
+<BlazorButton @onclick="onclick">Toggle Toast Visibility</BlazorButton>
+
+@code {
+    private bool isVisible { get; set; } = true;
+
+    void onclick(MouseEventArgs e)
+	{
+		isVisible = !isVisible;
+		StateHasChanged();
+	}
+}

@@ -1,0 +1,19 @@
+﻿<BSButton Color="Color.Primary" OnClick="@onToggle">Launch demo modal</BSButton>
+<BSModal @ref="Centered" IsCentered="true">
+    <BSModalHeader OnClick="@onToggle">Modal title</BSModalHeader>
+    <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+    <BSModalFooter>
+        <BSButton Color="Color.Secondary" OnClick="@onToggle">Close</BSButton>
+        <BSButton Color="Color.Primary" OnClick="@onToggle">Save Changes</BSButton>
+    </BSModalFooter>
+</BSModal>
+
+@code
+{
+    BSModal Centered;
+
+    void onToggle(MouseEventArgs e)
+    {
+        Centered.Toggle();
+    }
+}
