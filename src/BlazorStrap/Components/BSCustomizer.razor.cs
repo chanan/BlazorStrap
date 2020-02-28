@@ -34,6 +34,8 @@ namespace BlazorStrap
         public string BreakpointMS { get; set; }
         public string BreakpointLG { get; set; }
         public string BreakpointXL { get; set; }
+        public string FontFamilySansSerif { get; set; }
+        public string FontFamilyMonospace { get; set; }
 
     }
 }
