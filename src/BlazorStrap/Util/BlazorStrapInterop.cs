@@ -81,12 +81,13 @@ namespace BlazorStrap.Util
             return JSRuntime.InvokeAsync<object>("blazorStrap.focusElement", el);
         }
 
-        public ValueTask<bool> SetBootstrapCSS(string theme, string version)
+        public ValueTask<bool> SetBootstrapCss(string theme, string version)
         {
-            return JSRuntime.InvokeAsync<bool>("blazorStrap.setBootstrapCSS", theme, version);
+            return JSRuntime.InvokeAsync<bool>("blazorStrap.setBootstrapCss", theme, version);
         }
 
-
+        [Obsolete("SetBootstrapCSS is obsolete and will be removed in a future version of BlazorStrap. Please use SetBootstrapCss instead.", false)]
+        public ValueTask<bool> SetBootstrapCSS(string theme, string version) => SetBootstrapCss(theme, version);
     }
 
     public class StringReturn
