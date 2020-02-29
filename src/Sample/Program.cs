@@ -11,14 +11,14 @@ namespace Sample
     {
         public static async Task Main(string[] args)
         {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
 
             builder.Services.AddBlazorPrettyCode(defaults =>
             {
                 defaults.DefaultTheme = "SolarizedDark";
                 defaults.ShowLineNumbers = true;
             });
-            builder.Services.AddBootstrapCSS();
+            builder.Services.AddBootstrapCss();
 
             builder.RootComponents.Add<App>("app");
             builder.RootComponents.Add<ClientSideStyled>("#styled");

@@ -13,7 +13,7 @@ namespace BlazorStrap
             .AddClass("table-striped", IsStriped)
             .AddClass("table-bordered", IsBordered)
             .AddClass("table-borderless", IsBorderless)
-            .AddClass("table-hover", IsHovarable)
+            .AddClass("table-hover", IsHoverable)
             .AddClass("table-sm", IsSmall)
             .AddClass(Class)
         .Build();

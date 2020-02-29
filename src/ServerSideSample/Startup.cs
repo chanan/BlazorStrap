@@ -50,7 +50,7 @@ namespace ServerSideSample
                 defaults.DefaultTheme = "SolarizedDark";
                 defaults.ShowLineNumbers = true;
             });
-            services.AddBootstrapCSS();
+            services.AddBootstrapCss();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
