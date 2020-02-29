@@ -81,7 +81,7 @@ window.blazorStrap = {
     focusElement: function (element) {
         element.focus();
     },
-    setBootstrapCSS: function (theme, version) {
+    setBootstrapCss: function (theme, version) {
         if (link === undefined) {
             link = document.createElement('link');
             document.head.insertBefore(link, document.head.firstChild);
