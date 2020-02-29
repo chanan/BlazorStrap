@@ -35,9 +35,9 @@
 
 <ol>
     <li>Remove the link to the bootstrap stylesheet in your <mark>index.html</mark> file (or <mark>_Host.cshtml</mark> file for Server Side projects)</li>
-    <li>Add <mark>services.AddBootstrapCSS();</mark> to your <mark>Startup.cs</mark> file</li>
-    <li>Inject <mark>BootstrapCSS</mark> into <mark>MainLayout.razor</mark> by adding: <mark>@@inject IBootstrapCSS BootstrapCSS</mark></li>
-    <li>Call <mark>await BootstrapCSS.SetBootstrapCSS("4.3.1");</mark></li>
+    <li>Add <mark>services.AddBootstrapCss();</mark> to your <mark>Startup.cs</mark> file</li>
+    <li>Inject <mark>BootstrapCss</mark> into <mark>MainLayout.razor</mark> by adding: <mark>@@inject IBootstrapCss BootstrapCss</mark></li>
+    <li>Call <mark>await BootstrapCss.SetBootstrapCss("4.3.1");</mark></li>
 </ol>
 
 <p>You can even allow your users to switch themes:</p>
