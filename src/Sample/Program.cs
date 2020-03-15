@@ -1,7 +1,7 @@
 ﻿using BlazorPrettyCode;
 using BlazorStrap;
-using BlazorStyled;
-using Microsoft.AspNetCore.Blazor.Hosting;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using SampleCore;
 using System.Threading.Tasks;
 
@@ -13,15 +13,15 @@ namespace Sample
         {
             WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
 
+            builder.Services.AddBaseAddressHttpClient();
+            builder.Services.AddBootstrapCss();
             builder.Services.AddBlazorPrettyCode(defaults =>
             {
                 defaults.DefaultTheme = "SolarizedDark";
                 defaults.ShowLineNumbers = true;
             });
-            builder.Services.AddBootstrapCss();
-
+            
             builder.RootComponents.Add<App>("app");
-            builder.RootComponents.Add<ClientSideStyled>("#styled");
 
             await builder.Build().RunAsync();
         }

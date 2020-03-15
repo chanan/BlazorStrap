@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BlazorPrettyCode" Version="1.2.0" />
+    <PackageReference Include="BlazorPrettyCode" Version="1.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.2" />
   </ItemGroup>
 
@@ -19,6 +19,10 @@
     <EmbeddedResource Include="wwwroot\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="wwwroot\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="wwwroot\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\snippets\alerts\alerts5.html" />
   </ItemGroup>
 
 </Project>

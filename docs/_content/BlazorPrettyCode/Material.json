@@ -1,0 +1,70 @@
+{
+  "Name": "Material - Default",
+  "Settings": [
+    {
+      "Settings": {
+        "background-color": "#263238",
+        "color": "#EEFFFF",
+        "font-family": "'Fira Code'"
+      }
+    },
+    {
+      "Name": "Text",
+      "Settings": { "color": "#EEFFFF" }
+    },
+    {
+      "Name": "Tag symbols",
+      "Settings": { "color": "#89DDFF" }
+    },
+    {
+      "Name": "Tag name",
+      "Settings": { "color": "#FF5370" }
+    },
+    {
+      "Name": "Attribute name",
+      "Settings": {
+        "color": "#C792EA",
+        "font-style": "italic"
+      }
+    },
+    {
+      "Name": "Attribute value",
+      "Settings": { "color": "#C3E88D" }
+    },
+    {
+      "Name": "String",
+      "Settings": { "color": "#C3E88D" }
+    },
+    {
+      "Name": "Razor Keyword",
+      "Settings": {
+        "color": "#89DDFF"
+      }
+    },
+    {
+      "Name": "Row Highlight",
+      "Settings": {
+        "background-color": "#000000"
+      }
+    },
+    {
+      "Name": "Font",
+      "Settings": {
+        "font-family": "Fira Code",
+        "font-weight": "400"
+      }
+    },
+    {
+      "Name": "CSS Propery",
+      "Settings": {
+        "color": "#EEFFFF"
+      }
+    },
+    {
+      "Name": "CSS Class",
+      "Settings": {
+        "color": "#F78C6C"
+      }
+    }
+  ]
+}

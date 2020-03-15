@@ -337,3 +337,6 @@ ASALocalRun/
 !/docs/*
 !/docs/_framework/*
 !/docs/_framework/_bin/*
+
+# Ignore dist
+/dist

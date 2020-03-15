@@ -1,5 +1,17 @@
 ﻿var link;
 
+// MDN String.include polyfill
+if (!String.prototype.includes) {
+    String.prototype.includes = function(search, start) {
+        'use strict';
+        if (search instanceof RegExp) {
+            throw TypeError('first argument must not be a RegExp');
+        }
+        if (start === undefined) { start = 0; }
+        return this.indexOf(search, start) !== -1;
+    };
+}
+
 window.blazorStrap = {
     animationEvent: function (event) {
         if (event.target.hasAttributes()) {
@@ -89,9 +101,9 @@ window.blazorStrap = {
             link.rel = 'stylesheet';
         }
         if (theme === 'bootstrap') {
-            link.href = `https://stackpath.bootstrapcdn.com/bootstrap/${version}/css/bootstrap.min.css`;
+            link.href = "https://stackpath.bootstrapcdn.com/bootstrap/" + version + "/css/bootstrap.min.css";
         } else {
-            link.href = `https://stackpath.bootstrapcdn.com/bootswatch/${version}/${theme}/bootstrap.min.css`;
+            link.href = "https://stackpath.bootstrapcdn.com/bootswatch/" + version + "/" + theme + "/bootstrap.min.css";
         }
         return true;
     }

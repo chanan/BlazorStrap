@@ -1,0 +1,78 @@
+{
+  "Name": "Winter Is Coming - Light",
+  "Settings": [
+    {
+      "Settings": {
+        "background-color": "#FFFFFF",
+        "color": "#236ebf",
+        "font-family": "'Fira Code'"
+      }
+    },
+    {
+      "Name": "Text",
+      "Settings": { "color": "#236ebf" }
+    },
+    {
+      "Name": "Tag symbols",
+      "Settings": { "color": "#0444ac" }
+    },
+    {
+      "Name": "Tag name",
+      "Settings": { "color": "#0444ac" }
+    },
+    {
+      "Name": "Attribute name",
+      "Settings": {
+        "color": "#df8618",
+        "font-style": "italic"
+      }
+    },
+    {
+      "Name": "Attribute value",
+      "Settings": { "color": "#bcf0c0" }
+    },
+    {
+      "Name": "String",
+      "Settings": { "color": "#87429A" }
+    },
+    {
+      "Name": "Quotes",
+      "Settings": {
+        "color": "#87429A",
+        "font-style": "italic"
+      }
+    },
+    {
+      "Name": "Razor Keyword",
+      "Settings": {
+        "color": "#7b30d0"
+      }
+    },
+    {
+      "Name": "Row Highlight",
+      "Settings": {
+        "background-color": "#eff2ef"
+      }
+    },
+    {
+      "Name": "Font",
+      "Settings": {
+        "font-family": "Fira Code",
+        "font-weight": "400"
+      }
+    },
+    {
+      "Name": "CSS Propery",
+      "Settings": {
+        "color": "#7b30d0"
+      }
+    },
+    {
+      "Name": "CSS Class",
+      "Settings": {
+        "color": "#df8618",
+        "font-style": "italic"
+      }
+    }
+  ]
+}

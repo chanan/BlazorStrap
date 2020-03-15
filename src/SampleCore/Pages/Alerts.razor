@@ -48,6 +48,11 @@
             <td>Applies the selected color to the alert</td>
         </tr>
         <tr>
+            <td>IsOpen</td>
+            <td>bool</td>
+            <td>Opens and closes the alert</td>
+        </tr>
+        <tr>
             <td>IsDismissible</td>
             <td>bool</td>
             <td>Adds the ability to dismiss the alert</td>
@@ -112,10 +117,27 @@
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/alerts/alerts4.html" />
 
+<h3>Closing</h3>
+
+<div class="docs-example">
+    <BSAlert Color="Color.Info" IsOpen="@isOpen">
+        Toggle the alert with the button below
+    </BSAlert>
+    <BSButton @onclick="@onclick">Toggle Alert</BSButton>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/alerts/alerts5.html" />
+
 @code {
+    private bool isOpen = true;
+
     void OnDismiss()
     {
         Console.WriteLine("OnDismiss");
         StateHasChanged();
+    }
+
+    void onclick(MouseEventArgs e)
+    {
+        isOpen = !isOpen;
     }
 }

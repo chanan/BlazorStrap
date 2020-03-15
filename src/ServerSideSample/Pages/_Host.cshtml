@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="_content/Samplecore/css/demo.css" />
     <link rel="stylesheet" href="_content/BlazorStrap/css/submenu.css" />
     <link rel="manifest" href="/site.webmanifest">
-    @(await Html.RenderComponentAsync<BlazorStyled.ServerSideStyled>(RenderMode.ServerPrerendered))
 </head>
 <body class="Hello">
     <app>@(await Html.RenderComponentAsync<SampleCore.App>(RenderMode.ServerPrerendered))</app>

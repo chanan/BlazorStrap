@@ -49,6 +49,7 @@ namespace ServerSideSample
             {
                 defaults.DefaultTheme = "SolarizedDark";
                 defaults.ShowLineNumbers = true;
+                defaults.IsDevelopmentMode = true;
             });
             services.AddBootstrapCss();
         }

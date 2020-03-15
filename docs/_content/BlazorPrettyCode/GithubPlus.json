@@ -1,0 +1,69 @@
+{
+  "Name": "Github Plus",
+  "Settings": [
+    {
+      "Settings": {
+        "background-color": "ffffff",
+        "color": "#24292e",
+        "font-family": "'Fira Code'"
+      }
+    },
+    {
+      "Name": "Text",
+      "Settings": { "color": "#24292e" }
+    },
+    {
+      "Name": "Tag symbols",
+      "Settings": { "color": "#24292e" }
+    },
+    {
+      "Name": "Tag name",
+      "Settings": { "color": "#22863a" }
+    },
+    {
+      "Name": "Attribute name",
+      "Settings": {
+        "color": "#6f42c1"
+      }
+    },
+    {
+      "Name": "Attribute value",
+      "Settings": { "color": "#24292e" }
+    },
+    {
+      "Name": "String",
+      "Settings": { "color": "#22863a" }
+    },
+    {
+      "Name": "Razor Keyword",
+      "Settings": {
+        "color": "#d73a49"
+      }
+    },
+    {
+      "Name": "Row Highlight",
+      "Settings": {
+        "background-color": "#fffbdd"
+      }
+    },
+    {
+      "Name": "Font",
+      "Settings": {
+        "font-family": "Fira Code",
+        "font-weight": "400"
+      }
+    },
+    {
+      "Name": "CSS Propery",
+      "Settings": {
+        "color": "#005cc5"
+      }
+    },
+    {
+      "Name": "CSS Class",
+      "Settings": {
+        "color": "#6f42c1"
+      }
+    }
+  ]
+}

@@ -14,6 +14,7 @@ namespace BlazorStrap
         [Parameter] public EventCallback<BSAlertEvent> CloseEvent { get; set; }
         [Parameter] public Color Color { get; set; } = Color.Primary;
         [Parameter] public bool IsDismissible { get; set; }
+        [Parameter] public bool IsOpen { get; set; } = true;
         /// <summary>
         /// Gets or sets an action to be invoked when the alert is dismissed.
         /// </summary>
@@ -28,7 +29,7 @@ namespace BlazorStrap
            .AddClass($"alert-{Color.ToDescriptionString()}")
            .AddClass(Class)
        .Build();
-        protected bool IsOpen { get; set; } = true;
+        
 
         protected override Task OnAfterRenderAsync(bool firstrun)
         {
