@@ -8,9 +8,9 @@
 
 <ol>
     <li>Remove the link to the bootstrap stylesheet in your <mark>index.html</mark> file</li>
-    <li>Add <mark>services.AddBootstrapCSS();</mark> to your <mark>Startup.cs</mark> file</li>
-    <li>Inject <mark>NootstrapCSS</mark> into <mark>MainLayout.razor</mark> by adding: <mark>@@inject IBootstrapCSS BootstrapCSS</mark></li>
-    <li>Call <mark>await BootstrapCSS.SetBootstrapCSS();</mark> (See API below for options)</li>
+    <li>Add <mark>services.AddBootstrapCss();</mark> to your <mark>Startup.cs</mark> file</li>
+    <li>Inject <mark>BootstrapCss</mark> into <mark>MainLayout.razor</mark> by adding: <mark>@@inject IBootstrapCss BootstrapCss</mark></li>
+    <li>Call <mark>await BootstrapCss.SetBootstrapCss();</mark> (See API below for options)</li>
 </ol>
 
 <PrettyCode CodeFile="_content/SampleCore/snippets/themes/themes1.html" Title="Startup.cs" HighlightLines="5" />
@@ -21,8 +21,8 @@
 <ol>
     <li>Remove the link to the bootstrap stylesheet in your <mark>_Host.cshtml</mark> file</li>
     <li>Add <mark>services.AddBootstrapCSS();</mark> to your <mark>Startup.cs</mark> file</li>
-    <li>Inject <mark>NootstrapCSS</mark> into <mark>MainLayout.razor</mark> by adding: <mark>@@inject IBootstrapCSS BootstrapCSS</mark></li>
-    <li>Call <mark>await BootstrapCSS.SetBootstrapCSS();</mark> (See API below for options)</li>
+    <li>Inject <mark>BootstrapCss</mark> into <mark>MainLayout.razor</mark> by adding: <mark>@@inject IBootstrapCss BootstrapCss</mark></li>
+    <li>Call <mark>await BootstrapCss.SetBootstrapCss();</mark> (See API below for options)</li>
 </ol>
 
 <PrettyCode CodeFile="_content/SampleCore/snippets/themes/themes3.html" Title="Startup.cs" HighlightLines="16" />
@@ -31,10 +31,10 @@
 <h2>API</h2>
 
 <ul>
-    <li><code>BootstrapCSS.SetBootstrapCSS();</code> - Sets your site's CSS to the latest bootstrap CSS</li>
-    <li><code>BootstrapCSS.SetBootstrapCSS("version number");</code> - Sets your site's CSS to the the version of bootstrap CSS you supply (using "latest" will use latest version)</li>
-    <li><code>BootstrapCSS.SetBootstrapCSS("theme", "version number");</code> - Sets your site's CSS to the the version of the named bootswatch CSS you supply</li>
-    <li><code>BootstrapCSS.SetBootstrapCSS(Theme theme, "version number");</code> - Sets your site's CSS to the the version of the named bootswatch CSS you supply via an enum</li>
+    <li><code>BootstrapCss.SetBootstrapCss();</code> - Sets your site's CSS to the latest bootstrap CSS</li>
+    <li><code>BootstrapCss.SetBootstrapCss("version number");</code> - Sets your site's CSS to the the version of bootstrap CSS you supply (using "latest" will use latest version)</li>
+    <li><code>BootstrapCss.SetBootstrapCss("theme", "version number");</code> - Sets your site's CSS to the the version of the named bootswatch CSS you supply</li>
+    <li><code>BootstrapCss.SetBootstrapCss(Theme theme, "version number");</code> - Sets your site's CSS to the the version of the named bootswatch CSS you supply via an enum</li>
     <li><code>Theme CurrentTheme { get; }</code> - Returns the current theme as an enum</li>
 </ul>
 

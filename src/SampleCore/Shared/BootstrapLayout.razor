@@ -1,5 +1,5 @@
 @inherits LayoutComponentBase
-@inject IBootstrapCSS BootstrapCSS
+@inject IBootstrapCss BootstrapCss
 
 <BSNavbar IsFixedTop="true" IsDark="true" Class="navbar-expand flex-column flex-md-row bd-navbar">
     <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Blazorstrap"><img src="_content/SampleCore/logo-inverted.svg" width="36" height="36" alt="BlazorStrap"></a>
@@ -75,7 +75,7 @@
     {
         if (firstrun)
         {
-            await BootstrapCSS.SetBootstrapCSS("4.3.1");
+            await BootstrapCss.SetBootstrapCss("4.3.1");
         }
     }
 }

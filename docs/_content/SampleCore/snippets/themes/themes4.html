@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-@inject IBootstrapCSS BootstrapCSS
+@inject IBootstrapCss BootstrapCss
 
 <div class="sidebar" style="overflow-y: auto">
     <NavMenu />
@@ -16,7 +16,7 @@
     {
         if (isServerSide && !hasBeendone)
         {
-            await BootstrapCSS.SetBootstrapCSS("4.3.1");
+            await BootstrapCss.SetBootstrapCss("4.3.1");
             hasBeendone = true;
         }
     }
