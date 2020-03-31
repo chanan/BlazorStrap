@@ -25,4 +25,12 @@
     <Content Remove="wwwroot\snippets\alerts\alerts5.html" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Remove="wwwroot\snippets\modals\modals5.html" />
+    <EmbeddedResource Remove="wwwroot\snippets\modals\modals6.html" />
+    <EmbeddedResource Remove="wwwroot\snippets\modals\modals7.html" />
+    <EmbeddedResource Remove="wwwroot\snippets\modals\modals8.html" />
+    <EmbeddedResource Remove="wwwroot\snippets\modals\modals9.html" />
+  </ItemGroup>
+
 </Project>

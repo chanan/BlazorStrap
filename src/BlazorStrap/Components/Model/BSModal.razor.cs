@@ -17,6 +17,10 @@ namespace BlazorStrap
         [Parameter] public bool IgnoreClickOnBackdrop { get; set; }
         [Parameter] public bool IgnoreEscape { get; set; }
         [Parameter] public bool IsCentered { get; set; }
+        [Parameter] public bool IsBottom { get; set; }
+        [Parameter] public bool IsFullWidth { get; set; }
+        [Parameter] public bool IsFullHeight { get; set; }
+        [Parameter] public bool IsFullScreen { get; set; }
         [Parameter] public bool NoBackdrop { get; set; }
         [Parameter] public EventCallback<BSModalEvent> ShowEvent { get; set; }
         [Parameter] public EventCallback<BSModalEvent> ShownEvent { get; set; }
@@ -45,10 +49,22 @@ namespace BlazorStrap
         {
             get
             {
-             //   var display = DisableAnimations || (IsOpen ?? true)
-                 //   ? (IsOpen ?? false) ? "display: block; padding-right: 17px;" : null
-                var display= (_toggleModel) ? "display: block; padding-right: 17px;" : null;
+                //   var display = DisableAnimations || (IsOpen ?? true)
+                //   ? (IsOpen ?? false) ? "display: block; padding-right: 17px;" : null
+                // we don't need any -> padding-right: 17px;
+                var display = (_toggleModel) ? "display: block;" : null;
                 return $"{Style} {display}".Trim();
+            }
+        }
+        protected string InnerStyles
+        {
+            get
+            {
+                var fullWidthStyle = (IsFullWidth) ? "width:100%;min-width:100%;margin-left:0;margin-right:0;" : null;
+                var bottomStyle = (IsBottom) ? "display: flex;-ms-flex-align: flex-end;align-items: flex-end;height:100%;min-height:100%;margin-top:0;margin-bottom:0;" : null;
+                var fullHeightStyle = (IsFullHeight) ? "display: flex;-ms-flex-align: stretch;align-items: stretch;height:100%;min-height:100%;margin-top:0;margin-bottom:0;" : null;
+                var fullScreenStyle = (IsFullScreen) ? "display: flex;-ms-flex-align: stretch;align-items: stretch;width:100%;min-width:100%;height:100%;min-height:100%;margin:0;" : null;
+                return $" {fullWidthStyle} {bottomStyle} {fullScreenStyle} {fullHeightStyle}";
             }
         }
 

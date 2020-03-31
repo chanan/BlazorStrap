@@ -3,7 +3,7 @@
 <h1>Modals</h1>
 
 <div class="docs-example modal-example">
-    <BSModal IsOpen="true" NoBackdrop="true" Class="show"> 
+    <BSModal IsOpen="true" NoBackdrop="true" Class="show">
         <BSModalHeader>Modal title</BSModalHeader>
         <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
         <BSModalFooter>
@@ -66,6 +66,82 @@
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/modals/modals4.html" />
 
+<h3>Full Width Modal</h3>
+
+<div class="docs-example">
+    <BSButton Color="Color.Primary" @onclick="onclick5">Full width modal</BSButton>
+    <BSModal IsFullWidth="true" @bind-IsOpen="@IsOpen5">
+        <BSModalHeader OnClick="onclick5">Modal title</BSModalHeader>
+        <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+        <BSModalFooter>
+            <BSButton Color="Color.Primary" @onclick="onclick5">Do Something</BSButton>
+            <BSButton Color="Color.Secondary" @onclick="onclick5">Cancel</BSButton>
+        </BSModalFooter>
+    </BSModal>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/modals/modals5.html" />
+
+<h3>Bottom Modal</h3>
+
+<div class="docs-example">
+    <BSButton Color="Color.Primary" @onclick="onclick6">Bottom modal</BSButton>
+    <BSModal IsBottom="true" @bind-IsOpen="@IsOpen6">
+        <BSModalHeader OnClick="onclick6">Modal title</BSModalHeader>
+        <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+        <BSModalFooter>
+            <BSButton Color="Color.Primary" @onclick="onclick6">Do Something</BSButton>
+            <BSButton Color="Color.Secondary" @onclick="onclick6">Cancel</BSButton>
+        </BSModalFooter>
+    </BSModal>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/modals/modals6.html" />
+
+<h3>Bottom Sheet like modal</h3>
+
+<div class="docs-example">
+    <BSButton Color="Color.Primary" @onclick="onclick7">Bottom sheet modal</BSButton>
+    <BSModal IsBottom="true" IsFullWidth="true" @bind-IsOpen="@IsOpen7">
+        <BSModalHeader OnClick="onclick7">Modal title</BSModalHeader>
+        <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+        <BSModalFooter>
+            <BSButton Color="Color.Primary" @onclick="onclick7">Do Something</BSButton>
+            <BSButton Color="Color.Secondary" @onclick="onclick7">Cancel</BSButton>
+        </BSModalFooter>
+    </BSModal>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/modals/modals7.html" />
+
+
+<h3>Full Height Modal</h3>
+
+<div class="docs-example">
+    <BSButton Color="Color.Primary" @onclick="onclick8">Full height modal</BSButton>
+    <BSModal IsFullHeight="true" @bind-IsOpen="@IsOpen8">
+        <BSModalHeader OnClick="onclick8">Modal title</BSModalHeader>
+        <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+        <BSModalFooter>
+            <BSButton Color="Color.Primary" @onclick="onclick8">Do Something</BSButton>
+            <BSButton Color="Color.Secondary" @onclick="onclick8">Cancel</BSButton>
+        </BSModalFooter>
+    </BSModal>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/modals/modals8.html" />
+
+<h3>Fullscreen modal</h3>
+
+<div class="docs-example">
+    <BSButton Color="Color.Primary" @onclick="onclick9">Fullscreen modal</BSButton>
+    <BSModal IsFullScreen="true" @bind-IsOpen="@IsOpen9">
+        <BSModalHeader OnClick="onclick9">Modal title</BSModalHeader>
+        <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+        <BSModalFooter>
+            <BSButton Color="Color.Primary" @onclick="onclick9">Do Something</BSButton>
+            <BSButton Color="Color.Secondary" @onclick="onclick9">Cancel</BSButton>
+        </BSModalFooter>
+    </BSModal>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/modals/modals9.html" />
+
 <h3>Ignore Click on Back Drop</h3>
 
 <p>You can set <code>IgnoreClickOnBackDrop</code> to prevent the user closing the model by clicking on the back drop.</p>
@@ -94,6 +170,36 @@
     void onclick4(MouseEventArgs e)
     {
         IsOpen4 = !IsOpen4;
+        StateHasChanged();
+    }
+    bool IsOpen5 { get; set; }
+    void onclick5(MouseEventArgs e)
+    {
+        IsOpen5 = !IsOpen5;
+        StateHasChanged();
+    }
+    bool IsOpen6 { get; set; }
+    void onclick6(MouseEventArgs e)
+    {
+        IsOpen6 = !IsOpen6;
+        StateHasChanged();
+    }
+    bool IsOpen7 { get; set; }
+    void onclick7(MouseEventArgs e)
+    {
+        IsOpen7 = !IsOpen7;
+        StateHasChanged();
+    }
+    bool IsOpen8 { get; set; }
+    void onclick8(MouseEventArgs e)
+    {
+        IsOpen8 = !IsOpen8;
+        StateHasChanged();
+    }
+    bool IsOpen9 { get; set; }
+    void onclick9(MouseEventArgs e)
+    {
+        IsOpen9 = !IsOpen9;
         StateHasChanged();
     }
 }
