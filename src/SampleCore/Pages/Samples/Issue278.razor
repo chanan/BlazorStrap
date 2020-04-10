@@ -1,0 +1,72 @@
+﻿@page "/samples/issue278"
+@using BlazorStrap.Components.Forms.Validators
+@using SampleCore.Pages.Samples.Issue278Types
+
+<BSForm Model="customer" OnValidSubmit="SaveCustomer">
+    <FluentValidator TValidator="CustomerValidator" />
+
+    <h3>Your name</h3>
+    <BSInput InputType="InputType.Text" placeholder="First name" @bind-Value="customer.FirstName" />
+    <BSInput InputType="InputType.Text" placeholder="Last name" @bind-Value="customer.LastName" />
+    <ValidationMessage For="@(() => customer.FirstName)" />
+    <ValidationMessage For="@(() => customer.LastName)" />
+
+    <h3>Your address</h3>
+    <div>
+        <BSInput InputType="InputType.Text" placeholder="Line 1" @bind-Value="customer.Address.Line1" />
+        <ValidationMessage For="@(() => customer.Address.Line1)" />
+    </div>
+    <div>
+        <BSInput InputType="InputType.Text" placeholder="City" @bind-Value="customer.Address.City" />
+        <ValidationMessage For="@(() => customer.Address.City)" />
+    </div>
+    <div>
+        <BSInput InputType="InputType.Text" placeholder="Postcode" @bind-Value="customer.Address.Postcode" />
+        <ValidationMessage For="@(() => customer.Address.Postcode)" />
+    </div>
+
+    <h3>
+        Payment methods
+        [<a href="/samples/issue278" @onclick="AddPaymentMethod"  @onclick:preventDefault>Add new</a>]
+    </h3>
+    <ValidationMessage For="@(() => customer.PaymentMethods)" />
+
+    @foreach (var paymentMethod in customer.PaymentMethods)
+    {
+        <p>
+            <BSInput InputType="InputType.Select" @bind-Value="paymentMethod.MethodType">
+                <option value="@PaymentMethod.Type.CreditCard">Credit card</option>
+                <option value="@PaymentMethod.Type.HonourSystem">Honour system</option>
+            </BSInput>
+
+            @if (paymentMethod.MethodType == PaymentMethod.Type.CreditCard)
+            {
+                <BSInput InputType="InputType.Text" placeholder="Card number" @bind-Value="paymentMethod.CardNumber" />
+            }
+            else if (paymentMethod.MethodType == PaymentMethod.Type.HonourSystem)
+            {
+                <span>Sure, we trust you to pay us somehow eventually</span>
+            }
+
+            <button type="button" @onclick="@(() => customer.PaymentMethods.Remove(paymentMethod))" @onclick:preventDefault>Remove</button>
+
+            <ValidationMessage For="@(() => paymentMethod.CardNumber)" />
+        </p>
+    }
+
+    <p><button type="submit">Submit</button></p>
+</BSForm>
+
+@code {
+    private Customer customer = new Customer();
+
+    void AddPaymentMethod()
+    {
+        customer.PaymentMethods.Add(new PaymentMethod());
+    }
+
+    void SaveCustomer()
+    {
+        Console.WriteLine("TODO: Actually do something with the valid data");
+    }
+}
