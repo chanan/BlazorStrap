@@ -164,7 +164,7 @@ namespace BlazorStrap
                 }
             }
             // This appears safe to remove 
-            // builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, () => { _touched = true; ValidateField(base.FieldIdentifier) ; }));
+            builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, () => { _touched = true; ValidateField(FieldIdentifier) ; }));
             builder.AddContent(13, ChildContent);
             builder.CloseElement();
         }
@@ -343,7 +343,7 @@ namespace BlazorStrap
         private void ValidateField(FieldIdentifier fieldIdentifier)
         {
             var OnFieldChanged = (MulticastDelegate)MyEditContext.GetType().GetField("OnFieldChanged", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(MyEditContext);
-            OnFieldChanged?.DynamicInvoke(new object[] { this, new FieldChangedEventArgs(fieldIdentifier) });
+            OnFieldChanged?.DynamicInvoke(new object[] { EditContext, new FieldChangedEventArgs(fieldIdentifier) });
             StateHasChanged();
         }
     }

@@ -1,11 +1,11 @@
-﻿using FluentValidation;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using FluentValidation;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace BlazorStrap.Components.Forms.Validators
+namespace BlazorStrap.Extensions.FluentValidation
 {
     public class FluentValidator<TValidator> : ComponentBase where TValidator : IValidator, new()
     {
@@ -22,8 +22,11 @@ namespace BlazorStrap.Components.Forms.Validators
             // Revalidate when any field changes, or if the entire form requests validation
             // (e.g., on submit)
 
+            //_editContext.OnFieldChanged += (sender, eventArgs)
+            //    => ValidateModel((EditContext)sender, messages);
+
             _editContext.OnFieldChanged += (sender, eventArgs)
-                => ValidateModel((EditContext)sender, messages);
+                => ValidateModelField((EditContext)sender, messages, eventArgs);
 
             _editContext.OnValidationRequested += (sender, eventArgs)
                 => ValidateModel((EditContext)sender, messages);
@@ -40,7 +43,19 @@ namespace BlazorStrap.Components.Forms.Validators
             }
             editContext.NotifyValidationStateChanged();
         }
-
+        private void ValidateModelField(EditContext editContext, ValidationMessageStore messages, FieldChangedEventArgs fieldChangedEventArgs)
+        {
+            var type = editContext.Model.GetType();
+            var validationResult = _validator.Validate(editContext.Model);
+            
+            messages.Clear(fieldChangedEventArgs.FieldIdentifier);
+            foreach (var error in validationResult.Errors.Where(w => ToFieldIdentifier(editContext, w.PropertyName).FieldName == fieldChangedEventArgs.FieldIdentifier.FieldName))
+            {
+                var fieldIdentifier = ToFieldIdentifier(editContext, error.PropertyName);
+                messages.Add(fieldIdentifier, error.ErrorMessage);
+            }
+            editContext.NotifyValidationStateChanged();
+        }
         private static FieldIdentifier ToFieldIdentifier(EditContext editContext, string propertyPath)
         {
             // This method parses property paths like 'SomeProp.MyCollection[123].ChildProp'
