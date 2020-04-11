@@ -163,7 +163,6 @@ namespace BlazorStrap
                    builder.AddAttribute(11, "max", MaxDate);
                 }
             }
-            // This appears safe to remove 
             builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, () => { _touched = true; ValidateField(FieldIdentifier) ; }));
             builder.AddContent(13, ChildContent);
             builder.CloseElement();
