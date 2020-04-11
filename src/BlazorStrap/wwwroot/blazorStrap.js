@@ -112,7 +112,7 @@ window.blazorStrap = {
 function showPopper(reference, popper, arrow, placement) {
     var thePopper = new Popper(reference, popper,
         {
-            placement,
+            placement: placement,
             modifiers: {
                 offset: {
                     offset: 0
