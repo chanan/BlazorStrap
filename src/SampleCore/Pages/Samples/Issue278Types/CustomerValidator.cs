@@ -12,7 +12,6 @@ namespace SampleCore.Pages.Samples.Issue278Types
             RuleFor(customer => customer.FirstName).NotEmpty().MaximumLength(50);
             RuleFor(customer => customer.LastName).NotEmpty().MaximumLength(50);
             RuleFor(customer => customer.Address).SetValidator(new AddressValidator());
-
             RuleFor(customer => customer.PaymentMethods).NotEmpty().WithMessage("You have to define at least one payment method");
             RuleForEach(customer => customer.PaymentMethods).SetValidator(new PaymentMethodValidator());
         }

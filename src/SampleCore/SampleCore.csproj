@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj" />
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
+    
   </ItemGroup>
 
   <ItemGroup>
