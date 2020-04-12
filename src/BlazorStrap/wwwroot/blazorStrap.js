@@ -93,6 +93,26 @@ window.blazorStrap = {
     focusElement: function (element) {
         element.focus();
     },
+    collapsingElement: function (element, show) {
+        element.classList.remove("collapsing");
+        element.classList.remove("collapse");
+        var height = element.offsetHeight;
+        element.classList.add("collapsing");
+
+        if (show) {
+            setTimeout(function () { element.style.height = height + "px"; }, 100)
+        }
+        else {
+            element.style.height = height + "px";
+            setTimeout(function () { element.style.height =""; }, 100)   
+        }
+        return true;
+    },
+
+    collapsingElementEnd: function (element) {
+        element.style.height = "";
+        return true;
+    },
     setBootstrapCss: function (theme, version) {
         if (link === undefined) {
             link = document.createElement('link');

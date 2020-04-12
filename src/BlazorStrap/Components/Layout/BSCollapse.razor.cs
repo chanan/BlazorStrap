@@ -1,4 +1,5 @@
 ﻿using BlazorComponentUtilities;
+using BlazorStrap.Util;
 using BlazorStrap.Util.Components;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
@@ -15,23 +16,24 @@ namespace BlazorStrap
         [Parameter] public EventCallback<BSCollapseEvent> HiddenEvent { get; set; }
         [Parameter] public bool IsList { get; set; }
         [CascadingParameter] protected BSNavbar Navbar { get; set; }
+
         internal BSCollapseEvent BSCollapseEvent { get; set; }
         internal List<EventCallback<BSCollapseEvent>> EventQue { get; set; } = new List<EventCallback<BSCollapseEvent>>();
 
         [CascadingParameter] internal BSCollapseItem CollapseItem { get; set; }
         protected string Tag => IsList ? "li" : "div";
-
+        protected bool Collapsing { get; set; }
         protected string Classname =>
-         new CssBuilder("collapse")
+         new CssBuilder(Collapsing && (IsOpen ?? false) ? "collapsing" : "collapse")
              .AddClass("navbar-collapse", IsNavbar)
-             .AddClass("show", (IsOpen ?? false))
+             .AddClass("show", (IsOpen ?? false) && !Collapsing)
              .AddClass(Class)
          .Build();
 
         [Parameter] public bool IsNavbar { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
-
+        [Inject] protected Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
         protected override void OnInitialized()
         {
             if (IsNavbar && Navbar != null)
@@ -52,6 +54,8 @@ namespace BlazorStrap
 
         internal override async Task Changed(bool e)
         {
+            Collapsing = true;
+            
             BSCollapseEvent = new BSCollapseEvent() { Target = this };
             if (e)
             {
@@ -72,15 +76,25 @@ namespace BlazorStrap
                 EventQue.Add(HiddenEvent);
             }
         }
-
-        protected override Task OnAfterRenderAsync(bool firstrun)
+        public async Task AnimationEnd()
         {
+            Collapsing = false;
+            await new BlazorStrapInterop(JSRuntime).ClearOffsetHeight(MyRef);
+            await InvokeAsync(StateHasChanged).ConfigureAwait(false);
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstrun)
+        {
+            if (Collapsing && !firstrun)
+            {
+                await new BlazorStrapInterop(JSRuntime).SetOffsetHeight(MyRef, IsOpen ?? false);
+            }
             for (var i = 0; i < EventQue.Count; i++)
             {
                 EventQue[i].InvokeAsync(BSCollapseEvent);
                 EventQue.RemoveAt(i);
             }
-            return base.OnAfterRenderAsync(false);
+           // return base.OnAfterRenderAsync(false);
         }
     }
 }

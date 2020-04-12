@@ -1,6 +1,6 @@
 ﻿@namespace BlazorStrap
 @inherits BSCollapseBase
 
-<DynamicElement @attributes="@UnknownParameters" TagName="@Tag" class="@Classname" @bind-ElementRef="MyRef">
+<DynamicElement @attributes="@UnknownParameters" TagName="@Tag" class="@Classname" @bind-ElementRef="MyRef" @ontransitionend="AnimationEnd">
     @ChildContent
 </DynamicElement>

@@ -23,6 +23,26 @@ namespace BlazorStrap.Util
             OnEscapeEvent?.Invoke();
             return Task.CompletedTask;
         }
+
+        /// <summary>
+        /// Set Collapse offset height
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ValueTask<bool> SetOffsetHeight(ElementReference el, bool show)
+        {
+            return JSRuntime.InvokeAsync<bool>("blazorStrap.collapsingElement", el, show);
+        }
+
+        /// <summary>
+        /// Clear Collapse offset height
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ValueTask<bool> ClearOffsetHeight(ElementReference el)
+        {
+            return JSRuntime.InvokeAsync<bool>("blazorStrap.collapsingElementEnd", el);
+        }
         /// <summary>
         /// Use for animated classes only. Blazor can not track classes added this way.
         /// </summary>
@@ -33,6 +53,7 @@ namespace BlazorStrap.Util
         {
             return JSRuntime.InvokeAsync<bool>("blazorStrap.addClass", el, Classname);
         }
+
         /// <summary>
         /// Use for animated classes only. Blazor can not track classes added this way.
         /// </summary>
