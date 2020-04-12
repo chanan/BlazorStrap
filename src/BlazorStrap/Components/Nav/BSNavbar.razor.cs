@@ -9,6 +9,7 @@ namespace BlazorStrap
 {
     public abstract class BSNavbarBase : ComponentBase
     {
+        [Parameter] public bool Header { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public Color Color { get; set; } = Color.None;
@@ -44,6 +45,10 @@ namespace BlazorStrap
             .AddClass(Class)
         .Build();
 
+        protected string Tag => Header? "Header" : "Nav";
+        
+
         private bool _visible { get; set; }
+
     }
 }
