@@ -85,9 +85,17 @@ namespace BlazorStrap
 
         protected override async Task OnAfterRenderAsync(bool firstrun)
         {
-            if (Collapsing && !firstrun)
+            if (Collapsing)
             {
-                await new BlazorStrapInterop(JSRuntime).SetOffsetHeight(MyRef, IsOpen ?? false);
+                if (firstrun && Collapsing)
+                {
+                    Collapsing = false;
+                    await InvokeAsync(StateHasChanged).ConfigureAwait(false);
+                }
+                else
+                {
+                    await new BlazorStrapInterop(JSRuntime).SetOffsetHeight(MyRef, IsOpen ?? false);
+                }
             }
             for (var i = 0; i < EventQue.Count; i++)
             {
