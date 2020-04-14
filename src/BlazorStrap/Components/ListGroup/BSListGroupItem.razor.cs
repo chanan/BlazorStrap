@@ -14,6 +14,7 @@ namespace BlazorStrap
             .AddClass($"list-group-item-{Color.ToDescriptionString()}", Color != Color.None)
             .AddClass("active", IsActive)
             .AddClass("disabled", IsDisabled && ListGroupType != ListGroupType.Button)
+            .AddClass("list-group-item-action", ListGroupType != ListGroupType.List)
             .AddClass(Class)
         .Build();
 
