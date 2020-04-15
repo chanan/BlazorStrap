@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\snippets\alerts\alerts5.html" />
+    <Content Remove="wwwroot\snippets\carousels\carousels4.html" />
   </ItemGroup>
 
   <ItemGroup>
