@@ -53,6 +53,44 @@
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels3.html" />
 
+<h3>With a Svg instead of an Image</h3>
+
+<div class="docs-example">
+    <BSCarousel NumberOfItems="@items.Count">
+        <BSCarouselIndicators NumberOfItems="@items.Count" />
+        <div class="carousel-inner">
+            @for (int i = 0; i < items.Count; i++)
+            {
+                Item item = items[i];
+                <BSCarouselItem IsSvg="true">
+                    <svg class="d-block w-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" preserveAspectRatio="none">
+                        <defs>
+                            <style type="text/css">
+                                #holder_1631dfd09f0 text {
+                                    fill: #555;
+                                    font-weight: normal;
+                                    font-family: Helvetica, monospace;
+                                    font-size: 40pt
+                                }
+                            </style>
+                        </defs>
+                        <g id="holder_1631dfd09f0">
+                            '
+                            <rect width="800" height="400" fill="#777"></rect>
+                            <g>
+                                <text x="285.921875" y="217.7" id="@item.Alt.ToLower().Replace(" ", "-")">@item.Alt</text>
+                            </g>
+                        </g>
+                    </svg>
+                </BSCarouselItem>
+            }
+        </div>
+        <BSCarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" />
+        <BSCarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" />
+    </BSCarousel>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels4.html" />
+
 @code {
     IList<Item> items = new List<Item>
 {

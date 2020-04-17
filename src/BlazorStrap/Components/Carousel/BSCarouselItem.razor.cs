@@ -31,6 +31,7 @@ namespace BlazorStrap
         public bool Prev { get; set; }
         public bool Next { get; set; }
         protected bool AddActionLink => !string.IsNullOrEmpty(ActionLink);
+        [Parameter] public bool IsSvg { get; set; } = false;
 
         [Parameter] public int Interval { get; set; } = 5000;
         [Parameter] public string Src { get; set; }
