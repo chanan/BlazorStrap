@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
-namespace BlazorStrap.DataTemplates
+namespace BlazorStrap.Extensions
 {
     public partial class BSDataTable<TItem>
     {

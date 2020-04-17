@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleCore", "src\SampleCor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Extensions.FluentValidation", "src\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj", "{B63CBB2F-799B-45FB-9AAC-43D41755C80F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorStrap.DataTemplates", "BlazorStrap.DataTemplates\BlazorStrap.DataTemplates.csproj", "{B8DE544E-1972-412C-A7ED-4F2C16A58814}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorStrap.Extensions.BSDataTable", "src\BlazorStrap.Extensions.BSDataTable\BlazorStrap.Extensions.BSDataTable.csproj", "{B8DE544E-1972-412C-A7ED-4F2C16A58814}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
