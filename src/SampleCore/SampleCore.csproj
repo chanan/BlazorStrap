@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorStrap.Extensions.DataComponents\BlazorStrap.Extensions.DataComponents.csproj" />
     <ProjectReference Include="..\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj" />
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
     
@@ -26,9 +27,11 @@
   <ItemGroup>
     <Content Remove="wwwroot\snippets\alerts\alerts5.html" />
     <Content Remove="wwwroot\snippets\carousels\carousels4.html" />
+    <Content Remove="wwwroot\snippets\carousels\Item.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="wwwroot\snippets\carousels\carousels5.html" />
     <EmbeddedResource Remove="wwwroot\snippets\modals\modals5.html" />
     <EmbeddedResource Remove="wwwroot\snippets\modals\modals6.html" />
     <EmbeddedResource Remove="wwwroot\snippets\modals\modals7.html" />
