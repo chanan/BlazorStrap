@@ -598,3 +598,111 @@
     </BSTable>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables15.html" />
+
+<h3>Data Templated Table</h3>
+<BSDataTable Items="Samples1" Context="sample" IsResponsive="true" IsStriped="true">
+    <HeaderTemplate>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </HeaderTemplate>
+    <ItemTemplate>
+        <th scope="row">@sample.Id</th>
+        <td>@sample.FirstName</td>
+        <td>@sample.LastName</td>
+        <td>@sample.Handle</td>
+    </ItemTemplate>
+</BSDataTable>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables16.html" />
+
+<h3>Data Templated Table Loading Example</h3>
+<BSDataTable Items="Samples2" Context="sample" IsResponsive="true" IsStriped="true">
+    <HeaderTemplate>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </HeaderTemplate>
+    <LoadingTemplate>
+            <td colspan="4">Loading ...</td>
+    </LoadingTemplate>
+    <ItemTemplate>
+        <th scope="row">@sample.Id</th>
+        <td>@sample.FirstName</td>
+        <td>@sample.LastName</td>
+        <td>@sample.Handle</td>
+    </ItemTemplate>
+</BSDataTable>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables17.html" />
+
+<h3>Data Templated Table No Content Example</h3>
+<BSDataTable Items="Samples3" Context="sample" IsResponsive="true" IsStriped="true">
+    <HeaderTemplate>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </HeaderTemplate>
+    <NoDataTemplate>
+        <td colspan="4">No Data Available</td>
+    </NoDataTemplate>
+    <ItemTemplate>
+        <th scope="row">@sample.Id</th>
+        <td>@sample.FirstName</td>
+        <td>@sample.LastName</td>
+        <td>@sample.Handle</td>
+    </ItemTemplate>
+</BSDataTable>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables18.html" />
+
+@code
+{
+    public List<SampleData> Samples1 { get; set; }
+    public List<SampleData> Samples2 { get; set; } // Never initialized for loading screen
+    public List<SampleData> Samples3 { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Samples1 = new List<SampleData>();
+        Samples3 = new List<SampleData>(); // No data
+
+        Samples1.Add(new SampleData()
+        {
+            Id = 1,
+            FirstName = "Mark",
+            LastName = "Otto",
+            Handle = "@@mdo"
+        });
+
+        Samples1.Add(new SampleData()
+        {
+            Id = 2,
+            FirstName = "Jacob",
+            LastName = "Thornton",
+            Handle = "@@fat"
+        });
+
+        Samples1.Add(new SampleData()
+        {
+            Id = 3,
+            FirstName = "Larry",
+            LastName = "the Bird",
+            Handle = "@@twitter"
+        });
+    }
+
+    public class SampleData
+    {
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Handle { get; set; }
+    }
+}
