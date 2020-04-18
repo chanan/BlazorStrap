@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleCore", "src\SampleCor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Extensions.FluentValidation", "src\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj", "{B63CBB2F-799B-45FB-9AAC-43D41755C80F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorStrap.Extensions.DataComponents", "src\BlazorStrap.Extensions.DataComponents\BlazorStrap.Extensions.DataComponents.csproj", "{089DA91F-73F3-4C63-9F21-BEDC0FB34DC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Extensions.DataComponents", "src\BlazorStrap.Extensions.DataComponents\BlazorStrap.Extensions.DataComponents.csproj", "{089DA91F-73F3-4C63-9F21-BEDC0FB34DC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <EmbeddedResource Remove="wwwroot\snippets\carousels\carousels5.html" />
+    <EmbeddedResource Remove="wwwroot\snippets\listgroups\listgroups13.html" />
     <EmbeddedResource Remove="wwwroot\snippets\modals\modals5.html" />
     <EmbeddedResource Remove="wwwroot\snippets\modals\modals6.html" />
     <EmbeddedResource Remove="wwwroot\snippets\modals\modals7.html" />
