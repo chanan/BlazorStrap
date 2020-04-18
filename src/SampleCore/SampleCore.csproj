@@ -38,6 +38,9 @@
     <EmbeddedResource Remove="wwwroot\snippets\modals\modals7.html" />
     <EmbeddedResource Remove="wwwroot\snippets\modals\modals8.html" />
     <EmbeddedResource Remove="wwwroot\snippets\modals\modals9.html" />
+    <EmbeddedResource Remove="wwwroot\snippets\tables\tables16.html" />
+    <EmbeddedResource Remove="wwwroot\snippets\tables\tables17.html" />
+    <EmbeddedResource Remove="wwwroot\snippets\tables\tables18.html" />
   </ItemGroup>
 
 </Project>

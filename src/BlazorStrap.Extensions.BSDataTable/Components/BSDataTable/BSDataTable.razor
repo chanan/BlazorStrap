@@ -1,0 +1,41 @@
+﻿@namespace BlazorStrap.Extensions
+@typeparam TItem
+
+
+<BSTable IsDark="@IsDark" IsBordered="@IsBordered" IsHoverable="@IsHoverable" IsResponsive="@IsResponsive"
+         IsStriped="@IsStriped" IsSmall="@IsSmall" IsBorderless="@IsBorderless">
+    <thead>
+        @HeaderTemplate
+    </thead>
+    <tbody>
+        
+            @if (_isLoading)
+            {
+                <tr>
+                    @LoadingTemplate
+                </tr>
+            }
+            else
+            {
+                if (_hasNoData)
+                {
+                    <tr>
+                        @NoDataTemplate
+                    </tr>
+                }
+                else
+                {
+
+                    @foreach (var item in Items)
+                    {
+                        <tr>
+                            @ItemTemplate(item)
+                        </tr>
+                    }
+                }
+            }
+    </tbody>
+    <tfoot>
+        @FooterTemplate
+    </tfoot>
+</BSTable>
