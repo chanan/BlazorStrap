@@ -1,38 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap.Extensions.DataComponents
 {
-    public partial class BSDataCarousel<TItem>
+    public partial class BSDataCarousel<TItem> : DataComponentBase<TItem>
     {
         // Private Variables
-        private bool _isLoading => Items == null;
         private int _numberOfItems => Items.Count;
-        private bool _hasNoData => _numberOfItems == 0;
-
-        /// <summary>
-        /// Data model to pass into the component
-        /// </summary>
-        [Parameter] public List<TItem> Items { get; set; }
-
-        /// <summary>
-        /// This template loops through each row of your data and adds it to the Carousel
-        /// </summary>
-        [Parameter] public RenderFragment<TItem> ItemTemplate { get; set; }
-
-        /// <summary>
-        /// This template will be displayed if the list of your data is null, or not initialized.
-        /// It will be displayed instead of the carousel.
-        /// </summary>
-        [Parameter] public RenderFragment LoadingTemplate { get; set; }
-
-        /// <summary>
-        /// This template will be displayed if the list of your data has no items.
-        /// It will be displayed instead of the carousel.
-        /// </summary>
-        [Parameter] public RenderFragment NoDataTemplate { get; set; }
 
         /// <summary>
         /// When true, this adds the Indicators to the Carousel.

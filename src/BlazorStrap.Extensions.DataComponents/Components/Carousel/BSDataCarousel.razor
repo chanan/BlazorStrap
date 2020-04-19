@@ -1,13 +1,15 @@
 ﻿@namespace BlazorStrap.Extensions.DataComponents
 @typeparam TItem
+@inherits DataComponentBase<TItem>
 
-@if(_isLoading)
+
+@if (IsLoading)
 {
     @LoadingTemplate
 }
 else
 {
-    @if(_hasNoData)
+    @if (HasNoData)
     {
         @NoDataTemplate
     }

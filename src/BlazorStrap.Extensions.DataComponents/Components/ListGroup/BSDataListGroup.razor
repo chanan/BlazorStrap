@@ -1,7 +1,8 @@
 ﻿@namespace BlazorStrap.Extensions.DataComponents
 @typeparam TItem
+@inherits DataComponentBase<TItem>
 
-@if(_isLoading)
+@if(IsLoading)
 {
     <BSListGroup>
         <BSListGroupItem>Loading...</BSListGroupItem>
@@ -9,7 +10,7 @@
 }
 else
 {
-    @if(_hasNoData)
+    @if(HasNoData)
     {
         <BSListGroup>
             <BSListGroupItem>No data available</BSListGroupItem>

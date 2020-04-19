@@ -1,5 +1,6 @@
-﻿@namespace BlazorStrap.Extensions
+﻿@namespace BlazorStrap.Extensions.DataComponents
 @typeparam TItem
+@inherits DataComponentBase<TItem>
 
 
 <BSTable IsDark="@IsDark" IsBordered="@IsBordered" IsHoverable="@IsHoverable" IsResponsive="@IsResponsive"
@@ -9,7 +10,7 @@
     </thead>
     <tbody>
         
-            @if (_isLoading)
+            @if (IsLoading)
             {
                 <tr>
                     @LoadingTemplate
@@ -17,7 +18,7 @@
             }
             else
             {
-                if (_hasNoData)
+                if (HasNoData)
                 {
                     <tr>
                         @NoDataTemplate
