@@ -82,11 +82,11 @@ window.blazorStrap = {
         reference.addEventListener("mouseover", mouseoverHandler);
         return true;
     },
-    modelEscape: function () {
+    modelEscape: function (dotnetHelper) {
         document.body.onkeydown = function (e) {
             if (e.key == "Escape") {
                 document.body.onkeydown = null;
-                DotNet.invokeMethodAsync("BlazorStrap", "OnEscape");
+                dotnetHelper.invokeMethodAsync("OnEscape");
             }
         };
     },
