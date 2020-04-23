@@ -2,6 +2,8 @@ using BlazorComponentUtilities;
 using BlazorStrap.Util;
 using BlazorStrap.Util.Components;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -29,6 +31,7 @@ namespace BlazorStrap
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         internal BSModalEvent BSModalEvent { get; set; }
         internal List<EventCallback<BSModalEvent>> EventQue { get; set; } = new List<EventCallback<BSModalEvent>>();
+        private BlazorStrapInterop _blazorStrapInterop { get; set; }
 
         protected string Classname =>
           new CssBuilder("modal fade")
@@ -82,12 +85,10 @@ namespace BlazorStrap
             BSModalEvent = new BSModalEvent() { Target = this };
             if (e)
             {
-                await new BlazorStrapInterop(JSRuntime).AddBodyClass("modal-open");
+                await _blazorStrapInterop.AddBodyClass("modal-open");
                 if (!IgnoreEscape)
                 {
-                    //TODO: This sucks make it better
-                    await new BlazorStrapInterop(JSRuntime).ModalEscapeKey();
-                    BlazorStrapInterop.OnEscapeEvent += OnEscape;
+                    await _blazorStrapInterop.ModalEscapeKey(this);
                 }
                 new Task(async () =>
                 {
@@ -110,7 +111,7 @@ namespace BlazorStrap
                     await InvokeAsync(StateHasChanged).ConfigureAwait(false);
                 }).Start();
                 await HideEvent.InvokeAsync(BSModalEvent).ConfigureAwait(false);
-                await new BlazorStrapInterop(JSRuntime).RemoveBodyClass("modal-open");
+                await _blazorStrapInterop.RemoveBodyClass("modal-open");
             }
         }
        
@@ -120,6 +121,8 @@ namespace BlazorStrap
             if (firstrun)
             {
                 _isInitialized = true;
+
+                _blazorStrapInterop = new BlazorStrapInterop(JSRuntime);
             }
             for (var i = 0; i < EventQue.Count; i++)
             {
@@ -138,10 +141,10 @@ namespace BlazorStrap
             }
         }
 
-        protected async Task OnEscape()
+        [JSInvokable]
+        public async Task OnEscape()
         {
             Hide();
-            BlazorStrapInterop.OnEscapeEvent -= OnEscape;
             await InvokeAsync(StateHasChanged).ConfigureAwait(false);
         }
 

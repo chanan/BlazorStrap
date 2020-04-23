@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap.Util
 {
-    public class BlazorStrapInterop
+    public class BlazorStrapInterop : IDisposable
     {
-        public static Func<Task> OnEscapeEvent { get; set; }
-
         public static Func<string, Task> OnAnimationEndEvent { get; set; }
         public static Func<string, string, Task> OnAddClassEvent { get; set; }
         protected IJSRuntime JSRuntime { get; }
@@ -16,12 +14,6 @@ namespace BlazorStrap.Util
         public BlazorStrapInterop(IJSRuntime jsRuntime)
         {
             JSRuntime = jsRuntime;
-        }
-        [JSInvokable]
-        public static Task OnEscape()
-        {
-            OnEscapeEvent?.Invoke();
-            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -78,9 +70,11 @@ namespace BlazorStrap.Util
             return JSRuntime.InvokeAsync<bool>("blazorStrap.changeBodyPaddingRight", padding);
         }
 
-        public ValueTask<string> ModalEscapeKey()
+        private DotNetObjectReference<BSModalBase> _objRef;
+        public ValueTask<string> ModalEscapeKey(BSModalBase modal)
         {
-            return JSRuntime.InvokeAsync<string>("blazorStrap.modelEscape");
+            _objRef = DotNetObjectReference.Create(modal);
+            return JSRuntime.InvokeAsync<string>("blazorStrap.modelEscape", _objRef);
         }
         public ValueTask<bool> Log(string message)
         {
@@ -109,6 +103,11 @@ namespace BlazorStrap.Util
 
         [Obsolete("SetBootstrapCSS is obsolete and will be removed in a future version of BlazorStrap. Please use SetBootstrapCss instead.", false)]
         public ValueTask<bool> SetBootstrapCSS(string theme, string version) => SetBootstrapCss(theme, version);
+
+        public void Dispose()
+        {
+            _objRef.Dispose();
+        }
     }
 
     public class StringReturn
