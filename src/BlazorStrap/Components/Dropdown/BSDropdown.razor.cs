@@ -16,6 +16,8 @@ namespace BlazorStrap
         [Parameter] public EventCallback<BSDropdownEvent> HideEvent { get; set; }
         [Parameter] public EventCallback<BSDropdownEvent> HiddenEvent { get; set; }
 
+        [Inject] public BlazorStrapInterop BlazorStrapInterop { get; set; }
+
         internal BSDropdownEvent BSDropdownEvent { get; set; }
         internal List<EventCallback<BSDropdownEvent>> EventQue { get; set; } = new List<EventCallback<BSDropdownEvent>>();
 

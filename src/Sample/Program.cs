@@ -3,6 +3,8 @@ using BlazorStrap;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using SampleCore;
+using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Sample
@@ -13,7 +15,7 @@ namespace Sample
         {
             WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-            builder.Services.AddBaseAddressHttpClient();
+            builder.Services.AddSingleton(new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddBootstrapCss();
             builder.Services.AddBlazorPrettyCode(defaults =>
             {

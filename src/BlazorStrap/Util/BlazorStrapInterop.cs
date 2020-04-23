@@ -7,8 +7,8 @@ namespace BlazorStrap.Util
 {
     public class BlazorStrapInterop : IDisposable
     {
-        public static Func<string, Task> OnAnimationEndEvent { get; set; }
-        public static Func<string, string, Task> OnAddClassEvent { get; set; }
+        public Func<string, Task> OnAnimationEndEvent { get; set; }
+        public Func<string, string, Task> OnAddClassEvent { get; set; }
         protected IJSRuntime JSRuntime { get; }
 
         public BlazorStrapInterop(IJSRuntime jsRuntime)
@@ -71,6 +71,8 @@ namespace BlazorStrap.Util
         }
 
         private DotNetObjectReference<BSModalBase> _objRef;
+        private bool _disposedValue;
+
         public ValueTask<string> ModalEscapeKey(BSModalBase modal)
         {
             _objRef = DotNetObjectReference.Create(modal);
@@ -104,9 +106,26 @@ namespace BlazorStrap.Util
         [Obsolete("SetBootstrapCSS is obsolete and will be removed in a future version of BlazorStrap. Please use SetBootstrapCss instead.", false)]
         public ValueTask<bool> SetBootstrapCSS(string theme, string version) => SetBootstrapCss(theme, version);
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    if (_objRef != null)
+                    {
+                        _objRef.Dispose();
+                    }
+                }
+                _disposedValue = true;
+            }
+        }
+
         public void Dispose()
         {
-            _objRef.Dispose();
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 
