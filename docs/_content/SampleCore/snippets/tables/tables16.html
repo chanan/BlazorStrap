@@ -1,0 +1,54 @@
+﻿<h3>Data Templated Table No Content Example</h3>
+<BSDataTable Items="Samples" Context="sample" IsResponsive="true" IsStriped="true">
+    <HeaderTemplate>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </HeaderTemplate>
+    <NoDataTemplate>
+        <td colspan="4">No Data Available</td>
+    </NoDataTemplate>
+    <ItemTemplate>
+        <th scope="row">@sample.Id</th>
+        <td>@sample.FirstName</td>
+        <td>@sample.LastName</td>
+        <td>@sample.Handle</td>
+    </ItemTemplate>
+</BSDataTable>
+
+@code
+{
+    public List<SampleData>Samples { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Samples = new List<SampleData>();
+
+        Samples1.Add(new SampleData()
+            {
+                Id = 1,
+                FirstName = "Mark",
+                LastName = "Otto",
+               Handle = "@@mdo"
+            });
+
+        Samples1.Add(new SampleData()
+        {
+            Id = 2,
+            FirstName = "Jacob",
+            LastName = "Thornton",
+            Handle = "@@fat"
+        });
+
+        Samples1.Add(new SampleData()
+        {
+            Id = 3,
+            FirstName = "Larry",
+            LastName = "the Bird",
+            Handle = "@@twitter"
+        });
+    }
+}
