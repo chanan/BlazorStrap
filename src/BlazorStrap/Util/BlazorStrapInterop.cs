@@ -11,6 +11,8 @@ namespace BlazorStrap.Util
         public Func<string, string, Task> OnAddClassEvent { get; set; }
         protected IJSRuntime JSRuntime { get; }
 
+        private int _openModals = 0;
+
         public BlazorStrapInterop(IJSRuntime jsRuntime)
         {
             JSRuntime = jsRuntime;
@@ -54,11 +56,13 @@ namespace BlazorStrap.Util
         /// <returns></returns>
         public ValueTask<bool> AddBodyClass(string Classname)
         {
+            _openModals++;
             return JSRuntime.InvokeAsync<bool>("blazorStrap.addBodyClass", Classname);
         }
         public ValueTask<bool> RemoveBodyClass(string Classname)
         {
-            return JSRuntime.InvokeAsync<bool>("blazorStrap.removeBodyClass", Classname);
+            _openModals--;
+            return _openModals ==0 ? JSRuntime.InvokeAsync<bool>("blazorStrap.removeBodyClass", Classname) : new ValueTask<bool>(false);
         }
         /// <summary>
         /// Primary use is with modals when the scroll bar is hidden

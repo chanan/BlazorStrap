@@ -2,9 +2,7 @@ using BlazorComponentUtilities;
 using BlazorStrap.Util;
 using BlazorStrap.Util.Components;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -31,7 +29,8 @@ namespace BlazorStrap
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         internal BSModalEvent BSModalEvent { get; set; }
         internal List<EventCallback<BSModalEvent>> EventQue { get; set; } = new List<EventCallback<BSModalEvent>>();
-        private BlazorStrapInterop _blazorStrapInterop { get; set; }
+        [Inject] public BlazorStrapInterop BlazorStrapInterop { get; set; }
+        protected ElementReference Me { get; set; }
 
         protected string Classname =>
           new CssBuilder("modal fade")
@@ -46,8 +45,6 @@ namespace BlazorStrap
                 .AddClass("modal-dialog-centered", IsCentered)
             .Build();
 
-        [Inject] protected Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
-        protected ElementReference Me { get; set; }
         protected string Styles
         {
             get
@@ -81,14 +78,14 @@ namespace BlazorStrap
             {
                 return;
             }
-           
+
             BSModalEvent = new BSModalEvent() { Target = this };
             if (e)
             {
-                await _blazorStrapInterop.AddBodyClass("modal-open");
+                await BlazorStrapInterop.AddBodyClass("modal-open");
                 if (!IgnoreEscape)
                 {
-                    await _blazorStrapInterop.ModalEscapeKey(this);
+                    await BlazorStrapInterop.ModalEscapeKey(this);
                 }
                 new Task(async () =>
                 {
@@ -111,10 +108,10 @@ namespace BlazorStrap
                     await InvokeAsync(StateHasChanged).ConfigureAwait(false);
                 }).Start();
                 await HideEvent.InvokeAsync(BSModalEvent).ConfigureAwait(false);
-                await _blazorStrapInterop.RemoveBodyClass("modal-open");
+                await BlazorStrapInterop.RemoveBodyClass("modal-open");
             }
         }
-       
+
         protected override Task OnAfterRenderAsync(bool firstrun)
         {
             // This is models like the demo where they are open prior to the page drawing.
@@ -122,7 +119,7 @@ namespace BlazorStrap
             {
                 _isInitialized = true;
 
-                _blazorStrapInterop = new BlazorStrapInterop(JSRuntime);
+               
             }
             for (var i = 0; i < EventQue.Count; i++)
             {

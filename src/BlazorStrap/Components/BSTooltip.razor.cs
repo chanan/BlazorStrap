@@ -7,7 +7,7 @@ namespace BlazorStrap
     public abstract class BSTooltipBase : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        [Inject] protected Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
+        [Inject] public BlazorStrapInterop BlazorStrapInterop { get; set; }
         //Didnt change this to use DynamicElement so that ref will still work
 
         protected ElementReference Tooltip { get; set; }
@@ -17,7 +17,7 @@ namespace BlazorStrap
             if (Target != null)
             {
                 var placement = Placement.ToDescriptionString();
-                new BlazorStrapInterop(JSRuntime).Tooltip(Target, Tooltip, Arrow, placement);
+                BlazorStrapInterop.Tooltip(Target, Tooltip, Arrow, placement);
             }
         }
 
