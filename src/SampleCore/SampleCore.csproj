@@ -13,6 +13,8 @@
   <ItemGroup>
     <ProjectReference Include="..\BlazorStrap.Extensions.DataComponents\BlazorStrap.Extensions.DataComponents.csproj" />
     <ProjectReference Include="..\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj" />
+    <ProjectReference Include="..\BlazorStrap.Extensions.TreeView\BlazorStrap.Extensions.TreeView.csproj" />
+    
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
     
   </ItemGroup>
@@ -22,6 +24,17 @@
     <EmbeddedResource Include="wwwroot\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="wwwroot\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="wwwroot\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\snippets\extensions\extensions1.html" />
+    <Content Remove="wwwroot\snippets\extensions\extensions2.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="wwwroot\snippets\extensions\extensions1.html">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

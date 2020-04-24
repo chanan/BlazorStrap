@@ -1,0 +1,102 @@
+﻿@page "/Extensions"
+@using BlazorStrap.Extensions.FluentValidation
+@using SampleCore.Pages.ExtensionsModels
+
+<h1>Tree View</h1>
+
+<div class="docs-example">
+    <BSTree Expand="true">
+        <BSTreeNode>
+            <BSTreeItem Label="Level 1-a">
+                <BSTreeNode>
+                    <BSTreeItem Label="Level 2-a"/>
+                    <BSTreeItem Label="Level 2-b" Active="true"/>
+                    <BSTreeItem Label="Level 2-c">
+                        <BSTreeNode>
+                            <BSTreeItem Label="Level 3-a"/>
+                            <BSTreeItem Label="Level 3-b"/>
+                            <BSTreeItem Label="Level 3-c"><Action>With Action links</Action></BSTreeItem>
+                        </BSTreeNode>
+                    </BSTreeItem>
+                </BSTreeNode>
+            </BSTreeItem>
+            <BSTreeItem Label="Level 1-b"/>
+            <BSTreeItem Label="Level 1-c"/>
+        </BSTreeNode>
+    </BSTree>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/extensions/extensions1.html" />
+    <h1>Fluent Validator</h1>
+
+    <div class="docs-example">
+        <p>This example was taken copied from Steve Sanderson fluent validator project. </p>
+        <BSForm Model="customer" OnValidSubmit="SaveCustomer">
+            <FluentValidator TValidator="CustomerValidator" />
+
+            <h3>Your name</h3>
+            <BSInput InputType="InputType.Text" placeholder="First name" @bind-Value="customer.FirstName" />
+            <ValidationMessage For="@(() => customer.FirstName)" />
+            <BSInput InputType="InputType.Text" placeholder="Last name" @bind-Value="customer.LastName" />
+            <ValidationMessage For="@(() => customer.LastName)" />
+
+            <h3>Your address</h3>
+            <div>
+                <BSInput InputType="InputType.Text" placeholder="Line 1" @bind-Value="customer.Address.Line1" />
+                <ValidationMessage For="@(() => customer.Address.Line1)" />
+            </div>
+            <div>
+                <BSInput InputType="InputType.Text" placeholder="City" @bind-Value="customer.Address.City" />
+                <ValidationMessage For="@(() => customer.Address.City)" />
+            </div>
+            <div>
+                <BSInput InputType="InputType.Text" placeholder="Postcode" @bind-Value="customer.Address.Postcode" />
+                <ValidationMessage For="@(() => customer.Address.Postcode)" />
+            </div>
+
+            <h3>
+                Payment methods
+                [<a href="/Extensions" @onclick="AddPaymentMethod" @onclick:preventDefault>Add new</a>]
+            </h3>
+            <ValidationMessage For="@(() => customer.PaymentMethods)" />
+
+            @foreach (var paymentMethod in customer.PaymentMethods)
+            {
+                <p>
+                    <BSInput InputType="InputType.Select" @bind-Value="paymentMethod.MethodType">
+                        <option value="@PaymentMethod.Type.CreditCard">Credit card</option>
+                        <option value="@PaymentMethod.Type.HonourSystem">Honour system</option>
+                    </BSInput>
+
+                    @if (paymentMethod.MethodType == PaymentMethod.Type.CreditCard)
+                    {
+                        <BSInput InputType="InputType.Text" placeholder="Card number" @bind-Value="paymentMethod.CardNumber" />
+                    }
+                    else if (paymentMethod.MethodType == PaymentMethod.Type.HonourSystem)
+                    {
+                        <span>Sure, we trust you to pay us somehow eventually</span>
+                    }
+                    <ValidationMessage For="@(() => paymentMethod.CardNumber)" />
+
+                    <button type="button" @onclick="@(() => customer.PaymentMethods.Remove(paymentMethod))" @onclick:preventDefault>Remove</button>
+
+
+                </p>
+            }
+
+            <p><button type="submit">Submit</button></p>
+        </BSForm>
+    </div>
+    <PrettyCode CodeFile="_content/SampleCore/snippets/extensions/extensions2.html" />
+    @code {
+        private Customer customer = new Customer();
+
+        void AddPaymentMethod()
+        {
+            customer.PaymentMethods.Add(new PaymentMethod());
+        }
+
+        void SaveCustomer()
+        {
+
+        }
+    }
