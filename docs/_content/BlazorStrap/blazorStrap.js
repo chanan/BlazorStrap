@@ -82,16 +82,36 @@ window.blazorStrap = {
         reference.addEventListener("mouseover", mouseoverHandler);
         return true;
     },
-    modelEscape: function () {
+    modelEscape: function (dotnetHelper) {
         document.body.onkeydown = function (e) {
             if (e.key == "Escape") {
                 document.body.onkeydown = null;
-                DotNet.invokeMethodAsync("BlazorStrap", "OnEscape");
+                dotnetHelper.invokeMethodAsync("OnEscape");
             }
         };
     },
     focusElement: function (element) {
         element.focus();
+    },
+    collapsingElement: function (element, show) {
+        element.classList.remove("collapsing");
+        element.classList.remove("collapse");
+        var height = element.offsetHeight;
+        element.classList.add("collapsing");
+
+        if (show) {
+            setTimeout(function () { element.style.height = height + "px"; }, 100)
+        }
+        else {
+            element.style.height = height + "px";
+            setTimeout(function () { element.style.height =""; }, 100)   
+        }
+        return true;
+    },
+
+    collapsingElementEnd: function (element) {
+        element.style.height = "";
+        return true;
     },
     setBootstrapCss: function (theme, version) {
         if (link === undefined) {
@@ -112,7 +132,7 @@ window.blazorStrap = {
 function showPopper(reference, popper, arrow, placement) {
     var thePopper = new Popper(reference, popper,
         {
-            placement,
+            placement: placement,
             modifiers: {
                 offset: {
                     offset: 0
