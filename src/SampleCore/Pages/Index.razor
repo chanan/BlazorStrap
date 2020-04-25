@@ -15,13 +15,19 @@
 
 <ol>
     <li style="margin-bottom: 5px;">Get it from nuget: <a href="https://www.nuget.org/packages/BlazorStrap/"><img src="https://img.shields.io/nuget/vpre/BlazorStrap.svg" /></a></li>
+    <li>Add <mark>builder.Services.AddBootstrapCss();</mark> to your <mark>Program.cs</mark></li>
     <li>Add <mark>@@using BlazorStrap</mark> to your <mark>_Imports.razor</mark></li>
 </ol>
 
 <h3>Server Side Usage</h3>
 
-<p>In addition to the above, modify your <mark>_Host.cshtml</mark> file to include the javascript files used by BlazorStrap. An example of this is in the 
-    <a href="https://github.com/chanan/BlazorStrap/blob/master/src/ServerSideSample/Pages/_Host.cshtml">ServerSideSample project</a>.</p>
+<ol>
+    <li>Add <mark>services.AddBootstrapCss()</mark> to your <mark>public void ConfigureServices(IServiceCollection services)</mark> in <mark>Startup.cs</mark></li>
+    <li>
+        Modify your <mark>_Host.cshtml</mark> file to include the javascript files used by BlazorStrap. An example of this is in the
+        <a href="https://github.com/chanan/BlazorStrap/blob/master/src/ServerSideSample/Pages/_Host.cshtml">ServerSideSample project</a>.
+    </li>
+</ol>
 
 <h2>Add the CSS to your project</h2>
 
@@ -35,7 +41,6 @@
 
 <ol>
     <li>Remove the link to the bootstrap stylesheet in your <mark>index.html</mark> file (or <mark>_Host.cshtml</mark> file for Server Side projects)</li>
-    <li>Add <mark>services.AddBootstrapCss();</mark> to your <mark>Startup.cs</mark> file</li>
     <li>Inject <mark>BootstrapCss</mark> into <mark>MainLayout.razor</mark> by adding: <mark>@@inject IBootstrapCss BootstrapCss</mark></li>
     <li>Call <mark>await BootstrapCss.SetBootstrapCss("4.3.1");</mark></li>
 </ol>
