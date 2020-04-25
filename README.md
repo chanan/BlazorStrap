@@ -57,3 +57,8 @@ https://github.com/chanan/BlazorStrap/releases
 * Tables
 * Tabs
 * Tooltip
+
+## Extensions:
+* BlazorStrap.Extensions.DataComponents
+* BlazorStrap.Extensions.FluentValidation
+* BlazorStrap.Extensions.TreeView
