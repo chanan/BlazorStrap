@@ -629,7 +629,7 @@
         </tr>
     </HeaderTemplate>
     <LoadingTemplate>
-            <td colspan="4">Loading ...</td>
+        <td colspan="4">Loading ...</td>
     </LoadingTemplate>
     <ItemTemplate>
         <th scope="row">@sample.Id</th>
@@ -662,12 +662,32 @@
 </BSDataTable>
 <PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables18.html" />
 
+<h3>Data Sortable Templated Table</h3>
+<BSDataTable Items="Samples1" Context="sample" IsResponsive="true" IsStriped="true" @ref="SortableRef">
+    <HeaderTemplate>
+        <tr>
+            <th scope="col" ><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort("Id"))" @onclick:preventDefault>#</a></th>
+            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort("FirstName"))" @onclick:preventDefault>First</a></th>
+            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort("LastName"))" @onclick:preventDefault>Last</a></th>
+            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort("Handle"))" @onclick:preventDefault>Handle</a></th>
+        </tr>
+    </HeaderTemplate>
+    <ItemTemplate>
+        <th scope="row">@sample.Id</th>
+        <td>@sample.FirstName</td>
+        <td>@sample.LastName</td>
+        <td>@sample.Handle</td>
+    </ItemTemplate>
+</BSDataTable>
+<PrettyCode CodeFile="_content/SampleCore/snippets/tables/tables19.html" />
+
 @code
 {
+
     public List<SampleData> Samples1 { get; set; }
     public List<SampleData> Samples2 { get; set; } // Never initialized for loading screen
     public List<SampleData> Samples3 { get; set; }
-
+    private BSDataTable<SampleData> SortableRef { get; set; }
     protected override void OnInitialized()
     {
         Samples1 = new List<SampleData>();

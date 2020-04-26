@@ -32,6 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="wwwroot\snippets\tables\tables19.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="wwwroot\snippets\extensions\extensions1.html">
       <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </EmbeddedResource>
