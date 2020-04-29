@@ -111,6 +111,8 @@ window.blazorStrap = {
 
     collapsingElementEnd: function (element) {
         element.style.height = "";
+        element.classList.remove("collapsing");
+        element.classList.add("collapse");
         return true;
     },
     setBootstrapCss: function (theme, version) {
