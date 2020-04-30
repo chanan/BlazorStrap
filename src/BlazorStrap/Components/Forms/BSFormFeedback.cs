@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
+using System;
 using System.Linq;
 
 namespace BlazorStrap
@@ -10,6 +11,7 @@ namespace BlazorStrap
     {
         private bool _clean = true;
         private FieldIdentifier _fieldIdentifier;
+        private readonly EventHandler<ValidationStateChangedEventArgs> _validationStateChangedHandler;
 
         ///  [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string Classname =>
@@ -25,6 +27,11 @@ namespace BlazorStrap
             .AddClass("invalid-feedback", ((Parent?.UserValidation ?? false) || Parent is null) && IsInvalid && !IsTooltip)
             .AddClass(Class)
         .Build();
+
+        public BSFormFeedback()
+        {
+            _validationStateChangedHandler = (sender, eventArgs) => StateHasChanged();
+        }
 
         protected bool HasValidationErrors()
         {
@@ -60,8 +67,10 @@ namespace BlazorStrap
             if (For != null)
             {
                 _fieldIdentifier = FieldIdentifier.Create(For);
+                MyEditContext.OnValidationStateChanged += _validationStateChangedHandler;
             }
         }
+
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {

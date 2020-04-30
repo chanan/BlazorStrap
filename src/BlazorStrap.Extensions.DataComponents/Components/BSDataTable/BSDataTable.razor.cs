@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace BlazorStrap.Extensions.DataComponents
 {
@@ -14,6 +16,9 @@ namespace BlazorStrap.Extensions.DataComponents
         [Parameter] public bool IsResponsive { get; set; }
         [Parameter] public string Class { get; set; }
 
+        private string _sortColumn { get; set; } = "";
+        private bool _desc { get; set; }
+        private PropertyDescriptor _prop { get; set; }
         // Render Fragments
 
         /// <summary>
@@ -27,5 +32,16 @@ namespace BlazorStrap.Extensions.DataComponents
         /// It will be displayed in the foot section of the table.
         /// </summary>
         [Parameter] public RenderFragment FooterTemplate { get; set; }
+
+        public async Task Sort(string name)
+        {
+            if (_sortColumn != name)
+                _desc = false;
+            else
+                _desc = !_desc;
+            _sortColumn = name;
+            _prop = TypeDescriptor.GetProperties(typeof(TItem)).Find(_sortColumn, false);
+            await InvokeAsync(StateHasChanged);
+        }
     }
 }
