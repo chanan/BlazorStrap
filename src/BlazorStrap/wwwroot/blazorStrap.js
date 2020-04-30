@@ -13,6 +13,7 @@ if (!String.prototype.includes) {
 }
 
 window.blazorStrap = {
+    poppers: [],
     animationEvent: function (event) {
         if (event.target.hasAttributes()) {
             var name = "";
@@ -50,16 +51,31 @@ window.blazorStrap = {
     },
     changeBodyPaddingRight: function (padding) {
         var dpi = window.devicePixelRatio;
-        if (dpi == 1 || !padding) {
+        if (dpi === 1 || !padding) {
             document.body.style.paddingRight = padding;
         }
         return true;
     },
     popper: function (target, popperId, arrow, placement) {
+        window.blazorStrap.closeOtherPoppers(popperId);
         var reference = document.getElementById(target);
         var popper = document.getElementById(popperId);
         showPopper(reference, popper, arrow, placement);
         return true;
+    },
+    closeOtherPoppers: function(popperId) {
+        window.blazorStrap.poppers.forEach(p => {
+            if (p !== popperId) {
+                var el = document.getElementById(p);
+                if (el) {
+                    el.style.visibility = "hidden";
+                    el.style.pointerEvents = "none";
+                }
+            }
+        });
+        if (window.blazorStrap.poppers.indexOf(popperId) === -1) {
+            window.blazorStrap.poppers.push(popperId);
+        }
     },
     tooltip: function (target, tooltip, arrow, placement) {
         var instance;
