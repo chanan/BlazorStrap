@@ -57,3 +57,8 @@ https://github.com/chanan/BlazorStrap/releases
 * Tables
 * Tabs
 * Tooltip
+
+## Extensions:
+* BlazorStrap.Extensions.DataComponents 
+* [![NuGet Pre Release](https://img.shields.io/nuget/v/BlazorStrap.Extensions.FluentValidation.svg)](https://www.nuget.org/packages/BlazorStrap.Extensions.FluentValidation/) BlazorStrap.Extensions.FluentValidation
+* [![NuGet Pre Release](https://img.shields.io/nuget/v/BlazorStrap.Extensions.TreeView.svg)](https://www.nuget.org/packages/BlazorStrap.Extensions.TreeView/) BlazorStrap.Extensions.TreeView

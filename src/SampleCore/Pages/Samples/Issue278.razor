@@ -7,22 +7,22 @@
 
         <h3>Your name</h3>
         <BSInput InputType="InputType.Text" placeholder="First name" @bind-Value="customer.FirstName" />
-        <ValidationMessage For="@(() => customer.FirstName)" />
+        <BSFormFeedback For="@(() => customer.FirstName)" />
         <BSInput InputType="InputType.Text" placeholder="Last name" @bind-Value="customer.LastName" />
-        <ValidationMessage For="@(() => customer.LastName)" />
+        <BSFormFeedback For="@(() => customer.LastName)" />
 
         <h3>Your address</h3>
         <div>
             <BSInput InputType="InputType.Text" placeholder="Line 1" @bind-Value="customer.Address.Line1" />
-            <ValidationMessage For="@(() => customer.Address.Line1)" />
+            <BSFormFeedback For="@(() => customer.Address.Line1)" />
         </div>
         <div>
             <BSInput InputType="InputType.Text" placeholder="City" @bind-Value="customer.Address.City" />
-            <ValidationMessage For="@(() => customer.Address.City)" />
+            <BSFormFeedback For="@(() => customer.Address.City)" />
         </div>
         <div>
             <BSInput InputType="InputType.Text" placeholder="Postcode" @bind-Value="customer.Address.Postcode" />
-            <ValidationMessage For="@(() => customer.Address.Postcode)" />
+            <BSFormFeedback For="@(() => customer.Address.Postcode)" />
         </div>
 
         <h3>

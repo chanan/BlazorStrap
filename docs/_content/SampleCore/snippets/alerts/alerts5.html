@@ -1,0 +1,13 @@
+﻿<BSAlert Color="Color.Info" IsOpen="@isOpen">
+    Toggle the alert with the button below
+</BSAlert>
+<BSButton @onclick="@onclick">Toggle Alert</BSButton>
+
+@code {
+    private bool isOpen = true;
+
+    void onclick(MouseEventArgs e)
+    {
+        isOpen = !isOpen;
+    }
+}

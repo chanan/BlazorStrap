@@ -150,15 +150,15 @@
 
 <div class="docs-example">
     <BSFormGroup IsCheck="true">
-        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios1" RadioValue="@("option1")" @bind-Value="RadioVlaue"/>
+        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios1" RadioValue="@("option1")" @bind-Value="RadioValue"/>
         <BSLabel For="exampleRadios1">Default radio</BSLabel>
     </BSFormGroup>
     <BSFormGroup IsCheck="true">
-        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios2" RadioValue="@("option2")" @bind-Value="RadioVlaue"/>
+        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios2" RadioValue="@("option2")" @bind-Value="RadioValue"/>
         <BSLabel For="exampleRadios2">Second default radio</BSLabel>
     </BSFormGroup>
     <BSFormGroup IsCheck="true" Class="disabled">
-        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios3" RadioValue="@("option3")" IsDisabled="true" @bind-Value="RadioVlaue"/>
+        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios3" RadioValue="@("option3")" IsDisabled="true" @bind-Value="RadioValue"/>
         <BSLabel For="exampleRadios3">Disabled radio</BSLabel>
     </BSFormGroup>
 </div>
@@ -219,7 +219,7 @@
 
 @code
 {
-    private string RadioVlaue = "option1";
+    private string RadioValue = "option1";
     private FormsModel formsModelVal = new FormsModel();
     private FormsModel formsModelValTT = new FormsModel();
 

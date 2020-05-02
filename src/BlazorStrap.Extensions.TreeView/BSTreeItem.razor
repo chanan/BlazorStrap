@@ -1,0 +1,8 @@
+﻿<CascadingValue Value="this">
+    <li class="nav-item">
+        <a class="nav-link @((Active) ? "active" : "") d-flex @((IsOpen && Child != null) ? "show" : "")" @onclick="OnClickEvent" @onclick:preventDefault @onclick:stopPropagation>
+            <div class="mr-auto"><span class="@(Child != null ? "tree-toggle" : "tree-spacer")  @((IsOpen && Child != null) ? "open" : "")"></span> @Label</div><div>@Action</div>
+        </a>
+        @ChildContent
+        </li>
+</CascadingValue>

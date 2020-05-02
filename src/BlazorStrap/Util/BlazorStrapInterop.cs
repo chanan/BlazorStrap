@@ -5,23 +5,17 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap.Util
 {
-    public class BlazorStrapInterop
+    public class BlazorStrapInterop : IDisposable
     {
-        public static Func<Task> OnEscapeEvent { get; set; }
-
-        public static Func<string, Task> OnAnimationEndEvent { get; set; }
-        public static Func<string, string, Task> OnAddClassEvent { get; set; }
+        public Func<string, Task> OnAnimationEndEvent { get; set; }
+        public Func<string, string, Task> OnAddClassEvent { get; set; }
         protected IJSRuntime JSRuntime { get; }
+
+        private int _openModals = 0;
 
         public BlazorStrapInterop(IJSRuntime jsRuntime)
         {
             JSRuntime = jsRuntime;
-        }
-        [JSInvokable]
-        public static Task OnEscape()
-        {
-            OnEscapeEvent?.Invoke();
-            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -62,11 +56,13 @@ namespace BlazorStrap.Util
         /// <returns></returns>
         public ValueTask<bool> AddBodyClass(string Classname)
         {
+            _openModals++;
             return JSRuntime.InvokeAsync<bool>("blazorStrap.addBodyClass", Classname);
         }
         public ValueTask<bool> RemoveBodyClass(string Classname)
         {
-            return JSRuntime.InvokeAsync<bool>("blazorStrap.removeBodyClass", Classname);
+            _openModals--;
+            return _openModals ==0 ? JSRuntime.InvokeAsync<bool>("blazorStrap.removeBodyClass", Classname) : new ValueTask<bool>(false);
         }
         /// <summary>
         /// Primary use is with modals when the scroll bar is hidden
@@ -78,9 +74,13 @@ namespace BlazorStrap.Util
             return JSRuntime.InvokeAsync<bool>("blazorStrap.changeBodyPaddingRight", padding);
         }
 
-        public ValueTask<string> ModalEscapeKey()
+        private DotNetObjectReference<BSModalBase> _objRef;
+        private bool _disposedValue;
+
+        public ValueTask<string> ModalEscapeKey(BSModalBase modal)
         {
-            return JSRuntime.InvokeAsync<string>("blazorStrap.modelEscape");
+            _objRef = DotNetObjectReference.Create(modal);
+            return JSRuntime.InvokeAsync<string>("blazorStrap.modelEscape", _objRef);
         }
         public ValueTask<bool> Log(string message)
         {
@@ -109,6 +109,28 @@ namespace BlazorStrap.Util
 
         [Obsolete("SetBootstrapCSS is obsolete and will be removed in a future version of BlazorStrap. Please use SetBootstrapCss instead.", false)]
         public ValueTask<bool> SetBootstrapCSS(string theme, string version) => SetBootstrapCss(theme, version);
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    if (_objRef != null)
+                    {
+                        _objRef.Dispose();
+                    }
+                }
+                _disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
     }
 
     public class StringReturn
