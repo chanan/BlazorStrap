@@ -1,5 +1,6 @@
 ﻿using BlazorPrettyCode;
 using BlazorStrap;
+using BlazorStrap.Extensions;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using SampleCore;
@@ -20,6 +21,7 @@ namespace Sample
                 defaults.DefaultTheme = "SolarizedDark";
                 defaults.ShowLineNumbers = true;
             });
+            builder.Services.AddSvgLoader();
             
             builder.RootComponents.Add<App>("app");
 

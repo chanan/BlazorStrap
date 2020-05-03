@@ -1,0 +1,82 @@
+﻿@page "/svgs"
+
+<h1>Svg's</h1>
+<p>While this component is not necessarily a bootstrap item, it becomes really useful for animating Svg's, and can really augment a well designed carousel. The power behind this component is that it allows inline svg markup or it will inject the markup from an svg file directly into the html. This allows you to use css to animate the svg whether inline or loaded from a file.</p>
+
+<h2>Setup Instructions</h2>
+<p>In order to use the Svg component you will need to register the SvgLoader service into Blazor's dependency injection system.</p>
+
+<h4>Registering the SvgLoader Service</h4>
+<p>The instructions for setup are as follows:</p>\
+
+<h5>Server Side Blazor Setup</h5>
+<ol>
+    <li>Add <mark>services.AddSvgLoader();</mark> to your <mark>Startup.cs</mark> file.</li>
+</ol>
+
+<h5>Client Side Blazor Setup</h5>
+<ol>
+    <li>Add <mark>builder.Services.AddSvgLoader();</mark> to your <mark>Program.cs</mark> file.</li>
+</ol>
+
+<h3>SVG Inline</h3>
+<div class="docs-example">
+    <BSSvg Class="d-block w-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" preserveAspectRatio="none">
+        <defs>
+            <style type="text/css">
+                #holder_1631dfd09f0 text {
+                    fill: #555;
+                    font-weight: normal;
+                    font-family: Helvetica, monospace;
+                    font-size: 40pt
+                }
+            </style>
+        </defs>
+        <g id="holder_1631dfd09f0">
+            '
+            <rect width="800" height="400" fill="#777"></rect>
+            <g>
+                <text x="285.921875" y="217.7">Sample Svg</text>
+            </g>
+        </g>
+    </BSSvg>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/svgs/svg1.html" />
+
+<h3>Svg From File</h3>
+
+<BSAlert Color="Color.Info">Please note that the svg file must have an extension of <mark>.svg</mark>.</BSAlert>
+<div class="docs-example">
+    <BSSvg Src="_content/SampleCore/sampleSvg.svg" />
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/svgs/svg2.html" />
+
+<h3>Svg with Animations using CSS</h3>
+<div class="docs-example">
+    <BSSvg Class="d-block w-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" preserveAspectRatio="none">
+        <defs>
+            <style type="text/css">
+                #holder_1631dfd09f0 text {
+                    fill: #555;
+                    font-weight: normal;
+                    font-family: Helvetica, monospace;
+                    font-size: 40pt
+                }
+            </style>
+        </defs>
+        <g id="holder_1631dfd09f0">
+            '
+            <rect width="800" height="400" fill="#777"></rect>
+            <g>
+                <text x="285.921875" y="217.7" id="svg-text">Sample Svg</text>
+            </g>
+        </g>
+    </BSSvg>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/svgs/svg3.html" />
+
+<h3>Svg loaded from file with Animations using CSS </h3>
+<div class="docs-example">
+    <BSSvg Src="_content/SampleCore/sampleSvg4.svg" />
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/svgs/svg4.html" />

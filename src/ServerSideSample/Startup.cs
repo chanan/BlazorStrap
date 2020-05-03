@@ -1,5 +1,6 @@
 using BlazorPrettyCode;
 using BlazorStrap;
+using BlazorStrap.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -52,6 +53,7 @@ namespace ServerSideSample
                 defaults.IsDevelopmentMode = true;
             });
             services.AddBootstrapCss();
+            services.AddSvgLoader();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -25,6 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\sampleSvg.svg" />
+    <Content Remove="wwwroot\sampleSvg1.svg" />
+    <Content Remove="wwwroot\sampleSvg2.svg" />
+    <Content Remove="wwwroot\sampleSvg3.svg" />
+    <Content Remove="wwwroot\sampleSvg4.svg" />
     <Content Remove="wwwroot\snippets\alerts\alerts5.html" />
     <Content Remove="wwwroot\snippets\carousels\carousels4.html" />
   </ItemGroup>
@@ -35,9 +40,28 @@
     <EmbeddedResource Remove="wwwroot\snippets\modals\modals7.html" />
     <EmbeddedResource Remove="wwwroot\snippets\modals\modals8.html" />
     <EmbeddedResource Remove="wwwroot\snippets\modals\modals9.html" />
+    <EmbeddedResource Remove="wwwroot\snippets\svgs\svg1.html" />
+    <EmbeddedResource Remove="wwwroot\snippets\svgs\svg2.html" />
+    <EmbeddedResource Remove="wwwroot\snippets\svgs\svg3.html" />
+    <EmbeddedResource Remove="wwwroot\snippets\svgs\svg4.html" />
     <EmbeddedResource Remove="wwwroot\snippets\tables\tables16.html" />
     <EmbeddedResource Remove="wwwroot\snippets\tables\tables17.html" />
     <EmbeddedResource Remove="wwwroot\snippets\tables\tables18.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="wwwroot\sampleSvg.svg">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="wwwroot\sampleSvg4.svg">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="wwwroot\sampleSvg3.svg">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="wwwroot\sampleSvg2.svg">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
