@@ -49,7 +49,8 @@ namespace BlazorStrap
             _ => "input"
         };
 
-
+        [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
+        [Parameter] public EventCallback<FocusEventArgs> OnFocus { get; set; }
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
         [Parameter] public Size Size { get; set; } = Size.None;
         [Parameter] public string MaxDate { get; set; } = "9999-12-31";
@@ -63,7 +64,8 @@ namespace BlazorStrap
         [Parameter] public bool IsMultipleSelect { get; set; }
         [Parameter] public int? SelectSize { get; set; }
         [Parameter] public int? SelectedIndex { get; set; }
-        [Parameter] public bool ValidateOnChange { get; set; }
+        [Parameter] public bool ValidateOnChange { get; set; } 
+        [Parameter] public bool ValidateOnBlur { get; set; } = true;
         [Parameter] public string Class { get; set; }
 
         // [Parameter] public string Class { get; set; }
@@ -163,7 +165,19 @@ namespace BlazorStrap
                    builder.AddAttribute(11, "max", MaxDate);
                 }
             }
-            builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, () => { _touched = true; ValidateField(FieldIdentifier) ; }));
+            builder.AddAttribute(12, "onfocus", EventCallback.Factory.Create(this, (e) => {
+                OnFocus.InvokeAsync(e);
+            }));
+            
+                builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, (FocusEventArgs e) => {
+                    
+                    if (ValidateOnBlur)
+                    {
+                        ValidateField(FieldIdentifier);
+                    }
+                    OnBlur.InvokeAsync(e);
+                }));
+            
             builder.AddContent(13, ChildContent);
             builder.CloseElement();
         }
