@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System.Collections.Generic;
 
 namespace BlazorStrap.Extensions.TreeView
 {
     public partial class BSTreeItem : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public Dictionary<string, object> AdditionalAttributes { get; set; }
         [Parameter] public bool IsActive { get; set; }
         [Parameter] public string Label { get; set; }
+        [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public RenderFragment Action { get; set; }
         [Parameter] public bool Active { get; set; }
@@ -27,9 +31,20 @@ namespace BlazorStrap.Extensions.TreeView
                 IsOpen = true;
             }
         }
+
         protected void OnClickEvent(MouseEventArgs e)
         {
-            IsOpen = !IsOpen;
+            if (!Root.DoubleClickToOpen)
+                IsOpen = !IsOpen;
+            if (OnClick.HasDelegate)
+            {
+                OnClick.InvokeAsync(e);
+            }
+        }
+        protected void OnDblClickEvent(MouseEventArgs e)
+        {
+            if (Root.DoubleClickToOpen)
+                IsOpen = !IsOpen;
             if (OnClick.HasDelegate)
             {
                 OnClick.InvokeAsync(e);
