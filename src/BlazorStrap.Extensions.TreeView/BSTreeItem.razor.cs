@@ -11,6 +11,7 @@ namespace BlazorStrap.Extensions.TreeView
         [Parameter] public RenderFragment Action { get; set; }
         [Parameter] public bool Active { get; set; }
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+        [Parameter] public EventCallback<MouseEventArgs> OnDblClick { get; set; }
         [CascadingParameter] public BSTree Root { get; set; }
         public BSTreeNode Child { get; set; }
         [Parameter] public bool IsOpen {

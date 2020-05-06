@@ -6,5 +6,6 @@ namespace BlazorStrap.Extensions.TreeView
     {
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public bool Expand { get; set; }
+        [Parameter] public bool DoubleClickToOpen { get; set; }
     }
 }
