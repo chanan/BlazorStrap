@@ -2,6 +2,7 @@
 using BlazorStrap.Util;
 using BlazorStrap.Util.Components;
 using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -75,6 +76,7 @@ namespace BlazorStrap
                 await HideEvent.InvokeAsync(BSCollapseEvent).ConfigureAwait(false);
                 EventQue.Add(HiddenEvent);
             }
+            StateHasChanged();
         }
         public async Task AnimationEnd()
         {
