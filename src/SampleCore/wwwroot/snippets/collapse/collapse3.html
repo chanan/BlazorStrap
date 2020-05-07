@@ -1,0 +1,20 @@
+﻿<div class="accordion">
+    <BSCollapseGroup>
+        @for (int i = 0; i < 5; i++)
+        {
+            int number = i + 1;
+            <BSCollapseItem @key="@i">
+                <BSCard CardType="CardType.Card">
+                    <BSCard CardType="CardType.Header">
+                        <BSCollapseToggle IsLink="true">Collapsable Group Item #@number</BSCollapseToggle>
+                    </BSCard>
+                    <BSCollapse>
+                        <BSCard CardType="CardType.Body">
+                            <BSCard CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</BSCard>
+                        </BSCard>
+                    </BSCollapse>
+                </BSCard>
+            </BSCollapseItem>
+        }
+    </BSCollapseGroup>
+</div>
