@@ -1,5 +1,7 @@
 ﻿<BSCollapseItem>
-    <BSCollapseToggle Color="Color.Primary">Toggle</BSCollapseToggle>
+    <BSCollapseToggle Color="Color.Primary">
+        @(context ? "Hide" : "Show")
+    </BSCollapseToggle>
     <BSCollapse>
         <BSCard CardType="CardType.Card">
             <BSCard CardType="CardType.Body">
