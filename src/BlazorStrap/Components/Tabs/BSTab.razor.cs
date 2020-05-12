@@ -76,8 +76,8 @@ namespace BlazorStrap
                 if (Group.Disposing) return;
                 //Locks updates when deleting tabs
                 Group.Tabs.Remove(this);
-                Group.Selected = (Group.Selected == this) ? Group.Tabs.FirstOrDefault() : Group.Selected;
                 Group.Disposing = true;
+                Group.Selected = (Group.Selected == this) ? Group.Tabs.FirstOrDefault() : Group.Selected;
             }
         }
     }
