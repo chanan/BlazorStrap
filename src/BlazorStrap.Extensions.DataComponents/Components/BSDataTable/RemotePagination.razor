@@ -1,0 +1,44 @@
+﻿@namespace BlazorStrap.Extensions.DataComponents
+
+@if (TotalRecords != 0)
+{
+    @if (!IsLoading && !HasNoData)
+    {
+        <BSPagination Alignment="Alignment.Right">
+            <BSPaginationItem IsDisabled="@IsPreviousDisabled">
+                <BSPaginationLink Href="@(GetUrl(Page - 1))" PaginationLinkType="PaginationLinkType.PreviousIcon" />
+            </BSPaginationItem>
+            @for (int i = 0; i < Pages; i++)
+            {
+                int count = i + 1;
+                if (count == Page)
+                {
+                    <BSPaginationItem IsActive="true">
+                        <BSPaginationLink>@count <span class="sr-only">(current)</span></BSPaginationLink>
+                    </BSPaginationItem>
+                }
+                else
+                {
+                    <BSPaginationItem>
+                        <BSPaginationLink Href="@(GetUrl(count))">@count</BSPaginationLink>
+                    </BSPaginationItem>
+                }
+
+            }
+            <BSPaginationItem IsDisabled="@IsNextDisabled">
+                <BSPaginationLink Href="@(GetUrl(Page + 1))" PaginationLinkType="PaginationLinkType.NextIcon" />
+            </BSPaginationItem>
+        </BSPagination>
+    }
+    else
+    {
+        <BSPagination Alignment="Alignment.Right" Style="visibility: hidden;">
+            <BSPaginationItem IsDisabled="true">
+                <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.PreviousIcon" />
+            </BSPaginationItem>
+            <BSPaginationItem IsDisabled="true">
+                <BSPaginationLink Href="#" PaginationLinkType="PaginationLinkType.NextIcon" />
+            </BSPaginationItem>
+        </BSPagination>
+    }
+}
