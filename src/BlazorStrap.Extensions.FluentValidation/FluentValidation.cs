@@ -4,19 +4,41 @@ using System.Linq;
 using FluentValidation;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorStrap.Extensions.FluentValidation
 {
-    public class FluentValidator<TValidator> : ComponentBase where TValidator : IValidator, new()
+    public class FluentValidator<TValidator> : BaseFluentValidator
+        where TValidator : IValidator, new()
+    {
+        protected override IValidator CreateValidator()
+        {
+            return new TValidator();
+        }
+    }
+
+    public class InjectFluentValidator : BaseFluentValidator
+    {
+        [Inject] private IServiceProvider _services { get; set; }
+
+        protected override IValidator CreateValidator()
+        {
+            var type = typeof(IValidator<>).MakeGenericType(_editContext.Model.GetType());
+            return _services.GetRequiredService(type) as IValidator;
+        }
+    }
+
+    public abstract class BaseFluentValidator : ComponentBase
     {
         private readonly static char[] _separators = new[] { '.', '[' };
-        private TValidator _validator;
 
-        [CascadingParameter] private EditContext _editContext { get; set; }
+        [CascadingParameter] protected EditContext _editContext { get; set; }
+        protected IValidator _validator;
+        protected abstract IValidator CreateValidator();
 
         protected override void OnInitialized()
         {
-            _validator = new TValidator();
+            _validator = CreateValidator();
             var messages = new ValidationMessageStore(_editContext);
 
             // Revalidate when any field changes, or if the entire form requests validation
@@ -47,7 +69,7 @@ namespace BlazorStrap.Extensions.FluentValidation
         {
             var type = editContext.Model.GetType();
             var validationResult = _validator.Validate(editContext.Model);
-            
+
             messages.Clear(fieldChangedEventArgs.FieldIdentifier);
             foreach (var error in validationResult.Errors.Where(w => ToFieldIdentifier(editContext, w.PropertyName).FieldName == fieldChangedEventArgs.FieldIdentifier.FieldName))
             {
