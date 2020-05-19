@@ -17,7 +17,7 @@ namespace BlazorStrap.Extensions.FluentValidation
         }
     }
 
-    public class InjectFluentValidator : BaseFluentValidator
+    public class FluentValidatorInjected : BaseFluentValidator
     {
         [Inject] private IServiceProvider _services { get; set; }
 
