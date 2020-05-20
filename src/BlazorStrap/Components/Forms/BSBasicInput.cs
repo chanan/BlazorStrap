@@ -38,12 +38,14 @@ namespace BlazorStrap
 
         private FieldIdentifier _fieldIdentifier { get; set; }
 
+        [CascadingParameter] public BSLabel BSLabel { get; set; }
         [Parameter] public Expression<Func<object>> For { get; set; }
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
         [Parameter] public Size Size { get; set; } = Size.None;
         [Parameter] public string MaxDate { get; set; } = "9999-12-31";
         [Parameter] public virtual T Value { get; set; }
         [Parameter] public virtual T RadioValue { get; set; }
+        [Parameter] public virtual T CheckValue { get; set; }
         [Parameter] public virtual EventCallback<T> ValueChanged { get; set; }
         [Parameter] public EventCallback<string> ConversionError { get; set; }
         [Parameter] public bool IsReadonly { get; set; }
@@ -95,9 +97,28 @@ namespace BlazorStrap
                 ValueChanged.InvokeAsync(Value);
             }
             else
-            { 
-                var tmp = (bool)(object)Value;
-                Value = (T)(object)(!tmp);
+            {
+                if (typeof(T) != typeof(bool))
+                {
+                    if (CheckValue != null)
+                    {
+                        if (Value != null)
+                        {
+                            Value = default(T);
+                            ValueChanged.InvokeAsync(Value);
+                        }
+                        else
+                        {
+                            Value = CheckValue;
+                            ValueChanged.InvokeAsync(Value);
+                        }
+                    }
+                }
+                else
+                {
+                    var tmp = (bool)(object)Value;
+                    Value = (T)(object)(!tmp);
+                }
                 ValueChanged.InvokeAsync(Value);
             }
         }
@@ -113,14 +134,36 @@ namespace BlazorStrap
             builder.AddAttribute(6, "multiple", IsMultipleSelect);
             builder.AddAttribute(7, "size", SelectSize);
             builder.AddAttribute(8, "selectedIndex", SelectedIndex);
+
             if (InputType == InputType.Checkbox)
             {
-                if(typeof(T) == typeof(string))
+                if (BSLabel != null)
                 {
-                    Value = ((string)(object)Value).ToLowerInvariant() != "false" ? (T)(object)"true" : (T)(object)"false";
+                    if (CurrentValue == null)
+                        BSLabel.IsActive = false;
+                    else if (CurrentValue.GetType() == typeof(bool))
+                        BSLabel.IsActive = (bool)(object)CurrentValue;
+                    else
+                        BSLabel.IsActive = true;
                 }
-                builder.AddAttribute(9, "checked", Convert.ToBoolean(Value, CultureInfo.InvariantCulture));
+                builder.AddAttribute(9, "checked", BindConverter.FormatValue(CurrentValue));
                 builder.AddAttribute(10, "onclick", EventCallback.Factory.Create(this, OnClick));
+            // Kept for rollback if needed remove after next release
+            //    if (InputType == InputType.Checkbox)
+            //{
+            //    if(typeof(T) == typeof(string))
+            //    {
+            //        Value = ((string)(object)Value).ToLowerInvariant() != "false" ? (T)(object)"true" : (T)(object)"false";
+            //        if (BSLabel != null)
+            //        {
+            //            if (Convert.ToBoolean(Value, CultureInfo.InvariantCulture))
+            //                BSLabel.IsActive = true;
+            //            else
+            //                BSLabel.IsActive = false;
+            //        }
+            //    }
+            //    builder.AddAttribute(9, "checked", Convert.ToBoolean(Value, CultureInfo.InvariantCulture));
+            //    builder.AddAttribute(10, "onclick", EventCallback.Factory.Create(this, OnClick));
             }
             else if(InputType == InputType.Radio)
             {
@@ -128,11 +171,15 @@ namespace BlazorStrap
                 {
                     if (RadioValue.Equals(Value))
                     {
+                        if (BSLabel != null)
+                            BSLabel.IsActive = true;
                         builder.AddAttribute(9, "checked", true);
                         builder.AddAttribute(10, "onclick", EventCallback.Factory.Create(this, OnClick));
                     }
                     else
                     {
+                        if (BSLabel != null)
+                            BSLabel.IsActive = false;
                         builder.AddAttribute(9, "checked", false);
                         builder.AddAttribute(10, "onclick", EventCallback.Factory.Create(this, OnClick));
                     }

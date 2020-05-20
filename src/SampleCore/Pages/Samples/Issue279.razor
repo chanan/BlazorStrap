@@ -1,52 +1,12 @@
-﻿@page "/samples/issue278"
+﻿@page "/samples/issue279"
 @using BlazorStrap.Extensions.FluentValidation
-@using BlazorStrap
 @using SampleCore.Pages.Samples.Issue278Types
 
 
-
-<BSInput InputType="InputType.Text" @bind-Value="customer.FirstName" placeholder="First name"></BSInput>
 <BSForm Model="customer" OnValidSubmit="SaveCustomer">
-    <div>@(customer.Checked ? "true" : "false")</div>
 
-
-    BSBasicInput
-    <BSButtonGroup IsToggle="true">
-        <BSLabel IsButton="true">
-            <BSBasicInput InputType="InputType.Checkbox" @bind-Value="customer.LastName" CheckValue="@("Hello")" />Checked
-        </BSLabel>
-    </BSButtonGroup>
-    <BSButtonGroup IsToggle="true">
-        <BSLabel IsButton="true">
-            <BSBasicInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("John")" />John
-        </BSLabel>
-        <BSLabel IsButton="true">
-            <BSBasicInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("Mike")" />Mike
-        </BSLabel>
-        <BSLabel IsButton="true">
-            <BSBasicInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("Smith")" />Smith
-        </BSLabel>
-    </BSButtonGroup>
-
-    BSInput
-    <BSButtonGroup IsToggle="true">
-        <BSLabel IsButton="true">
-            <BSInput InputType="InputType.Checkbox" @bind-Value="customer.LastName" CheckValue="@("Hello")" />Checked
-        </BSLabel>
-    </BSButtonGroup>
-    <BSButtonGroup IsToggle="true">
-        <BSLabel IsButton="true">
-            <BSInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("John")" />John
-        </BSLabel>
-        <BSLabel IsButton="true">
-            <BSInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("Mike")" />Mike
-        </BSLabel>
-        <BSLabel IsButton="true">
-            <BSInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("Smith")" />Smith
-        </BSLabel>
-    </BSButtonGroup>
     <FluentValidator TValidator="CustomerValidator" />
-
+    
     <h3>Your name</h3>
     <BSInput OnBlur="OnBlur" InputType="InputType.Text" OnFocus="OnFocus" @bind-Value="customer.FirstName" ValidateOnBlur="false" placeholder="First name"></BSInput>
     <BSFormFeedback For="@(() => customer.FirstName)" />

@@ -25,13 +25,13 @@ namespace BlazorStrap
 
         protected string Tag { get; set; } = "button";
 
-        protected string pressed => IsActive ? "true" : null;
+        protected string Pressed => IsActive ? "true" : null;
 
-        protected string disabled => IsDisabled ? "true" : null;
+        protected string Disabled => IsDisabled ? "true" : null;
 
-        protected string tab => IsDisabled ? "-1" : null;
+        protected string Tab => IsDisabled ? "-1" : null;
 
-        protected string type => ButtonType switch
+        protected string Type => ButtonType switch
         {
             ButtonType.Input => "button",
             ButtonType.Button => "button",

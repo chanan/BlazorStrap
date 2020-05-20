@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazorStrap
 {
-    public class BSForm : EditForm
+    public class BSForm : EditForm, IBSForm
     {
         protected string Classname =>
         new CssBuilder()
