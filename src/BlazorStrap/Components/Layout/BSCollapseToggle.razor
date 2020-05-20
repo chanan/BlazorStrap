@@ -2,5 +2,5 @@
 @inherits BSCollapseToggleBase
 
         <DynamicElement @attributes="@UnknownParameters" TagName="@Tag" class="@Classname" href="@href" type="@Type" @onclick="OnClickEvent" aria-expanded="@CollapseItem?.Collapse?.IsOpen.ToString().ToLower()">
-            @ChildContent
+            @ChildContent(CollapseItem?.Collapse?.IsOpen ?? false)
         </DynamicElement>

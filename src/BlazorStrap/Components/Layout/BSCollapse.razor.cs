@@ -75,6 +75,7 @@ namespace BlazorStrap
                 await HideEvent.InvokeAsync(BSCollapseEvent).ConfigureAwait(false);
                 EventQue.Add(HiddenEvent);
             }
+            StateHasChanged();
         }
         public async Task AnimationEnd()
         {

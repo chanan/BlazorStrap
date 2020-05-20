@@ -6,72 +6,57 @@
     <BSButton Color="Color.Primary" @onclick="onclick">Toggle</BSButton>
     <BSCollapse IsOpen="@IsOpen">
         <BSCard CardType="CardType.Card">
-            <BSCard CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</BSCard>
+            <BSCard CardType="CardType.Body">
+                <BSCard CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</BSCard>
+            </BSCard>
         </BSCard>
     </BSCollapse>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/collapse/collapse1.html" />
 
-<h3>Accordion example</h3>
-
-<BSAlert Color="Color.Info">
-    The syntax below isn't great and will likely change
-</BSAlert>
-
-<div class="docs-example">
-    <div class="accordion">
+<h3>Alternate syntax</h3>
+<BSCollapseItem>
+    <BSCollapseToggle Color="Color.Primary">
+        @(context ? "Hide" : "Show")
+    </BSCollapseToggle>
+    <BSCollapse>
         <BSCard CardType="CardType.Card">
-            <BSCard CardType="CardType.Header"><BSButton ButtonType="ButtonType.Button" @onclick="@accordianClick1" Color="Color.None" Class="btn-link">Collapsible Group Item #1</BSButton></BSCard>
-            <BSCollapse IsOpen="@IsOpen1">
+            <BSCard CardType="CardType.Body">
                 <BSCard CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</BSCard>
-            </BSCollapse>
+            </BSCard>
         </BSCard>
-        <BSCard CardType="CardType.Card">
-            <BSCard CardType="CardType.Header"><BSButton ButtonType="ButtonType.Button" @onclick="@accordianClick2" Color="Color.None" Class="btn-link">Collapsible Group Item #2</BSButton></BSCard>
-            <BSCollapse IsOpen="@IsOpen2">
-                <BSCard CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</BSCard>
-            </BSCollapse>
-        </BSCard>
-        <BSCard CardType="CardType.Card">
-            <BSCard CardType="CardType.Header"><BSButton ButtonType="ButtonType.Button" @onclick="@accordianClick3" Color="Color.None" Class="btn-link">Collapsible Group Item #3</BSButton></BSCard>
-            <BSCollapse IsOpen="@IsOpen3">
-                <BSCard CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</BSCard>
-            </BSCollapse>
-        </BSCard>
-    </div>
-</div>
+    </BSCollapse>
+</BSCollapseItem>
 <PrettyCode CodeFile="_content/SampleCore/snippets/collapse/collapse2.html" />
+
+<h3>Accordion example</h3>
+<div class="accordion">
+    <BSCollapseGroup>
+        @for (int i = 0; i < 5; i++)
+        {
+            int number = i + 1;
+            <BSCollapseItem @key="@i">
+                <BSCard CardType="CardType.Card">
+                    <BSCard CardType="CardType.Header">
+                        <BSCollapseToggle IsLink="true">Collapsable Group Item #@number</BSCollapseToggle>
+                    </BSCard>
+                    <BSCollapse>
+                        <BSCard CardType="CardType.Body">
+                            <BSCard CardType="CardType.Text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</BSCard>
+                        </BSCard>
+                    </BSCollapse>
+                </BSCard>
+            </BSCollapseItem>
+        }
+    </BSCollapseGroup>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/collapse/collapse3.html" />
 
 @code {
     bool IsOpen { get; set; }
     void onclick(MouseEventArgs e)
     {
         IsOpen = !IsOpen;
-        StateHasChanged();
-    }
-
-    bool IsOpen1 { get; set; } = true;
-    bool IsOpen2 { get; set; }
-    bool IsOpen3 { get; set; }
-    void accordianClick1(MouseEventArgs e)
-    {
-        IsOpen1 = true;
-        IsOpen2 = false;
-        IsOpen3 = false;
-        StateHasChanged();
-    }
-    void accordianClick2(MouseEventArgs e)
-    {
-        IsOpen1 = false;
-        IsOpen2 = true;
-        IsOpen3 = false;
-        StateHasChanged();
-    }
-    void accordianClick3(MouseEventArgs e)
-    {
-        IsOpen1 = false;
-        IsOpen2 = false;
-        IsOpen3 = true;
         StateHasChanged();
     }
 }
