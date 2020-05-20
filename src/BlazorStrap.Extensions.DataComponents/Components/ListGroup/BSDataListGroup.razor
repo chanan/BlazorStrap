@@ -1,0 +1,28 @@
+﻿@namespace BlazorStrap.Extensions.DataComponents
+@typeparam TItem
+@inherits DataComponentBase<TItem>
+
+@if(IsLoading)
+{
+    <BSListGroup>
+        <BSListGroupItem>Loading...</BSListGroupItem>
+    </BSListGroup>
+}
+else
+{
+    @if(HasNoData)
+    {
+        <BSListGroup>
+            <BSListGroupItem>No data available</BSListGroupItem>
+        </BSListGroup>
+    }
+    else
+    {
+        <BSListGroup ListGroupType="@ListGroupType" IsFlush="@IsFlush" Class="@Class">
+            @foreach(var item in Items)
+            {
+                @ItemTemplate(item)
+            }
+        </BSListGroup>
+    }
+}

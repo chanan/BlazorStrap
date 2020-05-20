@@ -33,7 +33,7 @@ namespace BlazorStrap
         [Parameter] public bool IsNavbar { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
-        [Inject] protected Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
+        [Inject] public BlazorStrapInterop BlazorStrapInterop { get; set; }
         protected override void OnInitialized()
         {
             if (IsNavbar && Navbar != null)
@@ -55,7 +55,7 @@ namespace BlazorStrap
         internal override async Task Changed(bool e)
         {
             Collapsing = true;
-            
+
             BSCollapseEvent = new BSCollapseEvent() { Target = this };
             if (e)
             {
@@ -75,11 +75,12 @@ namespace BlazorStrap
                 await HideEvent.InvokeAsync(BSCollapseEvent).ConfigureAwait(false);
                 EventQue.Add(HiddenEvent);
             }
+            StateHasChanged();
         }
         public async Task AnimationEnd()
         {
             Collapsing = false;
-            await new BlazorStrapInterop(JSRuntime).ClearOffsetHeight(MyRef);
+            await BlazorStrapInterop.ClearOffsetHeight(MyRef);
             await InvokeAsync(StateHasChanged).ConfigureAwait(false);
         }
 
@@ -94,15 +95,15 @@ namespace BlazorStrap
                 }
                 else
                 {
-                    await new BlazorStrapInterop(JSRuntime).SetOffsetHeight(MyRef, IsOpen ?? false);
+                    await BlazorStrapInterop.SetOffsetHeight(MyRef, IsOpen ?? false);
                 }
             }
             for (var i = 0; i < EventQue.Count; i++)
             {
-                EventQue[i].InvokeAsync(BSCollapseEvent);
+                await EventQue[i].InvokeAsync(BSCollapseEvent).ConfigureAwait(false);
                 EventQue.RemoveAt(i);
             }
-           // return base.OnAfterRenderAsync(false);
+            // return base.OnAfterRenderAsync(false);
         }
     }
 }

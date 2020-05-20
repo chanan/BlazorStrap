@@ -1,0 +1,14 @@
+﻿<CascadingValue Value="this">
+    @if (IsRoot)
+    {
+        <ul class="nav nav-pills flex-column">
+            @ChildContent
+        </ul>
+    }
+    else
+    {
+        <ul class="nav nav-pills flex-column @(IsOpen ? "show" : "")">
+            @ChildContent
+        </ul>
+    }
+</CascadingValue>

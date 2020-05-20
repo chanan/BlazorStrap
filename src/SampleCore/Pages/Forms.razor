@@ -1,31 +1,31 @@
 ﻿@page "/forms"
 @using System.ComponentModel.DataAnnotations;
 <h1>Forms</h1>
-
-<BSAlert Color="Color.Warning">Form tags are not finished. Binding, specifically of the select tag, still needs work.</BSAlert>
+<BSAlert Color="Color.Info"><p>Most of the examples here use BSBasicInput this is to avoid having to have a model. Always favor BSINput expect when you need a input without a form.</p></BSAlert>
+@*<BSAlert Color="Color.Warning">Form tags are not finished. Binding, specifically of the select tag, still needs work.</BSAlert>*@
 
 <div class="docs-example">
-    <BSBasicForm >
+    <BSForm Model="formsModelVal" OnValidSubmit="@(() => Console.WriteLine("Valid") )">
         <BSFormGroup>
             <BSLabel For="exampleInputEmail1">Email address</BSLabel>
-            <BSBasicInput Id="exampleInputEmail1" InputType="InputType.Email" PlaceHolder="Enter email" Value="string.Empty"  />
+            <BSInput Id="exampleInputEmail1" InputType="InputType.Email" PlaceHolder="Enter email" @bind-Value="formsModelVal.Email"  />
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </BSFormGroup>
         <BSFormGroup>
             <BSLabel For="exampleInputPassword1">Password</BSLabel>
-            <BSBasicInput Id="exampleInputPassword1" InputType="InputType.Password" PlaceHolder="Password" Value="string.Empty"/>
+            <BSInput Id="exampleInputPassword1" InputType="InputType.Password" PlaceHolder="Password" @bind-Value="formsModelVal.Blank"  />
         </BSFormGroup>
         <BSFormGroup IsCheck="true">
-            <BSBasicInput Id="exampleCheck1" InputType="InputType.Checkbox" Value="string.Empty"/>
+            <BSInput Id="exampleCheck1" InputType="InputType.Checkbox" @bind-Value="formsModelVal.Valid" />
             <BSLabel IsCheck="true" For="exampleCheck1">Check me out</BSLabel>
         </BSFormGroup>
         <BSButton Color="Color.Primary" ButtonType="ButtonType.Submit">Submit</BSButton>
-    </BSBasicForm>
+    </BSForm>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms1.html" />
 
 <p>Use @@bind-Value to bind to BSInput value</p>
-
+<BSAlert Color="Color.Info">Example of a form without a Model</BSAlert>
 <div class="docs-example">
     <BSBasicForm>
         <BSFormGroup>
@@ -150,15 +150,15 @@
 
 <div class="docs-example">
     <BSFormGroup IsCheck="true">
-        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios1" RadioValue="@("option1")" @bind-Value="RadioVlaue"/>
+        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios1" RadioValue="@("option1")" @bind-Value="RadioValue"/>
         <BSLabel For="exampleRadios1">Default radio</BSLabel>
     </BSFormGroup>
     <BSFormGroup IsCheck="true">
-        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios2" RadioValue="@("option2")" @bind-Value="RadioVlaue"/>
+        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios2" RadioValue="@("option2")" @bind-Value="RadioValue"/>
         <BSLabel For="exampleRadios2">Second default radio</BSLabel>
     </BSFormGroup>
     <BSFormGroup IsCheck="true" Class="disabled">
-        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios3" RadioValue="@("option3")" IsDisabled="true" @bind-Value="RadioVlaue"/>
+        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios3" RadioValue="@("option3")" IsDisabled="true" @bind-Value="RadioValue"/>
         <BSLabel For="exampleRadios3">Disabled radio</BSLabel>
     </BSFormGroup>
 </div>
@@ -219,7 +219,7 @@
 
 @code
 {
-    private string RadioVlaue = "option1";
+    private string RadioValue = "option1";
     private FormsModel formsModelVal = new FormsModel();
     private FormsModel formsModelValTT = new FormsModel();
 

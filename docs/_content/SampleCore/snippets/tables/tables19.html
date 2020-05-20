@@ -1,0 +1,59 @@
+﻿<BSDataTable Items="Samples1" Context="sample" IsResponsive="true" IsStriped="true" @ref="SortableRef">
+    <HeaderTemplate>
+        <tr>
+            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort(" Id"))" @onclick:preventDefault>#</a></th>
+            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort(" FirstName"))" @onclick:preventDefault>First</a></th>
+            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort(" LastName"))" @onclick:preventDefault>Last</a></th>
+            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort(" Handle"))" @onclick:preventDefault>Handle</a></th>
+        </tr>
+    </HeaderTemplate>
+    <ItemTemplate>
+        <th scope="row">@sample.Id</th>
+        <td>@sample.FirstName</td>
+        <td>@sample.LastName</td>
+        <td>@sample.Handle</td>
+    </ItemTemplate>
+</BSDataTable>
+
+@code
+{
+    public List<SampleData> Samples1 { get; set; }
+    private BSDataTable<SampleData> SortableRef { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Samples1 = new List<SampleData>();
+
+        Samples1.Add(new SampleData()
+        {
+            Id = 1,
+            FirstName = "Mark",
+            LastName = "Otto",
+            Handle = "@@mdo"
+        });
+
+        Samples1.Add(new SampleData()
+        {
+            Id = 2,
+            FirstName = "Jacob",
+            LastName = "Thornton",
+            Handle = "@@fat"
+        });
+
+        Samples1.Add(new SampleData()
+        {
+            Id = 3,
+            FirstName = "Larry",
+            LastName = "the Bird",
+            Handle = "@@twitter"
+        });
+    }
+
+    public class SampleData
+    {
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Handle { get; set; }
+    }
+}

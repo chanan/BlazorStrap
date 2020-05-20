@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -7,12 +7,14 @@
 
   <ItemGroup>
     <PackageReference Include="BlazorPrettyCode" Version="1.4.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorStrap.Extensions.BSDataTable\BlazorStrap.Extensions.BSDataTable.csproj" />
+    <ProjectReference Include="..\BlazorStrap.Extensions.DataComponents\BlazorStrap.Extensions.DataComponents.csproj" />
     <ProjectReference Include="..\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj" />
+    <ProjectReference Include="..\BlazorStrap.Extensions.TreeView\BlazorStrap.Extensions.TreeView.csproj" />
+    
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
     
   </ItemGroup>
@@ -25,28 +27,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\sampleSvg.svg" />
-    <Content Remove="wwwroot\sampleSvg1.svg" />
-    <Content Remove="wwwroot\sampleSvg2.svg" />
-    <Content Remove="wwwroot\sampleSvg3.svg" />
-    <Content Remove="wwwroot\sampleSvg4.svg" />
-    <Content Remove="wwwroot\snippets\alerts\alerts5.html" />
-    <Content Remove="wwwroot\snippets\carousels\carousels4.html" />
+    <Content Remove="wwwroot\snippets\buttons\buttons10.html" />
+    <Content Remove="wwwroot\snippets\extensions\extensions1.html" />
+    <Content Remove="wwwroot\snippets\extensions\extensions2.html" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Remove="wwwroot\snippets\modals\modals5.html" />
-    <EmbeddedResource Remove="wwwroot\snippets\modals\modals6.html" />
-    <EmbeddedResource Remove="wwwroot\snippets\modals\modals7.html" />
-    <EmbeddedResource Remove="wwwroot\snippets\modals\modals8.html" />
-    <EmbeddedResource Remove="wwwroot\snippets\modals\modals9.html" />
-    <EmbeddedResource Remove="wwwroot\snippets\svgs\svg1.html" />
-    <EmbeddedResource Remove="wwwroot\snippets\svgs\svg2.html" />
-    <EmbeddedResource Remove="wwwroot\snippets\svgs\svg3.html" />
-    <EmbeddedResource Remove="wwwroot\snippets\svgs\svg4.html" />
-    <EmbeddedResource Remove="wwwroot\snippets\tables\tables16.html" />
-    <EmbeddedResource Remove="wwwroot\snippets\tables\tables17.html" />
-    <EmbeddedResource Remove="wwwroot\snippets\tables\tables18.html" />
+    <EmbeddedResource Remove="wwwroot\snippets\tables\tables19.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="wwwroot\snippets\buttons\buttons10.html">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="wwwroot\snippets\extensions\extensions1.html">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

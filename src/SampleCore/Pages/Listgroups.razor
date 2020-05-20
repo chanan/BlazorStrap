@@ -165,6 +165,23 @@
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups11.html" />
 
+<h3>Using the List Group Data Template</h3>
+<div class="docs-example">
+    <BSDataListGroup Items="ListGroup" ListGroupType="ListGroupType.List" Context="groupItem">
+        <ItemTemplate>
+            <BSListGroupItem ListGroupType="ListGroupType.List" IsActive="@groupItem.IsActive" IsDisabled="@groupItem.IsDisabled">
+                <BSListGroupItemHeading>
+                    <h5 class="mb-1">@groupItem.Header</h5>
+                    <small>@groupItem.LastEdited</small>
+                </BSListGroupItemHeading>
+                <p class="mb-1">@groupItem.Content</p>
+                <small>@groupItem.FootNote</small>
+            </BSListGroupItem>
+        </ItemTemplate>        
+    </BSDataListGroup>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups13.html" />
+
 <!-- <h3>Tabable Content</h3>
 Review <div class="docs-example">
     <BSRow>
@@ -190,6 +207,35 @@ Review <div class="docs-example">
 <PrettyCode CodeFile="_content/SampleCore/snippets/listgroups/listgroups12.html" />-->
 
 @code {
+            List<Item> ListGroup = new List<Item>
+    {
+        new Item
+        {
+            Header = "List group item heading Active",
+            LastEdited = "3 days ago",
+            Content = "Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.",
+            FootNote = "Donec id elit non mi porta.",
+            IsActive = true
+        },
+        new Item
+        {
+            Header = "List group item heading",
+            LastEdited = "5 days ago",
+            Content = "Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.",
+            FootNote = "Donec id elit non mi porta.",
+            IsActive = false
+        },
+        new Item
+        {
+            Header = "List group item heading Disabled",
+            LastEdited = "5 days ago",
+            Content = "Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.",
+            FootNote = "Donec id elit non mi porta.",
+            IsActive = false,
+            IsDisabled = true
+        }
+    };
+
     void onclick(MouseEventArgs e)
     {
         Console.WriteLine("Button was clicked!");
@@ -218,5 +264,15 @@ Review <div class="docs-example">
     {
         active = 4;
         StateHasChanged();
+    }
+
+    class Item
+    {
+        public string Header { get; set; }
+        public string LastEdited { get; set; }
+        public string Content { get; set; }
+        public string FootNote { get; set; }
+        public bool IsActive { get; set; } = false;
+        public bool IsDisabled { get; set; } = false;
     }
 }

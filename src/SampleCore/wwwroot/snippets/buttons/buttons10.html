@@ -1,0 +1,23 @@
+﻿<BSForm Model="customer">
+    <BSButtonGroup IsToggle="true">
+        <BSLabel IsButton="true">
+            <BSInput InputType="InputType.Checkbox" @bind-Value="customer.LastName" CheckValue="@(" Hello")" />Checked
+        </BSLabel>
+    </BSButtonGroup>
+    <BSButtonGroup IsToggle="true">
+        <BSLabel IsButton="true">
+            <BSInput InputType="InputType.Checkbox" @bind-Value="customer.Checked" />Bool Checked
+        </BSLabel>
+    </BSButtonGroup>
+    <BSButtonGroup IsToggle="true">
+        <BSLabel IsButton="true">
+            <BSInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@(" John")" />John
+        </BSLabel>
+        <BSLabel IsButton="true">
+            <BSInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@(" Mike")" />Mike
+        </BSLabel>
+        <BSLabel IsButton="true">
+            <BSInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@(" Smith")" />Smith
+        </BSLabel>
+    </BSButtonGroup>
+</BSForm>

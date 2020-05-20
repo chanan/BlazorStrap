@@ -29,7 +29,7 @@ namespace BlazorStrap
         [Parameter] public string HiddenClass { get; set; }
         [Parameter] public string ShownClass { get; set; }
         [Parameter] public string Class { get; set; }
-        [Parameter] public RenderFragment ChildContent { get; set; }
+        [Parameter] public RenderFragment<bool> ChildContent { get; set; }
         [CascadingParameter] internal BSCollapseItem CollapseItem { get; set; }
         [CascadingParameter] internal BSCollapseGroup CollapseGroup { get; set; }
 

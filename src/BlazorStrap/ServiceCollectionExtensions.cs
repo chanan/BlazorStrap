@@ -8,8 +8,8 @@ namespace BlazorStrap
     {
         public static IServiceCollection AddBootstrapCss(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<CurrentTheme>();
-            serviceCollection.AddTransient<BlazorStrapInterop>();
+            serviceCollection.AddScoped<CurrentTheme>();
+            serviceCollection.AddScoped<BlazorStrapInterop>();
             serviceCollection.AddTransient<IBootstrapCss, BootstrapCss>();
             serviceCollection.AddTransient<IBootstrapCSS, BootstrapCss>();
             return serviceCollection;
