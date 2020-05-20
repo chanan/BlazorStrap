@@ -14,7 +14,33 @@ namespace BlazorStrap
         [Parameter] public EventCallback<BSAlertEvent> CloseEvent { get; set; }
         [Parameter] public Color Color { get; set; } = Color.Primary;
         [Parameter] public bool IsDismissible { get; set; }
-        [Parameter] public bool IsOpen { get; set; } = true;
+
+        private bool _isOpen = true;
+        [Parameter] public bool IsOpen 
+        {
+            get => _isOpen;
+            set
+            {
+                if (_isOpen == value) return;
+
+                _isOpen = value;
+                IsOpenChanged.InvokeAsync(value);
+                if (value)
+                    CheckAutoHide().ConfigureAwait(false);
+            }
+        }
+        [Parameter] public EventCallback<bool> IsOpenChanged { get; set; }
+        /// <summary>
+        /// When using AutoHide, you also need to use @bind-IsOpen to be able
+        /// to properly re-open alert again
+        /// </summary>
+        [Parameter] public bool AutoHide { get; set; }
+        /// <summary>
+        /// Delay in milliseconds to wait to AutoHide the alert. 
+        /// It is only used when AutoHide is set to true.
+        /// Default = 4000 (4 seconds). 
+        /// </summary>
+        [Parameter] public int AutoHideDelay { get; set; } = 4000;
         /// <summary>
         /// Gets or sets an action to be invoked when the alert is dismissed.
         /// </summary>
@@ -46,9 +72,25 @@ namespace BlazorStrap
         {
             IsOpen = false;
             OnDismiss.InvokeAsync(EventCallback.Empty);
+            CloseAlert();
+        }
+
+        protected void CloseAlert()
+        {
             BSAlertEvent = new BSAlertEvent() { Target = this };
             CloseEvent.InvokeAsync(BSAlertEvent);
             EventQue.Add(ClosedEvent);
+        }
+
+        protected async Task CheckAutoHide()
+        {
+            if (IsOpen && AutoHide)
+            {
+                await Task.Delay(AutoHideDelay).ConfigureAwait(true);
+                IsOpen = false;
+                await InvokeAsync(StateHasChanged).ConfigureAwait(false);
+                CloseAlert();
+            }
         }
     }
 }
