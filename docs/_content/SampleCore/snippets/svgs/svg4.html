@@ -1,0 +1,17 @@
+﻿<BSSvg Src="../sampleSvg.svg" />
+
+text#svg-text {
+    animation-name: animateSvg;
+    transform-origin: 50% 50%;
+    animation-duration: 5s;
+}
+
+@keyframes animateSvg {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

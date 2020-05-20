@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
-namespace BlazorStrap.Extensions.DataComponents
+namespace BlazorStrap.Extensions.BSDataTable
 {
     public partial class BSDataCarousel<TItem> : DataComponentBase<TItem>
     {

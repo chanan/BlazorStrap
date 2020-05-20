@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 
-namespace BlazorStrap.Extensions.DataComponents
+namespace BlazorStrap.Extensions.BSDataTable
 {
     public partial class BSDataTable<TItem> : DataComponentBase<TItem>
     {

@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Components;
 
 
-namespace BlazorStrap.Extensions.DataComponents
+namespace BlazorStrap.Extensions.BSDataTable
 {
     /// <summary>
     /// Base class for adding Data Components to BlazorStrap.

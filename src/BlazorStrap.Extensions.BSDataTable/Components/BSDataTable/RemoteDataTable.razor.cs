@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace BlazorStrap.Extensions.DataComponents
+namespace BlazorStrap.Extensions.BSDataTable
 {
     public partial class RemoteDataTable<TItem> : DataComponentBase<TItem>
     {

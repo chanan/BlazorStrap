@@ -11,8 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorStrap.Extensions.DataComponents\BlazorStrap.Extensions.DataComponents.csproj" />
+    <ProjectReference Include="..\BlazorStrap.Extensions.BSDataTable\BlazorStrap.Extensions.BSDataTable.csproj" />
     <ProjectReference Include="..\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj" />
+    <ProjectReference Include="..\BlazorStrap.Extensions.SvgLoader\BlazorStrap.Extensions.SvgLoader.csproj" />
     <ProjectReference Include="..\BlazorStrap.Extensions.TreeView\BlazorStrap.Extensions.TreeView.csproj" />
     
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />

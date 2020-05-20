@@ -4,10 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
     <PackageId>BlazorStrap.Extensions.TreeView</PackageId>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Authors>Chanan Braunstein; John Bomhold</Authors>
     <Title>Blazor BootStrap Extensions TreeView</Title>
-    <Description>A FluentValidation component library for BlazorStrap</Description>
+    <Description>A treeview component library for BlazorStrap</Description>
     <PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
     <PackageTags>blazor;bootstrap;bootstrap4</PackageTags>
     <RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>

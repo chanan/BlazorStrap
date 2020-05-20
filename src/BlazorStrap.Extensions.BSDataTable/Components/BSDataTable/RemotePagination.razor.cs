@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 
-namespace BlazorStrap.Extensions.DataComponents
+namespace BlazorStrap.Extensions.BSDataTable
 {
     public partial class RemotePagination : ComponentBase
     {

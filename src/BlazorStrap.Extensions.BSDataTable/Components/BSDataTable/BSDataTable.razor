@@ -1,8 +1,7 @@
-﻿@namespace BlazorStrap.Extensions.DataComponents
+﻿@namespace BlazorStrap.Extensions.BSDataTable
 @typeparam TItem
 @inherits DataComponentBase<TItem>
 
-<RemotePagination HasNoData="HasNoData" IsLoading="IsLoading" Page="Page" RecordsPerPage="RecordsPerPage" TotalRecords="TotalRecords" UrlPattern="@UrlPattern" />
 
 <BSTable IsDark="@IsDark" IsBordered="@IsBordered" IsHoverable="@IsHoverable" IsResponsive="@IsResponsive"
          IsStriped="@IsStriped" IsSmall="@IsSmall" IsBorderless="@IsBorderless">
@@ -29,11 +28,23 @@
             }
             else
             {
-                @foreach (var item in Items)
+                if (_sortColumn != "")
                 {
-                    <tr>
-                        @ItemTemplate(item)
-                    </tr>
+                    @foreach (var item in Items.OrderByWithDirection(x => _prop.GetValue(x), _desc))
+                    {
+                        <tr>
+                            @ItemTemplate(item)
+                        </tr>
+                    }
+                }
+                else
+                {
+                    @foreach (var item in Items)
+                    {
+                        <tr>
+                            @ItemTemplate(item)
+                        </tr>
+                    }
                 }
             }
         }
@@ -42,5 +53,3 @@
         @FooterTemplate
     </tfoot>
 </BSTable>
-
-<RemotePagination HasNoData="HasNoData" IsLoading="IsLoading" Page="Page" RecordsPerPage="RecordsPerPage" TotalRecords="TotalRecords" UrlPattern="@UrlPattern" />

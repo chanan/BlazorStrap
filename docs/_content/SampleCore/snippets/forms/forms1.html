@@ -1,16 +1,16 @@
-﻿<BSBasicForm >
+﻿<BSForm Model="formsModelVal" OnValidSubmit="@(() => Console.WriteLine(" Valid") )">
     <BSFormGroup>
         <BSLabel For="exampleInputEmail1">Email address</BSLabel>
-        <BSBasicInput Id="exampleInputEmail1" InputType="InputType.Email" PlaceHolder="Enter email" Value="string.Empty"  />
+        <BSInput Id="exampleInputEmail1" InputType="InputType.Email" PlaceHolder="Enter email" @bind-Value="formsModelVal.Email" />
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </BSFormGroup>
     <BSFormGroup>
         <BSLabel For="exampleInputPassword1">Password</BSLabel>
-        <BSBasicInput Id="exampleInputPassword1" InputType="InputType.Password" PlaceHolder="Password" Value="string.Empty"/>
+        <BSInput Id="exampleInputPassword1" InputType="InputType.Password" PlaceHolder="Password" @bind-Value="formsModelVal.Blank" />
     </BSFormGroup>
     <BSFormGroup IsCheck="true">
-        <BSBasicInput Id="exampleCheck1" InputType="InputType.Checkbox" Value="string.Empty"/>
+        <BSInput Id="exampleCheck1" InputType="InputType.Checkbox" @bind-Value="formsModelVal.Valid" />
         <BSLabel IsCheck="true" For="exampleCheck1">Check me out</BSLabel>
     </BSFormGroup>
     <BSButton Color="Color.Primary" ButtonType="ButtonType.Submit">Submit</BSButton>
-</BSBasicForm>
+</BSForm>
