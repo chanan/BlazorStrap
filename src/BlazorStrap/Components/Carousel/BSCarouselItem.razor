@@ -2,30 +2,29 @@
 @inherits BSCarouselItemBase
 
     <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@Classname" @ontransitionend="AnimationEnd">
-        @if (IsSvg)
+        @if (AddActionLink)
         {
-            @if (AddActionLink)
+        <a href="@ActionLink" target="@ActionLinkTarget">
+            @if (IsSvg)
             {
-                <a href="@ActionLink" target="@ActionLinkTarget">
-                    @ChildContent
-                </a>
-            }
-            else
-            {
-                @ChildContent
-            }
-        }
-        else
-        {
-            @if (AddActionLink)
-            {
-                <a href="@ActionLink" target="@ActionLinkTarget"><img class="d-block w-100" src="@Src" alt="@Alt"></a>
+                <BSSvg Class="d-block w-100" Src="@Src" />
             }
             else
             {
                 <img class="d-block w-100" src="@Src" alt="@Alt">
             }
-            @ChildContent
+        </a>
         }
-
+        else
+        {
+            @if (IsSvg)
+            {
+                <BSSvg Class="d-block w-100" Src="@Src" />
+            }
+            else
+            {
+                <img class="d-block w-100" src="@Src" alt="@Alt">
+            }
+        }
+        @ChildContent
     </DynamicElement>

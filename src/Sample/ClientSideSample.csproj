@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BlazorStrap.Extensions.SvgLoader\BlazorStrap.Extensions.SvgLoader.csproj" />
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
     <ProjectReference Include="..\SampleCore\SampleCore.csproj" />
   </ItemGroup>

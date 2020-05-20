@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,7 +32,7 @@ namespace BlazorStrap
         public bool Prev { get; set; }
         public bool Next { get; set; }
         protected bool AddActionLink => !string.IsNullOrEmpty(ActionLink);
-        [Parameter] public bool IsSvg { get; set; } = false;
+        protected bool IsSvg { get; private set; }
 
         [Parameter] public int Interval { get; set; } = 5000;
         [Parameter] public string Src { get; set; }
@@ -43,9 +44,10 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
+            SetSvg();
             Parent.CarouselItems.Add(this);
-        }       
-        
+        }
+
         public async Task StateChanged()
         {
             await InvokeAsync(StateHasChanged).ConfigureAwait(false);
@@ -76,6 +78,12 @@ namespace BlazorStrap
             Next = false;
 
             return Task.CompletedTask;
+        }
+
+        private void SetSvg()
+        {
+            IsSvg = (Path.GetExtension(Src) == ".svg" ? true : false);
+            StateHasChanged();
         }
     }
 }

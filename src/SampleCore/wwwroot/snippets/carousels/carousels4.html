@@ -3,28 +3,7 @@
     <div class="carousel-inner">
         @for (int i = 0; i < items.Count; i++)
         {
-        Item item = items[i];
-        <BSCarouselItem IsSvg="true">
-            <svg class="d-block w-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" preserveAspectRatio="none">
-                <defs>
-                    <style type="text/css">
-                        #holder_1631dfd09f0 text {
-                            fill: #555;
-                            font-weight: normal;
-                            font-family: Helvetica, monospace;
-                            font-size: 40pt
-                        }
-                    </style>
-                </defs>
-                <g id="holder_1631dfd09f0">
-                    '
-                    <rect width="800" height="400" fill="#777"></rect>
-                    <g>
-                        <text x="285.921875" y="217.7" id="@item.Alt.ToLower().Replace(' ', '-')">@item.Alt</text>
-                    </g>
-                </g>
-            </svg>
-        </BSCarouselItem>
+        <BSCarouselItem src="@items[i].Source" alt="@items[i].Alt" ActionLink="@items[i].ActionLink" ActionLinkTarget="@items[i].ActionLinkTarget" />
         }
     </div>
     <BSCarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" />
@@ -34,31 +13,31 @@
 @code {
     IList<Item> items = new List<Item>
     {
-        new Item {
-            Source = "...First Slide",
-            Alt ="First Slide",
-            Caption = "Slide 1",
-            Header = "Slide 1 Header"
-        },
-        new Item {
-            Source = "...Second Slide",
-            Alt ="Second Slide",
-            Caption = "Slide 2",
-            Header = "Slide 2 Header"
-        },
-        new Item {
-            Source = "...Third Slide",
-            Alt ="Third Slide",
-            Caption = "Slide 3",
-            Header = "Slide 3 Header"
-        }
+    new Item {
+    Source = "...First Slide as SVG File (ie. ../imgs/sample.svg )",
+    Alt ="First Slide",
+    Caption = "Slide 1",
+    Header = "Slide 1 Header"
+    },
+    new Item {
+    Source = "...Second Slide as SVG File (ie. ../imgs/sample.svg )",
+    Alt ="Second Slide",
+    Caption = "Slide 2",
+    Header = "Slide 2 Header"
+    },
+    new Item {
+    Source = "...Third Slide as SVG File (ie. ../imgs/sample.svg )",
+    Alt ="Third Slide",
+    Caption = "Slide 3",
+    Header = "Slide 3 Header"
+    }
     };
 
     class Item
     {
-        public string Source { get; set; }
-        public string Alt { get; set; }
-        public string Caption { get; set; }
-        public string Header { get; set; }
+    public string Source { get; set; }
+    public string Alt { get; set; }
+    public string Caption { get; set; }
+    public string Header { get; set; }
     }
-}
+    }

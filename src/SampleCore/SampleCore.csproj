@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -41,6 +41,21 @@
       <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Update="wwwroot\snippets\extensions\extensions1.html">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="wwwroot\sampleSvg.svg">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="wwwroot\sampleSvg4.svg">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="wwwroot\sampleSvg3.svg">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="wwwroot\sampleSvg2.svg">
       <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
