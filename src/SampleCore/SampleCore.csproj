@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="wwwroot\snippets\dropdowns\dropdowns17.html" />
     <EmbeddedResource Remove="wwwroot\snippets\tables\tables19.html" />
   </ItemGroup>
 

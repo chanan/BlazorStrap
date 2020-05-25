@@ -13,6 +13,7 @@ namespace BlazorStrap
 
         protected string Classname =>
              new CssBuilder("dropdown-menu")
+                 .AddClass("dropdown-menu-right", Right)
                  .AddClass("show", DropDown?.Selected == this)
                  .AddClass("show", NavItem?.Selected == this)
                  .AddClass("show", NavItem?.Selected != this && DropDown?.Selected != this && (IsOpen ?? false))
@@ -25,6 +26,7 @@ namespace BlazorStrap
         [CascadingParameter] internal BSDropdown DropDown { get; set; }
         [CascadingParameter] internal BSNavItem NavItem { get; set; }
         [CascadingParameter] internal BSButtonGroup ButtonGroup { get; set; }
+        [Parameter] public bool Right { get; set; }
 
         internal bool IsSubmenu => DropDown == null ? false : DropDown.IsSubmenu;
 
