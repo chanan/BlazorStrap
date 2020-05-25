@@ -1,9 +1,14 @@
-﻿<BSButton Color="Color.Primary" @onclick="onclick8">Full height modal</BSButton>
-<BSModal IsFullHeight="true" @bind-IsOpen="@IsOpen8">
-    <BSModalHeader OnClick="onclick8">Modal title</BSModalHeader>
+﻿<BSButton Color="Color.Primary" @onclick="@(() => FullHeight.Show())">Full height modal</BSButton>
+<BSModal IsFullHeight="true" @ref="FullHeight">
+    <BSModalHeader OnClick="@(() => FullHeight.Hide())">Modal title</BSModalHeader>
     <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
     <BSModalFooter>
-        <BSButton Color="Color.Primary" @onclick="onclick8">Do Something</BSButton>
-        <BSButton Color="Color.Secondary" @onclick="onclick8">Cancel</BSButton>
+        <BSButton Color="Color.Primary" @onclick="@(() => FullHeight.Hide())">Do Something</BSButton>
+        <BSButton Color="Color.Secondary" @onclick="@(() => FullHeight.Hide())">Cancel</BSButton>
     </BSModalFooter>
 </BSModal>
+
+@code
+{
+    BSModal FullHeight { get; set; }
+}

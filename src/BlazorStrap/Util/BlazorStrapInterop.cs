@@ -74,13 +74,15 @@ namespace BlazorStrap.Util
             return JSRuntime.InvokeAsync<bool>("blazorStrap.changeBodyPaddingRight", padding);
         }
 
-        private DotNetObjectReference<BSModalBase> _objRef;
+       // private DotNetObjectReference<BSModalBase> _objRef;
         private bool _disposedValue;
 
-        public ValueTask<string> ModalEscapeKey(BSModalBase modal)
+        [Obsolete("In the extreamly unlikely event you are manually calling this. It has been removed.")]
+        public Task<string> ModalEscapeKey(BSModal modal)
         {
-            _objRef = DotNetObjectReference.Create(modal);
-            return JSRuntime.InvokeAsync<string>("blazorStrap.modelEscape", _objRef);
+            return Task.FromResult("");
+            //_objRef = DotNetObjectReference.Create(modal);
+            //return JSRuntime.InvokeAsync<string>("blazorStrap.modelEscape", _objRef);
         }
         public ValueTask<bool> Log(string message)
         {
@@ -116,10 +118,6 @@ namespace BlazorStrap.Util
             {
                 if (disposing)
                 {
-                    if (_objRef != null)
-                    {
-                        _objRef.Dispose();
-                    }
                 }
                 _disposedValue = true;
             }

@@ -1,9 +1,13 @@
-﻿<BSButton Color="Color.Primary" @onclick="onclick9">Fullscreen modal</BSButton>
-<BSModal IsFullScreen="true" @bind-IsOpen="@IsOpen9">
-    <BSModalHeader OnClick="onclick9">Modal title</BSModalHeader>
+﻿<BSButton Color="Color.Primary" @onclick="@(() => FullScreen.Show())">Fullscreen modal</BSButton>
+<BSModal IsFullScreen="true" @ref="FullScreen">
+    <BSModalHeader OnClick="@(() => FullScreen.Hide())">Modal title</BSModalHeader>
     <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
     <BSModalFooter>
-        <BSButton Color="Color.Primary" @onclick="onclick9">Do Something</BSButton>
-        <BSButton Color="Color.Secondary" @onclick="onclick9">Cancel</BSButton>
+        <BSButton Color="Color.Primary" @onclick="@(() => FullScreen.Hide())">Do Something</BSButton>
+        <BSButton Color="Color.Secondary" @onclick="@(() => FullScreen.Hide())">Cancel</BSButton>
     </BSModalFooter>
 </BSModal>
+
+@code {
+    BSModal FullScreen { get; set; }
+}

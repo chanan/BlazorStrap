@@ -3,12 +3,13 @@ using BlazorStrap.Util;
 using BlazorStrap.Util.Components;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSModalBase : ToggleableComponentBase
+    public partial class BSModal : ToggleableComponentBase, IDisposable
     {
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public string Class { get; set; }
@@ -21,6 +22,7 @@ namespace BlazorStrap
         [Parameter] public bool IsFullWidth { get; set; }
         [Parameter] public bool IsFullHeight { get; set; }
         [Parameter] public bool IsFullScreen { get; set; }
+        [Parameter] public bool IsInline { get; set; }
         [Parameter] public bool NoBackdrop { get; set; }
         [Parameter] public EventCallback<BSModalEvent> ShowEvent { get; set; }
         [Parameter] public EventCallback<BSModalEvent> ShownEvent { get; set; }
@@ -30,14 +32,14 @@ namespace BlazorStrap
         internal BSModalEvent BSModalEvent { get; set; }
         internal List<EventCallback<BSModalEvent>> EventQue { get; set; } = new List<EventCallback<BSModalEvent>>();
         [Inject] public BlazorStrapInterop BlazorStrapInterop { get; set; }
+        [Inject] private IJSRuntime _jsRuntime { get; set; }
         protected ElementReference Me { get; set; }
 
 
         protected string Classname =>
           new CssBuilder("modal")
-              .AddClass(AnimationClass, AnimationClass != null)
+              .AddClass(AnimationClass, AnimationClass != null && !DisableAnimations)
               .AddClass("show", _toggleShow)
-              //.AddClass("show", _canShow && !DisableAnimations)
               .AddClass(Class)
           .Build();
 
@@ -51,9 +53,6 @@ namespace BlazorStrap
         {
             get
             {
-                //   var display = DisableAnimations || (IsOpen ?? true)
-                //   ? (IsOpen ?? false) ? "display: block; padding-right: 17px;" : null
-                // we don't need any -> padding-right: 17px;
                 var display = (_toggleModel) ? "display: block;" : null;
                 return $"{Style} {display}".Trim();
             }
@@ -73,7 +72,7 @@ namespace BlazorStrap
         private bool _toggleShow { get; set; }
         private bool _toggleModel { get; set; }
         private bool _isInitialized { get; set; }
-
+        private static Action<string> _onEscapeCallback;
         internal override async Task Changed(bool e)
         {
             if (!_isInitialized)
@@ -84,11 +83,13 @@ namespace BlazorStrap
             BSModalEvent = new BSModalEvent() { Target = this };
             if (e)
             {
-                await BlazorStrapInterop.AddBodyClass("modal-open");
-                if (!IgnoreEscape)
+                if (!IsInline)
                 {
-                    await BlazorStrapInterop.ModalEscapeKey(this);
+                    _ = await _jsRuntime.InvokeAsync<string>("blazorStrap.modal.open", Me.Id).ConfigureAwait(false);
+                    _ = await _jsRuntime.InvokeAsync<string>("blazorStrap.modal.initOnEscape", Me.Id).ConfigureAwait(false);
                 }
+                _onEscapeCallback += OnEscapeCallback;
+                    //await BlazorStrapInterop.ModalEscapeKey(this);
                 new Task(async () =>
                 {
                     _toggleModel = true;
@@ -101,6 +102,7 @@ namespace BlazorStrap
             }
             else
             {
+                
                 new Task(async () =>
                 {
                     _toggleShow = e;
@@ -110,7 +112,12 @@ namespace BlazorStrap
                     await InvokeAsync(StateHasChanged).ConfigureAwait(false);
                 }).Start();
                 await HideEvent.InvokeAsync(BSModalEvent).ConfigureAwait(false);
-                await BlazorStrapInterop.RemoveBodyClass("modal-open");
+                if (!IsInline)
+                {
+                    _onEscapeCallback -= OnEscapeCallback;
+                    _ = await _jsRuntime.InvokeAsync<string>("blazorStrap.modal.close", Me.Id).ConfigureAwait(false);
+                }
+                //await BlazorStrapInterop.RemoveBodyClass("modal-open");
             }
         }
 
@@ -141,19 +148,32 @@ namespace BlazorStrap
         }
 
         [JSInvokable]
-        public async Task OnEscape()
+        public static async Task OnModalEscape(string id)
         {
-            Hide();
-            await InvokeAsync(StateHasChanged).ConfigureAwait(false);
+            _onEscapeCallback?.Invoke(id);
+            
+        }
+        public void OnEscapeCallback(string id)
+        {
+            if (id == Me.Id && !IgnoreEscape)
+            {
+                Hide();
+            }
         }
 
         protected override void OnInitialized()
         {
+         
             if (AnimationClass == null)
             {
                 AnimationClass = "fade";
             }
             base.OnInitialized();
+        }
+
+        public void Dispose()
+        {
+            _onEscapeCallback -= OnEscapeCallback;
         }
     }
 }

@@ -1,18 +1,24 @@
-﻿<BSButton Color="Color.Primary" @onclick="onclick3">Large modal</BSButton>
-<BSModal IsOpen="@IsOpen3" Size="Size.Large">
-    <BSModalHeader OnClick="onclick3">Modal title</BSModalHeader>
+﻿<BSButton Color="Color.Primary" @onclick="@(() => SizeLarge.Show())">Large modal</BSButton>
+<BSModal @ref="SizeLarge" Size="Size.Large">
+    <BSModalHeader OnClick="@(() => SizeLarge.Hide())">Modal title</BSModalHeader>
     <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
     <BSModalFooter>
-        <BSButton Color="Color.Secondary" @onclick="onclick3">Close</BSButton>
-        <BSButton Color="Color.Primary" @onclick="onclick3">Save Changes</BSButton>
+        <BSButton Color="Color.Secondary" @onclick="@(() => SizeLarge.Hide())">Close</BSButton>
+        <BSButton Color="Color.Primary" @onclick="@(() => SizeLarge.Hide())">Save Changes</BSButton>
     </BSModalFooter>
 </BSModal>
-<BSButton Color="Color.Primary" @onclick="onclick4">Small modal</BSButton>
-<BSModal IsOpen="@IsOpen4" Size="Size.Small">
-    <BSModalHeader OnClick="onclick4">Modal title</BSModalHeader>
+<BSButton Color="Color.Primary" @onclick="@(() => SizeSmall.Show())">Small modal</BSButton>
+<BSModal @ref="SizeSmall" Size="Size.Small">
+    <BSModalHeader OnClick="@(() => SizeSmall.Hide())">Modal title</BSModalHeader>
     <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
     <BSModalFooter>
-        <BSButton Color="Color.Secondary" @onclick="onclick4">Close</BSButton>
-        <BSButton Color="Color.Primary" @onclick="onclick4">Save Changes</BSButton>
+        <BSButton Color="Color.Secondary" @onclick="@(() => SizeSmall.Hide())">Close</BSButton>
+        <BSButton Color="Color.Primary" @onclick="@(() => SizeSmall.Hide())">Save Changes</BSButton>
     </BSModalFooter>
 </BSModal>
+
+@code
+{
+    BSModal SizeLarge { get; set; }
+    BSModal SizeSmall { get; set; }
+}
