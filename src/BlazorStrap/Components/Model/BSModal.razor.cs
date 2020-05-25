@@ -32,8 +32,10 @@ namespace BlazorStrap
         [Inject] public BlazorStrapInterop BlazorStrapInterop { get; set; }
         protected ElementReference Me { get; set; }
 
+
         protected string Classname =>
-          new CssBuilder("modal fade")
+          new CssBuilder("modal")
+              .AddClass(AnimationClass, AnimationClass != null)
               .AddClass("show", _toggleShow)
               //.AddClass("show", _canShow && !DisableAnimations)
               .AddClass(Class)
