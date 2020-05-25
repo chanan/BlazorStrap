@@ -13,6 +13,71 @@ if (!String.prototype.includes) {
 }
 
 window.blazorStrap = {
+    modal: {
+        paddingRight: function (padding) {
+            var dpi = window.devicePixelRatio;
+            if (dpi === 1 || !padding) {
+                document.body.style.paddingRight = padding;
+            }
+            return true;
+        },
+        eventListeners: [],
+        open: function (id) {
+            if (!document.body.classList.contains("modal-open")) {
+                document.body.classList.add("modal-open");
+            }
+            this.paddingRight("17px");
+            return id;
+        },
+        close: function (id) {
+            for (var i = 0; i < this.eventListeners.length; ++i) {
+                if (this.eventListeners[i].id == id) {
+                    
+                    if (i + 1 != this.eventListeners.length) {
+                        this.eventListeners.splice(i, 1);
+                    }
+                    else {
+                        // Removes this event listener.
+                        document.removeEventListener("keyup", window.blazorStrap.modal.eventListeners[window.blazorStrap.modal.eventListeners.length - 1].func);
+                        window.blazorStrap.modal.eventListeners.pop();
+
+                        // Adds Event listener back to modal under closing modal.
+                        if (window.blazorStrap.modal.eventListeners.length >= 1)
+                            document.addEventListener("keyup", window.blazorStrap.modal.eventListeners[window.blazorStrap.modal.eventListeners.length - 1].func);
+                        else {
+                            document.body.classList.remove("modal-open");
+                            window.blazorStrap.modal.paddingRight("");
+                        }
+                    }
+                }
+            }
+        },
+        initOnEscape: function (id) {
+            this.eventListeners.push({id: id, func: function (e) {
+                if (e.key == "Escape") {
+                    DotNet.invokeMethodAsync("BlazorStrap", "OnModalEscape", id);
+
+                    // Removes this event listener.
+                    document.removeEventListener("keyup", window.blazorStrap.modal.eventListeners[window.blazorStrap.modal.eventListeners.length - 1].func);
+                    window.blazorStrap.modal.eventListeners.pop();
+
+                    // Adds Event listener back to modal under closing modal.
+                    if (window.blazorStrap.modal.eventListeners.length >= 1)
+                        document.addEventListener("keyup", window.blazorStrap.modal.eventListeners[window.blazorStrap.modal.eventListeners.length - 1].func);
+                    else {
+                        document.body.classList.remove("modal-open");
+                        window.blazorStrap.modal.paddingRight("");
+                    }
+                };
+            }});
+            // Removes event listener from modal under current modal.
+            if(this.eventListeners.length > 1)
+                document.removeEventListener("keyup", this.eventListeners[this.eventListeners.length - 2].func);
+            // Adds new event listener for just opened modal.
+            document.addEventListener("keyup", this.eventListeners[this.eventListeners.length - 1].func);
+            return id;
+        }
+    },
     poppers: [],
     animationEvent: function (event) {
         if (event.target.hasAttributes()) {

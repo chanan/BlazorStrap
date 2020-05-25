@@ -1,9 +1,14 @@
-﻿<BSButton Color="Color.Primary" @onclick="onclick5">Large modal</BSButton>
-<BSModal IsFullWidth="true" @bind-IsOpen="@IsOpen5">
-    <BSModalHeader OnClick="onclick5">Modal title</BSModalHeader>
+﻿<BSButton Color="Color.Primary" @onclick="@(() => FullWidth.Show())">Full width modal</BSButton>
+<BSModal @ref="FullWidth" IsFullWidth="true">
+    <BSModalHeader OnClick="@(() => FullWidth.Hide())">Modal title</BSModalHeader>
     <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
     <BSModalFooter>
-        <BSButton Color="Color.Primary" @onclick="onclick5">Do Something</BSButton>
-        <BSButton Color="Color.Secondary" @onclick="onclick5">Cancel</BSButton>
+        <BSButton Color="Color.Primary" @onclick="@(() => FullWidth.Hide())">Do Something</BSButton>
+        <BSButton Color="Color.Secondary" @onclick="@(() => FullWidth.Hide())">Cancel</BSButton>
     </BSModalFooter>
 </BSModal>
+
+@code
+{
+    BSModal FullWidth { get; set; }
+}
