@@ -161,7 +161,7 @@
     </BSButtonGroup>
     <BSButtonGroup DropdownDirection="DropdownDirection.Up" IsOpen="@IsOpen13">
         <BSButton Color="Color.Secondary">Split Dropup</BSButton>
-        <BSDropdownToggle IsSplit="true" Color="Color.Secondary" @onclick="onclick13"/>
+        <BSDropdownToggle IsSplit="true" Color="Color.Secondary" @onclick="onclick13" />
         <BSDropdownMenu @bind-IsOpen="@IsOpen13">
             <BSDropdownItem Href="javascript:void(0);">Action</BSDropdownItem>
             <BSDropdownItem Href="javascript:void(0);">Another Action</BSDropdownItem>
@@ -185,7 +185,7 @@
     </BSButtonGroup>
     <BSButtonGroup DropdownDirection="DropdownDirection.Right" IsOpen="@IsOpen15">
         <BSButton Color="Color.Secondary">Split Dropright</BSButton>
-        <BSDropdownToggle IsSplit="true" Color="Color.Secondary" @onclick="onclick15"/>
+        <BSDropdownToggle IsSplit="true" Color="Color.Secondary" @onclick="onclick15" />
         <BSDropdownMenu @bind-IsOpen="@IsOpen15">
             <BSDropdownItem Href="javascript:void(0);">Action</BSDropdownItem>
             <BSDropdownItem Href="javascript:void(0);">Another Action</BSDropdownItem>
@@ -208,7 +208,7 @@
         </BSDropdownMenu>
     </BSButtonGroup>
     <BSButtonGroup DropdownDirection="DropdownDirection.Left">
-        <BSDropdownToggle IsSplit="true" Color="Color.Secondary" @onclick="onclick18"/>
+        <BSDropdownToggle IsSplit="true" Color="Color.Secondary" @onclick="onclick18" />
         <BSDropdownMenu IsOpen="@IsOpen18">
             <BSDropdownItem Href="javascript:void(0);">Action</BSDropdownItem>
             <BSDropdownItem Href="javascript:void(0);">Another Action</BSDropdownItem>
@@ -306,6 +306,25 @@
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns10.html" />
 
+
+<h3>Right aligned</h3>
+<div class="docs-example">
+    <div style="text-align: right">
+        <BSDropdown>
+            <BSDropdownToggle>Dropdown</BSDropdownToggle>
+            <BSDropdownMenu Right="true">
+                <span class="dropdown-item-text">Dropdown item text</span>
+                <BSDropdownItem href="javascript:void(0);">Action</BSDropdownItem>
+                <BSDropdownItem href="javascript:void(0);">Another action</BSDropdownItem>
+                <BSDropdownItem href="javascript:void(0);">Something else here</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSDropdown>
+    </div>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/dropdowns/dropdowns17.html" />
+
+
+
 <h3>Menu content</h3>
 <h4>Headers</h4>
 
@@ -351,14 +370,14 @@
         <BSForm Class="px-4 py-3" Model="@formsModel">
             <BSFormGroup>
                 <BSLabel for="exampleDropdownFormEmail1">Email address</BSLabel>
-                <BSInput InputType="InputType.Email" id="exampleDropdownFormEmail1" placeholder="email@example.com" @bind-Value="formsModel.Blank"/>
+                <BSInput InputType="InputType.Email" id="exampleDropdownFormEmail1" placeholder="email@example.com" @bind-Value="formsModel.Blank" />
             </BSFormGroup>
             <BSFormGroup>
                 <BSLabel for="exampleDropdownFormPassword1">Password</BSLabel>
-                <BSInput InputType="InputType.Password" id="exampleDropdownFormPassword1" placeholder="Password" @bind-Value="formsModel.Blank"/>
+                <BSInput InputType="InputType.Password" id="exampleDropdownFormPassword1" placeholder="Password" @bind-Value="formsModel.Blank" />
             </BSFormGroup>
             <BSFormGroup IsCheck="true">
-                <BSInput InputType="InputType.Checkbox" id="dropdownCheck" @bind-Value="formsModel.Blank"/>
+                <BSInput InputType="InputType.Checkbox" id="dropdownCheck" @bind-Value="formsModel.Blank" />
                 <BSLabel IsCheck="true" for="dropdownCheck">
                     Remember me
                 </BSLabel>
@@ -428,13 +447,13 @@
     {
         Console.WriteLine("Clicked on menu item");
     }
-    
 
-     public class FormsModel
+
+    public class FormsModel
     {
 
         public string Blank { get; set; }
-     
+
 
     }
 
