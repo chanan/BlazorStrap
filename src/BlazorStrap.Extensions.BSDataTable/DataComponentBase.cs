@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Components;
 
@@ -16,12 +17,12 @@ namespace BlazorStrap.Extensions.BSDataTable
     {
         // Private Variables
         protected bool IsLoading => Items == null;
-        protected bool HasNoData => Items.Count == 0;
+        protected bool HasNoData => Items.Count() == 0;
 
         /// <summary>
         /// Data model to pass into the component
         /// </summary>
-        [Parameter] public List<TItem> Items { get; set; }
+        [Parameter] public IEnumerable<TItem> Items { get; set; }
 
         /// <summary>
         /// This template loops through each row of your data and adds it to the Carousel

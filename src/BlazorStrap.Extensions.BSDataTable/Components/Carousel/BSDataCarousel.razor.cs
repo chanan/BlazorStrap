@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BlazorStrap.Extensions.BSDataTable
 {
     public partial class BSDataCarousel<TItem> : DataComponentBase<TItem>
     {
         // Private Variables
-        private int _numberOfItems => Items.Count;
+        private int _numberOfItems => Items.Count();
 
         /// <summary>
         /// When true, this adds the Indicators to the Carousel.

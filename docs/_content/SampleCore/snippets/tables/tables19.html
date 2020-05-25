@@ -1,10 +1,10 @@
 ﻿<BSDataTable Items="Samples1" Context="sample" IsResponsive="true" IsStriped="true" @ref="SortableRef">
     <HeaderTemplate>
         <tr>
-            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort(" Id"))" @onclick:preventDefault>#</a></th>
-            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort(" FirstName"))" @onclick:preventDefault>First</a></th>
-            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort(" LastName"))" @onclick:preventDefault>Last</a></th>
-            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort(" Handle"))" @onclick:preventDefault>Handle</a></th>
+            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort("Id"))" @onclick:preventDefault>#</a></th>
+            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort("FirstName"))" @onclick:preventDefault>First</a></th>
+            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort("LastName"))" @onclick:preventDefault>Last</a></th>
+            <th scope="col"><a href="javascript:void(0)" @onclick="@(() => SortableRef.Sort("Handle"))" @onclick:preventDefault>Handle</a></th>
         </tr>
     </HeaderTemplate>
     <ItemTemplate>
