@@ -1,6 +1,7 @@
 ﻿using BlazorComponentUtilities;
 using BlazorStrap.Util;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using System.Collections.Generic;
 
 namespace BlazorStrap
@@ -15,7 +16,18 @@ namespace BlazorStrap
         .Build();
 
         [Parameter] public Color Color { get; set; } = Color.None;
+        [Parameter] public EventCallback<MouseEventArgs> OnClick{ get; set; }
+        [Parameter] public bool OnClickPreventDefault { get; set; }
+        [Parameter] public bool OnClickStopPropagation { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
+
+        protected void OnClickEvent(MouseEventArgs e)
+        {
+            if (OnClick.HasDelegate)
+            {
+                OnClick.InvokeAsync(e);
+            }
+        }
     }
 }
