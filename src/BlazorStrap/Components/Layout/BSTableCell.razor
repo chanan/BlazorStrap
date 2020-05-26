@@ -1,6 +1,6 @@
 ﻿@namespace BlazorStrap
 @inherits BSTableCellBase
 
-<DynamicElement @attributes="@UnknownParameters" TagName="td" class="@Classname">
+<DynamicElement @attributes="@UnknownParameters" TagName="td" class="@Classname" @onclick="OnClickEvent" OnClickPreventDefault="OnClickPreventDefault" OnClickStopPropagation="OnClickStopPropagation">
     @ChildContent
 </DynamicElement>
