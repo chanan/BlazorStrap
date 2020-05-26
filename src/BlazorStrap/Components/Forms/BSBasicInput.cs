@@ -210,6 +210,7 @@ namespace BlazorStrap
             return value switch
             {
                 null => null,
+                bool @bool => BindConverter.FormatValue(@bool.ToString().ToLowerInvariant(), CultureInfo.InvariantCulture),
                 int @int => BindConverter.FormatValue(@int, CultureInfo.InvariantCulture),
                 long @long => BindConverter.FormatValue(@long, CultureInfo.InvariantCulture),
                 float @float => BindConverter.FormatValue(@float, CultureInfo.InvariantCulture),
@@ -263,6 +264,42 @@ namespace BlazorStrap
                 result = (T)(object)Convert.ToInt32(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
+            }
+            else if (typeof(T) == typeof(bool))
+            {
+                if (InputType != InputType.Select)
+                {
+                    result = (T)(object)false;
+                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The bool valued must be used with select, checkboxes, or radios.");
+                    return false;
+                }
+                try
+                {
+                    if (value.ToString().ToLowerInvariant() == "false")
+                    {
+                        result = (T)(object)false;
+                        validationErrorMessage = null;
+                        return true;
+                    }
+                    else if (value.ToString().ToLowerInvariant() == "true")
+                    {
+                        result = (T)(object)true;
+                        validationErrorMessage = null;
+                        return true;
+                    }
+                    else
+                    {
+                        result = (T)(object)false;
+                        validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a bool of true or false.");
+                        return false;
+                    }
+                }
+                catch
+                {
+                    result = (T)(object)false;
+                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a bool of true or false.");
+                    return false;
+                }
             }
             else if (typeof(T) == typeof(long) || typeof(T) == typeof(long?))
             {
