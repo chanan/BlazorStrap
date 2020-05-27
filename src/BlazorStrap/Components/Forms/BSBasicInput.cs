@@ -16,6 +16,7 @@ namespace BlazorStrap
     public class BSBasicInput<T> : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
+        [Inject] protected BlazorStrapInterop BlazorStrapInterop { get; set; }
         [CascadingParameter] protected EditContext MyEditContext { get; set; }
 
         private const string _dateFormat = "yyyy-MM-dd";
@@ -61,6 +62,7 @@ namespace BlazorStrap
 
         // [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
+        protected ElementReference ElementReference;
 
         protected string Type => InputType.ToDescriptionString();
 
@@ -196,6 +198,7 @@ namespace BlazorStrap
                 }
             }
             builder.AddContent(13, ChildContent);
+            builder.AddElementReferenceCapture(14, er => ElementReference = er);
             builder.CloseElement();
         }
 
@@ -417,5 +420,7 @@ namespace BlazorStrap
                 }
             }
         }
+
+        public ValueTask<object> Focus() => BlazorStrapInterop.FocusElement(ElementReference);
     }
 }
