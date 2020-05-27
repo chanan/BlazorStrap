@@ -15,8 +15,10 @@ namespace BlazorStrap
          new CssBuilder()
              .AddClass("btn", !IsLink)
              .AddClass("dropdown-item", Dropdown?.IsSubmenu == true)
+             .AddClass($"btn-outline-{Color.ToDescriptionString()}", !IsLink && IsOutline)
              .AddClass($"btn-{Size.ToDescriptionString()}", !IsLink && Size != Size.None)
-             .AddClass($"btn-{Color.ToDescriptionString()}", !IsLink && Color != Color.None)
+             .AddClass($"btn-{Color.ToDescriptionString()}", !IsLink && Color != Color.None && !IsOutline)
+             .AddClass("btn-block", IsBlock)
              .AddClass("dropdown-toggle-split", IsSplit)
              .AddClass("dropdown-toggle")
              //nav-link should only show on root drop down toggle
@@ -29,7 +31,9 @@ namespace BlazorStrap
         protected string Href => IsLink ? "javascript:void(0)" : null;
 
         [Parameter] public Color Color { get; set; } = Color.None;
+        [Parameter] public bool IsOutline { get; set; }
         [Parameter] public Size Size { get; set; } = Size.None;
+        [Parameter] public bool IsBlock { get; set; }
         [Parameter] public bool IsLink { get; set; }
 
         [Obsolete("This Parameter is no longer require and will be removed soon")]
