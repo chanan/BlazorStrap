@@ -36,9 +36,10 @@ namespace BlazorStrap
         //        base.EditContext = null;
         //    }
         //    return base.SetParametersAsync(parameters);
-            
+
         //}
 
+        [Inject] protected BlazorStrapInterop BlazorStrapInterop { get; set; }
         // [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [CascadingParameter] protected EditContext MyEditContext { get; set; }
 
@@ -87,7 +88,7 @@ namespace BlazorStrap
         [Parameter] public bool IsMultipleSelect { get; set; }
         [Parameter] public int? SelectSize { get; set; }
         [Parameter] public int? SelectedIndex { get; set; }
-        [Parameter] public bool ValidateOnChange { get; set; } 
+        [Parameter] public bool ValidateOnChange { get; set; }
         [Parameter] public bool ValidateOnBlur { get; set; } = true;
         [Parameter] public string Class { get; set; }
 
@@ -97,6 +98,8 @@ namespace BlazorStrap
         protected string Type => InputType.ToDescriptionString();
 
         private const string _dateFormat = "yyyy-MM-dd";
+
+        protected ElementReference ElementReference;
 
         protected override void OnInitialized()
         {
@@ -111,7 +114,7 @@ namespace BlazorStrap
             _touched = true;
         }
 
-       
+
         private string GetClass()
         {
             return InputType switch
@@ -217,23 +220,26 @@ namespace BlazorStrap
 
                 if (InputType == InputType.Date && !String.IsNullOrEmpty(MaxDate))
                 {
-                   builder.AddAttribute(11, "max", MaxDate);
+                    builder.AddAttribute(11, "max", MaxDate);
                 }
             }
-            builder.AddAttribute(12, "onfocus", EventCallback.Factory.Create(this, (e) => {
+            builder.AddAttribute(12, "onfocus", EventCallback.Factory.Create(this, (e) =>
+            {
                 OnFocus.InvokeAsync(e);
             }));
-            
-                builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, (FocusEventArgs e) => {
-                    
-                    if (ValidateOnBlur)
-                    {
-                        ValidateField(FieldIdentifier);
-                    }
-                    OnBlur.InvokeAsync(e);
-                }));
-            
+
+            builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, (FocusEventArgs e) =>
+            {
+
+                if (ValidateOnBlur)
+                {
+                    ValidateField(FieldIdentifier);
+                }
+                OnBlur.InvokeAsync(e);
+            }));
+
             builder.AddContent(13, ChildContent);
+            builder.AddElementReferenceCapture(14, er => ElementReference = er);
             builder.CloseElement();
         }
 
@@ -337,7 +343,7 @@ namespace BlazorStrap
             }
             else if (typeof(T) == typeof(bool))
             {
-                if(InputType != InputType.Select)
+                if (InputType != InputType.Select)
                 {
                     result = (T)(object)false;
                     validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The bool valued must be used with select, checkboxes, or radios.");
@@ -345,7 +351,7 @@ namespace BlazorStrap
                 }
                 try
                 {
-                    if(value.ToString().ToLowerInvariant() == "false")
+                    if (value.ToString().ToLowerInvariant() == "false")
                     {
                         result = (T)(object)false;
                         validationErrorMessage = null;
@@ -412,8 +418,8 @@ namespace BlazorStrap
                     return false;
                 }
             }
-           
-                throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
+
+            throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
         }
 
         private static bool TryParseDateTime(string value, out T result)
@@ -452,5 +458,7 @@ namespace BlazorStrap
             OnFieldChanged?.DynamicInvoke(new object[] { EditContext, new FieldChangedEventArgs(fieldIdentifier) });
             StateHasChanged();
         }
+
+        public ValueTask<object> Focus() => BlazorStrapInterop.FocusElement(ElementReference);
     }
 }

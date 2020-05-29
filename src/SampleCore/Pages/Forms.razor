@@ -8,12 +8,12 @@
     <BSForm Model="formsModelVal" OnValidSubmit="@(() => Console.WriteLine("Valid") )">
         <BSFormGroup>
             <BSLabel For="exampleInputEmail1">Email address</BSLabel>
-            <BSInput Id="exampleInputEmail1" InputType="InputType.Email" PlaceHolder="Enter email" @bind-Value="formsModelVal.Email"  />
+            <BSInput Id="exampleInputEmail1" InputType="InputType.Email" PlaceHolder="Enter email" @bind-Value="formsModelVal.Email" />
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </BSFormGroup>
         <BSFormGroup>
             <BSLabel For="exampleInputPassword1">Password</BSLabel>
-            <BSInput Id="exampleInputPassword1" InputType="InputType.Password" PlaceHolder="Password" @bind-Value="formsModelVal.Blank"  />
+            <BSInput Id="exampleInputPassword1" InputType="InputType.Password" PlaceHolder="Password" @bind-Value="formsModelVal.Blank" />
         </BSFormGroup>
         <BSFormGroup IsCheck="true">
             <BSInput Id="exampleCheck1" InputType="InputType.Checkbox" @bind-Value="formsModelVal.Valid" />
@@ -30,7 +30,7 @@
     <BSBasicForm>
         <BSFormGroup>
             <BSLabel For="exampleFormControlSelect1">Example select</BSLabel>
-            <BSBasicInput Id="exampleFormControlSelect1" InputType="InputType.Select" Value="string.Empty" >
+            <BSBasicInput Id="exampleFormControlSelect1" InputType="InputType.Select" Value="string.Empty">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -40,7 +40,7 @@
         </BSFormGroup>
         <BSFormGroup>
             <BSLabel For="exampleText">Text Area</BSLabel>
-            <BSBasicInput InputType="InputType.TextArea" Name="text" Id="exampleText" Rows="5" Value="string.Empty"/>
+            <BSBasicInput InputType="InputType.TextArea" Name="text" Id="exampleText" Rows="5" Value="string.Empty" />
         </BSFormGroup>
         <BSFormGroup>
             <BSLabel For="exampleFormControlFile1">Example file input</BSLabel>
@@ -54,9 +54,9 @@
 <h3>Sizing</h3>
 
 <div class="docs-example">
-    <BSBasicInput InputType="InputType.Text" Size="Size.Large" PlaceHolder="Size.Large" Value="string.Empty"/>
-    <BSBasicInput InputType="InputType.Text" PlaceHolder="Default" Value="string.Empty"/>
-    <BSBasicInput InputType="InputType.Text" Size="Size.Small" PlaceHolder="Size.Small" Value="string.Empty"/>
+    <BSBasicInput InputType="InputType.Text" Size="Size.Large" PlaceHolder="Size.Large" Value="string.Empty" />
+    <BSBasicInput InputType="InputType.Text" PlaceHolder="Default" Value="string.Empty" />
+    <BSBasicInput InputType="InputType.Text" Size="Size.Small" PlaceHolder="Size.Small" Value="string.Empty" />
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms3.html" />
 
@@ -79,7 +79,7 @@
     <BSBasicForm>
         <BSFormGroup>
             <BSLabel For="formControlRange">Example Range input</BSLabel>
-            <BSBasicInput InputType="InputType.Range" Id="formControlRange" Value="string.Empty"/>
+            <BSBasicInput InputType="InputType.Range" Id="formControlRange" Value="string.Empty" />
         </BSFormGroup>
     </BSBasicForm>
 </div>
@@ -88,7 +88,7 @@
 <h3>Readonly</h3>
 
 <div class="docs-example">
-    <BSBasicInput InputType="InputType.Text" PlaceHolder="Readonly input here…" IsReadonly="true" Value="string.Empty"/>
+    <BSBasicInput InputType="InputType.Text" PlaceHolder="Readonly input here…" IsReadonly="true" Value="string.Empty" />
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms6.html" />
 
@@ -99,13 +99,13 @@
         <BSFormGroup IsRow="true">
             <BSLabel For="staticEmail" SM="2">Email</BSLabel>
             <BSCol SM="10">
-                <BSBasicInput InputType="InputType.Text" IsReadonly="true" IsPlaintext="true" Id="staticEmail" Value="string.Empty"/>
+                <BSBasicInput InputType="InputType.Text" IsReadonly="true" IsPlaintext="true" Id="staticEmail" Value="string.Empty" />
             </BSCol>
         </BSFormGroup>
         <BSFormGroup IsRow="true">
             <BSLabel For="inputPassword" SM="2">Password</BSLabel>
             <BSCol SM="10">
-                <BSBasicInput InputType="InputType.Password" Id="inputPassword" Value="string.Empty"/>
+                <BSBasicInput InputType="InputType.Password" Id="inputPassword" Value="string.Empty" />
             </BSCol>
         </BSFormGroup>
         <BSFormGroup IsRow="true">
@@ -123,11 +123,11 @@
     <BSBasicForm IsInline="true">
         <BSFormGroup Class="mb-2 mr-sm-2 mb-sm-0">
             <BSLabel For="exampleEmail" Class="mr-sm-2">Email</BSLabel>
-            <BSBasicInput InputType="InputType.Email" Name="email" Id="exampleEmail" PlaceHolder="something@idk.cool" Value="string.Empty"/>
+            <BSBasicInput InputType="InputType.Email" Name="email" Id="exampleEmail" PlaceHolder="something@idk.cool" Value="string.Empty" />
         </BSFormGroup>
         <BSFormGroup Class="mb-2 mr-sm-2 mb-sm-0">
             <BSLabel For="examplePassword" class="mr-sm-2">Password</BSLabel>
-            <BSBasicInput InputType="InputType.Password" Name="password" Id="examplePassword" PlaceHolder="don't tell!" Value="string.Empty"/>
+            <BSBasicInput InputType="InputType.Password" Name="password" Id="examplePassword" PlaceHolder="don't tell!" Value="string.Empty" />
         </BSFormGroup>
         <BSButton ButtonType="ButtonType.Submit">Submit</BSButton>
     </BSBasicForm>
@@ -138,11 +138,11 @@
 
 <div class="docs-example">
     <BSFormGroup IsCheck="true">
-        <BSBasicInput InputType="InputType.Checkbox" Id="defaultCheck1" Value="false"/>
+        <BSBasicInput InputType="InputType.Checkbox" Id="defaultCheck1" Value="false" />
         <BSLabel For="defaultCheck1">Default checkbox</BSLabel>
     </BSFormGroup>
     <BSFormGroup IsCheck="true">
-        <BSBasicInput InputType="InputType.Checkbox" Id="defaultCheck2" IsDisabled="true" Value="false"/>
+        <BSBasicInput InputType="InputType.Checkbox" Id="defaultCheck2" IsDisabled="true" Value="false" />
         <BSLabel For="defaultCheck2">Disabled checkbox</BSLabel>
     </BSFormGroup>
 </div>
@@ -150,15 +150,15 @@
 
 <div class="docs-example">
     <BSFormGroup IsCheck="true">
-        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios1" RadioValue="@("option1")" @bind-Value="RadioValue"/>
+        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios1" RadioValue="@("option1")" @bind-Value="RadioValue" />
         <BSLabel For="exampleRadios1">Default radio</BSLabel>
     </BSFormGroup>
     <BSFormGroup IsCheck="true">
-        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios2" RadioValue="@("option2")" @bind-Value="RadioValue"/>
+        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios2" RadioValue="@("option2")" @bind-Value="RadioValue" />
         <BSLabel For="exampleRadios2">Second default radio</BSLabel>
     </BSFormGroup>
     <BSFormGroup IsCheck="true" Class="disabled">
-        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios3" RadioValue="@("option3")" IsDisabled="true" @bind-Value="RadioValue"/>
+        <BSBasicInput InputType="InputType.Radio" Id="exampleRadios3" RadioValue="@("option3")" IsDisabled="true" @bind-Value="RadioValue" />
         <BSLabel For="exampleRadios3">Disabled radio</BSLabel>
     </BSFormGroup>
 </div>
@@ -171,12 +171,12 @@
         <DataAnnotationsValidator />
         <BSFormGroup>
             <BSLabel For="exampleEmail3">Input without validation</BSLabel>
-            <BSBasicInput InputType="InputType.Text" Id="exampleEmail3" Value="string.Empty"/>
+            <BSBasicInput InputType="InputType.Text" Id="exampleEmail3" Value="string.Empty" />
         </BSFormGroup>
         <BSFormGroup>
             <BSLabel For="exampleEmail4">Valid input</BSLabel>
-            <BSInput InputType="InputType.Text" Id="exampleEmail4" @bind-Value="@formsModelVal.Valid" ValidateOnChange="true"/>
-            <BSFormFeedback For="@(() => formsModelVal.Valid)" ValidMessage="Sweet! that name is available"/>
+            <BSInput InputType="InputType.Text" Id="exampleEmail4" @bind-Value="@formsModelVal.Valid" ValidateOnChange="true" />
+            <BSFormFeedback For="@(() => formsModelVal.Valid)" ValidMessage="Sweet! that name is available" />
         </BSFormGroup>
         <BSFormGroup>
             <BSLabel For="exampleEmail5">Invalid input</BSLabel>
@@ -194,7 +194,7 @@
         <BSRow>
             <BSFormGroup Class="col-md-12">
                 <BSLabel For="exampleEmail6">Input without validation</BSLabel>
-                <BSBasicInput InputType="InputType.Text" Id="exampleEmail6" Value="string.Empty"/>
+                <BSBasicInput InputType="InputType.Text" Id="exampleEmail6" Value="string.Empty" />
             </BSFormGroup>
             <BSFormGroup Class="col-md-12">
                 <BSLabel For="exampleEmail7">Valid input</BSLabel>
@@ -216,12 +216,29 @@
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms12.html" />
 
+<h4>Focus input element</h4>
+<div class="docs-example">
+    <BSForm Model="@formsModelFocus">
+        <BSFormGroup IsRow="true">
+            <BSLabel For="focusInputElement" SM="2">Input element</BSLabel>
+            <BSCol SM="8">
+                <BSInput InputType="InputType.Text" Id="focusInputElement" @bind-Value="@formsModelFocus.Blank" @ref="focusInputElement" />
+            </BSCol>
+            <BSCol SM="2">
+                <BSButton Color="Color.Primary" OnClick="@(async e => await focusInputElement.Focus())">Focus</BSButton>
+            </BSCol>
+        </BSFormGroup>
+    </BSForm>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms13.html" />
 
 @code
 {
     private string RadioValue = "option1";
     private FormsModel formsModelVal = new FormsModel();
     private FormsModel formsModelValTT = new FormsModel();
+    private FormsModel formsModelFocus = new FormsModel();
+    private BSInput<string> focusInputElement;
 
     public class FormsModel
     {
