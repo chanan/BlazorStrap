@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+	  <TargetFramework>netstandard2.0</TargetFramework>
+	  <RazorLangVersion>3.0</RazorLangVersion>
+	  <PackageId>BlazorStrap.Extensions.BSDataTable</PackageId>
+	  <Version>1.0.1-Preview-01</Version>
+	  <Authors>Chanan Braunstein; John Bomhold, Harold Collins</Authors>
+	  <Title>Blazor BootStrap Extensions BSDataTable</Title>
+	  <Description>A Datatable library for blazorstrap</Description>
+	  <PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
+	  <PackageTags>blazor;bootstrap;bootstrap4</PackageTags>
+	  <RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.4" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,56 @@
+﻿@namespace BlazorStrap.Extensions.BSDataTable
+@typeparam TItem
+@inherits DataComponentBase<TItem>
+
+<BSTable IsDark="@IsDark" IsBordered="@IsBordered" IsHoverable="@IsHoverable" IsResponsive="@IsResponsive"
+         IsStriped="@IsStriped" IsSmall="@IsSmall" IsBorderless="@IsBorderless">
+    <BSTableHead>
+        <CascadingValue Value="this">
+            @HeaderTemplate
+        </CascadingValue>
+    </BSTableHead>
+    <BSTableBody>
+        @if (IsLoading)
+        {
+            <BSTableRow>
+                @LoadingTemplate
+            </BSTableRow>
+        }
+        else
+        {
+            if (HasNoData && NoDataTemplate != null)
+            {
+                <BSTableRow>
+                    @NoDataTemplate
+                </BSTableRow>
+            }
+            else if (HasNoData && NoDataTemplate == null)
+            {
+            }
+            else
+            {
+                if (_sortColumn != "")
+                {
+                    @foreach (var item in Items.OrderByWithDirection(x => _prop.GetValue(x), _desc))
+                    {
+                        <BSTableRow>
+                            @ItemTemplate(item)
+                        </BSTableRow>
+                    }
+                }
+                else
+                {
+                    @foreach (var item in Items)
+                    {
+                        <BSTableRow>
+                            @ItemTemplate(item)
+                        </BSTableRow>
+                    }
+                }
+            }
+        }
+    </BSTableBody>
+    <BSTableFooter>
+        @FooterTemplate
+    </BSTableFooter>
+</BSTable>

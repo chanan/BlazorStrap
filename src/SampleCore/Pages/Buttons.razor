@@ -1,7 +1,6 @@
 ﻿@page "/buttons"
-
+@using SampleCore.Pages.Samples.Issue278Types
 <h1>Buttons</h1>
-
 <div class="docs-example">
     <BSButton Color="Color.Primary">primary</BSButton>
     <BSButton Color="Color.Secondary">secondary</BSButton>
@@ -27,7 +26,7 @@
     <BSButton ButtonType="ButtonType.Link" Href="#">Link</BSButton>
     <BSButton ButtonType="ButtonType.Button">Button</BSButton>
     <BSButton ButtonType="ButtonType.Input" Value="Input" />
-    <BSButton ButtonType="ButtonType.Submit" Value="Submit" />
+    <BSButton ButtonType="ButtonType.Submit" Value="Submit">Submit</BSButton>
     <BSButton ButtonType="ButtonType.Reset" Value="Reset" />
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/buttons/buttons3.html" />
@@ -82,13 +81,38 @@
 <PrettyCode CodeFile="_content/SampleCore/snippets/buttons/buttons9.html" />
 
 <h3>Checkbox and radio buttons</h3>
+<div class="docs-example">
+    <BSForm Model="customer">
+        <BSButtonGroup IsToggle="true">
+            <BSLabel IsButton="true">
+                <BSInput InputType="InputType.Checkbox" @bind-Value="customer.LastName" CheckValue="@("Hello")" />Checked
+            </BSLabel>
+        </BSButtonGroup>
+        <BSButtonGroup IsToggle="true">
+            <BSLabel IsButton="true">
+                <BSInput InputType="InputType.Checkbox" @bind-Value="customer.Checked" />Bool Checked
+            </BSLabel>
+        </BSButtonGroup>
+        <BSButtonGroup IsToggle="true">
+            <BSLabel IsButton="true">
+                <BSInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("John")" />John
+            </BSLabel>
+            <BSLabel IsButton="true">
+                <BSInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("Mike")" />Mike
+            </BSLabel>
+            <BSLabel IsButton="true">
+                <BSInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("Smith")" />Smith
+            </BSLabel>
+        </BSButtonGroup>
+    </BSForm>
+</div>
+    <PrettyCode CodeFile="_content/SampleCore/snippets/buttons/buttons10.html" />
 
-<BSAlert Color="Color.Info">Checkboxes and Radio aren't support yet by BlazorStrap</BSAlert>
+    @code {
+        private Customer customer = new Customer();
 
-
-@code {
-    void onclick(MouseEventArgs e)
-    {
-        Console.WriteLine("Button was clicked!");
+        void onclick(MouseEventArgs e)
+        {
+            Console.WriteLine("Button was clicked!");
+        }
     }
-}

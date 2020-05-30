@@ -1,39 +1,86 @@
 ﻿@page "/samples/issue278"
 @using BlazorStrap.Extensions.FluentValidation
+@using BlazorStrap
 @using SampleCore.Pages.Samples.Issue278Types
 
 
-<BSForm Model="customer" OnValidSubmit="SaveCustomer">
 
-    <FluentValidator TValidator="CustomerValidator" />
-    
-    <h3>Your name</h3>
-    <BSInput OnBlur="OnBlur" InputType="InputType.Text" OnFocus="OnFocus" @bind-Value="customer.FirstName" ValidateOnBlur="false" placeholder="First name"></BSInput>
-    <BSFormFeedback For="@(() => customer.FirstName)" />
-    <BSInput InputType="InputType.Text" placeholder="Last name" @bind-Value="customer.LastName" />
-    <BSFormFeedback For="@(() => customer.LastName)" />
+    <BSForm Model="customer" OnValidSubmit="SaveCustomer">
+        <div>@(customer.Checked ? "true" : "false")</div>
+        <BSBasicInput InputType="InputType.Checkbox" @bind-Value="customer.Checked" />Checked
+        <BSInput InputType="InputType.Checkbox" @bind-Value="customer.Checked" />Checked
+        <BSInput InputType="InputType.Select" @bind-Value="customer.Checked">
+            <option value="true">Yes</option>
+            <option value="false">False</option>
+        </BSInput>
+        <BSBasicInput InputType="InputType.Select" @bind-Value="customer.Checked">
+            <option value="true">Yes</option>
+            <option value="false">False</option>
+        </BSBasicInput>
+        BSBasicInput
+        <BSButtonGroup IsToggle="true">
+            <BSLabel IsButton="true">
+                <BSBasicInput InputType="InputType.Checkbox" @bind-Value="customer.LastName" CheckValue="@("Hello")" />Checked
+            </BSLabel>
+        </BSButtonGroup>
+        <BSButtonGroup IsToggle="true">
+            <BSLabel IsButton="true">
+                <BSBasicInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("John")" />John
+            </BSLabel>
+            <BSLabel IsButton="true">
+                <BSBasicInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("Mike")" />Mike
+            </BSLabel>
+            <BSLabel IsButton="true">
+                <BSBasicInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("Smith")" />Smith
+            </BSLabel>
+        </BSButtonGroup>
 
-    <h3>Your address</h3>
-    <div>
-        <BSInput InputType="InputType.Text" placeholder="Line 1" @bind-Value="customer.Address.Line1" />
-        <BSFormFeedback For="@(() => customer.Address.Line1)" />
-    </div>
-    <div>
-        <BSInput InputType="InputType.Text" placeholder="City" @bind-Value="customer.Address.City" />
-        <BSFormFeedback For="@(() => customer.Address.City)" />
-    </div>
-    <div>
-        <BSInput InputType="InputType.Text" placeholder="Postcode" @bind-Value="customer.Address.Postcode" />
-        <BSFormFeedback For="@(() => customer.Address.Postcode)" />
-    </div>
+        BSInput
+        <BSButtonGroup IsToggle="true">
+            <BSLabel IsButton="true">
+                <BSInput InputType="InputType.Checkbox" @bind-Value="customer.LastName" CheckValue="@("Hello")" />Checked
+            </BSLabel>
+        </BSButtonGroup>
+        <BSButtonGroup IsToggle="true">
+            <BSLabel IsButton="true">
+                <BSInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("John")" />John
+            </BSLabel>
+            <BSLabel IsButton="true">
+                <BSInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("Mike")" />Mike
+            </BSLabel>
+            <BSLabel IsButton="true">
+                <BSInput InputType="InputType.Radio" @bind-Value="customer.FirstName" RadioValue="@("Smith")" />Smith
+            </BSLabel>
+        </BSButtonGroup>
+        <FluentValidator TValidator="CustomerValidator" />
 
-    <h3>
-        Payment methods
-        [<a href="/samples/issue278" @onclick="AddPaymentMethod" @onclick:preventDefault>Add new</a>]
-    </h3>
-    <ValidationMessage For="@(() => customer.PaymentMethods)" />
+        <h3>Your name</h3>
+        <BSInput OnBlur="OnBlur" InputType="InputType.Text" OnFocus="OnFocus" @bind-Value="customer.FirstName" ValidateOnBlur="false" placeholder="First name"></BSInput>
+        <BSFormFeedback For="@(() => customer.FirstName)" />
+        <BSInput InputType="InputType.Text" placeholder="Last name" @bind-Value="customer.LastName" />
+        <BSFormFeedback For="@(() => customer.LastName)" />
 
-    @foreach (var paymentMethod in customer.PaymentMethods)
+        <h3>Your address</h3>
+        <div>
+            <BSInput InputType="InputType.Text" placeholder="Line 1" @bind-Value="customer.Address.Line1" />
+            <BSFormFeedback For="@(() => customer.Address.Line1)" />
+        </div>
+        <div>
+            <BSInput InputType="InputType.Text" placeholder="City" @bind-Value="customer.Address.City" />
+            <BSFormFeedback For="@(() => customer.Address.City)" />
+        </div>
+        <div>
+            <BSInput InputType="InputType.Text" placeholder="Postcode" @bind-Value="customer.Address.Postcode" />
+            <BSFormFeedback For="@(() => customer.Address.Postcode)" />
+        </div>
+
+        <h3>
+            Payment methods
+            [<a href="/samples/issue278" @onclick="AddPaymentMethod" @onclick:preventDefault>Add new</a>]
+        </h3>
+        <ValidationMessage For="@(() => customer.PaymentMethods)" />
+
+        @foreach (var paymentMethod in customer.PaymentMethods)
     {
         <p>
             <BSInput InputType="InputType.Select" @bind-Value="paymentMethod.MethodType">
@@ -43,11 +90,11 @@
 
             @if (paymentMethod.MethodType == PaymentMethod.Type.CreditCard)
             {
-                <BSInput InputType="InputType.Text" placeholder="Card number" @bind-Value="paymentMethod.CardNumber" />
+            <BSInput InputType="InputType.Text" placeholder="Card number" @bind-Value="paymentMethod.CardNumber" />
             }
             else if (paymentMethod.MethodType == PaymentMethod.Type.HonourSystem)
             {
-                <span>Sure, we trust you to pay us somehow eventually</span>
+            <span>Sure, we trust you to pay us somehow eventually</span>
             }
             <ValidationMessage For="@(() => paymentMethod.CardNumber)" />
 
@@ -57,8 +104,8 @@
         </p>
     }
 
-    <p><button type="submit">Submit</button></p>
-</BSForm>
+        <p><button type="submit">Submit</button></p>
+    </BSForm>
 @code
 {
 

@@ -1,0 +1,12 @@
+﻿@namespace BlazorStrap
+
+@if (string.IsNullOrWhiteSpace(Src))
+{
+    <DynamicElement @attributes="@UnknownParameters" TagName="svg" class="@Classname">
+        @ChildContent
+    </DynamicElement>
+}
+else
+{
+        @Markup
+}

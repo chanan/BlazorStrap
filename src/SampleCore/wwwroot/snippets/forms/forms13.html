@@ -1,0 +1,25 @@
+﻿<BSForm Model="@formsModelFocus">
+    <BSFormGroup IsRow="true">
+        <BSLabel For="focusInputElement" SM="2">Input element</BSLabel>
+        <BSCol SM="8">
+            <BSInput InputType="InputType.Text" Id="focusInputElement" @bind-Value="@formsModelFocus.Blank" @ref="focusInputElement" />
+        </BSCol>
+        <BSCol SM="2">
+            <BSButton Color="Color.Primary" OnClick="@(async e => await focusInputElement.Focus())">Focus</BSButton>
+        </BSCol>
+    </BSFormGroup>
+</BSForm>
+@code
+{
+    private FormsModel formsModelFocus = new FormsModel();
+    private BSInput<string> focusInputElement;
+
+    public class FormsModel
+    {
+        public string Valid { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Oh noes! that name is already taken")]
+        public string InValid { get; set; }
+        public string Blank { get; set; }
+        public string Email { get; set; } = "email@example.com";
+    }
+}

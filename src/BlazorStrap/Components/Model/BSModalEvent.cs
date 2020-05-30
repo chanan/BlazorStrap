@@ -2,6 +2,6 @@
 {
     public class BSModalEvent
     {
-        public BSModalBase Target { get; set; }
+        public BSModal Target { get; set; }
     }
 }

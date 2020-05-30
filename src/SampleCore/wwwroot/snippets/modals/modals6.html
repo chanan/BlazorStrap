@@ -1,9 +1,14 @@
-﻿<BSButton Color="Color.Primary" @onclick="onclick6">Large modal</BSButton>
-<BSModal IsBottom="true" @bind-IsOpen="@IsOpen6">
-    <BSModalHeader OnClick="onclick6">Modal title</BSModalHeader>
+﻿<BSButton Color="Color.Primary" @onclick="@(() => Bottom.Show())">Bottom modal</BSButton>
+<BSModal @ref="Bottom" IsBottom="true">
+    <BSModalHeader OnClick="@(() => Bottom.Hide())">Modal title</BSModalHeader>
     <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
     <BSModalFooter>
-        <BSButton Color="Color.Primary" @onclick="onclick6">Do Something</BSButton>
-        <BSButton Color="Color.Secondary" @onclick="onclick6">Cancel</BSButton>
+        <BSButton Color="Color.Primary" @onclick="@(() => Bottom.Hide())">Do Something</BSButton>
+        <BSButton Color="Color.Secondary" @onclick="@(() => Bottom.Hide())">Cancel</BSButton>
     </BSModalFooter>
 </BSModal>
+
+@code
+{
+    BSModal Bottom { get; set; }
+}

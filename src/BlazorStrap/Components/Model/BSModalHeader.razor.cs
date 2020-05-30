@@ -22,5 +22,7 @@ namespace BlazorStrap
         [Parameter] public string Class { get; set; }
         [Parameter] public string HeadingClass { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
+
+
     }
 }

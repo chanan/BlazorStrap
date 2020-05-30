@@ -80,6 +80,23 @@ text#third-slide {
     }
 }
 
+text#svg-text {
+    animation-name: animateSlide4;
+    transform-origin: 50% 50%;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animateSlide4 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .nav-link.active {
     background-color: lavender;
 }

@@ -8,6 +8,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
@@ -16,6 +17,29 @@ namespace BlazorStrap
         private bool _clean = true;
         private bool _touched = false;
 
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+        }
+        //Consider getting rid of BSBasicInput
+        //public override Task SetParametersAsync(ParameterView parameters)
+        //{
+        //    parameters.SetParameterProperties(this);
+        //    if (MyEditContext == null)
+        //    {
+        //        MyEditContext = new EditContext(new object());
+        //        var basecontext = this.GetType().BaseType.GetProperty("CascadedEditContext", BindingFlags.NonPublic | BindingFlags.Instance);
+        //        basecontext.SetValue(this, MyEditContext);
+        //    }
+        //    else
+        //    {
+        //        base.EditContext = null;
+        //    }
+        //    return base.SetParametersAsync(parameters);
+
+        //}
+
+        [Inject] protected BlazorStrapInterop BlazorStrapInterop { get; set; }
         // [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [CascadingParameter] protected EditContext MyEditContext { get; set; }
 
@@ -31,7 +55,6 @@ namespace BlazorStrap
            .AddClass(GetClass())
            .AddClass(Class)
          .Build();
-
         protected bool HasValidationErrors()
         {
             if (_clean || MyEditContext == null)
@@ -48,13 +71,14 @@ namespace BlazorStrap
             InputType.TextArea => "textarea",
             _ => "input"
         };
-
+        [CascadingParameter] public BSLabel BSLabel { get; set; }
         [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
         [Parameter] public EventCallback<FocusEventArgs> OnFocus { get; set; }
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
         [Parameter] public Size Size { get; set; } = Size.None;
         [Parameter] public string MaxDate { get; set; } = "9999-12-31";
         [Parameter] public virtual T RadioValue { get; set; }
+        [Parameter] public virtual T CheckValue { get; set; }
         [Parameter] public bool IsReadonly { get; set; }
         [Parameter] public bool IsPlaintext { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
@@ -64,7 +88,7 @@ namespace BlazorStrap
         [Parameter] public bool IsMultipleSelect { get; set; }
         [Parameter] public int? SelectSize { get; set; }
         [Parameter] public int? SelectedIndex { get; set; }
-        [Parameter] public bool ValidateOnChange { get; set; } 
+        [Parameter] public bool ValidateOnChange { get; set; }
         [Parameter] public bool ValidateOnBlur { get; set; } = true;
         [Parameter] public string Class { get; set; }
 
@@ -74,6 +98,8 @@ namespace BlazorStrap
         protected string Type => InputType.ToDescriptionString();
 
         private const string _dateFormat = "yyyy-MM-dd";
+
+        protected ElementReference ElementReference;
 
         protected override void OnInitialized()
         {
@@ -88,7 +114,7 @@ namespace BlazorStrap
             _touched = true;
         }
 
-       
+
         private string GetClass()
         {
             return InputType switch
@@ -110,8 +136,27 @@ namespace BlazorStrap
             }
             else
             {
-                var tmp = (bool)(object)Value;
-                Value = (T)(object)(!tmp);
+                if (typeof(T) != typeof(bool))
+                {
+                    if (CheckValue != null)
+                    {
+                        if (Value != null)
+                        {
+                            Value = default(T);
+                            ValueChanged.InvokeAsync(Value);
+                        }
+                        else
+                        {
+                            Value = CheckValue;
+                            ValueChanged.InvokeAsync(Value);
+                        }
+                    }
+                }
+                else
+                {
+                    var tmp = (bool)(object)Value;
+                    Value = (T)(object)(!tmp);
+                }
                 ValueChanged.InvokeAsync(Value);
             }
         }
@@ -139,6 +184,15 @@ namespace BlazorStrap
             builder.AddAttribute(8, "selectedIndex", SelectedIndex);
             if (InputType == InputType.Checkbox)
             {
+                if (BSLabel != null)
+                {
+                    if (CurrentValue == null)
+                        BSLabel.IsActive = false;
+                    else if (CurrentValue.GetType() == typeof(bool))
+                        BSLabel.IsActive = (bool)(object)CurrentValue;
+                    else
+                        BSLabel.IsActive = true;
+                }
                 builder.AddAttribute(9, "checked", BindConverter.FormatValue(CurrentValue));
                 builder.AddAttribute(10, "onclick", EventCallback.Factory.Create(this, OnClick));
             }
@@ -146,11 +200,15 @@ namespace BlazorStrap
             {
                 if (RadioValue.Equals(Value))
                 {
+                    if (BSLabel != null)
+                        BSLabel.IsActive = true;
                     builder.AddAttribute(9, "checked", true);
                     builder.AddAttribute(10, "onclick", EventCallback.Factory.Create(this, OnClick));
                 }
                 else
                 {
+                    if (BSLabel != null)
+                        BSLabel.IsActive = false;
                     builder.AddAttribute(9, "checked", false);
                     builder.AddAttribute(10, "onclick", EventCallback.Factory.Create(this, OnClick));
                 }
@@ -162,23 +220,26 @@ namespace BlazorStrap
 
                 if (InputType == InputType.Date && !String.IsNullOrEmpty(MaxDate))
                 {
-                   builder.AddAttribute(11, "max", MaxDate);
+                    builder.AddAttribute(11, "max", MaxDate);
                 }
             }
-            builder.AddAttribute(12, "onfocus", EventCallback.Factory.Create(this, (e) => {
+            builder.AddAttribute(12, "onfocus", EventCallback.Factory.Create(this, (e) =>
+            {
                 OnFocus.InvokeAsync(e);
             }));
-            
-                builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, (FocusEventArgs e) => {
-                    
-                    if (ValidateOnBlur)
-                    {
-                        ValidateField(FieldIdentifier);
-                    }
-                    OnBlur.InvokeAsync(e);
-                }));
-            
+
+            builder.AddAttribute(12, "onblur", EventCallback.Factory.Create(this, (FocusEventArgs e) =>
+            {
+
+                if (ValidateOnBlur)
+                {
+                    ValidateField(FieldIdentifier);
+                }
+                OnBlur.InvokeAsync(e);
+            }));
+
             builder.AddContent(13, ChildContent);
+            builder.AddElementReferenceCapture(14, er => ElementReference = er);
             builder.CloseElement();
         }
 
@@ -187,6 +248,7 @@ namespace BlazorStrap
             return value switch
             {
                 null => null,
+                bool @bool => BindConverter.FormatValue(@bool.ToString().ToLowerInvariant(), CultureInfo.InvariantCulture),
                 int @int => BindConverter.FormatValue(@int, CultureInfo.InvariantCulture),
                 long @long => BindConverter.FormatValue(@long, CultureInfo.InvariantCulture),
                 float @float => BindConverter.FormatValue(@float, CultureInfo.InvariantCulture),
@@ -279,6 +341,42 @@ namespace BlazorStrap
                 validationErrorMessage = null;
                 return true;
             }
+            else if (typeof(T) == typeof(bool))
+            {
+                if (InputType != InputType.Select)
+                {
+                    result = (T)(object)false;
+                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The bool valued must be used with select, checkboxes, or radios.");
+                    return false;
+                }
+                try
+                {
+                    if (value.ToString().ToLowerInvariant() == "false")
+                    {
+                        result = (T)(object)false;
+                        validationErrorMessage = null;
+                        return true;
+                    }
+                    else if (value.ToString().ToLowerInvariant() == "true")
+                    {
+                        result = (T)(object)true;
+                        validationErrorMessage = null;
+                        return true;
+                    }
+                    else
+                    {
+                        result = (T)(object)false;
+                        validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a bool of true or false.", FieldIdentifier.FieldName);
+                        return false;
+                    }
+                }
+                catch
+                {
+                    result = (T)(object)false;
+                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a bool of true or false.", FieldIdentifier.FieldName);
+                    return false;
+                }
+            }
             else if (typeof(T) == typeof(DateTime) || typeof(T) == typeof(DateTime?))
             {
                 if (TryParseDateTime(value, out result))
@@ -320,6 +418,7 @@ namespace BlazorStrap
                     return false;
                 }
             }
+
             throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
         }
 
@@ -359,5 +458,7 @@ namespace BlazorStrap
             OnFieldChanged?.DynamicInvoke(new object[] { EditContext, new FieldChangedEventArgs(fieldIdentifier) });
             StateHasChanged();
         }
+
+        public ValueTask<object> Focus() => BlazorStrapInterop.FocusElement(ElementReference);
     }
 }

@@ -1,0 +1,46 @@
+﻿@namespace BlazorStrap.Extensions.BSDataTable
+@typeparam TItem
+@inherits DataComponentBase<TItem>
+
+<RemotePagination HasNoData="HasNoData" IsLoading="IsLoading" Page="Page" RecordsPerPage="RecordsPerPage" TotalRecords="TotalRecords" UrlPattern="@UrlPattern" />
+
+<BSTable IsDark="@IsDark" IsBordered="@IsBordered" IsHoverable="@IsHoverable" IsResponsive="@IsResponsive"
+         IsStriped="@IsStriped" IsSmall="@IsSmall" IsBorderless="@IsBorderless">
+    <thead>
+        <CascadingValue Value="this">
+            @HeaderTemplate
+        </CascadingValue>
+    </thead>
+    <tbody>
+
+        @if (IsLoading)
+        {
+            <tr>
+                @LoadingTemplate
+            </tr>
+        }
+        else
+        {
+            if (HasNoData)
+            {
+                <tr>
+                    @NoDataTemplate
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Items)
+                {
+                    <tr>
+                        @ItemTemplate(item)
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+    <tfoot>
+        @FooterTemplate
+    </tfoot>
+</BSTable>
+
+<RemotePagination HasNoData="HasNoData" IsLoading="IsLoading" Page="Page" RecordsPerPage="RecordsPerPage" TotalRecords="TotalRecords" UrlPattern="@UrlPattern" />
