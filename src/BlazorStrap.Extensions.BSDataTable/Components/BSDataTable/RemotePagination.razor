@@ -4,13 +4,15 @@
 {
     @if (!IsLoading && !HasNoData)
     {
-        <BSPagination Alignment="Alignment.Right">
-            <BSPaginationItem IsDisabled="@IsPreviousDisabled">
-                <BSPaginationLink Href="@(GetUrl(Page - 1))" PaginationLinkType="PaginationLinkType.PreviousIcon" />
-            </BSPaginationItem>
-            @for (int i = 0; i < Pages; i++)
+    <BSPagination Alignment="Alignment.Right">
+        <BSPaginationItem IsDisabled="@IsPreviousDisabled">
+            <BSPaginationLink Href="@(GetUrl(Page - 1))" PaginationLinkType="PaginationLinkType.PreviousIcon" />
+        </BSPaginationItem>
+        @for (int i = 0; i < Pages; i++)
+        {
+            int count = i + 1;
+            if (Math.Abs(Page - count) <= WindowSize)
             {
-                int count = i + 1;
                 if (count == Page)
                 {
                     <BSPaginationItem IsActive="true">
@@ -23,12 +25,12 @@
                         <BSPaginationLink Href="@(GetUrl(count))">@count</BSPaginationLink>
                     </BSPaginationItem>
                 }
-
             }
-            <BSPaginationItem IsDisabled="@IsNextDisabled">
-                <BSPaginationLink Href="@(GetUrl(Page + 1))" PaginationLinkType="PaginationLinkType.NextIcon" />
-            </BSPaginationItem>
-        </BSPagination>
+        }
+        <BSPaginationItem IsDisabled="@IsNextDisabled">
+            <BSPaginationLink Href="@(GetUrl(Page + 1))" PaginationLinkType="PaginationLinkType.NextIcon" />
+        </BSPaginationItem>
+    </BSPagination>
     }
     else
     {
