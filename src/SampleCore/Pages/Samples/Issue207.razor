@@ -1,0 +1,94 @@
+﻿@page "/samples/issue207"
+@using System.ComponentModel.DataAnnotations;
+
+<h3>Issue207</h3>
+
+<BSBasicInput Value="SearchTerm" ValueChanged="@((string value) => SelectedChanged(value))" ValidateOnInput="true" />
+
+<span class="text-muted ml-5">
+    Showing @FilteredToDos.Count out of @ToDoItems.Count
+</span>
+
+<h4 class="mt-4">To Do's</h4>
+<ul>
+    @foreach (var toDo in FilteredToDos)
+    {
+        <li>@toDo.Name</li>
+    }
+</ul>
+
+<hr />
+
+<BSForm Model="@formsModelValTT" ValidateOnInit="true">
+        <DataAnnotationsValidator />
+        <BSRow>
+            <BSFormGroup Class="col-md-12">
+                <BSLabel For="exampleEmail6">Input without validation</BSLabel>
+                <BSBasicInput InputType="InputType.Text" Id="exampleEmail6" Value="string.Empty" />
+            </BSFormGroup>
+            <BSFormGroup Class="col-md-12">
+                <BSLabel For="exampleEmail7">Valid input</BSLabel>
+                <BSInput InputType="InputType.Text" Id="exampleEmail7" @bind-Value="@formsModelValTT.Valid" />
+                <BSFormFeedback For="@(() => formsModelValTT.Valid)" IsTooltip="true" ValidMessage="Sweet! that name is available" />
+            </BSFormGroup>
+            <BSFormGroup Class="col-md-12">
+                <BSLabel For="exampleEmail8">Invalid input</BSLabel>
+                <BSInput InputType="InputType.Text" Id="exampleEmail8" @bind-Value="@formsModelValTT.InValid" ValidateOnInput="true"/>
+                <BSFormFeedback For="@(() => formsModelValTT.InValid)" IsTooltip="true" ValidMessage="Sweet! you fixed the issue" />
+            </BSFormGroup>
+            <BSFormGroup Class="col-md-12">
+                <BSLabel For="exampleEmail9">Invalid input</BSLabel>
+                <BSInput InputType="InputType.Text" Id="exampleEmail9" @bind-Value="@formsModelValTT.IsInValid"/>
+                <BSFormFeedback For="@(() => formsModelValTT.IsInValid)" IsTooltip="true" ValidMessage="Sweet! you fixed the issue" />
+            </BSFormGroup>
+            <BSFormGroup Class="col-md-12">
+                <BSLabel For="exampleEmail8">Date input</BSLabel>
+                <BSInput InputType="InputType.Date" Id="exampleEmail10" @bind-Value="@formsModelValTT.Date" />
+                <BSFormFeedback For="@(() => formsModelValTT.Date)" IsTooltip="true" ValidMessage="Sweet! that name is available" />
+            </BSFormGroup>
+        </BSRow>
+    </BSForm>
+
+
+@code {
+    private FormsModel formsModelValTT = new FormsModel();
+
+    public class FormsModel
+    {
+
+        public string Valid { get; set; }
+        public DateTime Date { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Oh noes! that name is already taken")]
+        public string InValid { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Oh noes! that name is already taken")]
+        public string IsInValid { get; set; }
+        public string Blank { get; set; }
+        public string Email { get; set; } = "email@example.com";
+    }
+
+
+    // Initialize SearchTerm to "" to prevent null's
+    string SearchTerm { get; set; } = string.Empty;
+
+    // Imagine this was retrieved from an API, just hardcoding for demo purposes
+    List<ToDoItem> ToDoItems => new List<ToDoItem>
+    {
+        new ToDoItem { Name = "Garbage" },
+        new ToDoItem { Name = "Dishes" },
+        new ToDoItem { Name = "Wash clothes" },
+        new ToDoItem { Name = "Water flowers" }
+    };
+
+    List<ToDoItem> FilteredToDos => ToDoItems.Where(i => i.Name.ToLower().Contains(SearchTerm.ToLower())).ToList();
+
+    public class ToDoItem
+    {
+        public string Name {get; set;}
+
+    }
+
+    protected void SelectedChanged(string e)
+    {
+        SearchTerm = e;
+    }
+}

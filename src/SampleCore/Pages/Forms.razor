@@ -1,7 +1,7 @@
 ﻿@page "/forms"
 @using System.ComponentModel.DataAnnotations;
 <h1>Forms</h1>
-<BSAlert Color="Color.Info"><p>Most of the examples here use BSBasicInput this is to avoid having to have a model. Always favor BSINput expect when you need a input without a form.</p></BSAlert>
+<BSAlert Color="Color.Info"><p>Most of the examples here use BSBasicInput this is to avoid having to have a model. Always favor BSInput except when you need a input without a form.</p></BSAlert>
 @*<BSAlert Color="Color.Warning">Form tags are not finished. Binding, specifically of the select tag, still needs work.</BSAlert>*@
 
 <div class="docs-example">
@@ -187,6 +187,29 @@
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms11.html" />
 
+<h3>Form Validation using OnInput instead of OnChange</h3>
+<BSAlert Color="Color.Info"><p>Use the parameter DebounceInterval to adjust the speed in which the validation occures. DebounceInterval is measured in Milliseconds.</p></BSAlert>
+<div class="docs-example">
+    <BSForm Model="@formsModelVal" ValidateOnInit="true">
+        <DataAnnotationsValidator />
+        <BSFormGroup>
+            <BSLabel For="exampleEmail3">Input without validation</BSLabel>
+            <BSBasicInput InputType="InputType.Text" Id="exampleEmail3" Value="string.Empty" />
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleEmail4">Valid input</BSLabel>
+            <BSInput InputType="InputType.Text" Id="exampleEmail4" @bind-Value="@formsModelVal.Valid" />
+            <BSFormFeedback For="@(() => formsModelVal.Valid)" ValidMessage="Sweet! that name is available" />
+        </BSFormGroup>
+        <BSFormGroup>
+            <BSLabel For="exampleEmail5">Invalid input</BSLabel>
+            <BSInput InputType="InputType.Text" Id="exampleEmail5" @bind-Value="@formsModelVal.InValid" ValidateOnInput="true" />
+            <BSFormFeedback For="@(() => formsModelVal.InValid)" ValidMessage="Sweet! you fixed the issue" />
+        </BSFormGroup>
+    </BSForm>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms14.html" />
+
 <h4>Form Tooltip Validation</h4>
 <div class="docs-example">
     <BSForm Model="@formsModelValTT" ValidateOnInit="true">
@@ -232,6 +255,26 @@
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms13.html" />
 
+<h4>Using OnInput with BSBasicInput</h4>
+<div class="docs-example">
+    Enter Search Parameters
+    <BSBasicInput Value="SearchTerm" ValueChanged="@((string value) => SelectedChanged(value))" ValidateOnInput="true" />
+
+    <span class="text-muted ml-5">
+        Showing @FilteredPeople.Count out of @People.Count
+    </span>
+
+    <h4 class="mt-4">To Do's</h4>
+    <ul>
+        @foreach (var person in FilteredPeople)
+        {
+            <li>@person.Name</li>
+        }
+    </ul>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/forms/forms15.html" />
+
+
 @code
 {
     private string RadioValue = "option1";
@@ -249,5 +292,31 @@
         public string InValid { get; set; }
         public string Blank { get; set; }
         public string Email { get; set; } = "email@example.com";
+    }
+
+    // Initialize SearchTerm to "" to prevent null's
+    string SearchTerm { get; set; } = string.Empty;
+
+    // Imagine this was retrieved from an API, just hardcoding for demo purposes
+    List<Person> People => new List<Person>
+    {
+        new Person { Name = "John Doe" },
+        new Person { Name = "Harold Witlice" },
+        new Person { Name = "Harry Critter" },
+        new Person { Name = "Sue Pantsoff" },
+        new Person { Name = "Kat Outabag" }
+    };
+
+    List<Person> FilteredPeople => People.Where(i => i.Name.ToLower().Contains(SearchTerm.ToLower())).ToList();
+
+    public class Person
+    {
+        public string Name { get; set; }
+
+    }
+
+    protected void SelectedChanged(string e)
+    {
+        SearchTerm = e;
     }
 }

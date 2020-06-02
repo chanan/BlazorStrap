@@ -59,6 +59,8 @@ namespace BlazorStrap
         [Parameter] public int? SelectSize { get; set; }
         [Parameter] public int? SelectedIndex { get; set; }
         [Parameter] public string Class { get; set; }
+        [Parameter] public bool ValidateOnInput { get; set; } = false;
+        [Parameter] public int DebounceInterval { get; set; } = 500;
 
         // [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
@@ -84,6 +86,13 @@ namespace BlazorStrap
                 InputType.Range => "form-control-range",
                 _ => IsPlaintext ? "form-control-plaintext" : "form-control"
             };
+        }
+
+        protected void OnInput(string e)
+        {
+            RateLimitingExceptionForObject.Debounce(e, DebounceInterval, (CurrentValueAsString) => {
+                OnChange(e);
+            });
         }
 
         protected void OnChange(string e)
@@ -190,7 +199,15 @@ namespace BlazorStrap
             else
             {
                 builder.AddAttribute(9, "value", BindConverter.FormatValue(CurrentValueAsString));
-                builder.AddAttribute(11, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
+                if(ValidateOnInput != true)
+                {
+                    builder.AddAttribute(11, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
+                }
+                else
+                {
+                    builder.AddAttribute(11, "oninput", EventCallback.Factory.CreateBinder<string>(this, OnInput, CurrentValueAsString));
+                }
+                
 
                 if (InputType == InputType.Date && !String.IsNullOrEmpty(MaxDate))
                 {
