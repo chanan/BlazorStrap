@@ -166,7 +166,7 @@ namespace BlazorStrap
         protected void OnInput(string e)
         {
             RateLimitingExceptionForObject.Debounce(e, DebounceInterval, (CurrentValueAsString) => {
-                OnChange(e);
+                InvokeAsync(() => OnChange(e));
             });
         }
 
