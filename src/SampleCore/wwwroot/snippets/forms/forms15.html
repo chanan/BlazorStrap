@@ -1,0 +1,42 @@
+﻿Enter Search Parameters
+<BSBasicInput Value="SearchTerm" ValueChanged="@((string value) => SelectedChanged(value))" ValidateOnInput="true" />
+
+<span class="text-muted ml-5">
+    Showing @FilteredPeople.Count out of @People.Count
+</span>
+
+<h4 class="mt-4">To Do's</h4>
+<ul>
+    @foreach (var person in FilteredPeople)
+    {
+    <li>@person.Name</li>
+    }
+</ul>
+
+@code
+{
+    string SearchTerm { get; set; } = string.Empty;
+
+    List<Person>
+    People => new List<Person>
+        {
+        new Person { Name = "John Doe" },
+        new Person { Name = "Harold Witlice" },
+        new Person { Name = "Harry Critter" },
+        new Person { Name = "Sue Pantsoff" },
+        new Person { Name = "Kat Outabag" }
+        };
+
+        List<Person>
+            FilteredPeople => People.Where(i => i.Name.ToLower().Contains(SearchTerm.ToLower())).ToList();
+
+            public class Person
+            {
+            public string Name { get; set; }
+            }
+
+            protected void SelectedChanged(string e)
+            {
+            SearchTerm = e;
+            }
+            }

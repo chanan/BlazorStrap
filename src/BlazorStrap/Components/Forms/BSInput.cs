@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -89,8 +90,10 @@ namespace BlazorStrap
         [Parameter] public int? SelectSize { get; set; }
         [Parameter] public int? SelectedIndex { get; set; }
         [Parameter] public bool ValidateOnChange { get; set; }
+        [Parameter] public bool ValidateOnInput { get; set; } = false;
         [Parameter] public bool ValidateOnBlur { get; set; } = true;
         [Parameter] public string Class { get; set; }
+        [Parameter] public int DebounceInterval { get; set; } = 500;
 
         // [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
@@ -160,6 +163,12 @@ namespace BlazorStrap
                 ValueChanged.InvokeAsync(Value);
             }
         }
+        protected void OnInput(string e)
+        {
+            RateLimitingExceptionForObject.Debounce(e, DebounceInterval, (CurrentValueAsString) => {
+                InvokeAsync(() => OnChange(e));
+            });
+        }
 
         protected void OnChange(string e)
         {
@@ -216,7 +225,14 @@ namespace BlazorStrap
             else
             {
                 builder.AddAttribute(9, "value", BindConverter.FormatValue(CurrentValueAsString));
-                builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
+                if (ValidateOnInput)
+                {
+                    builder.AddAttribute(10, "oninput", EventCallback.Factory.CreateBinder<string>(this, OnInput, CurrentValueAsString));
+                }
+                else
+                {
+                    builder.AddAttribute(10, "onchange", EventCallback.Factory.CreateBinder<string>(this, OnChange, CurrentValueAsString));
+                }
 
                 if (InputType == InputType.Date && !String.IsNullOrEmpty(MaxDate))
                 {
