@@ -19,6 +19,7 @@ namespace BlazorStrap.Extensions.BSDataTable
         [Parameter] public int TotalRecords { get; set; }
         [Parameter] public int RecordsPerPage { get; set; } = 50;
         [Parameter] public string UrlPattern { get; set; }
+        [Parameter] public int WindowSize { get; set; } = 3;
 
         // Render Fragments
 

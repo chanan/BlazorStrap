@@ -11,6 +11,7 @@ namespace BlazorStrap.Extensions.BSDataTable
         [Parameter] public bool IsLoading { get; set; }
         [Parameter] public bool HasNoData { get; set; }
         [Parameter] public string UrlPattern { get; set; }
+        [Parameter] public int WindowSize { get; set; }
 
         private int Pages => (int)Math.Ceiling((float)TotalRecords / RecordsPerPage);
         private bool IsPreviousDisabled => Page == 1;
