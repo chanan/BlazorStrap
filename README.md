@@ -12,13 +12,13 @@ Bootstrap 4 Components for Blazor Framework
 
 ### Blazor WebAssembly (Client-side Blazor)
 
-> Add <script src="_content/BlazorStrap/blazorStrap.js"></script> inside the `<head>` element of your `wwwroot/index.html`.
-> In program add builder.Services.AddBootstrapCss();
+1. Inside the `<head>` element of your `wwwroot/index.html`, add `<script src="_content/BlazorStrap/blazorStrap.js"></script>`.
+2. In `Program`, add `builder.Services.AddBootstrapCss();`.
 
 ### Blazor Server (Server-side Blazor)
 
-> Add <script src="_content/BlazorStrap/blazorStrap.js"></script> inside the `<head>` element of your `Pages/_Host.cshtml`.
-> In startup add Services.AddBootstrapCss();
+1. Inside the `<head>` element of your `Pages/_Host.cshtml`, add `<script src="_content/BlazorStrap/blazorStrap.js"></script>`.
+2. In `Startup`, add `Services.AddBootstrapCss();`.
 
 ## Animations
 > Animations are always on as they no longer require javascript to function.
