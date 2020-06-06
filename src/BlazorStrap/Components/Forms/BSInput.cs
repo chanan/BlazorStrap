@@ -15,56 +15,23 @@ namespace BlazorStrap
 {
     public class BSInput<T> : InputBase<T>
     {
+        // Constants
+        private const string _dateFormat = "yyyy-MM-dd";
+
+        // Private variables
         private bool _clean = true;
         private bool _touched = false;
+        
 
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-        }
-        //Consider getting rid of BSBasicInput
-        //public override Task SetParametersAsync(ParameterView parameters)
-        //{
-        //    parameters.SetParameterProperties(this);
-        //    if (MyEditContext == null)
-        //    {
-        //        MyEditContext = new EditContext(new object());
-        //        var basecontext = this.GetType().BaseType.GetProperty("CascadedEditContext", BindingFlags.NonPublic | BindingFlags.Instance);
-        //        basecontext.SetValue(this, MyEditContext);
-        //    }
-        //    else
-        //    {
-        //        base.EditContext = null;
-        //    }
-        //    return base.SetParametersAsync(parameters);
-
-        //}
-
-        [Inject] protected BlazorStrapInterop BlazorStrapInterop { get; set; }
-        // [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        [CascadingParameter] protected EditContext MyEditContext { get; set; }
-
-        [CascadingParameter] protected BSForm Parent { get; set; }
-
+        // protected variables
         protected string Classname =>
-        new CssBuilder()
-           .AddClass($"form-control-{Size.ToDescriptionString()}", Size != Size.None)
-           .AddClass("is-valid", IsValid)
-           .AddClass("is-invalid", IsInvalid)
-           .AddClass("is-valid", _touched && (!Parent?.UserValidation ?? false) && !HasValidationErrors())
-           .AddClass("is-invalid", (!Parent?.UserValidation ?? false) && HasValidationErrors())
-           .AddClass(GetClass())
-           .AddClass(Class)
-         .Build();
-        protected bool HasValidationErrors()
-        {
-            if (_clean || MyEditContext == null)
-            {
-                _clean = false;
-                return false;
-            }
-            return MyEditContext.GetValidationMessages(base.FieldIdentifier).Any();
-        }
+            new CssBuilder()
+               .AddClass($"form-control-{Size.ToDescriptionString()}", Size != Size.None)
+               .AddClass("is-valid", GenerateIsValid())
+               .AddClass("is-invalid", GenerateIsInvalid())
+               .AddClass(GetClass())
+               .AddClass(Class)
+             .Build();
 
         protected string Tag => InputType switch
         {
@@ -72,7 +39,13 @@ namespace BlazorStrap
             InputType.TextArea => "textarea",
             _ => "input"
         };
-        [CascadingParameter] public BSLabel BSLabel { get; set; }
+        protected string Type => InputType.ToDescriptionString();
+        protected ElementReference ElementReference;
+
+        //Dependency Injection
+        [Inject] protected BlazorStrapInterop BlazorStrapInterop { get; set; }
+
+        // Parameters
         [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
         [Parameter] public EventCallback<FocusEventArgs> OnFocus { get; set; }
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
@@ -94,91 +67,35 @@ namespace BlazorStrap
         [Parameter] public bool ValidateOnBlur { get; set; } = true;
         [Parameter] public string Class { get; set; }
         [Parameter] public int DebounceInterval { get; set; } = 500;
-
-        // [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
 
-        protected string Type => InputType.ToDescriptionString();
+        // Cascading Parameters
+        [CascadingParameter] protected EditContext MyEditContext { get; set; }
+        [CascadingParameter] protected BSForm Parent { get; set; }
+        [CascadingParameter] public BSLabel BSLabel { get; set; }
 
-        private const string _dateFormat = "yyyy-MM-dd";
-
-        protected ElementReference ElementReference;
-
-        protected override void OnInitialized()
+        // Overrides
+        protected override void OnParametersSet()
         {
-            MyEditContext.OnValidationRequested += MyEditContext_OnValidationRequested;
-            //Preview 7 workaround
-            if (Parent != null)
-                Parent.FormIsReady(MyEditContext);
+            base.OnParametersSet();
         }
+        //Consider getting rid of BSBasicInput
+        //public override Task SetParametersAsync(ParameterView parameters)
+        //{
+        //    parameters.SetParameterProperties(this);
+        //    if (MyEditContext == null)
+        //    {
+        //        MyEditContext = new EditContext(new object());
+        //        var basecontext = this.GetType().BaseType.GetProperty("CascadedEditContext", BindingFlags.NonPublic | BindingFlags.Instance);
+        //        basecontext.SetValue(this, MyEditContext);
+        //    }
+        //    else
+        //    {
+        //        base.EditContext = null;
+        //    }
+        //    return base.SetParametersAsync(parameters);
 
-        private void MyEditContext_OnValidationRequested(object sender, ValidationRequestedEventArgs e)
-        {
-            _touched = true;
-        }
-
-
-        private string GetClass()
-        {
-            return InputType switch
-            {
-                InputType.Checkbox => "form-check-input",
-                InputType.Radio => "form-check-input",
-                InputType.File => "form-control-file",
-                InputType.Range => "form-control-range",
-                _ => IsPlaintext ? "form-control-plaintext" : "form-control"
-            };
-        }
-
-        protected void OnClick(MouseEventArgs e)
-        {
-            if (InputType == InputType.Radio)
-            {
-                Value = (T)(object)(RadioValue);
-                ValueChanged.InvokeAsync(Value);
-            }
-            else
-            {
-                if (typeof(T) != typeof(bool))
-                {
-                    if (CheckValue != null)
-                    {
-                        if (Value != null)
-                        {
-                            Value = default(T);
-                            ValueChanged.InvokeAsync(Value);
-                        }
-                        else
-                        {
-                            Value = CheckValue;
-                            ValueChanged.InvokeAsync(Value);
-                        }
-                    }
-                }
-                else
-                {
-                    var tmp = (bool)(object)Value;
-                    Value = (T)(object)(!tmp);
-                }
-                ValueChanged.InvokeAsync(Value);
-            }
-        }
-        protected void OnInput(string e)
-        {
-            RateLimitingExceptionForObject.Debounce(e, DebounceInterval, (CurrentValueAsString) => {
-                InvokeAsync(() => OnChange(e));
-            });
-        }
-
-        protected void OnChange(string e)
-        {
-            if (ValidateOnChange)
-            {
-                InvokeAsync(() => MyEditContext.Validate());
-                StateHasChanged();
-            }
-            CurrentValueAsString = e;
-        }
+        //}
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -259,6 +176,14 @@ namespace BlazorStrap
             builder.CloseElement();
         }
 
+        protected override void OnInitialized()
+        {
+            MyEditContext.OnValidationRequested += MyEditContext_OnValidationRequested;
+            //Preview 7 workaround
+            if (Parent != null)
+                Parent.FormIsReady(MyEditContext);
+        }
+
         protected override string FormatValueAsString(T value)
         {
             return value switch
@@ -274,12 +199,6 @@ namespace BlazorStrap
                 DateTimeOffset dateTimeOffsetValue => BindConverter.FormatValue(dateTimeOffsetValue, _dateFormat, CultureInfo.InvariantCulture),
                 _ => base.FormatValueAsString(value),
             };
-        }
-
-        public void ForceValidate()
-        {
-            InvokeAsync(() => MyEditContext.Validate());
-            StateHasChanged();
         }
 
         protected override bool TryParseValueFromString(string value, out T result, out string validationErrorMessage)
@@ -438,6 +357,108 @@ namespace BlazorStrap
             throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
         }
 
+        // public methods
+        public void ForceValidate()
+        {
+            InvokeAsync(() => MyEditContext.Validate());
+            StateHasChanged();
+        }
+
+        public ValueTask<object> Focus() => BlazorStrapInterop.FocusElement(ElementReference);
+
+        // Protected Methods
+        protected bool HasValidationErrors()
+        {
+            if (_clean || MyEditContext == null)
+            {
+                _clean = false;
+                return false;
+            }
+            return MyEditContext.GetValidationMessages(base.FieldIdentifier).Any();
+        }
+
+        protected void OnClick(MouseEventArgs e)
+        {
+            if (InputType == InputType.Radio)
+            {
+                Value = (T)(object)(RadioValue);
+                ValueChanged.InvokeAsync(Value);
+            }
+            else
+            {
+                if (typeof(T) != typeof(bool))
+                {
+                    if (CheckValue != null)
+                    {
+                        if (Value != null)
+                        {
+                            Value = default(T);
+                            ValueChanged.InvokeAsync(Value);
+                        }
+                        else
+                        {
+                            Value = CheckValue;
+                            ValueChanged.InvokeAsync(Value);
+                        }
+                    }
+                }
+                else
+                {
+                    var tmp = (bool)(object)Value;
+                    Value = (T)(object)(!tmp);
+                }
+                ValueChanged.InvokeAsync(Value);
+            }
+        }
+        protected void OnInput(string e)
+        {
+            RateLimitingExceptionForObject.Debounce(e, DebounceInterval, (CurrentValueAsString) => {
+                InvokeAsync(() => OnChange(e));
+            });
+        }
+
+        protected void OnChange(string e)
+        {
+            if (ValidateOnChange)
+            {
+                InvokeAsync(() => MyEditContext.Validate());
+                StateHasChanged();
+            }
+            CurrentValueAsString = e;
+        }
+
+        // Private Methods
+        private bool GenerateIsValid()
+        {
+            var isValid = _touched && (!Parent?.UserValidation ?? false) && !HasValidationErrors();
+
+            return IsValid != isValid ? isValid : IsValid;
+        }
+
+        private bool GenerateIsInvalid()
+        {
+            var isInvalid = (!Parent?.UserValidation ?? false) && HasValidationErrors();
+
+            return IsInvalid != isInvalid ? isInvalid : IsInvalid;
+        }
+
+        private void MyEditContext_OnValidationRequested(object sender, ValidationRequestedEventArgs e)
+        {
+            _touched = true;
+        }
+
+        private string GetClass()
+        {
+            return InputType switch
+            {
+                InputType.Checkbox => "form-check-input",
+                InputType.Radio => "form-check-input",
+                InputType.File => "form-control-file",
+                InputType.Range => "form-control-range",
+                _ => IsPlaintext ? "form-control-plaintext" : "form-control"
+            };
+        }
+
         private static bool TryParseDateTime(string value, out T result)
         {
             var success = BindConverter.TryConvertToDateTime(value, CultureInfo.InvariantCulture, _dateFormat, out DateTime parsedValue);
@@ -474,7 +495,5 @@ namespace BlazorStrap
             OnFieldChanged?.DynamicInvoke(new object[] { EditContext, new FieldChangedEventArgs(fieldIdentifier) });
             StateHasChanged();
         }
-
-        public ValueTask<object> Focus() => BlazorStrapInterop.FocusElement(ElementReference);
     }
 }
