@@ -203,158 +203,42 @@ namespace BlazorStrap
 
         protected override bool TryParseValueFromString(string value, out T result, out string validationErrorMessage)
         {
+            bool? boolToReturn;
+
             Type type = typeof(T);
-            if (typeof(T) == typeof(string))
-            {
-                result = (T)(object)value;
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (value == null && (Nullable.GetUnderlyingType(type) != null))
-            {
-                result = (T)(object)default(T);
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (value?.Length == 0 && typeof(DateTime) != typeof(T) && typeof(DateTimeOffset) != typeof(T))
-            {
-                result = (T)(object)default(T);
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T).IsEnum)
-            {
-                // There's no non-generic Enum.TryParse (https://github.com/dotnet/corefx/issues/692)
-                try
-                {
-                    result = (T)Enum.Parse(typeof(T), value);
-                    validationErrorMessage = null;
-                    return true;
-                }
-                catch (ArgumentException)
-                {
-                    result = default;
-                    validationErrorMessage = $"The {FieldIdentifier.FieldName} field is not valid.";
-                    return false;
-                }
-            }
-            else if (typeof(T) == typeof(int) || typeof(T) == typeof(int?))
-            {
-                result = (T)(object)Convert.ToInt32(value, CultureInfo.InvariantCulture);
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T) == typeof(long) || typeof(T) == typeof(long?))
-            {
-                result = (T)(object)Convert.ToInt64(value, CultureInfo.InvariantCulture);
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T) == typeof(double) || typeof(T) == typeof(double?))
-            {
-                result = (T)(object)double.Parse(value, CultureInfo.InvariantCulture);
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T) == typeof(decimal) || typeof(T) == typeof(decimal?))
-            {
-                result = (T)(object)decimal.Parse(value, CultureInfo.InvariantCulture);
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T) == typeof(Guid) || typeof(T) == typeof(Guid?))
-            {
-                try
-                {
-                    result = (T)(object)Guid.Parse(value);
-                }
-                catch
-                {
-                    result = (T)(object)new Guid();
-                    validationErrorMessage = "Invalid Guid format";
-                }
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T) == typeof(bool))
+
+            // Moved to static class in adherence to DRY
+            boolToReturn = TryParseString<T>.ToValue(value, out result, out validationErrorMessage);
+
+            if (typeof(T) == typeof(bool))
             {
                 if (InputType != InputType.Select)
                 {
                     result = (T)(object)false;
                     validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The bool valued must be used with select, checkboxes, or radios.");
-                    return false;
-                }
-                try
-                {
-                    if (value.ToString().ToLowerInvariant() == "false")
-                    {
-                        result = (T)(object)false;
-                        validationErrorMessage = null;
-                        return true;
-                    }
-                    else if (value.ToString().ToLowerInvariant() == "true")
-                    {
-                        result = (T)(object)true;
-                        validationErrorMessage = null;
-                        return true;
-                    }
-                    else
-                    {
-                        result = (T)(object)false;
-                        validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a bool of true or false.", FieldIdentifier.FieldName);
-                        return false;
-                    }
-                }
-                catch
-                {
-                    result = (T)(object)false;
-                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a bool of true or false.", FieldIdentifier.FieldName);
-                    return false;
+                    boolToReturn = false;
                 }
             }
-            else if (typeof(T) == typeof(DateTime) || typeof(T) == typeof(DateTime?))
-            {
-                if (TryParseDateTime(value, out result))
-                {
-                    validationErrorMessage = null;
-                    return true;
-                }
-                else
-                {
-                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a date.", FieldIdentifier.FieldName);
-                    return false;
-                }
-            }
-            else if (typeof(T) == typeof(DateTimeOffset) || typeof(T) == typeof(DateTimeOffset?))
-            {
-                if (TryParseDateTimeOffset(value, out result))
-                {
-                    validationErrorMessage = null;
-                    return true;
-                }
-                else
-                {
-                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a date.", FieldIdentifier.FieldName);
-                    return false;
-                }
-            }
-            else if (type.GenericTypeArguments.Length > 0 && type.GenericTypeArguments[0].IsEnum)
+
+            if (type.GenericTypeArguments.Length > 0 && type.GenericTypeArguments[0].IsEnum)
             {
                 try
                 {
                     result = (T)Enum.Parse(type.GenericTypeArguments[0].UnderlyingSystemType, value);
                     validationErrorMessage = null;
-                    return true;
+                    boolToReturn = true;
                 }
                 catch (ArgumentException)
                 {
                     result = default;
                     validationErrorMessage = $"The {FieldIdentifier.FieldName} field is not valid.";
-                    return false;
+                    boolToReturn = false;
                 }
             }
 
-            throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
+            return boolToReturn != null
+                ? boolToReturn.Value
+                : throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
         }
 
         // public methods

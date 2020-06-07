@@ -19,7 +19,7 @@
     <li style="margin-bottom: 5px;">Get it from nuget: <a href="https://www.nuget.org/packages/BlazorStrap/"><img src="https://img.shields.io/nuget/vpre/BlazorStrap.svg" /></a></li>
     <li>
         Modify your <mark>index.html</mark> file to include the JavaScript files used by BlazorStrap:
-        inside the <mark><head></mark> element of your <mark>wwwroot/index.html</mark>, add <mark><script src="_content/BlazorStrap/blazorStrap.js"></script></mark>.
+        inside the <mark>&lt;head&gt;</mark> element of your <mark>wwwroot/index.html</mark>, add <mark>&lt;script src="_content/BlazorStrap/blazorStrap.js"&gt;&lt;/script&gt;</mark>.
     </li>
     <li>Add <mark>builder.Services.AddBootstrapCss();</mark> to your <mark>Program.cs</mark></li>
     <li>Add <mark>@@using BlazorStrap</mark> to your <mark>_Imports.razor</mark></li>
@@ -31,7 +31,7 @@
     <li style="margin-bottom: 5px;">Get it from nuget: <a href="https://www.nuget.org/packages/BlazorStrap/"><img src="https://img.shields.io/nuget/vpre/BlazorStrap.svg" /></a></li>
     <li>
         Modify your <mark>_Host.cshtml</mark> file to include the javascript files used by BlazorStrap:
-        inside the <mark><head></mark> element of your <mark>wwwroot/index.html</mark>, add <mark><script src="_content/BlazorStrap/blazorStrap.js"></script></mark>. An example of this is in the
+        inside the <mark>&lt;head&gt;</mark> element of your <mark>wwwroot/index.html</mark>, add <mark>&lt;script src="_content/BlazorStrap/blazorStrap.js"&gt;&lt;/script&gt;</mark>. An example of this is in the
         <a href="https://github.com/chanan/BlazorStrap/blob/master/src/ServerSideSample/Pages/_Host.cshtml">ServerSideSample project</a>.
     </li>
     <li>Add <mark>services.AddBootstrapCss()</mark> to your <mark>public void ConfigureServices(IServiceCollection services)</mark> in <mark>Startup.cs</mark></li>
