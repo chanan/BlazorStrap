@@ -28,6 +28,7 @@ namespace BlazorStrap
         [Parameter] public EventCallback<BSModalEvent> ShownEvent { get; set; }
         [Parameter] public Size Size { get; set; } = Size.None;
         [Parameter] public string Style { get; set; }
+        [Parameter] public bool IsScrollable { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         internal BSModalEvent BSModalEvent { get; set; }
         internal List<EventCallback<BSModalEvent>> EventQue { get; set; } = new List<EventCallback<BSModalEvent>>();
@@ -45,6 +46,7 @@ namespace BlazorStrap
 
         protected string InnerClassname =>
             new CssBuilder("modal-dialog")
+                .AddClass((IsScrollable ? "modal-dialog-scrollable" : string.Empty))
                 .AddClass($"modal-{Size.ToDescriptionString()}", Size != Size.None)
                 .AddClass("modal-dialog-centered", IsCentered)
             .Build();
