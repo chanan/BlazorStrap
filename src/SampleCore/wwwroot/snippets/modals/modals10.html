@@ -1,0 +1,19 @@
+﻿<BSButton Color="Color.Primary" @onclick="@(() => LiveDemo.Show())">Launch demo modal</BSButton>
+<BSModal @ref="LiveDemo" IsScrollable="true">
+    <BSModalHeader OnClick="@(() => LiveDemo.Hide())">Modal title</BSModalHeader>
+    <BSModalBody>
+        <p>Modal body text goes here.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet nisi et erat placerat viverra in id risus. Quisque diam nulla, lobortis sed sodales eu, molestie in leo. Curabitur sodales, leo vel hendrerit fermentum, turpis erat hendrerit urna, nec iaculis ante felis ut magna. Sed hendrerit, justo nec porttitor mollis, est ipsum aliquet ligula, vitae tincidunt neque ante nec magna. Vestibulum finibus lacinia est, non tempor leo semper quis. Suspendisse eu ornare dui, a placerat ligula. Etiam ornare non turpis a tincidunt.</p>
+        <p>Praesent nec congue nunc. Donec euismod mollis turpis at pellentesque. Aenean imperdiet nisl augue, ac facilisis libero dictum scelerisque. Sed blandit justo vel sapien sodales pharetra. Ut nec sapien pellentesque velit mollis sodales. Nulla blandit lobortis purus, a feugiat sapien lacinia eu. Suspendisse cursus nisi ut lacus commodo, nec placerat nulla imperdiet. Suspendisse gravida tortor vel aliquam eleifend. Integer quis arcu urna. Curabitur non risus consectetur, venenatis neque ut, porta justo. Suspendisse potenti. In malesuada, ipsum sed mattis laoreet, quam turpis tristique nunc, at tincidunt ligula velit imperdiet justo.</p>
+        <p>Morbi tristique condimentum metus, eu rhoncus odio blandit ac. In ullamcorper bibendum velit ut faucibus. Quisque vel eleifend turpis. Vivamus ut malesuada mauris, ut dictum orci. Suspendisse vestibulum ligula orci, et placerat turpis dignissim vitae. Nunc facilisis lorem arcu, eu commodo nisl porttitor eu. Fusce cursus mi eu massa mattis hendrerit. Pellentesque dignissim sem et gravida tristique. Cras quis tristique est.</p>
+        <p>Mauris finibus, erat ac feugiat ultricies, mi purus tempus nunc, in placerat arcu orci non dolor. Praesent ultrices efficitur pretium. Quisque quis quam ipsum. Ut at tortor viverra, aliquet nulla lacinia, volutpat felis. Proin vitae nisi quis velit blandit gravida. Sed bibendum mi urna, a ultrices enim lobortis ac. Quisque auctor tortor elit, congue cursus quam interdum ac. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer molestie lectus sit amet volutpat lacinia. Proin mattis ornare eleifend. Fusce massa mauris, venenatis et faucibus eget, ultricies vel ipsum.</p>
+    </BSModalBody>
+    <BSModalFooter>
+        <BSButton Color="Color.Secondary" @onclick="@(() => LiveDemo.Hide())">Close</BSButton>
+        <BSButton Color="Color.Primary" @onclick="@(() => LiveDemo.Hide())">Save Changes</BSButton>
+    </BSModalFooter>
+</BSModal>
+
+@code {
+    BSModal LiveDemo { get; set; }
+}
