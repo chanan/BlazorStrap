@@ -1,5 +1,6 @@
 ﻿@page "/buttons"
 @using SampleCore.Pages.Samples.Issue278Types
+
 <h1>Buttons</h1>
 <div class="docs-example">
     <BSButton Color="Color.Primary">primary</BSButton>
@@ -13,6 +14,74 @@
     <BSButton Color="Color.Link">link</BSButton>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/buttons/buttons1.html" />
+
+<h3>Properties</h3>
+<BSTable IsStriped="true" IsBordered="true">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ButtonType</td>
+            <td>BlazorStrap.ButtonType (enum)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Class</td>
+            <td>string</td>
+            <td>Adds an user defined class for site CSS.</td>
+        </tr>
+        <tr>
+            <td>Color</td>
+            <td>BlazorStrap.Color (enum)</td>
+            <td>Set the color of the button based on boostrap colors.</td>
+        </tr>
+        <tr>
+            <td>IsActive</td>
+            <td>bool</td>
+            <td>Button will appear pressed (with a darker background, darker border, and inset shadow) when active. This allows you to force the active appearance progmatically should you need to.</td>
+        </tr>
+        <tr>
+            <td>IsBlock</td>
+            <td>bool</td>
+            <td>Creates a block level button, that spans the full width of a parent.</td>
+        </tr>
+        <tr>
+            <td>IsDisabled</td>
+            <td>bool</td>
+            <td>Makes buttons look inactive.</td>
+        </tr>
+        <tr>
+            <td>IsInvalid</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>IsOutline</td>
+            <td>bool</td>
+            <td>Removes all background images / colors on the button.</td>
+        </tr>
+        <tr>
+            <td>IsValid</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Size</td>
+            <td>BlazorStrap.Size (enum)</td>
+            <td>Sets the size of the button.</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>string</td>
+            <td>The value, or label, of the button.</td>
+        </tr>
+    </tbody>
+</BSTable>
 
 <h3>Supplying OnClick Handler</h3>
 <div class="docs-example">
