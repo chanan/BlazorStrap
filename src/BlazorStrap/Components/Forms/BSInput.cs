@@ -15,56 +15,23 @@ namespace BlazorStrap
 {
     public class BSInput<T> : InputBase<T>
     {
+        // Constants
+        private const string _dateFormat = "yyyy-MM-dd";
+
+        // Private variables
         private bool _clean = true;
         private bool _touched = false;
+        
 
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-        }
-        //Consider getting rid of BSBasicInput
-        //public override Task SetParametersAsync(ParameterView parameters)
-        //{
-        //    parameters.SetParameterProperties(this);
-        //    if (MyEditContext == null)
-        //    {
-        //        MyEditContext = new EditContext(new object());
-        //        var basecontext = this.GetType().BaseType.GetProperty("CascadedEditContext", BindingFlags.NonPublic | BindingFlags.Instance);
-        //        basecontext.SetValue(this, MyEditContext);
-        //    }
-        //    else
-        //    {
-        //        base.EditContext = null;
-        //    }
-        //    return base.SetParametersAsync(parameters);
-
-        //}
-
-        [Inject] protected BlazorStrapInterop BlazorStrapInterop { get; set; }
-        // [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        [CascadingParameter] protected EditContext MyEditContext { get; set; }
-
-        [CascadingParameter] protected BSForm Parent { get; set; }
-
+        // protected variables
         protected string Classname =>
-        new CssBuilder()
-           .AddClass($"form-control-{Size.ToDescriptionString()}", Size != Size.None)
-           .AddClass("is-valid", IsValid)
-           .AddClass("is-invalid", IsInvalid)
-           .AddClass("is-valid", _touched && (!Parent?.UserValidation ?? false) && !HasValidationErrors())
-           .AddClass("is-invalid", (!Parent?.UserValidation ?? false) && HasValidationErrors())
-           .AddClass(GetClass())
-           .AddClass(Class)
-         .Build();
-        protected bool HasValidationErrors()
-        {
-            if (_clean || MyEditContext == null)
-            {
-                _clean = false;
-                return false;
-            }
-            return MyEditContext.GetValidationMessages(base.FieldIdentifier).Any();
-        }
+            new CssBuilder()
+               .AddClass($"form-control-{Size.ToDescriptionString()}", Size != Size.None)
+               .AddClass("is-valid", GenerateIsValid())
+               .AddClass("is-invalid", GenerateIsInvalid())
+               .AddClass(GetClass())
+               .AddClass(Class)
+             .Build();
 
         protected string Tag => InputType switch
         {
@@ -72,7 +39,13 @@ namespace BlazorStrap
             InputType.TextArea => "textarea",
             _ => "input"
         };
-        [CascadingParameter] public BSLabel BSLabel { get; set; }
+        protected string Type => InputType.ToDescriptionString();
+        protected ElementReference ElementReference;
+
+        //Dependency Injection
+        [Inject] protected BlazorStrapInterop BlazorStrapInterop { get; set; }
+
+        // Parameters
         [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
         [Parameter] public EventCallback<FocusEventArgs> OnFocus { get; set; }
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
@@ -94,91 +67,35 @@ namespace BlazorStrap
         [Parameter] public bool ValidateOnBlur { get; set; } = true;
         [Parameter] public string Class { get; set; }
         [Parameter] public int DebounceInterval { get; set; } = 500;
-
-        // [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
 
-        protected string Type => InputType.ToDescriptionString();
+        // Cascading Parameters
+        [CascadingParameter] protected EditContext MyEditContext { get; set; }
+        [CascadingParameter] protected BSForm Parent { get; set; }
+        [CascadingParameter] public BSLabel BSLabel { get; set; }
 
-        private const string _dateFormat = "yyyy-MM-dd";
-
-        protected ElementReference ElementReference;
-
-        protected override void OnInitialized()
+        // Overrides
+        protected override void OnParametersSet()
         {
-            MyEditContext.OnValidationRequested += MyEditContext_OnValidationRequested;
-            //Preview 7 workaround
-            if (Parent != null)
-                Parent.FormIsReady(MyEditContext);
+            base.OnParametersSet();
         }
+        //Consider getting rid of BSBasicInput
+        //public override Task SetParametersAsync(ParameterView parameters)
+        //{
+        //    parameters.SetParameterProperties(this);
+        //    if (MyEditContext == null)
+        //    {
+        //        MyEditContext = new EditContext(new object());
+        //        var basecontext = this.GetType().BaseType.GetProperty("CascadedEditContext", BindingFlags.NonPublic | BindingFlags.Instance);
+        //        basecontext.SetValue(this, MyEditContext);
+        //    }
+        //    else
+        //    {
+        //        base.EditContext = null;
+        //    }
+        //    return base.SetParametersAsync(parameters);
 
-        private void MyEditContext_OnValidationRequested(object sender, ValidationRequestedEventArgs e)
-        {
-            _touched = true;
-        }
-
-
-        private string GetClass()
-        {
-            return InputType switch
-            {
-                InputType.Checkbox => "form-check-input",
-                InputType.Radio => "form-check-input",
-                InputType.File => "form-control-file",
-                InputType.Range => "form-control-range",
-                _ => IsPlaintext ? "form-control-plaintext" : "form-control"
-            };
-        }
-
-        protected void OnClick(MouseEventArgs e)
-        {
-            if (InputType == InputType.Radio)
-            {
-                Value = (T)(object)(RadioValue);
-                ValueChanged.InvokeAsync(Value);
-            }
-            else
-            {
-                if (typeof(T) != typeof(bool))
-                {
-                    if (CheckValue != null)
-                    {
-                        if (Value != null)
-                        {
-                            Value = default(T);
-                            ValueChanged.InvokeAsync(Value);
-                        }
-                        else
-                        {
-                            Value = CheckValue;
-                            ValueChanged.InvokeAsync(Value);
-                        }
-                    }
-                }
-                else
-                {
-                    var tmp = (bool)(object)Value;
-                    Value = (T)(object)(!tmp);
-                }
-                ValueChanged.InvokeAsync(Value);
-            }
-        }
-        protected void OnInput(string e)
-        {
-            RateLimitingExceptionForObject.Debounce(e, DebounceInterval, (CurrentValueAsString) => {
-                InvokeAsync(() => OnChange(e));
-            });
-        }
-
-        protected void OnChange(string e)
-        {
-            if (ValidateOnChange)
-            {
-                InvokeAsync(() => MyEditContext.Validate());
-                StateHasChanged();
-            }
-            CurrentValueAsString = e;
-        }
+        //}
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -259,6 +176,14 @@ namespace BlazorStrap
             builder.CloseElement();
         }
 
+        protected override void OnInitialized()
+        {
+            MyEditContext.OnValidationRequested += MyEditContext_OnValidationRequested;
+            //Preview 7 workaround
+            if (Parent != null)
+                Parent.FormIsReady(MyEditContext);
+        }
+
         protected override string FormatValueAsString(T value)
         {
             return value switch
@@ -276,166 +201,146 @@ namespace BlazorStrap
             };
         }
 
+        protected override bool TryParseValueFromString(string value, out T result, out string validationErrorMessage)
+        {
+            bool? boolToReturn;
+
+            Type type = typeof(T);
+
+            // Moved to static class in adherence to DRY
+            boolToReturn = TryParseString<T>.ToValue(value, out result, out validationErrorMessage);
+
+            if (typeof(T) == typeof(bool))
+            {
+                if (InputType != InputType.Select)
+                {
+                    result = (T)(object)false;
+                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The bool valued must be used with select, checkboxes, or radios.");
+                    boolToReturn = false;
+                }
+            }
+
+            if (type.GenericTypeArguments.Length > 0 && type.GenericTypeArguments[0].IsEnum)
+            {
+                try
+                {
+                    result = (T)Enum.Parse(type.GenericTypeArguments[0].UnderlyingSystemType, value);
+                    validationErrorMessage = null;
+                    boolToReturn = true;
+                }
+                catch (ArgumentException)
+                {
+                    result = default;
+                    validationErrorMessage = $"The {FieldIdentifier.FieldName} field is not valid.";
+                    boolToReturn = false;
+                }
+            }
+
+            return boolToReturn != null
+                ? boolToReturn.Value
+                : throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
+        }
+
+        // public methods
         public void ForceValidate()
         {
             InvokeAsync(() => MyEditContext.Validate());
             StateHasChanged();
         }
 
-        protected override bool TryParseValueFromString(string value, out T result, out string validationErrorMessage)
-        {
-            Type type = typeof(T);
-            if (typeof(T) == typeof(string))
-            {
-                result = (T)(object)value;
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (value == null && (Nullable.GetUnderlyingType(type) != null))
-            {
-                result = (T)(object)default(T);
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (value?.Length == 0 && typeof(DateTime) != typeof(T) && typeof(DateTimeOffset) != typeof(T))
-            {
-                result = (T)(object)default(T);
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T).IsEnum)
-            {
-                // There's no non-generic Enum.TryParse (https://github.com/dotnet/corefx/issues/692)
-                try
-                {
-                    result = (T)Enum.Parse(typeof(T), value);
-                    validationErrorMessage = null;
-                    return true;
-                }
-                catch (ArgumentException)
-                {
-                    result = default;
-                    validationErrorMessage = $"The {FieldIdentifier.FieldName} field is not valid.";
-                    return false;
-                }
-            }
-            else if (typeof(T) == typeof(int) || typeof(T) == typeof(int?))
-            {
-                result = (T)(object)Convert.ToInt32(value, CultureInfo.InvariantCulture);
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T) == typeof(long) || typeof(T) == typeof(long?))
-            {
-                result = (T)(object)Convert.ToInt64(value, CultureInfo.InvariantCulture);
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T) == typeof(double) || typeof(T) == typeof(double?))
-            {
-                result = (T)(object)double.Parse(value, CultureInfo.InvariantCulture);
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T) == typeof(decimal) || typeof(T) == typeof(decimal?))
-            {
-                result = (T)(object)decimal.Parse(value, CultureInfo.InvariantCulture);
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T) == typeof(Guid) || typeof(T) == typeof(Guid?))
-            {
-                try
-                {
-                    result = (T)(object)Guid.Parse(value);
-                }
-                catch
-                {
-                    result = (T)(object)new Guid();
-                    validationErrorMessage = "Invalid Guid format";
-                }
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T) == typeof(bool))
-            {
-                if (InputType != InputType.Select)
-                {
-                    result = (T)(object)false;
-                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The bool valued must be used with select, checkboxes, or radios.");
-                    return false;
-                }
-                try
-                {
-                    if (value.ToString().ToLowerInvariant() == "false")
-                    {
-                        result = (T)(object)false;
-                        validationErrorMessage = null;
-                        return true;
-                    }
-                    else if (value.ToString().ToLowerInvariant() == "true")
-                    {
-                        result = (T)(object)true;
-                        validationErrorMessage = null;
-                        return true;
-                    }
-                    else
-                    {
-                        result = (T)(object)false;
-                        validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a bool of true or false.", FieldIdentifier.FieldName);
-                        return false;
-                    }
-                }
-                catch
-                {
-                    result = (T)(object)false;
-                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a bool of true or false.", FieldIdentifier.FieldName);
-                    return false;
-                }
-            }
-            else if (typeof(T) == typeof(DateTime) || typeof(T) == typeof(DateTime?))
-            {
-                if (TryParseDateTime(value, out result))
-                {
-                    validationErrorMessage = null;
-                    return true;
-                }
-                else
-                {
-                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a date.", FieldIdentifier.FieldName);
-                    return false;
-                }
-            }
-            else if (typeof(T) == typeof(DateTimeOffset) || typeof(T) == typeof(DateTimeOffset?))
-            {
-                if (TryParseDateTimeOffset(value, out result))
-                {
-                    validationErrorMessage = null;
-                    return true;
-                }
-                else
-                {
-                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a date.", FieldIdentifier.FieldName);
-                    return false;
-                }
-            }
-            else if (type.GenericTypeArguments.Length > 0 && type.GenericTypeArguments[0].IsEnum)
-            {
-                try
-                {
-                    result = (T)Enum.Parse(type.GenericTypeArguments[0].UnderlyingSystemType, value);
-                    validationErrorMessage = null;
-                    return true;
-                }
-                catch (ArgumentException)
-                {
-                    result = default;
-                    validationErrorMessage = $"The {FieldIdentifier.FieldName} field is not valid.";
-                    return false;
-                }
-            }
+        public ValueTask<object> Focus() => BlazorStrapInterop.FocusElement(ElementReference);
 
-            throw new InvalidOperationException($"{GetType()} does not support the type '{typeof(T)}'.");
+        // Protected Methods
+        protected bool HasValidationErrors()
+        {
+            if (_clean || MyEditContext == null)
+            {
+                _clean = false;
+                return false;
+            }
+            return MyEditContext.GetValidationMessages(base.FieldIdentifier).Any();
+        }
+
+        protected void OnClick(MouseEventArgs e)
+        {
+            if (InputType == InputType.Radio)
+            {
+                Value = (T)(object)(RadioValue);
+                ValueChanged.InvokeAsync(Value);
+            }
+            else
+            {
+                if (typeof(T) != typeof(bool))
+                {
+                    if (CheckValue != null)
+                    {
+                        if (Value != null)
+                        {
+                            Value = default(T);
+                            ValueChanged.InvokeAsync(Value);
+                        }
+                        else
+                        {
+                            Value = CheckValue;
+                            ValueChanged.InvokeAsync(Value);
+                        }
+                    }
+                }
+                else
+                {
+                    var tmp = (bool)(object)Value;
+                    Value = (T)(object)(!tmp);
+                }
+                ValueChanged.InvokeAsync(Value);
+            }
+        }
+        protected void OnInput(string e)
+        {
+            RateLimitingExceptionForObject.Debounce(e, DebounceInterval, (CurrentValueAsString) => {
+                InvokeAsync(() => OnChange(e));
+            });
+        }
+
+        protected void OnChange(string e)
+        {
+            if (ValidateOnChange)
+            {
+                InvokeAsync(() => MyEditContext.Validate());
+                StateHasChanged();
+            }
+            CurrentValueAsString = e;
+        }
+
+        // Private Methods
+        private bool GenerateIsValid()
+        {
+            var isValid = _touched && (!Parent?.UserValidation ?? false) && !HasValidationErrors();
+
+            return IsValid != isValid ? isValid : IsValid;
+        }
+
+        private bool GenerateIsInvalid()
+        {
+            var isInvalid = (!Parent?.UserValidation ?? false) && HasValidationErrors();
+
+            return IsInvalid != isInvalid ? isInvalid : IsInvalid;
+        }
+
+        private void MyEditContext_OnValidationRequested(object sender, ValidationRequestedEventArgs e)
+        {
+            _touched = true;
+        }
+
+        private string GetClass()
+        {
+            return InputType switch
+            {
+                InputType.Checkbox => "form-check-input",
+                InputType.Radio => "form-check-input",
+                InputType.File => "form-control-file",
+                InputType.Range => "form-control-range",
+                _ => IsPlaintext ? "form-control-plaintext" : "form-control"
+            };
         }
 
         private static bool TryParseDateTime(string value, out T result)
@@ -474,7 +379,5 @@ namespace BlazorStrap
             OnFieldChanged?.DynamicInvoke(new object[] { EditContext, new FieldChangedEventArgs(fieldIdentifier) });
             StateHasChanged();
         }
-
-        public ValueTask<object> Focus() => BlazorStrapInterop.FocusElement(ElementReference);
     }
 }
