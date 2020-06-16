@@ -13,6 +13,9 @@ namespace BlazorStrap
         .Build();
 
         [Parameter] public string Href { get; set; }
+        [Parameter] public bool OnClickStopPropagation { get; set; } = false;
+        [Parameter] public bool OnClickPreventDefault { get; set; } = false;
+
         [Parameter] public PaginationLinkType PaginationLinkType { get; set; } = PaginationLinkType.Custom;
         private string label
         {

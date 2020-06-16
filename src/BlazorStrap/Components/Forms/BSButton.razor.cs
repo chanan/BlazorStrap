@@ -41,6 +41,8 @@ namespace BlazorStrap
         };
 
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+        [Parameter] public bool OnClickStopPropagation { get; set; } = false;
+        [Parameter] public bool OnClickPreventDefault { get; set; } = false;
         [Parameter] public Color Color { get; set; } = Color.Primary;
 
         private ButtonType _buttonType = ButtonType.Button;
