@@ -1,0 +1,24 @@
+﻿@page "/samples/Issue330"
+
+<h3>issue330</h3>
+
+<div>
+    <a class="justify-content-between align-items-center d-flex" @onclick="Toggle">
+        <h3 class="d-flex align-items-center">
+            Click here
+        </h3>
+    </a>
+    <BSCollapse IsOpen="IsOpen">
+        Test content
+    </BSCollapse>
+</div>
+
+@code {
+    private bool IsOpen { get; set; } = false;
+
+    private void Toggle(MouseEventArgs e)
+    {
+        IsOpen = !IsOpen;
+        StateHasChanged();
+    }
+}
