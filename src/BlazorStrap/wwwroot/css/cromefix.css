@@ -2,3 +2,12 @@
 div.modal-header > button.close:focus {
     outline: 0px;
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .collapsing {
+        transition: step-end !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+}
+}
