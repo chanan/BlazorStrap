@@ -12,6 +12,7 @@ namespace BlazorStrap
             serviceCollection.AddScoped<BlazorStrapInterop>();
             serviceCollection.AddTransient<IBootstrapCss, BootstrapCss>();
             serviceCollection.AddTransient<IBootstrapCSS, BootstrapCss>();
+            serviceCollection.AddTransient<IPopper, Popper>();
             return serviceCollection;
         }
 

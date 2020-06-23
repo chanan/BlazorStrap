@@ -1,4 +1,5 @@
 ﻿var link;
+var script;
 
 // MDN String.include polyfill
 if (!String.prototype.includes) {
@@ -208,6 +209,14 @@ window.blazorStrap = {
         } else {
             link.href = "https://stackpath.bootstrapcdn.com/bootswatch/" + version + "/" + theme + "/bootstrap.min.css";
         }
+        return true;
+    },
+    setPopper: function () {
+        if (script === undefined) {
+            script = document.createElement('script');
+            document.head.insertBefore(script, document.head.lastChild);
+        }
+        script.src = "_content/BlazorStrap/popper.min.js";
         return true;
     }
 };
