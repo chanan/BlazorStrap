@@ -2,7 +2,9 @@
 using BlazorStrap.Util;
 using BlazorStrap.Util.Components;
 using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
@@ -10,6 +12,8 @@ namespace BlazorStrap
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Inject] public BlazorStrapInterop BlazorStrapInterop { get; set; }
+        [Inject] public IPopper Popper { get; set; }
+
         protected string Classname =>
         new CssBuilder("popover")
             .AddClass($"bs-popover-{Placement.ToDescriptionString()}")
@@ -19,12 +23,16 @@ namespace BlazorStrap
 
         protected ElementReference Arrow { get; set; }
 
-        protected override void OnAfterRender(bool firstrun)
+        protected override async Task OnAfterRenderAsync(bool firstrun)
         {
+            if (firstrun)
+            {
+                await Popper.SetPopper();
+            }
             if (IsOpen ?? false)
             {
                 var placement = Placement.ToDescriptionString();
-                BlazorStrapInterop.Popper(Target, Id, Arrow, placement);
+                await BlazorStrapInterop.Popper(Target, Id, Arrow, placement);
             }
         }
         protected string Id => Target + "-popover";

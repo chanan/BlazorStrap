@@ -109,6 +109,11 @@ namespace BlazorStrap.Util
             return JSRuntime.InvokeAsync<bool>("blazorStrap.setBootstrapCss", theme, version);
         }
 
+        public ValueTask<bool> SetPopper()
+        {
+            return JSRuntime.InvokeAsync<bool>("blazorStrap.setPopper");
+        }
+
         [Obsolete("SetBootstrapCSS is obsolete and will be removed in a future version of BlazorStrap. Please use SetBootstrapCss instead.", false)]
         public ValueTask<bool> SetBootstrapCSS(string theme, string version) => SetBootstrapCss(theme, version);
 

@@ -34,6 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="wwwroot\site.webmanifest" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

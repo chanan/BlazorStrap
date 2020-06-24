@@ -1,6 +1,7 @@
 ﻿using BlazorStrap.Util;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
@@ -8,16 +9,22 @@ namespace BlazorStrap
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Inject] public BlazorStrapInterop BlazorStrapInterop { get; set; }
+        [Inject] public IPopper Popper { get; set; }
+
         //Didnt change this to use DynamicElement so that ref will still work
 
         protected ElementReference Tooltip { get; set; }
         protected ElementReference Arrow { get; set; }
-        protected override void OnAfterRender(bool firstrun)
+        protected override async Task OnAfterRenderAsync(bool firstrun)
         {
+            if(firstrun)
+            {
+                await Popper.SetPopper();
+            }
             if (Target != null)
             {
                 var placement = Placement.ToDescriptionString();
-                BlazorStrapInterop.Tooltip(Target, Tooltip, Arrow, placement);
+                await BlazorStrapInterop.Tooltip(Target, Tooltip, Arrow, placement);
             }
         }
 
