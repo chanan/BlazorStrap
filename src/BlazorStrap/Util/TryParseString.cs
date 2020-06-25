@@ -1,16 +1,34 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Globalization;
+using System.Linq;
 
 namespace BlazorStrap.Util
 {
     public static class TryParseString<T>
     {
-        private const string _dateFormat = "yyyy-MM-dd";
 
-        public static bool ToDateTime(string value, out T result)
+        private static string GetDateTimeFormatString(string value)
         {
-            var success = BindConverter.TryConvertToDateTime(value, CultureInfo.InvariantCulture, _dateFormat, out DateTime parsedValue);
+            const string dateFormat = "yyyy-MM-dd";
+            const string timeFormat = "HH:mm";
+            const string timeFormatWithSeconds = "HH:mm:ss";
+            const string timeFormatWithMilliSeconds = "HH:mm:ss.fff";
+
+            var formatString = value.Count(c => c == ':') switch
+            {
+                1 => timeFormat,
+                2 when value.Contains('.') => timeFormatWithMilliSeconds,
+                2 => timeFormatWithSeconds,
+                _ => dateFormat
+            };
+            return formatString;
+        }
+
+        private static bool ToDateTime(string value, out T result)
+        {
+            var formatString = GetDateTimeFormatString(value);
+            var success = BindConverter.TryConvertToDateTime(value, CultureInfo.InvariantCulture, formatString, out DateTime parsedValue);
             if (success)
             {
                 result = (T)(object)parsedValue;
@@ -25,7 +43,8 @@ namespace BlazorStrap.Util
 
         private static bool ToDateTimeOffset(string value, out T result)
         {
-            var success = BindConverter.TryConvertToDateTimeOffset(value, CultureInfo.InvariantCulture, _dateFormat, out DateTimeOffset parsedValue);
+            var formatString = GetDateTimeFormatString(value);
+            var success = BindConverter.TryConvertToDateTimeOffset(value, CultureInfo.InvariantCulture, formatString, out DateTimeOffset parsedValue);
             if (success)
             {
                 result = (T)(object)parsedValue;

@@ -57,6 +57,16 @@
             <td>bool</td>
             <td>Adds the ability to dismiss the alert</td>
         </tr>
+        <tr>
+            <td>AutoHide</td>
+            <td>bool</td>
+            <td>Automatically close alert after set delay. Must use together with @@bind-IsOpen</td>
+        </tr>
+        <tr>
+            <td>AutoHideDelay</td>
+            <td>int</td>
+            <td>Time in milliseconds to wait to auto-hide the alert. Only applies when AutoHide is set to true</td>
+        </tr>
     </tbody>
 </table>
 
@@ -127,8 +137,19 @@
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/alerts/alerts5.html" />
 
+<h3>Auto-closing</h3>
+
+<div class="docs-example">
+    <BSAlert Color="Color.Info" @bind-IsOpen="isOpenAutoClose" AutoHide="true" AutoHideDelay="5000">
+        I am an alert and I automatically close after 5 seconds!
+    </BSAlert>
+    <BSButton @onclick="@onclickAutoClose">Show Alert</BSButton>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/alerts/alerts6.html" />
+
 @code {
     private bool isOpen = true;
+    private bool isOpenAutoClose = false;
 
     void OnDismiss()
     {
@@ -139,5 +160,10 @@
     void onclick(MouseEventArgs e)
     {
         isOpen = !isOpen;
+    }
+
+    void onclickAutoClose(MouseEventArgs e)
+    {
+        isOpenAutoClose = true;
     }
 }

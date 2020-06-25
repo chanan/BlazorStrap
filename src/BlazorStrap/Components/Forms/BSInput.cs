@@ -16,7 +16,7 @@ namespace BlazorStrap
     public class BSInput<T> : InputBase<T>
     {
         // Constants
-        private const string _dateFormat = "yyyy-MM-dd";
+        private string _dateFormat = "yyyy-MM-dd";
 
         // Private variables
         private bool _clean = true;
@@ -182,6 +182,9 @@ namespace BlazorStrap
             //Preview 7 workaround
             if (Parent != null)
                 Parent.FormIsReady(MyEditContext);
+
+            if (InputType == InputType.Time)
+                _dateFormat = "HH:mm:ss.fff";
         }
 
         protected override string FormatValueAsString(T value)
@@ -343,7 +346,7 @@ namespace BlazorStrap
             };
         }
 
-        private static bool TryParseDateTime(string value, out T result)
+        private bool TryParseDateTime(string value, out T result)
         {
             var success = BindConverter.TryConvertToDateTime(value, CultureInfo.InvariantCulture, _dateFormat, out DateTime parsedValue);
             if (success)
@@ -358,7 +361,7 @@ namespace BlazorStrap
             }
         }
 
-        private static bool TryParseDateTimeOffset(string value, out T result)
+        private bool TryParseDateTimeOffset(string value, out T result)
         {
             var success = BindConverter.TryConvertToDateTimeOffset(value, CultureInfo.InvariantCulture, _dateFormat, out DateTimeOffset parsedValue);
             if (success)
