@@ -1,0 +1,32 @@
+﻿@page "/Samples/InputTime"
+@functions {
+    private DateTime TmpDate1 { get; set; } = new DateTime(2020, 06, 23, 22, 50, 10, 780);
+    private DateTime TmpDate2 { get; set; } = new DateTime(2020, 06, 23, 22, 50, 10, 780);
+    private DateTime TmpDate3 { get; set; } = new DateTime(2020, 06, 23, 22, 50, 10, 780);
+}
+<BSForm Model="@TmpDate1">
+    <BSFormGroup IsRow="true">
+        <BSLabel For="time1" SM="4">Without Seconds</BSLabel>
+        <BSCol SM="8">
+            <BSInput InputType="@InputType.Time" Id="time1" @bind-Value="@TmpDate1"></BSInput>
+        </BSCol>
+    </BSFormGroup>
+    <BSFormGroup IsRow="true">
+        <BSLabel For="time2" SM="4">With Seconds</BSLabel>
+        <BSCol SM="8">
+            <BSInput InputType="@InputType.Time" Id="time2" step="1" @bind-Value="@TmpDate2"></BSInput>
+        </BSCol>
+    </BSFormGroup>
+    <BSFormGroup IsRow="true">
+        <BSLabel For="time3" SM="4">With Seconds and MilliSeconds</BSLabel>
+        <BSCol SM="8">
+            <BSInput InputType="@InputType.Time" Id="time3" step="0.001" @bind-Value="@TmpDate3"></BSInput>
+        </BSCol>
+    </BSFormGroup>
+</BSForm>
+
+@(TmpDate1.ToLongTimeString()).@(TmpDate1.Millisecond)
+<br />
+@(TmpDate2.ToLongTimeString()).@(TmpDate2.Millisecond)
+<br />
+@(TmpDate3.ToLongTimeString()).@(TmpDate3.Millisecond)
