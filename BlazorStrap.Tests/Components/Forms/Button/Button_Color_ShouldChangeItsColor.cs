@@ -71,14 +71,14 @@ namespace BlazorStrap.Tests.Components.Forms.Button
         [InlineData(Color.Dark, Color.Info, false, false, false, true, false, false, false, false, false)]
         [InlineData(Color.Dark, Color.Warning, false, false, false, false, true, false, false, false, false)]
         [InlineData(Color.Dark, Color.Light, false, false, false, false, false, false, true, false, false)]
-        [InlineData(Color.Light, Color.Primary, true, false, false, false, false, false, false, false, false)]
-        [InlineData(Color.Light, Color.Secondary, false, true, false, false, false, false, false, false, false)]
-        [InlineData(Color.Light, Color.Success, false, false, true, false, false, false, false, false, false)]
-        [InlineData(Color.Light, Color.Info, false, false, false, true, false, false, false, false, false)]
-        [InlineData(Color.Light, Color.Warning, false, false, false, false, true, false, false, false, false)]
-        [InlineData(Color.Light, Color.Danger, false, false, false, false, false, true, false, false, false)]
-        [InlineData(Color.Light, Color.Light, false, false, false, false, false, false, true, false, false)]
-        [InlineData(Color.Light, Color.Dark, false, false, false, false, false, false, false, true, false)]
+        [InlineData(Color.Link, Color.Primary, true, false, false, false, false, false, false, false, false)]
+        [InlineData(Color.Link, Color.Secondary, false, true, false, false, false, false, false, false, false)]
+        [InlineData(Color.Link, Color.Success, false, false, true, false, false, false, false, false, false)]
+        [InlineData(Color.Link, Color.Info, false, false, false, true, false, false, false, false, false)]
+        [InlineData(Color.Link, Color.Warning, false, false, false, false, true, false, false, false, false)]
+        [InlineData(Color.Link, Color.Danger, false, false, false, false, false, true, false, false, false)]
+        [InlineData(Color.Link, Color.Light, false, false, false, false, false, false, true, false, false)]
+        [InlineData(Color.Link, Color.Dark, false, false, false, false, false, false, false, true, false)]
         public async Task ToTheNewColor(
             Color startColor,
             Color targetColor,
