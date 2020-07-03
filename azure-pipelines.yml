@@ -20,6 +20,7 @@ pool: 'contabo'
 variables:
   buildConfiguration: 'Release'
 
+steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore command'
   inputs:
