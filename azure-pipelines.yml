@@ -1,0 +1,38 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    exclude:
+      - src/README.md
+      - src/CONTRIBUTING.md
+
+pr:
+- master
+
+pool: 'contabo'
+
+variables:
+  buildConfiguration: 'Release'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore command'
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+    projects: 'BlazorStrap.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build command'
+  inputs:
+    command: 'build'
+    projects: 'BlazorStrap.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test command'
+  inputs:
+    command: 'test'
+    projects: 'BlazorStrap.sln'
