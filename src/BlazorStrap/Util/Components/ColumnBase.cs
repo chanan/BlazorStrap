@@ -222,9 +222,9 @@ namespace BlazorStrap.Util.Components
 
             set => _xsoffset = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
-                (false, _) => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(XSOffset)),
-                (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(XSOffset))
+                (false, _) => throw new ArgumentException(Properties.Resources.Between_0_and_12, nameof(XSOffset)),
+                (true, var lovalue) when ivalue >= 0 && ivalue <= 12 => lovalue,
+                _ => throw new ArgumentException(Properties.Resources.Between_0_and_12, nameof(XSOffset))
             };
         }
 
@@ -236,9 +236,9 @@ namespace BlazorStrap.Util.Components
 
             set => _smoffset = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
-                (false, _) => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(SMOffset)),
-                (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(SMOffset))
+                (false, _) => throw new ArgumentException(Properties.Resources.Between_0_and_12, nameof(SMOffset)),
+                (true, var lovalue) when ivalue >= 0 && ivalue <= 12 => lovalue,
+                _ => throw new ArgumentException(Properties.Resources.Between_0_and_12, nameof(SMOffset))
             };
         }
 
@@ -250,9 +250,9 @@ namespace BlazorStrap.Util.Components
 
             set => _mdoffset = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
-                (false, _) => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(MDOffset)),
-                (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(MDOffset))
+                (false, _) => throw new ArgumentException(Properties.Resources.Between_0_and_12, nameof(MDOffset)),
+                (true, var lovalue) when ivalue >= 0 && ivalue <= 12 => lovalue,
+                _ => throw new ArgumentException(Properties.Resources.Between_0_and_12, nameof(MDOffset))
             };
         }
 
@@ -264,9 +264,9 @@ namespace BlazorStrap.Util.Components
 
             set => _lgoffset = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
-                (false, _) => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(LGOffset)),
-                (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(LGOffset))
+                (false, _) => throw new ArgumentException(Properties.Resources.Between_0_and_12, nameof(LGOffset)),
+                (true, var lovalue) when ivalue >= 0 && ivalue <= 12 => lovalue,
+                _ => throw new ArgumentException(Properties.Resources.Between_0_and_12, nameof(LGOffset))
             };
         }
 
@@ -278,9 +278,9 @@ namespace BlazorStrap.Util.Components
 
             set => _xloffset = (int.TryParse(value, out var ivalue), value?.ToLowerInvariant()) switch
             {
-                (false, _) => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(XLOffset)),
-                (true, var lovalue) when ivalue >= 1 && ivalue <= 12 => lovalue,
-                _ => throw new ArgumentException(Properties.Resources.Between_1_and_12, nameof(XLOffset))
+                (false, _) => throw new ArgumentException(Properties.Resources.Between_0_and_12, nameof(XLOffset)),
+                (true, var lovalue) when ivalue >= 0 && ivalue <= 12 => lovalue,
+                _ => throw new ArgumentException(Properties.Resources.Between_0_and_12, nameof(XLOffset))
             };
         }
 

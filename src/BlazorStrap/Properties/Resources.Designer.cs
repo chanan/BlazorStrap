@@ -68,7 +68,18 @@ namespace BlazorStrap.Properties {
                 return ResourceManager.GetString("Between 1 and 12", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Must be between 0 and 12.
+        /// </summary>
+        internal static string Between_0_and_12
+        {
+            get
+            {
+                return ResourceManager.GetString("Between 0 and 12", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Must be \&quot;auto\&quot; or between 1 and 12.
         /// </summary>
