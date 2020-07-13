@@ -36,7 +36,7 @@ namespace BlazorStrap.Extensions
             {
                 return new MarkupString(string.Empty);
             }
-            catch (HttpRequestException e)
+            catch (HttpRequestException)
             {
                 return new MarkupString(string.Empty);
             }
