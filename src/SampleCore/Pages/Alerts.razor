@@ -2,6 +2,10 @@
 
 <h1>Alerts</h1>
 
+<p>Provide contextual feedback messages for typical user actions with a handful of available and flexible alert messages.</p>
+
+<h3>Examples</h3>
+<p>Alerts are available for any length of text, as well as an optional event for dismissing the alert. For proper styling use one of the eight <strong>required</strong> color classes (e.g. Color.Primary). For inline dismissal, set IsDismissable to true.</p>
 <div class="docs-example">
     <BSAlert Color="Color.Primary">
         This is a primary alert — check it out!
@@ -31,37 +35,10 @@
 
 <PrettyCode CodeFile="_content/SampleCore/snippets/alerts/alerts1.html" />
 
-<h3>Properties</h3>
-
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Property</th>
-            <th>Type</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Color</td>
-            <td>Color enum</td>
-            <td>Applies the selected color to the alert</td>
-        </tr>
-        <tr>
-            <td>IsOpen</td>
-            <td>bool</td>
-            <td>Opens and closes the alert</td>
-        </tr>
-        <tr>
-            <td>IsDismissible</td>
-            <td>bool</td>
-            <td>Adds the ability to dismiss the alert</td>
-        </tr>
-    </tbody>
-</table>
-
-
 <h3>Link color</h3>
+
+<p>Use the .alert-link utility class to quickly provide matching colored links within any alert.</p>
+
 <div class="docs-example">
     <BSAlert Color="Color.Primary">
         This is a primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
@@ -92,6 +69,8 @@
 
 <h3>Additional content</h3>
 
+<p>Alerts can also contain additional HTML elements like headings, paragraphs and dividers.</p>
+
 <div class="docs-example">
     <BSAlert Color="Color.Success">
         <h4 className="alert-heading">Well done!</h4>
@@ -110,6 +89,8 @@
 
 <h3>Dismissing</h3>
 
+<p>Using Blazor it is possible to dismiss any alert by setting IsDismissable to true. You can also hook into the OnDismiss Event to add additional functionality.</p>
+
 <div class="docs-example">
     <BSAlert Color="Color.Info" IsDismissible="true" OnDismiss="@OnDismiss">
         I am an alert and I can be dismissed!
@@ -119,6 +100,18 @@
 
 <h3>Closing</h3>
 
+<p>Using Blazor you can show and hide alerts and reopen closed alerts. Here's how:</p>
+<ul>
+    <li>Attach the IsOpen property to a variable in your code section.</li>
+    <li>Using the OnClick method of a button, or any clickable component, set the value of your IsOpen property to true or false. (Make sure to call StateHasChanged in your onclick method.)</li>
+</ul>
+
+<p>Using Blazor you can also set your alerts to autohide after a specified duration. Here's how:</p>
+<ul>
+    <li>Set the AutoHide property to true.</li>
+    <li>Set the AutoHideDelay property to number of milliseconds you wish to delay the alert's closing. (<strong>optional</strong> - Default = 4000ms)</li>
+</ul>
+
 <div class="docs-example">
     <BSAlert Color="Color.Info" IsOpen="@isOpen">
         Toggle the alert with the button below
@@ -126,6 +119,46 @@
     <BSButton @onclick="@onclick">Toggle Alert</BSButton>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/alerts/alerts5.html" />
+
+<h3>Properties</h3>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Color</td>
+            <td>Color enum</td>
+            <td>Applies the selected color to the alert</td>
+        </tr>
+        <tr>
+            <td>IsOpen</td>
+            <td>bool</td>
+            <td>Opens and closes the alert</td>
+        </tr>
+        <tr>
+            <td>IsDismissible</td>
+            <td>bool</td>
+            <td>Adds the ability to dismiss the alert</td>
+        </tr>
+        <tr>
+            <td>AutoHide</td>
+            <td>bool</td>
+            <td>Auto hides the alert after the specified delay in milliseconds (Default is 4000ms). When using autohide, you also need to use &#64;bind-IsOpen to be able to properly re-open the alert again.</td>
+        </tr>
+        <tr>
+            <td>AutoHideDelay</td>
+            <td>int</td>
+            <td>Sets the delay in milliseconds for auto hiding the alert.</td>
+        </tr>
+    </tbody>
+</table>
+
 
 @code {
     private bool isOpen = true;

@@ -267,7 +267,7 @@
                 <BSCard CardType="CardType.Text">This card has supporting text below as a natural lead-in to additional content.</BSCard>
                 <BSCard CardType="CardType.Text"><small class="text-muted">Last updated 3 mins ago</small></BSCard>
             </BSCard>
-            </BSCard>
+        </BSCard>
         <BSCard>
             <BSCard CardType="CardType.Image" VerticalAlignment="VerticalAlignment.Top" src="https://via.placeholder.com/256x180" alt="256x180" />
             <BSCard CardType="CardType.Body">
@@ -365,3 +365,57 @@
     </BSCard>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/cards/cards11.html" />
+
+<h3>Properties</h3>
+<BSTable IsStriped="true" IsBordered="true">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>CardType</td>
+            <td>BlazorStrap.CardType (enum)</td>
+            <td>Set the type of card to use. The following may be used: Card, Image, Body, Title, Subtitle, Text, Link, Header, Footer, ImageOverlay, Group, Deck, Columns</td>
+        </tr>
+        <tr>
+            <td>VerticalAlignment</td>
+            <td>BlazorStrap.VerticalAlignment (enum)</td>
+            <td>Sets the vertical alignment of the card. Can be: None, Bottom, Center, Top</td>
+        </tr>
+        <tr>
+            <td>Alignment</td>
+            <td>BlazorStrap.Alignment (enum)</td>
+            <td>Set the alignment of the card. Can be: None, Left, Center, Right</td>
+        </tr>
+        <tr>
+            <td>HeadingSize</td>
+            <td>BlazorStrap.HeadingSize (enum)</td>
+            <td>Sets the heading size for the card. Can be: None, H1, H2, H3, H4, H5, H6</td>
+        </tr>
+        <tr>
+            <td>IsInverse</td>
+            <td>bool</td>
+            <td>Set to true to change to inverse the theme from light background and dard text to a dark background with white text.</td>
+        </tr>
+        <tr>
+            <td>Color</td>
+            <td>BlazorStrap.Color (enum)</td>
+            <td>Set the color of the card based on boostrap colors.</td>
+        </tr>
+        <tr>
+            <td>IsOutline</td>
+            <td>bool</td>
+            <td>Removes all background images / colors on the card.</td>
+        </tr>
+        <tr>
+            <td>Class</td>
+            <td>string</td>
+            <td>Adds an user defined class for site CSS.</td>
+        </tr>
+    </tbody>
+</BSTable>
+

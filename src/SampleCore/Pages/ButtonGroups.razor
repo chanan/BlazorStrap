@@ -86,6 +86,44 @@
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/buttongroups/buttongroups5.html" />
 
+<h3>Properties</h3>
+<BSTable IsStriped="true" IsBordered="true">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>IsToggle</td>
+            <td>bool</td>
+            <td>Set to true to add a radio and checkbox style behavior to the button group.</td>
+        </tr>
+        <tr>
+            <td>IsToolbar</td>
+            <td>bool</td>
+            <td>Set to true to turn this button group into a button toolbar.</td>
+        </tr>
+        <tr>
+            <td>IsVertical</td>
+            <td>bool</td>
+            <td>Set to true to set the layout orientation of this button group to vertical.</td>
+        </tr>
+        <tr>
+            <td>Size</td>
+            <td>BlazorStrap.Size (enum)</td>
+            <td>Sets the size of the button.</td>
+        </tr>
+        <tr>
+            <td>Class</td>
+            <td>string</td>
+            <td>Adds additional classes to the Button Group.</td>
+        </tr>
+    </tbody>
+</BSTable>
+
 @code {
     bool IsOpen { get; set; }
     void onclick(MouseEventArgs e)
