@@ -15,6 +15,11 @@
             <BSInput InputType="InputType.Text" Id="exampleEmail8" @bind-Value="@formsModelValTT.InValid"/>
             <BSFormFeedback For="@(() => formsModelValTT.InValid)" IsTooltip="true" ValidMessage="Sweet! you fixed the issue"  />
         </BSFormGroup>
+        <BSFormGroup Class="col-md-12">
+            <BSLabel For="exampleDate">Date input</BSLabel>
+            <BSInput InputType="InputType.Date" Id="exampleDate" @bind-Value="@formsModelValTT.Date" />
+            <BSFormFeedback For="@(() => formsModelValTT.Date)" IsTooltip="true" ValidMessage="Sweet! you've chosen the right date" />
+        </BSFormGroup>
     </BSRow>
 </BSForm>
 @code
@@ -28,5 +33,6 @@
         public string InValid { get; set; }
         public string Blank { get; set; }
         public string Email { get; set; } = "email@example.com";
+        public DateTime Date { get; set; }
     }
 }
