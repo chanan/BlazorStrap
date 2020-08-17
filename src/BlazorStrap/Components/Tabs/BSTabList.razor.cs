@@ -11,6 +11,7 @@ namespace BlazorStrap
             new CssBuilder("nav")
                 .AddClass("nav-tabs", !IsPills)
                 .AddClass("nav-pills", IsPills)
+                .AddClass("nav-fill", IsFill)
                 .AddClass("flex-column", IsVertical)
                 .AddClass(GetAlignment())
                 .AddClass(Class)
