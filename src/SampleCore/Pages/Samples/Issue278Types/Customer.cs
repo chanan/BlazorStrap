@@ -6,7 +6,7 @@ namespace SampleCore.Pages.Samples.Issue278Types
 {
     public class Customer
     {
-        public bool Checked { get; set; }
+        public bool? Checked { get; set; } 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Address Address { get; } = new Address();

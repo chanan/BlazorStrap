@@ -135,7 +135,7 @@ namespace BlazorStrap.Util
 
                 return true;
             }
-            else if (typeof(T) == typeof(bool))
+            else if (typeof(T) == typeof(bool) || typeof(T) == typeof(bool?))
             {
                 try
                 {
@@ -149,6 +149,11 @@ namespace BlazorStrap.Util
                     {
                         result = (T)(object)true;
                         validationErrorMessage = null;
+                        return true;
+                    }
+                    else if(string.IsNullOrEmpty(value.ToString()))
+                    {
+                        result = (T) default;
                         return true;
                     }
                     else

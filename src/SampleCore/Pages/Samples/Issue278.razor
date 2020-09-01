@@ -6,17 +6,27 @@
 
 
     <BSForm Model="customer" OnValidSubmit="SaveCustomer">
-        <div>@(customer.Checked ? "true" : "false")</div>
-        <BSBasicInput InputType="InputType.Checkbox" @bind-Value="customer.Checked" />Checked
-        <BSInput InputType="InputType.Checkbox" @bind-Value="customer.Checked" />Checked
+        <div>Check value = @(customer.Checked ?? false ? "true" : "false" )</div>
+        <div> is null? @(@customer.Checked == null ? "Yes" : "No")</div>
+        <div><BSBasicInput InputType="InputType.Checkbox" @bind-Value="customer.Checked" />True</div>
+        <div><BSInput InputType="InputType.Checkbox" @bind-Value="customer.Checked" />True</div>
         <BSInput InputType="InputType.Select" @bind-Value="customer.Checked">
-            <option value="true">Yes</option>
+            <option value="true">True</option>
             <option value="false">False</option>
+            <option value="">Null</option>
         </BSInput>
         <BSBasicInput InputType="InputType.Select" @bind-Value="customer.Checked">
-            <option value="true">Yes</option>
+            <option value="true">True</option>
             <option value="false">False</option>
+            <option value="">Null</option>
         </BSBasicInput>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         BSBasicInput
         <BSButtonGroup IsToggle="true">
             <BSLabel IsButton="true">
@@ -81,28 +91,28 @@
         <ValidationMessage For="@(() => customer.PaymentMethods)" />
 
         @foreach (var paymentMethod in customer.PaymentMethods)
-    {
-        <p>
-            <BSInput InputType="InputType.Select" @bind-Value="paymentMethod.MethodType">
-                <option value="@PaymentMethod.Type.CreditCard">Credit card</option>
-                <option value="@PaymentMethod.Type.HonourSystem">Honour system</option>
-            </BSInput>
+        {
+            <p>
+                <BSInput InputType="InputType.Select" @bind-Value="paymentMethod.MethodType">
+                    <option value="@PaymentMethod.Type.CreditCard">Credit card</option>
+                    <option value="@PaymentMethod.Type.HonourSystem">Honour system</option>
+                </BSInput>
 
-            @if (paymentMethod.MethodType == PaymentMethod.Type.CreditCard)
-            {
-            <BSInput InputType="InputType.Text" placeholder="Card number" @bind-Value="paymentMethod.CardNumber" />
-            }
-            else if (paymentMethod.MethodType == PaymentMethod.Type.HonourSystem)
-            {
-            <span>Sure, we trust you to pay us somehow eventually</span>
-            }
-            <ValidationMessage For="@(() => paymentMethod.CardNumber)" />
+                @if (paymentMethod.MethodType == PaymentMethod.Type.CreditCard)
+                {
+                    <BSInput InputType="InputType.Text" placeholder="Card number" @bind-Value="paymentMethod.CardNumber" />
+                }
+                else if (paymentMethod.MethodType == PaymentMethod.Type.HonourSystem)
+                {
+                    <span>Sure, we trust you to pay us somehow eventually</span>
+                }
+                <ValidationMessage For="@(() => paymentMethod.CardNumber)" />
 
-            <button type="button" @onclick="@(() => customer.PaymentMethods.Remove(paymentMethod))" @onclick:preventDefault>Remove</button>
+                <button type="button" @onclick="@(() => customer.PaymentMethods.Remove(paymentMethod))" @onclick:preventDefault>Remove</button>
 
 
-        </p>
-    }
+            </p>
+        }
 
         <p><button type="submit">Submit</button></p>
     </BSForm>

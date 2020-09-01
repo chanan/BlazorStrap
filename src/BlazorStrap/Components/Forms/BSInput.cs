@@ -189,6 +189,13 @@ namespace BlazorStrap
 
         protected override string FormatValueAsString(T value)
         {
+            if(typeof(T) == typeof(bool?))
+            {
+                if(value == null)
+                {
+                    return "";
+                }
+            }
             return value switch
             {
                 null => null,
@@ -273,7 +280,7 @@ namespace BlazorStrap
             }
             else
             {
-                if (typeof(T) != typeof(bool))
+                if (typeof(T) != typeof(bool) || typeof(T) != typeof(bool?))
                 {
                     if (CheckValue != null)
                     {
@@ -286,6 +293,17 @@ namespace BlazorStrap
                         {
                             Value = CheckValue;
                             ValueChanged.InvokeAsync(Value);
+                        }
+                    }
+                    else
+                    {
+                        if (Value == null)
+                        {
+                            Value = (T)(object)true;
+                        }
+                        else
+                        {
+                            Value = (T)(object)(((bool)(object)Value == true) ? false : true);
                         }
                     }
                 }

@@ -158,7 +158,7 @@ namespace BlazorStrap
             }
             else
             {
-                if (typeof(T) != typeof(bool))
+                if (typeof(T) != typeof(bool) || typeof(T) != typeof(bool?))
                 {
                     if (CheckValue != null)
                     {
@@ -173,10 +173,22 @@ namespace BlazorStrap
                             ValueChanged.InvokeAsync(Value);
                         }
                     }
+                    else
+                    {
+                        if(Value == null)
+                        {
+                            Value = (T)(object)true;
+                        }
+                        else
+                        {
+                            Value = (T)(object) (((bool) (object) Value == true) ? false : true); 
+                        }
+                    }
                 }
                 else
                 {
-                    var tmp = (bool)(object)Value;
+
+                    var tmp = (bool?)(object)Value;
                     Value = (T)(object)(!tmp);
                 }
                 ValueChanged.InvokeAsync(Value);
@@ -185,6 +197,13 @@ namespace BlazorStrap
 
         protected string FormatValueAsString(T value)
         {
+            if (typeof(T) == typeof(bool?))
+            {
+                if (value == null)
+                {
+                    return "";
+                }
+            }
             return value switch
             {
                 null => null,
