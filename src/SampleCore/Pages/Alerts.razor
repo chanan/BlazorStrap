@@ -108,6 +108,7 @@
 
 <p>Using Blazor you can also set your alerts to autohide after a specified duration. Here's how:</p>
 <ul>
+    <li>Attach the @@bind-IsOpen property to a variable in your code section.</li>
     <li>Set the AutoHide property to true.</li>
     <li>Set the AutoHideDelay property to number of milliseconds you wish to delay the alert's closing. (<strong>optional</strong> - Default = 4000ms)</li>
 </ul>
@@ -149,7 +150,7 @@
         <tr>
             <td>AutoHide</td>
             <td>bool</td>
-            <td>Auto hides the alert after the specified delay in milliseconds (Default is 4000ms). When using autohide, you also need to use &#64;bind-IsOpen to be able to properly re-open the alert again.</td>
+            <td>Auto hides the alert after the specified delay in milliseconds (Default is 4000ms). When using autohide, you also need to use @@bind-IsOpen to be able to properly re-open the alert again.</td>
         </tr>
         <tr>
             <td>AutoHideDelay</td>
