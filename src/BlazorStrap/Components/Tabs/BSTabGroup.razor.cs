@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -31,6 +32,20 @@ namespace BlazorStrap
                 _selected = value;
                 InvokeAsync(StateHasChanged);
             }
+        }
+
+        /// <summary>
+        /// Activate a tab by Id
+        /// </summary>
+        /// <param name="tabId">The Id of the tab to select</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Throws when the tab Id, passed in parameter <paramref name="tabId"/>,
+        ///  does not exist
+        /// </exception>
+        public void SelectTabById(string tabId)
+        {
+            Selected = Tabs.Find(i => i.Id == tabId) ?? 
+                throw new ArgumentOutOfRangeException($"The tab with Id { tabId } does not exist");
         }
 
         [Parameter] public RenderFragment ChildContent { get; set; }
