@@ -2,6 +2,7 @@
 @page "/tabs/home"
 @page "/tabs/profile"
 @page "/tabs/contact"
+@page "/tabs/admin"
 @inject NavigationManager NavigationManager
 
 <h1>Tabs</h1>
@@ -75,66 +76,117 @@
     </BSRow>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/tabs/tabs3.html" />
-
+<br />
+<br />
 <h1>Tabs - Set Active</h1>
 <div class="docs-example">
-    <BSTabGroup ShowEvent="@Show" HiddenEvent="@Hidden" HideEvent="@Hide" ShownEvent="@Shown">
+    <h3>There are a few ways to set a tab as active</h3>
+    <ul>
+        <li>1. Click the tab header</li>
+        <li>2. By calling the <strong>&lt;BSTabGroup&gt;</strong> reference's <strong>SelectTabById()</strong> method</li>
+        <li>3. Get a referece to <strong>&lt;BSTab&gt;</strong> and call it's <strong>Select()</strong> method</li>
+        <li>4. By page route</li>
+    </ul>
+    <div>
+        <h4>2. &lt;BSTabGroup&gt; reference</h4>
+        <div>
+            <BSButton OnClick="ActivateAdminTab" IsBlock="true">Go to Admin tab by Id</BSButton>
+            <BSButton OnClick="ActivateProfileTab" IsBlock="true">Go to Profile tab by Id</BSButton>
+        </div>
+        <br />
+        <h4>3. Select by &lt;BSTab&gt; reference</h4>
+        <div>
+            Note that you are not required to set a tab Id, but if you want to use
+            it's <strong>Select()</strong> method then you'll need it.
+        </div>
+        <div>
+            <BSButton OnClick="ActivateContactTab" IsBlock="true">Go to Contact tab by tab reference</BSButton>
+            <BSButton OnClick="ActivateHomeTab" IsBlock="true">Go to Home tab by tab reference</BSButton>
+        </div>
+        <br />
+        <h4>4. By page route</h4>
+        <BSButton Color="Color.Primary" IsBlock="true" OnClick="Home">Navigate to Tab page with Home selected</BSButton>
+        <BSButton Color="Color.Success" IsBlock="true" OnClick="Contact">Navigate to Tab page with Contact selected</BSButton>
+        <BSButton Color="Color.Secondary" IsBlock="true" OnClick="Admin">Navigate to Tab page with Admin selected</BSButton>
+    </div>
+    <br />
+    <BSTabGroup @ref="TabGroup" ShowEvent="@Show" HiddenEvent="@Hidden" HideEvent="@Hide" ShownEvent="@Shown">
         <BSTabList>
-            <BSTab>
+            <BSTab @ref="TabHome" Id="homeTab" InitialSelection="@(NavigationManager.Uri.EndsWith("home"))">
                 <BSTabLabel>Home</BSTabLabel>
-                <BSTabContent>Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.</BSTabContent>
+                <BSTabContent>
+                    <h4>Home tab</h4>
+                    This is the sample text for the Home tab
+                </BSTabContent>
             </BSTab>
-            <BSTab InitialSelection="@true">
+            <BSTab Id="profileTab" InitialSelection="@true"> <!-- Select this tab on load by default -->
                 <BSTabLabel>Profile</BSTabLabel>
-                <BSTabContent>Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute laboris nisi. Labore labore veniam irure irure ipsum pariatur mollit magna in cupidatat dolore magna irure esse tempor ad mollit. Dolore commodo nulla minim amet ipsum officia consectetur amet ullamco voluptate nisi commodo ea sit eu.</BSTabContent>
+                <BSTabContent>
+                    <h4>Profile tab information</h4>
+                    This is the sample text for the Profile tab
+                </BSTabContent>
             </BSTab>
-            <BSTab>
+            <BSTab @ref="TabContact" Id="contactTab" InitialSelection="@(NavigationManager.Uri.EndsWith("contact"))">
                 <BSTabLabel>Contact</BSTabLabel>
-                <BSTabContent>Sint sit mollit irure quis est nostrud cillum consequat Lorem esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in labore cillum elit enim. Consequat aliquip incididunt ipsum et minim laborum laborum laborum et cillum labore. Deserunt adipisicing cillum id nulla minim nostrud labore eiusmod et amet. Laboris consequat consequat commodo non ut non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit irure ea ullamco Lorem aute nostrud magna.</BSTabContent>
+                <BSTabContent>
+                    <h4>Contact tab</h4>
+                    Sample text for Contact tab
+                </BSTabContent>
+            </BSTab>
+            <BSTab Id="adminTab" InitialSelection="@(NavigationManager.Uri.EndsWith("admin"))">
+                <BSTabLabel>Admin</BSTabLabel>
+                <BSTabContent>
+                    <h4>Administration tab</h4>
+                    Sample text for Admin tab
+                </BSTabContent>
             </BSTab>
         </BSTabList>
         <BSTabSelectedContent />
     </BSTabGroup>
+    <br />
     <PrettyCode CodeFile="_content/SampleCore/snippets/tabs/tabs4.html" />
 </div>
-<h1>Tabs - Set Active By Route</h1>
-<div class="docs-example">
-    <BSButton Color="Color.Primary" Size="Size.Large" IsBlock="true" @onclick="Home">Click me to navigate to Tab page with Home selected</BSButton>
-    <BSButton Color="Color.Primary" Size="Size.Large" IsBlock="true" @onclick="Profile">Click me to navigate to Tab page with Profile selected</BSButton>
-    <BSButton Color="Color.Primary" Size="Size.Large" IsBlock="true" @onclick="Contact">Click me to navigate to Tab page with Contact selected</BSButton>
-    <BSTabGroup ShowEvent="@Show" HiddenEvent="@Hidden" HideEvent="@Hide" ShownEvent="@Shown">
-        <BSTabList>
-            <BSTab InitialSelection="@(NavigationManager.Uri.EndsWith("home"))">
-                <BSTabLabel>Home</BSTabLabel>
-                <BSTabContent>Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.</BSTabContent>
-            </BSTab>
-            <BSTab InitialSelection="@(NavigationManager.Uri.EndsWith("profile"))">
-                <BSTabLabel>Profile</BSTabLabel>
-                <BSTabContent>Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute laboris nisi. Labore labore veniam irure irure ipsum pariatur mollit magna in cupidatat dolore magna irure esse tempor ad mollit. Dolore commodo nulla minim amet ipsum officia consectetur amet ullamco voluptate nisi commodo ea sit eu.</BSTabContent>
-            </BSTab>
-            <BSTab InitialSelection="@(NavigationManager.Uri.EndsWith("contact"))">
-                <BSTabLabel>Contact</BSTabLabel>
-                <BSTabContent>Sint sit mollit irure quis est nostrud cillum consequat Lorem esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in labore cillum elit enim. Consequat aliquip incididunt ipsum et minim laborum laborum laborum et cillum labore. Deserunt adipisicing cillum id nulla minim nostrud labore eiusmod et amet. Laboris consequat consequat commodo non ut non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit irure ea ullamco Lorem aute nostrud magna.</BSTabContent>
-            </BSTab>
-        </BSTabList>
-        <BSTabSelectedContent />
-    </BSTabGroup>
-</div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/tabs/tabs5.html" />
 
 @code {
+    private BSTabGroup TabGroup;
+    private BSTab TabContact;
+    private BSTab TabHome;
+
+    // 2. BSTabGroup reference by tab Id
+    private void ActivateProfileTab()
+    {
+        TabGroup.SelectTabById("profileTab");
+    }
+    private void ActivateAdminTab()
+    {
+        TabGroup.SelectTabById("adminTab");
+    }
+
+    // 3. By BSTab reference
+    private void ActivateContactTab()
+    {
+        TabContact.Select();
+    }
+    private void ActivateHomeTab()
+    {
+        TabHome.Select();
+    }
+
+    // 4. By route
     private void Home()
     {
         NavigationManager.NavigateTo("/tabs/home", true);
-    }
-    private void Profile()
-    {
-        NavigationManager.NavigateTo("/tabs/profile", true);
     }
     private void Contact()
     {
         NavigationManager.NavigateTo("/tabs/contact", true);
     }
+    private void Admin()
+    {
+        NavigationManager.NavigateTo("/tabs/admin", true);
+    }
+
+    // Methods to run on events
     private void Show(BSTabEvent e)
     {
         Console.WriteLine($"Show   -> Activated: {e.Activated?.Id.ToString()} , Deactivated: {e.Deactivated?.Id.ToString()}");
