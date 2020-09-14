@@ -280,7 +280,7 @@ namespace BlazorStrap
             }
             else
             {
-                if (typeof(T) != typeof(bool) || typeof(T) != typeof(bool?))
+                if (typeof(T) != typeof(bool) && typeof(T) != typeof(bool?))
                 {
                     if (CheckValue != null)
                     {
