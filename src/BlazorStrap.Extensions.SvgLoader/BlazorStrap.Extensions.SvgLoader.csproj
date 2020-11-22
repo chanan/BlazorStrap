@@ -3,7 +3,7 @@
     <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
     <RazorLangVersion>3.0</RazorLangVersion>
 	  <PackageId>BlazorStrap.Extensions.SVGLoader</PackageId>
-	  <Version>1.5.0-preview-01</Version>
+	  <Version>1.5.0-preview-02</Version>
 	  <Authors>Chanan Braunstein; John Bomhold, Harold Collins</Authors>
 	  <Title>Blazor BootStrap Extensions SVGLoader</Title>
 	  <Description>A SVGLoader library for blazorstrap</Description>
@@ -14,8 +14,8 @@
 
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.0-rc.2.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0-rc.2.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.*" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.4" />
