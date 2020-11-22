@@ -212,7 +212,7 @@ window.blazorStrap = {
         return true;
     },
     setPopper: function () {
-        if (script === undefined) {
+        if (typeof Popper === undefined && script === undefined) {
             script = document.createElement('script');
             document.head.insertBefore(script, document.head.lastChild);
         }
