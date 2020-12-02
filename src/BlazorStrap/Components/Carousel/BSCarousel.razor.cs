@@ -20,6 +20,7 @@ namespace BlazorStrap
             set { _activeIndex = value; ActiveIndexChanged?.Invoke(); DoAnimations(); }
         }
 
+        private bool _timerEnabled { get; set; } = true;
         public bool AnimationRunning { get; set; } = false;
         public List<BSCarouselIndicatorItemBase> CarouselIndicatorItems { get; } = new List<BSCarouselIndicatorItemBase>();
         public List<BSCarouselItemBase> CarouselItems { get; } = new List<BSCarouselItemBase>();
@@ -105,23 +106,26 @@ namespace BlazorStrap
 
         public void ResetTimer()
         {
-            Timer.Stop();
-            if (Interval == 0)
-                return;
+            if (Timer != null)
+                Timer.Stop();
 
-            Timer.Interval = CarouselItems[ActiveIndex].Interval;
-            Timer.Start();
+            if (_timerEnabled)
+            {
+                Timer.Interval = CarouselItems[ActiveIndex].Interval;
+                Timer.Start();
+            }
         }
 
         protected override void OnInitialized()
         {
-            if (Timer == null)
+            if (Interval == 0)
+                _timerEnabled = false;
+
+            if (Timer == null && _timerEnabled)
             {
                 Timer = new Timer(Interval);
                 Timer.Elapsed += OnTimerEvent;
                 Timer.AutoReset = true;
-                if (Interval == 0)
-                    return;
                 Timer.Start();
             }
         }
@@ -129,8 +133,12 @@ namespace BlazorStrap
         private async Task DoAnimations()
         {
             if (CarouselItems.Count == 0) return;
-            Timer.Stop();
-            Timer.Interval = CarouselItems[ActiveIndex].Interval;
+
+            if (_timerEnabled)
+            {
+                Timer.Stop();
+                Timer.Interval = CarouselItems[ActiveIndex].Interval;
+            }
             if (Direction == 0)
             {
                 var oldindex = ActiveIndex == 0 ? NumberOfItems - 1 : ActiveIndex - 1;
@@ -181,7 +189,9 @@ namespace BlazorStrap
                 await CarouselItems[ActiveIndex].Clean().ConfigureAwait(false);
                 CarouselItems[ActiveIndex].Active = true;
                 await InvokeAsync(StateHasChanged).ConfigureAwait(false);
-                Timer.Start();
+
+                if (_timerEnabled)
+                    Timer.Start();
             }
         }
         protected async Task OnKeyPress(KeyboardEventArgs e)
@@ -215,11 +225,13 @@ namespace BlazorStrap
 
         protected override void OnParametersSet()
         {
+            if (Interval != 0)
+                _timerEnabled = true;
+
             if (Ride && ActiveIndex == 0)
             {
-                if (Interval == 0)
-                    return;
-                Timer.Start();
+                if (_timerEnabled)
+                    Timer.Start();
             }
         }
 
