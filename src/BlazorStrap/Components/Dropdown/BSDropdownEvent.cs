@@ -2,6 +2,6 @@
 {
     public class BSDropdownEvent
     {
-        public BSDropdownBase Target { get; set; }
+        public BSDropdown Target { get; set; }
     }
 }

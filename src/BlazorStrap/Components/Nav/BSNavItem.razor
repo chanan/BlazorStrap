@@ -1,10 +1,9 @@
 ﻿@namespace BlazorStrap
-@inherits BSNavItemBase
-
-    <CascadingValue Value="@this">
-        <CascadingValue Value="@DropDownMenu">
-            <DynamicElement @attributes="@UnknownParameters" TagName="@Tag" class="@Classname" @onfocusout="LostFocus" @onmouseleave="MouseLeave" @onmouseenter="MouseEnter">
-                @ChildContent
-            </DynamicElement>
-        </CascadingValue>
+@inherits ToggleableComponentBase
+<CascadingValue Value="@this">
+    <CascadingValue Value="@DropDownMenu">
+        <DynamicElement @attributes="@UnknownParameters" TagName="@Tag" class="@Classname" @onfocusout="LostFocus" @onmouseleave="MouseLeave" @onmouseenter="MouseEnter">
+            @ChildContent
+        </DynamicElement>
     </CascadingValue>
+</CascadingValue>

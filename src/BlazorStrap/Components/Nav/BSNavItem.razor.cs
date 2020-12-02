@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSNavItemBase : ToggleableComponentBase, IDisposable
+    public partial class BSNavItem : ToggleableComponentBase, IDisposable
     {
         internal bool IsSubmenu { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
 
-        private BSDropdownMenuBase _selected;
+        private BSDropdownMenu _selected;
         private bool _shouldClose { get; set; } = false;
 
         //Prevents NULL
-        private BSDropdownMenuBase _dropDownMenu { get; set; } = new BSDropdownMenu();
+        private BSDropdownMenu _dropDownMenu { get; set; } = new BSDropdownMenu();
 
-        public BSDropdownMenuBase DropDownMenu
+        public BSDropdownMenu DropDownMenu
         {
             get => _dropDownMenu;
             set
@@ -28,7 +28,7 @@ namespace BlazorStrap
             }
         }
 
-        public BSDropdownMenuBase Selected
+        public BSDropdownMenu Selected
         {
             get
             {

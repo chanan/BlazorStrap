@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSDropdownToggleBase : ComponentBase
+    public partial class BSDropdownToggle : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
 
@@ -43,7 +43,7 @@ namespace BlazorStrap
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
-        [CascadingParameter] internal BSDropdownMenuBase Dropdown { get; set; }
+        [CascadingParameter] internal BSDropdownMenu Dropdown { get; set; }
 
         protected void Escape(KeyboardEventArgs e)
         {

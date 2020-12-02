@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSTabSelectedContentBase : ComponentBase
+    public partial class BSTabSelectedContent : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [CascadingParameter] protected BSTabGroup Group { get; set; }

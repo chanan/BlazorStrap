@@ -7,7 +7,7 @@ using System.Timers;
 
 namespace BlazorStrap
 {
-    public abstract class BSNavbarBase : ComponentBase
+    public partial class BSNavbar : ComponentBase
     {
         [Parameter] public bool Header { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }

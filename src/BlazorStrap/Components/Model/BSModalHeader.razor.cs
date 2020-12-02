@@ -5,15 +5,15 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSModalHeaderBase : ComponentBase
+    public partial class BSModalHeader : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        protected string divClassname =>
+        protected string DivClassname =>
             new CssBuilder("modal-header")
                 .AddClass(Class)
             .Build();
 
-        protected string headingClassname =>
+        protected string HeadingClassname =>
             new CssBuilder("modal-title")
                 .AddClass(HeadingClass)
             .Build();

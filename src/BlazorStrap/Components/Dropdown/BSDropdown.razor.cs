@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSDropdownBase : ToggleableComponentBase, IDisposable
+    public partial class BSDropdown : ToggleableComponentBase, IDisposable
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] public EventCallback<BSDropdownEvent> ShowEvent { get; set; }
@@ -22,13 +22,13 @@ namespace BlazorStrap
         internal List<EventCallback<BSDropdownEvent>> EventQue { get; set; } = new List<EventCallback<BSDropdownEvent>>();
 
         // Prevents rogue closing
-        private BSDropdownMenuBase _selected;
+        private BSDropdownMenu _selected;
 
-        private BSDropdownMenuBase _dropDownMenu { get; set; } = new BSDropdownMenu();
+        private BSDropdownMenu _dropDownMenu { get; set; } = new BSDropdownMenu();
         public bool Active { get; set; } = false;
         private bool _shouldClose { get; set; } = false;
 
-        internal BSDropdownMenuBase DropDownMenu
+        internal BSDropdownMenu DropDownMenu
         {
             get => _dropDownMenu;
             set
@@ -38,7 +38,7 @@ namespace BlazorStrap
             }
         }
 
-        public BSDropdownMenuBase Selected
+        public BSDropdownMenu Selected
         {
             get => _selected;
             set

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSDropdownItemBase : ComponentBase, IDisposable
+    public partial class BSDropdownItem : ComponentBase, IDisposable
     {
         [Inject] protected NavigationManager UriHelper { get; set; }
 

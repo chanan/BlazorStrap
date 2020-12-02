@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSCarouselItemBase : ComponentBase
+    public partial class BSCarouselItem : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [CascadingParameter] protected BSCarousel Parent { get; set; }

@@ -2,6 +2,6 @@
 {
     public class BSAlertEvent
     {
-        public BSAlertBase Target { get; set; }
+        public BSAlert Target { get; set; }
     }
 }

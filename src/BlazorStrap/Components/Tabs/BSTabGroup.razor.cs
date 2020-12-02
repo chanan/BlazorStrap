@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSTabGroupBase : ComponentBase
+    public partial class BSTabGroup : ComponentBase
     {
         internal bool Disposing { get; set; } = false;
         internal bool HasRendered { get; set; } = false;
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        public List<BSTabBase> Tabs { get; set; } = new List<BSTabBase>();
+        public List<BSTab> Tabs { get; set; } = new List<BSTab>();
         internal List<EventCallback<BSTabEvent>> EventQue { get; set; } = new List<EventCallback<BSTabEvent>>();
         internal BSTabEvent BSTabEvent { get; set; }
-        private BSTabBase _selected;
-        public BSTabBase Selected
+        private BSTab _selected;
+        public BSTab Selected
         {
             get => _selected;
             set

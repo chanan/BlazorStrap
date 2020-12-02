@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSAlertBase : ComponentBase
+    public partial class BSAlert : ComponentBase
     {
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public string Class { get; set; }

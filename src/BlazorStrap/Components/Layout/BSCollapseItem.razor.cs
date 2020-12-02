@@ -2,10 +2,10 @@
 
 namespace BlazorStrap
 {
-    public abstract class BSCollapseItemBase : ComponentBase
+    public partial class BSCollapseItem : ComponentBase
     {
         [Parameter] public RenderFragment ChildContent { get; set; }
-        internal BSCollapseBase Collapse { get; set; }
+        internal BSCollapse Collapse { get; set; }
 
         private bool _active = false;
         public bool Active
