@@ -30,6 +30,7 @@
     {
         if (isServerSide && firstrun)
         {
+            System.Diagnostics.Debug.WriteLine("test");
             await BootstrapCSS.SetBootstrapCSS("4.5.0");
         }
     }

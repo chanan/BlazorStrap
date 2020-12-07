@@ -45,6 +45,17 @@ namespace BlazorStrap
             {
                 _selected = value;
                 if (_selected != null) _selected.Changed(true);
+                if(_selected == null)
+                {
+                    if(Dropdown != null)
+                    {
+                        Dropdown.Selected = _selected;
+                    }
+                    else if(NavItem != null)
+                    {
+                        NavItem.Selected = _selected;
+                    }
+                }
                 InvokeAsync(StateHasChanged);
             }
         }

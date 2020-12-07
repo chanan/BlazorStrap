@@ -20,6 +20,7 @@ namespace BlazorStrap
 
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public string Class { get; set; }
+        [Parameter] public bool HideCloseButton { get; set; }
         [Parameter] public string HeadingClass { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
 
