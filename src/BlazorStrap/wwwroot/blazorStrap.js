@@ -212,11 +212,11 @@ window.blazorStrap = {
         return true;
     },
     setPopper: function () {
-        if (typeof Popper === undefined && script === undefined) {
+        if (typeof Popper === undefined || script === undefined) {
             script = document.createElement('script');
             document.head.insertBefore(script, document.head.lastChild);
+            script.src = "_content/BlazorStrap/popper.min.js";
         }
-        script.src = "_content/BlazorStrap/popper.min.js";
         return true;
     }
 };
