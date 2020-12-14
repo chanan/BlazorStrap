@@ -9,6 +9,7 @@ namespace SampleCore.Pages.Samples.Issue278Types
         public bool? Checked { get; set; } 
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
         public Address Address { get; } = new Address();
         public List<PaymentMethod> PaymentMethods { get; } = new List<PaymentMethod>();
     }

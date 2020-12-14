@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSCollapseToggleBase : ComponentBase
+    public partial class BSCollapseToggle : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string Classname =>

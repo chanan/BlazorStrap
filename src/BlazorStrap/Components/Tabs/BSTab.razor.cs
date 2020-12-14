@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSTabBase : ComponentBase, IDisposable
+    public partial class BSTab : ComponentBase, IDisposable
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         public RenderFragment Content { get; set; }

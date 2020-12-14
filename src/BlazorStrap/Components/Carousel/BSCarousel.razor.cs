@@ -8,7 +8,7 @@ using System.Timers;
 
 namespace BlazorStrap
 {
-    public abstract class BSCarouselBase : ComponentBase, IDisposable
+    public partial class BSCarousel : ComponentBase, IDisposable
     {
         private const string _carouselFade = "carousel-fade";
 
@@ -22,8 +22,8 @@ namespace BlazorStrap
 
         private bool _timerEnabled { get; set; } = true;
         public bool AnimationRunning { get; set; } = false;
-        public List<BSCarouselIndicatorItemBase> CarouselIndicatorItems { get; } = new List<BSCarouselIndicatorItemBase>();
-        public List<BSCarouselItemBase> CarouselItems { get; } = new List<BSCarouselItemBase>();
+        public List<BSCarouselIndicatorItem> CarouselIndicatorItems { get; } = new List<BSCarouselIndicatorItem>();
+        public List<BSCarouselItem> CarouselItems { get; } = new List<BSCarouselItem>();
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public bool Fade { get; set; } = false;
@@ -173,7 +173,7 @@ namespace BlazorStrap
             }
         }
 
-        public async Task AnimationEnd(BSCarouselItemBase sender)
+        public async Task AnimationEnd(BSCarouselItem sender)
         {
             if (sender == CarouselItems[ActiveIndex])
             {

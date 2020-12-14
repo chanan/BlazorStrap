@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSNavbarTogglerBase : ComponentBase
+    public partial class BSNavbarToggler : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string Classname =>

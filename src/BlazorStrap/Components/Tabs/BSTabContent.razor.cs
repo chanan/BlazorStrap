@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSTabContentBase : ComponentBase
+    public partial class BSTabContent : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         public string Classname =>

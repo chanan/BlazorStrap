@@ -1,9 +1,11 @@
 ﻿@namespace BlazorStrap
-@inherits BSModalHeaderBase
 
-<DynamicElement @attributes="@UnknownParameters" TagName="div" class="@divClassname">
-    <h5 class="@headingClassname">@ChildContent</h5>
+<DynamicElement @attributes="@UnknownParameters" TagName="div" class="@DivClassname">
+    <h5 class="@HeadingClassname">@ChildContent</h5>
+    @if (!HideCloseButton)
+    {
     <button type="button" class="close" aria-label="Close" @onclick="OnClick">
         <span aria-hidden="true">&times;</span>
     </button>
+    }
 </DynamicElement>

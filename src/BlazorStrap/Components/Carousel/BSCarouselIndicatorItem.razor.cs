@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSCarouselIndicatorItemBase : ComponentBase
+    public partial class BSCarouselIndicatorItem : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
 

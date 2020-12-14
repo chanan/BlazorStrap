@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSColBase : ColumnBase
+    public partial class BSCol : ColumnBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
 

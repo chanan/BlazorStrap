@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSTooltipBase : ComponentBase
+    public partial class BSTooltip : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Inject] public BlazorStrapInterop BlazorStrapInterop { get; set; }

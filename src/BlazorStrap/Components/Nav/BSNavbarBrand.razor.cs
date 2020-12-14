@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSNavbarBrandBase : ComponentBase
+    public partial class BSNavbarBrand : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string Classname =>

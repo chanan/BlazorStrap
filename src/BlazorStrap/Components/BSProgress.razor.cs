@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSProgressBase : ComponentBase
+    public partial class BSProgress : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string Classname =>
@@ -24,7 +24,7 @@ namespace BlazorStrap
 
         [Parameter] public int Value { get; set; }
         [Parameter] public int Max { get; set; } = 100;
-        protected string styles
+        protected string Styles
         {
             get
             {

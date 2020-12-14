@@ -1,10 +1,10 @@
 @page "/samples/issue154"
-@layout Layout104
-<BSTabGroup >
+
+<BSTabGroup  @ref="tabs">
     <BSTabList>
         @foreach (var tab in _tabList)
         {
-            <BSTab Name="@tab.Label" @key="tab">
+            <BSTab Name="@tab.Label" @key="tab" Id="@tab.Id">
                 <BSTabLabel>@tab.Label <strong @onclick="() => RemoveTab(tab.Id)">X</strong></BSTabLabel>
                 <BSTabContent>@tab.Content</BSTabContent>
             </BSTab>
@@ -14,11 +14,12 @@
     </BSTabGroup>
 
     @code{
-            private class SimpleTab
-            {
-                public string Id { get; set; }
-                public string Label { get; set; }
-                public string Content { get; set; }
+        BSTabGroup tabs;
+        private class SimpleTab
+        {
+            public string Id { get; set; }
+            public string Label { get; set; }
+            public string Content { get; set; }
 
             public SimpleTab(string label, string content)
             {
@@ -42,7 +43,26 @@
             var tab = this._tabList.FirstOrDefault(x => x.Id == tabId);
             if (tab != null)
             {
+
+                if(tab.Id == tabs.Selected.Id)
+                {
+                    string nextid = new Guid().ToString();
+                    if (_tabList.IndexOf(tab) > 0)
+                    {
+                        nextid = _tabList[_tabList.IndexOf(tab) - 1].Id;
+                    }
+                    else if(_tabList.Count > 1)
+                    {
+                        nextid = _tabList[_tabList.IndexOf(tab) + 1].Id;
+                    }
+                    if (nextid != new Guid().ToString())
+                        tabs.SelectTabById(nextid);
+
+                }
+
                 this._tabList.Remove(tab);
+
+
             }
             StateHasChanged();
         }

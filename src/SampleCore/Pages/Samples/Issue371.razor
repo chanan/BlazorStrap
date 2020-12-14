@@ -1,0 +1,28 @@
+﻿@page "/samples/issue371"
+@using System.ComponentModel.DataAnnotations;
+<BSForm Model="Model" ValidateOnInit="true">
+    <DataAnnotationsValidator/>
+    <BSFormGroup>
+        <BSLabel For="EmailAddress">Email Address</BSLabel>
+        <BSInput InputType="InputType.Email" id="EmailAddress" @bind-Value="@Model.Email" ValidateOnChange="true"/>
+        <BSFormFeedback For="@(() => Model.Email)" ValidMessage="Sweet"></BSFormFeedback>
+    </BSFormGroup>
+</BSForm>
+
+
+@code
+{
+    FormsModel Model = new FormsModel();
+    public class FormsModel
+    {
+
+        public string Valid { get; set; }
+        public DateTime Date { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Oh noes! that name is already taken")]
+        public string InValid { get; set; }
+        public string Blank { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = "email@example.com";
+    }
+}

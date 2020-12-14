@@ -27,7 +27,13 @@ window.blazorStrap = {
             if (!document.body.classList.contains("modal-open")) {
                 document.body.classList.add("modal-open");
             }
-            this.paddingRight("17px");
+            var body = document.body,
+                html = document.documentElement;
+            var height = Math.max(body.scrollHeight, body.offsetHeight,
+                html.clientHeight, html.scrollHeight, html.offsetHeight);
+            if (height > window.innerHeight) {
+                this.paddingRight("17px");
+            }
             return id;
         },
         close: function (id) {
@@ -212,11 +218,11 @@ window.blazorStrap = {
         return true;
     },
     setPopper: function () {
-        if (typeof Popper === undefined && script === undefined) {
+        if (typeof Popper === undefined || script === undefined) {
             script = document.createElement('script');
             document.head.insertBefore(script, document.head.lastChild);
+            script.src = "_content/BlazorStrap/popper.min.js";
         }
-        script.src = "_content/BlazorStrap/popper.min.js";
         return true;
     }
 };

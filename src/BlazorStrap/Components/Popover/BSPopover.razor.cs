@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
-    public abstract class BSPopoverBase : ToggleableComponentBase
+    public partial class BSPopover : ToggleableComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Inject] public BlazorStrapInterop BlazorStrapInterop { get; set; }

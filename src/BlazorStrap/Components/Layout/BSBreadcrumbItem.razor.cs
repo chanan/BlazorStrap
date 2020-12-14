@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSBreadcrumbItemBase : ComponentBase
+    public partial class BSBreadcrumbItem : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
 

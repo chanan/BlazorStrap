@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSDropdownItemBase : ComponentBase, IDisposable
+    public partial class BSDropdownItem : ComponentBase, IDisposable
     {
         [Inject] protected NavigationManager UriHelper { get; set; }
 
@@ -45,10 +45,14 @@ namespace BlazorStrap
             {
                 OnClick.InvokeAsync(e);
             }
-            if (!StayOpen && DropDown?.IsSubmenu == false && !HasSubMenu)
+            // Not Sure why I had this here commented out. Will remove after full testing.
+            // if (!StayOpen && DropDown?.IsSubmenu == false && !HasSubMenu)
+            //   {
+            if (!StayOpen)
             {
                 DropDown.Selected = null;
             }
+            //  }
         }
 
         protected override void OnInitialized()

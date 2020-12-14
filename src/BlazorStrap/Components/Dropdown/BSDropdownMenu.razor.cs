@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSDropdownMenuBase : ToggleableComponentBase
+    public partial class BSDropdownMenu : ToggleableComponentBase
     {
         [Inject] protected IJSRuntime JSRuntime { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }

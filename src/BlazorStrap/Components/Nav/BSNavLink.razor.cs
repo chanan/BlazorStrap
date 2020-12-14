@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSNavLinkBase : ComponentBase, IDisposable
+    public partial class BSNavLink : ComponentBase, IDisposable
     {
         [Inject] protected NavigationManager UriHelper { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }

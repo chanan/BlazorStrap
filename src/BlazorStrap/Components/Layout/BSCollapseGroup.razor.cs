@@ -2,7 +2,7 @@
 
 namespace BlazorStrap
 {
-    public abstract class BSCollapseGroupBase : ComponentBase
+    public partial class BSCollapseGroup : ComponentBase
     {
         [Parameter] public RenderFragment ChildContent { get; set; }
 

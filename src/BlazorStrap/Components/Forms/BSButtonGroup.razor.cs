@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSButtonGroupBase : ComponentBase
+    public partial class BSButtonGroup : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
 

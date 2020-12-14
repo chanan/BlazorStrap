@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSMediaBase : ComponentBase
+    public partial class BSMedia : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string Classname =>

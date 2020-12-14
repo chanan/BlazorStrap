@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSNavBase : ComponentBase, IDisposable
+    public partial class BSNav : ComponentBase, IDisposable
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
-        private BSNavItemBase _selected;
+        private BSNavItem _selected;
         private bool _disposed;
-        internal List<BSNavItemBase> Navitems { get; set; } = new List<BSNavItemBase>();
-        public BSNavItemBase Selected
+        internal List<BSNavItem> Navitems { get; set; } = new List<BSNavItem>();
+        public BSNavItem Selected
         {
             get => _selected;
             set

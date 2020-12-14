@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BlazorStrap
 {
-    public abstract class BSPaginationLinkBase : ComponentBase
+    public partial class BSPaginationLink : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         protected string Classname =>
@@ -17,7 +17,7 @@ namespace BlazorStrap
         [Parameter] public bool OnClickPreventDefault { get; set; } = false;
 
         [Parameter] public PaginationLinkType PaginationLinkType { get; set; } = PaginationLinkType.Custom;
-        private string label
+        private string _label
         {
             get
             {
@@ -26,7 +26,7 @@ namespace BlazorStrap
                 return null;
             }
         }
-        private string sr
+        private string _sr
         {
             get
             {
