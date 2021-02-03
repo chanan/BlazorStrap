@@ -3,7 +3,7 @@
     <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
     <RazorLangVersion>3.0</RazorLangVersion>
 	  <PackageId>BlazorStrap.Extensions.SVGLoader</PackageId>
-	  <Version>1.5.0-preview-02</Version>
+	  <Version>1.5.0</Version>
 	  <Authors>Chanan Braunstein; John Bomhold, Harold Collins</Authors>
 	  <Title>Blazor BootStrap Extensions SVGLoader</Title>
 	  <Description>A SVGLoader library for blazorstrap</Description>

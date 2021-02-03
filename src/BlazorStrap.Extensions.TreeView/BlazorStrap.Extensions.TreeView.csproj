@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
     <RazorLangVersion>3.0</RazorLangVersion>
     <PackageId>BlazorStrap.Extensions.TreeView</PackageId>
-    <Version>1.5.0-preview-02</Version>
+    <Version>1.5.0</Version>
     <Authors>Chanan Braunstein; John Bomhold</Authors>
     <Title>Blazor BootStrap Extensions TreeView</Title>
     <Description>A treeview component library for BlazorStrap</Description>
