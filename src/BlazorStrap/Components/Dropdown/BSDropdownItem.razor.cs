@@ -38,6 +38,7 @@ namespace BlazorStrap
         [Parameter] public string Class { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
         [CascadingParameter] internal BSDropdown DropDown { get; set; }
+        [CascadingParameter] internal BSNavItem NavItem { get; set; }
 
         protected void OnClickEvent(MouseEventArgs e)
         {
@@ -50,7 +51,13 @@ namespace BlazorStrap
             //   {
             if (!StayOpen)
             {
-                DropDown.Selected = null;
+                if (DropDown != null) {
+                    DropDown.Selected = null;
+                }
+
+                if (NavItem != null) {
+                    NavItem.Selected = null;
+                }
             }
             //  }
         }
