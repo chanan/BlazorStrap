@@ -34,6 +34,7 @@ namespace BlazorStrap.Util.Components
 
         public bool Manual { get; set; } = false;
         private bool _isOpen { get; set; }
+        internal bool InternalIsOpen { set => _isOpen = value; }
 
         internal virtual Task Changed(bool e)
         {

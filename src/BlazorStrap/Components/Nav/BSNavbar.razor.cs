@@ -9,6 +9,7 @@ namespace BlazorStrap
 {
     public partial class BSNavbar : ComponentBase
     {
+        [Parameter] public bool RemoveDefaultClass { get; set; }
         [Parameter] public bool Header { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public string Class { get; set; }
@@ -34,7 +35,8 @@ namespace BlazorStrap
 
         internal EventHandler<bool> VisibleChange { get; set; }
         protected string Classname =>
-        new CssBuilder("navbar")
+        new CssBuilder()
+            .AddClass("navbar", !RemoveDefaultClass)
             .AddClass("fixed-top", IsFixedTop)
             .AddClass("fixed-bottom", IsFixedBottom)
             .AddClass("sticky-top", IsStickyTop)

@@ -2,6 +2,7 @@
 using BlazorStrap.Util;
 using BlazorStrap.Util.Components;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace BlazorStrap
 {
     public partial class BSCollapse : ToggleableComponentBase
     {
+        private DotNetObjectReference<BSCollapse> _objectReference;
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] public EventCallback<BSCollapseEvent> ShowEvent { get; set; }
         [Parameter] public EventCallback<BSCollapseEvent> ShownEvent { get; set; }
@@ -24,9 +26,9 @@ namespace BlazorStrap
         protected string Tag => IsList ? "li" : "div";
         protected bool Collapsing { get; set; }
         protected string Classname =>
-         new CssBuilder(Collapsing && (IsOpen ?? false) ? "collapsing" : "collapse")
+         new CssBuilder("collapse")
              .AddClass("navbar-collapse", IsNavbar)
-             .AddClass("show", (IsOpen ?? false) && !Collapsing)
+             .AddClass("show", (IsOpen ?? false) && DisableAnimations && !Collapsing)
              .AddClass(Class)
          .Build();
 
@@ -36,6 +38,7 @@ namespace BlazorStrap
         [Inject] public BlazorStrapInterop BlazorStrapInterop { get; set; }
         protected override void OnInitialized()
         {
+            _objectReference = DotNetObjectReference.Create(this);
             if (IsNavbar && Navbar != null)
             {
                 Navbar.VisibleChange += OnVisibleChange;
@@ -55,49 +58,20 @@ namespace BlazorStrap
         internal override async Task Changed(bool e)
         {
             Collapsing = true;
-
-            BSCollapseEvent = new BSCollapseEvent() { Target = this };
-            if (e)
-            {
-                await ShowEvent.InvokeAsync(BSCollapseEvent).ConfigureAwait(false);
-                EventQue.Add(ShownEvent);
-            }
-            else
-            {
-                if (IsNavbar && Navbar != null)
-                {
-                    if (Navbar.HasCollapsed == false)
-                    {
-                        Navbar.HasCollapsed = true;
-                        Navbar.Visible = false;
-                    }
-                }
-                await HideEvent.InvokeAsync(BSCollapseEvent).ConfigureAwait(false);
-                EventQue.Add(HiddenEvent);
-            }
-            StateHasChanged();
+            await BlazorStrapInterop.AddCollapsingEvent(MyRef, e, _objectReference).ConfigureAwait(false);
+            await BlazorStrapInterop.CollapsingElement(MyRef, e).ConfigureAwait(false);
+            InternalIsOpen = e;
         }
+
+        [JSInvokable]
         public async Task AnimationEnd()
         {
             Collapsing = false;
-            await BlazorStrapInterop.ClearOffsetHeight(MyRef);
-            await InvokeAsync(StateHasChanged).ConfigureAwait(false);
+           // InvokeAsync(StateHasChanged);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstrun)
         {
-            if (Collapsing)
-            {
-                if (firstrun && Collapsing)
-                {
-                    Collapsing = false;
-                    await InvokeAsync(StateHasChanged).ConfigureAwait(false);
-                }
-                else
-                {
-                    await BlazorStrapInterop.SetOffsetHeight(MyRef, IsOpen ?? false);
-                }
-            }
             for (var i = 0; i < EventQue.Count; i++)
             {
                 await EventQue[i].InvokeAsync(BSCollapseEvent).ConfigureAwait(false);

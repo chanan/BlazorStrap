@@ -1,7 +1,7 @@
 ﻿<BSNavbar IsExpand="true" IsDark="false" Color="Color.Light">
     <BSNavbarBrand Href="javascript:void(0);">Navbar</BSNavbarBrand>
     <BSNavbarToggler @onclick="onclick" />
-    <BSCollapse isOpen="@IsOpen" IsNavbar="true" IsOpenChanged="OpenChanged">
+    <BSCollapse @ref="NavbarCollapse" IsNavbar="true" IsOpenChanged="OpenChanged">
         <BSNav IsList="true" Class="mr-auto" IsNavbar="true">
             <BSNavItem>
                 <BSNavLink IsActive="true" Href="javascript:void(0);">Home</BSNavLink>
@@ -21,9 +21,9 @@
                     <BSDropdownItem Href="javascript:void(0);">Yet Another Action</BSDropdownItem>
                 </BSDropdownMenu>
             </BSNavItem>
-            <BSNavItem IsDropdown="true" @bind-IsOpen="@IsOpen2" CloseOnFocusout="false">
-                <BSDropdownToggle @onclick="onclick2" Color="Color.Light">User Controlled</BSDropdownToggle>
-                <BSDropdownMenu @bind-IsOpen="@IsOpen2">
+            <BSNavItem IsDropdown="true" @bind-IsOpen="@UserControlledIsOpen" CloseOnFocusout="false">
+                <BSDropdownToggle @onclick="UserControlledClick" Color="Color.Light">User Controlled</BSDropdownToggle>
+                <BSDropdownMenu @bind-IsOpen="@UserControlledIsOpen">
                     <BSDropdownItem Href="javascript:void(0);">Action</BSDropdownItem>
                     <BSDropdownItem Href="javascript:void(0);">Another Action</BSDropdownItem>
                     <BSDropdownItem IsDivider="true" />
@@ -32,32 +32,35 @@
             </BSNavItem>
         </BSNav>
         <BSForm IsInline="true" Class="my-2 my-lg-0" Model="@formsModel">
-            <BSInput InputType="InputType.Search" PlaceHolder="Search" Class="mr-sm-2" @bind-Value="formsModel.Blank"/>
+            <BSInput InputType="InputType.Search" PlaceHolder="Search" Class="mr-sm-2" @bind-Value="formsModel.Blank" />
             <BSButton IsOutline="true" Color="Color.Success" ButtonType="ButtonType.Submit" Class="my-2 my-sm-0">Search</BSButton>
         </BSForm>
     </BSCollapse>
 </BSNavbar>
 
 @code {
-    bool IsOpen { get; set; } = true;
+    private BSCollapse NavbarCollapse;
+    private FormsModel formsModel = new FormsModel();
+    bool UserControlledIsOpen { get; set; } = true;
     void onclick(MouseEventArgs e)
     {
-        IsOpen = !IsOpen;
-        StateHasChanged();
-        Console.WriteLine("Navbar Class->" + IsOpen.ToString());
+        NavbarCollapse.Toggle();
+        Console.WriteLine("Navbar State->" + NavbarCollapse.IsOpen.ToString());
     }
     void OpenChanged(bool e)
     {
-        IsOpen = e;
-        Invoke(StateHasChanged);
-        Console.WriteLine("OpenChanged->" + IsOpen.ToString());
+        Console.WriteLine("OpenChanged->" + e.ToString());
     }
 
-    bool IsOpen2 { get; set; } = true;
-    void onclick2(MouseEventArgs e)
+    void UserControlledClick(MouseEventArgs e)
     {
-        IsOpen2 = !IsOpen2;
+        UserControlledIsOpen = !UserControlledIsOpen;
         StateHasChanged();
 
+    }
+
+    public class FormsModel
+    {
+        public string Blank { get; set; }
     }
 }

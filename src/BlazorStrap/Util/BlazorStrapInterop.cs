@@ -19,6 +19,29 @@ namespace BlazorStrap.Util
         }
 
         /// <summary>
+        /// Sets Transition End event callback for Collapse
+        /// </summary>
+        /// <param name="el">ElementReference: Rendered element reference.</param>
+        /// <param name="show">Boolean: Element should be shown.</param>
+        /// <param name="objectReference">DotNetObjectReference<BSCollapse>: </param>
+        /// <returns>bool</returns>
+        public ValueTask<bool> AddCollapsingEvent(ElementReference el, bool show, DotNetObjectReference<BSCollapse> objectReference)
+        {
+            return JSRuntime.InvokeAsync<bool>("blazorStrap.addCollapsingEvent", el, show, objectReference);
+        }
+
+        /// <summary>
+        /// Set Collapse offset height
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ValueTask<bool> CollapsingElement(ElementReference el, bool show)
+        {
+            return JSRuntime.InvokeAsync<bool>("blazorStrap.collapsingElement", el, show);
+        }
+
+
+        /// <summary>
         /// Set Collapse offset height
         /// </summary>
         /// <param name="id"></param>

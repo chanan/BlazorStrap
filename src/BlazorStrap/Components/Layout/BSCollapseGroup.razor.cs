@@ -20,7 +20,10 @@ namespace BlazorStrap
                 }
                 else
                 {
-                    _selected?.Collapse.Hide();
+                    if (_selected?.Collapse.IsOpen ?? false)
+                    {
+                        _selected?.Collapse.Hide();
+                    }
                     _selected = value;
                     _selected?.Collapse.Show();
                 }

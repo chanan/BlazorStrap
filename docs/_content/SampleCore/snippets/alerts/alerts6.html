@@ -1,0 +1,13 @@
+﻿<BSAlert Color="Color.Info" @bind-IsOpen="isOpen" AutoHide="true" AutoHideDelay="5000">
+    I am an alert and I automatically close after 5 seconds!
+</BSAlert>
+<BSButton @onclick="@onclick">Show Alert</BSButton>
+
+@code {
+    private bool isOpen = false;
+
+    void onclick(MouseEventArgs e)
+    {
+        isOpen = true;
+    }
+}
