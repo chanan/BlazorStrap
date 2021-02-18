@@ -53,6 +53,7 @@ namespace BlazorStrap
                     Nav.Selected = this;
                     _selected = value;
                 }
+                InvokeAsync(StateHasChanged);
             }
         }
 

@@ -7,8 +7,10 @@ namespace BlazorStrap
 {
     public partial class BSTabGroup : ComponentBase
     {
+        internal string ReturnId { get; set; }
         internal bool Disposing { get; set; } = false;
         internal bool HasRendered { get; set; } = false;
+        internal DynamicItem DynamicSelected { get; set; } = new DynamicItem();
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         public List<BSTab> Tabs { get; set; } = new List<BSTab>();
         internal List<EventCallback<BSTabEvent>> EventQue { get; set; } = new List<EventCallback<BSTabEvent>>();
@@ -33,7 +35,14 @@ namespace BlazorStrap
                 InvokeAsync(StateHasChanged);
             }
         }
-
+        internal BSTab InternalSelected
+        {
+            get => _selected;
+            set
+            {
+                _selected = value;
+            }
+        }
         /// <summary>
         /// Activate a tab by Id
         /// </summary>
@@ -54,6 +63,11 @@ namespace BlazorStrap
         [Parameter] public EventCallback<BSTabEvent> HideEvent { get; set; }
         [Parameter] public EventCallback<BSTabEvent> HiddenEvent { get; set; }
 
+        public void UpdateDynamic()
+        {
+            _selected = null;
+            StateHasChanged();
+        }
         protected override Task OnAfterRenderAsync(bool firstrun)
         {
             if (firstrun)

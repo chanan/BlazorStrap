@@ -26,6 +26,7 @@ namespace BlazorStrap
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public string Name { get; set; }
         [Parameter] public bool? InitialSelection { get; set; }
+        [CascadingParameter] public DynamicItem DynamicObject { get; set; }
 
 
 
@@ -35,6 +36,14 @@ namespace BlazorStrap
             if (Group.Selected == null || InitialSelection.GetValueOrDefault())
             {
                 Group.Selected = this;
+            }
+
+            if (!String.IsNullOrEmpty(Group?.ReturnId))
+            {
+                if (Group.ReturnId == Id)
+                {
+                    Group.Selected = this;
+                }
             }
             return base.OnInitializedAsync();
         }
@@ -47,6 +56,8 @@ namespace BlazorStrap
                 Group.Disposing = false;
                 return;
             }
+
+            Group.DynamicSelected = DynamicObject;
             Group.Selected = this;
         }
         public void UpdateContent()
@@ -66,6 +77,11 @@ namespace BlazorStrap
             Dispose(true);
             GC.SuppressFinalize(this);
 
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
         }
 
         protected virtual void Dispose(bool disposing)
