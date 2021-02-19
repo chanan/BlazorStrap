@@ -20,9 +20,6 @@ Bootstrap 4 Components for Blazor Framework
 1. Inside the `<head>` element of your `Pages/_Host.cshtml`, add `<script src="_content/BlazorStrap/blazorStrap.js"></script>`.
 2. In `Startup`, add `Services.AddBootstrapCss();`.
 
-## Animations
-> Animations are always on as they no longer require javascript to function.
-
 ## Docs
 https://blazorstrap.io
 
