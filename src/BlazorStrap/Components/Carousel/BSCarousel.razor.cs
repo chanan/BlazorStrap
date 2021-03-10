@@ -166,6 +166,7 @@ namespace BlazorStrap
                 await ActiveIndexChangedEvent.InvokeAsync(ActiveIndex).ConfigureAwait(false);
             }
         }
+
         protected async Task OnKeyPress(KeyboardEventArgs e)
         {
             if (!Keyboard) return;
@@ -232,7 +233,6 @@ namespace BlazorStrap
         {
             if (AnimationRunning) return;
             ResetTimer();
-
             ActiveIndex = ActiveIndex == 0 ? NumberOfItems - 1 : ActiveIndex - 1;
             await DoAnimations().ConfigureAwait(true);
         }
