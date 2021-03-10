@@ -1,9 +1,9 @@
-﻿<BSCarousel NumberOfItems="@items.Count">
-    <BSCarouselIndicators NumberOfItems="@items.Count" ActiveIndexChangedEvent="@indexChanged"/>
+﻿<BSCarousel NumberOfItems="@items.Count" ActiveIndexChangedEvent="@indexChanged">
+    <BSCarouselIndicators />
     <div class="carousel-inner">
         @for (int i = 0; i < items.Count; i++)
         {
-            <BSCarouselItem src="@items[i].Source" alt="@items[i].Alt" />
+        <BSCarouselItem src="@items[i].Source" alt="@items[i].Alt" />
         }
     </div>
     <BSCarouselControl CarouselDirection="CarouselDirection.Previous" />
