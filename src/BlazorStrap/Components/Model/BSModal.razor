@@ -1,13 +1,15 @@
 ﻿@namespace BlazorStrap
 @inherits ToggleableComponentBase
 
-<DynamicElement @attributes="@UnknownParameters" style="@Styles" TagName="div" class="@Classname" tabindex="-1" role="dialog" @onfocus="OnBackdropClick" @bind-ElementRef="MyRef">
-    <div class="@InnerClassname" role="document" style="@InnerStyles" tabindex="-2">
-        <div class="modal-content" @ref="Me">
-            @ChildContent
+<CascadingValue Value="this">
+    <DynamicElement @attributes="@UnknownParameters" style="@Styles" TagName="div" class="@Classname" tabindex="-1" role="dialog" @onfocus="OnBackdropClick" @bind-ElementRef="MyRef">
+        <div class="@InnerClassname" role="document" style="@InnerStyles" tabindex="-2">
+            <div class="modal-content" @ref="Me">
+                @ChildContent
+            </div>
         </div>
-    </div>
-</DynamicElement>
+    </DynamicElement>
+</CascadingValue>
 @if (!NoBackdrop)
 {
     <div class="modal-backdrop fade @((IsOpen ?? false) ? "show" : "d-none")"></div>
