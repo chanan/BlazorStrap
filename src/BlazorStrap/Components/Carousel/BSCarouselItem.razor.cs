@@ -42,15 +42,15 @@ namespace BlazorStrap
         [Parameter] public string ActionLinkTarget { get; set; } = "_self";
         [Parameter] public RenderFragment ChildContent { get; set; }
 
+        protected override Task OnParametersSetAsync()
+        {
+            return base.OnParametersSetAsync();
+        }
+
         protected override void OnInitialized()
         {
             SetSvg();
             Parent.CarouselItems.Add(this);
-        }
-
-        public async Task StateChanged()
-        {
-            await InvokeAsync(StateHasChanged).ConfigureAwait(false);
         }
 
         public Task AnimationEnd()
@@ -65,19 +65,17 @@ namespace BlazorStrap
                 if(Parent.CarouselItems[0] == this)
                 {
                     Active = true;
-                    await InvokeAsync(StateHasChanged).ConfigureAwait(false);
+                    await InvokeAsync(StateHasChanged).ConfigureAwait(true);
                 }
             }
         }
-        public Task Clean()
+        public void Clean()
         {
             Active = false;
             Left = false;
             Right = false;
             Prev = false;
             Next = false;
-
-            return Task.CompletedTask;
         }
 
         private void SetSvg()

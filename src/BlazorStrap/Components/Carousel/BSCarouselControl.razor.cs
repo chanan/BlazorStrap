@@ -24,11 +24,9 @@ namespace BlazorStrap
 
         protected string DirectionName => CarouselDirection == CarouselDirection.Previous ? "Previous" : "Next";
 
-        [Parameter] public int NumberOfItems { get; set; }
         [Parameter] public CarouselDirection CarouselDirection { get; set; } = CarouselDirection.Previous;
         [Parameter] public string Class { get; set; }
         [CascadingParameter] internal BSCarousel Parent { get; set; }
-
         [Parameter] public EventCallback<int> ActiveIndexChanged { get; set; }
 
         protected async Task OnClick()
@@ -36,17 +34,13 @@ namespace BlazorStrap
             if (Parent.AnimationRunning) return;
             if (CarouselDirection == CarouselDirection.Previous)
             {
-                Parent.Direction = 1;
-                Parent.ResetTimer();
-                Parent.ActiveIndex = Parent.ActiveIndex == 0 ? NumberOfItems - 1 : Parent.ActiveIndex - 1;
+                await Parent.GoToPrevItem().ConfigureAwait(true);
             }
             else
             {
-                Parent.Direction = 0;
-                Parent.ResetTimer();
-                Parent.ActiveIndex = Parent.ActiveIndex == NumberOfItems - 1 ? 0 : Parent.ActiveIndex + 1;
+                await Parent.GoToNextItem().ConfigureAwait(true);
             }
-            await ActiveIndexChanged.InvokeAsync(Parent.ActiveIndex).ConfigureAwait(false);
+            await ActiveIndexChanged.InvokeAsync(Parent.ActiveIndex).ConfigureAwait(true);
         }
     }
 }
