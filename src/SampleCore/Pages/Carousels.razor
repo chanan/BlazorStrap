@@ -3,88 +3,89 @@
 <h1>Carousels</h1>
 
 <div class="docs-example">
-    <BSCarousel NumberOfItems="@items.Count">
-        <BSCarouselIndicators NumberOfItems="@items.Count" />
+    <BSCarousel NumberOfItems="@items.Count" ActiveIndexChangedEvent="@indexChanged">
+        <BSCarouselIndicators />
         <div class="carousel-inner">
             @for (int i = 0; i < items.Count; i++)
             {
                 <BSCarouselItem src="@items[i].Source" alt="@items[i].Alt" />
             }
         </div>
-        <BSCarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" />
-        <BSCarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" />
+        <BSCarouselControl CarouselDirection="CarouselDirection.Previous" />
+        <BSCarouselControl CarouselDirection="CarouselDirection.Next" />
     </BSCarousel>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels1.html" />
 <h3>With Captions & Headers & Fade</h3>
 
-<div class="docs-example">
-    <BSCarousel NumberOfItems="@items.Count" Fade="true">
-        <BSCarouselIndicators NumberOfItems="@items.Count" ActiveIndexChangedEvent="@indexChanged" />
-        <div class="carousel-inner">
-            @for (int i = 0; i < items.Count; i++)
-            {
-                Item item = items[i];
-                <BSCarouselItem src="@item.Source" alt="@item.Alt">
-                    <BSCarouselCaption CaptionText="@item.Caption" HeaderText="@item.Header" />
-                </BSCarouselItem>
-            }
-        </div>
-        <BSCarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" />
-        <BSCarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" />
-    </BSCarousel>
-</div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels2.html" />
+    <div class="docs-example">
+        <BSCarousel NumberOfItems="@items.Count" Fade="true">
+            <BSCarouselIndicators ActiveIndexChangedEvent="@indexChanged" />
+            <div class="carousel-inner">
+                @for (int i = 0; i < items.Count; i++)
+                {
+                    Item item = items[i];
+                    <BSCarouselItem src="@item.Source" alt="@item.Alt">
+                        <BSCarouselCaption CaptionText="@item.Caption" HeaderText="@item.Header" />
+                    </BSCarouselItem>
+                }
+            </div>
+            <BSCarouselControl CarouselDirection="CarouselDirection.Previous" />
+            <BSCarouselControl CarouselDirection="CarouselDirection.Next"  />
+        </BSCarousel>
+    </div>
+    <PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels2.html" />
 
-<h3>With Clickable Image</h3>
+    <h3>With Clickable Image</h3>
 
-<div class="docs-example">
-    <BSCarousel NumberOfItems="@items.Count">
-        <BSCarouselIndicators NumberOfItems="@items.Count" />
-        <div class="carousel-inner">
-            @for (int i = 0; i < items.Count; i++)
-            {
-                <BSCarouselItem src="@items[i].Source" alt="@items[i].Alt" ActionLink="@items[i].ActionLink" ActionLinkTarget="@items[i].ActionLinkTarget" />
-            }
-        </div>
-        <BSCarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" />
-        <BSCarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" />
-    </BSCarousel>
-</div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels3.html" />
+    <div class="docs-example">
+        <BSCarousel NumberOfItems="@items.Count">
+            <BSCarouselIndicators />
+            <div class="carousel-inner">
+                @for (int i = 0; i < items.Count; i++)
+                {
+                    <BSCarouselItem src="@items[i].Source" alt="@items[i].Alt" ActionLink="@items[i].ActionLink" ActionLinkTarget="@items[i].ActionLinkTarget" />
+                }
+            </div>
+            <BSCarouselControl CarouselDirection="CarouselDirection.Previous" />
+            <BSCarouselControl CarouselDirection="CarouselDirection.Next" />
+        </BSCarousel>
+    </div>
+    <PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels3.html" />
 
-<h3>With Svg's instead of an Image</h3>
+    <h3>With Svg's instead of an Image</h3>
 
-<BSAlert Color="Color.Info">
-    In order to use the BSSvg component you will need to register a service. See <a href="/svgs">Svg's</a> for setup instructions.
-</BSAlert>
+    <BSAlert Color="Color.Info">
+        In order to use the BSSvg component you will need to register a service. See <a href="/svgs">Svg's</a> for setup instructions.
+    </BSAlert>
 
-<div class="docs-example">
-    <BSCarousel NumberOfItems="@svgItems.Count">
-        <BSCarouselIndicators NumberOfItems="@svgItems.Count" />
-        <div class="carousel-inner">
-            @for (int i = 0; i < svgItems.Count; i++)
-            {
-                <BSCarouselItem src="@svgItems[i].Source" alt="@svgItems[i].Alt" ActionLink="@svgItems[i].ActionLink" ActionLinkTarget="@svgItems[i].ActionLinkTarget" />
-            }
-        </div>
-        <BSCarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@svgItems.Count" />
-        <BSCarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@svgItems.Count" />
-    </BSCarousel>
-</div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels4.html" />
+    <div class="docs-example">
+        <BSCarousel NumberOfItems="@svgItems.Count">
+            <BSCarouselIndicators />
+            <div class="carousel-inner">
+                @for (int i = 0; i < svgItems.Count; i++)
+                {
+                    <BSCarouselItem src="@svgItems[i].Source" alt="@svgItems[i].Alt" ActionLink="@svgItems[i].ActionLink" ActionLinkTarget="@svgItems[i].ActionLinkTarget" />
+                }
+            </div>
+            <BSCarouselControl CarouselDirection="CarouselDirection.Previous" />
+            <BSCarouselControl CarouselDirection="CarouselDirection.Next" />
+        </BSCarousel>
+    </div>
+    <PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels4.html" />
 
-<h3>Using the Carousel Data Template</h3>
-<div class="docs-example">
-    <BSDataCarousel Items="items" Context="item" HasControls="true" HasIndicators="true">
-        <ItemTemplate>
-            <BSCarouselItem src="@item.Source" alt="@item.Alt" ActionLink="@item.ActionLink" ActionLinkTarget="@item.ActionLinkTarget" />
-        </ItemTemplate>
-    </BSDataCarousel>
-</div>
-<PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels5.html" />
+    <h3>Using the Carousel Data Template</h3>
+    <div class="docs-example">
+        <BSDataCarousel Items="items" Context="item" HasControls="true" HasIndicators="true">
+            <ItemTemplate>
+                <BSCarouselItem src="@item.Source" alt="@item.Alt" ActionLink="@item.ActionLink" ActionLinkTarget="@item.ActionLinkTarget" />
+            </ItemTemplate>
+        </BSDataCarousel>
+    </div>
+    <PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels5.html" />
 
 @code {
+
     List<Item> items = new List<Item>
 {
         new Item {

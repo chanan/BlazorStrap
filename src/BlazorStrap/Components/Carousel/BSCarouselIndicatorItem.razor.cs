@@ -26,7 +26,8 @@ namespace BlazorStrap
 
         protected async Task OnClick()
         {
-            await ActiveIndexChangedEvent.InvokeAsync(Index).ConfigureAwait(false);
+            await Parent.GoToSpecificItem(Index).ConfigureAwait(true);
+            await ActiveIndexChangedEvent.InvokeAsync(Index).ConfigureAwait(true);
         }
     }
 }
