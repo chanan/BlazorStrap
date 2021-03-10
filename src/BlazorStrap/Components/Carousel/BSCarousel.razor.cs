@@ -56,6 +56,7 @@ namespace BlazorStrap
 
         [Parameter] public bool Ride { get; set; } = false;
         public Timer Timer { get; set; }
+        public Timer TransitionTimer { get; set; }
         [Parameter] public bool Touch { get; set; } = true;
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] public bool Wrap { get; set; } = true;
@@ -70,6 +71,59 @@ namespace BlazorStrap
         private int _numberOfItems { get; set; }
         private string _pause { get; set; } = "hover";
         [Inject] protected Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
+
+        protected override void OnInitialized()
+        {
+            if (Interval == 0)
+                _timerEnabled = false;
+
+            if (Timer == null && _timerEnabled)
+            {
+                Timer = new Timer(Interval);
+                Timer.Elapsed += OnTimerEvent;
+                Timer.AutoReset = true;
+                if (BSModal != null)
+                {
+                    BSModal.OnChanged += BSModal_OnChanged;
+                    if (BSModal.IsOpen ?? false)
+                        Timer.Start();
+                }
+                else
+                {
+                    Timer.Start();
+                }
+            }
+
+            if (TransitionTimer == null)
+            {
+                TransitionTimer = new Timer(2000);
+                TransitionTimer.Elapsed += OnTransitionTimerEvent;
+                TransitionTimer.AutoReset = false;
+            }
+        }
+
+        protected override void OnParametersSet()
+        {
+
+            if (CarouselItems == null)
+            {
+                CarouselItems = new List<BSCarouselItem>();
+            }
+
+            if (CarouselIndicatorItems == null)
+            {
+                CarouselIndicatorItems = new List<BSCarouselIndicatorItem>();
+            }
+
+            if (Interval != 0)
+                _timerEnabled = true;
+
+            if (Ride && ActiveIndex == 0)
+            {
+                if (_timerEnabled)
+                    Timer.Start();
+            }
+        }
 
         public void Dispose()
         {
@@ -89,6 +143,12 @@ namespace BlazorStrap
                 {
                     Timer.Stop();
                     Timer.Dispose();
+                }
+
+                if (TransitionTimer != null)
+                {
+                    TransitionTimer.Stop();
+                    TransitionTimer.Dispose();
                 }
             }
         }
@@ -110,29 +170,15 @@ namespace BlazorStrap
             }
         }
 
-        protected override void OnInitialized()
+        public void ResetTransitionTimer()
         {
-            if (Interval == 0)
-                _timerEnabled = false;
-
-            if (Timer == null && _timerEnabled)
+            if (TransitionTimer != null)
             {
-                Timer = new Timer(Interval);
-                Timer.Elapsed += OnTimerEvent;
-                Timer.AutoReset = true;
-                if (BSModal != null)
-                {
-                    BSModal.OnChanged += BSModal_OnChanged;
-                    if (BSModal.IsOpen ?? false)
-                    Timer.Start();
-                }
-                else
-                {
-                    Timer.Start();
-                }
+                TransitionTimer.Stop();
+                TransitionTimer.Start();
             }
-          
         }
+
 
         private void BSModal_OnChanged(bool e)
         {
@@ -180,7 +226,8 @@ namespace BlazorStrap
             CarouselItems[ActiveIndex].Right = Direction == 1;
             CarouselItems[_prevIndex].Right = Direction == 1;
             this.StateHasChanged();
-                
+
+            ResetTransitionTimer();
         }
 
         public async Task AnimationEnd(BSCarouselItem sender)
@@ -223,29 +270,6 @@ namespace BlazorStrap
         {
             if (_pause == "hover" && Timer != null) { ResetTimer(); }
         }
-
-        protected override void OnParametersSet()
-        {
-
-            if (CarouselItems == null)
-            {
-                CarouselItems = new List<BSCarouselItem>();
-            }
-
-            if (CarouselIndicatorItems == null)
-            {
-                CarouselIndicatorItems = new List<BSCarouselIndicatorItem>();
-            }
-
-            if (Interval != 0)
-                _timerEnabled = true;
-
-            if (Ride && ActiveIndex == 0)
-            {
-                if (_timerEnabled)
-                    Timer.Start();
-            }
-        }
         
         public async Task GoToSpecificItem(int index)
         {
@@ -283,6 +307,20 @@ namespace BlazorStrap
             ActiveIndex = ActiveIndex == NumberOfItems - 1 ? 0 : ActiveIndex + 1;
             await InvokeAsync(DoAnimations).ConfigureAwait(true);
             await OnSlide.InvokeAsync(null).ConfigureAwait(true);
+        }
+
+        private async void OnTransitionTimerEvent(object source, ElapsedEventArgs e)
+        {
+            if (!AnimationRunning) return;
+
+            // If the active index is not "active" by the time the timer is elapsed something is very wrong, reset the animation
+            if (!CarouselItems[ActiveIndex].Active)
+            {
+                await InvokeAsync(async () => {
+                    await AnimationEnd(CarouselItems[ActiveIndex]).ConfigureAwait(true);
+                    return;
+                }).ConfigureAwait(true);
+            }
         }
 
         private int GetDirection()
