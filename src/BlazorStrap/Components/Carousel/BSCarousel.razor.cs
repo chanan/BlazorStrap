@@ -116,14 +116,6 @@ namespace BlazorStrap
             }
         }
 
-        protected override void OnAfterRender(bool firstRender)
-        {
-
-
-
-            base.OnAfterRender(firstRender);
-        }
-
         public void Dispose()
         {
             if(BSModal != null)
@@ -166,6 +158,15 @@ namespace BlazorStrap
             {
                 Timer.Interval = CarouselItems[ActiveIndex].Interval;
                 Timer.Start();
+            }
+        }
+
+        public void ResetTransitionTimer()
+        {
+            if (TransitionTimer != null)
+            {
+                TransitionTimer.Stop();
+                TransitionTimer.Start();
             }
         }
 
@@ -217,8 +218,7 @@ namespace BlazorStrap
             CarouselItems[_prevIndex].Right = Direction == 1;
             this.StateHasChanged();
 
-            TransitionTimer.Start();
-                
+            ResetTransitionTimer();
         }
 
         public async Task AnimationEnd(BSCarouselItem sender)
