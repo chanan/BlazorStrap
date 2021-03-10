@@ -10,6 +10,8 @@ namespace BlazorStrap
 {
     public partial class BSCarousel : ComponentBase, IDisposable
     {
+        [CascadingParameter] public BSModal BSModal {get;set; }
+    
         private const string _carouselFade = "carousel-fade";
 
         private int _activeIndex { get; set; }
@@ -124,10 +126,14 @@ namespace BlazorStrap
 
         public void Dispose()
         {
+            if(BSModal != null)
+            {
+                BSModal.OnChanged -= BSModal_OnChanged;
+            }
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
+    
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -160,6 +166,25 @@ namespace BlazorStrap
             {
                 Timer.Interval = CarouselItems[ActiveIndex].Interval;
                 Timer.Start();
+            }
+        }
+
+
+        private void BSModal_OnChanged(bool e)
+        {
+            if (CarouselItems.Count == 0) return;
+
+            AnimationRunning = false;
+            if (Timer != null)
+            {
+                if (e == true)
+                {
+                    ResetTimer();
+                }
+                else
+                {
+                    Timer.Stop();
+                }
             }
         }
 

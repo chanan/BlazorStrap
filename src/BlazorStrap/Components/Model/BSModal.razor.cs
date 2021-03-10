@@ -31,6 +31,7 @@ namespace BlazorStrap
         [Parameter] public bool IsScrollable { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         internal BSModalEvent BSModalEvent { get; set; }
+        internal event Action<bool> OnChanged;
         internal List<EventCallback<BSModalEvent>> EventQue { get; set; } = new List<EventCallback<BSModalEvent>>();
         [Inject] public BlazorStrapInterop BlazorStrapInterop { get; set; }
         [Inject] private IJSRuntime _jsRuntime { get; set; }
@@ -81,7 +82,7 @@ namespace BlazorStrap
             {
                 return;
             }
-
+            OnChanged?.Invoke(e);
             BSModalEvent = new BSModalEvent() { Target = this };
             if (e)
             {
