@@ -82,7 +82,16 @@ namespace BlazorStrap
                 Timer = new Timer(Interval);
                 Timer.Elapsed += OnTimerEvent;
                 Timer.AutoReset = true;
-                Timer.Start();
+                if (BSModal != null)
+                {
+                    BSModal.OnChanged += BSModal_OnChanged;
+                    if (BSModal.IsOpen ?? false)
+                        Timer.Start();
+                }
+                else
+                {
+                    Timer.Start();
+                }
             }
 
             if (TransitionTimer == null)
