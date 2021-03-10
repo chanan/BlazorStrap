@@ -73,6 +73,10 @@ namespace BlazorStrap
 
         public void Dispose()
         {
+            if(BSModal != null)
+            {
+                BSModal.OnChanged -= BSModal_OnChanged;
+            }
             Dispose(true);
             GC.SuppressFinalize(this);
         }
