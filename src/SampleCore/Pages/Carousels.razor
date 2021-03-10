@@ -1,36 +1,9 @@
 ﻿@page "/carousels"
 
-<button @onclick="@(() => items.Add(items.First()))">Add Item</button>
-
 <h1>Carousels</h1>
 
-
-<BSButton Color="Color.Primary" @onclick="@(() => ImageCarouselModal.Show())">Launch demo modal</BSButton>
-<BSModal @ref="ImageCarouselModal">
-    <BSModalHeader OnClick="@(() => ImageCarouselModal.Hide())">Exterior Images</BSModalHeader>
-    <BSModalBody>
-        @if (ImageCarouselModal.IsOpen == true)
-        {
-            <BSCarousel NumberOfItems="@items.Count">
-                <BSCarouselIndicators/>
-                <div class="carousel-inner">
-                    @for (int i = 0; i < items.Count; i++)
-                    {
-                        <BSCarouselItem src="@items[i].Source" alt="@items[i].Alt" />
-                    }
-                </div>
-                <BSCarouselControl CarouselDirection="CarouselDirection.Previous" ActiveIndexChanged="@(newIndex => { return; })"/>
-                <BSCarouselControl CarouselDirection="CarouselDirection.Next" ActiveIndexChanged="@(newIndex => { return; })" />
-            </BSCarousel>
-        }
-
-    </BSModalBody>
-    <BSModalFooter>
-    </BSModalFooter>
-</BSModal>
-
 <div class="docs-example">
-    <BSCarousel NumberOfItems="@items.Count">
+    <BSCarousel NumberOfItems="@items.Count" ActiveIndexChangedEvent="@indexChanged">
         <BSCarouselIndicators />
         <div class="carousel-inner">
             @for (int i = 0; i < items.Count; i++)
@@ -112,9 +85,6 @@
     <PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels5.html" />
 
 @code {
-
-    BSModal ImageCarouselModal { get; set; }
-
 
     List<Item> items = new List<Item>
 {

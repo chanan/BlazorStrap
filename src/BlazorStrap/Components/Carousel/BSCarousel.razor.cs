@@ -57,7 +57,7 @@ namespace BlazorStrap
         [Parameter] public bool Touch { get; set; } = true;
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] public bool Wrap { get; set; } = true;
-        [Parameter] public EventCallback<int> ActiveIndexChanged { get; set; }
+        [Parameter] public EventCallback<int> ActiveIndexChangedEvent { get; set; }
         internal int Direction { get; set; }
 
         protected string Classname => new CssBuilder("carousel slide")
@@ -163,7 +163,7 @@ namespace BlazorStrap
                 if (_timerEnabled)
                     Timer.Start();
 
-                await ActiveIndexChanged.InvokeAsync(ActiveIndex).ConfigureAwait(false);
+                await ActiveIndexChangedEvent.InvokeAsync(ActiveIndex).ConfigureAwait(false);
             }
         }
         protected async Task OnKeyPress(KeyboardEventArgs e)

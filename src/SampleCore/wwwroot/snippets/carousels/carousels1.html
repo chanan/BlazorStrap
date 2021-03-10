@@ -1,14 +1,14 @@
 ﻿<BSCarousel NumberOfItems="@items.Count">
-        <BSCarouselIndicators NumberOfItems="@items.Count" />
-        <div class="carousel-inner">
-            @for (int i = 0; i < items.Count; i++)
-            {
-                <BSCarouselItem src="@items[i].Source" alt="@items[i].Alt" />
-            }
-        </div>
-        <BSCarouselControl CarouselDirection="CarouselDirection.Previous" NumberOfItems="@items.Count" />
-        <BSCarouselControl CarouselDirection="CarouselDirection.Next" NumberOfItems="@items.Count" />
-    </BSCarousel>
+    <BSCarouselIndicators NumberOfItems="@items.Count" ActiveIndexChangedEvent="@indexChanged"/>
+    <div class="carousel-inner">
+        @for (int i = 0; i < items.Count; i++)
+        {
+            <BSCarouselItem src="@items[i].Source" alt="@items[i].Alt" />
+        }
+    </div>
+    <BSCarouselControl CarouselDirection="CarouselDirection.Previous" />
+    <BSCarouselControl CarouselDirection="CarouselDirection.Next" />
+</BSCarousel>
     
 @code {
     IList<Item> items = new List<Item>
