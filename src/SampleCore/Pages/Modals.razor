@@ -162,6 +162,21 @@
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/modals/modals10.html" />
 
+<h3>Slide Out modal</h3>
+
+<div class="docs-example">
+    <BSButton Color="Color.Primary" @onclick="@(() => SlideOut.Show())">Slide out modal</BSButton>
+    <BSModal IsSlideOut="true" @ref="SlideOut">
+        <BSModalHeader OnClick="@(() => SlideOut.Hide())">Modal title</BSModalHeader>
+        <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+        <BSModalFooter>
+            <BSButton Color="Color.Primary" @onclick="@(() => SlideOut.Hide())">Do Something</BSButton>
+            <BSButton Color="Color.Secondary" @onclick="@(() => SlideOut.Hide())">Cancel</BSButton>
+        </BSModalFooter>
+    </BSModal>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/modals/modals11.html" />
+
 <h3>Ignore Click on Back Drop</h3>
 
 <p>You can set <code>IgnoreClickOnBackDrop</code> to prevent the user closing the model by clicking on the back drop.</p>
@@ -179,6 +194,7 @@
     BSModal FullWidth { get; set; }
     BSModal Bottom { get; set; }
     BSModal BottomFull { get; set; }
+    BSModal SlideOut { get; set; }
     BSModal FullHeight { get; set; }
     BSModal FullScreen { get; set; }
     bool IsOpen { get; set; }

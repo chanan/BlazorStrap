@@ -39,6 +39,7 @@
     <Content Remove="wwwroot\snippets\forms\forms14.html" />
     <Content Remove="wwwroot\snippets\forms\forms15.html" />
     <Content Remove="wwwroot\snippets\modals\modals10.html" />
+    <Content Remove="wwwroot\snippets\modals\modals11.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -73,6 +74,9 @@
       <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Update="wwwroot\snippets\forms\forms14.html">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="wwwroot\snippets\modals\modals11.html">
       <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Update="wwwroot\snippets\modals\modals10.html">
