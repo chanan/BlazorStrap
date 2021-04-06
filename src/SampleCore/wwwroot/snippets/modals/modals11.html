@@ -1,0 +1,13 @@
+﻿<BSButton Color="Color.Primary" @onclick="@(() => SlideOut.Show())">Slide out modal</BSButton>
+<BSModal IsSlideOut="true" @ref="SlideOut">
+    <BSModalHeader OnClick="@(() => SlideOut.Hide())">Modal title</BSModalHeader>
+    <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+    <BSModalFooter>
+        <BSButton Color="Color.Primary" @onclick="@(() => SlideOut.Hide())">Do Something</BSButton>
+        <BSButton Color="Color.Secondary" @onclick="@(() => SlideOut.Hide())">Cancel</BSButton>
+    </BSModalFooter>
+</BSModal>
+
+@code {
+    BSModal SlideOut { get; set; }
+}

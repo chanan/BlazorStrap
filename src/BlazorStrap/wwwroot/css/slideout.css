@@ -1,0 +1,31 @@
+﻿@media (max-width: 576px) {
+    .modal-dialog.modal-dialog-slideout {
+        width: 80%
+    }
+}
+
+.modal-dialog-slideout {
+    min-height: 100%;
+    display: flex !important;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    height: 100%;
+    min-height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.modal.fade .modal-dialog.modal-dialog-slideout {
+    -webkit-transform: translate(-100%,0);
+    transform: translate(-100%,0);
+}
+
+.modal.fade.show .modal-dialog.modal-dialog-slideout {
+    -webkit-transform: translate(0,0);
+    transform: translate(0,0);
+}
+
+.modal-dialog-slideout .modal-content {
+    border: 0;
+}

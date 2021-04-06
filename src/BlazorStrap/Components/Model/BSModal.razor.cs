@@ -19,6 +19,7 @@ namespace BlazorStrap
         [Parameter] public bool IgnoreEscape { get; set; }
         [Parameter] public bool IsCentered { get; set; }
         [Parameter] public bool IsBottom { get; set; }
+        [Parameter] public bool IsSlideOut { get; set; }
         [Parameter] public bool IsFullWidth { get; set; }
         [Parameter] public bool IsFullHeight { get; set; }
         [Parameter] public bool IsFullScreen { get; set; }
@@ -50,6 +51,7 @@ namespace BlazorStrap
                 .AddClass((IsScrollable ? "modal-dialog-scrollable" : string.Empty))
                 .AddClass($"modal-{Size.ToDescriptionString()}", Size != Size.None)
                 .AddClass("modal-dialog-centered", IsCentered)
+                .AddClass("modal-dialog-slideout", IsSlideOut)
             .Build();
 
         protected string Styles
@@ -68,6 +70,7 @@ namespace BlazorStrap
                 var bottomStyle = (IsBottom) ? "display: flex;-ms-flex-align: flex-end;align-items: flex-end;height:100%;min-height:100%;margin-top:0;margin-bottom:0;" : null;
                 var fullHeightStyle = (IsFullHeight) ? "display: flex;-ms-flex-align: stretch;align-items: stretch;height:100%;min-height:100%;margin-top:0;margin-bottom:0;" : null;
                 var fullScreenStyle = (IsFullScreen) ? "display: flex;-ms-flex-align: stretch;align-items: stretch;width:100%;min-width:100%;height:100%;min-height:100%;margin:0;" : null;
+
                 return $" {fullWidthStyle} {bottomStyle} {fullScreenStyle} {fullHeightStyle}";
             }
         }

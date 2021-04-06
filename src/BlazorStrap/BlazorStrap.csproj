@@ -43,6 +43,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\slideout.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Remove="wwwroot\site.webmanifest" />
   </ItemGroup>
 
