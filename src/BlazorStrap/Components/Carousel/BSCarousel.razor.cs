@@ -10,23 +10,21 @@ namespace BlazorStrap
 {
     public partial class BSCarousel : ComponentBase, IDisposable
     {
-        [CascadingParameter] public BSModal BSModal {get;set; }
-    
         private const string _carouselFade = "carousel-fade";
 
-        private int _activeIndex { get; set; }
-        private int _prevIndex { get; set; }
         public int ActiveIndex
         {
             get => _activeIndex;
-            set {
+            set
+            {
                 _prevIndex = _activeIndex;
                 _activeIndex = value;
             }
         }
 
-        private bool _timerEnabled { get; set; } = true;
+        [Parameter] public EventCallback<int> ActiveIndexChangedEvent { get; set; }
         public bool AnimationRunning { get; set; } = false;
+        [CascadingParameter] public BSModal BSModal { get; set; }
         public List<BSCarouselIndicatorItem> CarouselIndicatorItems { get; set; }
         public List<BSCarouselItem> CarouselItems { get; set; }
         [Parameter] public RenderFragment ChildContent { get; set; }
@@ -56,11 +54,10 @@ namespace BlazorStrap
 
         [Parameter] public bool Ride { get; set; } = false;
         public Timer Timer { get; set; }
-        public Timer TransitionTimer { get; set; }
         [Parameter] public bool Touch { get; set; } = true;
+        public Timer TransitionTimer { get; set; }
         [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> UnknownParameters { get; set; }
         [Parameter] public bool Wrap { get; set; } = true;
-        [Parameter] public EventCallback<int> ActiveIndexChangedEvent { get; set; }
         internal int Direction { get; set; }
 
         protected string Classname => new CssBuilder("carousel slide")
@@ -68,89 +65,65 @@ namespace BlazorStrap
         .AddClass(Class)
         .Build();
 
-        private int _numberOfItems { get; set; }
-        private string _pause { get; set; } = "hover";
         [Inject] protected Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
+        private int _activeIndex { get; set; }
+        private string _pause { get; set; } = "hover";
+        private int _prevIndex { get; set; }
+        private bool _timerEnabled { get; set; } = true;
 
-        protected override void OnInitialized()
+        public async Task AnimationEnd(BSCarouselItem sender)
         {
-            if (Interval == 0)
-                _timerEnabled = false;
-
-            if (Timer == null && _timerEnabled)
+            if (sender == CarouselItems[ActiveIndex])
             {
-                Timer = new Timer(Interval);
-                Timer.Elapsed += OnTimerEvent;
-                Timer.AutoReset = true;
-                if (BSModal != null)
-                {
-                    BSModal.OnChanged += BSModal_OnChanged;
-                    if (BSModal.IsOpen ?? false)
-                        Timer.Start();
-                }
-                else
-                {
-                    Timer.Start();
-                }
-            }
+                AnimationRunning = false;
 
-            if (TransitionTimer == null)
-            {
-                TransitionTimer = new Timer(2000);
-                TransitionTimer.Elapsed += OnTransitionTimerEvent;
-                TransitionTimer.AutoReset = false;
-            }
-        }
+                CarouselItems[_prevIndex].Clean();
+                CarouselItems[ActiveIndex].Clean();
+                CarouselItems[ActiveIndex].Active = true;
+                this.StateHasChanged();
 
-        protected override void OnParametersSet()
-        {
-
-            if (CarouselItems == null)
-            {
-                CarouselItems = new List<BSCarouselItem>();
-            }
-
-            if (CarouselIndicatorItems == null)
-            {
-                CarouselIndicatorItems = new List<BSCarouselIndicatorItem>();
-            }
-
-            if (Interval != 0)
-                _timerEnabled = true;
-
-            if (Ride && ActiveIndex == 0)
-            {
                 if (_timerEnabled)
+                {
+                    InitializeTimer();  // Avoid an System.ObjectDisposedException due to the timer being disposed. This occurs when the Enabled property of the timer is set to false by a previous call to Stop().
                     Timer.Start();
+                }
+
+                await ActiveIndexChangedEvent.InvokeAsync(ActiveIndex).ConfigureAwait(false);
             }
         }
 
         public void Dispose()
         {
-            if(BSModal != null)
+            if (BSModal != null)
             {
                 BSModal.OnChanged -= BSModal_OnChanged;
             }
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-    
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (Timer != null)
-                {
-                    Timer.Stop();
-                    Timer.Dispose();
-                }
 
-                if (TransitionTimer != null)
-                {
-                    TransitionTimer.Stop();
-                    TransitionTimer.Dispose();
-                }
-            }
+        public async Task GoToNextItem()
+        {
+            if (AnimationRunning) return;
+            ResetTimer();
+            ActiveIndex = ActiveIndex == NumberOfItems - 1 ? 0 : ActiveIndex + 1;
+            await DoAnimations().ConfigureAwait(true);
+        }
+
+        public async Task GoToPrevItem()
+        {
+            if (AnimationRunning) return;
+            ResetTimer();
+            ActiveIndex = ActiveIndex == 0 ? NumberOfItems - 1 : ActiveIndex - 1;
+            await DoAnimations().ConfigureAwait(true);
+        }
+
+        public async Task GoToSpecificItem(int index)
+        {
+            if (AnimationRunning) return;
+            ResetTimer();
+            ActiveIndex = index;
+            await DoAnimations().ConfigureAwait(true);
         }
 
         public async Task Refresh()
@@ -175,10 +148,99 @@ namespace BlazorStrap
             if (TransitionTimer != null)
             {
                 TransitionTimer.Stop();
+                InitializeTransitionTimer(); // Avoid an System.ObjectDisposedException due to the timer being disposed. This occurs when the Enabled property of the timer is set to false by the call to Stop() above.
                 TransitionTimer.Start();
             }
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (Timer != null)
+                {
+                    Timer.Stop();
+                    Timer.Dispose();
+                }
+
+                if (TransitionTimer != null)
+                {
+                    TransitionTimer.Stop();
+                    TransitionTimer.Dispose();
+                }
+            }
+        }
+
+        protected override void OnInitialized()
+        {
+            if (Interval == 0)
+                _timerEnabled = false;
+
+            if (Timer == null && _timerEnabled)
+            {
+                InitializeTimer();
+                if (BSModal != null)
+                {
+                    BSModal.OnChanged += BSModal_OnChanged;
+                    if (BSModal.IsOpen ?? false)
+                        Timer.Start();
+                }
+                else
+                {
+                    Timer.Start();
+                }
+            }
+
+            if (TransitionTimer == null)
+            {
+                InitializeTransitionTimer();
+            }
+        }
+
+        protected async Task OnKeyPress(KeyboardEventArgs e)
+        {
+            if (!Keyboard) return;
+            if (e?.Code == "37")
+            {
+                await GoToPrevItem().ConfigureAwait(true);
+            }
+            else if (e?.Code == "39")
+            {
+                await GoToNextItem().ConfigureAwait(true);
+            }
+        }
+
+        protected void OnMouseEnter()
+        {
+            if (_pause == "hover" && Timer != null) { Timer.Stop(); }
+        }
+
+        protected void OnMouseLeave()
+        {
+            if (_pause == "hover" && Timer != null) { ResetTimer(); }
+        }
+
+        protected override void OnParametersSet()
+        {
+            if (CarouselItems == null)
+            {
+                CarouselItems = new List<BSCarouselItem>();
+            }
+
+            if (CarouselIndicatorItems == null)
+            {
+                CarouselIndicatorItems = new List<BSCarouselIndicatorItem>();
+            }
+
+            if (Interval != 0)
+                _timerEnabled = true;
+
+            if (Ride && ActiveIndex == 0)
+            {
+                if (_timerEnabled)
+                    Timer.Start();
+            }
+        }
 
         private void BSModal_OnChanged(bool e)
         {
@@ -230,69 +292,54 @@ namespace BlazorStrap
             ResetTransitionTimer();
         }
 
-        public async Task AnimationEnd(BSCarouselItem sender)
+        private int GetDirection()
         {
-            if (sender == CarouselItems[ActiveIndex])
+            if (_prevIndex == 0)
             {
-                AnimationRunning = false;
+                if (ActiveIndex == NumberOfItems - 1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
 
-                CarouselItems[_prevIndex].Clean();
-                CarouselItems[ActiveIndex].Clean();
-                CarouselItems[ActiveIndex].Active = true;
-                this.StateHasChanged();
+            if (_prevIndex == NumberOfItems - 1)
+            {
+                if (ActiveIndex == 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
 
-                if (_timerEnabled)
-                    Timer.Start();
-
-                await ActiveIndexChangedEvent.InvokeAsync(ActiveIndex).ConfigureAwait(false);
+            if (ActiveIndex > _prevIndex)
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
             }
         }
 
-        protected async Task OnKeyPress(KeyboardEventArgs e)
+        private void InitializeTimer()
         {
-            if (!Keyboard) return;
-            if (e?.Code == "37")
-            {
-                await GoToPrevItem().ConfigureAwait(true);
-            }
-            else if (e?.Code == "39")
-            {
-                await GoToNextItem().ConfigureAwait(true);
-            }
+            Timer = new Timer(Interval);
+            Timer.Elapsed += OnTimerEvent;
+            Timer.AutoReset = true;
         }
 
-        protected void OnMouseEnter()
+        private void InitializeTransitionTimer()
         {
-            if (_pause == "hover" && Timer != null) { Timer.Stop(); }
-        }
-
-        protected void OnMouseLeave()
-        {
-            if (_pause == "hover" && Timer != null) { ResetTimer(); }
-        }
-        
-        public async Task GoToSpecificItem(int index)
-        {
-            if (AnimationRunning) return;
-            ResetTimer();
-            ActiveIndex = index;
-            await DoAnimations().ConfigureAwait(true);
-        }
-
-        public async Task GoToNextItem()
-        {
-            if (AnimationRunning) return;
-            ResetTimer();
-            ActiveIndex = ActiveIndex == NumberOfItems - 1 ? 0 : ActiveIndex + 1;
-            await DoAnimations().ConfigureAwait(true);
-        }
-
-        public async Task GoToPrevItem()
-        {
-            if (AnimationRunning) return;
-            ResetTimer();
-            ActiveIndex = ActiveIndex == 0 ? NumberOfItems - 1 : ActiveIndex - 1;
-            await DoAnimations().ConfigureAwait(true);
+            TransitionTimer = new Timer(2000);
+            TransitionTimer.Elapsed += OnTransitionTimerEvent;
+            TransitionTimer.AutoReset = false;
         }
 
         private async void OnTimerEvent(object source, ElapsedEventArgs e)
@@ -316,45 +363,12 @@ namespace BlazorStrap
             // If the active index is not "active" by the time the timer is elapsed something is very wrong, reset the animation
             if (!CarouselItems[ActiveIndex].Active)
             {
-                await InvokeAsync(async () => {
+                await InvokeAsync(async () =>
+                {
                     await AnimationEnd(CarouselItems[ActiveIndex]).ConfigureAwait(true);
                     return;
                 }).ConfigureAwait(true);
             }
         }
-
-        private int GetDirection()
-        {
-            if (_prevIndex == 0)
-            {
-                if (ActiveIndex == NumberOfItems - 1)
-                {
-                    return 1;
-                } else
-                {
-                    return 0;
-                }
-            }
-
-            if (_prevIndex == NumberOfItems - 1)
-            {
-                if (ActiveIndex == 0)
-                {
-                    return 0;
-                } else
-                {
-                    return 1;
-                }
-            }
-
-            if (ActiveIndex > _prevIndex)
-            {
-                return 0;
-            } else
-            {
-                return 1;
-            }
-        }
-
     }
 }
