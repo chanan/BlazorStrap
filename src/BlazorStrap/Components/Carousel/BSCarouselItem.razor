@@ -1,18 +1,20 @@
 ﻿@namespace BlazorStrap
 
-    <DynamicElement @attributes="@UnknownParameters" TagName="div" class="@Classname" @ontransitionend="AnimationEnd">
+<DynamicElement @attributes="@UnknownParameters" TagName="div" class="@Classname" @ontransitionend="AnimationEnd">
+    @if (!string.IsNullOrWhiteSpace(Src))
+    {
         @if (AddActionLink)
         {
-        <a href="@ActionLink" target="@ActionLinkTarget">
-            @if (IsSvg)
-            {
-                <BSSvg Class="d-block w-100" Src="@Src" />
-            }
-            else
-            {
-                <img class="d-block w-100" src="@Src" alt="@Alt">
-            }
-        </a>
+            <a href="@ActionLink" target="@ActionLinkTarget">
+                @if (IsSvg)
+                {
+                    <BSSvg Class="d-block w-100" Src="@Src" />
+                }
+                else
+                {
+                    <img class="d-block w-100" src="@Src" alt="@Alt">
+                }
+            </a>
         }
         else
         {
@@ -25,5 +27,6 @@
                 <img class="d-block w-100" src="@Src" alt="@Alt">
             }
         }
-        @ChildContent
-    </DynamicElement>
+    }
+    @ChildContent
+</DynamicElement>

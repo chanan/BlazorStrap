@@ -1,4 +1,5 @@
 ﻿@page "/carousels"
+@using System.Text
 
 <h1>Carousels</h1>
 
@@ -18,127 +19,136 @@
 <PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels1.html" />
 <h3>With Captions & Headers & Fade</h3>
 
-    <div class="docs-example">
-        <BSCarousel NumberOfItems="@items.Count" Fade="true">
-            <BSCarouselIndicators ActiveIndexChangedEvent="@indexChanged" />
-            <div class="carousel-inner">
-                @for (int i = 0; i < items.Count; i++)
-                {
-                    Item item = items[i];
-                    <BSCarouselItem src="@item.Source" alt="@item.Alt">
-                        <BSCarouselCaption CaptionText="@item.Caption" HeaderText="@item.Header" />
-                    </BSCarouselItem>
-                }
-            </div>
-            <BSCarouselControl CarouselDirection="CarouselDirection.Previous" />
-            <BSCarouselControl CarouselDirection="CarouselDirection.Next"  />
-        </BSCarousel>
-    </div>
-    <PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels2.html" />
+<div class="docs-example">
+    <BSCarousel NumberOfItems="@items.Count" Fade="true">
+        <BSCarouselIndicators ActiveIndexChangedEvent="@indexChanged" />
+        <div class="carousel-inner">
+            @for (int i = 0; i < items.Count; i++)
+            {
+                Item item = items[i];
+                <BSCarouselItem src="@item.Source" alt="@item.Alt">
+                    <BSCarouselCaption CaptionText="@item.Caption" HeaderText="@item.Header" />
+                </BSCarouselItem>
+            }
+        </div>
+        <BSCarouselControl CarouselDirection="CarouselDirection.Previous" />
+        <BSCarouselControl CarouselDirection="CarouselDirection.Next" />
+    </BSCarousel>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels2.html" />
 
-    <h3>With Clickable Image</h3>
+<h3>With Clickable Image</h3>
 
-    <div class="docs-example">
-        <BSCarousel NumberOfItems="@items.Count">
-            <BSCarouselIndicators />
-            <div class="carousel-inner">
-                @for (int i = 0; i < items.Count; i++)
-                {
-                    <BSCarouselItem src="@items[i].Source" alt="@items[i].Alt" ActionLink="@items[i].ActionLink" ActionLinkTarget="@items[i].ActionLinkTarget" />
-                }
-            </div>
-            <BSCarouselControl CarouselDirection="CarouselDirection.Previous" />
-            <BSCarouselControl CarouselDirection="CarouselDirection.Next" />
-        </BSCarousel>
-    </div>
-    <PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels3.html" />
+<div class="docs-example">
+    <BSCarousel NumberOfItems="@items.Count">
+        <BSCarouselIndicators />
+        <div class="carousel-inner">
+            @for (int i = 0; i < items.Count; i++)
+            {
+                <BSCarouselItem src="@items[i].Source" alt="@items[i].Alt" ActionLink="@items[i].ActionLink" ActionLinkTarget="@items[i].ActionLinkTarget" />
+            }
+        </div>
+        <BSCarouselControl CarouselDirection="CarouselDirection.Previous" />
+        <BSCarouselControl CarouselDirection="CarouselDirection.Next" />
+    </BSCarousel>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels3.html" />
 
-    <h3>With Svg's instead of an Image</h3>
+<h3>With Svg's instead of an Image</h3>
 
-    <BSAlert Color="Color.Info">
-        In order to use the BSSvg component you will need to register a service. See <a href="/svgs">Svg's</a> for setup instructions.
-    </BSAlert>
+<BSAlert Color="Color.Info">
+    In order to use the BSSvg component you will need to register a service. See <a href="/svgs">Svg's</a> for setup instructions.
+</BSAlert>
 
-    <div class="docs-example">
-        <BSCarousel NumberOfItems="@svgItems.Count">
-            <BSCarouselIndicators />
-            <div class="carousel-inner">
-                @for (int i = 0; i < svgItems.Count; i++)
-                {
-                    <BSCarouselItem src="@svgItems[i].Source" alt="@svgItems[i].Alt" ActionLink="@svgItems[i].ActionLink" ActionLinkTarget="@svgItems[i].ActionLinkTarget" />
-                }
-            </div>
-            <BSCarouselControl CarouselDirection="CarouselDirection.Previous" />
-            <BSCarouselControl CarouselDirection="CarouselDirection.Next" />
-        </BSCarousel>
-    </div>
-    <PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels4.html" />
+<div class="docs-example">
+    <BSCarousel NumberOfItems="@svgItems.Count">
+        <BSCarouselIndicators />
+        <div class="carousel-inner">
+            @for (int i = 0; i < svgItems.Count; i++)
+            {
+                <BSCarouselItem src="@svgItems[i].Source" alt="@svgItems[i].Alt" ActionLink="@svgItems[i].ActionLink" ActionLinkTarget="@svgItems[i].ActionLinkTarget" />
+            }
+        </div>
+        <BSCarouselControl CarouselDirection="CarouselDirection.Previous" />
+        <BSCarouselControl CarouselDirection="CarouselDirection.Next" />
+    </BSCarousel>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels4.html" />
 
-    <h3>Using the Carousel Data Template</h3>
-    <div class="docs-example">
-        <BSDataCarousel Items="items" Context="item" HasControls="true" HasIndicators="true">
-            <ItemTemplate>
-                <BSCarouselItem src="@item.Source" alt="@item.Alt" ActionLink="@item.ActionLink" ActionLinkTarget="@item.ActionLinkTarget" />
-            </ItemTemplate>
-        </BSDataCarousel>
-    </div>
-    <PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels5.html" />
+<h3>Using the Carousel Data Template</h3>
+<div class="docs-example">
+    <BSDataCarousel Items="items" Context="item" HasControls="true" HasIndicators="true">
+        <ItemTemplate>
+            <BSCarouselItem src="@item.Source" alt="@item.Alt" ActionLink="@item.ActionLink" ActionLinkTarget="@item.ActionLinkTarget" />
+        </ItemTemplate>
+    </BSDataCarousel>
+</div>
+<PrettyCode CodeFile="_content/SampleCore/snippets/carousels/carousels5.html" />
+<br />
+<p>
+    For complex display needs, you can take full control of how an item renders. To do this, either set the src attribute to an empty string or simply leave it as a null value. Then, supply your own child content inside an ItemTemplate component as such:
+</p>
+<pre>
+    @ComplexDisplayCodeExample
+</pre>
+<p>
+    Note, the sample code above assumes that the 'ChildContent' property of the 'item' context object in the 'items' collection is of type <span style="font-weight:bold;">MarkupString</span>.
+</p>
 
 @code {
-
     List<Item> items = new List<Item>
 {
-        new Item {
-            Source = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1631dfd09f0%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1631dfd09f0%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22217.7%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E",
-            Alt ="First Slide",
-            Caption = "Slide 1",
-            Header = "Slide 1 Header",
-            ActionLink = "https://chanan.github.io/BlazorStrap/",
-            ActionLinkTarget = "_blank"
-        },
-        new Item {
-            Source = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1631dfd09f1%20text%20%7B%20fill%3A%23444%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1631dfd09f1%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23666%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22247.3203125%22%20y%3D%22217.7%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E",
-            Alt ="Second Slide",
-            Caption = "Slide 2",
-            Header = "Slide 2 Header",
-            ActionLink = "https://chanan.github.io/BlazorStrap/",
-            ActionLinkTarget = "_blank"
-        },
-        new Item {
-            Source = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1631dfd09f2%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1631dfd09f2%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22277%22%20y%3D%22217.7%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E",
-            Alt ="Third Slide",
-            Caption = "Slide 3",
-            Header = "Slide 3 Header",
-            ActionLink = "https://chanan.github.io/BlazorStrap/",
-            ActionLinkTarget = "_blank"
-        }
+    new Item {
+    Source = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1631dfd09f0%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1631dfd09f0%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22217.7%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+    Alt ="First Slide",
+    Caption = "Slide 1",
+    Header = "Slide 1 Header",
+    ActionLink = "https://chanan.github.io/BlazorStrap/",
+    ActionLinkTarget = "_blank"
+    },
+    new Item {
+    Source = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1631dfd09f1%20text%20%7B%20fill%3A%23444%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1631dfd09f1%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23666%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22247.3203125%22%20y%3D%22217.7%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+    Alt ="Second Slide",
+    Caption = "Slide 2",
+    Header = "Slide 2 Header",
+    ActionLink = "https://chanan.github.io/BlazorStrap/",
+    ActionLinkTarget = "_blank"
+    },
+    new Item {
+    Source = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1631dfd09f2%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1631dfd09f2%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22277%22%20y%3D%22217.7%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+    Alt ="Third Slide",
+    Caption = "Slide 3",
+    Header = "Slide 3 Header",
+    ActionLink = "https://chanan.github.io/BlazorStrap/",
+    ActionLinkTarget = "_blank"
+    }
     };
     IList<Item> svgItems = new List<Item>
 {
-        new Item {
-            Source = "../_content/SampleCore/sampleSvg1.svg",
-            Alt ="First Slide",
-            Caption = "Slide 1",
-            Header = "Slide 1 Header",
-            ActionLink = "https://chanan.github.io/BlazorStrap/",
-            ActionLinkTarget = "_blank"
-        },
-        new Item {
-            Source = "../_content/SampleCore/sampleSvg2.svg",
-            Alt ="Second Slide",
-            Caption = "Slide 2",
-            Header = "Slide 2 Header",
-            ActionLink = "https://chanan.github.io/BlazorStrap/",
-            ActionLinkTarget = "_blank"
-        },
-        new Item {
-            Source = "../_content/SampleCore/sampleSvg3.svg",
-            Alt ="Third Slide",
-            Caption = "Slide 3",
-            Header = "Slide 3 Header",
-            ActionLink = "https://chanan.github.io/BlazorStrap/",
-            ActionLinkTarget = "_blank"
-        }
+    new Item {
+    Source = "../_content/SampleCore/sampleSvg1.svg",
+    Alt ="First Slide",
+    Caption = "Slide 1",
+    Header = "Slide 1 Header",
+    ActionLink = "https://chanan.github.io/BlazorStrap/",
+    ActionLinkTarget = "_blank"
+    },
+    new Item {
+    Source = "../_content/SampleCore/sampleSvg2.svg",
+    Alt ="Second Slide",
+    Caption = "Slide 2",
+    Header = "Slide 2 Header",
+    ActionLink = "https://chanan.github.io/BlazorStrap/",
+    ActionLinkTarget = "_blank"
+    },
+    new Item {
+    Source = "../_content/SampleCore/sampleSvg3.svg",
+    Alt ="Third Slide",
+    Caption = "Slide 3",
+    Header = "Slide 3 Header",
+    ActionLink = "https://chanan.github.io/BlazorStrap/",
+    ActionLinkTarget = "_blank"
+    }
     };
 
     private void indexChanged(int index)
@@ -154,5 +164,23 @@
         public string Header { get; set; }
         public string ActionLink { get; set; }
         public string ActionLinkTarget { get; set; }
+    }
+
+    private MarkupString ComplexDisplayCodeExample
+    {
+        get
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine(string.Empty);
+            sb.AppendLine("&lt;ItemTemplate&gt;");
+            sb.AppendLine("&nbsp;&nbsp;&lt;BSCarouselItem src=&quot;&quot;&gt;");
+            sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;@item.ChildContent");
+            sb.AppendLine("&nbsp;&nbsp;&lt;/BSCarouselItem&gt;");
+            sb.AppendLine("&lt;/ItemTemplate&gt;");
+
+            return (MarkupString)sb.ToString();
+
+        }
     }
 }
