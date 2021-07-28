@@ -21,7 +21,7 @@ namespace BlazorStrap
         // Private variables
         private bool _clean = true;
         private bool _touched = false;
-        
+
 
         // protected variables
         protected string Classname =>
@@ -189,9 +189,9 @@ namespace BlazorStrap
 
         protected override string FormatValueAsString(T value)
         {
-            if(typeof(T) == typeof(bool?))
+            if (typeof(T) == typeof(bool?))
             {
-                if(value == null)
+                if (value == null)
                 {
                     return "";
                 }
@@ -276,7 +276,6 @@ namespace BlazorStrap
             if (InputType == InputType.Radio)
             {
                 Value = (T)(object)(RadioValue);
-                ValueChanged.InvokeAsync(Value);
             }
             else
             {
@@ -287,12 +286,10 @@ namespace BlazorStrap
                         if (Value != null)
                         {
                             Value = default(T);
-                            ValueChanged.InvokeAsync(Value);
                         }
                         else
                         {
                             Value = CheckValue;
-                            ValueChanged.InvokeAsync(Value);
                         }
                     }
                     else
@@ -309,8 +306,20 @@ namespace BlazorStrap
                 }
                 else
                 {
-                    var tmp = (bool)(object)Value;
-                    Value = (T)(object)(!tmp);
+                    if (Value == null)
+                    {
+                        Type underlyingType = Nullable.GetUnderlyingType(typeof(T));
+                        // T is a Nullable<>
+                        if (underlyingType != null)
+                        {
+                            Value = (T)GetDefault(underlyingType);
+                        }
+                    }
+                    if (Value != null && Value is bool)
+                    {
+                        var tmp = (bool)(object)Value;
+                        Value = (T)(object)(!tmp);
+                    }
                 }
                 ValueChanged.InvokeAsync(Value);
             }
@@ -399,6 +408,11 @@ namespace BlazorStrap
             var OnFieldChanged = (MulticastDelegate)MyEditContext.GetType().GetField("OnFieldChanged", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(MyEditContext);
             OnFieldChanged?.DynamicInvoke(new object[] { EditContext, new FieldChangedEventArgs(fieldIdentifier) });
             StateHasChanged();
+        }
+
+        private object GetDefault(Type type)
+        {
+            return type.IsValueType ? Activator.CreateInstance(type) : null;
         }
     }
 }
