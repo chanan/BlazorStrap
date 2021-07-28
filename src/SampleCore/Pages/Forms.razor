@@ -16,8 +16,14 @@
             <BSInput Id="exampleInputPassword1" InputType="InputType.Password" PlaceHolder="Password" @bind-Value="formsModelVal.Blank" />
         </BSFormGroup>
         <BSFormGroup IsCheck="true">
-            <BSInput Id="exampleCheck1" InputType="InputType.Checkbox" @bind-Value="formsModelVal.Valid" />
-            <BSLabel IsCheck="true" For="exampleCheck1">Check me out</BSLabel>
+            <BSInput Id="exampleCheck1" 
+                     InputType="InputType.Checkbox"
+                     T="bool?"
+                     Value="formsModelVal.BoolNullable"
+                     ValueChanged=@((v) => { formsModelVal.BoolNullable = v; StateHasChanged(); }) 
+                     ValueExpression=@(() => formsModelVal.BoolNullable) />
+            <BSLabel IsCheck="true" For="exampleCheck1">Check me out: </BSLabel>
+            <p class="text-muted">Value: @formsModelVal.BoolNullable</p>
         </BSFormGroup>
         <BSButton Color="Color.Primary" ButtonType="ButtonType.Submit">Submit</BSButton>
     </BSForm>
@@ -285,7 +291,7 @@
 
     public class FormsModel
     {
-
+        public bool? BoolNullable { get; set; }
         public string Valid { get; set; }
         public DateTime Date { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Oh noes! that name is already taken")]
