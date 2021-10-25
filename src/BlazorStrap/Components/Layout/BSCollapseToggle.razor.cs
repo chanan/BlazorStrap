@@ -21,7 +21,7 @@ namespace BlazorStrap
 
         protected string Tag => IsLink ? "a" : "button";
         protected string Type => IsLink ? null : "button";
-        protected string href => IsLink ? "javascript:void(0)" : null;
+        protected string Href => IsLink ? "javascript:void(0)" : null;
 
         [Parameter] public Color Color { get; set; } = Color.None;
         [Parameter] public Size Size { get; set; } = Size.None;
