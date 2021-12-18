@@ -24,6 +24,7 @@
         <BSPopoverHeader>Right Popover</BSPopoverHeader>
         <BSPopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</BSPopoverBody>
     </BSPopover>
+    <BSButton Color="Color.Danger" @onclick="StateChange">State Change</BSButton>
 </div>
 <PrettyCode CodeFile="_content/SampleCore/snippets/popovers/popovers1.html" />
 
@@ -59,6 +60,10 @@
     void onclick4(MouseEventArgs e)
     {
         IsOpen4 = !IsOpen4;
+        StateHasChanged();
+    }
+    void StateChange()
+    {
         StateHasChanged();
     }
 }

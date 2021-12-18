@@ -38,7 +38,7 @@ namespace BlazorStrap.Util.Components
 
         internal virtual Task Changed(bool e)
         {
-            return Task.CompletedTask;
+            return Task.FromResult(e);
         }
         public virtual void Show()
         {

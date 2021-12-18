@@ -1,10 +1,7 @@
 ﻿@namespace BlazorStrap
 @inherits ToggleableComponentBase
 
-@if ((IsOpen ?? false))
-{
-    <DynamicElement Id="@Id" @attributes="@UnknownParameters" TagName="div" class="@Classname" role="tooltip" @onclick="OnClick">
-        <div @ref="Arrow" class="arrow"></div>
-        @ChildContent
-    </DynamicElement>
-}
+<div class="@Classname" id="@ElId" style="@Style" role="tooltip" popoverId="@Id" @onclick="OnClick" @ref="MyRef" @attributes="@UnknownParameters">
+    <div @ref="Arrow" class="arrow"></div>
+    @ChildContent
+</div>

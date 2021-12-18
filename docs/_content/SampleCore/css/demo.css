@@ -5,6 +5,9 @@
  * Licensed under the Creative Commons Attribution 3.0 Unported License.
  * For details, see https://creativecommons.org/licenses/by/3.0/.
  */
+.popover .popover-header{
+    margin-top:0;
+}
 .docs-example-row .row > .col, .docs-example-row .row > [class^="col-"] {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;

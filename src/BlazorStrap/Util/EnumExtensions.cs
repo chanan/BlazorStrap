@@ -1,9 +1,18 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace BlazorStrap.Util
 {
     public static class EnumExtensions
     {
+        internal static string Name<T>(this T val) where T : Enum
+        {
+            return Enum.GetName(typeof(T), val) ?? "";
+        }
+        internal static string NameToLower<T>(this T val) where T : Enum
+        {
+            return Enum.GetName(typeof(T), val).ToLower() ?? "";
+        }
         public static string ToDescriptionString(this Color val)
         {
             var attributes = (DescriptionAttribute[])val.GetType().GetField(val.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);

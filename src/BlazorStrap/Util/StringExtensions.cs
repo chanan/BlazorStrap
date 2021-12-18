@@ -6,6 +6,10 @@ namespace BlazorStrap.Util
 {
     internal static class StringExtensions
     {
+        public static string? ToNullString(this string value)
+        {
+            return string.IsNullOrEmpty(value) ? null : value;
+        }
         public static string FirstCharToUpper(this string input)
         {
             return input switch

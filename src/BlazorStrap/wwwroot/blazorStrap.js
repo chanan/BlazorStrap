@@ -3,7 +3,7 @@ var script;
 
 // MDN String.include polyfill
 if (!String.prototype.includes) {
-    String.prototype.includes = function(search, start) {
+    String.prototype.includes = function (search, start) {
         'use strict';
         if (search instanceof RegExp) {
             throw TypeError('first argument must not be a RegExp');
@@ -14,8 +14,77 @@ if (!String.prototype.includes) {
 }
 
 window.blazorStrap = {
+    AddOnce: false,
+    PopOvers: [],
+    RemovePopover: function (element, targetid) {
+        var id = element.getAttribute("popoverId");
+        var target = document.getElementById(targetid);
+
+        if (blazorStrap.PopOvers[id] !== 'undefined') {
+            var target = element.previousElementSibling;
+            blazorStrap.PopOvers[id].Popover.destroy();
+            if (blazorStrap.PopOvers[id].MouseOver) {
+                target.removeEventListener('mouseover', blazorStrap.PopOvers[id].Popover.Handler, false);
+                target.removeEventListener('mouseout', blazorStrap.PopOvers[id].Popover.Handler, false);
+            }
+            delete blazorStrap.PopOvers[id];
+        }
+    },
+    UpdatePopover: function (element, dotNetObjectReference, position, tooltip) {
+        var id = element.getAttribute("popoverId");
+        arrow = element.querySelector('.arrow');
+        blazorStrap.PopOvers[id].Popover.update();
+        blazorStrap.UpdatePopoverArrow(element, dotNetObjectReference, position, tooltip);
+    },
+    UpdatePopoverArrow: function (element, dotNetObjectReference, position, tooltip) {
+        var id = element.getAttribute("popoverId");
+        var arrow = element.querySelector('.arrow');
+
+        switch (position) {
+            case "top":
+                arrow.style.transform = "translate(" + (element.offsetWidth / 2 - (arrow.offsetWidth / 2)) + "px, 0px)";
+                blazorStrap.PopOvers[id].Popover.setOptions({ modifiers: [{ name: 'offset', options: { offset: [0, arrow.offsetHeight], }, }] });
+                break;
+            case "bottom":
+                arrow.style.transform = "translate(" + (element.offsetWidth / 2 - (arrow.offsetWidth / 2)) + "px, 0px)";
+                blazorStrap.PopOvers[id].Popover.setOptions({ modifiers: [{ name: 'offset', options: { offset: [0, arrow.offsetHeight], }, }] });
+                break;
+            case "left":
+                arrow.style.transform = "translate(0px, " + (element.offsetHeight / 2 - (arrow.offsetHeight / 2)) + "px)";
+                blazorStrap.PopOvers[id].Popover.setOptions({ modifiers: [{ name: 'offset', options: { offset: [0, arrow.offsetWidth], }, }] });
+                break;
+            case "right":
+                arrow.style.transform = "translate(0px, " + (element.offsetHeight / 2 - (arrow.offsetHeight / 2)) + "px)";
+                blazorStrap.PopOvers[id].Popover.setOptions({ modifiers: [{ name: 'offset', options: { offset: [0, arrow.offsetWidth], }, }] });
+                break;
+        }
+        setTimeout(function () {
+            var style = element.getAttribute("style");
+            dotNetObjectReference.invokeMethodAsync("SetStyle", style);
+        }, 200);
+    },
+    AddPopover: function (element, dotNetObjectReference, position, mouseover, tooltip, targetid) {
+
+        var target = document.getElementById(targetid);
+        var id = element.getAttribute("popoverId");
+        blazorStrap.PopOvers[id] = {
+            Popover:
+                Popper.createPopper(target, element, {
+                    placement: position,
+                }),
+            Handler: function () {
+                dotNetObjectReference.invokeMethodAsync("JSToggle");
+            },
+            MouseOver: false
+        };
+        if (mouseover) {
+            target.addEventListener('mouseover', blazorStrap.PopOvers[id].Handler, false);
+            target.addEventListener('mouseout', blazorStrap.PopOvers[id].Handler, false);
+        }
+        blazorStrap.UpdatePopoverArrow(element, dotNetObjectReference, position, tooltip);
+    },
     modal: {
-        paddingRight: function(padding) {
+        paddingRight: function (padding) {
             var dpi = window.devicePixelRatio;
             if (dpi === 1 || !padding) {
                 document.body.style.paddingRight = padding;
@@ -23,7 +92,7 @@ window.blazorStrap = {
             return true;
         },
         eventListeners: [],
-        open: function(id) {
+        open: function (id) {
             if (!document.body.classList.contains("modal-open")) {
                 document.body.classList.add("modal-open");
             }
@@ -39,7 +108,7 @@ window.blazorStrap = {
             }
             return id;
         },
-        close: function(id) {
+        close: function (id) {
             for (var i = 0; i < this.eventListeners.length; ++i) {
                 if (this.eventListeners[i].id == id) {
 
@@ -49,7 +118,7 @@ window.blazorStrap = {
                         // Removes this event listener.
                         document.removeEventListener("keyup",
                             window.blazorStrap.modal.eventListeners[window.blazorStrap.modal.eventListeners.length - 1]
-                            .func);
+                                .func);
                         window.blazorStrap.modal.eventListeners.pop();
 
                         // Adds Event listener back to modal under closing modal.
@@ -65,17 +134,17 @@ window.blazorStrap = {
                 }
             }
         },
-        initOnEscape: function(id) {
+        initOnEscape: function (id) {
             this.eventListeners.push({
                 id: id,
-                func: function(e) {
+                func: function (e) {
                     if (e.key == "Escape") {
                         DotNet.invokeMethodAsync("BlazorStrap", "OnModalEscape", id);
 
                         // Removes this event listener.
                         document.removeEventListener("keyup",
                             window.blazorStrap.modal.eventListeners[window.blazorStrap.modal.eventListeners.length - 1]
-                            .func);
+                                .func);
                         window.blazorStrap.modal.eventListeners.pop();
 
                         // Adds Event listener back to modal under closing modal.
@@ -99,7 +168,7 @@ window.blazorStrap = {
         }
     },
     poppers: [],
-    animationEvent: function(event) {
+    animationEvent: function (event) {
         if (event.target.hasAttributes()) {
             var name = "";
             var attrs = event.target.attributes;
@@ -115,39 +184,39 @@ window.blazorStrap = {
             DotNet.invokeMethodAsync("BlazorStrap", "OnAnimationEnd", event.target.id);
         }
     },
-    log: function(message) {
+    log: function (message) {
         console.log("message: ", message);
         return true;
     },
-    addBodyClass: function(Classname) {
+    addBodyClass: function (Classname) {
         if (Classname == "modal-open") {
             this.changeBodyPaddingRight("17px");
         }
         document.body.classList.add(Classname);
         return true;
     },
-    removeBodyClass: function(Classname) {
+    removeBodyClass: function (Classname) {
         if (Classname == "modal-open") {
             this.changeBodyPaddingRight("");
         }
         document.body.classList.remove(Classname);
         return true;
     },
-    changeBodyPaddingRight: function(padding) {
+    changeBodyPaddingRight: function (padding) {
         var dpi = window.devicePixelRatio;
         if (dpi === 1 || !padding) {
             document.body.style.paddingRight = padding;
         }
         return true;
     },
-    popper: function(target, popperId, arrow, placement) {
+    popper: function (target, popperId, arrow, placement) {
         window.blazorStrap.closeOtherPoppers(popperId);
         var reference = document.getElementById(target);
         var popper = document.getElementById(popperId);
         showPopper(reference, popper, arrow, placement);
         return true;
     },
-    closeOtherPoppers: function(popperId) {
+    closeOtherPoppers: function (popperId) {
         window.blazorStrap.poppers.forEach(p => {
             if (p !== popperId) {
                 var el = document.getElementById(p);
@@ -161,7 +230,7 @@ window.blazorStrap = {
             window.blazorStrap.poppers.push(popperId);
         }
     },
-    tooltip: function(target, tooltip, arrow, placement) {
+    tooltip: function (target, tooltip, arrow, placement) {
         var instance;
         var reference = document.getElementById(target);
 
@@ -185,19 +254,19 @@ window.blazorStrap = {
         reference.addEventListener("mouseover", mouseoverHandler);
         return true;
     },
-    modelEscape: function(dotnetHelper) {
-        document.body.onkeydown = function(e) {
+    modelEscape: function (dotnetHelper) {
+        document.body.onkeydown = function (e) {
             if (e.key == "Escape") {
                 document.body.onkeydown = null;
                 dotnetHelper.invokeMethodAsync("OnEscape");
             }
         };
     },
-    focusElement: function(element) {
+    focusElement: function (element) {
         element.focus();
     },
     addCollapsingEvent: function (element, show, dotNetObjectReference) {
-        var handler = function() {
+        var handler = function () {
             if (element) {
                 element.style.height = "";
                 element.classList.remove("collapsing");
@@ -211,7 +280,7 @@ window.blazorStrap = {
             element.removeEventListener('transitionend', handler, false);
             dotNetObjectReference.invokeMethodAsync("AnimationEnd");
         };
-        element.addEventListener('transitionend', handler , false);
+        element.addEventListener('transitionend', handler, false);
         return true;
     },
     collapsingElement: function (element, show) {
@@ -219,13 +288,13 @@ window.blazorStrap = {
         element.classList.remove("collapse");
         var height = element.offsetHeight;
         element.classList.add("collapsing");
-   
+
         if (show) {
-            setTimeout(function() { element.style.height = height + "px"; }, 100);
+            setTimeout(function () { element.style.height = height + "px"; }, 100);
         }
         else {
             element.style.height = height + "px";
-            setTimeout(function() { element.style.height = ""; }, 100);
+            setTimeout(function () { element.style.height = ""; }, 100);
         }
         return true;
     },
@@ -256,8 +325,28 @@ window.blazorStrap = {
             script = document.createElement('script');
             document.head.insertBefore(script, document.head.lastChild);
             script.src = "_content/BlazorStrap/popper.min.js";
+            return false;
         }
         return true;
+    },
+    SetStyle: function (element, style, value) {
+        element.style[style] = value;
+    },
+    AddClass: function (element, className, delay = 0) {
+        if (delay == 0) {
+            element.classList.add(className);
+        }
+        else {
+            setTimeout(function () { element.classList.add(className); }, delay);
+        }
+    },
+    RemoveClass: function (element, className, delay = 0) {
+        if (delay == 0) {
+            element.classList.remove(className);
+        }
+        else {
+            setTimeout(function () { element.classList.remove(className); }, delay);
+        }
     }
 };
 
