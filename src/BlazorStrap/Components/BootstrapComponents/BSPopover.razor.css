@@ -1,0 +1,3 @@
+﻿.popover:not(.show) {
+   visibility:hidden;
+}

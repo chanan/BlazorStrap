@@ -1,0 +1,7 @@
+﻿@namespace BlazorStrap
+@inherits BlazorStrapBase
+<a href="@Url" class="alert-link">@ChildContent</a>
+
+@code {
+    [Parameter] public string? Url { get; set; }
+}

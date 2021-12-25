@@ -1,0 +1,24 @@
+﻿@namespace BlazorStrap
+@inherits BlazorStrapBase
+
+@if (Header == null || Content == null)
+{
+    <BlazorStrap.InternalComponents.Error Name="BSToast">
+        Both <strong>Header</strong> and <strong>Content</strong> RenderFragment are required.
+    </BlazorStrap.InternalComponents.Error>
+
+    return;
+}
+
+<div class="@ClassBuilder" @attributes="Attributes">
+    @if (Header != null)
+    {
+        <div class="@HeaderClassBuilder">
+            @Header
+            <button type="button" class="ms-auto btn-close @ButtonClass" data-bs-dismiss="toast" aria-label="Close" @onclick="ClickEvent"></button>
+        </div>
+    }
+    <div class="@ContentClassBuilder">
+        @Content
+    </div>
+</div>

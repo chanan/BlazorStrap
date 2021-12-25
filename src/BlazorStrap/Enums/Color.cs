@@ -1,29 +1,15 @@
-﻿using System.ComponentModel;
-
-namespace BlazorStrap
+﻿namespace BlazorStrap
 {
-    public enum Color
+    public enum BSColor
     {
-        None,
-        [Description("active")]
-        Active,
-        [Description("primary")]
+        Default,
         Primary,
-        [Description("secondary")]
         Secondary,
-        [Description("success")]
         Success,
-        [Description("danger")]
         Danger,
-        [Description("warning")]
         Warning,
-        [Description("info")]
         Info,
-        [Description("light")]
         Light,
-        [Description("dark")]
-        Dark,
-        [Description("link")]
-        Link
+        Dark
     }
 }

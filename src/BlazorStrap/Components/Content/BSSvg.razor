@@ -1,0 +1,13 @@
+﻿@namespace BlazorStrap
+@inherits BlazorStrapBase
+
+@if (string.IsNullOrWhiteSpace(Source))
+{
+    <DynamicElement @attributes="@Attributes" TagName="svg" class="@ClassBuilder">
+        @ChildContent
+    </DynamicElement>
+}
+else
+{
+        @Markup
+}

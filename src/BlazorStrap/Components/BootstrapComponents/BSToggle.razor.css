@@ -1,0 +1,8 @@
+.dropdown-submenu button.dropdown-toggle {
+    width: 100%;
+}
+
+    .dropdown-submenu button.dropdown-toggle::after,
+    .dropdown-submenu a::after {
+        transform: rotate(-90deg);
+    }
