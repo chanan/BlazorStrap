@@ -1,0 +1,8 @@
+﻿@namespace BlazorStrap
+@inherits BlazorStrapBase
+
+<nav style="--bs-breadcrumb-divider: @Divider;" aria-label="breadcrumb" >
+    <ol class="@ClassBuilder" @attributes="Attributes">
+        @ChildContent
+    </ol>
+</nav>

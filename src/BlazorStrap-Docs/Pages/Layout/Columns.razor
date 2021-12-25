@@ -1,0 +1,212 @@
+﻿@page "/layout/columns"
+<BSContainer Class="bd-main" Size="Container.Fluid">
+    <div class="bd-content">
+        <h2>Columns</h2>
+        <p>Layout compoents can be mixed with normal HTML tags and Bootstrap classes safely. For more details about containers see <a href="https://getbootstrap.com/docs/5.1/layout/columns/">https://getbootstrap.com/docs/5.1/layout/columns/</a></p>
+        <h4>Component &lt;BSCol&gt;</h4>
+        <BSTable>
+            <BSTHead>
+                <BSTR>
+                    <BSTD>Parameter</BSTD>
+                    <BSTD>Type</BSTD>
+                    <BSTD>Valid</BSTD>
+                    <BSTD>Output</BSTD>
+                </BSTR>
+            </BSTHead>
+            <BSTBody>
+                <BSTR>
+                    <BSTD>Auto</BSTD>
+                    <BSTD>bool</BSTD>
+                    <BSTD>true/false</BSTD>
+                    <BSTD>.col-auto</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>Align</BSTD>
+                    <BSTD>Align</BSTD>
+                    <BSTD>Enum</BSTD>
+                    <BSTD>.align-self-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>Column</BSTD>
+                    <BSTD>int</BSTD>
+                    <BSTD>1-12</BSTD>
+                    <BSTD>.col-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>ColumnSmall</BSTD>
+                    <BSTD>int</BSTD>
+                    <BSTD>1-12</BSTD>
+                    <BSTD>.col-sm-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>ColumnMedium</BSTD>
+                    <BSTD>int</BSTD>
+                    <BSTD>1-12</BSTD>
+                    <BSTD>.col-md-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>ColumnLarge</BSTD>
+                    <BSTD>int</BSTD>
+                    <BSTD>1-12</BSTD>
+                    <BSTD>.col-lg-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>ColumnLarge</BSTD>
+                    <BSTD>int</BSTD>
+                    <BSTD>1-12</BSTD>
+                    <BSTD>.col-lg-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>OrderFirst</BSTD>
+                    <BSTD>bool</BSTD>
+                    <BSTD>true/false</BSTD>
+                    <BSTD>.order-first</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>OrderLast</BSTD>
+                    <BSTD>bool</BSTD>
+                    <BSTD>true/false</BSTD>
+                    <BSTD>.order-last</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>Order</BSTD>
+                    <BSTD>int</BSTD>
+                    <BSTD>1-12</BSTD>
+                    <BSTD>.order-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>OrderSmall</BSTD>
+                    <BSTD>int</BSTD>
+                    <BSTD>1-12</BSTD>
+                    <BSTD>.order-sm-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>OrderMedium</BSTD>
+                    <BSTD>int</BSTD>
+                    <BSTD>1-12</BSTD>
+                    <BSTD>.order-md-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>OrderLarge</BSTD>
+                    <BSTD>int</BSTD>
+                    <BSTD>1-12</BSTD>
+                    <BSTD>.order-lg-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>Offset</BSTD>
+                    <BSTD>int</BSTD>
+                    <BSTD>0-12</BSTD>
+                    <BSTD>.offset-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>OffsetSmall</BSTD>
+                    <BSTD>int</BSTD>
+                    <BSTD>0-12</BSTD>
+                    <BSTD>.offset-sm-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>OffsetMedium</BSTD>
+                    <BSTD>int</BSTD>
+                    <BSTD>0-12</BSTD>
+                    <BSTD>.offset-md-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>OffsetLarge</BSTD>
+                    <BSTD>int</BSTD>
+                    <BSTD>0-12</BSTD>
+                    <BSTD>.offset-lg-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD colspan="4">See shared for additonal parameters</BSTD>
+                </BSTR>
+            </BSTBody>
+        </BSTable>
+        <h3 id="vertical-alignment">Vertical alignment<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#vertical-alignment" style="padding-left: 0.375em;"></a></h3>
+        <div class="bd-example bd-example-row bd-example-row-flex-cols">
+            <BlazorStrap_Docs.Samples.Layout.Columns.Alignment />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Layout/Columns/Alignment.md" />
+        </div>
+
+        <div class="bd-example bd-example-row bd-example-row-flex-cols">
+            <BlazorStrap_Docs.Samples.Layout.Columns.Alignment2 />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Layout/Columns/Alignment2.md" />
+        </div>
+
+        <h3 id="horizontal-alignment">Horizontal alignment<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#horizontal-alignment" style="padding-left: 0.375em;"></a></h3>
+        <div class="bd-example bd-example-row">
+            <BlazorStrap_Docs.Samples.Layout.Columns.Horizontal />
+        </div>
+
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Layout/Columns/Horizontal.md" />
+        </div>
+        <h3 id="column-wrapping">Column wrapping<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#column-wrapping" style="padding-left: 0.375em;"></a></h3>
+        <div class="bd-example bd-example-row">
+            <BlazorStrap_Docs.Samples.Layout.Columns.Wrapping />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Layout/Columns/Wrapping.md" />
+        </div>
+        <h3 id="column-breaks">Column breaks<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#column-breaks" style="padding-left: 0.375em;"></a></h3>
+        <div class="bd-example bd-example-row">
+            <BlazorStrap_Docs.Samples.Layout.Columns.ColBreaks />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Layout/Columns/ColBreaks.md" />
+        </div>
+        <div class="bd-example bd-example-row">
+            <BlazorStrap_Docs.Samples.Layout.Columns.ColBreaks2 />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Layout/Columns/ColBreaks2.md" />
+        </div>
+        <h2 id="reordering">Reordering<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#reordering" style="padding-left: 0.375em;"></a></h2>
+        <h3 id="order-classes">Order Property<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#order-classes" style="padding-left: 0.375em;"></a></h3>
+        <div class="bd-example bd-example-row">
+            <BlazorStrap_Docs.Samples.Layout.Columns.Order1 />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Layout/Columns/Order1.md" />
+        </div>
+        <div class="bd-example bd-example-row">
+            <BlazorStrap_Docs.Samples.Layout.Columns.Order2 />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Layout/Columns/Order2.md" />
+        </div>
+        <h3 id="offsetting-columns">Offsetting columns<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#offsetting-columns" style="padding-left: 0.375em;"></a></h3>
+        <div class="bd-example bd-example-row">
+            <BlazorStrap_Docs.Samples.Layout.Columns.Offsetting1 />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Layout/Columns/Offsetting1.md" />
+        </div>
+        <div class="bd-example bd-example-row">
+            <BlazorStrap_Docs.Samples.Layout.Columns.Offsetting2 />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Layout/Columns/Offsetting2.md" />
+        </div>
+        <h4 id="margin-utilities">Margin utilities<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#margin-utilities" style="padding-left: 0.375em;"></a></h4>
+        <div class="bd-example bd-example-row">
+            <BlazorStrap_Docs.Samples.Layout.Columns.ColMargin />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Layout/Columns/ColMargin.md" />
+        </div>
+        <h2 id="standalone-column-classes">Standalone column classes<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#standalone-column-classes" style="padding-left: 0.375em;"></a></h2>
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Layout.Columns.ColStandalone />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Layout/Columns/ColStandalone.md" />
+        </div>
+
+
+    </div>
+
+</BSContainer>

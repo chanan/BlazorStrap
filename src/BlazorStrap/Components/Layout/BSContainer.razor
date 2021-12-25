@@ -1,5 +1,6 @@
 ﻿@namespace BlazorStrap
+@inherits BlazorStrapBase
 
-<DynamicElement @attributes="@UnknownParameters" TagName="div" class="@Classname">
+<div class="@ClassBuilder" @attributes="Attributes">
     @ChildContent
-</DynamicElement>
+</div>

@@ -1,0 +1,62 @@
+﻿@page "/components/closebutton"
+
+<BSContainer Class="bd-main py-3" Size="Container.Fluid">
+    <div class="bd-content">
+        <h2>Close Button</h2>
+        <h4>Component &lt;BSCloseButton&gt;</h4>
+        <BSTable>
+            <BSTHead>
+                <BSTR>
+                    <BSTD>Parameter</BSTD>
+                    <BSTD>Type</BSTD>
+                    <BSTD>Valid</BSTD>
+                    <BSTD>Output</BSTD>
+                </BSTR>
+            </BSTHead>
+            <BSTBody>
+                <BSTR>
+                    <BSTD>IsDisabled</BSTD>
+                    <BSTD>bool</BSTD>
+                    <BSTD>true/false</BSTD>
+                    <BSTD>disabled</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>IsWhite</BSTD>
+                    <BSTD>bool</BSTD>
+                    <BSTD>true/false</BSTD>
+                    <BSTD>.btn-close-white</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>OnClick</BSTD>
+                    <BSTD>EventCallback</BSTD>
+                    <BSTD>MouseEventArgs</BSTD>
+                    <BSTD></BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD colspan="4">See shared for additonal parameters</BSTD>
+                </BSTR>
+            </BSTBody>
+        </BSTable>
+        <h3>Example</h3>
+        <div class="bd-example bd-example-row bd-example-row-flex-cols">
+            <BlazorStrap_Docs.Samples.Components.CloseButton.CloseButton1 />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Components/CloseButton/CloseButton1.md" />
+        </div>
+        <h3>Disabled state</h3>
+        <div class="bd-example bd-example-row bd-example-row-flex-cols">
+            <BlazorStrap_Docs.Samples.Components.CloseButton.CloseButton2 />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Components/CloseButton/CloseButton2.md" />
+        </div>
+        <h3>White variant</h3>
+        <div class="bd-example bg-dark bd-example-row bd-example-row-flex-cols">
+            <BlazorStrap_Docs.Samples.Components.CloseButton.CloseButton3 />
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Components/CloseButton/CloseButton3.md" />
+        </div>
+    </div>
+</BSContainer>

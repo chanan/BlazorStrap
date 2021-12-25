@@ -4,8 +4,6 @@ namespace BlazorStrap
 {
     public enum InputType
     {
-        [Description("checkbox")]
-        Checkbox,
         [Description("color")]
         Color,
         [Description("date")]
@@ -14,16 +12,12 @@ namespace BlazorStrap
         DateTimeLocal,
         [Description("email")]
         Email,
-        [Description("file")]
-        File,
         [Description("month")]
         Month,
         [Description("number")]
         Number,
         [Description("password")]
         Password,
-        [Description("radio")]
-        Radio,
         [Description("range")]
         Range,
         [Description("search")]

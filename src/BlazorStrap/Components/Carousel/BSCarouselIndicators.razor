@@ -1,8 +1,0 @@
-﻿@namespace BlazorStrap
-
-<DynamicElement @attributes="@UnknownParameters" TagName="ol" class="@Classname">
-    @for (var i = 0; i < _numberOfItems; i++)
-    {
-        <BSCarouselIndicatorItem IsActive="@(i == ActiveIndex)" Index="@i" ActiveIndexChangedEvent="@ClickEventActiveIndex" />
-    }
-</DynamicElement>
