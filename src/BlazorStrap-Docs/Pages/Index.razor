@@ -1,0 +1,63 @@
+﻿@page "/"
+@using System.ComponentModel.DataAnnotations
+<div class="bd-callout bd-callout-warning">
+    <strong>Work inprogress</strong> This version is still under devlopment. All component are subject to breaking changes.
+</div>
+<div>Name: @Modal.Name</div>
+<div>Checked: @Modal.Checked</div>
+<p>Test with EditForm</p>
+<EditForm Model="@Modal" OnValidSubmit="@(() => Console.WriteLine("Valid"))">
+    <DataAnnotationsValidator/>
+    <BSValidationSummary/>
+    <BSDiv MarginBottom="Margins.Medium">
+        <BSLabel>Name</BSLabel>
+        <BSInput @bind-Value="@Modal.Name" ValidateOnChange="true" ValidateOnInput="true" ValidateOnBlur="false"/>
+        <BSFeedback For="() => Modal.Name"/>
+    </BSDiv>
+    <BSDiv MarginBottom="Margins.Medium">
+        <BSLabel>Name</BSLabel>
+        <BSInputFile IsRequired="true" ValidWhen="@(() => Modal.HasFile)" OnChange="OnFileChange"/>
+        <BSFeedback For="() => Modal.HasFile"/>
+    </BSDiv>
+    <BSDiv MarginBottom="Margins.Medium">
+        <BSButton Color="BSColor.Primary" ButtonType="ButtonType.Submit">Submit</BSButton>    
+    </BSDiv>
+</EditForm>
+<h4>Stand alone inputs no EditContext</h4>
+<BSDiv MarginBottom="Margins.Medium">
+<BSInput @bind-Value="@Modal.Name"/>    
+</BSDiv>
+
+<div class="form-check">
+    <BSLabel IsCheckLabel="true">True</BSLabel>
+    <BSInputRadio CheckedValue="@(true)" @bind-Value="Modal.Checked"/>
+</div>
+<div class="form-check">
+    <BSLabel IsCheckLabel="true">False</BSLabel>
+    <BSInputRadio CheckedValue="@(false)" @bind-Value="Modal.Checked"/>
+</div>
+<BSInputFile IsRequired="true" IsManual="true"/>
+<p>Test without EditForm</p>
+
+@code {
+    private ModalClass Modal { get; set; } = new ModalClass();
+
+    private void OnFileChange(InputFileChangeEventArgs e)
+    {
+        Modal.HasFile = null;
+        if (e.FileCount > 0)
+            Modal.HasFile = true;
+    }
+
+    public class ModalClass
+    {
+        [Required(ErrorMessage = "Name is required")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Custom Error Message")]
+        public bool? HasFile { get; set; }
+
+        public bool Checked { get; set; }
+    }
+
+}

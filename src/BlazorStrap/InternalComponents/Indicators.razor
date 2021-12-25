@@ -1,0 +1,14 @@
+﻿<div class="carousel-indicators">
+    @for (i = 0; i < Count; ++i)
+    {
+        var index = i;
+        @if (i != Active)
+        {
+            <button type="button" aria-label="Slide @(i + 1)" @onclick="EventUtil.AsNonRenderingEventHandler(() => { ClickEvent(index);})" data-bs-target="bs" @onkeyup="@(e => { EventUtil.AsNonRenderingEventHandler(() => { PressEvent(e); }); })"></button>
+        }
+        else
+        {
+            <button type="button" class="active" aria-label="Slide @(i + 1)" @onclick="EventUtil.AsNonRenderingEventHandler(() => { ClickEvent(index);})" data-bs-target="bs" @onkeyup="@(e => { EventUtil.AsNonRenderingEventHandler(() => { PressEvent(e); }); })"></button>
+        }
+    }
+</div>

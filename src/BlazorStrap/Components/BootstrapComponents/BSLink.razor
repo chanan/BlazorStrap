@@ -1,0 +1,11 @@
+﻿@namespace BlazorStrap
+@inherits BlazorStrapBase
+
+@if (string.IsNullOrEmpty(Target))
+    {
+        <a href="@Url" class="@ClassBuilder" @attributes="Attributes" data-blazorstrap="@DataId" data-blazorstrap-target="@Target">@ChildContent</a>
+    }
+    else
+    {
+        <a href="javascript:void(0)" class="@ClassBuilder" @attributes="Attributes" data-blazorstrap="@DataId" @onclick="ClickEvent" @onclick:preventDefault data-blazorstrap-target="@Target">@ChildContent</a>
+    }

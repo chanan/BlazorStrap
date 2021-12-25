@@ -1,5 +1,0 @@
-﻿@namespace BlazorStrap
-
-<DynamicElement @attributes="@UnknownParameters" TagName="@Tag" class="@Classname" href="@Href" type="@Type" @onclick="OnClickEvent" aria-expanded="@CollapseItem?.Collapse?.IsOpen.ToString().ToLower()">
-    @ChildContent(CollapseItem?.Collapse?.IsOpen ?? false)
-</DynamicElement>

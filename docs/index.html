@@ -1,58 +1,92 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width">
-    <title>BlazorStrap Demo Site</title>
-    <base href="/" />
-    <link rel="apple-touch-icon" sizes="180x180" href="_content/SampleCore/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="_content/SampleCore/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="_content/SampleCore/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <style id="styled"></style>
-    <script type="text/javascript">
-        // Single Page Apps for GitHub Pages
-        // https://github.com/rafrex/spa-github-pages
-        // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
-        // ----------------------------------------------------------------------
-        // This script checks to see if a redirect is present in the query string
-        // and converts it back into the correct url and adds it to the
-        // browser's history using window.history.replaceState(...),
-        // which won't cause the browser to attempt to load the new url.
-        // When the single page app is loaded further down in this file,
-        // the correct url will be waiting in the browser's history for
-        // the single page app to route accordingly.
-        (function(l) {
-          if (l.search) {
-            var q = {};
-            l.search.slice(1).split('&').forEach(function(v) {
-              var a = v.split('=');
-              q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
-            });
-            if (q.p !== undefined) {
-              window.history.replaceState(null, null,
-                l.pathname.slice(0, -1) + (q.p || '') +
-                (q.q ? ('?' + q.q) : '') +
-                l.hash
-              );
-            }
-          }
-        }(window.location))
-      </script>
-      <link rel="stylesheet" href="_content/BlazorStrap/css/cromefix.css">
-      <link rel="stylesheet" href="_content/BlazorStrap/css/submenu.css">
-      <link rel="stylesheet" href="_content/SampleCore/css/demo.css">
-	  <link rel="stylesheet" href="style.css" />
-      <script src="_content/BlazorStrap/blazorStrap.js"></script>
-      <script src="_content/BlazorStrap/popper.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>BlazorStrap</title>
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
 </head>
+
 <body>
-    <app>Loading...</app>
-    
-    <!-- temporary WORKAROUND for Safari https://github.com/mono/mono/issues/15588#issuecomment-529056521 -->
-    <script>var Module;</script>
-    
-    <script src="_framework/blazor.webassembly.js"></script>
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <header class="navbar navbar-dark navbar-expand-md bg-purple fixed-top shadow-lg border border-1 border-top-0 border-end-0 border-start-0">
+        <nav class="container-xxl flex-wrap flex-md-nowrap" aria-label="Main navigation">
+            <span class="navbar-brand p-0 me-2"> <img class="d-block my-1" src="logo-inverted.svg" height="32" alt="BlazorStrap" /></span>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" data-blazorstrap="ad350ea8-fb99-494d-a0a6-c9fb13924548" _bl_6="">
+                <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav pt-2 py-md-0">
+                    <li class="nav-item col-6 col-md-auto d-none d-md-block">
+                        <a href="" class="nav-link active">
+                            <strong class="text-white">BlazorStrap</strong>
+                        </a>
+                    </li>
+
+                    <li class="nav-item col-6 col-md-auto"><a class="nav-link active" href="https://getbootstrap.com/docs/5.1/getting-started/introduction/">Bootstrap Docs</a></li>
+                </ul>
+                <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+                    <li class="nav-item col-6 col-md-auto">
+                        <a href="https://github.com/jbomhold3/BlazorStrap5" class="nav-link p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="36" width="36" viewBox="0 0 512 499.36" role="img" focusable="false" class="navbar-nav-svg d-inline-block align-text-top">
+                                <path fill="currentColor" fill-rule="evenodd" d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z"></path>
+                            </svg>
+                            <small class="d-md-none ms-2">GitHub</small>
+                        </a>
+                    </li>
+                    <li class="nav-item col-6 col-md-auto">
+                        <a href="https://gitter.im/BlazorStrap/community" class="nav-link p-2">
+                            <svg fill="currentColor" fill-rule="evenodd" viewBox="0 0 51 75" height="36" width="36" xmlns="http://www.w3.org/2000/svg" class="navbar-nav-svg d-inline-block align-text-top">
+                                <path d="m0 0h6v48h-6zm15 13h6v62h-6zm15 0h6v62h-6zm15 0h6v34h-6z"></path>
+                            </svg>
+                            <small class="d-md-none ms-2">Gitter</small>
+                        </a>
+                    </li>
+                </ul>
+                <a class="btn btn-bd-download d-lg-inline-block my-2 my-md-0 ms-md-3" href="">Download</a>
+            </div>
+        </nav>
+    </header>
+    <div class="container h-100">
+        <div class="d-flex h-100 align-items-center justify-content-center">
+            <div class="card p-3 text-center shadow-lg">
+                <div class="card bg-purple text-white p-2 mb-3 shadow-lg">
+                    <h1>BlazorStrap</h1>
+                    <p>Please select a documentation version.</p>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card shadow-lg m-auto h-100">
+                            <a href="/V1">
+                                <h1 class="card-header">BlazorStrap V1</h1>
+                                <img src="logo.svg" class="card-img-top bg-purple-gradient" alt="..." />
+                                <div class="card-body">
+                                    <p>The Bootstrap 4 implementation of BlazorStrap</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card shadow-lg m-auto h-100">
+                            <a href="/V5">
+                                <h1 class="card-header">BlazorStrap V5</h1>
+                                <img src="logo5.svg" class="card-img-top bg-purple-gradient" alt="..." />
+                                <div class="card-body">
+                                    <p>The Bootstrap 5 implementation of BlazorStrap</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="fixed-bottom bg-light p-3 shadow-lg border border-bottom-0 border-end-0 border-start-0">
+        <div class="container text-center">
+            Provided free of charge under the MIT license.
+        </div>
+    </footer>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </html>

@@ -1,0 +1,29 @@
+body {
+
+    height: 100vh;
+    overflow: hidden;
+}
+
+.bg-purple {
+    background: #5C2C94;
+}
+
+.bg-purple-gradient {
+    background: radial-gradient(ellipse at bottom, #5C2C94 0%, #030617 100%);
+}
+
+.btn-bd-download {
+    font-weight: 600;
+    color: #ffe484;
+    border-color: #ffe484;
+}
+
+.navbar-nav-svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.card a {
+    color: black;
+    text-decoration: none;
+}

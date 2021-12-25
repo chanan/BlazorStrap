@@ -1,8 +1,5 @@
 ﻿@namespace BlazorStrap
-@inherits ColumnBase
-
-<CascadingValue Value="this">
-    <DynamicElement @attributes="@UnknownParameters" TagName="label" class="@Classname">
-        @ChildContent
-    </DynamicElement>
-</CascadingValue>
+@inherits BlazorStrapBase
+<label class="@ClassBuilder" @attributes="Attributes">
+    @ChildContent
+</label>

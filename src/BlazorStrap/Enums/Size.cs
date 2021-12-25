@@ -14,6 +14,8 @@ namespace BlazorStrap
         [Description("lg")]
         Large,
         [Description("xl")]
-        ExtraLarge
+        ExtraLarge,
+        [Description("xxl")]
+        ExtraExtraLarge
     }
 }
