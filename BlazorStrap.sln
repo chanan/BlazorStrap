@@ -7,6 +7,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8BC77845-4555-4F8B-9502-0F1619F0BA2D}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		LICENSE = LICENSE
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Server", "src\BlazorStrap.Server\BlazorStrap.Server.csproj", "{4D1CD190-DA57-410E-8B80-99BC55E071E5}"
