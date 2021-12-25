@@ -10,6 +10,31 @@ Bootstrap 4 Components for Blazor Framework
 ![GitHub stars](https://img.shields.io/github/stars/chanan/BlazorStrap?color=orange)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/BlazorStrap/community)
 
+## Bootstrap 5
+> Important: Target V5 for bootstrap 5
+``` html
+<PackageReference Include="BlazorStrap" Version="5.*.*" />
+```
+
+This version is still under development. Package is not released yet. Check out our progress. https://blazorstrap.io
+### Blazor WebAssembly (Client-side Blazor)
+
+1. Inside the `<head>` element of your `wwwroot/index.html`, add `<script src="_content/BlazorStrap/blazorstrap.js"></script><script src="_content/BlazorStrap/popper.min.js"></script>`.
+2. In `Program`, add `builder.Services.AddBlazorStrap();`.
+
+### Blazor Server (Server-side Blazor)
+
+1. Inside the `<head>` element of your `Pages/_Host.cshtml`, add `<script src="_content/BlazorStrap/blazorstrap.js"></script><script src="_content/BlazorStrap/popper.min.js"></script>`.
+2. In `Startup`, add `builder.Services.AddBlazorStrap();`.
+
+---------
+## Bootstrap 4
+> Important:
+Target V1 for bootstrap 4
+``` html 
+<PackageReference Include="BlazorStrap" Version="1.*.*" />
+```
+
 ### Blazor WebAssembly (Client-side Blazor)
 
 1. Inside the `<head>` element of your `wwwroot/index.html`, add `<script src="_content/BlazorStrap/blazorStrap.js"></script><script src="_content/BlazorStrap/popper.min.js"></script>`.
@@ -34,16 +59,17 @@ https://github.com/chanan/BlazorStrap/releases
 * Alerts
 * Badges
 * Breadcrumbs
-* Buttons (excluding Checkboxes and Radio buttons)
+* Buttons
 * ButtonGroups
 * Cards
 * Carousals
 * Collapse
 * Dropdowns
+* OffCanvas V5
 * Images
 * Jumbotrons
 * Figures
-* Forms - mostly done (Binding still pending)
+* Forms
 * Layout (Container, Row, Col)
 * Listgroups
 * Navs
