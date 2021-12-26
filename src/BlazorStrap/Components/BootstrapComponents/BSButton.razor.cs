@@ -9,10 +9,10 @@ namespace BlazorStrap
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
         [Parameter] public bool IsActive { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
-        [Parameter] public bool IsReset { get; set; }
-        [Parameter] public bool IsSubmit { get; set; }
         [Parameter] public bool IsLink { get; set; }
         [Parameter] public bool IsOutlined { get; set; }
+        [Parameter] public bool IsReset { get; set; }
+        [Parameter] public bool IsSubmit { get; set; }
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public Size Size { get; set; } = Size.None;
         [Parameter] public string? Target { get; set; }
@@ -28,17 +28,17 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
+        private string? ButtonType()
+        {
+            if(IsSubmit) return "Submit";
+            return IsReset ? "Reset" : "button";
+        }
+
         private async Task ClickEvent()
         {
             if(!string.IsNullOrEmpty(Target))
                 BlazorStrap.OnForwardClick(Target);
             await OnClick.InvokeAsync();
-        }
-
-        private string? ButtonType()
-        {
-            if(IsSubmit) return "Submit";
-            return IsReset ? "Reset" : "button";
         }
     }
 }

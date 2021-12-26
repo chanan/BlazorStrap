@@ -5,10 +5,10 @@ namespace BlazorStrap
 {
     public partial class BSButtonGroup : BlazorStrapBase
     {
+        [Parameter] public Placement DropdownPlacement { get; set; } = Placement.BottomStart;
         [Parameter] public bool IsToolbar { get; set; }
         [Parameter] public bool IsVertical { get; set; }
-        [Parameter] public Placement DropdownPlacement { get; set; } = Placement.BottomStart;
-        
+
 
         private string? ClassBuilder => new CssBuilder()
             .AddClass("btn-group", !IsToolbar && !IsVertical)
@@ -20,6 +20,5 @@ namespace BlazorStrap
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
-
     }
 }

@@ -34,6 +34,7 @@ namespace BlazorStrap_Docs.Helper
             markdown = Regex.Replace(markdown,@"<!--\\\\-->(.*?)<!--//-->", "" , RegexOptions.Singleline);
             string html;
             var code = "";
+            
             if (markdown.IndexOf("@code", StringComparison.Ordinal) != -1)
             {
                 html = markdown.Substring(0, markdown.IndexOf("@code", StringComparison.Ordinal));;
@@ -53,5 +54,6 @@ namespace BlazorStrap_Docs.Helper
 
             await base.OnParametersSetAsync();
         }
+        
     }
 }
