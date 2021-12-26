@@ -13,7 +13,7 @@ See [shared](layout/shared) for additional parameters
 :::
 
 {.mt-4}
-#### Component \<BSCard\>
+#### Component \<BSCarouselItem\>
 :::
 
 | Parameter | Type | Valid       | Remarks/Output | 

@@ -22,6 +22,10 @@ See [shared](layout/shared) for additional parameters
 
 {{sample=Components/Badge/Badge3}}
 
+### Background colors
+
 {{sample=Components/Badge/Badge4}}
+
+### Pill badges
 
 {{sample=Components/Badge/Badge5}}

@@ -29,7 +29,8 @@ namespace BlazorStrap_Docs.Helper
         protected override async Task OnParametersSetAsync()
         {
             if (Source == null || HttpClient == null) return;
-            using var response = await HttpClient.GetAsync(Source + "?" + Guid.NewGuid().ToString());
+            using var response = await HttpClient.GetAsync(Source + ".md" + "?" + Guid.NewGuid().ToString());
+            Console.WriteLine(Source);
             var markdown = await response.Content.ReadAsStringAsync();
             markdown = Regex.Replace(markdown,@"<!--\\\\-->(.*?)<!--//-->", "" , RegexOptions.Singleline);
             string html;

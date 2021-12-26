@@ -12,18 +12,6 @@
                 </ul>
             </Content>
         </BSCollapse>
-        <!--<li class="mb-1">
-            <button class="btn d-inline-flex align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#getting-started-collapse" aria-expanded="true" aria-current="true">
-                Getting started
-            </button>
-
-            <div class="collapse show" id="getting-started-collapse" style="">
-                <ul class="list-unstyled fw-normal pb-1 small">
-                    <li><a href="/docs/5.1/getting-started/introduction/" class="d-inline-flex align-items-center rounded active" aria-current="page">Introduction</a></li>
-                    <li><a href="/docs/5.1/getting-started/contribute/" class="d-inline-flex align-items-center rounded">Contribute</a></li>
-                </ul>
-            </div>
-        </li>-->
 
         <li class="mb-1">
             <BSCollapse DefaultShown="@(NavManager.Uri.Contains("/layout/"))">
@@ -41,10 +29,11 @@
                         <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Forms</BSToggle></Toggler>
                         <Content>
                             <ul class="list-unstyled fw-normal pb-1 small">
+                                <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/shared">Shared</NavLink></li>
                                 <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/formcontrols">Form control</NavLink></li>
                                 <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/select">Select</NavLink></li>
                                 <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/checkbox">Checks & Radios</NavLink></li>
-                                <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/Range">Range</NavLink></li>
+                                <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/range">Range</NavLink></li>
                                 <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/inputgroup">Input Group</NavLink></li>
                                 <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/inputfile">Input File</NavLink></li>
                                 <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/validation">Validation</NavLink></li>
@@ -76,7 +65,7 @@
                         <li><NavLink class="d-inline-flex align-items-center rounded" href="components/pagination">Pagination</NavLink></li>
                         <li><NavLink class="d-inline-flex align-items-center rounded" href="components/popovers">Popovers</NavLink></li>
                         <li><NavLink class="d-inline-flex align-items-center rounded" href="components/progress">Progress</NavLink></li>
-                        <li><NavLink class="d-inline-flex align-items-center rounded" href="components/toasts">Toasts</NavLink></li>
+                        <li><NavLink class="d-inline-flex align-items-center rounded" href="components/toast">Toasts</NavLink></li>
                         <li><NavLink class="d-inline-flex align-items-center rounded" href="components/tooltips">Tooltips</NavLink></li>
 
                     </ul>

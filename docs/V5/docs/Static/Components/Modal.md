@@ -1,0 +1,52 @@
+﻿## Modal
+#### Component \<BSModal\>
+See [shared](layout/shared) for additional parameters    
+:::
+
+| Parameter        | Type           | Valid          | Remarks/Output              | 
+|------------------|----------------|----------------|-----------------------------|
+| FullScreenSize   | Enum           | Side           | `.modal-fullscreen-[]-down` | {.table-striped}
+| AllowScroll      | bool           | true/false     | Allows Body Scrolling       | 
+| Size             | Enum           | Size           | `.modal-[]`                 |
+| IsCentered       | bool           | true/false     | `.modal-dialog-centered`    |
+| IsFullScreen     | bool           | true/false     | `.modal-fullscreen`         |
+| IsScrollable     | bool           | true/false     | `.modal-dialog-scrollable`  |
+| ShowBackdrop     | bool           | true/false     |
+| ButtonClass      | string         | string         | string                      |
+| ContentClass     | string         | string         | string                      |
+| HeaderClass      | string         | string         | string                      |
+| IsStaticBackdrop | bool           | true/false     | Ignores backdrop clicks     |
+| Header           | RenderFragment | RenderFragment | Nested Content              |
+| Content          | RenderFragment | RenderFragment | Nested Content              |
+| Footer           | RenderFragment | RenderFragment | Nested Content              |
+
+:::
+
+### Live Example
+
+{{sample=Components/Modal/Modal1}}
+
+### Static backdrop
+
+{{sample=Components/Modal/Modal2}}
+
+### Scrolling long content
+When modals become too long for the user’s viewport or device, they scroll independent of the page itself. Try the demo below to see what we mean.
+
+{{sample=Components/Modal/Modal3}}
+
+You can also scroll content in the modals body
+
+{{sample=Components/Modal/Modal4}}
+
+### Vertically centered
+
+{{sample=Components/Modal/Modal5}}
+
+### Tooltips and popovers
+
+{{sample=Components/Modal/Modal6}}
+
+### Toggle between modals
+
+{{sample=Components/Modal/Modal7}}

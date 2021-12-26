@@ -7,22 +7,21 @@ namespace BlazorStrap
 {
     public partial class BSDropdown : BlazorStrapBase, IAsyncDisposable
     {
-        private BSPopover? PopoverRef { get; set; }
         [Inject] NavigationManager NavigationManager { get; set; }
-        [Parameter] public RenderFragment? Content { get; set; }
-        [Parameter] public string? ShownAttribute { get; set; }
-        [Parameter] public bool Demo { get; set; }
-        [Parameter] public string? Offset { get; set; } 
         [Parameter] public bool AllowItemClick { get; set; }
         [Parameter] public bool AllowOutsideClick { get; set; }
+        [Parameter] public RenderFragment? Content { get; set; }
+        [Parameter] public bool Demo { get; set; }
+        [Parameter] public bool IsDark { get; set; }
         [Parameter] public bool IsManual { get; set; }
         [Parameter] public bool IsStatic { get; set; }
-        [Parameter] public bool IsDark { get; set; }
+        [Parameter] public string? Offset { get; set; }
+        [Parameter] public string? ShownAttribute { get; set; }
         [Parameter] public string Target { get; set; } = Guid.NewGuid().ToString();
         [Parameter] public RenderFragment? Toggler { get; set; }
+        [CascadingParameter] public BSButtonGroup? Group { get; set; }
         [CascadingParameter] public BSNavItem? NavItem { get; set; }
         [CascadingParameter] public BSDropdown? Parent { get; set; }
-        [CascadingParameter] public BSButtonGroup? Group { get; set; }
         internal bool Active { get; set; }
         internal int ChildCount { get; set; }
 
@@ -33,14 +32,33 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
+        private string DataRefId => (PopoverRef != null) ? PopoverRef.DataId : DataId;
+
         private string? GroupClassBuilder => new CssBuilder()
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
-        private string DataRefId => (PopoverRef != null) ? PopoverRef.DataId : DataId; 
         private ElementReference MyRef { get; set; }
+        private BSPopover? PopoverRef { get; set; }
         internal bool Shown { get; set; }
+
+        public async Task HideAsync()
+        {
+            if(!AllowOutsideClick)
+                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataRefId, "documentDropdown", "click", true);
+            Shown = false;
+            if (Group != null && PopoverRef != null && !IsStatic)
+            {
+                await PopoverRef.HideAsync();
+            }
+            if (!string.IsNullOrEmpty(ShownAttribute))
+            {
+                await Js.InvokeVoidAsync("blazorStrap.RemoveAttribute", MyRef, ShownAttribute);
+            }
+            await InvokeAsync(StateHasChanged);
+        }
+
         public async Task ShowAsync()
         {
             if(!AllowOutsideClick)
@@ -58,25 +76,15 @@ namespace BlazorStrap
             await InvokeAsync(StateHasChanged);
         }
 
-        public async Task HideAsync()
-        {
-            if(!AllowOutsideClick)
-                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataRefId, "documentDropdown", "click", true);
-            Shown = false;
-            if (Group != null && PopoverRef != null && !IsStatic)
-            {
-                await PopoverRef.HideAsync();
-            }
-            if (!string.IsNullOrEmpty(ShownAttribute))
-            {
-                await Js.InvokeVoidAsync("blazorStrap.RemoveAttribute", MyRef, ShownAttribute);
-            }
-            await InvokeAsync(StateHasChanged);
-        }
-        
         public Task ToggleAsync()
         {
             return Shown ? HideAsync() : ShowAsync();
+        }
+
+
+        protected override void OnInitialized()
+        {
+            JSCallback.EventHandler += OnEventHandler;
         }
 
         private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList,
@@ -99,12 +107,6 @@ namespace BlazorStrap
                 if (IsManual) return;
                 await HideAsync();
             }
-        }
-
-
-        protected override void OnInitialized()
-        {
-            JSCallback.EventHandler += OnEventHandler;
         }
 
 

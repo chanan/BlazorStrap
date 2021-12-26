@@ -1,4 +1,4 @@
-﻿<BSAlert Color="BSColor.Info" IsDismissable="true" @ref="_alertRef" Dismissed="Dismissed">
+﻿<BSAlert Color="BSColor.Info" IsDismissible="true" @ref="_alertRef" Dismissed="Dismissed">
     An example dismissable alert example.
 </BSAlert>
 <BSButton Color="BSColor.Primary" IsDisabled="_buttonDisabled" @onclick="Show">Show</BSButton>

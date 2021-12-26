@@ -1,6 +1,6 @@
 ﻿@foreach (var alert in Alerts)
 {
-    <BSAlert Color="alert.Color" IsDismissable="true" Dismissed="@(() => Dismiss(alert))" @key="alert">
+    <BSAlert Color="alert.Color" IsDismissible="true" Dismissed="@(() => Dismiss(alert))" @key="alert">
         This is a dismissable alert!
     </BSAlert>
 }

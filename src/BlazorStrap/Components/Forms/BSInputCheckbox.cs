@@ -17,8 +17,6 @@ namespace BlazorStrap
         protected bool IsRadio { get; set; }
         [Parameter] public bool IsToggle { get; set; }
         [DisallowNull] public ElementReference? Element { get; protected set; }
-
-        [Parameter] public RenderFragment? Label { get; set; }
         private string InputType => IsRadio ? "radio" : "checkbox";
         [Parameter] public Size Size { get; set; }
 

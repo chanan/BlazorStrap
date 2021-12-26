@@ -7,14 +7,19 @@ namespace BlazorStrap
 {
     public partial class BSPopover : BlazorStrapBase, IAsyncDisposable
     {
+        [Parameter] public RenderFragment? Content { get; set; }
+        /// <summary>
+        /// This Parameter is intended for internal use 
+        /// </summary>
+        [Parameter] public string? DropdownOffset { get; set; }
+        [Parameter] public RenderFragment? Header { get; set; }
+        [Parameter] public BSColor HeaderColor { get; set; }
+
         /// <summary>
         /// This Parameter is intended for internal use 
         /// </summary>
         [Parameter] public bool IsDropdown { get; set; }
-        [Parameter] public string? DropdownOffset { get; set; } 
-        [Parameter] public RenderFragment? Content { get; set; }
-        [Parameter] public RenderFragment? Header { get; set; }
-        [Parameter] public BSColor HeaderColor { get; set; }
+
         [Parameter] public bool MouseOver { get; set; }
         [Parameter] public Placement Placement { get; set; } = Placement.Top;
         [Parameter] public string? Target { get; set; }
@@ -76,7 +81,7 @@ namespace BlazorStrap
             await InvokeAsync(StateHasChanged);
         }
 
-      
+
         public Task ToggleAsync()
         {
             return !Shown ? ShowAsync() : HideAsync();

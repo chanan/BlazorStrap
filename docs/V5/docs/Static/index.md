@@ -1,4 +1,9 @@
-﻿Bootstrap 5 Components for Blazor Framework
+﻿<div class="d-flex align-items-center">
+    <img src="https://blazorstrap.io/logo5.svg" alt="BootStrapV5 Logo" style="height: 100px"/>
+    <h1>BlazorStrap 5</h1>
+</div>
+
+Bootstrap 5 Components for Blazor Framework
 
 ### Install
 ##### Blazor WebAssembly

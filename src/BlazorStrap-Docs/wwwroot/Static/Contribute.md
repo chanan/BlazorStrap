@@ -20,7 +20,7 @@ If you feel BlazorStrap is lacking a feature you need or just want please create
 
 ### Pull Requests
 ---
-* Fork the repo and create your branch from `master`
+* Fork the repo and create your branch from **`master`**
 * Please keep your branch focused to the change.
 * If your making API changes please update the documentation
 * If your adding a feature create basic documentation and provide a sample.
