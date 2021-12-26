@@ -35,6 +35,8 @@ namespace BlazorStrap
         [Description("url")]
         Url,
         [Description("week")]
-        Week
+        Week,
+        [Description("datalist")]
+        DataList
     }
 }

@@ -1,0 +1,90 @@
+﻿@page "/forms/select"
+
+<BSContainer Class="bd-main py-3" Size="Container.Fluid">
+    <div class="bd-content">
+        <h2>BSInput</h2>
+        <div class="bd-callout bd-callout-info">
+            <p><strong>Note</strong> <code>IsBasic</code> allows the complier to infer the genertic type of inputs. When not used with <code>@@bind-Value</code> This valid value can be any type example used here is a string with the value of true.</p>
+        </div>
+        <h4>Component &lt;BSInput&gt;</h4>
+        <p><strong>*</strong> indicates required Parameters</p>
+        <BSTable>
+            <BSTHead>
+                <BSTR>
+                    <BSTD>Parameter</BSTD>
+                    <BSTD>Type</BSTD>
+                    <BSTD>Valid</BSTD>
+                    <BSTD>Output/Result</BSTD>
+                </BSTR>
+            </BSTHead>
+            <BSTBody>
+                <BSTR>
+                    <BSTD>InputSize</BSTD>
+                    <BSTD>Enum</BSTD>
+                    <BSTD>Size</BSTD>
+                    <BSTD>.form-select-# or .form-control-#</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD><strong>*</strong>InputType</BSTD>
+                    <BSTD>Enum</BSTD>
+                    <BSTD>InputType</BSTD>
+                    <BSTD>
+                        <code>Input Type=#</code>
+                    </BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>IsPlainText</BSTD>
+                    <BSTD>bool</BSTD>
+                    <BSTD>true/false</BSTD>
+                    <BSTD>.form-control-plaintext</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>IsReadonly</BSTD>
+                    <BSTD>bool</BSTD>
+                    <BSTD>true/false</BSTD>
+                    <BSTD>readonly</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD colspan="4">See shared for additonal parameters</BSTD>
+                </BSTR>
+            </BSTBody>
+        </BSTable>
+        <p><code>@@("value")</code> is not required it's a line declaration of a string to make the demo work</p>
+        <h3>Default</h3>
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Select.Select1/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Select/Select1.md"/>
+        </div>
+        <h3>Sizing</h3>
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Select.Select2/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Select/Select2.md"/>
+        </div>
+        The <code>multiple</code> attribute is also supported.
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Select.Select3/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Select/Select3.md"/>
+        </div>
+        As is the <code>size</code> parameter.
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Select.Select4/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Select/Select4.md"/>
+        </div>
+        <h3>Disabled</h3>
+        <p>Since <code>readonly</code> is not valid for <code>select</code> we automatically assign it's true value to disabled</p>
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Select.Select5/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Select/Select5.md"/>
+        </div>
+    </div>
+</BSContainer>

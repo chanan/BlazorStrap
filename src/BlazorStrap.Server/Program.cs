@@ -1,4 +1,4 @@
-using BlazorStrap.Extensions;
+using BlazorStrap;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 

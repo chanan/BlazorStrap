@@ -4,7 +4,6 @@ namespace BlazorStrap
 {
     public interface IBlazorStrapBase
     {
-        RenderFragment? ChildContent { get; set; }
         string Class { get; set; }
         string DataId { get; set; }
 

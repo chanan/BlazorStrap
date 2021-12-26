@@ -21,19 +21,19 @@ namespace BlazorStrap.Utilities;
 /// </summary>
 public abstract class BlazorInputBase<TValue> : ComponentBase, IDisposable
 {
-
     private readonly EventHandler<ValidationStateChangedEventArgs> _validationStateChangedHandler;
     private bool _hasInitializedParameters;
     private bool _previousParsingAttemptFailed;
     private ValidationMessageStore? _parsingValidationMessages;
     private Type? _nullableUnderlyingType;
-   
+
     [CascadingParameter] private EditContext? CascadedEditContext { get; set; }
 
     /// <summary>
     /// Gets or sets a collection of additional attributes that will be applied to the created element.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Gets or sets the value of the input. This should be used with two-way binding.
@@ -47,18 +47,21 @@ public abstract class BlazorInputBase<TValue> : ComponentBase, IDisposable
     /// <summary>
     /// Gets or sets a callback that updates the bound value.
     /// </summary>
-    [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
+    [Parameter]
+    public EventCallback<TValue> ValueChanged { get; set; }
 
     /// <summary>
     /// Gets or sets an expression that identifies the bound value.
     /// </summary>
-    [Parameter] public Expression<Func<TValue>>? ValueExpression { get; set; }
+    [Parameter]
+    public Expression<Func<TValue>>? ValueExpression { get; set; }
 
     /// <summary>
     /// Gets or sets the display name for this field.
     /// <para>This value is used when generating error messages when the input value fails to parse correctly.</para>
     /// </summary>
-    [Parameter] public string? DisplayName { get; set; }
+    [Parameter]
+    public string? DisplayName { get; set; }
 
     /// <summary>
     /// Gets the associated <see cref="Microsoft.AspNetCore.Components.Forms.EditContext"/>.
@@ -162,8 +165,8 @@ public abstract class BlazorInputBase<TValue> : ComponentBase, IDisposable
     /// <param name="result">An instance of <typeparamref name="TValue"/>.</param>
     /// <param name="validationErrorMessage">If the value could not be parsed, provides a validation error message.</param>
     /// <returns>True if the value could be parsed; otherwise false.</returns>
-    protected abstract bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out TValue result, [NotNullWhen(false)] out string? validationErrorMessage);
-
+    protected abstract bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out TValue result,
+        [NotNullWhen(false)] out string? validationErrorMessage);
 
 
     /// <inheritdoc />
@@ -176,16 +179,15 @@ public abstract class BlazorInputBase<TValue> : ComponentBase, IDisposable
             // This is the first run
             // Could put this logic in OnInit, but its nice to avoid forcing people who override OnInit to call base.OnInit()
 
-            if (ValueExpression == null )
-            {
-                throw new InvalidOperationException($"{GetType()} requires a value for the 'ValueExpression' " +
-                    $"parameter. Normally this is provided automatically when using 'bind-Value'.");
-            }
-
-            FieldIdentifier = FieldIdentifier.Create(ValueExpression);
-
             if (CascadedEditContext != null)
             {
+                if (ValueExpression == null)
+                {
+                    throw new InvalidOperationException($"{GetType()} requires a value for the 'ValueExpression' " +
+                                                        $"parameter. Normally this is provided automatically when using 'bind-Value'.");
+                }
+
+                FieldIdentifier = FieldIdentifier.Create(ValueExpression);
                 EditContext = CascadedEditContext;
                 EditContext.OnValidationStateChanged += _validationStateChangedHandler;
             }

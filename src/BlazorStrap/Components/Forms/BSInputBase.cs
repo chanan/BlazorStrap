@@ -16,6 +16,7 @@ namespace BlazorStrap
         [Parameter] public int DebounceInterval { get; set; } = 500;
         [Parameter] public string InvalidClass { get; set; } = "is-invalid";
         [Parameter] public bool IsDisabled { get; set; }
+        [Parameter] public TValue IsBasic { get; set; }
         [Parameter] public bool IsInvalid { get; set; }
         [Parameter] public bool IsValid { get; set; }
         [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
@@ -64,6 +65,19 @@ namespace BlazorStrap
                     (CurrentValueAsString) => { InvokeAsync(() => OnChangeEvent(e)); });
         }
 
+        #region Dispose
+
+        private void Dispose()
+        {
+            if (EditContext is not null)
+            {
+                EditContext.OnFieldChanged -= OnFieldChanged;
+                EditContext.OnValidationRequested -= OnValidationRequested;
+            }
+        }
+
+        #endregion
+
         private void DoValidation()
         {
             if (EditContext is null)
@@ -94,19 +108,6 @@ namespace BlazorStrap
             DoValidation();
         }
 
-        #region Dispose
-
-        private void Dispose()
-        {
-            if (EditContext is not null)
-            {
-                EditContext.OnFieldChanged -= OnFieldChanged;
-                EditContext.OnValidationRequested -= OnValidationRequested;
-            }
-        }
-
-        #endregion
-
         #region BlazorStrapBase
 
         /// <summary>
@@ -114,6 +115,7 @@ namespace BlazorStrap
         /// </summary>
         [Parameter]
         public Position Position { get; set; } = Position.Default;
+
         //Copy Paste from BlazorStrapBase
         [Parameter] public RenderFragment? ChildContent { get; set; }
 

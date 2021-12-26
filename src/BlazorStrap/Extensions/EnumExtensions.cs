@@ -9,6 +9,16 @@ namespace BlazorStrap
 {
     public static class EnumExtensions
     {
+        internal static bool VaildGridSize(this string? value)
+        {
+            if (value is "auto" or "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "10" or "11" or "12")
+            {
+                return true;
+            }
+            if(!string.IsNullOrEmpty(value))
+                Console.WriteLine($"Invalid Grid size used {value}");
+            return false;
+        }
         internal static string Name<T>(this T val) where T : Enum
         {
             return Enum.GetName(typeof(T), val) ?? "";

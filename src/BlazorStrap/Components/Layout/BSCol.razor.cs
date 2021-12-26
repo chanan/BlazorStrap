@@ -6,54 +6,54 @@ namespace BlazorStrap
     public partial class BSCol : BlazorStrapBase
     {
         [Parameter] public Align Align { get; set; }
-        [Parameter] public bool Auto { get; set; }
-        [Parameter] public int Column { get; set; }
-        [Parameter] public int ColumnXL { get; set; }
-        [Parameter] public int ColumnXXL { get; set; }
-        [Parameter] public int ColumnLarge { get; set; }
-        [Parameter] public int ColumnMedium { get; set; }
-        [Parameter] public int ColumnSmall { get; set; }
-        [Parameter] public int Offset { get; set; } = -1;
-        [Parameter] public int OffsetXXL { get; set; } = -1;
-        [Parameter] public int OffsetXL { get; set; } = -1;
-        [Parameter] public int OffsetLarge { get; set; } = -1;
-        [Parameter] public int OffsetMedium { get; set; } = -1;
-        [Parameter] public int OffsetSmall { get; set; } = -1;
-        [Parameter] public int Order { get; set; }
+        [Parameter] public string? Column { get; set; }
+        [Parameter] public string? ColumnXL { get; set; }
+        [Parameter] public string? ColumnXXL { get; set; }
+        [Parameter] public string? ColumnLarge { get; set; }
+        [Parameter] public string? ColumnMedium { get; set; }
+        [Parameter] public string? ColumnSmall { get; set; }
+        [Parameter] public string? Offset { get; set; } 
+        [Parameter] public string? OffsetXXL { get; set; } 
+        [Parameter] public string? OffsetXL { get; set; } 
+        [Parameter] public string? OffsetLarge { get; set; } 
+        [Parameter] public string? OffsetMedium { get; set; } 
+        [Parameter] public string? OffsetSmall { get; set; } 
+        [Parameter] public string? Order { get; set; }
         [Parameter] public bool OrderFirst { get; set; }
-        [Parameter] public int OrderLarge { get; set; }
-        [Parameter] public int OrderXL { get; set; }
-        [Parameter] public int OrderXXL { get; set; }
+        [Parameter] public string? OrderLarge { get; set; }
+        [Parameter] public string? OrderXL { get; set; }
+        [Parameter] public string? OrderXXL { get; set; }
         [Parameter] public bool OrderLast { get; set; }
-        [Parameter] public int OrderMedium { get; set; }
-        [Parameter] public int OrderSmall { get; set; }
+        [Parameter] public string? OrderMedium { get; set; }
+        [Parameter] public string? OrderSmall { get; set; }
 
         private string? ClassBuilder => new CssBuilder()
-         .AddClass("col", Column == 0 && ColumnSmall == 0 && ColumnMedium == 0 && ColumnLarge == 0 && !Auto)
-         .AddClass("col-auto", Auto)
-         .AddClass($"col-{Column}", Column > 0 && Column < 13)
-         .AddClass($"col-sm-{ColumnSmall}", ColumnSmall > 0 && ColumnSmall < 13)
-         .AddClass($"col-md-{ColumnMedium}", ColumnMedium > 0 && ColumnMedium < 13)
-         .AddClass($"col-lg-{ColumnLarge}", ColumnLarge > 0 && ColumnLarge < 13)
-         .AddClass($"col-xl-{ColumnXL}", ColumnXL > 0 && ColumnXL < 13)
-         .AddClass($"col-xxl-{ColumnXXL}", ColumnXXL > 0 && ColumnXXL < 13)
-         .AddClass($"order-{Order}", Order > 0 && Order < 13)
-         .AddClass($"order-sm-{OrderSmall}", OrderSmall > 0 && OrderSmall < 13)
-         .AddClass($"order-md-{OrderMedium}", OrderMedium > 0 && OrderMedium < 13)
-         .AddClass($"order-lg-{OrderLarge}", OrderLarge > 0 && OrderLarge < 13)
-         .AddClass($"order-xl-{OrderXL}", OrderXL > 0 && OrderXL < 13)
-         .AddClass($"order-xxl-{OrderXXL}", OrderXXL > 0 && OrderXXL < 13)
-         .AddClass($"order-first", OrderFirst)
-         .AddClass($"order-last", OrderLast)
-         .AddClass($"offset-{Offset}", Offset > -1 && Offset < 13)
-         .AddClass($"offset-sm-{OffsetSmall}", OffsetSmall > -1 && OffsetSmall < 13)
-         .AddClass($"offset-md-{OffsetMedium}", OffsetMedium > -1 && OffsetMedium < 13)
-         .AddClass($"offset-lg-{OffsetLarge}", OffsetLarge > -1 && OffsetLarge < 13)
-         .AddClass($"offset-xl-{OffsetXL}", OffsetXL > -1 && OffsetXL < 13)
-         .AddClass($"offset-xxl-{OffsetXXL}", OffsetXXL > -1 && OffsetXXL < 13)
-         .AddClass($"align-self-{Align.GetName<Align>(Align).ToLower()}", Align != Align.Default)
+         .AddClass("col", Column == null && ColumnSmall == null && ColumnMedium == null && ColumnLarge == null && ColumnXL == null && ColumnXXL == null )
+         .AddClass($"col-{Column}", Column.VaildGridSize())
+         .AddClass($"col-sm-{ColumnSmall}", ColumnSmall.VaildGridSize())
+         .AddClass($"col-md-{ColumnMedium}", ColumnSmall.VaildGridSize())
+         .AddClass($"col-lg-{ColumnLarge}", ColumnLarge.VaildGridSize())
+         .AddClass($"col-xl-{ColumnXL}", ColumnXL.VaildGridSize())
+         .AddClass($"col-xxl-{ColumnXXL}", ColumnXXL.VaildGridSize())
+         .AddClass($"order-{Order}", Order.VaildGridSize())
+         .AddClass($"order-sm-{OrderSmall}", OrderSmall.VaildGridSize())
+         .AddClass($"order-md-{OrderMedium}", OrderMedium.VaildGridSize())
+         .AddClass($"order-lg-{OrderLarge}", OrderLarge.VaildGridSize())
+         .AddClass($"order-xl-{OrderXL}", OrderXL.VaildGridSize())
+         .AddClass($"order-xxl-{OrderXXL}", OrderXXL.VaildGridSize())
+         .AddClass("order-first", OrderFirst)
+         .AddClass("order-last", OrderLast)
+         .AddClass($"offset-{Offset}", Offset.VaildGridSize())
+         .AddClass($"offset-sm-{OffsetSmall}", OffsetSmall.VaildGridSize())
+         .AddClass($"offset-md-{OffsetMedium}", OffsetMedium.VaildGridSize())
+         .AddClass($"offset-lg-{OffsetLarge}", OffsetLarge.VaildGridSize())
+         .AddClass($"offset-xl-{OffsetXL}", OffsetXL.VaildGridSize())
+         .AddClass($"offset-xxl-{OffsetXXL}", OffsetXXL.VaildGridSize())
+         .AddClass($"align-self-{Align.NameToLower()}", Align != Align.Default)
          .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
          .AddClass(Class, !string.IsNullOrEmpty(Class))
          .Build().ToNullString();
+        
+        
     }
 }

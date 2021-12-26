@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Markdig.SyntaxHighlighting" Version="1.0.0" />
+    <PackageReference Include="Markdig.SyntaxHighlighting" Version="1.0.0-custom" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
 	<PackageReference Include="Markdig" Version="0.26.0" />
 	  

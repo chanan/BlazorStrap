@@ -1,0 +1,54 @@
+/* _content/BlazorStrap/Components/BootstrapComponents/BSDropdown.razor.rz.scp.css */
+.dropdown-submenu[b-stsct8r3qo] {
+    position: relative;
+}
+
+  
+    .dropdown-submenu[b-stsct8r3qo]::after {
+        transform: rotate(-90deg);
+        position: absolute;
+        right: 6px;
+        top: .8em;
+    }
+
+    .dropdown-submenu .dropdown-menu[b-stsct8r3qo] {
+        top: 0;
+        left: 100%;
+        margin-left: 0rem;
+        margin-right: .1rem;
+    }
+/* _content/BlazorStrap/Components/BootstrapComponents/BSPopover.razor.rz.scp.css */
+.popover:not(.show)[b-kex6n1b759] {
+   visibility:hidden;
+}
+/* _content/BlazorStrap/Components/BootstrapComponents/BSToggle.razor.rz.scp.css */
+.dropdown-submenu button.dropdown-toggle[b-04kpj09912] {
+    width: 100%;
+}
+
+    .dropdown-submenu button.dropdown-toggle[b-04kpj09912]::after,
+    .dropdown-submenu a[b-04kpj09912]::after {
+        transform: rotate(-90deg);
+    }
+/* _content/BlazorStrap/Components/BootstrapComponents/BSTooltip.razor.rz.scp.css */
+.popover:not(.show)[b-1h1bjrpzgl] {
+   visibility:hidden;
+}
+/* _content/BlazorStrap/InternalComponents/Error.razor.rz.scp.css */
+.bserror[b-doufk0x9zt] {
+    padding: .25rem 1rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #d8d8d8;
+    border-left-width: .2rem;
+    border-right-width: .2rem;
+    border-radius: .25rem;
+    border-left-color: var(--bs-red);
+    border-right-color: var(--bs-red);
+}
+.bserror-header[b-doufk0x9zt] {
+    font-size: 1.5em;
+}
+    .bserror-header svg[b-doufk0x9zt]{
+        vertical-align: middle;
+    }

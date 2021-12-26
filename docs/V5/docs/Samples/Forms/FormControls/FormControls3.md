@@ -1,0 +1,2 @@
+﻿<BSInput InputType="InputType.Text" placeholder="Disabled input" IsDisabled="true" IsBasic="true"/>
+<BSInput InputType="InputType.Text" placeholder="Disabled readonly  input" IsDisabled="true" IsReadonly="true" IsBasic="true"/>

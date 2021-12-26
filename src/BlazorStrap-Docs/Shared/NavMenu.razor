@@ -3,10 +3,10 @@
 
     <ul class="list-unstyled mb-0 py-3 pt-md-3">
         <BSCollapse DefaultShown="true">
-            <Toggler><BSToggle Button="true" Class="d-inline-flex align-items-center rounded">Getting Started</BSToggle></Toggler>
+            <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Getting Started</BSToggle></Toggler>
             <Content>
                 <ul class="list-unstyled fw-normal pb-1 small">
-                    <li><NavLink class="d-inline-flex align-items-center rounded" href="install">Install</NavLink></li>
+                    <li><NavLink class="d-inline-flex align-items-center rounded" href="">Install</NavLink></li>
                     <li><NavLink class="d-inline-flex align-items-center rounded" href="contribute">Contribute</NavLink></li>
                     <li><NavLink class="d-inline-flex align-items-center rounded" href="shared">Shared Parameters</NavLink></li>
                 </ul>
@@ -27,7 +27,7 @@
 
         <li class="mb-1">
             <BSCollapse DefaultShown="@(NavManager.Uri.Contains("/layout/"))">
-                <Toggler><BSToggle Button="true" Class="d-inline-flex align-items-center rounded">Layout</BSToggle></Toggler>
+                <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Layout</BSToggle></Toggler>
                 <Content>
                     <ul class="list-unstyled fw-normal pb-1 small">
                         <li><NavLink class="d-inline-flex align-items-center rounded" href="layout/containers">Containers</NavLink></li>
@@ -37,8 +37,24 @@
             </BSCollapse>
         </li>
         <li class="mb-1">
+                    <BSCollapse DefaultShown="@(NavManager.Uri.Contains("/forms/"))">
+                        <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Forms</BSToggle></Toggler>
+                        <Content>
+                            <ul class="list-unstyled fw-normal pb-1 small">
+                                <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/formcontrols">Form control</NavLink></li>
+                                <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/select">Select</NavLink></li>
+                                <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/checkbox">Checks & Radios</NavLink></li>
+                                <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/Range">Range</NavLink></li>
+                                <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/inputgroup">Input Group</NavLink></li>
+                                <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/inputfile">Input File</NavLink></li>
+                                <li><NavLink class="d-inline-flex align-items-center rounded" href="forms/validation">Validation</NavLink></li>
+                            </ul>
+                        </Content>
+                    </BSCollapse>
+                </li>
+        <li class="mb-1">
             <BSCollapse DefaultShown="@(NavManager.Uri.Contains("/components/"))">
-                <Toggler><BSToggle Button="true" Class="d-inline-flex align-items-center rounded">Components</BSToggle></Toggler>
+                <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Components</BSToggle></Toggler>
                 <Content>
                     <ul class="list-unstyled fw-normal pb-1 small">
                         <li><NavLink class="d-inline-flex align-items-center rounded" href="components/accordion">Accordion</NavLink></li>

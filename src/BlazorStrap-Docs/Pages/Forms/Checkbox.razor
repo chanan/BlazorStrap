@@ -1,0 +1,124 @@
+﻿@page "/forms/checkbox"
+
+<BSContainer Class="bd-main py-3" Size="Container.Fluid">
+    <div class="bd-content">
+        <h2>BSInput</h2>
+        <div class="bd-callout bd-callout-info">
+            <p><strong>Note</strong> <code>IsBasic</code> allows the complier to infer the genertic type of inputs. When not used with <code>@@bind-Value</code> This valid value can be any type example used here is a string with the value of true.</p>
+        </div>
+        <h4>Component &lt;BSInput&gt;</h4>
+        <p><strong>*</strong> indicates required Parameters</p>
+        <BSTable>
+            <BSTHead>
+                <BSTR>
+                    <BSTD>Parameter</BSTD>
+                    <BSTD>Type</BSTD>
+                    <BSTD>Valid</BSTD>
+                    <BSTD>Output/Result</BSTD>
+                </BSTR>
+            </BSTHead>
+            <BSTBody>
+                <BSTR>
+                    <BSTD><strong>*</strong>CheckedValue</BSTD>
+                    <BSTD>
+                        <code>T</code>
+                    </BSTD>
+                    <BSTD>N/A</BSTD>
+                    <BSTD></BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>Color</BSTD>
+                    <BSTD>Enum</BSTD>
+                    <BSTD>BSColor</BSTD>
+                    <BSTD>Button Color</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>IsPlainText</BSTD>
+                    <BSTD>bool</BSTD>
+                    <BSTD>true/false</BSTD>
+                    <BSTD>.form-control-plaintext</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD>IsReadonly</BSTD>
+                    <BSTD>bool</BSTD>
+                    <BSTD>true/false</BSTD>
+                    <BSTD>readonly</BSTD>
+                </BSTR>
+                <BSTR>
+                    <BSTD colspan="4">See shared for additonal parameters</BSTD>
+                </BSTR>
+            </BSTBody>
+        </BSTable>
+        <p><code>@@("value")</code> is not required it's a line declaration of a string to make the demo work</p>
+        <h3>Default</h3>
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Checkbox.Checkbox1/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Checkbox/Checkbox1.md"/>
+        </div>
+        <h3>Indeterminate</h3>
+        <!--<div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Checkbox.Checkbox2/>
+        </div>-->
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Checkbox/Checkbox2.md"/>
+        </div>
+        <h3>Disabled</h3>
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Checkbox.Checkbox3/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Checkbox/Checkbox3.md"/>
+        </div>
+        <h3>Radios</h3>
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Checkbox.Checkbox4/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Checkbox/Checkbox4.md"/>
+        </div>
+        <h3>Disabled</h3>
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Checkbox.Checkbox5/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Checkbox/Checkbox5.md"/>
+        </div>
+        <h3>Disabled</h3>
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Checkbox.Checkbox6/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Checkbox/Checkbox6.md"/>
+        </div>
+        <h3>Inline</h3>
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Checkbox.Checkbox7/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Checkbox/Checkbox7.md"/>
+        </div>
+        <h3>Toggle buttons</h3>
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Checkbox.Checkbox8/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Checkbox/Checkbox8.md"/>
+        </div>
+        <h3>Radio toggle buttons</h3>
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Checkbox.Checkbox9/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Checkbox/Checkbox9.md"/>
+        </div>
+        <h3>Outlined styles</h3>
+        <div class="bd-example">
+            <BlazorStrap_Docs.Samples.Forms.Checkbox.Checkbox10/>
+        </div>
+        <div class="highlight">
+            <CodeBlock Source="docs/Samples/Forms/Checkbox/Checkbox10.md"/>
+        </div>
+    </div>
+</BSContainer>

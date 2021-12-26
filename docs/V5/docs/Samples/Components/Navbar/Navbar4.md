@@ -2,7 +2,7 @@
     <BSContainer Container="Container.Fluid">
         <BSNavbarBrand Url="javascript:void(0);">
             <img src="logo.svg" width="30" class="d-inline-block align-text-top"/>
-            BlazorStrap5
+            BlazorStrap
         </BSNavbarBrand>
     </BSContainer>
 </BSNavbar>
