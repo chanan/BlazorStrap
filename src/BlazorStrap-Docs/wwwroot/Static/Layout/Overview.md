@@ -4,8 +4,8 @@ See [shared](layout/shared) for parameters
 
 The following is a list of general layout Components and helpers provided.
   
-Our layout classes are intended helper components to write there html counterpart. Without the need to remember classes. The is nothing preventing you from writing their html couterpart. 
-If you ever need a class we did not provide in your element you can insert in with the `Class` parameter. We provide all bootstrap class as static string use `BS.`
+Our layout components are intended helpers to write their html counterpart. Without the need to remember classes. The is nothing preventing you from writing their html counterpart. 
+If you ever need a class we did not provide in your element you can insert in with the `Class` parameter. We provide all bootstrap class as static string use `BS.` class
 
 * `<BSDiv>` is equivalent to `<div>` with our shared parameters
 * `<BSContainer>` is equivalent to `<div class="container">` 
@@ -13,6 +13,14 @@ If you ever need a class we did not provide in your element you can insert in wi
 * `<BSCol>` is equivalent to `<div class="col">`
 * `<BSColBreak>`  is equivalent to `<div class="w-100">`
 * `<BSLink>` is equivalent to `<a class="" href=""></a>`
+* `<BSTable>` is equivalent to `<table class="table">` but with our formatting parameters
+* `<BSTHead>` is equivalent to `<thead>` but with our formatting parameters
+* `<BSTBody>` is equivalent to `<tbody>` but with our formatting parameters
+* `<BSTR>` is equivalent to `<TR>` but with our formatting parameters
+* `<BSTD>` is equivalent to `<TD>` but with our formatting parameters
+* `<BSTFoot>` is equivalent to `<tfoot>` but with our formatting parameters
+* `<BSCaption>` is equivalent to `<caption>` but with our formatting parameters
+* `<BSCard>`,`<BSCardBody>`,`<BSCardFooter>`,`<BSCardHeader>` is equivalent to `<div class="card [foo]">` but with our formatting parameters
 
 ----
 

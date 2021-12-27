@@ -24,8 +24,9 @@ See [shared](layout/shared) for additional parameters
 
 ### Background colors
 
-{{sample=Components/Badge/Badge4}}
+{{sample=Components/Badge/Badge5}}
 
 ### Pill badges
 
-{{sample=Components/Badge/Badge5}}
+{{sample=Components/Badge/Badge4}}
+
