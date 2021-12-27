@@ -10,7 +10,7 @@ Bootstrap 5 Components for Blazor Framework
 1. Download the V5.0 package from nuget: [![nuget](https://img.shields.io/badge/nuget-Download%205.x-blue)](https://www.nuget.org/packages/BlazorStrap)
 2. Modify your index.html with the following.
    1. Inside the ```<head>``` add 
-      1. ```<link href="YourAssemblyName.styles.css" rel="stylesheet">``` )
+      1. ```<link href="BlazorStrap.WASM.styles.css" rel="stylesheet">``` )
    2. At the end of the ```<body>``` add 
       1. ```<script src="_content/BlazorStrap/popper.min.js"></script>```
       2. ```<script src="_content/BlazorStrap/blazorstrap.js"></script>```
@@ -23,7 +23,7 @@ Bootstrap 5 Components for Blazor Framework
 1. Download the V5.0 package from nuget:[![nuget](https://img.shields.io/badge/nuget-Download%205.x-blue)](https://www.nuget.org/packages/BlazorStrap)
 2. Modify your _host.cshtml with the following.
    1. Inside the ```<head>``` add
-      1. ```<link href="YourAssemblyName.styles.css" rel="stylesheet">```
+      1. ```<link href="BlazorStrap.WASM.styles.css" rel="stylesheet">```
    2. At the end of the ```<body>``` add
       1. ```<script src="_content/BlazorStrap/popper.min.js"></script>```
       2. ```<script src="_content/BlazorStrap/blazorstrap.js"></script>```

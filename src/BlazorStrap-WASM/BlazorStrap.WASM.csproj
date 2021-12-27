@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
+    <InvariantGlobalization>true</InvariantGlobalization>
 	<BlazorCacheBootResources>false</BlazorCacheBootResources>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
