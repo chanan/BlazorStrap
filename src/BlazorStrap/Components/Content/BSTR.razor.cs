@@ -11,8 +11,8 @@ namespace BlazorStrap
 
         private string? ClassBuilder => new CssBuilder()
           .AddClass("table-active", IsActive)
-          .AddClass($"table-{BSColor.GetName<BSColor>(Color).ToLower()}", Color != BSColor.Default)
-          .AddClass($"align-{AlignRow.GetName<AlignRow>(AlignRow).ToLower()}", AlignRow != AlignRow.Default)
+          .AddClass($"table-{Color.NameToLower()}", Color != BSColor.Default)
+          .AddClass($"align-{AlignRow.NameToLower()}", AlignRow != AlignRow.Default)
           .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
           .AddClass(Class, !string.IsNullOrEmpty(Class))
           .Build().ToNullString();

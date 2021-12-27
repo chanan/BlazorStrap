@@ -1,0 +1,4 @@
+﻿<svg style="font-size: 3rem;text-anchor: middle" width="1200" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 400x300" preserveAspectRatio="xMidYMid slice" focusable="false">
+    <rect width="100%" height="100%" fill="#868e96"></rect>
+    <text x="50%" y="50%" fill="#dee2e6" dy=".3em" id="svg-text">Animated SVG</text>
+</svg>

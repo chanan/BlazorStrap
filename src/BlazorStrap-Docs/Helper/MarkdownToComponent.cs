@@ -69,6 +69,7 @@ namespace BlazorStrap_Docs.Helper
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+            var hasCss = false;
             if (NotFound)
             {
                     builder.AddContent(0, ChildContent);
@@ -97,6 +98,12 @@ namespace BlazorStrap_Docs.Helper
                             typeName = typeName.Substring(0, typeName.IndexOf(";"));
                             if (classList.StartsWith(" "))
                                 classList = classList.Substring(1);
+                            if(classList.Contains(";CSS"))
+                            {
+                                hasCss = true;
+                                classList = classList.Replace(";CSS", "");
+                            }
+
                         }
                         var type = StringToType($"{NamespaceRoot}.{typeName}");
                         if (type != null)
@@ -108,9 +115,8 @@ namespace BlazorStrap_Docs.Helper
                             builder.CloseElement();
                             builder.OpenComponent(x++, typeof(CodeBlock));
                             builder.AddAttribute(x++, "Source", $"{WebRoot}{typeName.Replace(".", "/")}");
+                            builder.AddAttribute(x++, "CSS", hasCss);
                             builder.CloseComponent();
-                            
-                            //builder.AddContent(i, matches[i].ToString() + "<------- Would add comp here");    
                         }
                     }
                     ++i;

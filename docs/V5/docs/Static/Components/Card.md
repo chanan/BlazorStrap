@@ -1,6 +1,14 @@
 ﻿## Cards
-:::{.bd-callout .bd-callout-info}
-**Work inprogress** Documentation is still being written for this component
+
+#### Components \<BSCard\> \<BSCardBody\> \<BSCardHeader\> \<BSCardFooter\>
+See [shared](layout/shared) for additional parameters
+
 :::
 
-#### Component \<BSCard\>
+| Parameter | Type | Valid   | Remarks/Output | 
+|-----------|------|---------|----------------|
+| Color     | Enum | BSColor | `.bg-[]`       | {.table-striped .p-2}
+
+:::
+
+For examples of cards inuse see bootstraps official documentation

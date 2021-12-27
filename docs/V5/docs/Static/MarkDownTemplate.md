@@ -5,8 +5,7 @@ See [shared](layout/shared) for additional parameters
 
 | Parameter | Type | Valid | Remarks/Output | 
 |-----------|------|-------|----------------|
-|           |      |       |                | {.table-striped .p-2}  
-
+|           |      |       |                | {.table-striped .p-2}
 
 :::
 

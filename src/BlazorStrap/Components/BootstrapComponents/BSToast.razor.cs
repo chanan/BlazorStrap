@@ -11,7 +11,6 @@ namespace BlazorStrap
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
         [Parameter] public RenderFragment Content { get; set; }
         [Parameter] public string ContentClass { get; set; }
-        
         [Parameter] public RenderFragment Header { get; set; }
         [Parameter] public string HeaderClass { get; set; }
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
@@ -34,16 +33,16 @@ namespace BlazorStrap
 
         private bool Shown { get; set; } = true;
 
+        public void Toggle()
+        {
+            Shown = !Shown;
+        }
+
         private async Task ClickEvent()
         {
             if (!OnClick.HasDelegate)
                 Toggle();
             await OnClick.InvokeAsync();
-        }
-
-        public void Toggle()
-        {
-            Shown = !Shown;
         }
     }
 }

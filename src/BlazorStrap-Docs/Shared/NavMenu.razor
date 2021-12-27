@@ -12,18 +12,30 @@
                 </ul>
             </Content>
         </BSCollapse>
-
         <li class="mb-1">
             <BSCollapse DefaultShown="@(NavManager.Uri.Contains("/layout/"))">
                 <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Layout</BSToggle></Toggler>
                 <Content>
                     <ul class="list-unstyled fw-normal pb-1 small">
+                        <li><NavLink class="d-inline-flex align-items-center rounded" href="layout/overview">Overview</NavLink></li>
                         <li><NavLink class="d-inline-flex align-items-center rounded" href="layout/containers">Containers</NavLink></li>
                         <li><NavLink class="d-inline-flex align-items-center rounded" href="layout/columns">Columns</NavLink></li>
                     </ul>
                 </Content>
             </BSCollapse>
         </li>
+          <li class="mb-1">
+                    <BSCollapse DefaultShown="@(NavManager.Uri.Contains("/layout/"))">
+                        <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Content</BSToggle></Toggler>
+                        <Content>
+                            <ul class="list-unstyled fw-normal pb-1 small">
+                                <li><NavLink class="d-inline-flex align-items-center rounded" href="content/tables">Tables</NavLink></li>
+                                <li><NavLink class="d-inline-flex align-items-center rounded" href="content/images">Images</NavLink></li>
+                                <li><NavLink class="d-inline-flex align-items-center rounded" href="content/figures">Figures</NavLink></li>
+                            </ul>
+                        </Content>
+                    </BSCollapse>
+                </li>
         <li class="mb-1">
                     <BSCollapse DefaultShown="@(NavManager.Uri.Contains("/forms/"))">
                         <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Forms</BSToggle></Toggler>

@@ -7,10 +7,10 @@ namespace BlazorStrap
     {
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
 
-        internal string? ClassBuilder => new CssBuilder("card")
-            .AddClass($"bs-{BSColor.GetName<BSColor>(Color).ToLower()}", Color != BSColor.Default)
-            .AddClass(LayoutClass, !String.IsNullOrEmpty(LayoutClass))
-            .AddClass(Class, !String.IsNullOrEmpty(Class))
+        private string? ClassBuilder => new CssBuilder("card")
+            .AddClass($"bg-{BSColor.GetName<BSColor>(Color).ToLower()}", Color != BSColor.Default)
+            .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
+            .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
     }
 }

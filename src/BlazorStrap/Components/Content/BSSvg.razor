@@ -3,11 +3,11 @@
 
 @if (string.IsNullOrWhiteSpace(Source))
 {
-    <DynamicElement @attributes="@Attributes" TagName="svg" class="@ClassBuilder">
+    <svg @attributes="Attributes" class="@ClassBuilder">
         @ChildContent
-    </DynamicElement>
+    </svg>
 }
 else
 {
-        @Markup
+    @Markup
 }

@@ -1,7 +1,5 @@
 ﻿## Tooltips
-:::{.bd-callout .bd-callout-info}
-**Work inprogress** Documentation is still being written for this component
-:::
+
 #### Component \<BSTooltip\>
 See [shared](layout/shared) for additional parameters    
 :::

@@ -8,9 +8,9 @@
   "resources": {
     "assembly": {
       "BlazorComponentUtilities.dll": "sha256-UapksNiQg3lu5QM9uVSLyjEuzRH\/7o22fmcmxcLAAeI=",
-      "BlazorStrap-Docs.dll": "sha256-6SmotuhRL59w4d8XcAQnT6Ns02rCHJq5su75AeGKSe0=",
-      "BlazorStrap.dll": "sha256-tAg9k0+qvPQHdvtLaBvVlMPBjl\/DgDzq\/l5SSAcOuZg=",
-      "BlazorStrap.WASM.dll": "sha256-o6WSeV1yhA4RncpWhtM1dnDA1n0z7G6pbALILSEH4X8=",
+      "BlazorStrap-Docs.dll": "sha256-QPsBBm3ID+Ljd1DXCkbxx19xTCFvPARHwxrFFoJWA68=",
+      "BlazorStrap.dll": "sha256-zhaNXMlq591uel9LGwiLg1mg74cxKGP1GaZXWQT95qk=",
+      "BlazorStrap.WASM.dll": "sha256-1Obwaj0xMRDR3w8Fsc+SNIzL+\/0DDD9chAumFXbWLpc=",
       "ColorCode.dll": "sha256-hF07ps23in9mbwaN4uSoZklQVfyJIw2Ep4R448bfkOk=",
       "Markdig.dll": "sha256-9\/ICq2gSL+hjhMdZXNoIRs8wyZFtZpr3yFSW+RQVdoQ=",
       "Markdig.SyntaxHighlighting.dll": "sha256-qkuHEt7805bTVSkNsvDi5CT5M3Q4VSK619BHVC+FdKs=",
@@ -48,7 +48,7 @@
       "System.Net.Http.dll": "sha256-SG1ErxalwWL+oTNjRbGYkVXkuk1onIlIJTlyaGj\/d44=",
       "System.Net.Primitives.dll": "sha256-3sI1NNIqa\/NbsiwoB9ge3te+b4FnMCiOJO1UBN3PeUA=",
       "System.ObjectModel.dll": "sha256-UG4O9ciL695mY+vsFCa\/RG7XLv2tIXBQF2ChiVBasFE=",
-      "System.Private.CoreLib.dll": "sha256-7CS2MxOH9nrW6zKJUFrgQsHiqsVmoyuF2e1hVlPDQ14=",
+      "System.Private.CoreLib.dll": "sha256-BssDLPaUB6rCJJ2BEhbhF71aPR\/00S4IiunH18MN0E4=",
       "System.Private.Runtime.InteropServices.JavaScript.dll": "sha256-C00EjhH1PgivSevy5JGkGQ6O6iWgPnZ6YYi9\/nQBPa4=",
       "System.Private.Uri.dll": "sha256-S5HrTdUD7cIVcEOhVBdvWtQkO2n5w9JKWvt0tJQJHeQ=",
       "System.Resources.ResourceManager.dll": "sha256-gzbrKVMiTK1iPLy43DV1yztdRJ7ai4r7P0dbHJgXLjE=",
@@ -57,7 +57,7 @@
       "System.Runtime.Extensions.dll": "sha256-86NAVOpK5\/GQ2C1DX7ZuekbgQlBEscXP4cMkAkOCjqI=",
       "System.Text.Encodings.Web.dll": "sha256-wpoIHsG+HQYfKV\/LKarpVXK2PbZYvgTPWpbVVJq210Y=",
       "System.Text.Json.dll": "sha256-HMBYGXVQ+t7wMbKPaoLSwA1ckk304a+PfRaNrtmMPRM=",
-      "System.Text.RegularExpressions.dll": "sha256-OQ5DPeTuHKGXWcEXYjwSHz2IiDaN6xrGXb2mfqbPDYU=",
+      "System.Text.RegularExpressions.dll": "sha256-RbA+qwbxqD3VjxNNeMPC3kY61fh5iPzv43lT8Bcb3qE=",
       "System.Threading.dll": "sha256-p4CYU7JQH61ZxpDuI1oa0NU+Mz931l7kZUJ\/ehgDL5w="
     },
     "extensions": null,

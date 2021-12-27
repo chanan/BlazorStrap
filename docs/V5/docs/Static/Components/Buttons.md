@@ -3,8 +3,8 @@
 **Work inprogress** Documentation is still being written for this component
 :::
 #### Component \<BSButton\>
+See [shared](layout/shared) for additional parameters   
 
-See [shared](layout/shared) for additional parameters    
 :::
 
 | Parameter  | Type          | Valid          | Remarks/Output               | 
