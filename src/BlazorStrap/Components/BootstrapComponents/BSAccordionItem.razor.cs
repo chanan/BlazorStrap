@@ -77,7 +77,6 @@ namespace BlazorStrap
             {
                 HasRendered = true;
             }
-            Console.WriteLine("Rendered");
         }
 
         protected override void OnInitialized()
