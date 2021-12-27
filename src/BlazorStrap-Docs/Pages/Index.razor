@@ -1,8 +1,23 @@
 ﻿@page "/{Area?}/{Page?}"
 @implements IDisposable;
 @inject NavigationManager Navman
+
+
 <BSContainer Class="bd-main py-3" Size="Container.Fluid">
     <div class="bd-content">
+            <BSDropdown IsDiv="true" Placement="Placement.BottomStart">
+                <Toggler>
+                    <BSToggle>Test</BSToggle>
+                </Toggler>
+                <Content>
+                    <BSDropdown  Placement="Placement.RightEnd">
+                        <Toggler>
+                            <BSToggle>Test</BSToggle>
+                        </Toggler>
+                        <Content>Test</Content>
+                    </BSDropdown>
+                </Content>
+            </BSDropdown>
         <MarkdownToComponent Source="@Source" NamespaceRoot="BlazorStrap_Docs.Samples" WebRoot="docs/Samples/" DefaultClass="bd-example">
             404
         </MarkdownToComponent>

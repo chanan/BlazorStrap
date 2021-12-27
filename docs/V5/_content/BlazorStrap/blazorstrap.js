@@ -197,6 +197,7 @@ window.blazorStrap = {
         });
     },
     PeakHeight: async function (element) {
+        if(element === null || element === undefined) return;
         return new Promise(function (resolve) {
             element.style.visibility = "hidden";
             element.style.position = "absolute";
@@ -210,6 +211,7 @@ window.blazorStrap = {
         });
     },
     GetHeight: async function (element) {
+        if(element === null || element === undefined) return;
         return new Promise(function (resolve) {
             resolve(element.offsetHeight);
         });
@@ -243,6 +245,7 @@ window.blazorStrap = {
         });
     },
     SetStyle: async function (element, style, value, delay = 0) {
+        if(element === null || element === undefined) return;
         element.style[style] = value;
         return new Promise(function (resolve) {
             if (delay !== 0)
@@ -252,21 +255,25 @@ window.blazorStrap = {
         });
     },
     GetStyle: async function (element) {
+        if(element === null || element === undefined) return;
         return element.style.cssText;
     },
     AddAttribute: async function (element, name, value) {
+        if(element === null || element === undefined) return;
         return new Promise(function (resolve) {
             element.setAttribute(name, value);
             resolve();
         });
     },
     RemoveAttribute: async function (element, name) {
+        if(element === null || element === undefined) return;
         return new Promise(function (resolve) {
             element.removeAttribute(name);
             resolve();
         });
     },
     AddClass: async function (element, className, delay = 0) {
+        if(element === null || element === undefined) return;
         element.classList.add(className);
         return new Promise(function (resolve) {
             if (delay !== 0)
@@ -296,6 +303,7 @@ window.blazorStrap = {
         })
     },
     RemoveClass: async function (element, className, delay = 0) {
+        if(element === null || element === undefined) return;
         element.classList.remove(className);
         return new Promise(function (resolve) {
             if (delay !== 0)

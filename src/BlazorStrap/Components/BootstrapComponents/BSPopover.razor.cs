@@ -5,8 +5,9 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSPopover : BlazorStrapBase, IAsyncDisposable
+    public partial class BSPopover : BlazorStrapBase, IAsyncDisposable, IDisposable
     {
+        private bool _isDisposing;
         [Parameter] public RenderFragment? Content { get; set; }
         /// <summary>
         /// This Parameter is intended for internal use 
@@ -43,7 +44,7 @@ namespace BlazorStrap
             .Build().ToNullString();
 
         private ElementReference MyRef { get; set; }
-        internal bool Shown { get; set; }
+        private bool Shown { get; set; }
         private string Style { get; set; } = "display:none;";
 
         public async Task HideAsync()
@@ -51,9 +52,7 @@ namespace BlazorStrap
             Shown = false;
             await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "show", 100);
             await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "display", "none");
-            
             await Js.InvokeVoidAsync("blazorStrap.RemovePopover", MyRef, DataId);
-            
             Style = "display:none;";
             await InvokeAsync(StateHasChanged);
         }
@@ -126,6 +125,7 @@ namespace BlazorStrap
 
         public async ValueTask DisposeAsync()
         {
+            
             JSCallback.EventHandler -= OnEventHandler;
 
             // Prerendering error suppression 
@@ -149,6 +149,16 @@ namespace BlazorStrap
                 }
 
             GC.SuppressFinalize(this);
+        }
+
+        /// <inheritdoc/>
+        protected virtual void Dispose(bool disposing)
+        {
+        }
+        public void Dispose()
+        {
+            _isDisposing = true;
+            Dispose(_isDisposing);
         }
     }
 }

@@ -11,16 +11,32 @@
 <CascadingValue Value="this">
     @if (Parent != null)
     {
-        <div class="dropdown dropdown-submenu">
-            @Toggler
-            <ul class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
-                @Content
-            </ul>
-        </div>
+        if (!IsDiv && Parent?.IsDiv == false)
+        {
+            <li class="@IsDivClassBuilder">
+                @Toggler
+                <BSPopover DropdownOffset="@Offset" Placement="Placement" IsDropdown="true" Class="@GroupClassBuilder" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
+                    <Content>
+                        @Content
+                    </Content>
+                </BSPopover>
+            </li>
+        }
+        else
+        {
+            <div class="@IsDivClassBuilder">
+                @Toggler
+                <BSPopover DropdownOffset="@Offset" Placement="Placement" IsDropdown="true" Class="@GroupClassBuilder" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
+                    <Content>
+                        @Content
+                    </Content>
+                </BSPopover>
+            </div>
+        }
     }
     else
     {
-        @if (NavItem != null )
+        @if (NavItem != null)
         {
             @Toggler
             <ul class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-bs-popper="blazorstrap" data-blazorstrap="@DataId">
@@ -33,7 +49,7 @@
                 @Content
             </ul>
         }
-        else if(Group != null && Target != null && !IsStatic)
+        else if (Group != null && Target != null && !IsStatic)
         {
             @Toggler
             <BSPopover DropdownOffset="@Offset" Placement="Group.DropdownPlacement" IsDropdown="true" Class="@GroupClassBuilder" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
@@ -42,14 +58,16 @@
                 </Content>
             </BSPopover>
         }
-        else if(IsDiv)
+        else if (IsDiv)
         {
-            @Toggler
-            <BSPopover DropdownOffset="@Offset" Placement="Group.DropdownPlacement" IsDropdown="true" Class="@GroupClassBuilder" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
-                <Content>
-                    @Content
-                </Content>
-            </BSPopover>
+            <div class="@IsDivClassBuilder">
+                @Toggler
+                <BSPopover DropdownOffset="@Offset" Placement="Placement" IsDropdown="true" Class="@GroupClassBuilder" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
+                    <Content>
+                        @Content
+                    </Content>
+                </BSPopover>
+            </div>
         }
         else
         {
@@ -60,6 +78,5 @@
                 </ul>
             </div>
         }
-
     }
 </CascadingValue>

@@ -44,7 +44,7 @@ namespace BlazorStrap
         {
             if (DropDownParent != null)
             {
-                if (DropDownParent.Group != null)
+                if (DropDownParent.Group != null || DropDownParent.IsDiv)
                 {
                     DataId = DropDownParent.Target;
                 }

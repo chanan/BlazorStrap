@@ -18,14 +18,23 @@ namespace BlazorStrap
         [Parameter] public bool IsStatic { get; set; }
         [Parameter] public string? Offset { get; set; }
         [Parameter] public string? ShownAttribute { get; set; }
+        [Parameter] public string SubmenuClass { get; set; } = "dropdown-submenu";
         [Parameter] public string Target { get; set; } = Guid.NewGuid().ToString();
         [Parameter] public RenderFragment? Toggler { get; set; }
         [CascadingParameter] public BSButtonGroup? Group { get; set; }
         [CascadingParameter] public BSNavItem? NavItem { get; set; }
         [CascadingParameter] public BSDropdown? Parent { get; set; }
+        [Parameter] public Placement Placement { get; set; } = Placement.RightEnd;
         internal bool Active { get; set; }
         internal int ChildCount { get; set; }
 
+        private string? IsDivClassBuilder => new CssBuilder()
+            .AddClass(SubmenuClass, Parent != null)
+            .AddClass("dropdown", Parent == null)
+            .AddClass("dropup", Placement is Placement.Top or Placement.TopEnd or Placement.TopStart)
+            .AddClass("dropstart", Placement is Placement.Left or Placement.LeftEnd or Placement.LeftStart)
+            .AddClass("dropend", Placement is Placement.Right or Placement.RightEnd or Placement.RightStart)
+            .Build().ToNullString();
         private string? ClassBuilder => new CssBuilder("dropdown-menu")
             .AddClass("dropdown-menu-dark", IsDark)
             .AddClass("show", Shown)
@@ -49,7 +58,7 @@ namespace BlazorStrap
             if(!AllowOutsideClick)
                 await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataRefId, "documentDropdown", "click", true);
             Shown = false;
-            if ((Group != null && PopoverRef != null && !IsStatic) || IsDiv)
+            if ((Group != null && PopoverRef != null && !IsStatic) ||  (IsDiv || Parent != null))
             {
                 await PopoverRef.HideAsync();
             }
@@ -65,7 +74,7 @@ namespace BlazorStrap
             if(!AllowOutsideClick)
                 await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataRefId, "documentDropdown", "click", true, AllowItemClick);
             Shown = true;
-            if ((Group != null && PopoverRef != null && !IsStatic)  || IsDiv)
+            if ((Group != null && PopoverRef != null && !IsStatic)  || (IsDiv || Parent != null))
             {
                 await PopoverRef.ShowAsync();
             }
