@@ -108,7 +108,6 @@ namespace BlazorStrap
                 await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "show");
             }
             Shown = !Shown;
-            Console.WriteLine(Shown);
             await InvokeAsync(StateHasChanged);
         }
 

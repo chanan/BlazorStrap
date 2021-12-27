@@ -79,7 +79,6 @@ namespace BlazorStrap
             {
                 if (!_leaveBodyAlone)
                 {
-                    _leaveBodyAlone = false;
                     await Js.InvokeVoidAsync("blazorStrap.RemoveBodyClass", "modal-open");
                     await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "");
                     await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", "");
@@ -94,6 +93,7 @@ namespace BlazorStrap
                     await TransitionEndAsync();
                 }
             }
+            _leaveBodyAlone = false;
         }
 
         public async Task ShowAsync()
@@ -113,10 +113,17 @@ namespace BlazorStrap
 
                 if (!AllowScroll)
                 {
+                    
                     var scrollWidth = await Js.InvokeAsync<int>("blazorStrap.GetScrollBarWidth");
-                    await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "hidden");
-                    if (scrollWidth != 0)
-                        await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", $"{scrollWidth}px");
+                    var viewportheight = await Js.InvokeAsync<int>("blazorStrap.GetInnerHeight");
+                    var peakHeight = await Js.InvokeAsync<int>("blazorStrap.PeakHeight", MyRef);
+
+                    if (viewportheight > peakHeight)
+                    {
+                        await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "hidden");
+                        if (scrollWidth != 0)
+                            await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", $"{scrollWidth}px");
+                    }
                 }
             }
             BlazorStrapService.ModalChanged(this);
@@ -220,14 +227,13 @@ namespace BlazorStrap
                 }
 
                 if (_shown)
-                    await ToggleAsync();
+                    await HideAsync();
                 return;
             }
-
             if (model == this || !_shown) return;
             _leaveBodyAlone = true;
-            await Task.Delay(50);
-            await ToggleAsync();
+            if(_shown)
+            await HideAsync();
         }
 
         public async ValueTask DisposeAsync()

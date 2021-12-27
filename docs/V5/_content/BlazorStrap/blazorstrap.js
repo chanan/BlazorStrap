@@ -12,8 +12,10 @@ window.blazorStrap = {
             if (blazorStrap.EventHandlers[id] === undefined) {
                 blazorStrap.EventHandlers[id] = {};
             }
-            blazorStrap.EventHandlers[id][name] = {
-                [type]: {
+            if(blazorStrap.EventHandlers[id][name] === undefined) {
+                blazorStrap.EventHandlers[id][name] = {};
+            }
+            blazorStrap.EventHandlers[id][name][type] = {
                     Callback: function (event) {
                         if (name === "documentDropdown") {
                             let parent = document.querySelector("[data-blazorstrap='" + id + "']");
@@ -41,7 +43,7 @@ window.blazorStrap = {
                         }
                     }
                 }
-            }
+            
 
             element.addEventListener(type, blazorStrap.EventHandlers[id][name][type].Callback, false);
             resolve();
@@ -210,6 +212,11 @@ window.blazorStrap = {
     GetHeight: async function (element) {
         return new Promise(function (resolve) {
             resolve(element.offsetHeight);
+        });
+    },
+    GetInnerHeight: async function () {
+        return new Promise(function (resolve) {
+            resolve(window.innerHeight);
         });
     },
     SetBodyStyle: async function (style, value) {

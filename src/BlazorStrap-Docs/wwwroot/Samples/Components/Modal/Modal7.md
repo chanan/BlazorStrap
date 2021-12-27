@@ -5,7 +5,7 @@
         <BSButton MarginStart="Margins.Auto" Color="BSColor.Secondary" Target="modal7b">Open second modal</BSButton>
     </Footer>
 </BSModal>
-<BSModal id="modal7b" IsCentered="true">
+<BSModal DataId="modal7b" IsCentered="true">
     <Header>Modal 2</Header>
     <Content>Hide this modal and show the first with the button below.</Content>
     <Footer>

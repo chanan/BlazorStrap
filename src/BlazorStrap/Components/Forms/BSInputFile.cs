@@ -82,7 +82,6 @@ namespace BlazorStrap
 
             if (EditContext is not null)
             {
-                Console.WriteLine(FieldIdentifier.FieldName);
                 EditContext.NotifyFieldChanged(FieldIdentifier);
                 EditContext.NotifyValidationStateChanged();
             }
