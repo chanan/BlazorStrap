@@ -12,6 +12,7 @@ See [shared](layout/shared) for additional parameters
 | IsFixedTop    | bool | true/false | `.fixed-top`                     |
 | IsHeader      | bool | true/false | `<Header>`                       |
 | IsStickyTop   | bool | true/false | `.sticky-top`                    |
+| NoNavbarClass | bool | true       | Removes `.navbar`                |
 
 :::
 

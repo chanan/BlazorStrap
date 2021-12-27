@@ -1,6 +1,7 @@
 ﻿## Nav & Tabs
 #### Component \<BSNav\>
-See [shared](layout/shared) for additional parameters    
+See [shared](layout/shared) for additional parameters
+
 :::
 
 | Parameter   | Type | Valid      | Remarks/Output        | 
@@ -12,7 +13,27 @@ See [shared](layout/shared) for additional parameters
 | IsTabs      | bool | true/false | `.nav-tabs`           |
 | IsVertical  | bool | true/false | `.flex-column`        |
 | IsJustified | bool | true/false | `.nav-justified`      |
+| NoNav       | bool | true/false | Removes `.nav`        |
 | NoNavbarNav | bool | true/false | Removes `.navbar-nav` |
+
+:::
+
+#### Component \<BSNavItem\>
+See [shared](layout/shared) for additional parameters
+
+:::
+
+| Parameter      | Type           | Valid          | Remarks/Output           | 
+|----------------|----------------|----------------|--------------------------|
+| IsActive       | bool           | true/false     | `.active`                | {.table-striped}
+| IsDisabled     | bool           | true/false     | `.disabled`              |
+| IsDropdown     | bool           | true/false     | `.dropdown`              |
+| NoNavItem      | bool           | true/false     | Removes `.nav-item`      |
+| PreventDefault | bool           | true/false     | Prevents default onclick |
+| Url            | bool           | true/false     | href = Url               |
+| TabContent     | RenderFragment | RenderFragment | Nested Content           |
+| TabLabel       | RenderFragment | RenderFragment | Nested Content           |
+| OnClick        | EventCallback  | MouseEventArgs |                          |
 
 :::
 

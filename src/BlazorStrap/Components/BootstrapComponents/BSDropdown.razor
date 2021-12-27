@@ -42,6 +42,15 @@
                 </Content>
             </BSPopover>
         }
+        else if(IsDiv)
+        {
+            @Toggler
+            <BSPopover DropdownOffset="@Offset" Placement="Group.DropdownPlacement" IsDropdown="true" Class="@GroupClassBuilder" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
+                <Content>
+                    @Content
+                </Content>
+            </BSPopover>
+        }
         else
         {
             <div class="dropdown">

@@ -5,6 +5,7 @@ namespace BlazorStrap
 {
     public partial class BSNavbar : BlazorStrapBase
     {
+        [Parameter] public bool NoNavbarClass { get; set; }
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
         [Parameter] public Size Expand { get; set; } = Size.Medium;
         [Parameter] public bool IsDark { get; set; }
@@ -13,7 +14,8 @@ namespace BlazorStrap
         [Parameter] public bool IsHeader { get; set; }
         [Parameter] public bool IsStickyTop { get; set; }
 
-        private string? ClassBuilder => new CssBuilder("navbar")
+        private string? ClassBuilder => new CssBuilder()
+            .AddClass("navbar", !NoNavbarClass)
             .AddClass("navbar-light", !IsDark)
             .AddClass("navbar-dark", IsDark)
             .AddClass("fixed-top", IsFixedTop)

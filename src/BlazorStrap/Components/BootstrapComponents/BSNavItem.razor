@@ -23,7 +23,7 @@
         {
             if (!IsDropdown)
             {
-                <li class="nav-item @ListItemClass">
+                <li class="@ListClassBuilder">
                     <a href="@Url" class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">
                         @ChildContent
                     </a>
@@ -31,7 +31,7 @@
             }
             else
             {
-                <li class="nav-item dropdown @ListItemClass">
+                <li class="@ListClassBuilder">
                     @ChildContent
                 </li>
             }
@@ -60,13 +60,13 @@
             {
                 if (IsDropdown)
                 {
-                    <li class="nav-item dropdown">
+                    <li class="@ListClassBuilder">
                         @ChildContent
                     </li>
                 }
                 else
                 {
-                    <li class="nav-item">
+                    <li class="@ListClassBuilder">
                         <a href="@Url" class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">
                             @ChildContent
                         </a>
@@ -96,13 +96,13 @@
             {
                 if (IsDropdown)
                 {
-                    <li class="nav-item dropdown">
+                    <li class="@ListClassBuilder">
                         @TabLabel
                     </li>    
                 }
                 else
                 {
-                    <li class="nav-item">
+                    <li class="@ListClassBuilder">
                         <a href="@Url" class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">
                             @TabLabel
                         </a>

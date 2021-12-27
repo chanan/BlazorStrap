@@ -12,6 +12,7 @@ namespace BlazorStrap
         [Parameter] public bool AllowOutsideClick { get; set; }
         [Parameter] public RenderFragment? Content { get; set; }
         [Parameter] public bool Demo { get; set; }
+        [Parameter] public bool IsDiv { get; set; }
         [Parameter] public bool IsDark { get; set; }
         [Parameter] public bool IsManual { get; set; }
         [Parameter] public bool IsStatic { get; set; }
@@ -48,7 +49,7 @@ namespace BlazorStrap
             if(!AllowOutsideClick)
                 await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataRefId, "documentDropdown", "click", true);
             Shown = false;
-            if (Group != null && PopoverRef != null && !IsStatic)
+            if ((Group != null && PopoverRef != null && !IsStatic) || IsDiv)
             {
                 await PopoverRef.HideAsync();
             }
@@ -64,7 +65,7 @@ namespace BlazorStrap
             if(!AllowOutsideClick)
                 await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataRefId, "documentDropdown", "click", true, AllowItemClick);
             Shown = true;
-            if (Group != null && PopoverRef != null && !IsStatic)
+            if ((Group != null && PopoverRef != null && !IsStatic)  || IsDiv)
             {
                 await PopoverRef.ShowAsync();
             }

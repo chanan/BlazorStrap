@@ -3,19 +3,20 @@
 See [shared](layout/shared) for additional parameters    
 :::
 
-| Parameter         | Type           | Valid          | Remarks/Output               | 
-|-------------------|----------------|----------------|------------------------------|
-| AllowItemClick    | bool           | true/false     | Allows Inside Clicks         | {.table-striped}
-| AllowOutsideClick | bool           | true/false     | Allows Outside Clicks        |
-| Demo              | bool           | RenderFragment | Nested Content               |
-| IsDark            | bool           | RenderFragment | Nested Content               |
-| IsManual          | bool           | true/false     | Manual Close                 |
-| IsStatic          | bool           | true/false     | Disables dynamic positioning |
-| Offset            | string         | #,#            | Dropdown offset              |
-| ShownAttribute    | string         | string         | Adds attribute when shown    |
-| Target            | string         | string         | `data-blazorstrap` of target |
-| Toggler           | RenderFragment | RenderFragment | Nested Content               |
-| Content           | RenderFragment | RenderFragment | Nested Content               |
+| Parameter         | Type           | Valid          | Remarks/Output                               | 
+|-------------------|----------------|----------------|----------------------------------------------|
+| AllowItemClick    | bool           | true/false     | Allows Inside Clicks                         | {.table-striped}
+| AllowOutsideClick | bool           | true/false     | Allows Outside Clicks                        |
+| Demo              | bool           | RenderFragment | Nested Content                               |
+| IsDark            | bool           | RenderFragment | Nested Content                               |
+| IsManual          | bool           | true/false     | Manual Close                                 |
+| IsDiv             | bool           | true/false     | Makes the dropdown menu a div and use popper |
+| IsStatic          | bool           | true/false     | Disables dynamic positioning                 |
+| Offset            | string         | #,#            | Dropdown offset                              |
+| ShownAttribute    | string         | string         | Adds attribute when shown                    |
+| Target            | string         | string         | `data-blazorstrap` of target                 |
+| Toggler           | RenderFragment | RenderFragment | Nested Content                               |
+| Content           | RenderFragment | RenderFragment | Nested Content                               |
 
 :::
 

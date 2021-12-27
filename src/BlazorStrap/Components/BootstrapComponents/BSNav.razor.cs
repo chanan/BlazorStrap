@@ -14,11 +14,12 @@ namespace BlazorStrap
         [Parameter] public bool IsVertical { get; set; }
         [Parameter] public Justify Justify { get; set; }
         [Parameter] public bool NoNavbarNav { get; set; }
+        [Parameter] public bool NoNav { get; set; }
         [CascadingParameter] public BSNavbar? Navbar { get; set; }
         internal BSNavItem? ActiveChild { get; set; }
 
         private string? ClassBuilder => new CssBuilder()
-            .AddClass("nav", Navbar == null)
+            .AddClass("nav", Navbar == null && !NoNav)
             .AddClass("navbar-nav", Navbar != null && !NoNavbarNav)
             .AddClass("nav-tabs", IsTabs)
             .AddClass("nav-pills", IsPills)

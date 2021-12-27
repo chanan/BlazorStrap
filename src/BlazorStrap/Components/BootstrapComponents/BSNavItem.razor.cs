@@ -11,6 +11,7 @@ namespace BlazorStrap
         [Parameter] public bool IsActive { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
         [Parameter] public bool IsDropdown { get; set; }
+        [Parameter] public bool NoNavItem { get; set; }
         [Parameter] public string? ListItemClass { get; set; }
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public bool PreventDefault { get; set; }
@@ -24,6 +25,12 @@ namespace BlazorStrap
             .AddClass("disabled", IsDisabled)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
+            .Build().ToNullString();
+        
+        private string? ListClassBuilder => new CssBuilder()
+            .AddClass("nav-item", !NoNavItem)
+            .AddClass("dropdown", IsDropdown)
+            .AddClass(ListItemClass)
             .Build().ToNullString();
 
         protected override void OnInitialized()

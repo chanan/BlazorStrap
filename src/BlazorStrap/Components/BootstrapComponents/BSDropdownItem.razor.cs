@@ -14,6 +14,7 @@ namespace BlazorStrap
         [Parameter] public bool IsText { get; set; }
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [CascadingParameter] public BSDropdown? Parent { get; set; }
+        [CascadingParameter] public BSPopover? Popper { get; set; }
         [Parameter] public bool PreventDefault { get; set; }
         [Parameter] public string? Url { get; set; } = "javascript:void(0)";
 
