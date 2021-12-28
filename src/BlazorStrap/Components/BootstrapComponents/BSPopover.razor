@@ -12,9 +12,18 @@
 <CascadingValue Value="this">
     @if (IsDropdown)
     {
-        <div class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap">
-            @Content
-        </div>
+        if (IsNavItemList)
+        {
+            <ul class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap">
+                @Content
+            </ul>
+        }
+        else
+        {
+            <div class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap">
+                @Content
+            </div>
+        }
     }
     else
     {

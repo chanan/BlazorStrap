@@ -1766,7 +1766,5 @@ namespace BlazorStrap
         public static string W_75 => "w-75 ";
         public static string W_Auto => "w-auto ";
         public static string Was_Validated => "was-validated ";
-
-
     }
 }

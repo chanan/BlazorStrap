@@ -1,57 +1,22 @@
 ﻿@namespace BlazorStrap
 @inherits BlazorStrapBase
 
-@if (IsDivider)
-{
-    <li>
-        <hr class="dropdown-divider">
-    </li>
-}
-else if (Popper != null)
-{
-    @if (IsButton)
+<CascadingValue Value="this">
+    @if (IsDivider)
     {
-        <button class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</button>
-    }
-    else if (IsText)
-    {
-        <span class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</span>
-    }
-    else if (Header > 0)
-    {
-        switch (Header)
+        if (Parent?.IsDiv == true)
         {
-            case 1:
-                <h1 class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</h1>
-                break;
-            case 2:
-                <h2 class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</h2>
-                break;
-            case 3:
-                <h3 class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</h3>
-                break;
-            case 4:
-                <h4 class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</h4>
-                break;
-            case 5:
-                <h5 class="@ClassBuilder" @attributes="Attributes"@onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</h5>
-                break;
-            case 6:
-                <h6 class="@ClassBuilder" @attributes="Attributes"@onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</h6>
-                break;
-            default:
-                <div class="text-danger fw-bold">ERROR! Invalided header</div>
-                break;
+            <hr class="dropdown-divider"/>
+        }
+        else
+        {
+            <li>
+                <hr class="dropdown-divider"/>
+            </li>
         }
     }
-    else
+    else if (Parent?.IsDiv == true)
     {
-        <a href="@Url" class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</a>
-    }
-}
-else
-{
-    <li>
         @if (IsButton)
         {
             <button class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</button>
@@ -87,9 +52,65 @@ else
                     break;
             }
         }
+        else if (IsSubmenu)
+        {
+            <div class="@ClassBuilder" @attributes="Attributes">
+                @ChildContent
+            </div>
+        }
         else
         {
             <a href="@Url" class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</a>
         }
-    </li>
-}
+    }
+    else if (IsSubmenu)
+    {
+        <li class="@ClassBuilder" @attributes="Attributes">
+            @ChildContent
+        </li>
+    }
+    else
+    {
+        <li>
+            @if (IsButton)
+            {
+                <button class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</button>
+            }
+            else if (IsText)
+            {
+                <span class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</span>
+            }
+            else if (Header > 0)
+            {
+                switch (Header)
+                {
+                    case 1:
+                        <h1 class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</h1>
+                        break;
+                    case 2:
+                        <h2 class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</h2>
+                        break;
+                    case 3:
+                        <h3 class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</h3>
+                        break;
+                    case 4:
+                        <h4 class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</h4>
+                        break;
+                    case 5:
+                        <h5 class="@ClassBuilder" @attributes="Attributes"@onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</h5>
+                        break;
+                    case 6:
+                        <h6 class="@ClassBuilder" @attributes="Attributes"@onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</h6>
+                        break;
+                    default:
+                        <div class="text-danger fw-bold">ERROR! Invalided header</div>
+                        break;
+                }
+            }
+            else
+            {
+                <a href="@Url" class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</a>
+            }
+        </li>
+    }
+</CascadingValue>

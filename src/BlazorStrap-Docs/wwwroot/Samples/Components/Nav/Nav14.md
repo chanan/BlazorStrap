@@ -10,16 +10,18 @@
                 <BSDropdownItem Url="javascript:void(0);">Another action</BSDropdownItem>
                 <BSDropdownItem Url="javascript:void(0);">Something else here</BSDropdownItem>
                 <BSDropdownItem IsDivider="true"/>
-                <BSDropdown>
-                    <Toggler>
-                        <BSToggle>Submenu</BSToggle>
-                    </Toggler>
-                    <Content>
-                        <BSDropdownItem Url="javascript:void(0);">Sub Action</BSDropdownItem>
-                        <BSDropdownItem Url="javascript:void(0);">Another sub action</BSDropdownItem>
-                        <BSDropdownItem Url="javascript:void(0);">Some other sub action</BSDropdownItem>
-                    </Content>
-                </BSDropdown>
+                <BSDropdownItem IsSubmenu="true">
+                    <BSDropdown>
+                        <Toggler>
+                            <BSToggle>Submenu</BSToggle>
+                        </Toggler>
+                        <Content>
+                            <BSDropdownItem Url="javascript:void(0);">Sub Action</BSDropdownItem>
+                            <BSDropdownItem Url="javascript:void(0);">Another sub action</BSDropdownItem>
+                            <BSDropdownItem Url="javascript:void(0);">Some other sub action</BSDropdownItem>
+                        </Content>
+                    </BSDropdown>
+                </BSDropdownItem>
             </Content>
         </BSDropdown>
     </BSNavItem>

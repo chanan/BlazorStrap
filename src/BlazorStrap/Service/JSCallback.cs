@@ -24,7 +24,13 @@ namespace BlazorStrap
 
             EventHandler?.Invoke(id, name, type, classList, e);
         }
+        
+        [JSInvokable("EventFallback")]
+        public static void EventFallback(string id, string name, string type)
+        {
 
+            EventHandler?.Invoke(id, name, type, new Dictionary<string, string>(), new JavascriptEvent());
+        }
         [JSInvokable("ResizeComplete")]
         public static void ResizeComplete(int width)
         {

@@ -5,11 +5,16 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSCollapse : BlazorStrapBase, IAsyncDisposable
+    public partial class BSCollapse : BlazorStrapBase, IDisposable
     {
         private bool _lock;
+        [Parameter] public bool NoAnimations { get; set; }
         [Parameter] public RenderFragment? Content { get; set; }
-
+        [Parameter] public EventCallback OnShown { get; set; }
+        [Parameter] public EventCallback OnHidden { get; set; }
+        [Parameter] public EventCallback OnShow { get; set; }
+        [Parameter] public EventCallback OnHide { get; set; }
+        
         [Parameter] public bool DefaultShown
         {
             get => _defaultShown;
@@ -34,50 +39,47 @@ namespace BlazorStrap
         private string? ClassBuilder => new CssBuilder("collapse")
             .AddClass("show", Shown)
             .AddClass("navbar-collapse", IsInNavbar)
-            .AddClass(LayoutClass, !String.IsNullOrEmpty(LayoutClass))
-            .AddClass(Class, !String.IsNullOrEmpty(Class))
+            .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
+            .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
         private ElementReference MyRef { get; set; }
 
-        public async Task ToggleAsync()
+        public async Task ShowAsync()
         {
+            if (OnShow.HasDelegate)
+                await OnShow.InvokeAsync();
+            
             if (_lock) return;
             _lock = true;
-            if (!EventsSet)
-            {
-                await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsCollapse", "transitionend");
-                EventsSet = true;
-            }
-
-            _objRef = DotNetObjectReference.Create(this);
-            if (Shown)
-            {
-                var height = await Js.InvokeAsync<int>("blazorStrap.GetHeight", MyRef); 
-                await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "collapse");
-                await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef,"height", $"{height}px");
-                await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "show");
-                await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "collapsing",100);
-                await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef,"height", "");
-            }
-            else
-            {
-                var height = await Js.InvokeAsync<int>("blazorStrap.PeakHeight", MyRef); 
-                await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "collapse");
-                await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "collapsing",100);
-                await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef,"height", $"{height}px");
-            }
-            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", MyRef))
-            {
+            if(!NoAnimations)
+                await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef,true,DataId, "bsCollapse", "transitionend");
+            Shown = true;
+            if (NoAnimations)
                 await TransitionEndAsync();
-            }
-            
+        }
+        public async Task HideAsync()
+        {
+            if (OnHide.HasDelegate)
+                await OnHide.InvokeAsync();
+            if (_lock) return;
+            _lock = true;
+            if(!NoAnimations)
+                await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef,false,DataId, "bsCollapse", "transitionend");
+            Shown = false;
+            if (NoAnimations)
+                await TransitionEndAsync();
+        }
+        public Task ToggleAsync()
+        {
+            return Shown ? HideAsync() : ShowAsync();
         }
 
         protected override void OnAfterRender(bool firstRender)
         {
             if(firstRender)
             {
+                _objRef = DotNetObjectReference.Create(this);
                 _hasRendered = true;
             }
         }
@@ -91,21 +93,18 @@ namespace BlazorStrap
 
         private async Task TransitionEndAsync()
         {
-            
-            await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef,"height", "");
-            await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "collapsing");
-            await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "collapse");
-            if (!Shown)
-            {
-                await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "show");
-            }
-            Shown = !Shown;
             _lock = false;
             await InvokeAsync(StateHasChanged);
+            
+            if (OnShown.HasDelegate && Shown)
+                await OnShown.InvokeAsync();
+            if (OnHidden.HasDelegate && !Shown)
+                await OnHidden.InvokeAsync();
         }
 
-        private void JSCallback_ResizeEvent(int width)
+        private async void JSCallback_ResizeEvent(int width)
         {
+            if (!IsInNavbar) return;
             if (width > 576 && NavbarParent?.Expand == Size.ExtraSmall ||
                 width > 576 && NavbarParent?.Expand == Size.Small ||
                 width > 768 && NavbarParent?.Expand == Size.Medium ||
@@ -114,6 +113,8 @@ namespace BlazorStrap
                 width > 1400 && NavbarParent?.Expand == Size.ExtraExtraLarge)
             {
                 Shown = false;
+                if (OnHidden.HasDelegate && !Shown)
+                    await OnHidden.InvokeAsync();
                 StateHasChanged();
             }
         }
@@ -138,14 +139,12 @@ namespace BlazorStrap
             }
         }
 
-        public async ValueTask DisposeAsync()
+        public void Dispose()
         {
-            if(EventsSet)
-                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "bsCollapse" ,"transitionend");
             JSCallback.EventHandler -= OnEventHandler;
             if(IsInNavbar)
                 JSCallback.ResizeEvent -= JSCallback_ResizeEvent;
-            GC.SuppressFinalize(this);
+            _objRef?.Dispose();
         }
     }
 }

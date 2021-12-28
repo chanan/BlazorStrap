@@ -4,7 +4,7 @@
     <Content>Testing</Content>
 </BSPopover>
 <BSButton Outlined="true" Color="BSColor.Primary" DataId="popoverTop">Top</BSButton>
-<BSPopover Placement="Placement.Top" Target="popoverTop">
+<BSPopover Placement="Placement.Top" Target="popoverTop" MouseOver="true">
     <Header>Test</Header>
     <Content>Testing</Content>
 </BSPopover>

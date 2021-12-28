@@ -7,6 +7,7 @@ namespace BlazorStrap
     public partial class BSNavbarToggle : BlazorStrapBase
     {
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+        [Parameter] public string? Target { get; set; }
         [CascadingParameter] public BSCollapse? CollapseParent { get; set; }
 
         private string? ClassBuilder => new CssBuilder("navbar-toggler")
@@ -16,10 +17,10 @@ namespace BlazorStrap
 
         public async Task ClickEvent()
         {   
+            if(!string.IsNullOrEmpty(Target))
+                BlazorStrap.OnForwardClick(Target);
             if (CollapseParent != null)
-            {
                 await CollapseParent.ToggleAsync();
-            }
             await OnClick.InvokeAsync();
         }
     }

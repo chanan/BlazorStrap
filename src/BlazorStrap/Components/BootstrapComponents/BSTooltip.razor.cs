@@ -61,8 +61,8 @@ namespace BlazorStrap
                 if (Target != null)
                 {
                     
-                    await Js.InvokeVoidAsync("blazorStrap.AddEvent", Target, "bsTooltip", "mouseover");
-                    await Js.InvokeVoidAsync("blazorStrap.AddEvent", Target, "bsTooltip", "mouseout");
+                    await Js.InvokeVoidAsync("blazorStrap.AddEvent", Target, "bsTooltip", "mouseenter");
+                    await Js.InvokeVoidAsync("blazorStrap.AddEvent", Target, "bsTooltip", "mouseleave");
                     EventsSet = true;
                 }
             }
@@ -75,11 +75,11 @@ namespace BlazorStrap
 
         private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList, JavascriptEvent? e)
         {
-            if (id == Target && name == "bsTooltip" && type == "mouseover")
+            if (id == Target && name == "bsTooltip" && type == "mouseenter")
             {
                 await ShowAsync();
             }
-            else if (id == Target && name == "bsTooltip" && type == "mouseout")
+            else if (id == Target && name == "bsTooltip" && type == "mouseleave")
             {
                 await HideAsync();
             }
@@ -99,8 +99,8 @@ namespace BlazorStrap
                     {
                         if (EventsSet)
                         {
-                            await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", Target, "bsTooltip", "mouseover");
-                            await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", Target, "bsTooltip", "mouseout");
+                            await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", Target, "bsTooltip", "mouseenter");
+                            await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", Target, "bsTooltip", "mouseleave");
                             await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "null", "null");
                         }
                     }

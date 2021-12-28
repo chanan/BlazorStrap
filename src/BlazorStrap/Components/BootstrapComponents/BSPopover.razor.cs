@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSPopover : BlazorStrapBase, IAsyncDisposable, IDisposable
+    public partial class BSPopover : BlazorStrapBase, IAsyncDisposable
     {
         private bool _isDisposing;
         [Parameter] public RenderFragment? Content { get; set; }
@@ -13,6 +13,7 @@ namespace BlazorStrap
         /// This Parameter is intended for internal use 
         /// </summary>
         [Parameter] public string? DropdownOffset { get; set; }
+        [Parameter] public bool IsNavItemList { get; set; }
         [Parameter] public RenderFragment? Header { get; set; }
         [Parameter] public BSColor HeaderColor { get; set; }
 
@@ -62,7 +63,7 @@ namespace BlazorStrap
         {
             Shown = true;
             await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "display", "");
-            if (_objRef != null)
+            if (_objRef != null && !MyRef.Equals(null))
             {
                 await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "visibility", "hidden");
                 await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "show");
@@ -75,6 +76,7 @@ namespace BlazorStrap
                     await Js.InvokeVoidAsync("blazorStrap.UpdatePopoverArrow", MyRef, _objRef, Placement.NameToLower().PurgeStartEnd(),
                         false);
                 await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "visibility", "");
+                Style = await Js.InvokeAsync<string>("blazorStrap.GetStyle", MyRef); 
                 EventsSet = true;
             }
             await InvokeAsync(StateHasChanged);
@@ -97,6 +99,11 @@ namespace BlazorStrap
                 {
                     if(!IsDropdown)
                         await Js.InvokeVoidAsync("blazorStrap.AddEvent", Target, "bsPopover", "click");
+                    if (MouseOver)
+                    {
+                        await Js.InvokeVoidAsync("blazorStrap.AddEvent", Target, "bsPopover", "mouseenter");
+                        await Js.InvokeVoidAsync("blazorStrap.AddEvent", Target, "bsPopover", "mouseleave");
+                    }                        
                     EventsSet = true;
                 }
             }
@@ -113,6 +120,14 @@ namespace BlazorStrap
             {
                 await ToggleAsync();
             }
+            else if (id == Target && name == "bsPopover" && type == "mouseenter")
+            {
+                await ShowAsync();
+            }
+            else if (id == Target && name == "bsPopover" && type == "mouseleave")
+            {
+                await HideAsync();
+            }
             else if (id == DataId && name == "bsPopover" && type == "click")
             {
                 await ToggleAsync();
@@ -123,11 +138,17 @@ namespace BlazorStrap
             }
         }
 
+
+        #region  Dispose
         public async ValueTask DisposeAsync()
         {
-            
+            _objRef?.Dispose();
             JSCallback.EventHandler -= OnEventHandler;
-
+            if (MouseOver)
+            {
+                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", Target, "bsPopover", "mouseenter");
+                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", Target, "bsPopover", "mouseleave");
+            }        
             // Prerendering error suppression 
             if (HasRender == true)
                 try
@@ -147,18 +168,8 @@ namespace BlazorStrap
                 catch (Exception ex) when (ex.GetType().Name == "JSDisconnectedException")
                 {
                 }
-
             GC.SuppressFinalize(this);
         }
-
-        /// <inheritdoc/>
-        protected virtual void Dispose(bool disposing)
-        {
-        }
-        public void Dispose()
-        {
-            _isDisposing = true;
-            Dispose(_isDisposing);
-        }
+        #endregion
     }
 }

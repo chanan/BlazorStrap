@@ -1,11 +1,14 @@
 ﻿using BlazorComponentUtilities;
+using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
     public partial class BSToggle : BlazorStrapBase
     {
+        private bool _init;
         [Parameter] public bool IsButton { get; set; }
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
         [Parameter] public bool IsNavLink { get; set; }
@@ -34,22 +37,24 @@ namespace BlazorStrap
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .AddClass("nav-link", !IsButton && IsNavLink)
-            .AddClass("dropdown-item", DropDownParent?.Parent != null )
+            .AddClass("dropdown-item", DropDownParent?.Parent != null && !IsNavLink )
             .AddClass("dropdown-toggle", DropDownParent != null)
             .AddClass("dropdown-toggle-split", DropDownParent != null && IsSplitButton)
             .AddClass("collapsed", (!CollapseParent?.Shown ?? false) && DropDownParent == null)
             .Build().ToNullString();
 
+        
         protected override void OnInitialized()
         {
             if (DropDownParent != null)
             {
-                if (DropDownParent.Group != null || DropDownParent.IsDiv)
+                if (DropDownParent.Group != null || DropDownParent.IsDiv || DropDownParent.IsNavPopper || DropDownParent.Parent != null)
                 {
                     DataId = DropDownParent.Target;
                 }
             }
         }
+
 
         private async Task ClickEvent()
         {

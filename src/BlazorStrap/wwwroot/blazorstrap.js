@@ -1,4 +1,21 @@
 ﻿// noinspection JSUnusedGlobalSymbols
+if (!Element.prototype.matches) {
+    Element.prototype.matches =
+        Element.prototype.msMatchesSelector ||
+        Element.prototype.webkitMatchesSelector;
+}
+
+if (!Element.prototype.closest) {
+    Element.prototype.closest = function(s) {
+        var el = this;
+
+        do {
+            if (Element.prototype.matches.call(el, s)) return el;
+            el = el.parentElement || el.parentNode;
+        } while (el !== null && el.nodeType === 1);
+        return null;
+    };
+}
 
 window.blazorStrap = {
     EventHandlers: [],
@@ -17,11 +34,13 @@ window.blazorStrap = {
             }
             blazorStrap.EventHandlers[id][name][type] = {
                     Callback: function (event) {
+                        if(type === "transitionend" && id !== event.target.getAttribute("data-blazorstrap"))
+                            return;
                         if (name === "documentDropdown") {
                             let parent = document.querySelector("[data-blazorstrap='" + id + "']");
                             if (parent !== null) {
                                 if (parent.contains(event.target)) {
-                                    if (event.target.classList.contains("dropdown-toggle")) {
+                                    if (event.target.closest(".dropdown-toggle") !== null) {
                                         return;
                                     }
                                 }
@@ -44,7 +63,6 @@ window.blazorStrap = {
                     }
                 }
             
-
             element.addEventListener(type, blazorStrap.EventHandlers[id][name][type].Callback, false);
             resolve();
         });
@@ -79,19 +97,21 @@ window.blazorStrap = {
             resolve();
         });
     },
-    TransitionDidNotStart: async function (element) {
+    TransitionDidNotStart: async function (element, delay = 200) {
         return new Promise(function (resolve) {
-            const timeout = setTimeout(function () {
-                resolve(true);
-            }, 200);
-            element.ontransitionstart = function () {
+            let handler = function (event) {
                 resolve(false);
                 clearTimeout(timeout);
-            }
+            };
+            const timeout = setTimeout(function () {
+                resolve(true);
+                element.removeEventListener("transitionstart",handler, {once:true});
+            }, delay);
+            element.addEventListener("transitionstart",handler, {once:true});
         }).then((data) => data);
     },
     RemovePopover: async function (element, id) {
-        return new Promise(function (resolve) {
+        return new Promise(function (resolve, r) {
             if (blazorStrap.EventHandlers[id] === undefined) return resolve();
             if (blazorStrap.EventHandlers[id]["Popover"] !== undefined) {
                 blazorStrap.EventHandlers[id].Popover.destroy();
@@ -104,6 +124,19 @@ window.blazorStrap = {
         });
     },
     AddPopover: async function (element, dotNetObjectReference, position, target, offset = "none") {
+        function ToPixels(value) {
+            if(value.indexOf("rem") !== -1)
+            {
+                value = value.substring(0,value.indexOf("rem"));
+                return value * parseFloat(getComputedStyle(document.documentElement).fontSize);    
+            }
+            else if(value.indexOf("em") !== -1)
+            {
+                value = value.substring(0,value.indexOf("em"));
+                return value * parseFloat(getComputedStyle(element).fontSize);   
+            }
+            return value;
+        }
         return new Promise(function (resolve) {
             const id = element.getAttribute("data-blazorstrap");
             target = document.querySelector("[data-blazorstrap='" + target + "']");
@@ -118,7 +151,7 @@ window.blazorStrap = {
                         modifiers: [{
                             name: 'offset',
                             options: {
-                                offset: [parseInt(offset[0]), parseInt(offset[1])],
+                                offset: [parseInt(ToPixels(offset[0])), parseInt(ToPixels(offset[1]))],
                             },
                         }]
                     });
@@ -129,7 +162,7 @@ window.blazorStrap = {
                         placement: position,
                     });
             }
-            resolve();
+            resolve(true);
         });
     },
     UpdatePopover: async function (element) {
@@ -301,6 +334,59 @@ window.blazorStrap = {
                 }, 10);
             }
         })
+    },
+    AnimateCollapse: async function(element, shown, id,name,type)
+    {
+        if(shown)
+        {
+            let cleanup = function () {
+                console.log("llaflsadfsa");
+                element.style["height"] = "";
+                element.classList.remove("collapsing");
+                element.classList.add("collapse");
+                element.classList.add("show");
+                DotNet.invokeMethodAsync("BlazorStrap", "EventFallback", id, name, type)
+            }
+            
+            let height = await blazorStrap.PeakHeight(element);
+            element.classList.remove("collapse");
+            element.classList.add("collapsing");
+            element.addEventListener("transitionend", cleanup, {once:true});
+            setTimeout(async function () {
+                element.style["height"] = height + "px";
+                if(await blazorStrap.TransitionDidNotStart(element,50)) {
+                    cleanup();
+                    element.removeEventListener("transitionend", cleanup, {once:true});
+                    DotNet.invokeMethodAsync("BlazorStrap", "EventFallback", id, name, type)
+                }
+            },10);
+            
+        }
+        else
+        {
+            let cleanup = function () {
+                element.classList.remove("collapsing");
+                element.classList.add("collapse");
+                DotNet.invokeMethodAsync("BlazorStrap", "EventFallback", id, name, type)
+            }
+                let height = await blazorStrap.GetHeight(element);
+            element.style["height"] = height + "px";
+            element.classList.remove("collapse");
+            element.classList.remove("show");
+            element.classList.add("collapsing");
+            element.addEventListener("transitionend", cleanup, {once:true});
+            
+            setTimeout(async function () {
+                element.style["height"] = "";
+                if(await blazorStrap.TransitionDidNotStart(element,50)) {
+                    cleanup();
+                    element.removeEventListener("transitionend", cleanup, {once:true});
+                    DotNet.invokeMethodAsync("BlazorStrap", "EventFallback", id, name, type);
+                }
+            },10);
+            
+            
+        }
     },
     RemoveClass: async function (element, className, delay = 0) {
         if(element === null || element === undefined) return;
