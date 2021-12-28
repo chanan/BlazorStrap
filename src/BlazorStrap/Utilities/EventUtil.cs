@@ -32,7 +32,7 @@ namespace BlazorStrap.Utilities
 
         private record ReceiverBase : IHandleEvent
         {
-            public Task HandleEventAsync(EventCallbackWorkItem item, object arg) =>
+            public Task HandleEventAsync(EventCallbackWorkItem item, object? arg) =>
                 item.InvokeAsync(arg);
         }
 

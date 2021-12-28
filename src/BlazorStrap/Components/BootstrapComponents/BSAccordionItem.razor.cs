@@ -5,8 +5,10 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSAccordionItem : BlazorStrapBase, IAsyncDisposable
+    public partial class BSAccordionItem : BlazorToggleStrapBase<BSAccordionItem>, IDisposable
     {
+        private bool _lock;
+        [Parameter] public bool NoAnimations { get; set; }
         [Parameter] public bool AlwaysOpen { get; set; }
         [Parameter] public RenderFragment? Content { get; set; }
 
@@ -37,38 +39,38 @@ namespace BlazorStrap
         // Can be access by @ref
         private bool Shown { get; set; }
 
-        public async Task ToggleAsync()
+        public override async Task ShowAsync()
         {
-            if (!EventsSet)
-            {
-                await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsAccordionItem", "transitionend");
-                EventsSet = true;
-            }
-            _objRef = DotNetObjectReference.Create(this);
+            if (OnShow.HasDelegate)
+                await OnShow.InvokeAsync(this);
             Parent?.Invoke(this);
-            if (Shown)
-            {
-                var height = await Js.InvokeAsync<int>("blazorStrap.GetHeight", MyRef); 
-                await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "collapse");
-                await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef,"height", $"{height}px");
-                await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "show");
-                await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "collapsing",100);
-                await Js.InvokeVoidAsync("blazorStrap.AddClass", ButtonRef, "collapsed");
-                await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef,"height", "");
-                
-            }
-            else
-            {
-                var height = await Js.InvokeAsync<int>("blazorStrap.PeakHeight", MyRef); 
-                await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "collapse");
-                await Js.InvokeVoidAsync("blazorStrap.RemoveClass", ButtonRef, "collapsed");
-                await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "collapsing",100);
-                await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef,"height", $"{height}px");
-            }
-            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", MyRef))
-            {
+            
+            if (_lock) return;
+            _lock = true;
+            if(!NoAnimations)
+                if (Js != null)
+                    await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, true, DataId, "bsAccordionItem", "transitionend");
+            Shown = true;
+            if (NoAnimations)
                 await TransitionEndAsync();
-            }
+        }
+        public override async Task HideAsync()
+        {
+            if (OnHide.HasDelegate)
+                await OnHide.InvokeAsync(this);
+            if (_lock) return;
+            _lock = true;
+            if(!NoAnimations)
+                if (Js != null)
+                    await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, false, DataId, "bsAccordionItem", "transitionend");
+            Shown = false;
+            if (NoAnimations)
+                await TransitionEndAsync();
+        }
+        
+        public override Task ToggleAsync()
+        {
+            return Shown ? HideAsync() : ShowAsync();
         }
 
         protected override void OnAfterRender(bool firstRender)
@@ -98,16 +100,13 @@ namespace BlazorStrap
 
         private async Task TransitionEndAsync()
         {
-            
-            await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef,"height", "");
-            await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "collapsing");
-            await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "collapse");
-            if (!Shown)
-            {
-                await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "show");
-            }
-            Shown = !Shown;
+            _lock = false;
             await InvokeAsync(StateHasChanged);
+            
+            if (OnShown.HasDelegate && Shown)
+                await OnShown.InvokeAsync(this);
+            if (OnHidden.HasDelegate && !Shown)
+                await OnHidden.InvokeAsync(this);
         }
 
         private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList, JavascriptEvent? e)
@@ -120,22 +119,17 @@ namespace BlazorStrap
 
         private async void Parent_ChildHandler(BSAccordionItem sender)
         {
-            if(sender != this && Shown && !AlwaysOpen && !sender.AlwaysOpen)
+            if(sender != this && !AlwaysOpen && !sender.AlwaysOpen)
             {
-                await ToggleAsync();
+                await HideAsync();
             }
         }
 
-        public async ValueTask DisposeAsync()
+        public void Dispose()
         {
-            if(EventsSet)
-                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "bsAccordionItem", "transitionend");
+            if (Parent != null) Parent.ChildHandler -= Parent_ChildHandler;
             JSCallback.EventHandler -= OnEventHandler;
-            if (Parent != null)
-            {
-                Parent.ChildHandler -= Parent_ChildHandler;
-            }
-            GC.SuppressFinalize(this);
+            _objRef?.Dispose();
         }
     }
 }

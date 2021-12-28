@@ -6,7 +6,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSModal : BlazorStrapBase, IAsyncDisposable
+    public partial class BSModal : BlazorToggleStrapBase<BSModal>, IAsyncDisposable
     {
         [Parameter] public bool AllowScroll { get; set; }
         [Parameter] public string? ButtonClass { get; set; }
@@ -64,8 +64,11 @@ namespace BlazorStrap
 
         private string Style { get; set; } = "display: none;";
 
-        public async Task HideAsync()
+        public override async Task HideAsync()
         {
+            if (OnHide.HasDelegate)
+                await OnHide.InvokeAsync(this);
+
             await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "document", "keyup", true);
             await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "document", "click", true);
             Shown = false;
@@ -74,7 +77,8 @@ namespace BlazorStrap
                 if (Js != null) await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsModal", "transitionend");
                 EventsSet = true;
             }
-            JSCallback.EventCallback("","ModalorOffcanvas", "toggled");
+
+            JSCallback.EventCallback("", "ModalorOffcanvas", "toggled");
             if (Js != null)
             {
                 if (!_leaveBodyAlone)
@@ -85,7 +89,7 @@ namespace BlazorStrap
                 }
 
                 await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "show", 50);
-                if(BackdropRef != null)
+                if (BackdropRef != null)
                     await BackdropRef.ToggleAsync();
 
                 if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", MyRef))
@@ -93,11 +97,14 @@ namespace BlazorStrap
                     await TransitionEndAsync();
                 }
             }
+
             _leaveBodyAlone = false;
         }
 
-        public async Task ShowAsync()
+        public override async Task ShowAsync()
         {
+            if (OnShow.HasDelegate)
+                await OnShow.InvokeAsync(this);
             await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "document", "keyup", true);
             await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "document", "click", true);
             Shown = true;
@@ -106,14 +113,14 @@ namespace BlazorStrap
                 if (Js != null) await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsModal", "transitionend");
                 EventsSet = true;
             }
-            JSCallback.EventCallback("","ModalorOffcanvas", "toggled");
+
+            JSCallback.EventCallback("", "ModalorOffcanvas", "toggled");
             if (Js != null)
             {
                 await Js.InvokeVoidAsync("blazorStrap.AddBodyClass", "modal-open");
 
                 if (!AllowScroll)
                 {
-                    
                     var scrollWidth = await Js.InvokeAsync<int>("blazorStrap.GetScrollBarWidth");
                     var viewportheight = await Js.InvokeAsync<int>("blazorStrap.GetInnerHeight");
                     var peakHeight = await Js.InvokeAsync<int>("blazorStrap.PeakHeight", MyRef);
@@ -126,22 +133,21 @@ namespace BlazorStrap
                     }
                 }
             }
+
             BlazorStrapService.ModalChanged(this);
-            
+
             if (BackdropRef != null)
                 await BackdropRef.ToggleAsync();
-            if (Js != null)
-            {
-                await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "display", "block", 50);
-                await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "show");
-            }
+            await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "display", "block", 50);
+            await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "show");
+
             if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", MyRef))
             {
                 await TransitionEndAsync();
             }
         }
 
-        public void Toggle()
+        private void Toggle()
         {
             EventUtil.AsNonRenderingEventHandler(ToggleAsync).Invoke();
         }
@@ -166,7 +172,7 @@ namespace BlazorStrap
         }
 
 
-        private Task ToggleAsync()
+        public override Task ToggleAsync()
         {
             return Shown ? HideAsync() : ShowAsync();
         }
@@ -175,6 +181,16 @@ namespace BlazorStrap
         {
             Style = Shown ? "display: block;" : "display: none;";
             await InvokeAsync(StateHasChanged);
+            if (Shown)
+            {
+                if (OnShown.HasDelegate)
+                    await OnShown.InvokeAsync(this);
+            }
+            else
+            {
+                if (OnHidden.HasDelegate)
+                    await OnHidden.InvokeAsync(this);
+            }
         }
 
         private void ClickEvent()
@@ -182,9 +198,9 @@ namespace BlazorStrap
             Toggle();
         }
 
-        private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList, JavascriptEvent? e)
+        private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList,
+            JavascriptEvent? e)
         {
-           
             if (DataId == id && name == "clickforward" && type == "click")
             {
                 await ToggleAsync();
@@ -201,9 +217,11 @@ namespace BlazorStrap
                     await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "modal-static");
                     return;
                 }
+
                 await HideAsync();
             }
-            else if (DataId == id && name == "document" && type == "click" && e?.Target.ClassList.Any(q => q.Value =="modal") == true)
+            else if (DataId == id && name == "document" && type == "click" &&
+                     e?.Target.ClassList.Any(q => q.Value == "modal") == true)
             {
                 if (IsStaticBackdrop)
                 {
@@ -211,9 +229,11 @@ namespace BlazorStrap
                     await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "modal-static");
                     return;
                 }
+
                 await HideAsync();
             }
         }
+
         private async void OnModalChange(BSModal? model, bool fromJs)
         {
             if (fromJs)
@@ -230,18 +250,19 @@ namespace BlazorStrap
                     await HideAsync();
                 return;
             }
+
             if (model == this || !_shown) return;
             _leaveBodyAlone = true;
-            if(_shown)
-            await HideAsync();
+            if (_shown)
+                await HideAsync();
         }
 
         public async ValueTask DisposeAsync()
         {
             await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "document", "click", true);
             await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "document", "keyup", true);
-            if(EventsSet)
-                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "bsModal" ,"transitionend");
+            if (EventsSet)
+                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "bsModal", "transitionend");
             JSCallback.EventHandler -= OnEventHandler;
             BlazorStrapService.ModalChange -= OnModalChange;
             GC.SuppressFinalize(this);

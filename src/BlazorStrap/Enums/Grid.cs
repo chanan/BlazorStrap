@@ -58,4 +58,11 @@ namespace BlazorStrap
         [Description("Align Bottom")]
         Bottom,
     }
+    public enum VerticalAlignment
+    {
+        None,
+        Bottom,
+        Center,
+        Top
+    }
 }

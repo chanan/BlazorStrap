@@ -1,8 +1,8 @@
-﻿<BSDiv MarginBottom="Margins.Medium">
+﻿<div class="mb-3">
     <BSLabel Class="@(BS.Text_Danger + BS.Fst_Italic)">Name</BSLabel>
     <BSInputFile IsRequired="true" ValidWhen="@(() => Modal.HasFile)" OnChange="OnFileChange"/>
     <BSFeedback For="() => Modal.HasFile"/>
-</BSDiv>
+</div>
 
 @code {
     private ModalClass Modal { get; set; } = new ModalClass();

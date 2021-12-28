@@ -12,12 +12,12 @@
         </div>
         @if (HasControls)
         {
-            <button class="carousel-control-prev" type="button" @onclick="EventUtil.AsNonRenderingEventHandler(BackAsync)" @onkeyup="@(e => { EventUtil.AsNonRenderingEventHandler(() => { PressEvent(e); }); })">
+            <button class="carousel-control-prev" type="button" @onclick="EventUtil.AsNonRenderingEventHandler(BackAsync)" @onkeyup="@(e => { EventUtil.AsNonRenderingEventHandler(async () => { await PressEvent(e); }); })">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button">
-                <span class="carousel-control-next-icon" aria-hidden="true" @onclick="EventUtil.AsNonRenderingEventHandler(NextAsync)" @onkeyup="@(e => { EventUtil.AsNonRenderingEventHandler(() => { PressEvent(e); }); })"></span>
+                <span class="carousel-control-next-icon" aria-hidden="true" @onclick="EventUtil.AsNonRenderingEventHandler(NextAsync)" @onkeyup="@(e => { EventUtil.AsNonRenderingEventHandler(async () => { await PressEvent(e); }); })"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         }

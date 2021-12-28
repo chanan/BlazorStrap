@@ -6,7 +6,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSOffCanvas  : BlazorStrapBase
+    public partial class BSOffCanvas  : BlazorToggleStrapBase<BSOffCanvas>
     {
         [Parameter] public bool AllowScroll { get; set; }
         [Parameter] public string? BodyClass { get; set; }
@@ -57,32 +57,49 @@ namespace BlazorStrap
             }
         }
 
-        public async Task ToggleAsync()
+        public override async Task ShowAsync()
         {
+            if (OnShow.HasDelegate)
+                await OnShow.InvokeAsync(this);
             JSCallback.EventCallback("","ModalorOffcanvas", "toggled");
             if (Js != null)
             {
-                if (Shown)
+                if (ShowBackdrop)
                 {
-                    if (ShowBackdrop)
-                    {
-                        await Js.InvokeVoidAsync("blazorStrap.RemoveClass", BackdropRef, "show", 100);
-                        BackdropStyle = "display: none;";
-                    }
-                }
-                else
-                {
-                    if (ShowBackdrop)
-                    {
-                        await Js.InvokeVoidAsync("blazorStrap.SetStyle", BackdropRef, "display", "block", 100);
-                        await Js.InvokeVoidAsync("blazorStrap.AddClass", BackdropRef, "show");
-                        BackdropStyle = "display: block;";
-                    }
+                    await Js.InvokeVoidAsync("blazorStrap.SetStyle", BackdropRef, "display", "block", 100);
+                    await Js.InvokeVoidAsync("blazorStrap.AddClass", BackdropRef, "show");
+                    BackdropStyle = "display: block;";
                 }
             }
 
-            Shown = !Shown;
+            Shown = true;
             await InvokeAsync(StateHasChanged);
+            if (OnShown.HasDelegate)
+                await OnShown.InvokeAsync(this);
+        }
+
+        public override async Task HideAsync()
+        {
+            if (OnHide.HasDelegate)
+                await OnHide.InvokeAsync(this);
+            JSCallback.EventCallback("","ModalorOffcanvas", "toggled");
+            if (Js != null)
+            {
+                if (ShowBackdrop)
+                {
+                    await Js.InvokeVoidAsync("blazorStrap.RemoveClass", BackdropRef, "show", 100);
+                    BackdropStyle = "display: none;";
+                }
+            }
+
+            Shown = false;
+            await InvokeAsync(StateHasChanged);
+            if (OnHidden.HasDelegate)
+                await OnHidden.InvokeAsync(this);
+        }
+        public override Task ToggleAsync()
+        {
+            return Shown ? HideAsync() : ShowAsync();
         }
         private async Task BackdropClicked()
         {

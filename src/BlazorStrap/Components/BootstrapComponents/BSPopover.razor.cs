@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSPopover : BlazorStrapBase, IAsyncDisposable
+    public partial class BSPopover : BlazorToggleStrapBase<BSPopover>, IAsyncDisposable
     {
         private bool _isDisposing;
         [Parameter] public RenderFragment? Content { get; set; }
@@ -48,19 +48,25 @@ namespace BlazorStrap
         private bool Shown { get; set; }
         private string Style { get; set; } = "display:none;";
 
-        public async Task HideAsync()
+        public override async Task HideAsync()
         {
+            if (OnHide.HasDelegate)
+                await OnHide.InvokeAsync(this);
             Shown = false;
             await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "show", 100);
             await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "display", "none");
             await Js.InvokeVoidAsync("blazorStrap.RemovePopover", MyRef, DataId);
             Style = "display:none;";
             await InvokeAsync(StateHasChanged);
+            if (OnHidden.HasDelegate)
+                await OnHidden.InvokeAsync(this);
         }
 
 
-        public async Task ShowAsync()
+        public override async Task ShowAsync()
         {
+            if (OnShow.HasDelegate)
+                await OnShow.InvokeAsync(this);
             Shown = true;
             await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "display", "");
             if (_objRef != null && !MyRef.Equals(null))
@@ -80,10 +86,12 @@ namespace BlazorStrap
                 EventsSet = true;
             }
             await InvokeAsync(StateHasChanged);
+            if (OnShown.HasDelegate)
+                await OnShown.InvokeAsync(this);
         }
 
 
-        public Task ToggleAsync()
+        public override Task ToggleAsync()
         {
             return !Shown ? ShowAsync() : HideAsync();
         }

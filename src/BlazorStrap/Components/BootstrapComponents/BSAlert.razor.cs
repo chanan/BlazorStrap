@@ -16,7 +16,7 @@ namespace BlazorStrap
         private bool _dismissed { get; set; }
 
         private string? ClassBuilder => new CssBuilder("alert")
-            .AddClass($"alert-{BSColor.GetName<BSColor>(Color).ToLower()}", Color != BSColor.Default)
+            .AddClass($"alert-{Color.NameToLower()}", Color != BSColor.Default)
             .AddClass("d-flex align-items-center", HasIcon)
             .AddClass("alert-dismissible", IsDismissible)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))

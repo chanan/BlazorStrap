@@ -7,7 +7,7 @@ namespace BlazorStrap
     {
         [Parameter] public Container Container { get; set; } = new Container();
 
-        internal string? ClassBuilder => new CssBuilder()
+        private string? ClassBuilder => new CssBuilder()
             .AddClass("container", Container.HasFlag(Container.Default))
             .AddClass("container-fluid", Container.HasFlag(Container.Fluid))
             .AddClass("container-sm", Container.HasFlag(Container.Small))

@@ -19,19 +19,26 @@ namespace BlazorStrap
                 Console.WriteLine($"Invalid Grid size used {value}");
             return false;
         }
-        internal static string Name<T>(this T val) where T : Enum
+        internal static string Name<T>(this T val) where T : Enum?
         {
+            if (val == null) throw new NullReferenceException("Enum values should not be null");
             return Enum.GetName(typeof(T), val) ?? "";
         }
 
-        internal static string NameToLower<T>(this T val) where T : Enum
+        internal static string NameToLower<T>(this T val) where T : Enum?
         {
-            return Enum.GetName(typeof(T), val).ToLower() ?? "";
+            if (val == null) throw new NullReferenceException("Enum values should not be null");
+            return Enum.GetName(typeof(T), val)?.ToLower() ?? "";
         }
 
-        internal static string ToDescriptionString<T>(this T val) where T : Enum
+        internal static string ToDescriptionString<T>(this T val) where T : Enum?
         {
-            var attributes = (DescriptionAttribute[])val.GetType().GetField(val.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
+            if (val == null) throw new NullReferenceException("Enum values should not be null");
+            var field = val.GetType().GetField(val.ToString());
+            
+            if(field == null) throw new NullReferenceException("Field names should not be null");
+            
+            var attributes = (DescriptionAttribute[]) field.GetCustomAttributes(typeof(DescriptionAttribute), false);
             return attributes.Length > 0 ? attributes[0].Description : string.Empty;
         }
         internal static string ToIndex(this Gutters value)

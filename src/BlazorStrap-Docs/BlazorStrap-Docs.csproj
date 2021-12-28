@@ -175,6 +175,8 @@
     <_ContentIncludedByDefault Remove="wwwroot\Samples\Layout\Containers\DefaultContainer.md" />
     <_ContentIncludedByDefault Remove="wwwroot\Samples\Layout\Containers\FluidContainer.md" />
     <_ContentIncludedByDefault Remove="wwwroot\Samples\Layout\Containers\ResponsiveContainers.md" />
+    <_ContentIncludedByDefault Remove="wwwroot\Samples\Components\Button\Button1.md" />
+    <_ContentIncludedByDefault Remove="wwwroot\Samples\Components\Button\Button2.md" />
   </ItemGroup>
 
 

@@ -1,6 +1,8 @@
 ﻿## Accordion
 #### Component \<BSAccordion\>
-See [shared](layout/shared) for additional parameters    
+See [shared](layout/shared) for additional parameters
+
+#### Component \<BSAccordionItem\>
 :::
 
 | Parameter    | Type           | Valid          | Remarks/Output                  | 
@@ -8,7 +10,7 @@ See [shared](layout/shared) for additional parameters
 | AlwaysOpen   | bool           | true/false     | `.d-flex` `.align-items-center` | {.table-striped}  
 | DefaultShown | bool           | true/false     | `.alert-dismissible`            |
 | Header       | RenderFragment | RenderFragment | Nested Content                  |               
-| Content      | RenderFragment | RenderFragment | Nested Content                  | 
+| Content      | RenderFragment | RenderFragment | Nested Content                  |
 
 :::
 
@@ -23,3 +25,18 @@ See [shared](layout/shared) for additional parameters
 ### Always open & default shown
 
 {{sample=Components/Accordion/Accordion3}}
+
+### Methods / Events
+TValue = BSAccordionItem
+:::
+
+| Name        | Type   | Return Value | Remarks                      |
+|-------------|--------|--------------|------------------------------|
+| ToggleAsync | Method |              | Toggles                      |
+| ShowAsync   | Method |              | Shows                        |
+| HideAsync   | Method |              | Hides                        |
+| OnShow      | Event  | TValue       | Raised when starting to show |
+| OnShown     | Event  | TValue       | Raised when shown            |
+| OnHide      | Event  | TValue       | Raised when starting to hide |
+| OnHidden    | Event  | TValue       | Raised when hidden           |
+:::

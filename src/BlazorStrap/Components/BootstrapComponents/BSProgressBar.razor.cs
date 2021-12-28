@@ -1,3 +1,4 @@
+using System.Globalization;
 using BlazorComponentUtilities;
 using Microsoft.AspNetCore.Components;
 
@@ -10,22 +11,15 @@ namespace BlazorStrap
         [Parameter] public bool IsStriped { get; set; }
         [Parameter] public double Max { get; set; } = 100;
         
-        [Parameter]
-        public double Value
+        [Parameter] public double Value
         {
-            get
-            {
-                return _value;
-            }
-            set
-            {
-                _value = value;
-            }
+            get => _value;
+            set => _value = value;
         }
 
         [CascadingParameter] public BSProgress? Parent { get;set;}
 
-        internal double _value { get; set; }
+        private double _value;
         private string? Width { get; set; } = null;
         
         private string? ClassBuilder => new CssBuilder("progress-bar")
@@ -47,13 +41,18 @@ namespace BlazorStrap
         }
         private void NotifyChildren()
         {
-            var percent = ( _value / Max * 100) / (Parent.Children.Count);
-            Width = $"width:{Math.Round(percent).ToString()}%;" ;
+            var percent = (_value / Max * 100);
+            if (Parent != null)
+            {
+                percent = (_value / Max * 100) / (Parent.Children.Count);
+            }
+
+            Width = $"width:{Math.Round(percent).ToString(CultureInfo.InvariantCulture)}%;" ;
         }
         protected virtual void Dispose(bool disposing) { }
         public void Dispose()
         {
-            if (Parent == null)
+            if (Parent != null)
             {
                 Parent.NotifyChildren -= NotifyChildren;
                 Parent.RemoveChild(this);

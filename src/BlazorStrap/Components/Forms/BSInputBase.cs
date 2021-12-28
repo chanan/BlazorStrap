@@ -1,29 +1,24 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Linq.Expressions;
-using BlazorComponentUtilities;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public abstract class BSInputBase<TValue> : BlazorInputBase<TValue>, IBlazorStrapBase, IDisposable
+    public abstract class BSInputBase<TValue> : BlazorInputBase<TValue>, IBlazorStrapBase
     {
         [Parameter] public int DebounceInterval { get; set; } = 500;
         [Parameter] public string InvalidClass { get; set; } = "is-invalid";
         [Parameter] public bool IsDisabled { get; set; }
-        [Parameter] public TValue IsBasic { get; set; }
+        [Parameter] public TValue? IsBasic { get; set; }
         [Parameter] public bool IsInvalid { get; set; }
         [Parameter] public bool IsValid { get; set; }
         [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
         [Parameter] public EventCallback<FocusEventArgs> OnFocus { get; set; }
         [Parameter] public bool ValidateOnBlur { get; set; } = true;
         [Parameter] public bool ValidateOnChange { get; set; }
-        [Parameter] public bool ValidateOnInput { get; set; } = false;
+        [Parameter] public bool ValidateOnInput { get; set; }
         [Parameter] public string ValidClass { get; set; } = "is-valid";
 
         protected void OnBlurEvent(FocusEventArgs? e)

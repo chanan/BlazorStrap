@@ -7,9 +7,14 @@ namespace BlazorStrap
 {
     public abstract class BlazorStrapBase : ComponentBase, IBlazorStrapBase
     {
-        public BlazorStrapService BlazorStrap => (BlazorStrapService)BlazorStrapSrc;
+        protected BlazorStrapService BlazorStrap => (BlazorStrapService)BlazorStrapSrc;
         [Inject] public IBlazorStrapService BlazorStrapSrc { get; set; } = new BlazorStrapService();
-        [Inject] public IJSRuntime Js { get; set; }
+        private IJSRuntime? _js;
+        [Inject] public IJSRuntime Js
+        {
+            get => _js ?? throw new NullReferenceException("Not able to inject required IJSRuntime.");
+            set => _js = value ?? throw new NullReferenceException("Not able to inject required IJSRuntime.");
+        } 
 
         [Parameter(CaptureUnmatchedValues = true)]
         public IDictionary<string, object> Attributes { get; set; } = new Dictionary<string, object>();

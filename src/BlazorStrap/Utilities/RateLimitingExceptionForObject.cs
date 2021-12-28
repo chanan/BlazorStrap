@@ -4,14 +4,14 @@
     {
         #region Private Properties
 
-        private static Timer _throttleTimerInterval;
-        private static Timer _debounceTimerInterval;
+        private static Timer? _throttleTimerInterval;
+        private static Timer? _debounceTimerInterval;
 
-        private static Action<object> _debounceAction;
-        private static object _lastObjectDebounce;
+        private static Action<object>? _debounceAction;
+        private static object? _lastObjectDebounce;
 
-        private static Action<object> _throttleAction;
-        private static object _lastObjectThrottle;
+        private static Action<object>? _throttleAction;
+        private static object? _lastObjectThrottle;
 
         #endregion
 
@@ -37,11 +37,12 @@
         /// DispatchTimer tick event for debounce
         /// </summary>
         /// <param name="state"></param>
-        private static void DebounceTimerIntervalOnTick(object state)
+        private static void DebounceTimerIntervalOnTick(object? state)
         {
+            if (state == null) return;
             _debounceTimerInterval?.Dispose();
 
-            if (_debounceTimerInterval != null)
+            if (_debounceTimerInterval != null && _lastObjectDebounce != null)
             {
                 _debounceAction?.Invoke(_lastObjectDebounce);
             }
@@ -74,8 +75,9 @@
         /// DispatchTimer tick event for throttle
         /// </summary>
         /// <param name="state"></param>
-        private static void ThrottleTimerIntervalOnTick(object state)
+        private static void ThrottleTimerIntervalOnTick(object? state)
         {
+            if (state == null) return;
             _throttleTimerInterval?.Dispose();
             _throttleTimerInterval = null;
 

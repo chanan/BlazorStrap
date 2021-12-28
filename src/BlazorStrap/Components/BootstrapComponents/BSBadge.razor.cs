@@ -10,7 +10,7 @@ namespace BlazorStrap
 
         private string? ClassBuilder => new CssBuilder("badge")
             .AddClass("rounded-pill", IsPill)
-            .AddClass($"bg-{BSColor.GetName<BSColor>(Color).ToLower()}", Color != BSColor.Default)
+            .AddClass($"bg-{Color.NameToLower()}", Color != BSColor.Default)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();

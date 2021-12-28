@@ -35,14 +35,48 @@ namespace BlazorStrap
             if(slide == _active) return;
             _last = _active;
             _active = slide;
-            Children[_last].Hide();
-            Children[_active].Show();
-            await Js.InvokeVoidAsync("blazorStrap.AnimateCarousel", Children[_active].MyRef,Children[_last].MyRef, back);
-            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", Children[_active].MyRef))
+            Children[_last].InternalHide();
+            Children[_active].InternalShow();
+            if (Js != null)
             {
-                await Children[_active].TransitionEndAsync();
-                await Children[_last].TransitionEndAsync();
+                await Js.InvokeVoidAsync("blazorStrap.AnimateCarousel", Children[_active].MyRef, Children[_last].MyRef, back);
+                if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", Children[_active].MyRef))
+                {
+                    await Children[_active].TransitionEndAsync();
+                    await Children[_last].TransitionEndAsync();
+                }
             }
+
+            await InvokeAsync(() =>
+            {
+                _indicatorsRef?.Refresh(Children.Count, _active);
+            });
+        }
+
+        internal Task HideSlide(BSCarouselItem slide)
+        {
+            return GotoChildSlide(slide == Children.First() ? Children.Last() : Children.First());
+        }
+
+        internal async Task GotoChildSlide(BSCarouselItem item)
+        {
+            var slide = Children.IndexOf(item);
+            var back = slide < _active;
+            if(slide == _active) return;
+            _last = _active;
+            _active = slide;
+            Children[_last].InternalHide();
+            Children[_active].InternalShow();
+            if (Js != null)
+            {
+                await Js.InvokeVoidAsync("blazorStrap.AnimateCarousel", Children[_active].MyRef, Children[_last].MyRef, back);
+                if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", Children[_active].MyRef))
+                {
+                    await Children[_active].TransitionEndAsync();
+                    await Children[_last].TransitionEndAsync();
+                }
+            }
+
             await InvokeAsync(() =>
             {
                 _indicatorsRef?.Refresh(Children.Count, _active);
@@ -63,14 +97,18 @@ namespace BlazorStrap
 
             else
                 _last = _active + 1;
-            Children[_last].Hide();
-            Children[_active].Show();
-            await Js.InvokeVoidAsync("blazorStrap.AnimateCarousel", Children[_active].MyRef,Children[_last].MyRef, true);
-            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", Children[_active].MyRef))
+            Children[_last].InternalHide();
+            Children[_active].InternalShow();
+            if (Js != null)
             {
-                await Children[_active].TransitionEndAsync();
-                await Children[_last].TransitionEndAsync();
+                await Js.InvokeVoidAsync("blazorStrap.AnimateCarousel", Children[_active].MyRef, Children[_last].MyRef, true);
+                if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", Children[_active].MyRef))
+                {
+                    await Children[_active].TransitionEndAsync();
+                    await Children[_last].TransitionEndAsync();
+                }
             }
+
             await InvokeAsync(() =>
             {
                 _indicatorsRef?.Refresh(Children.Count, _active);
@@ -91,14 +129,18 @@ namespace BlazorStrap
 
             else
                 _last = _active - 1;
-            Children[_last].Hide();
-            Children[_active].Show();
-            await Js.InvokeVoidAsync("blazorStrap.AnimateCarousel", Children[_active].MyRef,Children[_last].MyRef, false);
-            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", Children[_active].MyRef))
+            Children[_last].InternalHide();
+            Children[_active].InternalShow();
+            if (Js != null)
             {
-                await Children[_active].TransitionEndAsync();
-                await Children[_last].TransitionEndAsync();
+                await Js.InvokeVoidAsync("blazorStrap.AnimateCarousel", Children[_active].MyRef, Children[_last].MyRef, false);
+                if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", Children[_active].MyRef))
+                {
+                    await Children[_active].TransitionEndAsync();
+                    await Children[_last].TransitionEndAsync();
+                }
             }
+
             await InvokeAsync(() =>
             {
                 _indicatorsRef?.Refresh(Children.Count, _active);

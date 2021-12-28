@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSTooltip : BlazorStrapBase, IAsyncDisposable
+    public partial class BSTooltip : BlazorToggleStrapBase<BSTooltip>, IAsyncDisposable
     {
         [Parameter] public Placement Placement { get; set; }
         [Parameter] public string? Target { get; set; }
@@ -24,30 +24,41 @@ namespace BlazorStrap
         private bool Shown { get; set; }
         private string Style { get; set; } = "display:none";
 
-        public async Task HideAsync()
+        public override async Task HideAsync()
         {
+            if (OnHide.HasDelegate)
+                await OnHide.InvokeAsync(this);
             Shown = false;
             await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "display", "none");
             await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "show");
             await Js.InvokeVoidAsync("blazorStrap.RemovePopover", MyRef, DataId);
+            
+            if (OnHidden.HasDelegate)
+                await OnHidden.InvokeAsync(this);
         }
 
-        public async Task ShowAsync()
+        public override async Task ShowAsync()
         {
-            
+            if (OnShow.HasDelegate)
+                await OnShow.InvokeAsync(this);
             Shown = true;
             await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "display", "block");
+            
             if (_objRef != null)
             {
-                await Js.InvokeVoidAsync("blazorStrap.AddPopover", MyRef, _objRef, Placement.NameToLower().ToDashSeperated(), Target);
+                if (Target != null)
+                    await Js.InvokeVoidAsync("blazorStrap.AddPopover", MyRef, _objRef,
+                        Placement.NameToLower().ToDashSeperated(), Target);
                 await Js.InvokeVoidAsync("blazorStrap.UpdatePopoverArrow", MyRef, _objRef, Placement.NameToLower().PurgeStartEnd(),
                     true);
             }
 
             await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "show");
+            if (OnShown.HasDelegate)
+                await OnShown.InvokeAsync(this);
         }
 
-        public Task ToggleAsync()
+        public override Task ToggleAsync()
         {
             return !Shown ? ShowAsync() : HideAsync();
         }
@@ -91,7 +102,7 @@ namespace BlazorStrap
 
 
             // Prerendering error suppression 
-            if (HasRender == true)
+            if (HasRender)
                 try
                 {
                     await Js.InvokeVoidAsync("blazorStrap.RemovePopover", MyRef, DataId);

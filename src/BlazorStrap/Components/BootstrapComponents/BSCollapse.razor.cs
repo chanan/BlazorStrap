@@ -5,15 +5,11 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSCollapse : BlazorStrapBase, IDisposable
+    public partial class BSCollapse : BlazorToggleStrapBase<BSCollapse>, IDisposable
     {
         private bool _lock;
         [Parameter] public bool NoAnimations { get; set; }
         [Parameter] public RenderFragment? Content { get; set; }
-        [Parameter] public EventCallback OnShown { get; set; }
-        [Parameter] public EventCallback OnHidden { get; set; }
-        [Parameter] public EventCallback OnShow { get; set; }
-        [Parameter] public EventCallback OnHide { get; set; }
         
         [Parameter] public bool DefaultShown
         {
@@ -45,32 +41,35 @@ namespace BlazorStrap
 
         private ElementReference MyRef { get; set; }
 
-        public async Task ShowAsync()
+        public override async Task ShowAsync()
         {
             if (OnShow.HasDelegate)
-                await OnShow.InvokeAsync();
+                await OnShow.InvokeAsync(this);
             
             if (_lock) return;
             _lock = true;
             if(!NoAnimations)
-                await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef,true,DataId, "bsCollapse", "transitionend");
+                if (Js != null)
+                    await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, true, DataId, "bsCollapse", "transitionend");
             Shown = true;
             if (NoAnimations)
                 await TransitionEndAsync();
         }
-        public async Task HideAsync()
+        public override async Task HideAsync()
         {
             if (OnHide.HasDelegate)
-                await OnHide.InvokeAsync();
+                await OnHide.InvokeAsync(this);
             if (_lock) return;
             _lock = true;
             if(!NoAnimations)
-                await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef,false,DataId, "bsCollapse", "transitionend");
+                if (Js != null)
+                    await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, false, DataId, "bsCollapse", "transitionend");
             Shown = false;
             if (NoAnimations)
                 await TransitionEndAsync();
         }
-        public Task ToggleAsync()
+        
+        public override Task ToggleAsync()
         {
             return Shown ? HideAsync() : ShowAsync();
         }
@@ -97,9 +96,9 @@ namespace BlazorStrap
             await InvokeAsync(StateHasChanged);
             
             if (OnShown.HasDelegate && Shown)
-                await OnShown.InvokeAsync();
+                await OnShown.InvokeAsync(this);
             if (OnHidden.HasDelegate && !Shown)
-                await OnHidden.InvokeAsync();
+                await OnHidden.InvokeAsync(this);
         }
 
         private async void JSCallback_ResizeEvent(int width)

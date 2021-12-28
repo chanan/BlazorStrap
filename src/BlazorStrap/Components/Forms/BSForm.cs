@@ -18,14 +18,14 @@ namespace BlazorStrap
         /// </summary>
         [Parameter] public Gutters Gutters { get; set; }
         [Parameter] public Gutters HorizontalGutters { get; set; }
-        [Parameter] public TValue IsBasic { get; set; }
+        [Parameter] public TValue? IsBasic { get; set; }
         [Parameter] public bool IsFloating { get; set; }
         [Parameter] public bool IsRow { get; set; }
         /// <summary>
         /// Justify
         /// </summary>
         [Parameter] public Justify Justify { get; set; }
-        [Parameter] public TValue Model { get; set; }
+        [Parameter] public TValue? Model { get; set; }
         [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
         [Parameter] public EventCallback<EditContext> OnSubmit { get; set; }
         [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
@@ -42,12 +42,12 @@ namespace BlazorStrap
             .AddClass($"g-{HorizontalGutters.ToIndex()}", HorizontalGutters != Gutters.Default && IsRow)
             .AddClass($"gx-{VerticalGutters.ToIndex()}", VerticalGutters != Gutters.Default && IsRow)
             .AddClass($"gy-{Gutters.ToIndex()}", Gutters != Gutters.Default && IsRow)
-            .AddClass($"justify-content-{Justify.GetName<Justify>(Justify).ToLower()}", Justify != Justify.Default && IsRow)
-            .AddClass($"align-items-{Align.GetName<Align>(Align).ToLower()}", Align != Align.Default && IsRow)
+            .AddClass($"justify-content-{Justify.NameToLower()}", Justify != Justify.Default && IsRow)
+            .AddClass($"align-items-{Align.NameToLower()}", Align != Align.Default && IsRow)
             .AddClass(Class)
             .Build().ToNullString();
 
-        private RenderFragment<EditContext> EditFormChildContent { get; set; }
+        private RenderFragment<EditContext>? EditFormChildContent { get; set; }
 
         private RenderFragment? Form { get; set; }
 
@@ -63,7 +63,7 @@ namespace BlazorStrap
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            if (Model.Equals(default(TValue)) && EditContext == null)
+            if (Model != null && Model.Equals(default(TValue)) && EditContext == null)
             {
                 builder.OpenElement(0, "form");
                 builder.AddAttribute(1, "class", ClassBuilder);
@@ -72,10 +72,15 @@ namespace BlazorStrap
                 builder.CloseElement();
                 return;
             }
-            EditFormChildContent = content => child =>
+            EditFormChildContent = content =>
             {
-                content = EditContext;
-                child.AddContent(1, ChildContent);
+                if (content == null) throw new ArgumentNullException(nameof(content));
+                return child =>
+                    {
+                        if (EditContext != null)
+                            content = EditContext;
+                        child.AddContent(1, ChildContent);
+                    };
             };
             
             Form = formBuilder =>

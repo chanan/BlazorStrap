@@ -10,7 +10,7 @@ namespace BlazorStrap
         [Parameter] public bool IsRounded { get; set; }
         [Parameter] public bool IsThumbnail { get; set; }
         [Parameter] public bool IsPlaceholder { get; set; }
-        [Parameter] public string Source { get; set; }
+        [Parameter] public string? Source { get; set; }
         [CascadingParameter] public BSFigure? Figure { get; set; }
         private int PlaceHolderHeight { get; set; } = 100;
         private int PlaceHolderWidth { get; set; } = 100;
@@ -29,11 +29,12 @@ namespace BlazorStrap
 
         protected override void OnParametersSet()
         {
+            if (Source == null) return;
             if (!IsPlaceholder && !Source.ToLower().Contains("x")) return;
             var data = Source.Split("x");
             PlaceHolderHeight = Convert.ToInt32(data[1]);
             PlaceHolderWidth = Convert.ToInt32(data[0]);
-            PlaceHolderText = $"{data[0]}x{data[1]}"; 
+            PlaceHolderText = $"{data[0]}x{data[1]}";
             if (data.Length > 2)
                 PlaceHolderText = data[2];
         }

@@ -1,5 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Globalization;
+using static System.Nullable;
+
+// ReSharper disable ConditionIsAlwaysTrueOrFalse
+#pragma warning disable CS8604
+#pragma warning disable CS8625
+#pragma warning disable CS8600
+#pragma warning disable CS8601
 
 namespace BlazorStrap.Utilities
 {
@@ -34,7 +41,7 @@ namespace BlazorStrap.Utilities
             }
             else
             {
-                result = default;
+                result = default(T); 
                 return false;
             }
         }
@@ -50,15 +57,15 @@ namespace BlazorStrap.Utilities
             }
             else
             {
-                result = default;
+                result = default(T);
                 return false;
             }
         }
 
         public static bool ToValue(string value, out T result, out string validationErrorMessage)
         {
-            Type type = typeof(T);
-            result = default;
+            var type = typeof(T);
+            result = default(T);
             validationErrorMessage = string.Empty;
             if (typeof(T) == typeof(string))
             {
@@ -66,19 +73,22 @@ namespace BlazorStrap.Utilities
                 validationErrorMessage = null;
                 return true;
             }
-            else if (value == null && (Nullable.GetUnderlyingType(type) != null))
+
+            if (value == null && (GetUnderlyingType(type) != null))
             {
                 result = (T)(object)default(T);
                 validationErrorMessage = null;
                 return true;
             }
-            else if (value?.Length == 0 && typeof(DateTime) != typeof(T) && typeof(DateTimeOffset) != typeof(T))
+
+            if (value?.Length == 0 && typeof(DateTime) != typeof(T) && typeof(DateTimeOffset) != typeof(T))
             {
                 result = (T)(object)default(T);
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T).IsEnum)
+
+            if (typeof(T).IsEnum)
             {
                 // There's no non-generic Enum.TryParse (https://github.com/dotnet/corefx/issues/692)
                 try
@@ -94,31 +104,36 @@ namespace BlazorStrap.Utilities
                     return false;
                 }
             }
-            else if (typeof(T) == typeof(int) || typeof(T) == typeof(int?))
+
+            if (typeof(T) == typeof(int) || typeof(T) == typeof(int?))
             {
                 result = (T)(object)Convert.ToInt32(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T) == typeof(long) || typeof(T) == typeof(long?))
+
+            if (typeof(T) == typeof(long) || typeof(T) == typeof(long?))
             {
                 result = (T)(object)Convert.ToInt64(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T) == typeof(double) || typeof(T) == typeof(double?))
+
+            if (typeof(T) == typeof(double) || typeof(T) == typeof(double?))
             {
                 result = (T)(object)double.Parse(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T) == typeof(decimal) || typeof(T) == typeof(decimal?))
+
+            if (typeof(T) == typeof(decimal) || typeof(T) == typeof(decimal?))
             {
                 result = (T)(object)decimal.Parse(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T) == typeof(Guid) || typeof(T) == typeof(Guid?))
+
+            if (typeof(T) == typeof(Guid) || typeof(T) == typeof(Guid?))
             {
                 try
                 {
@@ -133,33 +148,34 @@ namespace BlazorStrap.Utilities
 
                 return true;
             }
-            else if (typeof(T) == typeof(bool) || typeof(T) == typeof(bool?))
+
+            if (typeof(T) == typeof(bool) || typeof(T) == typeof(bool?))
             {
                 try
                 {
-                    if (value.ToString().ToLowerInvariant() == "false")
+                    if (value?.ToString().ToLowerInvariant() == "false")
                     {
                         result = (T)(object)false;
                         validationErrorMessage = null;
                         return true;
                     }
-                    else if (value.ToString().ToLowerInvariant() == "true")
+
+                    if (value?.ToString().ToLowerInvariant() == "true")
                     {
                         result = (T)(object)true;
                         validationErrorMessage = null;
                         return true;
                     }
-                    else if(string.IsNullOrEmpty(value.ToString()))
+
+                    if(string.IsNullOrEmpty(value?.ToString()))
                     {
                         result = (T) default;
                         return true;
                     }
-                    else
-                    {
-                        result = (T)(object)false;
-                        validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a bool of true or false.");
-                        return false;
-                    }
+
+                    result = (T)(object)false;
+                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a bool of true or false.");
+                    return false;
                 }
                 catch
                 {
