@@ -6,7 +6,7 @@ namespace BlazorStrap.InternalComponents
 
     public partial class Indicators : ComponentBase
     {
-        int i = 0;
+        int _i = 0;
         private int Count { get; set; }
         private int Active { get; set; }
         [CascadingParameter] BSCarousel? Parent { get; set; }
@@ -19,7 +19,7 @@ namespace BlazorStrap.InternalComponents
         private async Task PressEvent(KeyboardEventArgs e)
         {
             if (Parent == null) return;
-            if (e?.Code == "37")
+            if (e.Code == "37")
             {
                 await Parent.BackAsync();
             }

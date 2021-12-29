@@ -26,7 +26,7 @@ namespace BlazorStrap
         [CascadingParameter] public BSNavItem? DropdownItem { get; set; }
         [CascadingParameter] public BSDropdown? Parent { get; set; }
         [Parameter] public Placement Placement { get; set; } = Placement.RightStart;
-        internal bool Active { get; set; }
+        internal bool Active { get; private set; }
         internal int ChildCount { get; set; }
 
         private string? IsDivClassBuilder => new CssBuilder()
@@ -52,13 +52,13 @@ namespace BlazorStrap
 
         private ElementReference MyRef { get; set; }
         private BSPopover? PopoverRef { get; set; }
-        internal bool Shown { get; set; }
+        internal bool Shown { get; private set; }
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public async Task HideAsync()
         {
             Shown = false;
-            if (Js != null)
-                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataRefId, "documentDropdown", "click", true);
+            await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataRefId, "documentDropdown", "click", true);
             if (IsCssHover)
             {
                 await InvokeAsync(StateHasChanged);
@@ -76,21 +76,20 @@ namespace BlazorStrap
 
             if (!string.IsNullOrEmpty(ShownAttribute))
             {
-                if (Js != null) await Js.InvokeVoidAsync("blazorStrap.RemoveAttribute", MyRef, ShownAttribute);
+                await Js.InvokeVoidAsync("blazorStrap.RemoveAttribute", MyRef, ShownAttribute);
             }
 
             await InvokeAsync(StateHasChanged);
         }
-
+        // ReSharper disable once MemberCanBePrivate.Global
         public async Task ShowAsync()
         {
             Shown = true;
 
             if (!AllowOutsideClick)
             {
-                if (Js != null)
-                    await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataRefId, "documentDropdown", "click", true,
-                        AllowItemClick);
+                await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataRefId, "documentDropdown", "click", true,
+                    AllowItemClick);
             }
 
             if (IsCssHover)
@@ -107,8 +106,7 @@ namespace BlazorStrap
 
             if (!string.IsNullOrEmpty(ShownAttribute))
             {
-                if (Js != null)
-                    await Js.InvokeVoidAsync("blazorStrap.AddAttribute", MyRef, ShownAttribute, "blazorStrap");
+                await Js.InvokeVoidAsync("blazorStrap.AddAttribute", MyRef, ShownAttribute, "blazorStrap");
             }
 
             await InvokeAsync(StateHasChanged);
@@ -138,7 +136,7 @@ namespace BlazorStrap
             {
                 // If this dropdown toggle return
                 if (e?.Target.ClassList.Any(q => q.Value == "dropdown-toggle") == true &&
-                    e?.Target.TargetId == DataId) return;
+                    e.Target.TargetId == DataId) return;
 
                 // If click element is inside this dropdown return
                 // if (e?.Target.ChildrenId?.Any(q => q == DataId) == true && AllowItemClick) return;
@@ -151,8 +149,7 @@ namespace BlazorStrap
 
         public async ValueTask DisposeAsync()
         {
-            if (Js != null)
-                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataRefId, "documentDropdown", "click", true);
+            await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataRefId, "documentDropdown", "click", true);
             JSCallback.EventHandler -= OnEventHandler;
 
             GC.SuppressFinalize(this);

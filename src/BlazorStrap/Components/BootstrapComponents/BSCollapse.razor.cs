@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSCollapse : BlazorToggleStrapBase<BSCollapse>, IDisposable
+    public partial class BSCollapse : BlazorStrapToggleBase<BSCollapse>, IDisposable
     {
         private bool _lock;
         [Parameter] public bool NoAnimations { get; set; }
@@ -30,7 +30,7 @@ namespace BlazorStrap
         [CascadingParameter] public BSNavbar? NavbarParent { get; set; }
 
         // Can be access by @ref
-        public bool Shown { get; set; }
+        public bool Shown { get; private set; }
 
         private string? ClassBuilder => new CssBuilder("collapse")
             .AddClass("show", Shown)
@@ -48,9 +48,7 @@ namespace BlazorStrap
             
             if (_lock) return;
             _lock = true;
-            if(!NoAnimations)
-                if (Js != null)
-                    await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, true, DataId, "bsCollapse", "transitionend");
+            if(!NoAnimations) await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, true, DataId, "bsCollapse", "transitionend");
             Shown = true;
             if (NoAnimations)
                 await TransitionEndAsync();
@@ -61,9 +59,7 @@ namespace BlazorStrap
                 await OnHide.InvokeAsync(this);
             if (_lock) return;
             _lock = true;
-            if(!NoAnimations)
-                if (Js != null)
-                    await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, false, DataId, "bsCollapse", "transitionend");
+            if(!NoAnimations) await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, false, DataId, "bsCollapse", "transitionend");
             Shown = false;
             if (NoAnimations)
                 await TransitionEndAsync();

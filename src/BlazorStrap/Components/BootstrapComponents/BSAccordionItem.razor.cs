@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSAccordionItem : BlazorToggleStrapBase<BSAccordionItem>, IDisposable
+    public partial class BSAccordionItem : BlazorStrapToggleBase<BSAccordionItem>, IDisposable
     {
         private bool _lock;
         [Parameter] public bool NoAnimations { get; set; }
@@ -22,14 +22,13 @@ namespace BlazorStrap
         [Parameter] public RenderFragment? Header { get; set; }
 
         private bool _defaultShown;
-        private DotNetObjectReference<BSAccordionItem>? _objRef;
         [CascadingParameter] public BSAccordion? Parent {get;set; }
         private ElementReference ButtonRef { get; set; }
 
         private string? ClassBuilder => new CssBuilder("accordion-collapse collapse")
             .AddClass("show", Shown)
-            .AddClass(LayoutClass, !String.IsNullOrEmpty(LayoutClass))
-            .AddClass(Class, !String.IsNullOrEmpty(Class))
+            .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
+            .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
         private bool HasRendered { get; set; }
@@ -129,7 +128,6 @@ namespace BlazorStrap
         {
             if (Parent != null) Parent.ChildHandler -= Parent_ChildHandler;
             JSCallback.EventHandler -= OnEventHandler;
-            _objRef?.Dispose();
         }
     }
 }

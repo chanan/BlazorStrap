@@ -5,7 +5,7 @@
     </BSCol>
     <BSCol Column="auto">
         <BSLabel IsHidden="true">Password</BSLabel>
-        <BSInput InputType="InputType.Password" IsBasic="true"/>
+        <BSInput InputType="InputType.Password" Value="@("")"/>
     </BSCol>
     <BSCol Column="auto">
         <BSButton Color="BSColor.Primary" IsSubmit="true" MarginBottom="Margins.Medium">Confirm identity</BSButton>

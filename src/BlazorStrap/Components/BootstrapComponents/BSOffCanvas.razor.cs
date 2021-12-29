@@ -1,12 +1,11 @@
 using BlazorComponentUtilities;
-
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSOffCanvas  : BlazorToggleStrapBase<BSOffCanvas>
+    public partial class BSOffCanvas : BlazorStrapToggleBase<BSOffCanvas>
     {
         [Parameter] public bool AllowScroll { get; set; }
         [Parameter] public string? BodyClass { get; set; }
@@ -61,15 +60,12 @@ namespace BlazorStrap
         {
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
-            JSCallback.EventCallback("","ModalorOffcanvas", "toggled");
-            if (Js != null)
+            JSCallback.EventCallback("", "ModalorOffcanvas", "toggled");
+            if (ShowBackdrop)
             {
-                if (ShowBackdrop)
-                {
-                    await Js.InvokeVoidAsync("blazorStrap.SetStyle", BackdropRef, "display", "block", 100);
-                    await Js.InvokeVoidAsync("blazorStrap.AddClass", BackdropRef, "show");
-                    BackdropStyle = "display: block;";
-                }
+                await Js.InvokeVoidAsync("blazorStrap.SetStyle", BackdropRef, "display", "block", 100);
+                await Js.InvokeVoidAsync("blazorStrap.AddClass", BackdropRef, "show");
+                BackdropStyle = "display: block;";
             }
 
             Shown = true;
@@ -82,14 +78,11 @@ namespace BlazorStrap
         {
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
-            JSCallback.EventCallback("","ModalorOffcanvas", "toggled");
-            if (Js != null)
+            JSCallback.EventCallback("", "ModalorOffcanvas", "toggled");
+            if (ShowBackdrop)
             {
-                if (ShowBackdrop)
-                {
-                    await Js.InvokeVoidAsync("blazorStrap.RemoveClass", BackdropRef, "show", 100);
-                    BackdropStyle = "display: none;";
-                }
+                await Js.InvokeVoidAsync("blazorStrap.RemoveClass", BackdropRef, "show", 100);
+                BackdropStyle = "display: none;";
             }
 
             Shown = false;
@@ -97,10 +90,12 @@ namespace BlazorStrap
             if (OnHidden.HasDelegate)
                 await OnHidden.InvokeAsync(this);
         }
+
         public override Task ToggleAsync()
         {
             return Shown ? HideAsync() : ShowAsync();
         }
+
         private async Task BackdropClicked()
         {
             if (DisableBackdropClick) return;
@@ -122,24 +117,17 @@ namespace BlazorStrap
                 {
                     if (!AllowScroll)
                     {
-                        if (Js != null)
-                        {
-                            var scrollWidth = await Js.InvokeAsync<int>("blazorStrap.GetScrollBarWidth");
-                            await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "hidden");
-                            await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", $"{scrollWidth}px");
-                        }
+                        var scrollWidth = await Js.InvokeAsync<int>("blazorStrap.GetScrollBarWidth");
+                        await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "hidden");
+                        await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", $"{scrollWidth}px");
                     }
                 }
             }
             else
             {
                 {
-                    if (Js != null)
-                    {
-                        await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "");
-                        await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", "");
-                    }
-                    
+                    await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "");
+                    await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", "");
                 }
             }
         }

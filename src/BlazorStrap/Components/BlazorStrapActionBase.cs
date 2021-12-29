@@ -7,9 +7,9 @@ namespace BlazorStrap;
 
 public class BlazorStrapActionBase : BlazorStrapBase
 {
-    protected bool IsLinkType { get; set; } = false;
-    protected bool HasButtonClass { get; set; } = false;
-    protected bool HasLinkClass { get; set; } = false;
+    protected bool IsLinkType { get; init; } 
+    protected bool HasButtonClass { get; set; } 
+    protected bool HasLinkClass { get; set; } 
     protected bool IsResetType { get; set; }
     protected bool IsSubmitType { get; set; }
     [Parameter] public BSColor Color { get; set; } = BSColor.Default;
@@ -69,7 +69,7 @@ public class BlazorStrapActionBase : BlazorStrapBase
                 builder.AddAttribute(6, "href", UrlBase);
         }
 
-        builder.AddAttribute(7, "onclick", EventCallback.Factory.Create(this, ClickEvent));
+        builder.AddAttribute(7, "onclick",  ClickEvent);
         builder.AddMultipleAttributes(8, Attributes);
         builder.AddContent(9, @ChildContent);
         builder.CloseElement();

@@ -50,3 +50,18 @@ You can also scroll content in the modals body
 ### Toggle between modals
 
 {{sample=Components/Modal/Modal7}}
+
+### Methods / Events
+TValue = BSModal
+:::
+
+| Name        | Type   | Return Value | Remarks                      |
+|-------------|--------|--------------|------------------------------|
+| ToggleAsync | Method |              | Toggles                      |
+| ShowAsync   | Method |              | Shows                        |
+| HideAsync   | Method |              | Hides                        |
+| OnShow      | Event  | TValue       | Raised when starting to show |
+| OnShown     | Event  | TValue       | Raised when shown            |
+| OnHide      | Event  | TValue       | Raised when starting to hide |
+| OnHidden    | Event  | TValue       | Raised when hidden           |
+:::

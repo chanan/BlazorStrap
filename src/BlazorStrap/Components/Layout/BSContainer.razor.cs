@@ -5,7 +5,7 @@ namespace BlazorStrap
 {
     public partial class BSContainer : BlazorStrapBase
     {
-        [Parameter] public Container Container { get; set; } = new Container();
+        [Parameter] public Container Container { get; set; } 
 
         private string? ClassBuilder => new CssBuilder()
             .AddClass("container", Container.HasFlag(Container.Default))

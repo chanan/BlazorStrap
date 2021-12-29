@@ -18,16 +18,16 @@ namespace BlazorStrap.Utilities
                 Func<TValue, Task> callback)
             => new AsyncReceiver<TValue>(callback).Invoke;
 
-        private record AsyncReceiver(Func<Task> callback)
+        private record AsyncReceiver(Func<Task> Callback)
             : ReceiverBase
         {
-            public Task Invoke() => callback();
+            public Task Invoke() => Callback();
         }
 
-        private record AsyncReceiver<T>(Func<T, Task> callback)
+        private record AsyncReceiver<T>(Func<T, Task> Callback)
             : ReceiverBase
         {
-            public Task Invoke(T arg) => callback(arg);
+            public Task Invoke(T arg) => Callback(arg);
         }
 
         private record ReceiverBase : IHandleEvent
@@ -36,16 +36,16 @@ namespace BlazorStrap.Utilities
                 item.InvokeAsync(arg);
         }
 
-        private record SyncReceiver(Action callback)
+        private record SyncReceiver(Action Callback)
             : ReceiverBase
         {
-            public void Invoke() => callback();
+            public void Invoke() => Callback();
         }
 
-        private record SyncReceiver<T>(Action<T> callback)
+        private record SyncReceiver<T>(Action<T> Callback)
             : ReceiverBase
         {
-            public void Invoke(T arg) => callback(arg);
+            public void Invoke(T arg) => Callback(arg);
         }
     }
 }

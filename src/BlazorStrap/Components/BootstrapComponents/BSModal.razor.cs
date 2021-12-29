@@ -6,7 +6,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSModal : BlazorToggleStrapBase<BSModal>, IAsyncDisposable
+    public partial class BSModal : BlazorStrapToggleBase<BSModal>, IAsyncDisposable
     {
         [Parameter] public bool AllowScroll { get; set; }
         [Parameter] public string? ButtonClass { get; set; }
@@ -59,7 +59,7 @@ namespace BlazorStrap
         private bool Shown
         {
             get => _shown;
-            set { _shown = value; }
+            set => _shown = value;
         }
 
         private string Style { get; set; } = "display: none;";
@@ -74,28 +74,26 @@ namespace BlazorStrap
             Shown = false;
             if (!EventsSet)
             {
-                if (Js != null) await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsModal", "transitionend");
+                await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsModal", "transitionend");
                 EventsSet = true;
             }
 
             JSCallback.EventCallback("", "ModalorOffcanvas", "toggled");
-            if (Js != null)
+
+            if (!_leaveBodyAlone)
             {
-                if (!_leaveBodyAlone)
-                {
-                    await Js.InvokeVoidAsync("blazorStrap.RemoveBodyClass", "modal-open");
-                    await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "");
-                    await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", "");
-                }
+                await Js.InvokeVoidAsync("blazorStrap.RemoveBodyClass", "modal-open");
+                await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "");
+                await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", "");
+            }
 
-                await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "show", 50);
-                if (BackdropRef != null)
-                    await BackdropRef.ToggleAsync();
+            await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "show", 50);
+            if (BackdropRef != null)
+                await BackdropRef.ToggleAsync();
 
-                if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", MyRef))
-                {
-                    await TransitionEndAsync();
-                }
+            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", MyRef))
+            {
+                await TransitionEndAsync();
             }
 
             _leaveBodyAlone = false;
@@ -110,29 +108,28 @@ namespace BlazorStrap
             Shown = true;
             if (!EventsSet)
             {
-                if (Js != null) await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsModal", "transitionend");
+                await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsModal", "transitionend");
                 EventsSet = true;
             }
 
             JSCallback.EventCallback("", "ModalorOffcanvas", "toggled");
-            if (Js != null)
+
+            await Js.InvokeVoidAsync("blazorStrap.AddBodyClass", "modal-open");
+
+            if (!AllowScroll)
             {
-                await Js.InvokeVoidAsync("blazorStrap.AddBodyClass", "modal-open");
+                var scrollWidth = await Js.InvokeAsync<int>("blazorStrap.GetScrollBarWidth");
+                var viewportHeight = await Js.InvokeAsync<int>("blazorStrap.GetInnerHeight");
+                var peakHeight = await Js.InvokeAsync<int>("blazorStrap.PeakHeight", MyRef);
 
-                if (!AllowScroll)
+                if (viewportHeight > peakHeight)
                 {
-                    var scrollWidth = await Js.InvokeAsync<int>("blazorStrap.GetScrollBarWidth");
-                    var viewportheight = await Js.InvokeAsync<int>("blazorStrap.GetInnerHeight");
-                    var peakHeight = await Js.InvokeAsync<int>("blazorStrap.PeakHeight", MyRef);
-
-                    if (viewportheight > peakHeight)
-                    {
-                        await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "hidden");
-                        if (scrollWidth != 0)
-                            await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", $"{scrollWidth}px");
-                    }
+                    await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "hidden");
+                    if (scrollWidth != 0)
+                        await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", $"{scrollWidth}px");
                 }
             }
+
 
             BlazorStrapService.ModalChanged(this);
 
@@ -162,7 +159,6 @@ namespace BlazorStrap
         {
             if (IsStaticBackdrop)
             {
-                if (Js == null) return;
                 await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "modal-static");
                 await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "modal-static", 250);
                 return;
@@ -240,7 +236,6 @@ namespace BlazorStrap
             {
                 if (IsStaticBackdrop)
                 {
-                    if (Js == null) return;
                     await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "modal-static", 250);
                     await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "modal-static");
                     return;

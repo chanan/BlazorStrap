@@ -13,7 +13,7 @@ namespace BlazorStrap
         [Parameter] public int Heading { get; set; } = 1;
         [Parameter] public bool IsDismissible { get; set; }
 
-        private bool _dismissed { get; set; }
+        private bool _dismissed;
 
         private string? ClassBuilder => new CssBuilder("alert")
             .AddClass($"alert-{Color.NameToLower()}", Color != BSColor.Default)

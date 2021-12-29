@@ -45,3 +45,8 @@ See [shared](forms/shared) for additional parameters
 ### Datalists
 
 {{sample=Forms/FormControls/FormControls9}}
+
+### Live
+Note TimeOnly and DataOnly are not in .net 5.0 
+
+{{sample=Forms/FormControls/FormControls10}}

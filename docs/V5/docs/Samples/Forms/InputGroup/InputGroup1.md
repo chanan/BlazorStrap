@@ -1,32 +1,32 @@
-﻿<BSDiv class="@(BS.Input_Group)" MarginBottom="Margins.Medium">
+﻿<div class="@BS.Input_Group mb-3">
     <span class="@BS.Input_Group_Text">@@</span>
-    <BSInput InputType="InputType.Text" placeholder="Username" IsBasic="true"/>
-</BSDiv>
+    <BSInput InputType="InputType.Text" placeholder="Username"  Value="@("")"/>
+</div>
 
-<BSDiv class="@(BS.Input_Group)" MarginBottom="Margins.Medium">
-    <BSInput InputType="InputType.Text" placeholder="Recipient's username" IsBasic="true"/>
+<div class="@BS.Input_Group mb-3">
+    <BSInput InputType="InputType.Text" placeholder="Recipient's username"  Value="@("")"/>
     <span class="@BS.Input_Group_Text">@@example.com</span>
-</BSDiv>
+</div>
 
 <BSLabel>Your vanity URL</BSLabel>
-<BSDiv class="@(BS.Input_Group)" MarginBottom="Margins.Medium">
+<div class="@BS.Input_Group mb-3">
     <span class="@BS.Input_Group_Text" id="basic-addon3">https://example.com/users/</span>
-    <BSInput InputType="InputType.Text" IsBasic="true"/>
-</BSDiv>
+    <BSInput InputType="InputType.Text"  Value="@("")"/>
+</div>
 
-<BSDiv class="@(BS.Input_Group)" MarginBottom="Margins.Medium">
+<div class="@BS.Input_Group mb-3">
     <span class="@BS.Input_Group_Text">$</span>
-    <BSInput InputType="InputType.Text" IsBasic="true"/>
+    <BSInput InputType="InputType.Text"  Value="@("")"/>
     <span class="@BS.Input_Group_Text">.00</span>
-</BSDiv>
+</div>
 
-<BSDiv class="@(BS.Input_Group)" MarginBottom="Margins.Medium">
-    <BSInput InputType="InputType.Text" placeholder="Username" IsBasic="true"/>
+<div class="@BS.Input_Group mb-3">
+    <BSInput InputType="InputType.Text" placeholder="Username"  Value="@("")"/>
     <span class="@BS.Input_Group_Text" >@@</span>
-    <BSInput InputType="InputType.Text" placeholder="Server" IsBasic="true"/>
-</BSDiv>
+    <BSInput InputType="InputType.Text" placeholder="Server"  Value="@("")"/>
+</div>
 
-<BSDiv class="@(BS.Input_Group)">
+<div class="@BS.Input_Group mb-3">
     <span class="@BS.Input_Group_Text">With textarea</span>
-    <BSInput InputType="InputType.TextArea" IsBasic="true"></BSInput>
-</BSDiv>
+    <BSInput InputType="InputType.TextArea"  Value="@("")"></BSInput>
+</div>

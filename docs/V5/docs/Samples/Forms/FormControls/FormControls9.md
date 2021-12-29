@@ -1,5 +1,5 @@
 ﻿<BSLabel>Datalist example</BSLabel>
-<BSInput InputType="InputType.DataList" list="datalistOptions" IsBasic="true"/>
+<BSInput InputType="InputType.DataList" list="datalistOptions" Value="@("Test")" />
 <datalist id="datalistOptions">
     <option value="San Francisco"/>
     <option value="New York"/>

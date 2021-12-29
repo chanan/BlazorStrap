@@ -6,8 +6,8 @@ namespace BlazorStrap
 {
     public partial class BSNavItem : BlazorStrapBase, IDisposable
     {
-        [Inject] NavigationManager NavigationManager { get; set; }
-
+        // ReSharper disable once NullableWarningSuppressionIsUsed
+        [Inject] private NavigationManager NavigationManager { get; set; } = null!;
         [Parameter] public bool IsActive { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
         [Parameter] public bool IsDropdown { get; set; }
@@ -17,7 +17,7 @@ namespace BlazorStrap
         [Parameter] public bool PreventDefault { get; set; }
         [Parameter] public RenderFragment? TabContent { get; set; }
         [Parameter] public RenderFragment? TabLabel { get; set; }
-        [Parameter] public string? Url { get; set; } = null;
+        [Parameter] public string? Url { get; set; } 
         [CascadingParameter] public BSNav? Parent { get; set; }
 
         private string? ClassBuilder => new CssBuilder("nav-link")

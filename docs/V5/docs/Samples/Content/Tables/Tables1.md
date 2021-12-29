@@ -30,7 +30,7 @@
     </BSTFoot>
 </BSTable>
 <!--\\-->
-<BSDiv class="@BS.Input_Group" MarginBottom="Margins.Medium">
+<div class="@BS.Input_Group mb-3">
     <span class="@BS.Input_Group_Text">Table Backgroud Color</span>
     <BSInput InputType="InputType.Select" @bind-Value="OTableColor">
         <option value="@BSColor.Default">None</option>
@@ -47,8 +47,8 @@
     <BSInputCheckbox @bind-Value="OIsBorderLess" IsToggle="true" IsOutlined="true" Color="BSColor.Secondary" CheckedValue="true" UnCheckedValue="false">IsBorderLess</BSInputCheckbox>
     <BSInputCheckbox @bind-Value="OIsCaptionTop" IsToggle="true" IsOutlined="true" Color="BSColor.Success" CheckedValue="true" UnCheckedValue="false">IsCaptionTop</BSInputCheckbox>
     <BSInputCheckbox @bind-Value="OIsStriped" IsToggle="true" IsOutlined="true" Color="BSColor.Danger" CheckedValue="true" UnCheckedValue="false">IsStriped</BSInputCheckbox>
-</BSDiv>
-<BSDiv class="@BS.Input_Group" MarginBottom="Margins.Medium">
+</div>
+<div class="@BS.Input_Group mb-3">
     <span class="@BS.Input_Group_Text">Row 2 Backgroud Color</span>
     <BSInput InputType="InputType.Select" @bind-Value="OTRColor">
         <option value="@BSColor.Default">None</option>
@@ -69,8 +69,8 @@
         <option value="@AlignRow.Bottom">Bottom</option>
     </BSInput>
     <BSInputCheckbox @bind-Value="OTRIsActive" IsToggle="true" IsOutlined="true" Color="BSColor.Primary" CheckedValue="true" UnCheckedValue="false">TRIsActive</BSInputCheckbox>
-</BSDiv>
-<BSDiv class="@BS.Input_Group" MarginBottom="Margins.Medium">
+</div>
+<div class="@BS.Input_Group mb-3">
     <span class="@BS.Input_Group_Text">Row 1 Col 1 Backgroud Color</span>
     <BSInput InputType="InputType.Select" @bind-Value="OTDColor">
         <option value="@BSColor.Default">None</option>
@@ -91,7 +91,7 @@
             <option value="@AlignRow.Bottom">Bottom</option>
         </BSInput>
     <BSInputCheckbox @bind-Value="OIsActive" IsToggle="true" IsOutlined="true" Color="BSColor.Primary" CheckedValue="true" UnCheckedValue="false">TRIsActive</BSInputCheckbox>
-</BSDiv>
+</div>
 <!--//-->
 <!-- Options Form not shown
 @code {

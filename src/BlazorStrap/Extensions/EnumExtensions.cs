@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using BlazorStrap.Properties;
 
 namespace BlazorStrap
 {
@@ -15,8 +11,10 @@ namespace BlazorStrap
             {
                 return true;
             }
-            if(!string.IsNullOrEmpty(value))
-                Console.WriteLine($"Invalid Grid size used {value}");
+
+            if (!string.IsNullOrEmpty(value))
+                
+                Console.WriteLine(Resources.Could_not_parse_input__Invalid_Guid_format,value);
             return false;
         }
         internal static string Name<T>(this T val) where T : Enum?

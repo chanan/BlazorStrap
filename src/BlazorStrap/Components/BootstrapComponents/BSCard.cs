@@ -33,8 +33,7 @@ namespace BlazorStrap
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            object? value = null;
-            if (Attributes.TryGetValue("src", out value) && (value?.ToString()?.Contains("placeholder:") ?? false) && CardType == CardType.Image)
+            if (Attributes.TryGetValue("src", out var value) && (value.ToString()?.Contains("placeholder:") ?? false) && CardType == CardType.Image)
             {
                 builder.OpenComponent(0, typeof(BSImage));
                 builder.AddAttribute(1, "Class", ClassBuilder);
@@ -54,7 +53,7 @@ namespace BlazorStrap
             
         }
 
-        private string? GetCardAlignmnet()
+        private string? GetCardAlignment()
         {
             return Alignment switch
             {
@@ -78,8 +77,8 @@ namespace BlazorStrap
             return CardType switch
             {
                 CardType.Body => $"card-body {GetTextColor()}",
-                CardType.Card => $"card {GetCardColor()} {GetCardAlignmnet()} {(IsInverse ? "bg-dark text-white" : null)}",
-                CardType.Image => $"card-img{GetImageVerticalAlignmnet()}",
+                CardType.Card => $"card {GetCardColor()} {GetCardAlignment()} {(IsInverse ? "bg-dark text-white" : null)}",
+                CardType.Image => $"card-img{GetImageVerticalAlignment()}",
                 CardType.Title => "card-title",
                 CardType.Subtitle => "card-subtitle mb-2 text-muted",
                 CardType.Link => "card-link",
@@ -93,7 +92,7 @@ namespace BlazorStrap
             };
         }
 
-        private string? GetImageVerticalAlignmnet()
+        private string? GetImageVerticalAlignment()
         {
             return VerticalAlignment switch
             {

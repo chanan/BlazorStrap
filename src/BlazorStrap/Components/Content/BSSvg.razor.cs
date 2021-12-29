@@ -9,7 +9,8 @@ namespace BlazorStrap
 {
     public partial class BSSvg : BlazorStrapBase
     {
-        [Inject] public ISvgLoader SvgLoader { get; set; }
+        // ReSharper disable once NullableWarningSuppressionIsUsed
+        [Inject] public ISvgLoader SvgLoader { get; set; } = null!;
         [Parameter] public Align Align { get; set; }
         [Parameter] public bool IsFluid { get; set; } 
         [Parameter] public bool IsRounded { get; set; }

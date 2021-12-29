@@ -1,1 +1,1 @@
-﻿<BSInput InputType="InputType.Text" placeholder="Readonly input here..." IsReadonly="true" IsBasic="true"/>
+﻿<BSInput InputType="InputType.Text" placeholder="Readonly input here..." IsReadonly="true"  Value="@("")"/>

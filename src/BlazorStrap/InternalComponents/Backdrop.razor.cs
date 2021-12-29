@@ -9,11 +9,13 @@ namespace BlazorStrap.InternalComponents;
 
 public partial class Backdrop : ComponentBase
 {
-    [Inject] private IBlazorStrapService _blazorStrapService { get; set; }
-    [Inject] private IJSRuntime Js { get; set; }
+    // ReSharper disable once NullableWarningSuppressionIsUsed
+    [Inject] private IBlazorStrapService BlazorStrapService { get; set; } = default!;
+    // ReSharper disable once NullableWarningSuppressionIsUsed
+    [Inject] private IJSRuntime Js { get; set; } = default!;
     [Parameter] public bool ShowBackdrop { get; set; }
     private bool Shown { get; set; }
-    private BlazorStrapService BlazorStrap => (BlazorStrapService)_blazorStrapService;
+    private BlazorStrapService BlazorStrap => (BlazorStrapService)BlazorStrapService;
     private string? BackdropClass => new CssBuilder("modal-backdrop")
         .AddClass("fade")
         .AddClass("show", Shown)

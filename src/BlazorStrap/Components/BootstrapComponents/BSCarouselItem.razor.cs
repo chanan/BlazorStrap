@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSCarouselItem : BlazorToggleStrapBase<BSCarouselItem>, IAsyncDisposable
+    public partial class BSCarouselItem : BlazorStrapToggleBase<BSCarouselItem>, IAsyncDisposable
     {
         [Parameter] public int Interval { get; set; } = 5000;
         private bool _active;
@@ -17,7 +17,7 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
-        internal ElementReference MyRef { get; set; }
+        internal ElementReference MyRef { get; private set; }
 
         public void First()
         {
@@ -62,8 +62,7 @@ namespace BlazorStrap
         {
             if (firstRender)
             {
-                if (Js != null)
-                    await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsCarouselItem", "transitionend");
+                await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsCarouselItem", "transitionend");
                 EventsSet = true;
             }
         }
@@ -108,9 +107,7 @@ namespace BlazorStrap
 
         public async ValueTask DisposeAsync()
         {
-            if (EventsSet)
-                if (Js != null)
-                    await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "bsCarouselItem", "transitionend");
+            if (EventsSet) await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "bsCarouselItem", "transitionend");
             JSCallback.EventHandler -= OnEventHandler;
             Parent?.RemoveChild(this);
             GC.SuppressFinalize(this);

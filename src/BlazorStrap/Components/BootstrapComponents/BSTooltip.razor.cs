@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSTooltip : BlazorToggleStrapBase<BSTooltip>, IAsyncDisposable
+    public partial class BSTooltip : BlazorStrapToggleBase<BSTooltip>, IAsyncDisposable
     {
         [Parameter] public Placement Placement { get; set; }
         [Parameter] public string? Target { get; set; }

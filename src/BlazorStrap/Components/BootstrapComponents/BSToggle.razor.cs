@@ -8,7 +8,6 @@ namespace BlazorStrap
 {
     public partial class BSToggle : BlazorStrapBase
     {
-        private bool _init;
         [Parameter] public bool IsButton { get; set; }
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
         [Parameter] public bool IsNavLink { get; set; }
@@ -19,7 +18,7 @@ namespace BlazorStrap
         [CascadingParameter] public BSCollapse? CollapseParent { get; set; }
         [CascadingParameter] public BSDropdown? DropDownParent { get; set; }
 
-        public string Target
+        private string Target
         {
             get
             {
@@ -31,7 +30,7 @@ namespace BlazorStrap
         private string? ClassBuilder => new CssBuilder()
             .AddClass($"btn-outline-{Color.NameToLower()}", IsOutlined && IsButton)
             .AddClass($"btn-{Color.NameToLower()}", Color != BSColor.Default && !IsOutlined && IsButton)
-            .AddClass("active", DropDownParent?.Active ?? false && IsNavLink)
+            .AddClass("active", (DropDownParent?.Active ?? false) && IsNavLink)
             .AddClass("btn", IsButton)
             .AddClass($"btn-{Size.ToDescriptionString()}", Size != Size.None)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
@@ -46,12 +45,10 @@ namespace BlazorStrap
         
         protected override void OnInitialized()
         {
-            if (DropDownParent != null)
+            if (DropDownParent == null) return;
+            if (DropDownParent.Group != null || DropDownParent.IsDiv || DropDownParent.IsNavPopper || DropDownParent.Parent != null)
             {
-                if (DropDownParent.Group != null || DropDownParent.IsDiv || DropDownParent.IsNavPopper || DropDownParent.Parent != null)
-                {
-                    DataId = DropDownParent.Target;
-                }
+                DataId = DropDownParent.Target;
             }
         }
 

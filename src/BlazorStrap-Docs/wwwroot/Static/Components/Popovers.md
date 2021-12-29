@@ -18,3 +18,18 @@ See [shared](layout/shared) for additional parameters
 ### Example
 
 {{sample=Components/Popover/Popover1}}
+
+### Methods / Events
+TValue = BSPopover
+:::
+
+| Name        | Type   | Return Value | Remarks                      |
+|-------------|--------|--------------|------------------------------|
+| ToggleAsync | Method |              | Toggles                      |
+| ShowAsync   | Method |              | Shows                        |
+| HideAsync   | Method |              | Hides                        |
+| OnShow      | Event  | TValue       | Raised when starting to show |
+| OnShown     | Event  | TValue       | Raised when shown            |
+| OnHide      | Event  | TValue       | Raised when starting to hide |
+| OnHidden    | Event  | TValue       | Raised when hidden           |
+:::

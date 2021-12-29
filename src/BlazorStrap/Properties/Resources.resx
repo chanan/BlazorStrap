@@ -132,4 +132,7 @@
   <data name="Could not parse input. Invalid Guid format" xml:space="preserve">
     <value>Could not parse input. Invalid Guid format.</value>
   </data>
+  <data name="EnumExtensions_VaildGridSize_Invalid_Grid_size_used__0_" xml:space="preserve">
+    <value>Invalid Grid size used {0}</value>
+  </data>
 </root>

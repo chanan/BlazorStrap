@@ -33,16 +33,13 @@ namespace BlazorStrap
 
         internal bool HasTabError { get; set; }
 
-        internal TabContentRender? TabRender { get; set; }
+        private TabContentRender? TabRender { get; set; }
 
         public bool SetFirstChild(BSNavItem sender)
         {
-            if (ActiveChild == null)
-            {
-                ActiveChild = sender;
-                return true;
-            }
-            return false;
+            if (ActiveChild != null) return false;
+            ActiveChild = sender;
+            return true;
         }
 
         public void Invoke(BSNavItem sender)

@@ -12,11 +12,11 @@ namespace BlazorStrap
     {
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
         [Parameter] public bool IsOutlined { get; set; }
-        [Parameter] public virtual T CheckedValue { get; set; }
-        [Parameter] public virtual T UnCheckedValue { get; set; }
+        [Parameter] public virtual T? CheckedValue { get; set; }
+        [Parameter] public virtual T? UnCheckedValue { get; set; }
         protected bool IsRadio { get; set; }
         [Parameter] public bool IsToggle { get; set; }
-        [DisallowNull] public ElementReference? Element { get; protected set; }
+        [DisallowNull] private ElementReference? Element { get; set; }
         private string InputType => IsRadio ? "radio" : "checkbox";
         [Parameter] public Size Size { get; set; }
 
@@ -41,7 +41,7 @@ namespace BlazorStrap
             builder.AddAttribute(1, "type", InputType);
             builder.AddAttribute(2, "class", ClassBuilder);
             builder.AddAttribute(3, "value", BindConverter.FormatValue(CurrentValue));
-            builder.AddAttribute(4, "onclick", EventCallback.Factory.Create(this, RadioOnClickEvent));
+            builder.AddAttribute(4, "onclick", RadioOnClickEvent);
             builder.AddAttribute(7, "onblur", OnBlurEvent);
             builder.AddAttribute(8, "onfocus", OnFocusEvent);
             builder.AddAttribute(8, "checked", Checked());
@@ -63,7 +63,12 @@ namespace BlazorStrap
 
         private void RadioOnClickEvent(MouseEventArgs e)
         {
-            if (IsToggle && Value.Equals(CheckedValue) && !IsRadio)
+            if (Value == null)
+            {
+                if (CheckedValue == null)
+                    Value = default(T);
+            }
+            else if (IsToggle && Value.Equals(CheckedValue) && !IsRadio)
                 Value = UnCheckedValue;
             else
                 Value = CheckedValue;
@@ -71,7 +76,12 @@ namespace BlazorStrap
         }
         private bool Checked()
         {
-            if (CheckedValue.Equals(Value))
+            if (CheckedValue == null)
+            {
+                if (Value == null)
+                    return true;
+            }
+            else if (CheckedValue.Equals(Value))
                 return true;
             return false;
         }

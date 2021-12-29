@@ -2,34 +2,68 @@
 using System.Globalization;
 using static System.Nullable;
 
+// Not messing with this class it does a lot of goofy things to make inputs work with all types of values
 // ReSharper disable ConditionIsAlwaysTrueOrFalse
 #pragma warning disable CS8604
 #pragma warning disable CS8625
 #pragma warning disable CS8600
+#pragma warning disable CS8602
 #pragma warning disable CS8601
 
 namespace BlazorStrap.Utilities
 {
     public static class TryParseString<T>
     {
-
         private static string GetDateTimeFormatString(string value)
         {
             const string dateFormat = "yyyy-MM-dd";
+            const string dateTimeLocalFormat = "yyyy-MM-ddTHH:mm:ss";
+            const string monthFormat = "yyyy-MM";   
             const string timeFormat = "HH:mm";
             const string timeFormatWithSeconds = "HH:mm:ss";
             const string timeFormatWithMilliSeconds = "HH:mm:ss.fff";
 
             var formatString = value.Count(c => c == ':') switch
             {
+                0 when value.Count(c => c == '-') is 1 => monthFormat,
                 1 => timeFormat,
                 2 when value.Contains('.') => timeFormatWithMilliSeconds,
+                2 when value.Count(c => c == '-') is 2 => dateTimeLocalFormat,
                 2 => timeFormatWithSeconds,
                 _ => dateFormat
             };
             return formatString;
         }
 
+        #if NET6_0_OR_GREATER
+        private static bool ToDateOnly(string value, out T result)
+        {
+            var formatString = GetDateTimeFormatString(value);
+            var success = BindConverter.TryConvertToDateOnly(value, CultureInfo.InvariantCulture, formatString, out DateOnly parsedValue);
+            if (success)
+            {
+                result = (T)(object)parsedValue;
+                return true;
+            }
+            
+            result = default;
+            return false;
+        }
+      
+        private static bool ToTimeOnly(string value, out T result)
+        {
+            var formatString = GetDateTimeFormatString(value);
+            var success = BindConverter.TryConvertToTimeOnly(value, CultureInfo.InvariantCulture, formatString, out TimeOnly parsedValue);
+            if (success)
+            {
+                result = (T)(object)parsedValue;
+                return true;
+            }
+            
+            result = default;
+            return false;
+        }
+        #endif
         private static bool ToDateTime(string value, out T result)
         {
             var formatString = GetDateTimeFormatString(value);
@@ -39,17 +73,16 @@ namespace BlazorStrap.Utilities
                 result = (T)(object)parsedValue;
                 return true;
             }
-            else
-            {
-                result = default(T); 
-                return false;
-            }
+            
+            result = default;
+            return false;
         }
 
         private static bool ToDateTimeOffset(string value, out T result)
         {
             var formatString = GetDateTimeFormatString(value);
             var success = BindConverter.TryConvertToDateTimeOffset(value, CultureInfo.InvariantCulture, formatString, out DateTimeOffset parsedValue);
+            
             if (success)
             {
                 result = (T)(object)parsedValue;
@@ -57,15 +90,15 @@ namespace BlazorStrap.Utilities
             }
             else
             {
-                result = default(T);
+                result = default;
                 return false;
             }
         }
 
         public static bool ToValue(string value, out T result, out string validationErrorMessage)
         {
-            var type = typeof(T);
-            result = default(T);
+            Type type = typeof(T);
+            result = default;
             validationErrorMessage = string.Empty;
             if (typeof(T) == typeof(string))
             {
@@ -73,22 +106,19 @@ namespace BlazorStrap.Utilities
                 validationErrorMessage = null;
                 return true;
             }
-
-            if (value == null && (GetUnderlyingType(type) != null))
+            else if (value == null && (Nullable.GetUnderlyingType(type) != null))
             {
                 result = (T)(object)default(T);
                 validationErrorMessage = null;
                 return true;
             }
-
-            if (value?.Length == 0 && typeof(DateTime) != typeof(T) && typeof(DateTimeOffset) != typeof(T))
+            else if (value?.Length == 0 && typeof(DateTime) != typeof(T) && typeof(DateTimeOffset) != typeof(T))
             {
                 result = (T)(object)default(T);
                 validationErrorMessage = null;
                 return true;
             }
-
-            if (typeof(T).IsEnum)
+            else if (typeof(T).IsEnum)
             {
                 // There's no non-generic Enum.TryParse (https://github.com/dotnet/corefx/issues/692)
                 try
@@ -104,36 +134,37 @@ namespace BlazorStrap.Utilities
                     return false;
                 }
             }
-
-            if (typeof(T) == typeof(int) || typeof(T) == typeof(int?))
+            else if (typeof(T) == typeof(int))
             {
                 result = (T)(object)Convert.ToInt32(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
-
-            if (typeof(T) == typeof(long) || typeof(T) == typeof(long?))
+            else if (typeof(T) == typeof(int?))
+            {
+                result = default(T);
+                validationErrorMessage = null;
+                return true;
+            }
+            else if (typeof(T) == typeof(long) || typeof(T) == typeof(long?))
             {
                 result = (T)(object)Convert.ToInt64(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
-
-            if (typeof(T) == typeof(double) || typeof(T) == typeof(double?))
+            else if (typeof(T) == typeof(double) || typeof(T) == typeof(double?))
             {
                 result = (T)(object)double.Parse(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
-
-            if (typeof(T) == typeof(decimal) || typeof(T) == typeof(decimal?))
+            else if (typeof(T) == typeof(decimal) || typeof(T) == typeof(decimal?))
             {
                 result = (T)(object)decimal.Parse(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
-
-            if (typeof(T) == typeof(Guid) || typeof(T) == typeof(Guid?))
+            else if (typeof(T) == typeof(Guid) || typeof(T) == typeof(Guid?))
             {
                 try
                 {
@@ -148,39 +179,40 @@ namespace BlazorStrap.Utilities
 
                 return true;
             }
-
-            if (typeof(T) == typeof(bool) || typeof(T) == typeof(bool?))
+            else if (typeof(T) == typeof(bool) || typeof(T) == typeof(bool?))
             {
                 try
                 {
-                    if (value?.ToString().ToLowerInvariant() == "false")
+                    if (value.ToString().ToLowerInvariant() == "false")
                     {
                         result = (T)(object)false;
                         validationErrorMessage = null;
                         return true;
                     }
-
-                    if (value?.ToString().ToLowerInvariant() == "true")
+                    else if (value.ToString().ToLowerInvariant() == "true")
                     {
                         result = (T)(object)true;
                         validationErrorMessage = null;
                         return true;
                     }
-
-                    if(string.IsNullOrEmpty(value?.ToString()))
+                    else if (string.IsNullOrEmpty(value.ToString()))
                     {
-                        result = (T) default;
+                        result = (T)default;
                         return true;
                     }
-
-                    result = (T)(object)false;
-                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a bool of true or false.");
-                    return false;
+                    else
+                    {
+                        result = (T)(object)false;
+                        validationErrorMessage = string.Format(CultureInfo.InvariantCulture,
+                            "The {0} field must be a bool of true or false.");
+                        return false;
+                    }
                 }
                 catch
                 {
                     result = (T)(object)false;
-                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a bool of true or false.");
+                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture,
+                        "The {0} field must be a bool of true or false.");
                     return false;
                 }
             }
@@ -193,10 +225,43 @@ namespace BlazorStrap.Utilities
                 }
                 else
                 {
-                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a date.", type.Name);
+                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture,
+                        "The {0} field must be a date.", type.Name);
                     return false;
                 }
             }
+        
+            #if NET6_0_OR_GREATER
+            else if (typeof(T) == typeof(DateOnly) || typeof(T) == typeof(DateOnly?))
+            {
+                if (TryParseString<T>.ToDateOnly(value, out result))
+                {
+                    validationErrorMessage = null;
+                    return true;
+                }
+                else
+                {
+                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture,
+                        "The {0} field must be a date.", type.Name);
+                    return false;
+                }
+            }
+            else if (typeof(T) == typeof(TimeOnly) || typeof(T) == typeof(TimeOnly?))
+            {
+                if (TryParseString<T>.ToTimeOnly(value, out result))
+                {
+                    validationErrorMessage = null;
+                    return true;
+                }
+                else
+                {
+                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture,
+                        "The {0} field must be a time.", type.Name);
+                    return false;
+                }
+            }
+            #endif
+            
             else if (typeof(T) == typeof(DateTimeOffset) || typeof(T) == typeof(DateTimeOffset?))
             {
                 if (TryParseString<T>.ToDateTimeOffset(value, out result))
@@ -206,11 +271,28 @@ namespace BlazorStrap.Utilities
                 }
                 else
                 {
-                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} field must be a date.", type.Name);
+                    validationErrorMessage = string.Format(CultureInfo.InvariantCulture,
+                        "The {0} field must be a date.", type.Name);
                     return false;
                 }
             }
-
+            else if (typeof(T).IsEnum)
+            {
+                var success = BindConverter.TryConvertTo<T>(value, CultureInfo.CurrentCulture, out var parsedValue);
+                if (success)
+                {
+                    result = parsedValue;
+                    validationErrorMessage = null;
+                    return true;
+                }
+                else
+                {
+                    result = default;
+                    validationErrorMessage =
+                        string.Format(CultureInfo.InvariantCulture, "The {0} is not valid.", type.Name);
+                    return false;
+                }
+            }
             return false;
         }
     }

@@ -23,7 +23,7 @@
         /// <param name="obj">Your object</param>
         /// <param name="interval">Milisecond interval</param>
         /// <param name="debounceAction">Called when last item call this method and after interval was finished</param>
-        public static void Debounce(object obj, int interval, Action<object> debounceAction)
+        public static void Debounce(object? obj, int interval, Action<object> debounceAction)
         {
             _lastObjectDebounce = obj;
             _debounceAction = debounceAction;

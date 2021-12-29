@@ -1,4 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿// Part's Flagged with Microsoft are
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using BlazorComponentUtilities;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
@@ -7,67 +12,112 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
-    public class BSInput<T> : BSInputBase<T>
+    public class BSInput<TValue> : BSInputBase<TValue>
     {
-        [Parameter] public InputType InputType { get; set; } = InputType.Text;
-        [Parameter] public bool IsPlainText { get; set; }
-        [Parameter] public bool IsReadonly { get; set; }
-        [Parameter] public bool NoColorClass { get; set; }
-        [Parameter] public Size InputSize { get; set; }
-        [DisallowNull] public ElementReference? Element { get; protected set; }
-
+        private string _dateFormat = "yyyy-MM-dd";
+        // Microsoft
+        private readonly bool _isMultipleSelect;
+        public BSInput()
+        {
+            // Microsoft
+            _isMultipleSelect = typeof(TValue).IsArray;
+        }
         protected string Tag => InputType switch
         {
             InputType.Select => "select",
             InputType.TextArea => "textarea",
             _ => "input"
         };
+        [DisallowNull] public ElementReference? Element { get; protected set; }
+        [Parameter] public bool IsPlainText { get; set; }
+        [Parameter] public bool IsReadonly { get; set; }
+        [Parameter] public InputType InputType { get; set; } = InputType.Text;
+        [Parameter] public Size InputSize { get; set; }
 
         private string? ClassBuilder => new CssBuilder()
-            .AddClass("form-range", InputType == InputType.Range)
+            .AddClass($"form-control-{InputSize.ToDescriptionString()}", InputSize != Size.None && InputType != InputType.Select )
+            .AddClass($"form-select-{InputSize.ToDescriptionString()}", InputSize != Size.None && InputType == InputType.Select )
             .AddClass("form-control", InputType != InputType.Select && InputType != InputType.Range)
-            .AddClass("form-select", InputType == InputType.Select)
-            .AddClass("form-control-color", InputType == InputType.Color && !NoColorClass)
-            .AddClass("form-control-plaintext", IsPlainText)
-            .AddClass($"form-control-{InputSize.ToDescriptionString()}",
-                InputType != InputType.Select && InputSize != Size.None)
-            .AddClass($"form-select-{InputSize.ToDescriptionString()}",
-                InputType == InputType.Select && InputSize != Size.None)
+            .AddClass("form-range", InputType == InputType.Range)
+            .AddClass(BS.Form_Control_Plaintext, IsPlainText)
             .AddClass(ValidClass, IsValid)
+            .AddClass("form-select", InputType == InputType.Select)
             .AddClass(InvalidClass, IsInvalid)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
-        protected override bool TryParseValueFromString(string? value, out T result,
-            [NotNullWhen(false)] out string? validationErrorMessage)
+    
+        protected override string? FormatValueAsString(TValue? value)
         {
-            return TryParseString<T>.ToValue(value ?? "", out result, out validationErrorMessage);
+            return value switch
+            {
+                null => null,
+                int @int => BindConverter.FormatValue(@int, CultureInfo.InvariantCulture),
+                long @long => BindConverter.FormatValue(@long, CultureInfo.InvariantCulture),
+                float @float => BindConverter.FormatValue(@float, CultureInfo.InvariantCulture),
+                double @double => BindConverter.FormatValue(@double, CultureInfo.InvariantCulture),
+                decimal @decimal => BindConverter.FormatValue(@decimal, CultureInfo.InvariantCulture),
+                DateTime dateTimeValue => BindConverter.FormatValue(dateTimeValue, _dateFormat, CultureInfo.InvariantCulture),
+                DateTimeOffset dateTimeOffsetValue => BindConverter.FormatValue(dateTimeOffsetValue, _dateFormat, CultureInfo.InvariantCulture),
+                #if NET6_0_OR_GREATER
+                    DateOnly dateOnlyValue => BindConverter.FormatValue(dateOnlyValue, _dateFormat, CultureInfo.InvariantCulture),
+                    TimeOnly timeOnlyValue => BindConverter.FormatValue(timeOnlyValue, _dateFormat, CultureInfo.InvariantCulture),
+                #endif
+                _ => base.FormatValueAsString(value),
+            };
         }
-
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            _dateFormat = InputType switch
+            {
+                InputType.Time => "HH:mm:ss.fff",
+                InputType.DateTimeLocal => "yyyy-MM-ddTHH:mm:ss",
+                InputType.Month => "yyyy-MM",
+                _ => _dateFormat
+            };
+        }
+        
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            if (InputType == InputType.Select && IsReadonly)
-                IsDisabled = IsReadonly;
             builder.OpenElement(0, Tag);
-            if (InputType != InputType.DataList)
+            if(Tag == "input")
                 builder.AddAttribute(1, "type", InputType.ToDescriptionString());
             builder.AddAttribute(2, "class", ClassBuilder);
-            builder.AddAttribute(3, "value", BindConverter.FormatValue(CurrentValue));
-            builder.AddAttribute(4, "onchange",
-                EventCallback.Factory.CreateBinder<string?>(this, OnChangeEvent, CurrentValueAsString));
-            builder.AddAttribute(5, "oninput",
-                EventCallback.Factory.CreateBinder<string?>(this, OnInputEvent, CurrentValueAsString));
-            builder.AddAttribute(6, "onblur", OnBlurEvent);
-            builder.AddAttribute(7, "onfocus", OnFocusEvent);
-            builder.AddAttribute(8, "disabled", IsDisabled);
-            if (Tag != "select")
-                builder.AddAttribute(9, "readonly", IsReadonly);
-            builder.AddMultipleAttributes(10, AdditionalAttributes);
+            if (_isMultipleSelect) // Microsoft
+            {   
+                builder.AddAttribute(4, "value", BindConverter.FormatValue(CurrentValue)?.ToString());
+                builder.AddAttribute(5, "onchange", EventCallback.Factory.CreateBinder<string?[]?>(this, SetCurrentValueAsStringArray, default));
+            }
+            else
+            {
+                builder.AddAttribute(3, "value", BindConverter.FormatValue(CurrentValueAsString));
+                builder.AddAttribute(4, "onchange", EventCallback.Factory.CreateBinder<string?>(this, OnChangeEvent, CurrentValueAsString));
+                builder.AddAttribute(5, "oninput", EventCallback.Factory.CreateBinder<string?>(this, OnInputEvent, CurrentValueAsString));
+            }
+            builder.AddAttribute(6, "disabled", IsDisabled);
+            builder.AddAttribute(7, "readonly", IsReadonly);
+            builder.AddAttribute(8, "onblur", OnBlurEvent);
+            builder.AddAttribute(9, "onfocus", OnFocusEvent);
+            builder.AddMultipleAttributes(8, AdditionalAttributes);
+            builder.AddAttribute(10, "multiple", _isMultipleSelect);
             builder.AddElementReferenceCapture(11, elReference => Element = elReference);
-            if (Tag == "select" || Tag == "textarea")
-                builder.AddContent(10, @ChildContent);
+            if(Tag != "input")
+                builder.AddContent(12, ChildContent);
             builder.CloseElement();
+        }
+
+        protected override bool TryParseValueFromString(string? value, out TValue result, [NotNullWhen(false)] out string? validationErrorMessage)
+        {
+            return TryParseString<TValue>.ToValue(value, out result, out validationErrorMessage);
+        }
+        // Microsoft
+        private void SetCurrentValueAsStringArray(string?[]? value)
+        {
+            CurrentValue = BindConverter.TryConvertTo<TValue>(value, CultureInfo.CurrentCulture, out var result)
+                ? result
+                : default;
         }
     }
 }

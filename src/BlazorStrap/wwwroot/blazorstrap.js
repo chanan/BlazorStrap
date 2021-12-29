@@ -340,7 +340,6 @@ window.blazorStrap = {
         if(shown)
         {
             let cleanup = function () {
-                console.log("llaflsadfsa");
                 element.style["height"] = "";
                 element.classList.remove("collapsing");
                 element.classList.add("collapse");

@@ -18,6 +18,6 @@ namespace BlazorStrap
           .AddClass(Class, !string.IsNullOrEmpty(Class))
           .Build().ToNullString();
 
-        [CascadingParameter] internal BSTHead TableHead { get; set; }
+        [CascadingParameter] internal BSTHead? TableHead { get; set; }
     }
 }

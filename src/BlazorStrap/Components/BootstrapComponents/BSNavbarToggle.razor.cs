@@ -15,7 +15,7 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
-        public async Task ClickEvent()
+        private async Task ClickEvent()
         {   
             if(!string.IsNullOrEmpty(Target))
                 BlazorStrap.OnForwardClick(Target);

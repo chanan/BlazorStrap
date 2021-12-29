@@ -5,14 +5,16 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSPopover : BlazorToggleStrapBase<BSPopover>, IAsyncDisposable
+    public partial class BSPopover : BlazorStrapToggleBase<BSPopover>, IAsyncDisposable
     {
-        private bool _isDisposing;
         [Parameter] public RenderFragment? Content { get; set; }
+
         /// <summary>
         /// This Parameter is intended for internal use 
         /// </summary>
-        [Parameter] public string? DropdownOffset { get; set; }
+        [Parameter]
+        public string? DropdownOffset { get; set; }
+
         [Parameter] public bool IsNavItemList { get; set; }
         [Parameter] public RenderFragment? Header { get; set; }
         [Parameter] public BSColor HeaderColor { get; set; }
@@ -20,7 +22,8 @@ namespace BlazorStrap
         /// <summary>
         /// This Parameter is intended for internal use 
         /// </summary>
-        [Parameter] public bool IsDropdown { get; set; }
+        [Parameter]
+        public bool IsDropdown { get; set; }
 
         [Parameter] public bool MouseOver { get; set; }
         [Parameter] public Placement Placement { get; set; } = Placement.Top;
@@ -30,7 +33,7 @@ namespace BlazorStrap
         private string? ClassBuilder => new CssBuilder()
             .AddClass("popover", !IsDropdown)
             .AddClass("fade", !IsDropdown)
-            .AddClass("dropdown-menu-end",  Placement == Placement.BottomEnd && IsDropdown)
+            .AddClass("dropdown-menu-end", Placement == Placement.BottomEnd && IsDropdown)
             .AddClass($"bs-popover-{Placement.NameToLower().PurgeStartEnd().LeftRightToStartEnd()}", !IsDropdown)
             .AddClass("dropdown-menu", IsDropdown)
             .AddClass($"show", Shown)
@@ -65,6 +68,11 @@ namespace BlazorStrap
 
         public override async Task ShowAsync()
         {
+            if (Target == null)
+            {
+                throw new NullReferenceException("Target cannot be null");
+            }
+
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             Shown = true;
@@ -73,18 +81,22 @@ namespace BlazorStrap
             {
                 await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "visibility", "hidden");
                 await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "show");
-                if(!string.IsNullOrEmpty(DropdownOffset))
-                    await Js.InvokeVoidAsync("blazorStrap.AddPopover", MyRef, _objRef, Placement.Name().ToDashSeperated(), Target, DropdownOffset);
+                if (!string.IsNullOrEmpty(DropdownOffset))
+                    await Js.InvokeVoidAsync("blazorStrap.AddPopover", MyRef, _objRef,
+                        Placement.Name().ToDashSeperated(), Target, DropdownOffset);
                 else
-                    await Js.InvokeVoidAsync("blazorStrap.AddPopover", MyRef, _objRef, Placement.Name().ToDashSeperated(), Target);
-          
-                if(!IsDropdown)
-                    await Js.InvokeVoidAsync("blazorStrap.UpdatePopoverArrow", MyRef, _objRef, Placement.NameToLower().PurgeStartEnd(),
+                    await Js.InvokeVoidAsync("blazorStrap.AddPopover", MyRef, _objRef,
+                        Placement.Name().ToDashSeperated(), Target);
+
+                if (!IsDropdown)
+                    await Js.InvokeVoidAsync("blazorStrap.UpdatePopoverArrow", MyRef, _objRef,
+                        Placement.NameToLower().PurgeStartEnd(),
                         false);
                 await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "visibility", "");
-                Style = await Js.InvokeAsync<string>("blazorStrap.GetStyle", MyRef); 
+                Style = await Js.InvokeAsync<string>("blazorStrap.GetStyle", MyRef);
                 EventsSet = true;
             }
+
             await InvokeAsync(StateHasChanged);
             if (OnShown.HasDelegate)
                 await OnShown.InvokeAsync(this);
@@ -105,13 +117,14 @@ namespace BlazorStrap
                 _objRef = DotNetObjectReference.Create(this);
                 if (Target != null)
                 {
-                    if(!IsDropdown)
+                    if (!IsDropdown)
                         await Js.InvokeVoidAsync("blazorStrap.AddEvent", Target, "bsPopover", "click");
                     if (MouseOver)
                     {
                         await Js.InvokeVoidAsync("blazorStrap.AddEvent", Target, "bsPopover", "mouseenter");
                         await Js.InvokeVoidAsync("blazorStrap.AddEvent", Target, "bsPopover", "mouseleave");
-                    }                        
+                    }
+
                     EventsSet = true;
                 }
             }
@@ -122,7 +135,8 @@ namespace BlazorStrap
             JSCallback.EventHandler += OnEventHandler;
         }
 
-        private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList, JavascriptEvent? e)
+        private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList,
+            JavascriptEvent? e)
         {
             if (id == Target && name == "bsPopover" && type == "click")
             {
@@ -147,18 +161,23 @@ namespace BlazorStrap
         }
 
 
-        #region  Dispose
+        #region Dispose
+
         public async ValueTask DisposeAsync()
         {
             _objRef?.Dispose();
             JSCallback.EventHandler -= OnEventHandler;
-            if (MouseOver)
+            if (Target != null)
             {
-                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", Target, "bsPopover", "mouseenter");
-                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", Target, "bsPopover", "mouseleave");
-            }        
+                if (MouseOver)
+                {
+                    await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", Target, "bsPopover", "mouseenter");
+                    await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", Target, "bsPopover", "mouseleave");
+                }
+            }
+
             // Prerendering error suppression 
-            if (HasRender == true)
+            if (HasRender)
                 try
                 {
                     if (Target != null)
@@ -166,9 +185,9 @@ namespace BlazorStrap
                         await Js.InvokeVoidAsync("blazorStrap.RemovePopover", MyRef, DataId);
                         if (EventsSet)
                         {
-                            if(!IsDropdown)
+                            if (!IsDropdown)
                                 await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", Target, "bsPopover", "click");
-                            
+
                             await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "null", "null");
                         }
                     }
@@ -176,8 +195,8 @@ namespace BlazorStrap
                 catch (Exception ex) when (ex.GetType().Name == "JSDisconnectedException")
                 {
                 }
-            GC.SuppressFinalize(this);
         }
+
         #endregion
     }
 }

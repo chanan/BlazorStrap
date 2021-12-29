@@ -20,7 +20,7 @@ namespace BlazorStrap
           .AddClass(Class, !string.IsNullOrEmpty(Class))
           .Build().ToNullString();
 
-        internal async Task ClickEvent()
+        private async Task ClickEvent()
         {
             if (OnClick.HasDelegate)
                 await OnClick.InvokeAsync();

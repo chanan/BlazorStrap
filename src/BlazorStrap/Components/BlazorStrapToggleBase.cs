@@ -1,11 +1,9 @@
-﻿using BlazorComponentUtilities;
-using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
+﻿using Microsoft.AspNetCore.Components;
 
 
 namespace BlazorStrap
 {
-    public abstract class BlazorToggleStrapBase<TValue> : BlazorStrapBase
+    public abstract class BlazorStrapToggleBase<TValue> : BlazorStrapBase
     {
         [Parameter] public EventCallback<TValue> OnShown { get; set; }
         [Parameter] public EventCallback<TValue> OnHidden { get; set; }

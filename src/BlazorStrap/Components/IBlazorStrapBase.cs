@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-
-namespace BlazorStrap
+﻿namespace BlazorStrap
 {
     public interface IBlazorStrapBase
     {
@@ -78,11 +76,11 @@ namespace BlazorStrap
         Padding PaddingTopAndBottom { get; set; }
 
 
-
         /// <summary>
         /// Position Helper
         /// </summary>
         Position Position { get; set; }
+
         string? LayoutClass { get; }
     }
 }

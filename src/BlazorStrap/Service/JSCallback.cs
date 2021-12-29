@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using BlazorStrap.Utilities;
+﻿using BlazorStrap.Utilities;
 using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public class JSCallback
+    public static class JSCallback
     {
         public static void CloseOtherDropdowns(BSDropdown sender)
         {

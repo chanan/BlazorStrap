@@ -8,7 +8,7 @@ namespace BlazorStrap
     {
         [Parameter] public bool IsActive { get; set; }
         [Parameter] public bool IsDivider { get; set; }
-        [Parameter] public int Header { get; set; } = 0;
+        [Parameter] public int Header { get; set; } 
         [Parameter] public bool IsDisabled { get; set; }
         [Parameter] public bool IsButton { get; set; }
         [Parameter] public bool IsSubmenu { get; set; }

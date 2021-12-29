@@ -6,16 +6,16 @@
 <BSRow>
     <BSCol>
         <BSCollapse DataId="collapse3a">
-            <BSCardBody Class="card">
+            <BSCard CardType="CardType.Card">
                 Some placeholder content for the first collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
-            </BSCardBody>
+            </BSCard>
         </BSCollapse>
     </BSCol>
     <BSCol>
         <BSCollapse DataId="collapse3b">
-            <BSCardBody Class="card">
+            <BSCard CardType="CardType.Card">
                 Some placeholder content for the second collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
-            </BSCardBody>
+            </BSCard>
         </BSCollapse>
     </BSCol>
 </BSRow>

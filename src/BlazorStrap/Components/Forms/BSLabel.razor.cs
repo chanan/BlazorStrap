@@ -38,7 +38,7 @@ namespace BlazorStrap
             .AddClass("visually-hidden", IsHidden)
             .AddClass("form-label", !IsColumn && !IsRadioLabel && !IsCheckLabel && !IsFloating)
             .AddClass("col-form-label", IsColumn && !IsRadioLabel && !IsCheckLabel)
-            .AddClass("form-check-label", (IsCheckLabel || IsRadioLabel) == true)
+            .AddClass("form-check-label", (IsCheckLabel || IsRadioLabel) )
             .AddClass("col", Column == null && ColumnSmall == null && ColumnMedium == null && ColumnLarge == null && ColumnXL == null && ColumnXXL == null && IsColumn)
             .AddClass($"col-{Column}", Column.VaildGridSize() && IsColumn)
             .AddClass($"col-sm-{ColumnSmall}", ColumnSmall.VaildGridSize() && IsColumn)
@@ -61,7 +61,6 @@ namespace BlazorStrap
             .AddClass($"offset-xl-{OffsetXL}", OffsetXL.VaildGridSize() && IsColumn)
             .AddClass($"offset-xxl-{OffsetXXL}", OffsetXXL.VaildGridSize() && IsColumn)
             .AddClass($"align-self-{Align.NameToLower()}", Align != Align.Default)
-            .AddClass($"align-self-{Align.GetName<Align>(Align).ToLower()}", Align != Align.Default)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();

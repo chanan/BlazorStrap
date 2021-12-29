@@ -44,7 +44,7 @@ namespace BlazorStrap
                 builder.OpenElement(1, "ul");
                 builder.AddMultipleAttributes(1, AdditionalAttributes);
                 builder.AddAttribute(2, "class", "validation-success");
-                foreach (var item in ValidationMessages.Where(q => q.Value == true))
+                foreach (var item in ValidationMessages.Where(q => q.Value ))
                 {
                     builder.OpenElement(2, "li");
                     builder.AddAttribute(3, "class", "validation-message");

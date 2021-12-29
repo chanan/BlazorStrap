@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazorStrap
 {
-    public partial class BSFeedback<TValue> : BlazorStrapBase, IDisposable
+    public class BSFeedback<TValue> : BlazorStrapBase, IDisposable
     {
         private bool _hasInitialized;
         [CascadingParameter] private EditContext? CascadedEditContext { get; set; }
-        protected EditContext EditContext { get; set; } = default!;
-        [Parameter] public Expression<Func<TValue>> For { get; set; }
-        [Parameter] public TValue IsManual { get; set; }
+        protected EditContext? EditContext { get; set; }
+        [Parameter] public Expression<Func<TValue>>? For { get; set; }
+        [Parameter] public TValue? IsManual { get; set; }
 
         private string? ClassBuilder => new CssBuilder()
             .AddClass("valid-tooltip", IsTooltip && !IsValid)
@@ -41,7 +41,7 @@ namespace BlazorStrap
 
                     _hasInitialized = true;
                     EditContext = CascadedEditContext;
-                    FieldIdentifier = FieldIdentifier.Create(For);
+                    if (For != null) FieldIdentifier = FieldIdentifier.Create(For);
                     //Field Changed
                     EditContext.OnFieldChanged += OnFieldChanged;
                     // Submitted
@@ -92,9 +92,9 @@ namespace BlazorStrap
             {
                 if (InvalidMessage == null)
                 {
+                    var first = true;
                     foreach (var message in EditContext.GetValidationMessages(FieldIdentifier))
                     {
-                        var first = true;
                         if (first)
                         {
                             InvalidMessage = message;
@@ -116,11 +116,9 @@ namespace BlazorStrap
         }
         public void Dispose()
         {
-            if (EditContext is not null)
-            {
-                EditContext.OnFieldChanged -= OnFieldChanged;
-                EditContext.OnValidationRequested -= OnValidationRequested;
-            }
+            if (EditContext is null) return;
+            EditContext.OnFieldChanged -= OnFieldChanged;
+            EditContext.OnValidationRequested -= OnValidationRequested;
         }
     }
 }

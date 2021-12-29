@@ -15,13 +15,13 @@ namespace BlazorStrap
     public class BSInputFile<TValue> : BlazorStrapBase, IDisposable
     {
         [Parameter] public string InvalidClass { get; set; } = "is-invalid";
-        [Parameter] public TValue IsBasic { get; set; }
+        [Parameter] public TValue? IsBasic { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
         [Parameter] public bool IsInvalid { get; set; }
         [Parameter] public bool IsValid { get; set; }
         [Parameter] public EventCallback<InputFileChangeEventArgs> OnChange { get; set; }
         [Parameter] public string ValidClass { get; set; } = "is-valid";
-        [Parameter] public Expression<Func<TValue>> ValidWhen { get; set; }
+        [Parameter] public Expression<Func<TValue>>? ValidWhen { get; set; }
         private bool _hasInitialized;
         [CascadingParameter] private EditContext? CascadedEditContext { get; set; }
 
@@ -32,7 +32,7 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
-        protected EditContext EditContext { get; set; } = default!;
+        protected EditContext? EditContext { get; set; }
 
         protected internal FieldIdentifier FieldIdentifier { get; set; }
 
@@ -41,7 +41,7 @@ namespace BlazorStrap
             builder.OpenComponent<InputFile>(0);
             builder.AddAttribute(1, "OnChange", EventCallback.Factory.Create<InputFileChangeEventArgs>(this, OnFileChange));
             builder.AddAttribute(2, "class", ClassBuilder);
-            builder.AddAttribute(3, "onclick", EventCallback.Factory.Create(this, OnFileClick));
+            builder.AddAttribute(3, "onclick",  OnFileClick);
             builder.AddMultipleAttributes(4, Attributes);
             builder.CloseElement();
         }
@@ -55,7 +55,7 @@ namespace BlazorStrap
 
                     _hasInitialized = true;
                     EditContext = CascadedEditContext;
-                    FieldIdentifier = FieldIdentifier.Create(ValidWhen);
+                    if (ValidWhen != null) FieldIdentifier = FieldIdentifier.Create(ValidWhen);
                     //Field Changed
                     EditContext.OnFieldChanged += OnFieldChanged;
                     // Submitted
