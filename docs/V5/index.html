@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>BlazorStrap</title>
+    <title>BlazorStrap V5</title>
     <base href="/V5/" />
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/loader.css" rel="stylesheet">
     <link href="BlazorStrap.WASM.styles.css" rel="stylesheet">
     <link href="css/docs.css" rel="stylesheet" />
     <script type="text/javascript">
@@ -41,32 +42,53 @@
 </head>
 
 <body>
-    <app>Loading... <br/><p>If your still seeing this after some time hit the refresh button. Something with GitHub pages does not like the app being forwarded by the homepage. Looking into the issue. </p></div>
-        <script src="_content/BlazorStrap/popper.min.js"></script>
-        <script src="_framework/blazor.webassembly.js" autostart="false"></script>
-        <script src="_content/BlazorStrap/blazorstrap.js"></script>
-        <script type="module">
-            import { BrotliDecode } from './decode.min.js';
-            Blazor.start({
-                loadBootResource: function (type, name, defaultUri, integrity) {
-                    if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
-                        return (async function () {
-                            const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
-                            if (!response.ok) {
-                                throw new Error(response.statusText);
-                            }
-                            const originalResponseBuffer = await response.arrayBuffer();
-                            const originalResponseArray = new Int8Array(originalResponseBuffer);
-                            const decompressedResponseArray = BrotliDecode(originalResponseArray);
-                            const contentType = type ===
-                                'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
-                            return new Response(decompressedResponseArray,
-                                { headers: { 'content-type': contentType } });
-                        })();
-                    }
-                }
-            });
+    <app>
+        <div class="loader-backdrop">
+            <div class="spinner-border text-light loader-wrapper" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <img src="logo5.svg" class="loader-logo">
+            <nav class="fixed-bottom navbar-light bg-light text-center p-1" id="fail" style="display: none;">
+                Loading is taking longer then expect. If your not on a slower connection please continue to wait. Other
+                wise <a href="javascript:refresh();">refresh.</a>
+            </nav>
+        </div>
+        <script type="text/javascript">
+            setTimeout(function () {
+                try {
+                document.getElementById("fail").style.display = "block";
+                } catch{}
+            }, 60000);
+            function refresh() {
+                location.reload(true);
+            }
         </script>
+    </app>
+    <script src="_content/BlazorStrap/popper.min.js"></script>
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script src="_content/BlazorStrap/blazorstrap.js"></script>
+    <script type="module">
+        import { BrotliDecode } from './decode.min.js';
+        Blazor.start({
+            loadBootResource: function (type, name, defaultUri, integrity) {
+                if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
+                    return (async function () {
+                        const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
+                        if (!response.ok) {
+                            throw new Error(response.statusText);
+                        }
+                        const originalResponseBuffer = await response.arrayBuffer();
+                        const originalResponseArray = new Int8Array(originalResponseBuffer);
+                        const decompressedResponseArray = BrotliDecode(originalResponseArray);
+                        const contentType = type ===
+                            'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
+                        return new Response(decompressedResponseArray,
+                            { headers: { 'content-type': contentType } });
+                    })();
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

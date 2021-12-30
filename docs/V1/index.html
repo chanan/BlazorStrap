@@ -1,58 +1,83 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width">
-    <title>BlazorStrap Demo Site</title>
-    <base href="/V1/" />
-    <link rel="apple-touch-icon" sizes="180x180" href="_content/SampleCore/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="_content/SampleCore/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="_content/SampleCore/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <style id="styled"></style>
-    <script type="text/javascript">
-        // Single Page Apps for GitHub Pages
-        // https://github.com/rafrex/spa-github-pages
-        // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
-        // ----------------------------------------------------------------------
-        // This script checks to see if a redirect is present in the query string
-        // and converts it back into the correct url and adds it to the
-        // browser's history using window.history.replaceState(...),
-        // which won't cause the browser to attempt to load the new url.
-        // When the single page app is loaded further down in this file,
-        // the correct url will be waiting in the browser's history for
-        // the single page app to route accordingly.
-        (function(l) {
-          if (l.search) {
-            var q = {};
-            l.search.slice(1).split('&').forEach(function(v) {
-              var a = v.split('=');
-              q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
-            });
-            if (q.p !== undefined) {
-              window.history.replaceState(null, null,
-                l.pathname.slice(0, -1) + (q.p || '') +
-                (q.q ? ('?' + q.q) : '') +
-                l.hash
-              );
-            }
-          }
-        }(window.location))
-      </script>
-      <link rel="stylesheet" href="_content/BlazorStrap/css/cromefix.css">
-      <link rel="stylesheet" href="_content/BlazorStrap/css/submenu.css">
-      <link rel="stylesheet" href="_content/SampleCore/css/demo.css">
-	  <link rel="stylesheet" href="style.css" />
-      <script src="_content/BlazorStrap/blazorStrap.js"></script>
-      <script src="_content/BlazorStrap/popper.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width">
+  <title>BlazorStrap V1</title>
+  <base href="/V1/" />
+  <link href="loader.css" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="_content/SampleCore/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="_content/SampleCore/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="_content/SampleCore/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <style id="styled"></style>
+  <script type="text/javascript">
+    // Single Page Apps for GitHub Pages
+    // https://github.com/rafrex/spa-github-pages
+    // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+    // ----------------------------------------------------------------------
+    // This script checks to see if a redirect is present in the query string
+    // and converts it back into the correct url and adds it to the
+    // browser's history using window.history.replaceState(...),
+    // which won't cause the browser to attempt to load the new url.
+    // When the single page app is loaded further down in this file,
+    // the correct url will be waiting in the browser's history for
+    // the single page app to route accordingly.
+    (function (l) {
+      if (l.search) {
+        var q = {};
+        l.search.slice(1).split('&').forEach(function (v) {
+          var a = v.split('=');
+          q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+        });
+        if (q.p !== undefined) {
+          window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + (q.p || '') +
+            (q.q ? ('?' + q.q) : '') +
+            l.hash
+          );
+        }
+      }
+    }(window.location))
+  </script>
+  <link rel="stylesheet" href="_content/BlazorStrap/css/cromefix.css">
+  <link rel="stylesheet" href="_content/BlazorStrap/css/submenu.css">
+  <link rel="stylesheet" href="_content/SampleCore/css/demo.css">
+  <link rel="stylesheet" href="style.css" />
+  <script src="_content/BlazorStrap/blazorStrap.js"></script>
+  <script src="_content/BlazorStrap/popper.min.js"></script>
 </head>
+
 <body>
-    <app>Loading... <br/><p>If your still seeing this after some time hit the refresh button. Something with GitHub pages does not like the app being forwarded by the homepage. Looking into the issue.</app>
-    
-    <!-- temporary WORKAROUND for Safari https://github.com/mono/mono/issues/15588#issuecomment-529056521 -->
-    <script>var Module;</script>
-    
-    <script src="_framework/blazor.webassembly.js"></script>
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <app>
+    <div class="loader-backdrop">
+      <div class="spinner-border text-light loader-wrapper" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <img src="logo.svg" class="loader-logo">
+      <nav class="fixed-bottom navbar-light bg-light text-center p-1" id="fail" style="display: none;">
+        Loading is taking longer then expect. If your not on a slower connection please continue to wait. Other
+        wise <a href="javascript:refresh();">refresh.</a>
+      </nav>
+    </div>
+    <script type="text/javascript">
+      setTimeout(function () {
+        try {
+          document.getElementById("fail").style.display = "block";
+        } catch { }
+      }, 60000);
+      function refresh() {
+        location.reload(true);
+      }
+    </script>
+  </app>
+
+  <!-- temporary WORKAROUND for Safari https://github.com/mono/mono/issues/15588#issuecomment-529056521 -->
+  <script>var Module;</script>
+
+  <script src="_framework/blazor.webassembly.js"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
+
 </html>
