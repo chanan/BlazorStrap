@@ -37,6 +37,7 @@ namespace BlazorStrap_Docs.Helper
             .UseAdvancedExtensions()
             .UseCustomContainers()
             .UseAutoLinks()
+            .UseSyntaxHighlighting()
             .UseSoftlineBreakAsHardlineBreak()
             .UsePipeTables()
             .UseCitations()

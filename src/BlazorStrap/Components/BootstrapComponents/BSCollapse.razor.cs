@@ -40,6 +40,10 @@ namespace BlazorStrap
             .Build().ToNullString();
 
         private ElementReference MyRef { get; set; }
+        protected override bool ShouldRender()
+        {
+            return !_lock;
+        }
 
         public override async Task ShowAsync()
         {
@@ -92,9 +96,9 @@ namespace BlazorStrap
             await InvokeAsync(StateHasChanged);
             
             if (OnShown.HasDelegate && Shown)
-                await OnShown.InvokeAsync(this);
+                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
             if (OnHidden.HasDelegate && !Shown)
-                await OnHidden.InvokeAsync(this);
+                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
         }
 
         private async void JSCallback_ResizeEvent(int width)

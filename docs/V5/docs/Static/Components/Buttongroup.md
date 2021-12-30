@@ -1,9 +1,6 @@
 ﻿## ButtonGroup
 #### Component \<BSButtonGroup\>
 
-:::{.bd-callout .bd-callout-info}
-**Work inprogress** Documentation is still being written for this component
-:::
 See [shared](layout/shared) for additional parameters    
 :::
 
@@ -14,3 +11,9 @@ See [shared](layout/shared) for additional parameters
 | IsVertical        | bool | true/false |     | `.btn-group-vertical`                 |               
 
 :::
+
+# Examples
+
+{{sample=Components/ButtonGroup/ButtonGroup1}}
+
+For more examples of button groups see Bootstrap's official documentation

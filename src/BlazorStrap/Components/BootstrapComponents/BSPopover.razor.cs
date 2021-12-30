@@ -8,6 +8,7 @@ namespace BlazorStrap
     public partial class BSPopover : BlazorStrapToggleBase<BSPopover>, IAsyncDisposable
     {
         [Parameter] public RenderFragment? Content { get; set; }
+        private bool _called;
 
         /// <summary>
         /// This Parameter is intended for internal use 
@@ -55,16 +56,14 @@ namespace BlazorStrap
         {
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
+            _called = true;
             Shown = false;
             await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "show", 100);
             await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "display", "none");
             await Js.InvokeVoidAsync("blazorStrap.RemovePopover", MyRef, DataId);
             Style = "display:none;";
             await InvokeAsync(StateHasChanged);
-            if (OnHidden.HasDelegate)
-                await OnHidden.InvokeAsync(this);
         }
-
 
         public override async Task ShowAsync()
         {
@@ -73,6 +72,7 @@ namespace BlazorStrap
                 throw new NullReferenceException("Target cannot be null");
             }
 
+            _called = true;
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             Shown = true;
@@ -98,8 +98,6 @@ namespace BlazorStrap
             }
 
             await InvokeAsync(StateHasChanged);
-            if (OnShown.HasDelegate)
-                await OnShown.InvokeAsync(this);
         }
 
 
@@ -126,6 +124,24 @@ namespace BlazorStrap
                     }
 
                     EventsSet = true;
+                }
+            }
+            else
+            {
+                if (!_called) return;
+                _called = false;
+                // Since there is no transition without a we run into a issue where rapid calls break the popover.
+                // The delay allows the popover time to clean up
+                await Task.Delay(100);
+                if (Shown)
+                {
+                    if (OnShown.HasDelegate)
+                        await OnShown.InvokeAsync(this);
+                }
+                else
+                {
+                    if (OnHidden.HasDelegate)
+                        await OnHidden.InvokeAsync(this);
                 }
             }
         }

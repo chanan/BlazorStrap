@@ -2,5 +2,14 @@
 @inherits BlazorStrapBase
 
 <li class="@ClassBuilder" @attributes="Attributes">
-    @ChildContent
+    @if (string.IsNullOrEmpty(Url))
+    {
+        <span class="page-link">
+            @ChildContent
+        </span>
+    }
+    else
+    {
+        <a href="@Url" class="page-link">@ChildContent</a>
+    }
 </li>

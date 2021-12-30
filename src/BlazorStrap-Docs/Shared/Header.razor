@@ -1,11 +1,18 @@
-﻿<BSNavbar IsHeader="true" Expand="Size.Medium" IsDark="true" Class="bd-navbar">
+﻿@inject IBlazorStrap _blazorStrap
+<BSNavbar IsHeader="true" Expand="Size.Medium" IsDark="true" Class="bd-navbar">
     <BSNav IsNav="true" Class="container-xxl flex-wrap flex-md-nowrap" aria-label="Main navigation" NoNavbarNav="true">
-        <BSNavbarBrand Padding="Padding.None" MarginEnd="Margins.Small"><img class="d-block my-1" src="logo-inverted.svg" height="32" alt="BlazorStrap" /></BSNavbarBrand>
+        <BSNavbarBrand Padding="Padding.None" MarginEnd="Margins.Small">
+            <img class="d-block my-1" src="logo-inverted.svg" height="32" alt="BlazorStrap"/>
+        </BSNavbarBrand>
         <BSCollapse IsInNavbar="true">
-            <Toggler><BSNavbarToggle /></Toggler>
+            <Toggler>
+                <BSNavbarToggle/>
+            </Toggler>
             <Content>
                 <BSNav Class="flex-row flex-wrap bd-navbar-nav pt-2 py-md-0">
-                    <BSNavItem ListItemClass="col-6 col-md-auto d-none d-md-block" Url=""> <strong class="text-white">BlazorStrap</strong></BSNavItem>
+                    <BSNavItem ListItemClass="col-6 col-md-auto d-none d-md-block" Url="">
+                        <strong class="text-white">BlazorStrap</strong>
+                    </BSNavItem>
                     <BSNavItem ListItemClass="col-6 col-md-auto" Url="https://getbootstrap.com/docs/5.1/getting-started/introduction/">Bootstrap Docs</BSNavItem>
                 </BSNav>
                 <BSNav Class="flex-row flex-wrap ms-md-auto">
@@ -18,7 +25,7 @@
                     <BSNavItem ListItemClass="col-6 col-md-auto" Padding="Padding.Small" Url="https://gitter.im/BlazorStrap/community">
                         <svg fill="currentColor" fill-rule="evenodd" viewBox="0 0 51 75" height="36" width="36" xmlns="http://www.w3.org/2000/svg" class="navbar-nav-svg d-inline-block align-text-top">
                             <path d="m0 0h6v48h-6zm15 13h6v62h-6zm15 0h6v62h-6zm15 0h6v34h-6z"/>
-                            </svg>
+                        </svg>
                         <small class="d-md-none ms-2">Gitter</small>
                     </BSNavItem>
                 </BSNav>
@@ -33,15 +40,43 @@
         <div class="me-auto"></div>
         <BSDropdown Class="dropdown-menu-end" ShownAttribute="data-bs-popper">
             <Toggler>
-                <BSToggle IsButton="true" Class="btn-bd-light dropdown-toggle"><span class="d-none d-lg-inline">Themes</span></BSToggle>
+                <BSToggle IsButton="true" Class="btn-bd-light dropdown-toggle">
+                    <span class="d-none d-lg-inline">Themes</span>
+                </BSToggle>
             </Toggler>
             <Content>
-                <BSDropdownItem>Place Holder</BSDropdownItem>
+                @foreach (var theme in _themes)
+                {
+                    <BSDropdownItem @onclick="@(() =>SelectedChanged(theme))">@theme</BSDropdownItem>
+                }
             </Content>
         </BSDropdown>
-         
+
     </BSContainer>
     <div class="container-xxl ">
 
     </div>
 </nav>
+
+@code {
+    private string? Selected { get; set; }
+    private List<string> _themes = new List<string>();
+
+    protected override void OnInitialized()
+    {
+        _themes = Enum.GetNames(typeof(Theme)).ToList();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstrun)
+    {
+        if (firstrun)
+        {
+            await _blazorStrap.SetBootstrapCss("5.1.3");
+        }
+    }
+    private async Task SelectedChanged(string value)
+    {
+        Selected = value;
+        await _blazorStrap.SetBootstrapCss(value, "5.1.3");
+    }
+}

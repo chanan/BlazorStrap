@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using BlazorComponentUtilities;
-
-
+using BlazorStrap.Service;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -10,12 +9,12 @@ namespace BlazorStrap.InternalComponents;
 public partial class Backdrop : ComponentBase
 {
     // ReSharper disable once NullableWarningSuppressionIsUsed
-    [Inject] private IBlazorStrapService BlazorStrapService { get; set; } = default!;
+    [Inject] private IBlazorStrap BlazorStrapService { get; set; } = default!;
     // ReSharper disable once NullableWarningSuppressionIsUsed
     [Inject] private IJSRuntime Js { get; set; } = default!;
     [Parameter] public bool ShowBackdrop { get; set; }
     private bool Shown { get; set; }
-    private BlazorStrapService BlazorStrap => (BlazorStrapService)BlazorStrapService;
+    private BlazorStrapCore BlazorStrap => (BlazorStrapCore)BlazorStrapService;
     private string? BackdropClass => new CssBuilder("modal-backdrop")
         .AddClass("fade")
         .AddClass("show", Shown)

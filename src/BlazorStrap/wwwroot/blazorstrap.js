@@ -1,4 +1,5 @@
 ﻿// noinspection JSUnusedGlobalSymbols
+var link;
 if (!Element.prototype.matches) {
     Element.prototype.matches =
         Element.prototype.msMatchesSelector ||
@@ -316,21 +317,42 @@ window.blazorStrap = {
         });
 
     },
-    AnimateCarousel: async function (showEl, hideEl, back) {
+    CleanupCarousel: async function (showEl, hideEl) {
+        //Cleans up any rogue calls
+        return new Promise(function (resolve) {
+            hideEl.classList.remove("carousel-item-end");
+            hideEl.classList.remove("carousel-item-prev");
+            hideEl.classList.remove("carousel-item-next");
+            hideEl.classList.remove("carousel-item-start");
+            showEl.classList.remove("carousel-item-end");
+            showEl.classList.remove("carousel-item-prev");
+            showEl.classList.remove("carousel-item-next");
+            showEl.classList.remove("carousel-item-start");
+            resolve();
+        });
+    },
+    AnimateCarousel: async function (id, showEl, hideEl, back) {
+        await blazorStrap.CleanupCarousel(showEl,hideEl);
+        let callback = function()
+        {
+            DotNet.invokeMethodAsync("BlazorStrap", "EventFallback", id, "bsCarousel", "transitionend");
+        }
         return new Promise(function (resolve) {
             if (back) {
                 showEl.classList.add("carousel-item-prev");
-                setTimeout(function () {
+                setTimeout(async function () {
                     showEl.classList.add("carousel-item-end");
                     hideEl.classList.add("carousel-item-end");
-                    resolve();
+                    hideEl.addEventListener("transitionend", callback, {once:true})
+                    resolve(await blazorStrap.TransitionDidNotStart(showEl));
                 }, 10);
             } else {
                 showEl.classList.add("carousel-item-next");
-                setTimeout(function () {
+                setTimeout(async function () {
                     showEl.classList.add("carousel-item-start");
                     hideEl.classList.add("carousel-item-start");
-                    resolve();
+                    hideEl.addEventListener("transitionend", callback, {once:true})
+                    resolve(await blazorStrap.TransitionDidNotStart(showEl));
                 }, 10);
             }
         })
@@ -415,7 +437,26 @@ window.blazorStrap = {
             result.push(children[i].getAttribute("data-blazorstrap"))
         }
         return result;
-    }
+    },
+    setBootstrapCss: function (theme, version) {
+        if (link === undefined) {
+            let existing = document.querySelectorAll('link[href$="bootstrap.min.css"]')[0];
+            if(existing === undefined) {
+                link = document.createElement('link');
+                document.head.insertBefore(link, document.head.firstChild);
+                link.type = 'text/css';
+                link.rel = 'stylesheet';
+            }
+            else
+                link = existing;
+        }
+        if (theme === 'bootstrap') {
+            link.href = "https://cdn.jsdelivr.net/npm/bootstrap@" + version + "/dist/css/bootstrap.min.css";
+        } else {
+            link.href = "https://cdn.jsdelivr.net/npm/bootswatch@" + version + "/dist/" + theme + "/bootstrap.min.css";
+        }
+        return true;
+    },
 }
 
 let ResizeFunc;

@@ -10,7 +10,7 @@ namespace BlazorStrap
         [Parameter] public bool IsNumbered { get; set; }
         [Parameter] public Size Size { get; set; } = Size.None;
 
-        private string? ClassBuilder => new CssBuilder("pagination")
+        private string? ClassBuilder => new CssBuilder("list-group")
           .AddClass($"list-group-flush", IsFlush)
           .AddClass($"list-group-numbered", IsNumbered)
           .AddClass($"list-group-horizontal", IsHorizontal && Size == Size.None)

@@ -7,7 +7,7 @@ namespace BlazorStrap
     {
         [Parameter] public bool IsFlushed { get; set; }
 
-        internal string? ClassBuilder => new CssBuilder("accordion")
+        private string? ClassBuilder => new CssBuilder("accordion")
             .AddClass("accordion-flush", IsFlushed)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))

@@ -1,5 +1,6 @@
 using BlazorComponentUtilities;
 using BlazorStrap.InternalComponents;
+using BlazorStrap.Service;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -8,6 +9,8 @@ namespace BlazorStrap
 {
     public partial class BSModal : BlazorStrapToggleBase<BSModal>, IAsyncDisposable
     {
+        private bool _lock;
+        private bool _called;
         [Parameter] public bool AllowScroll { get; set; }
         [Parameter] public string? ButtonClass { get; set; }
         [Parameter] public RenderFragment? Content { get; set; }
@@ -25,8 +28,12 @@ namespace BlazorStrap
         private bool _leaveBodyAlone;
 
         private bool _shown;
-
         private Backdrop? BackdropRef { get; set; }
+
+        protected override bool ShouldRender()
+        {
+            return !_lock;
+        }
 
         private string? ClassBuilder => new CssBuilder("modal")
             .AddClass("fade")
@@ -66,12 +73,15 @@ namespace BlazorStrap
 
         public override async Task HideAsync()
         {
+            _called = true;
+            _lock = true;
+            Shown = false;
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
 
             await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "document", "keyup", true);
             await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "document", "click", true);
-            Shown = false;
+
             if (!EventsSet)
             {
                 await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsModal", "transitionend");
@@ -101,11 +111,14 @@ namespace BlazorStrap
 
         public override async Task ShowAsync()
         {
+            _called = true;
+            _lock = true;
+            Shown = true;
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "document", "keyup", true);
             await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "document", "click", true);
-            Shown = true;
+
             if (!EventsSet)
             {
                 await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsModal", "transitionend");
@@ -131,7 +144,7 @@ namespace BlazorStrap
             }
 
 
-            BlazorStrapService.ModalChanged(this);
+            BlazorStrapCore.ModalChanged(this);
 
             if (BackdropRef != null)
                 await BackdropRef.ToggleAsync();
@@ -152,7 +165,7 @@ namespace BlazorStrap
         protected override void OnInitialized()
         {
             JSCallback.EventHandler += OnEventHandler;
-            BlazorStrapService.ModalChange += OnModalChange;
+            BlazorStrapCore.ModalChange += OnModalChange;
         }
 
         private async Task BackdropClicked()
@@ -176,16 +189,18 @@ namespace BlazorStrap
         private async Task TransitionEndAsync()
         {
             Style = Shown ? "display: block;" : "display: none;";
+            _lock = false;
+
             await InvokeAsync(StateHasChanged);
             if (Shown)
             {
                 if (OnShown.HasDelegate)
-                    await OnShown.InvokeAsync(this);
+                    _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
             }
             else
             {
                 if (OnHidden.HasDelegate)
-                    await OnHidden.InvokeAsync(this);
+                    _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
             }
         }
 
@@ -259,7 +274,7 @@ namespace BlazorStrap
             if (EventsSet)
                 await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "bsModal", "transitionend");
             JSCallback.EventHandler -= OnEventHandler;
-            BlazorStrapService.ModalChange -= OnModalChange;
+            BlazorStrapCore.ModalChange -= OnModalChange;
             GC.SuppressFinalize(this);
         }
     }

@@ -1,6 +1,6 @@
 ﻿<p>
-    <BSButton Target="collapse3a">Toggle first element</BSButton>
-    <BSButton IsLink="true" Color="BSColor.Primary" Target="collapse3b">Toggle second element</BSButton>
+    <BSButton Target="collapse3a" Color="BSColor.Secondary">Toggle first element</BSButton>
+    <BSLink IsButton="true" Color="BSColor.Primary" Target="collapse3b">Toggle second element</BSLink>
     <BSButton Color="BSColor.Primary" Target="collapse3a,collapse3b">Toggle both</BSButton>
 </p>
 <BSRow>

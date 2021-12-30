@@ -3,9 +3,11 @@
 See [shared](layout/shared) for additional parameters    
 :::
 
-| Parameter | Type   | Valid  | Remarks/Output | 
-|-----------|--------|--------|----------------|
-| Divider   | string | string |                | {.table-striped}  
+| Parameter | Type                       | Valid                      | Remarks/Output                                  | 
+|-----------|----------------------------|----------------------------|-------------------------------------------------|
+| Divider   | string                     | string                     |                                                 | {.table-striped}  
+| BasePath  | string                     | string                     | Turns on auto generate using supplied base path |
+| Labels    | Dictionary<string, string> | Dictionary<string, string> | Custom Labels for your paths see example        |
 
 :::
 
@@ -19,6 +21,17 @@ See [shared](layout/shared) for additional parameters
 | Url       | string | string | href=Url       |
 
 :::
+
+BlazorStrap can handle creating your breadcrumbs for you. 
+Simply supply a `BasePath`. This lets the component know to generate the breadcrumbs for you and where to start
+By default we automatically capitalize the first letter of each word. You can supply alternative labels by setting the Labels parameter.
+All paths are converted to lower case your dictionary keys should be set to lower case as well.
+
+### Automatic
+
+{{sample=Components/Breadcrumb/Breadcrumb0}}
+
+Or you can do it yourself, using our components.
 
 ### Example
 

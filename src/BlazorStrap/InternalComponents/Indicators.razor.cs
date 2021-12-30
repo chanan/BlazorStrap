@@ -14,7 +14,7 @@ namespace BlazorStrap.InternalComponents
         private async Task ClickEvent(int index)
         {
             if (Parent == null) return;
-            await Parent.GotoSlide(index);
+                 await Parent.GotoSlideAsync(index);
         }
         private async Task PressEvent(KeyboardEventArgs e)
         {

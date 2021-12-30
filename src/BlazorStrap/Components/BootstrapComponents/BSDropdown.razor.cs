@@ -7,6 +7,7 @@ namespace BlazorStrap
 {
     public partial class BSDropdown : BlazorStrapBase, IAsyncDisposable
     {
+        internal Action<bool, BSDropdownItem>? OnSetActive { get; set; }
         [Parameter] public bool AllowItemClick { get; set; }
         [Parameter] public bool AllowOutsideClick { get; set; }
         [Parameter] public RenderFragment? Content { get; set; }
@@ -117,6 +118,10 @@ namespace BlazorStrap
             return Shown ? HideAsync() : ShowAsync();
         }
 
+        internal void SetActive(bool active, BSDropdownItem item)
+        {
+            OnSetActive?.Invoke(active, item);
+        }
 
         protected override void OnInitialized()
         {

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using System.Timers;
+using BlazorStrap.Utilities;
+
 namespace BlazorStrap
 {
     public partial class BSCarousel : BlazorStrapBase, IDisposable
@@ -17,9 +19,12 @@ namespace BlazorStrap
         private InternalComponents.Indicators? _indicatorsRef;
         private int _last;
         private System.Timers.Timer? _transitionTimer;
-        public bool ClickLocked { get; set; }
+        private bool ClickLocked { get; set; }
+        private List<BSCarouselItem> Callback { get; set; } = new List<BSCarouselItem>();
+
         private List<BSCarouselItem> Children { get; set; } = new List<BSCarouselItem>();
 
+        // private Func<Task>? Callback { get; set; }
         private string? ClassBuilder => new CssBuilder("carousel")
             .AddClass("slide", IsSlide)
             .AddClass("carousel-fade", IsFade)
@@ -28,28 +33,16 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
-
-        public async Task GotoSlide(int slide)
+        protected override bool ShouldRender()
         {
-            if(ClickLocked) return;
-            ClickLocked = true;
-            var back = slide < _active;
-            if(slide == _active) return;
-            _last = _active;
-            _active = slide;
-            Children[_last].InternalHide();
-            Children[_active].InternalShow();
-            await Js.InvokeVoidAsync("blazorStrap.AnimateCarousel", Children[_active].MyRef, Children[_last].MyRef, back);
-            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", Children[_active].MyRef))
-            {
-                await Children[_active].TransitionEndAsync();
-                await Children[_last].TransitionEndAsync();
-            }
+            return !ClickLocked;
+        }
 
-            await InvokeAsync(() =>
-            {
-                _indicatorsRef?.Refresh(Children.Count, _active);
-            });
+        public Task GotoSlideAsync(int slide)
+        {
+            if (slide >= Children.Count && slide < 0)
+                return Task.CompletedTask;
+            return GotoChildSlide(Children[slide]);
         }
 
         internal Task HideSlide(BSCarouselItem slide)
@@ -57,39 +50,68 @@ namespace BlazorStrap
             return GotoChildSlide(slide == Children.First() ? Children.Last() : Children.First());
         }
 
+        protected override void OnInitialized()
+        {
+            JSCallback.EventHandler += OnEventHandler;
+        }
+        private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList, JavascriptEvent? e)
+        {
+            if (DataId == id && name == "bsCarousel" && type == "transitionend")
+            {
+                await TransitionEndAsync();
+            }
+        }
+
+        private async Task TransitionEndAsync()
+        {
+            ClickLocked = false;
+            await Children[_active].Refresh();
+            await Children[_last].Refresh();
+            
+            await Children[_last].Refresh();
+            if (Callback.Count > 0)
+            {
+                await GotoChildSlide(Callback.First());
+                Callback.Remove(Callback.First());
+            }
+            if (Children[_active].OnShown.HasDelegate)
+                _ = Task.Run(() => { _ = Children[_active].OnHidden.InvokeAsync(Children[_active]); });
+            if (Children[_last].OnHidden.HasDelegate)
+                _ = Task.Run(() => { _ = Children[_last].OnHidden.InvokeAsync(Children[_last]); });
+        }
+
         internal async Task GotoChildSlide(BSCarouselItem item)
         {
-            // Needs a call back added if the slide is moving 
-            if(ClickLocked) return;
-            ClickLocked = true;
-            
+            _transitionTimer?.Stop();
             var slide = Children.IndexOf(item);
+            if (ClickLocked)
+            {
+                Callback.Add(item);
+                return;
+            }
+            if (!Children.Contains(item)) return;
+
             var back = slide < _active;
-            if(slide == _active) return;
+            if (slide == _active) return;
+            ClickLocked = true;
             _last = _active;
             _active = slide;
-            Children[_last].InternalHide();
-            Children[_active].InternalShow();
-            await Js.InvokeVoidAsync("blazorStrap.AnimateCarousel", Children[_active].MyRef, Children[_last].MyRef, back);
-            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", Children[_active].MyRef))
-            {
-                await Children[_active].TransitionEndAsync();
-                await Children[_last].TransitionEndAsync();
-            }
-
-            await InvokeAsync(() =>
-            {
-                _indicatorsRef?.Refresh(Children.Count, _active);
-            });
+            await Children[_last].InternalHide();
+            await Children[_active].InternalShow();
+            await DoAnimations(back);
+            
+            await InvokeAsync(() => { _indicatorsRef?.Refresh(Children.Count, _active); });
+            ResetTransitionTimer(Children[_active].Interval);
         }
 
         internal async Task BackAsync()
         {
-            if(ClickLocked) return;
+            if (ClickLocked) return;
             ClickLocked = true;
+
             var last = _active;
             _active--;
-            
+
             if (_active < 0)
                 _active = Children.Count - 1;
             if (last == 0)
@@ -97,51 +119,46 @@ namespace BlazorStrap
 
             else
                 _last = _active + 1;
-            Children[_last].InternalHide();
-            Children[_active].InternalShow();
-            await Js.InvokeVoidAsync("blazorStrap.AnimateCarousel", Children[_active].MyRef, Children[_last].MyRef, true);
-            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", Children[_active].MyRef))
-            {
-                await Children[_active].TransitionEndAsync();
-                await Children[_last].TransitionEndAsync();
-            }
+            await Children[_last].InternalHide();
+            await Children[_active].InternalShow();
+            await DoAnimations(true);
 
-            await InvokeAsync(() =>
-            {
-                _indicatorsRef?.Refresh(Children.Count, _active);
-            });
+            await InvokeAsync(() => { _indicatorsRef?.Refresh(Children.Count, _active); });
             ResetTransitionTimer(Children[_active].Interval);
         }
 
         internal async Task NextAsync()
         {
-            if(ClickLocked) return;
+            if (ClickLocked) return;
             ClickLocked = true;
             _active++;
             if (_active > Children.Count - 1)
                 _active = 0;
-            
+
             if (_active == 0)
                 _last = Children.Count - 1;
 
             else
                 _last = _active - 1;
-            Children[_last].InternalHide();
-            Children[_active].InternalShow();
-            await Js.InvokeVoidAsync("blazorStrap.AnimateCarousel", Children[_active].MyRef, Children[_last].MyRef, false);
-            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", Children[_active].MyRef))
-            {
-                await Children[_active].TransitionEndAsync();
-                await Children[_last].TransitionEndAsync();
-            }
+            await Children[_last].InternalHide();
+            await Children[_active].InternalShow();
 
-            await InvokeAsync(() =>
-            {
-                _indicatorsRef?.Refresh(Children.Count, _active);
-            });
+            await DoAnimations(false);
+
+
+            await InvokeAsync(() => { _indicatorsRef?.Refresh(Children.Count, _active); });
             ResetTransitionTimer(Children[_active].Interval);
         }
 
+        private async Task DoAnimations(bool back)
+        {
+            if (await Js.InvokeAsync<bool>("blazorStrap.AnimateCarousel", DataId, Children[_active].MyRef, Children[_last].MyRef, back))
+            {
+                ClickLocked = false;
+                await Children[_active].Refresh();
+                await Children[_last].Refresh();
+            }
+        }
         internal void AddChild(BSCarouselItem item)
         {
             Children.Add(item);
@@ -161,7 +178,7 @@ namespace BlazorStrap
         internal void RemoveChild(BSCarouselItem item)
         {
             Children.Remove(item);
-            _indicatorsRef?.Refresh(Children.Count,_active);
+            _indicatorsRef?.Refresh(Children.Count, _active);
         }
 
         private async Task PressEvent(KeyboardEventArgs e)
@@ -192,10 +209,11 @@ namespace BlazorStrap
         {
             _transitionTimer?.Stop();
             if (interval == 0) return;
-            InitializeTransitionTimer(interval); // Avoid an System.ObjectDisposedException due to the timer being disposed. This occurs when the Enabled property of the timer is set to false by the call to Stop() above.
-            _transitionTimer?.Start(); 
+            InitializeTransitionTimer(
+                interval); // Avoid an System.ObjectDisposedException due to the timer being disposed. This occurs when the Enabled property of the timer is set to false by the call to Stop() above.
+            _transitionTimer?.Start();
         }
-
+        
         public void Dispose()
         {
             _transitionTimer?.Stop();

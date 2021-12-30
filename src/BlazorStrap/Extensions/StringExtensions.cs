@@ -47,6 +47,12 @@ namespace BlazorStrap
             value = value.Replace("end", "", true, CultureInfo.InvariantCulture);
             return value;
         }
+        public static string? FirstCharToUpper(this string? value)
+        {
+            if (string.IsNullOrEmpty(value) || char.IsUpper(value[0]))
+                return value;
+            return char.ToUpper(value[0]) + value.Substring(1);
+        }
 
         public static string? ToNullString(this string value)
         {

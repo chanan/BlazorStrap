@@ -5,12 +5,12 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSCarouselItem : BlazorStrapToggleBase<BSCarouselItem>, IAsyncDisposable
+    public partial class BSCarouselItem : BlazorStrapToggleBase<BSCarouselItem>, IDisposable
     {
         [Parameter] public int Interval { get; set; } = 5000;
         private bool _active;
+        private bool _once;
         [CascadingParameter] public BSCarousel? Parent { get; set; }
-
         private string? ClassBuilder => new CssBuilder("carousel-item")
             .AddClass("active", _active)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
@@ -45,31 +45,28 @@ namespace BlazorStrap
             return (_active) ? HideAsync() : ShowAsync();
         }
 
-        internal void InternalHide()
+        internal async Task InternalHide()
         {
+            
             if (OnHide.HasDelegate)
                 _ = OnHide.InvokeAsync(this);
             _active = false;
         }
 
-        internal void InternalShow()
+        internal async Task InternalShow()
         {
             if (OnShow.HasDelegate)
                 _ = OnShow.InvokeAsync(this);
             _active = true;
         }
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        
+        internal Task Refresh()
         {
-            if (firstRender)
-            {
-                await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsCarouselItem", "transitionend");
-                EventsSet = true;
-            }
+            return InvokeAsync(StateHasChanged);
         }
-
         protected override void OnInitialized()
         {
-            JSCallback.EventHandler += OnEventHandler;
+            
             Parent?.AddChild(this);
         }
 
@@ -81,36 +78,10 @@ namespace BlazorStrap
             }
         }
 
-        internal async Task TransitionEndAsync()
-        {
-            if (Parent != null) Parent.ClickLocked = false;
-            if (_active)
-            {
-                if (OnShown.HasDelegate)
-                    await OnShown.InvokeAsync(this);
-            }
-            else
-            {
-                if (OnHidden.HasDelegate)
-                    await OnHidden.InvokeAsync(this);
-            }
-            await InvokeAsync(StateHasChanged);
-        }
 
-        private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList, JavascriptEvent? e)
+        public void Dispose()
         {
-            if (DataId == id && name == "bsCarouselItem" && type == "transitionend")
-            {
-                await TransitionEndAsync();
-            }
-        }
-
-        public async ValueTask DisposeAsync()
-        {
-            if (EventsSet) await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "bsCarouselItem", "transitionend");
-            JSCallback.EventHandler -= OnEventHandler;
             Parent?.RemoveChild(this);
-            GC.SuppressFinalize(this);
         }
     }
 }

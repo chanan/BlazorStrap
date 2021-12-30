@@ -7,8 +7,8 @@ See [shared](layout/shared) for additional parameters
 |-------------------|----------------|----------------|----------------------------------------------|
 | AllowItemClick    | bool           | true/false     | Allows Inside Clicks                         | {.table-striped}
 | AllowOutsideClick | bool           | true/false     | Allows Outside Clicks                        |
-| Demo              | bool           | RenderFragment | Nested Content                               |
-| IsDark            | bool           | RenderFragment | Nested Content                               |
+| Demo              | bool           | true/false     | Shows Content only                           |
+| IsDark            | bool           | true/false     | `dropdown-menu-dark`                         |
 | IsManual          | bool           | true/false     | Manual Close                                 |
 | IsDiv             | bool           | true/false     | Makes the dropdown menu a div and use popper |
 | IsStatic          | bool           | true/false     | Disables dynamic positioning                 |
@@ -19,6 +19,26 @@ See [shared](layout/shared) for additional parameters
 | Content           | RenderFragment | RenderFragment | Nested Content                               |
 
 :::
+
+:::
+
+| Parameter      | Type          | Valid          | Remarks/Output                               | 
+|----------------|---------------|----------------|----------------------------------------------|
+| IsActive       | bool?         | true/false     | `.active` if not set we will add it for you. | {.table-striped}
+| IsDivider      | bool          | true/false     | `<hr class="dropdown-divider"/>`             |
+| Header         | int           | 1-6            | `<h1>` to `<h6>`                             |
+| IsDisabled     | bool          | true/false     | `.disabled`                                  |
+| IsButton       | bool          | true/false     | `<button>`                                   |
+| IsSubmenu      | bool          | true/false     | Outputs correctly for a nested DropDown      |
+| IsText         | bool          | true/false     | `dropdown-item-text`                         |
+| SubmenuClass   | string        | string         | Default `.dropdown-submenu`                  |
+| OnClick        | EventCallback | MouseEventArgs |                                              |
+| PreventDefault | string        | string         | Prevents Default for onclick                 |
+| Url            | string        | string         | `<a href="Url">`                             |
+
+:::
+
+Dropdown Items
 
 ### Single button
 

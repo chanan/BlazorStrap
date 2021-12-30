@@ -32,9 +32,10 @@ namespace BlazorStrap
             await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "display", "none");
             await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "show");
             await Js.InvokeVoidAsync("blazorStrap.RemovePopover", MyRef, DataId);
-            
+
             if (OnHidden.HasDelegate)
-                await OnHidden.InvokeAsync(this);
+                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this);});
+                
         }
 
         public override async Task ShowAsync()
@@ -55,7 +56,7 @@ namespace BlazorStrap
 
             await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "show");
             if (OnShown.HasDelegate)
-                await OnShown.InvokeAsync(this);
+                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this);});
         }
 
         public override Task ToggleAsync()

@@ -1,6 +1,8 @@
 ﻿
+using BlazorStrap.Service;
 using BlazorStrap.Utilities;
 using Microsoft.Extensions.DependencyInjection;
+using CurrentTheme = BlazorStrap.Utilities.CurrentTheme;
 
 namespace BlazorStrap
 {
@@ -8,7 +10,8 @@ namespace BlazorStrap
     {
         public static IServiceCollection AddBlazorStrap(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddScoped<IBlazorStrapService, BlazorStrapService>();
+            serviceCollection.AddScoped<BlazorStrapInterop>();
+            serviceCollection.AddTransient<IBlazorStrap, BlazorStrapCore>();
             serviceCollection.AddScoped<ISvgLoader, SvgLoader>();
             return serviceCollection;
         }

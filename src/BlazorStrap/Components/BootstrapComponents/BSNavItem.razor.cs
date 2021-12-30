@@ -1,5 +1,6 @@
 using BlazorComponentUtilities;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
@@ -7,8 +8,8 @@ namespace BlazorStrap
     public partial class BSNavItem : BlazorStrapBase, IDisposable
     {
         // ReSharper disable once NullableWarningSuppressionIsUsed
-        [Inject] private NavigationManager NavigationManager { get; set; } = null!;
-        [Parameter] public bool IsActive { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+        [Parameter] public bool? IsActive { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
         [Parameter] public bool IsDropdown { get; set; }
         [Parameter] public bool NoNavItem { get; set; }
@@ -19,24 +20,38 @@ namespace BlazorStrap
         [Parameter] public RenderFragment? TabLabel { get; set; }
         [Parameter] public string? Url { get; set; } 
         [CascadingParameter] public BSNav? Parent { get; set; }
-
+        private bool _canHandleActive;
+        private bool _childSetActive;
         private string? ClassBuilder => new CssBuilder("nav-link")
-            .AddClass("active", IsActive)
+            .AddClass("active", IsActive ?? false)
             .AddClass("disabled", IsDisabled)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
         
         private string? ListClassBuilder => new CssBuilder()
-            .AddClass("nav-item", !NoNavItem)
             .AddClass("dropdown", IsDropdown)
             .AddClass(ListItemClass)
             .Build().ToNullString();
 
         protected override void OnInitialized()
         {
-            if (NavigationManager.Uri == NavigationManager.BaseUri + Url)
+            if (IsActive == null)
+            {
+                _canHandleActive = true;
+                if (NavigationManager.Uri == NavigationManager.BaseUri + Url?.TrimStart('/'))
+                    IsActive = true;
+                NavigationManager.LocationChanged += OnLocationChanged;
+            }
+        }
+
+        private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+        {
+            if (!_canHandleActive || _childSetActive) return;
+            IsActive = false;
+            if (NavigationManager.Uri == NavigationManager.BaseUri + Url?.TrimStart('/'))
                 IsActive = true;
+            StateHasChanged();
         }
 
         protected override void OnParametersSet()
@@ -63,9 +78,10 @@ namespace BlazorStrap
             IsActive = false;
             await InvokeAsync(StateHasChanged);
         }
-
         public void Dispose()
         {
+            if(_canHandleActive)
+                NavigationManager.LocationChanged -= OnLocationChanged;
             if (Parent == null) return;
             if(Parent.ActiveChild == this)
                 Parent.ActiveChild = null;

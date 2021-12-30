@@ -1,7 +1,4 @@
 ﻿## Pagination
-:::{.bd-callout .bd-callout-info}
-**Work inprogress** Documentation is still being written for this component
-:::
 
 #### Component \<BSPagination\>
 See [shared](layout/shared) for additional parameters    
@@ -20,9 +17,17 @@ See [shared](layout/shared) for additional parameters
 
 :::
 
-| Parameter | Type | Valid      | Remarks/Output | 
-|-----------|------|------------|----------------|
-| Color     | Enum | BSColor    | `.bg-[]`       | {.table-striped .p-2} 
-| IsActive  | bool | true/false | `.active`      |
+| Parameter  | Type   | Valid      | Remarks/Output   | 
+|------------|--------|------------|------------------|
+| Color      | Enum   | BSColor    | `.bg-[]`         | {.table-striped .p-2} 
+| IsActive   | bool   | true/false | `.active`        |
+| IsDisabled | bool   | true/false | `.disabled`      |
+| Url        | string | string     | `<a herf="Url">` |
 
 :::
+
+### Example
+
+{{sample=Components/Pagination/Pagination1}}
+
+For more examples of buttons see Bootstrap's official documentation

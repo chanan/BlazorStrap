@@ -61,7 +61,6 @@ namespace BlazorStrap
 
         private void DoValidation()
         {
-            Console.WriteLine("here");
             if (EditContext is null)
             {
                 return;

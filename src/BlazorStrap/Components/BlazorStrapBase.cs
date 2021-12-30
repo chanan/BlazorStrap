@@ -1,4 +1,5 @@
 ﻿using BlazorComponentUtilities;
+using BlazorStrap.Service;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -7,9 +8,9 @@ namespace BlazorStrap
 {
     public abstract class BlazorStrapBase : ComponentBase, IBlazorStrapBase
     {
-        protected BlazorStrapService BlazorStrap => (BlazorStrapService)BlazorStrapSrc;
+        protected BlazorStrapCore BlazorStrap => (BlazorStrapCore)BlazorStrapSrc;
         // ReSharper disable once NullableWarningSuppressionIsUsed
-        [Inject] public IBlazorStrapService BlazorStrapSrc { get; set; } = null!;
+        [Inject] public IBlazorStrap BlazorStrapSrc { get; set; } = null!;
         // ReSharper disable once NullableWarningSuppressionIsUsed
         [Inject] public IJSRuntime Js { get; set; } = null!;
 

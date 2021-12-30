@@ -6,7 +6,7 @@
         <BSButton Color="BSColor.Primary">Understood</BSButton>
     </Footer>
 </BSModal>
-<BSModal IsCentered="true" IsScrollable="true" id="modal5a">
+<BSModal IsCentered="true" IsScrollable="true" DataId="modal5a">
     <Header>Modal Title</Header>
     <Content>
         <p>This is some placeholder content to show the scrolling behavior for modals. We use repeated line breaks to demonstrate how content can exceed minimum inner height, thereby showing inner scrolling. When content becomes longer than the prefedined max-height of modal, content will be cropped and scrollable within the modal.</p>

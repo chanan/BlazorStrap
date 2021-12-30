@@ -18,7 +18,6 @@
 </BSOffCanvas>
 @code {
     private BSOffCanvas? _offCanvas;
-
     private async Task OpenCanvas()
     {
         if (_offCanvas != null)

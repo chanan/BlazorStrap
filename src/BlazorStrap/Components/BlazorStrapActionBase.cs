@@ -7,21 +7,21 @@ namespace BlazorStrap;
 
 public class BlazorStrapActionBase : BlazorStrapBase
 {
+    
     protected bool IsLinkType { get; init; } 
     protected bool HasButtonClass { get; set; } 
     protected bool HasLinkClass { get; set; } 
     protected bool IsResetType { get; set; }
     protected bool IsSubmitType { get; set; }
     [Parameter] public BSColor Color { get; set; } = BSColor.Default;
-    [Parameter] public bool IsActive { get; set; }
+    [Parameter] public bool? IsActive { get; set; }
     [Parameter] public bool IsDisabled { get; set; }
     [Parameter] public bool IsOutlined { get; set; }
-
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
     [Parameter] public Size Size { get; set; } = Size.None;
     [Parameter] public string? Target { get; set; }
     protected string? UrlBase { get; set; }
-
+    
     private string? ClassBuilder => new CssBuilder()
         .AddClass("btn", !IsLinkType || HasButtonClass)
         .AddClass($"btn-outline-{Color.NameToLower()}", IsOutlined && (!IsLinkType || HasButtonClass))
@@ -29,7 +29,7 @@ public class BlazorStrapActionBase : BlazorStrapBase
             Color != BSColor.Default && !IsOutlined && (!IsLinkType || HasButtonClass))
         .AddClass($"btn-{Size.ToDescriptionString()}", Size != Size.None && (!IsLinkType || HasButtonClass))
         .AddClass("btn-link", HasLinkClass)
-        .AddClass("active", IsActive)
+        .AddClass("active", IsActive ?? false)
         .AddClass("disabled", IsDisabled)
         .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
         .AddClass(Class, !string.IsNullOrEmpty(Class))
@@ -45,7 +45,8 @@ public class BlazorStrapActionBase : BlazorStrapBase
     {
         if (!string.IsNullOrEmpty(Target))
             BlazorStrap.OnForwardClick(Target);
-        await OnClick.InvokeAsync(e);
+        if(OnClick.HasDelegate)
+            await OnClick.InvokeAsync(e);
     }
 
     private string GetTag => IsLinkType ? "a" : "button";
@@ -74,4 +75,6 @@ public class BlazorStrapActionBase : BlazorStrapBase
         builder.AddContent(9, @ChildContent);
         builder.CloseElement();
     }
+
+    
 }

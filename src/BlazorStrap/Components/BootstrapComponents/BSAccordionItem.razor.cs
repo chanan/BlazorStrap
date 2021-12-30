@@ -19,6 +19,11 @@ namespace BlazorStrap
             set { _defaultShown = value; Shown = value; }
         }
 
+        protected override bool ShouldRender()
+        {
+            return !_lock;
+        }
+
         [Parameter] public RenderFragment? Header { get; set; }
 
         private bool _defaultShown;
@@ -46,9 +51,7 @@ namespace BlazorStrap
             
             if (_lock) return;
             _lock = true;
-            if(!NoAnimations)
-                if (Js != null)
-                    await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, true, DataId, "bsAccordionItem", "transitionend");
+            if(!NoAnimations) await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, true, DataId, "bsAccordionItem", "transitionend");
             Shown = true;
             if (NoAnimations)
                 await TransitionEndAsync();
@@ -59,9 +62,7 @@ namespace BlazorStrap
                 await OnHide.InvokeAsync(this);
             if (_lock) return;
             _lock = true;
-            if(!NoAnimations)
-                if (Js != null)
-                    await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, false, DataId, "bsAccordionItem", "transitionend");
+            if(!NoAnimations) await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, false, DataId, "bsAccordionItem", "transitionend");
             Shown = false;
             if (NoAnimations)
                 await TransitionEndAsync();
@@ -101,11 +102,12 @@ namespace BlazorStrap
         {
             _lock = false;
             await InvokeAsync(StateHasChanged);
-            
+
             if (OnShown.HasDelegate && Shown)
-                await OnShown.InvokeAsync(this);
+                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
+
             if (OnHidden.HasDelegate && !Shown)
-                await OnHidden.InvokeAsync(this);
+                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
         }
 
         private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList, JavascriptEvent? e)

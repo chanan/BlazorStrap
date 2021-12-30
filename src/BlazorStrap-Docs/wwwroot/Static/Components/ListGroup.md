@@ -1,7 +1,4 @@
 ﻿## List Group
-:::{.bd-callout .bd-callout-info}
-**Work inprogress** Documentation is still being written for this component
-:::
 
 #### Component \<BSListGroup\>
 See [shared](layout/shared) for additional parameters    
@@ -29,3 +26,9 @@ See [shared](layout/shared) for additional parameters
 | Url            | string        | string         | href = Url                  |
 
 :::
+
+### Example
+
+{{sample=Components/ListGroup/ListGroup1}}
+
+For more examples of List Groups see Bootstrap's official documentation

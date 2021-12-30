@@ -23,17 +23,17 @@ See [shared](layout/shared) for additional parameters
 
 :::
 
-| Parameter      | Type           | Valid          | Remarks/Output           | 
-|----------------|----------------|----------------|--------------------------|
-| IsActive       | bool           | true/false     | `.active`                | {.table-striped}
-| IsDisabled     | bool           | true/false     | `.disabled`              |
-| IsDropdown     | bool           | true/false     | `.dropdown`              |
-| NoNavItem      | bool           | true/false     | Removes `.nav-item`      |
-| PreventDefault | bool           | true/false     | Prevents default onclick |
-| Url            | bool           | true/false     | href = Url               |
-| TabContent     | RenderFragment | RenderFragment | Nested Content           |
-| TabLabel       | RenderFragment | RenderFragment | Nested Content           |
-| OnClick        | EventCallback  | MouseEventArgs |                          |
+| Parameter      | Type           | Valid          | Remarks/Output                               | 
+|----------------|----------------|----------------|----------------------------------------------|
+| IsActive       | bool?          | true/false     | `.active` if not set we will add it for you. | {.table-striped}
+| IsDisabled     | bool           | true/false     | `.disabled`                                  |
+| IsDropdown     | bool           | true/false     | `.dropdown`                                  |
+| NoNavItem      | bool           | true/false     | Removes `.nav-item`                          |
+| PreventDefault | bool           | true/false     | Prevents default onclick                     |
+| Url            | bool           | true/false     | href = Url                                   |
+| TabContent     | RenderFragment | RenderFragment | Nested Content                               |
+| TabLabel       | RenderFragment | RenderFragment | Nested Content                               |
+| OnClick        | EventCallback  | MouseEventArgs |                                              |
 
 :::
 
