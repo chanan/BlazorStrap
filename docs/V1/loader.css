@@ -1,3 +1,6 @@
+body{
+	margin: 0;
+}
 .loader-backdrop {
 	top: 0;
 	position:absolute;
@@ -23,3 +26,23 @@
 	left: calc(50% - 75px);
 }
 
+.loader-spin {
+	display: inline-block;
+	width: 200px;
+	height: 200px;
+	border: 6px solid rgba(255, 255, 255, .3);
+	border-radius: 50%;
+	border-top-color: #fff;
+	animation: loaderspin 1s ease-in-out infinite;
+	-webkit-animation: loaderspin 1s ease-in-out infinite;
+  }
+  @keyframes loaderspin {
+	to {
+	  -webkit-transform: rotate(360deg);
+	}
+  }
+  @-webkit-keyframes loaderspin {
+	to {
+	  -webkit-transform: rotate(360deg);
+	}
+  }

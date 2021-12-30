@@ -52,11 +52,11 @@
 <body>
   <app>
     <div class="loader-backdrop">
-      <div class="spinner-border text-light loader-wrapper" role="status">
-        <span class="visually-hidden">Loading...</span>
+      <div class="loader-wrapper">
+      <div class="loader-spin"></div>
       </div>
       <img src="logo.svg" class="loader-logo">
-      <nav class="fixed-bottom navbar-light bg-light text-center p-1" id="fail" style="display: none;">
+      <nav id="fail" style="display: none; position: fixed; top: 0;">
         Loading is taking longer then expect. If your not on a slower connection please continue to wait. Other
         wise <a href="javascript:refresh();">refresh.</a>
       </nav>
