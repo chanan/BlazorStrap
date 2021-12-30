@@ -1,4 +1,4 @@
-﻿<BSBreadcrumb BasePath="/v5" Labels="Labels"/>
+﻿<BSBreadcrumb BasePath="/V5" Labels="Labels"/>
 @code {
     private static readonly Dictionary<string,string> Labels = new()
     {

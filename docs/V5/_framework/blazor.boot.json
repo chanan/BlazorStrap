@@ -8,7 +8,7 @@
   "resources": {
     "assembly": {
       "BlazorComponentUtilities.dll": "sha256-UapksNiQg3lu5QM9uVSLyjEuzRH\/7o22fmcmxcLAAeI=",
-      "BlazorStrap-Docs.dll": "sha256-0z0MlSv6VfXKWYK5PcuZxrCGrzG64EJES8WMubn4UHo=",
+      "BlazorStrap-Docs.dll": "sha256-vm6uYp4aetzX6UQgoDfgduBp0OtorvvXHp4Wa0sdy04=",
       "BlazorStrap.dll": "sha256-QrWQYa3XPCfMqutCJGNgU10imxOUr7whgoBopV76Pcg=",
       "BlazorStrap.WASM.dll": "sha256-ikqVJuX7jpKvEYeOqR2M05odvdkcU9iboanu3o6qO7E=",
       "ColorCode.dll": "sha256-hF07ps23in9mbwaN4uSoZklQVfyJIw2Ep4R448bfkOk=",
