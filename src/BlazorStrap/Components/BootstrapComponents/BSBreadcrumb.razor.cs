@@ -23,14 +23,14 @@ namespace BlazorStrap
             if (string.IsNullOrEmpty(BasePath)) return;
             if (NavigationManager == null) return;
             NavigationManager.LocationChanged += OnLocationChanged;
-            Tree = GetPath(NavigationManager.Uri.ToLower(), BasePath.ToLower(), Labels, NavigationManager?.BaseUri.ToLower() ?? "");
+            Tree = GetPath(NavigationManager.Uri, BasePath, Labels, NavigationManager?.BaseUri ?? "");
         }
 
         private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(BasePath)) return;
             if (NavigationManager == null) return;
-            Tree = GetPath(NavigationManager.Uri.ToLower(), BasePath.ToLower(), Labels, NavigationManager?.BaseUri.ToLower() ?? "");
+            Tree = GetPath(NavigationManager.Uri, BasePath, Labels, NavigationManager?.BaseUri ?? "");
             StateHasChanged();
         }
 
@@ -89,7 +89,7 @@ namespace BlazorStrap
                 return labels[query];
             }
 
-            return item.FirstCharToUpper() ?? "";
+            return item.ToLower().FirstCharToUpper() ?? "";
         }
 
         public void Dispose()

@@ -25,7 +25,7 @@ See [shared](layout/shared) for additional parameters
 BlazorStrap can handle creating your breadcrumbs for you. 
 Simply supply a `BasePath`. This lets the component know to generate the breadcrumbs for you and where to start
 By default we automatically capitalize the first letter of each word. You can supply alternative labels by setting the Labels parameter.
-All paths are converted to lower case your dictionary keys should be set to lower case as well.
+All paths are case sensitive your dictionary keys should be set to match the case as well.
 
 ### Automatic
 
