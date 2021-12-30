@@ -23,7 +23,9 @@ namespace BlazorStrap
             if (string.IsNullOrEmpty(BasePath)) return;
             if (NavigationManager == null) return;
             NavigationManager.LocationChanged += OnLocationChanged;
-            Tree = GetPath(NavigationManager.Uri, BasePath, Labels, NavigationManager?.BaseUri ?? "");
+            
+            Tree = GetPath(NavigationManager.Uri, BasePath, Labels, "https://localhost:7262/V5/" ?? "");
+            //Tree = GetPath(NavigationManager.Uri, BasePath, Labels, NavigationManager?.BaseUri ?? "");
         }
 
         private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -69,26 +71,24 @@ namespace BlazorStrap
             {
                 if (i != 0)
                     uri += "/" + steps[i];
-                result.Add(uri, LabelLookup(uri, steps[i], prefix, labels, navManBase));
+                result.Add(uri, LabelLookup(uri, steps[i], prefix, labels, navManBase, basePath));
             }
 
             return result;
         }
 
-        private static string LabelLookup(string path, string item, string prefix, Dictionary<string, string> labels,
-            string navManBase)
+        private static string LabelLookup(string path, string item, string prefix, Dictionary<string, string> labels, string navManBase, string basePath)
         {
             var query = path.Replace(prefix, "");
-            if (path + "/" == navManBase)
+            if (path + "/" == navManBase && basePath == "/")
             {
                 return labels.ContainsKey("/") ? labels["/"] : "Home";
             }
-
             if (labels.ContainsKey(query))
             {
                 return labels[query];
             }
-
+         
             return item.ToLower().FirstCharToUpper() ?? "";
         }
 

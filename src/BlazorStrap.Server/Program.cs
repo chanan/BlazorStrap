@@ -1,8 +1,10 @@
 using BlazorStrap;
+using BlazorStrap_Docs;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+
 // Server Side Blazor doesn't register HttpClient by default
 if (!builder.Services.Any(x => x.ServiceType == typeof(HttpClient)))
 {
@@ -13,7 +15,7 @@ if (!builder.Services.Any(x => x.ServiceType == typeof(HttpClient)))
         NavigationManager navman = s.GetRequiredService<NavigationManager>();
         return new HttpClient
         {
-            BaseAddress = new Uri(navman.BaseUri)
+            BaseAddress = new Uri(navman.BaseUri )
         };
     });
 }
@@ -21,9 +23,7 @@ builder.Services.AddBlazorStrap();
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
