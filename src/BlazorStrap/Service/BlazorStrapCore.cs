@@ -4,16 +4,14 @@ namespace BlazorStrap.Service
 {
     public class BlazorStrapCore : IBlazorStrap
     {
-
-        
-        private readonly BlazorStrapInterop _blazorStrapInterop;
+        internal readonly BlazorStrapInterop BlazorStrapInterop;
         //private readonly CurrentTheme _currentTheme;
         public Toaster Toaster { get;} = new Toaster();
         public Theme CurrentTheme { get; internal set; } = Theme.Bootstrap;
 
         public BlazorStrapCore(BlazorStrapInterop blazorStrapInterop)
         {
-            _blazorStrapInterop = blazorStrapInterop;
+            BlazorStrapInterop = blazorStrapInterop;
         }
         public Task SetBootstrapCss()
         {
@@ -33,7 +31,7 @@ namespace BlazorStrap.Service
             if (theme == null) return;
             var enumTheme = (Theme)Enum.Parse(typeof(Theme), theme);
             CurrentTheme = enumTheme;
-            await _blazorStrapInterop.SetBootstrapCss(theme.ToLowerInvariant(), version);
+            await BlazorStrapInterop.SetBootstrapCss(theme.ToLowerInvariant(), version);
         }
 
         public Task SetBootstrapCss(Theme theme, string version)

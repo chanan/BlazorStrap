@@ -38,7 +38,7 @@ namespace BlazorStrap.Service
         /// <param name="className"></param>
         /// <param name="cancellationToken"></param>
 
-        public ValueTask AddClass(ElementReference elementReference, string className, CancellationToken? cancellationToken = null) 
+        public ValueTask AddClassAsync(ElementReference elementReference, string className, CancellationToken? cancellationToken = null) 
             => _jsRuntime.InvokeVoidAsync("blazorStrap.AddClass", cancellationToken ?? CancellationToken.None, elementReference, className, 0);
         
         /// <summary>
@@ -207,21 +207,21 @@ namespace BlazorStrap.Service
         /// <summary>
         /// Remove a class from the body
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="className"></param>
         /// <param name="cancellationToken"></param>
-        public ValueTask RemoveBodyClassAsync(string name, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveBodyClass", CancellationToken.None, name);
+        public ValueTask RemoveBodyClassAsync(string className, CancellationToken? cancellationToken = null)
+            => _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveBodyClass", CancellationToken.None, className);
         
         /// <summary>
         /// Removes a class from the ElementReference
         /// </summary>
         /// <param name="elementReference"></param>
-        /// <param name="name"></param>
+        /// <param name="className"></param>
         /// <param name="delay"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public ValueTask RemoveClassAsync(ElementReference elementReference, string name, int delay = 0, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveClass", CancellationToken.None, elementReference, name, delay);
+        public ValueTask RemoveClassAsync(ElementReference elementReference, string className, int delay = 0, CancellationToken? cancellationToken = null)
+            => _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveClass", CancellationToken.None, elementReference, className, delay);
 
         // Not right in js yet
         public ValueTask RemoveEventAsync(string id, string name, EventTypes type, CancellationToken? cancellationToken = null)
@@ -254,7 +254,7 @@ namespace BlazorStrap.Service
         /// <param name="theme"></param>
         /// <param name="version"></param>
         public ValueTask<bool> SetBootstrapCssAsync(string? theme, string version)
-            => _jsRuntime.InvokeAsync<bool>("blazorStrap.setBootstrapCss", theme, version);
+            => _jsRuntime.InvokeAsync<bool>("blazorStrap.SetBootstrapCss", theme, version);
         
         [Obsolete]
         public ValueTask<bool> SetBootstrapCss(string? theme, string version)
@@ -272,6 +272,17 @@ namespace BlazorStrap.Service
         /// <param name="cancellationToken"></param>
         public ValueTask SetStyleAsync(ElementReference elementReference, string style, string value, int delay, CancellationToken? cancellationToken = null)
             => _jsRuntime.InvokeVoidAsync("blazorStrap.SetStyle", CancellationToken.None, elementReference, style,value, delay);
+        
+        /// <summary>
+        /// Adds the toast timer to ElementReference
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="time"></param>
+        /// <param name="timeRemaining"></param>
+        /// <param name="rendered"></param>
+        /// <param name="cancellationToken"></param>
+        public ValueTask ToastTimerAsync(ElementReference elementReference, int time, int timeRemaining, bool rendered, CancellationToken? cancellationToken = null) 
+            => _jsRuntime.InvokeVoidAsync("blazorStrap.ToastTimer", cancellationToken ?? CancellationToken.None, elementReference, time, timeRemaining, rendered);
         
         /// <summary>
         /// Returns true if no transition starts after given delay
@@ -303,16 +314,7 @@ namespace BlazorStrap.Service
         
         
         
-        /// <summary>
-        /// Adds the toast timer to ElementReference
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="time"></param>
-        /// <param name="timeRemaining"></param>
-        /// <param name="rendered"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask ToastTimerAsync(ElementReference elementReference, int time, int timeRemaining, bool rendered, CancellationToken? cancellationToken = null) 
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.ToastTimer", cancellationToken ?? CancellationToken.None, elementReference, time, timeRemaining, rendered);
+        
 
         
         // Sync Methods
