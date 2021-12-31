@@ -14,7 +14,7 @@ See [shared](forms/shared) for additional parameters
 | NoColorClass  | bool | true/false | Removes `.form-control-color`     |
 
 :::
-`@("value")` is not required it's a line declaration of a string to make the demo work
+`Value="@("X")"` is so the demo has a type and compile with adding code blocks. You will want to use `@bind-Value="YourRealVar""`
 
 ### Overview
 

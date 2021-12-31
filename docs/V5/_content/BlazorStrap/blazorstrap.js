@@ -17,8 +17,50 @@ if (!Element.prototype.closest) {
         return null;
     };
 }
-
 window.blazorStrap = {
+    ToastTimer: function(element, time, timeRemaining, rendered)
+    {
+        if(rendered === false)
+        {
+            element.classList.add("showing");
+        }
+        if(time === 0)
+        {
+            
+            setTimeout(function (){
+                element.classList.remove("showing");
+            },100)
+        }
+        if(time !== 0) {
+
+            const dflex = element.querySelector(".d-flex");
+            const wrapper = document.createElement("div");
+            wrapper.className = "w-100 p-0 m-0 position-relative border-bottom-1 border-dark";
+            wrapper.style.top = "-1px";
+            const timeEl = document.createElement("div")
+            wrapper.appendChild(timeEl);
+            element.insertBefore(wrapper, dflex);
+            timeEl.classList.add("bg-dark");
+            timeEl.style.height = "4px";
+            timeEl.style.opacity = ".4";
+            if (timeRemaining === 0) {
+                timeEl.style.width = "0";
+                timeEl.style["transition"] = "linear " + (time - timeRemaining) / 1000 + "s";
+                timeEl.style["-webkit-transition"] = "linear " + (time - timeRemaining) / 1000 + "s";
+            } else {
+                timeRemaining = time-timeRemaining;
+                console.log(((timeRemaining / time) * 100));
+                timeEl.style.width = ((timeRemaining / time) * 100) + "%";
+                timeEl.style["transition"] = "linear" + (time - timeRemaining) / 1000 + "s";
+                timeEl.style["-webkit-transition"] = "linear " + (time - timeRemaining) / 1000 + "s";
+            }
+        
+            setTimeout(function () {
+                element.classList.remove("showing");
+                timeEl.style.width = "100%";
+            }, 100);
+        }
+    },
     EventHandlers: [],
     AddEvent: async function (id, name, type, isDocument = false, ignoreChildren = false, filter = "") {
         return new Promise(function (resolve) {

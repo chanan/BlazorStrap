@@ -4,8 +4,11 @@ namespace BlazorStrap.Service
 {
     public class BlazorStrapCore : IBlazorStrap
     {
+
+        
         private readonly BlazorStrapInterop _blazorStrapInterop;
         //private readonly CurrentTheme _currentTheme;
+        public Toaster Toaster { get;} = new Toaster();
         public Theme CurrentTheme { get; internal set; } = Theme.Bootstrap;
 
         public BlazorStrapCore(BlazorStrapInterop blazorStrapInterop)

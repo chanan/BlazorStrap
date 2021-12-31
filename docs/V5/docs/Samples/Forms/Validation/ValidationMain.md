@@ -1,5 +1,5 @@
 ﻿@using System.ComponentModel.DataAnnotations
-<BSForm Model="Modal" IsRow="true" Gutters="Gutters.Medium" OnValidSubmit="OnSubmit">
+<BSForm Model="Modal" IsRow="true" Gutters="Gutters.Medium" OnValidSubmit="OnSubmit" OnReset="Reset">
     <DataAnnotationsValidator/>
     <BSCol Position="Position.Relative" ColumnMedium="12">
         @_message
@@ -32,10 +32,9 @@
     </BSCol>
     <BSCol Column="12">
         <BSButton Color="BSColor.Primary" IsSubmit="true">Submit</BSButton>
-        <BSButton Color="BSColor.Primary" IsReset="true">Reset</BSButton>
+        <BSButton Color="BSColor.Primary" IsReset="true" @onclick="Reset">Reset</BSButton>
     </BSCol>
 </BSForm>
-
 @code {
     private EmployeeModal Modal { get; set; } = new EmployeeModal();
     private string _message = "";
@@ -69,5 +68,9 @@
         [Required(ErrorMessage = "Employee must have a photo")]
         public bool? HasPendingPhoto { get; set; }
         public string? PhotoName { get; set; }
+    }
+    public void Reset ()
+    {
+        Modal = new EmployeeModal();
     }
 }

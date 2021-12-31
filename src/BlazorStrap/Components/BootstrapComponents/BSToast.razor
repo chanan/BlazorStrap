@@ -1,24 +1,30 @@
 ﻿@namespace BlazorStrap
 @inherits BlazorStrapBase
 
-@if (Header == null || Content == null)
+@if (Content == null)
 {
-    <BlazorStrap.InternalComponents.Error Name="BSToast">
-        Both <strong>Header</strong> and <strong>Content</strong> RenderFragment are required.
-    </BlazorStrap.InternalComponents.Error>
+<BlazorStrap.InternalComponents.Error Name="BSToast">
+    Both <strong>Header</strong> and <strong>Content</strong> RenderFragment are required.
+</BlazorStrap.InternalComponents.Error>
 
-    return;
+return;
 }
 
-<div class="@ClassBuilder" @attributes="Attributes">
+<div class="@ClassBuilder" @attributes="Attributes" @ref="MyRef">
     @if (Header != null)
     {
         <div class="@HeaderClassBuilder">
             @Header
-            <button type="button" class="ms-auto btn-close @ButtonClass" data-bs-dismiss="toast" aria-label="Close" @onclick="ClickEvent"></button>
+            <button type="button" class="ms-auto my-auto btn-close @ButtonClassBuilder" data-bs-dismiss="toast" aria-label="Close" @onclick="ClickEvent"></button>
         </div>
     }
-    <div class="@ContentClassBuilder">
-        @Content
+    <div class="d-flex">
+        <div class="@ContentClassBuilder">
+            @Content
+        </div>
+        @if (Header == null)
+        {
+            <button type="button" class="m-auto btn-close me-2 @ButtonClassBuilder" data-bs-dismiss="toast" aria-label="Close" @onclick="ClickEvent"></button>
+        }
     </div>
 </div>

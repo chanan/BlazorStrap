@@ -28,6 +28,7 @@ namespace BlazorStrap
         [Parameter] public TValue? Model { get; set; }
         [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
         [Parameter] public EventCallback<EditContext> OnSubmit { get; set; }
+        [Parameter] public EventCallback<EventArgs> OnReset { get; set; }
         [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
        // [Parameter] public bool ValidateOnInit { get; set; }
 
@@ -68,7 +69,7 @@ namespace BlazorStrap
                 builder.OpenElement(0, "form");
                 builder.AddAttribute(1, "class", ClassBuilder);
                 builder.AddMultipleAttributes(2, Attributes);
-                builder.AddContent(0, ChildContent);
+                builder.AddContent(3, ChildContent);
                 builder.CloseElement();
                 return;
             }
@@ -96,7 +97,6 @@ namespace BlazorStrap
                 {
                     formBuilder.AddAttribute(3, "Model", Model);
                 }
-
                 formBuilder.AddAttribute(4, "OnSubmit", OnSubmit);
                 formBuilder.AddAttribute(5, "OnValidSubmit", OnValidSubmit);
                 formBuilder.AddAttribute(6, "OnInvalidSubmit", OnInvalidSubmit);

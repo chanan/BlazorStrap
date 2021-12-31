@@ -11,7 +11,7 @@ namespace BlazorStrap
         public static IServiceCollection AddBlazorStrap(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<BlazorStrapInterop>();
-            serviceCollection.AddTransient<IBlazorStrap, BlazorStrapCore>();
+            serviceCollection.AddScoped<IBlazorStrap, BlazorStrapCore>();
             serviceCollection.AddScoped<ISvgLoader, SvgLoader>();
             return serviceCollection;
         }

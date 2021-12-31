@@ -1,4 +1,4 @@
-﻿<BSToast HeaderClass="bg-primary text-white" ButtonClass="btn-close-white">
+﻿<BSToast Color="BSColor.Primary">
     <Header><strong>BlazorStarp</strong></Header>
     <Content>Hello, world!</Content>
 </BSToast>
