@@ -69,7 +69,13 @@ namespace BlazorStrap
                     Value = default(T);
             }
             else if (IsToggle && Value.Equals(CheckedValue) && !IsRadio)
+            {
                 Value = UnCheckedValue;
+            }
+            else if (Value.Equals(CheckedValue) && !IsRadio)
+            {
+                Value = UnCheckedValue;
+            }
             else
                 Value = CheckedValue;
             ValueChanged.InvokeAsync(Value);
