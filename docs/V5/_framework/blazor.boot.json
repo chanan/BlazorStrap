@@ -8,9 +8,9 @@
   "resources": {
     "assembly": {
       "BlazorComponentUtilities.dll": "sha256-UapksNiQg3lu5QM9uVSLyjEuzRH\/7o22fmcmxcLAAeI=",
-      "BlazorStrap-Docs.dll": "sha256-+axw8GG9LtRlS87C8K6WMq7lc0JK47kZZ2RarT6X0rc=",
-      "BlazorStrap.dll": "sha256-o\/YvFzNKQ8uxflfOlCJgQKSaTw3VP3rl0XTaNnBGPFM=",
-      "BlazorStrap.WASM.dll": "sha256-VFGN8xr8Fito+TWBGKO2++VxMdMVTnQajrZlepSSu88=",
+      "BlazorStrap-Docs.dll": "sha256-lZmFXA4H6Km49oGQDvpduLt7Al6l6YhgBGZ1pN6NQpA=",
+      "BlazorStrap.dll": "sha256-EXheC+jruscQblCvQ4O1dVFExCy3A2jR3Z4tgBLtOo8=",
+      "BlazorStrap.WASM.dll": "sha256-34Ri4HDamWQI5myZoC2f2W51Xb90zArLziAmW9BUXfU=",
       "ColorCode.dll": "sha256-hF07ps23in9mbwaN4uSoZklQVfyJIw2Ep4R448bfkOk=",
       "Markdig.dll": "sha256-9\/ICq2gSL+hjhMdZXNoIRs8wyZFtZpr3yFSW+RQVdoQ=",
       "Markdig.SyntaxHighlighting.dll": "sha256-qkuHEt7805bTVSkNsvDi5CT5M3Q4VSK619BHVC+FdKs=",

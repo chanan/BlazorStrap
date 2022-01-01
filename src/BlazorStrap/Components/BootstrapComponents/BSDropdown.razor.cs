@@ -60,7 +60,7 @@ namespace BlazorStrap
         public async Task HideAsync()
         {
             Shown = false;
-            await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
+            await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataRefId, EventType.Click);
             if (IsCssHover)
             {
                 await InvokeAsync(StateHasChanged);

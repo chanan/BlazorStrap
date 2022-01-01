@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<IsPackable>true</IsPackable>
 		<PackageId>BlazorStrap</PackageId>
-		<Version>5.0.000-RC-4</Version>
+		<Version>5.0.000-RC-5</Version>
 		<Authors>Chanan Braunstein; John Bomhold</Authors>
 		<Title>Blazor BootStrap</Title>
 		<Description>A bootstrap 5 component library for Blazor</Description>
@@ -14,7 +14,7 @@
 		<PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
 		<RootNamespace>BlazorStrap</RootNamespace>
-		<PackageVersion>5.0.000-RC-4</PackageVersion>
+		<PackageVersion>5.0.000-RC-5</PackageVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
