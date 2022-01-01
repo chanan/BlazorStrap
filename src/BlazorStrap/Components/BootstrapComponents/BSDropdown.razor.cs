@@ -62,11 +62,6 @@ namespace BlazorStrap
         {
             Shown = false;
             await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataRefId, EventType.Click);
-            if (IsCssHover)
-            {
-                await InvokeAsync(StateHasChanged);
-                return;
-            }
 
             if ((Group != null && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper))
             {
@@ -84,15 +79,25 @@ namespace BlazorStrap
 
         protected override void OnParametersSet()
         {
+            Console.WriteLine(IsNavPopper);
             if (IsNavPopper == false)
             {
-                if (_LastIsNavPopper)
+                if (_LastIsNavPopper != IsNavPopper)
+                {
+                    Console.WriteLine("un set");
+                    PopoverRef = null;
+                }
+            }
+            else
+            {
+                if (IsNavPopper != _LastIsNavPopper == false)
                 {
                     Shown = false;
                     StateHasChanged();
                 }
-                PopoverRef = null;
             }
+
+            _LastIsNavPopper = IsNavPopper;
         }
 
         // ReSharper disable once MemberCanBePrivate.Global
@@ -104,14 +109,7 @@ namespace BlazorStrap
             {
                 await BlazorStrap.Interop.AddDocumentEventAsync(_objectRef, DataRefId, EventType.Click, AllowItemClick);
             }
-
-            if (IsCssHover)
-            {
-                await InvokeAsync(StateHasChanged);
-                return;
-            }
-
-
+            
             if ((Group != null && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper))
             {
                 if (PopoverRef != null) await PopoverRef.ShowAsync();

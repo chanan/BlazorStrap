@@ -85,6 +85,6 @@ Use `IsNav` to output as a non list
 
 {{sample=Components/Nav/Nav13}}
 
-### Custom Submenu
+### Submenu Example
 
 {{sample=Components/Nav/Nav14}}
