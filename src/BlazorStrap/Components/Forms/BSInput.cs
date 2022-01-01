@@ -58,8 +58,8 @@ namespace BlazorStrap
                 float @float => BindConverter.FormatValue(@float, CultureInfo.InvariantCulture),
                 double @double => BindConverter.FormatValue(@double, CultureInfo.InvariantCulture),
                 decimal @decimal => BindConverter.FormatValue(@decimal, CultureInfo.InvariantCulture),
-                DateTime dateTimeValue => BindConverter.FormatValue(dateTimeValue, _dateFormat, CultureInfo.InvariantCulture),
-                DateTimeOffset dateTimeOffsetValue => BindConverter.FormatValue(dateTimeOffsetValue, _dateFormat, CultureInfo.InvariantCulture),
+                DateTime @dateTimeValue => BindConverter.FormatValue(@dateTimeValue, _dateFormat, CultureInfo.InvariantCulture),
+                DateTimeOffset @dateTimeOffsetValue => BindConverter.FormatValue(@dateTimeOffsetValue, _dateFormat, CultureInfo.InvariantCulture),
                 #if NET6_0_OR_GREATER
                     DateOnly dateOnlyValue => BindConverter.FormatValue(dateOnlyValue, _dateFormat, CultureInfo.InvariantCulture),
                     TimeOnly timeOnlyValue => BindConverter.FormatValue(timeOnlyValue, _dateFormat, CultureInfo.InvariantCulture),

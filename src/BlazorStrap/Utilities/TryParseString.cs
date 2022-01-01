@@ -164,6 +164,12 @@ namespace BlazorStrap.Utilities
                 validationErrorMessage = null;
                 return true;
             }
+            else if (typeof(T) == typeof(float) || typeof(T) == typeof(float?))
+            {
+                result = (T)(object)float.Parse(value, CultureInfo.InvariantCulture);
+                validationErrorMessage = null;
+                return true;
+            }
             else if (typeof(T) == typeof(Guid) || typeof(T) == typeof(Guid?))
             {
                 try
@@ -264,7 +270,7 @@ namespace BlazorStrap.Utilities
             
             else if (typeof(T) == typeof(DateTimeOffset) || typeof(T) == typeof(DateTimeOffset?))
             {
-                if (TryParseString<T>.ToDateTimeOffset(value, out result))
+                if (ToDateTimeOffset(value, out result))
                 {
                     validationErrorMessage = null;
                     return true;
