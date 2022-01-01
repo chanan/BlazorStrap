@@ -154,6 +154,10 @@ namespace BlazorStrap
             {
                 await ToggleAsync();
             }
+            else if ((name.Equals(typeof(BSModal)) || name.Equals(typeof(BSOffCanvas))) && type == EventType.Toggle)
+            {
+                await HideAsync();
+            }
         }
 
         [JSInvokable]
@@ -175,10 +179,7 @@ namespace BlazorStrap
             {
                 await ToggleAsync();
             }
-            else if ((name.Equals(typeof(BSModal)) || name.Equals(typeof(BSOffCanvas))) && type == EventType.Toggle)
-            {
-                await HideAsync();
-            }
+          
         }
         
         #region Dispose

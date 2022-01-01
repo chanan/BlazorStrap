@@ -114,7 +114,7 @@ namespace BlazorStrap
         }
 
         [JSInvokable]
-        public override async Task InteropEventCallback(string id, CallerName name, EventType type)
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
         {
             if (DataId == id && name.Equals(this) && type == EventType.TransitionEnd)
             {

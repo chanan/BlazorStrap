@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorStrap.Utilities;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazorStrap
@@ -7,7 +8,7 @@ namespace BlazorStrap
     {
         // ReSharper disable once NullableWarningSuppressionIsUsed
         [Inject] private IBlazorStrap BlazorStrap { get; set; } = default!;
-
+        
         protected override void OnInitialized()
         {
             BlazorStrap.Toaster.OnChange += OnChange;
@@ -15,12 +16,12 @@ namespace BlazorStrap
 
         private void OnChange()
         {
-            StateHasChanged();
+            RateLimitingExceptionForObject.Debounce("", 50,
+                (CurrentValueAsString) => { InvokeAsync(StateHasChanged); });
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            builder.Clear();
             var lastPlacment = Toast.Default;
             var building = false;
             var i = 0;
