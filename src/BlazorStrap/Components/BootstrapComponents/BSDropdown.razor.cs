@@ -19,6 +19,7 @@ namespace BlazorStrap
         [Parameter] public bool IsStatic { get; set; }
         [Parameter] public bool IsCssHover { get; set; }
         [Parameter] public bool IsNavPopper { get; set; }
+        
         [Parameter] public string? Offset { get; set; }
         [Parameter] public string? ShownAttribute { get; set; }
         [Parameter] public string Target { get; set; } = Guid.NewGuid().ToString();
@@ -79,6 +80,14 @@ namespace BlazorStrap
             }
 
             await InvokeAsync(StateHasChanged);
+        }
+
+        protected override void OnParametersSet()
+        {
+            if (IsNavPopper == false)
+            {
+                PopoverRef = null;
+            }
         }
 
         // ReSharper disable once MemberCanBePrivate.Global
