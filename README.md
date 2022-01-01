@@ -1,6 +1,6 @@
 # BlazorStrap
 
-Bootstrap 4 Components for Blazor Framework
+Bootstrap 4 and Bootstrap 5 Components for Blazor Framework
 
 ## Install
 
