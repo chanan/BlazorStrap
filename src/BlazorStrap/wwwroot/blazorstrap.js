@@ -7,7 +7,7 @@ if (!Element.prototype.matches) {
 }
 
 if (!Element.prototype.closest) {
-    Element.prototype.closest = function(s) {
+    Element.prototype.closest = function (s) {
         var el = this;
 
         do {
@@ -35,60 +35,80 @@ window.blazorStrap = {
         if (element === null || element === undefined) return;
         element.classList.add(className);
         return new Promise(function (resolve) {
-            if (delay !== 0) setTimeout(() => resolve(), delay);else resolve();
+            if (delay !== 0) setTimeout(() => resolve(), delay); else resolve();
         });
     },
-    AddEvent: async function (id, name, type, isDocument = false, ignoreChildren = false, filter = "") {
+    AddDocumentEvent: async function (objRef, id, name, type, ignoreChildren = false, filter = "") {
         return new Promise(function (resolve) {
-            let element;
-            if (isDocument) element = document;else element = document.querySelector("[data-blazorstrap='" + id + "']");
-
-            if (blazorStrap.EventHandlers[id] === undefined) {
-                blazorStrap.EventHandlers[id] = {};
-            }
-
-            if (blazorStrap.EventHandlers[id][name] === undefined) {
-                blazorStrap.EventHandlers[id][name] = {};
-            }
-
-            blazorStrap.EventHandlers[id][name][type] = {
-                Callback: function (event) {
-                    if (type === "transitionend" && id !== event.target.getAttribute("data-blazorstrap")) return;
-
-                    if (name === "documentDropdown") {
-                        let parent = document.querySelector("[data-blazorstrap='" + id + "']");
-
-                        if (parent !== null) {
-                            if (parent.contains(event.target)) {
-                                if (event.target.closest(".dropdown-toggle") !== null) {
-                                    return;
-                                }
-                            }
-                        }
-                    }
-
-                    if (ignoreChildren) {
-                        let parent = document.querySelector("[data-blazorstrap='" + id + "']");
-
-                        if (parent !== null) {
-                            if (parent.contains(event.target)) return;
-                        }
-                    }
-
-                    if (filter === "") {
-                        // noinspection JSUnresolvedVariable,JSUnresolvedFunction
-                        DotNet.invokeMethodAsync("BlazorStrap", "EventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
-                    } else if (element.getElementsByClassName(filter)) {
-                        // noinspection JSUnresolvedVariable,JSUnresolvedFunction
-                        DotNet.invokeMethodAsync("BlazorStrap", "EventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
-                    }
-                }
-            };
-            element.addEventListener(type, blazorStrap.EventHandlers[id][name][type].Callback, false);
+            blazorStrap.AddEventInternal(objRef, document, id, name, type, ignoreChildren, filter);
             resolve();
         });
     },
-    AddPopover: async function (element, dotNetObjectReference, position, target, offset = "none") {
+    AddEventInternal: function (objRef, element, id, name, type, ignoreChildren = false, filter = "") {
+        if (blazorStrap.EventHandlers[id] === undefined) {
+            blazorStrap.EventHandlers[id] = {};
+        }
+
+        if (blazorStrap.EventHandlers[id][name] === undefined) {
+            blazorStrap.EventHandlers[id][name] = {};
+        }
+
+        blazorStrap.EventHandlers[id][name][type] = {
+            Callback: function (event) {
+                let resizeFunc;
+                if (type === "resize" && element === document) {
+
+                    clearTimeout(resizeFunc);
+                    resizeFunc = setTimeout(function () {
+                        // noinspection JSUnresolvedVariable,JSUnresolvedFunction
+                        try {
+                            objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
+                        } catch {
+                            // Element by be gone by time this fires   
+                        }
+                    }, 500);
+                    return;
+                }
+                if (type === "transitionend" && id !== event.target.getAttribute("data-blazorstrap")) return;
+
+                if (name === "bsdropdown") {
+                    let parent = document.querySelector("[data-blazorstrap='" + id + "']");
+
+                    if (parent !== null) {
+                        if (parent.contains(event.target)) {
+                            if (event.target.closest(".dropdown-toggle") !== null) {
+                                return;
+                            }
+                        }
+                    }
+                }
+                if (ignoreChildren) {
+                    let parent = document.querySelector("[data-blazorstrap='" + id + "']");
+
+                    if (parent !== null) {
+                        if (parent.contains(event.target)) return;
+                    }
+                }
+                if (filter === "") {
+                    objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
+                } else if (element.getElementsByClassName(filter)) {
+                    // noinspection JSUnresolvedVariable,JSUnresolvedFunction
+                    objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
+                }
+            }
+        };
+        if (type === "resize")
+            window.addEventListener(type, blazorStrap.EventHandlers[id][name][type].Callback, false);
+        else
+            element.addEventListener(type, blazorStrap.EventHandlers[id][name][type].Callback, false);
+    },
+    AddEvent: async function (objRef, id, name, type, isDocument = false, ignoreChildren = false, filter = "") {
+        return new Promise(function (resolve) {
+            blazorStrap.AddEventInternal(objRef, document.querySelector("[data-blazorstrap='" + id + "']"), id, name, type, ignoreChildren, filter);
+            resolve();
+        });
+    },
+    AddPopover: async function (element, position, target, offset = "none") {
         function ToPixels(value) {
             if (value.indexOf("rem") !== -1) {
                 value = value.substring(0, value.indexOf("rem"));
@@ -129,11 +149,11 @@ window.blazorStrap = {
             resolve(true);
         });
     },
-    AnimateCarousel: async function (id, showEl, hideEl, back) {
+    AnimateCarousel: async function (objref, id, showEl, hideEl, back) {
         await blazorStrap.CleanupCarousel(showEl, hideEl);
 
         let callback = function () {
-            DotNet.invokeMethodAsync("BlazorStrap", "EventFallback", id, "bsCarousel", "transitionend");
+            objref.invokeMethodAsync("InteropEventCallback", id, "bscarousel", "transitionend");
         };
 
         return new Promise(function (resolve) {
@@ -160,14 +180,14 @@ window.blazorStrap = {
             }
         });
     },
-    AnimateCollapse: async function (element, shown, id, name, type) {
+    AnimateCollapse: async function (objRef, element, id, shown, name) {
         if (shown) {
             let cleanup = function () {
                 element.style["height"] = "";
                 element.classList.remove("collapsing");
                 element.classList.add("collapse");
                 element.classList.add("show");
-                DotNet.invokeMethodAsync("BlazorStrap", "EventFallback", id, name, type);
+                objRef.invokeMethodAsync("InteropEventCallback", id, name, "transitionend", null, null);
             };
 
             let height = await blazorStrap.PeakHeight(element);
@@ -184,14 +204,14 @@ window.blazorStrap = {
                     element.removeEventListener("transitionend", cleanup, {
                         once: true
                     });
-                    DotNet.invokeMethodAsync("BlazorStrap", "EventFallback", id, name, type);
+                    objRef.invokeMethodAsync("InteropEventCallback", id, name, "transitionend", null, null);
                 }
             }, 10);
         } else {
             let cleanup = function () {
                 element.classList.remove("collapsing");
                 element.classList.add("collapse");
-                DotNet.invokeMethodAsync("BlazorStrap", "EventFallback", id, name, type);
+                objRef.invokeMethodAsync("InteropEventCallback", id, name, "transitionend", null, null);
             };
 
             let height = await blazorStrap.GetHeight(element);
@@ -207,10 +227,8 @@ window.blazorStrap = {
 
                 if (await blazorStrap.TransitionDidNotStart(element, 50)) {
                     cleanup();
-                    element.removeEventListener("transitionend", cleanup, {
-                        once: true
-                    });
-                    DotNet.invokeMethodAsync("BlazorStrap", "EventFallback", id, name, type);
+                    element.removeEventListener("transitionend", cleanup, {once: true});
+                    objRef.invokeMethodAsync("InteropEventCallback", id, name, "transitionend", null, null);
                 }
             }, 10);
         }
@@ -240,15 +258,23 @@ window.blazorStrap = {
         return result;
     },
     GetEvents: function (event) {   // Likely can be removed
-        return {
-            key: event.key,
-            target: {
-                classList: event.target.classList,
-                targetId: event.target.getAttribute("data-blazorstrap-target"),
-                childrenId: blazorStrap.GetChildrenIds(event.target),
-                dataId: event.target.getAttribute("data-blazorstrap")
+        try {
+            return {
+                key: event.key,
+                clientWidth: document.documentElement.clientWidth,
+                target: {
+                    classList: event.target.classList,
+                    targetId: event.target.getAttribute("data-blazorstrap-target"),
+                    childrenId: blazorStrap.GetChildrenIds(event.target),
+                    dataId: event.target.getAttribute("data-blazorstrap")
+                }
+            };
+        } catch {
+            return {
+                key: event.key,
+                clientWidth: document.documentElement.clientWidth,
             }
-        };
+        }
     },
     GetHeight: async function (element) {
         if (element === null || element === undefined) return;
@@ -256,7 +282,7 @@ window.blazorStrap = {
             resolve(element.offsetHeight);
         });
     },
-    GetInnerHeight: async function () {  // Rename to GetWindowInnerHeight
+    GetWindowInnerHeight: async function () {
         return new Promise(function (resolve) {
             resolve(window.innerHeight);
         });
@@ -301,41 +327,47 @@ window.blazorStrap = {
         if (element === null || element === undefined) return;
         element.classList.remove(className);
         return new Promise(function (resolve) {
-            if (delay !== 0) setTimeout(() => resolve(), delay);else resolve();
+            if (delay !== 0) setTimeout(() => resolve(), delay); else resolve();
         });
     },
-    RemoveEvent: async function (id, name, type, isDocument = false) { //Split Document out to its own function
+    RemoveDocumentEvent: async function (id, name, type) {
         return new Promise(function (resolve) {
-            let element;
-            if (isDocument) element = document;else element = document.querySelector("[data-blazorstrap='" + id + "']");
-            if (blazorStrap.EventHandlers[id] === undefined) return resolve();
-
-            if (name !== "null" && type !== "null") {
-                if (blazorStrap.EventHandlers[id][name] === undefined) return resolve();
-                if (blazorStrap.EventHandlers[id][name][type] === undefined) return resolve();
-
-                if (blazorStrap.EventHandlers[id][name][type] !== undefined && blazorStrap.EventHandlers[id][name][type] !== null) {
-                    if (element !== undefined && element !== null) {
-                        element.removeEventListener(type, blazorStrap.EventHandlers[id][name][type].Callback, false);
-                    }
-
-                    delete blazorStrap.EventHandlers[id][name][type];
-                }
-
-                if (Object.keys(blazorStrap.EventHandlers[id][name]).length === 0) {
-                    delete blazorStrap.EventHandlers[id][name];
-                }
-            }
-
-            if (Object.keys(blazorStrap.EventHandlers[id]).length === 0) {
-                delete blazorStrap.EventHandlers[id];
-            }
-
+            blazorStrap.RemoveEventInternal(document, id, name, type);
             resolve();
         });
     },
+    RemoveEvent: async function (id, name, type) { //Split Document out to its own function
+        return new Promise(function (resolve) {
+            blazorStrap.RemoveEventInternal(document.querySelector("[data-blazorstrap='" + id + "']"), id, name, type);
+            resolve();
+        });
+    },
+    RemoveEventInternal: function (element, id, name, type) {
+        if (blazorStrap.EventHandlers[id] === undefined) return;
+
+        if (name !== "null" && type !== "null") {
+            if (blazorStrap.EventHandlers[id][name] === undefined) return;
+            if (blazorStrap.EventHandlers[id][name][type] === undefined) return;
+
+            if (blazorStrap.EventHandlers[id][name][type] !== undefined && blazorStrap.EventHandlers[id][name][type] !== null) {
+                if (element !== undefined && element !== null) {
+                    if (type === "resize")
+                        window.removeEventListener(type, blazorStrap.EventHandlers[id][name][type].Callback, false);
+                    else
+                        element.removeEventListener(type, blazorStrap.EventHandlers[id][name][type].Callback, false);
+                }
+                delete blazorStrap.EventHandlers[id][name][type];
+            }
+            if (Object.keys(blazorStrap.EventHandlers[id][name]).length === 0) {
+                delete blazorStrap.EventHandlers[id][name];
+            }
+        }
+        if (Object.keys(blazorStrap.EventHandlers[id]).length === 0) {
+            delete blazorStrap.EventHandlers[id];
+        }
+    },
     RemovePopover: async function (element, id) {
-        return new Promise(function (resolve, r) {
+        return new Promise(function (resolve) {
             if (blazorStrap.EventHandlers[id] === undefined) return resolve();
 
             if (blazorStrap.EventHandlers[id]["Popover"] !== undefined) {
@@ -355,7 +387,7 @@ window.blazorStrap = {
             resolve();
         });
     },
-    setBootstrapCss: function (theme, version) {
+    SetBootstrapCss: function (theme, version) {
         if (link === undefined) {
             let existing = document.querySelectorAll('link[href$="bootstrap.min.css"]')[0];
 
@@ -379,7 +411,7 @@ window.blazorStrap = {
         if (element === null || element === undefined) return;
         element.style[style] = value;
         return new Promise(function (resolve) {
-            if (delay !== 0) setTimeout(() => resolve(), delay);else resolve();
+            if (delay !== 0) setTimeout(() => resolve(), delay); else resolve();
         });
     },
     ToastTimer: function (element, time, timeRemaining, rendered) {
@@ -411,7 +443,6 @@ window.blazorStrap = {
                 timeEl.style["-webkit-transition"] = "linear " + (time - timeRemaining) / 1000 + "s";
             } else {
                 timeRemaining = time - timeRemaining;
-                console.log(timeRemaining / time * 100);
                 timeEl.style.width = timeRemaining / time * 100 + "%";
                 timeEl.style["transition"] = "linear" + (time - timeRemaining) / 1000 + "s";
                 timeEl.style["-webkit-transition"] = "linear " + (time - timeRemaining) / 1000 + "s";
@@ -425,7 +456,7 @@ window.blazorStrap = {
     },
     TransitionDidNotStart: async function (element, delay = 200) {
         return new Promise(function (resolve) {
-            let handler = function (event) {
+            let handler = function () {
                 resolve(false);
                 clearTimeout(timeout);
             };
@@ -450,11 +481,11 @@ window.blazorStrap = {
             }, 10);
         });
     },
-    UpdatePopoverArrow: async function (element, dotNetObjectReference, position, tooltip) {
+    UpdatePopoverArrow: async function (element, position, tooltip) {
         const id = element.getAttribute("data-blazorstrap");
         let arrow;
         return new Promise(function (resolve) {
-            if (tooltip === false) arrow = element.querySelector('.popover-arrow');else arrow = element.querySelector('.tooltip-arrow');
+            if (tooltip === false) arrow = element.querySelector('.popover-arrow'); else arrow = element.querySelector('.tooltip-arrow');
             position = position.replace("start", "");
             position = position.replace("end", "");
 
@@ -512,12 +543,3 @@ window.blazorStrap = {
         });
     }
 }
-
-let ResizeFunc;
-window.addEventListener("resize", function () {
-    clearTimeout(ResizeFunc);
-    ResizeFunc = setTimeout(function () {
-        // noinspection JSUnresolvedVariable,JSUnresolvedFunction
-        DotNet.invokeMethodAsync("BlazorStrap", "ResizeComplete", document.documentElement.clientWidth);
-    }, 500);
-});

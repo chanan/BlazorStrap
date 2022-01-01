@@ -24,6 +24,6 @@ namespace BlazorStrap
                 ChildHandler(sender);
         }
 
-        internal event Action<BSAccordionItem>? ChildHandler;
+        internal Action<BSAccordionItem>? ChildHandler;
     }
 }

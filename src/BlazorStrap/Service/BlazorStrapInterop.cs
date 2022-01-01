@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorStrap.Utilities;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace BlazorStrap.Service
 {
     public class BlazorStrapInterop : IDisposable
     {
+        public Action<string, string, string, Dictionary<string, string>?, JavascriptEvent?>? EventHandler { get;  set; }
+        
         private readonly IJSRuntime _jsRuntime; 
         private readonly IJSInProcessRuntime? _jSInProcessRuntime;
         private bool _disposedValue;
@@ -36,79 +39,43 @@ namespace BlazorStrap.Service
         /// </summary>
         /// <param name="elementReference"></param>
         /// <param name="className"></param>
-        /// <param name="cancellationToken"></param>
-
-        public ValueTask AddClass(ElementReference elementReference, string className, CancellationToken? cancellationToken = null) 
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.AddClass", cancellationToken ?? CancellationToken.None, elementReference, className, 0);
-        
-        /// <summary>
-        /// Adds a class to the ElementReference with a forced return delay.
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="className"></param>
         /// <param name="delay"></param>
         /// <param name="cancellationToken"></param>
-        public ValueTask AddClass(ElementReference elementReference, string className, int delay = 0, CancellationToken? cancellationToken = null) 
+        public ValueTask AddClassAsync(ElementReference elementReference, string className, int delay = 0, CancellationToken? cancellationToken = null) 
             => _jsRuntime.InvokeVoidAsync("blazorStrap.AddClass", cancellationToken ?? CancellationToken.None, elementReference, className, delay);
-        
-        // Not correct in js yet
-        /// <summary>
-        /// Adds event to ElementReference.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="type"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask AddEvent(string id, string name, EventTypes type, CancellationToken? cancellationToken = null) 
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.AddEvent", cancellationToken ?? CancellationToken.None, id, name, type.NameToLower());
-        
-        /// <summary>
-        /// Adds event to ElementReference.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="type"></param>
-        /// <param name="ignoreChildren"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask AddEvent(string id, string name, EventTypes type, bool ignoreChildren, CancellationToken? cancellationToken = null) 
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.AddEvent", cancellationToken ?? CancellationToken.None, id, name, type.NameToLower(), ignoreChildren);
-        
+
         /// <summary>
         /// Adds event to ElementReference
         /// </summary>
+        /// <param name="dotNetObjectReference"></param>
         /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="type"></param>
-        /// <param name="classFilter">Likely to be removed.</param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask AddEvent(string id, string name, EventTypes type, string classFilter, CancellationToken? cancellationToken = null) 
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.AddEvent", cancellationToken ?? CancellationToken.None, id, name, type.NameToLower(), false, classFilter);
-        
-        /// <summary>
-        /// Adds event to ElementReference
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
         /// <param name="type"></param>
         /// <param name="ignoreChildren"></param>
         /// <param name="classFilter">Likely to be removed.</param>
         /// <param name="cancellationToken"></param>
-        public ValueTask AddEventAsync(string id, string name, EventTypes type, bool ignoreChildren = false, string classFilter = "", CancellationToken? cancellationToken = null) 
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.AddEvent", cancellationToken ?? CancellationToken.None, id, name, type.NameToLower(), ignoreChildren, classFilter);
-        
-        // Not in js yet
-        public ValueTask AddDocumentEventAsync(string id, string name, EventTypes type, bool ignoreChildren = false, string classFilter = "", CancellationToken? cancellationToken = null) 
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.AddDocumentEvent", cancellationToken ?? CancellationToken.None, id, name, type.NameToLower(), ignoreChildren,classFilter);
-        
+        public ValueTask AddEventAsync<T>(DotNetObjectReference<T> dotNetObjectReference, string id, EventType type, bool ignoreChildren = false, string classFilter = "", CancellationToken? cancellationToken = null) where T : class
+        {
+            var name = typeof(T).Name.ToLower();
+            return _jsRuntime.InvokeVoidAsync("blazorStrap.AddEvent", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, name, type.NameToLower(), ignoreChildren, classFilter);
+        }
+
+
         /// <summary>
-        /// Adds a Popover to ElementReference
+        /// Adds event to the document
         /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="placement"></param>
-        /// <param name="target"></param>
+        /// <param name="dotNetObjectReference"></param>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <param name="ignoreChildren"></param>
+        /// <param name="classFilter"></param>
         /// <param name="cancellationToken"></param>
-        public ValueTask AddPopoverAsync(ElementReference elementReference, Placement placement, string target, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.AddPopover", cancellationToken ?? CancellationToken.None, elementReference, placement.Name().ToDashSeperated(), target );
+        /// <returns></returns>
+        public ValueTask AddDocumentEventAsync<T>(DotNetObjectReference<T> dotNetObjectReference,string id, EventType type, bool ignoreChildren = false, string classFilter = "", CancellationToken? cancellationToken = null) where T : class
+        {
+            var name = typeof(T).Name.ToLower();
+            return _jsRuntime.InvokeVoidAsync("blazorStrap.AddDocumentEvent", cancellationToken ?? CancellationToken.None, dotNetObjectReference,id, name, type.NameToLower(), ignoreChildren,classFilter);
+        } 
+            
         
         /// <summary>
         /// Adds a Popover to ElementReference
@@ -118,30 +85,39 @@ namespace BlazorStrap.Service
         /// <param name="target"></param>
         /// <param name="offset"></param>
         /// <param name="cancellationToken"></param>
+        
         public ValueTask AddPopoverAsync(ElementReference elementReference, Placement placement, string target, string offset = "none",  CancellationToken? cancellationToken = null)
             => _jsRuntime.InvokeVoidAsync("blazorStrap.AddPopover", cancellationToken ?? CancellationToken.None, elementReference, placement.Name().ToDashSeperated(), target, offset );
 
         /// <summary>
         /// Triggers Carousel to animate
         /// </summary>
+        /// <param name="dotNetObjectReference"></param>
         /// <param name="id"></param>
         /// <param name="showElementReference"></param>
         /// <param name="hideElementReference"></param>
         /// <param name="back"></param>
         /// <param name="cancellationToken"></param>
-        public ValueTask AnimateCarouselAsync(string id, ElementReference showElementReference, ElementReference hideElementReference, bool back, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.AnimateCarousel", cancellationToken ?? CancellationToken.None, id, showElementReference, hideElementReference, back);
-        
+        /// /// <returns>bool</returns>
+        public ValueTask<bool> AnimateCarouselAsync<T>(DotNetObjectReference<T> dotNetObjectReference,string id, ElementReference showElementReference, ElementReference hideElementReference, bool back, CancellationToken? cancellationToken = null) where T : class
+        {
+            return _jsRuntime.InvokeAsync<bool>("blazorStrap.AnimateCarousel", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, showElementReference, hideElementReference, back);
+        }
+
         /// <summary>
         /// Triggers Collapse to animate
         /// </summary>
+        /// <param name="dotNetObjectReference"></param>
         /// <param name="elementReference"></param>
         /// <param name="id"></param>
         /// <param name="shown"></param>
-        /// <param name="name"></param>
         /// <param name="cancellationToken"></param>
-        public ValueTask AnimateCollapseAsync(ElementReference elementReference, string id, bool shown, string name, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.AnimateCarousel", cancellationToken ?? CancellationToken.None, elementReference, id, shown,name);
+        public ValueTask AnimateCollapseAsync<T>(DotNetObjectReference<T> dotNetObjectReference, ElementReference elementReference, string id, bool shown, CancellationToken? cancellationToken = null) where T : class
+        {
+            var name = typeof(T).Name.ToLower();
+            return _jsRuntime.InvokeVoidAsync("blazorStrap.AnimateCollapse", cancellationToken ?? CancellationToken.None, dotNetObjectReference,elementReference, id, shown,name);
+        }
+            
 
         /// <summary>
         /// Returns a string array of all child data-blazorstrap ids
@@ -207,28 +183,50 @@ namespace BlazorStrap.Service
         /// <summary>
         /// Remove a class from the body
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="className"></param>
         /// <param name="cancellationToken"></param>
-        public ValueTask RemoveBodyClassAsync(string name, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveBodyClass", CancellationToken.None, name);
+        public ValueTask RemoveBodyClassAsync(string className, CancellationToken? cancellationToken = null)
+            => _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveBodyClass", CancellationToken.None, className);
         
         /// <summary>
         /// Removes a class from the ElementReference
         /// </summary>
         /// <param name="elementReference"></param>
-        /// <param name="name"></param>
+        /// <param name="className"></param>
         /// <param name="delay"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public ValueTask RemoveClassAsync(ElementReference elementReference, string name, int delay = 0, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveClass", CancellationToken.None, elementReference, name, delay);
+        public ValueTask RemoveClassAsync(ElementReference elementReference, string className, int delay = 0, CancellationToken? cancellationToken = null)
+            => _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveClass", CancellationToken.None, elementReference, className, delay);
 
-        // Not right in js yet
-        public ValueTask RemoveEventAsync(string id, string name, EventTypes type, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveEvent", CancellationToken.None, id, name, type.NameToLower());
-        
-        public ValueTask RemoveDocumentEventAsync(string id, string name, EventTypes type, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveDocumentEvent", CancellationToken.None, id, name, type.NameToLower());
+        /// <summary>
+        /// Removes an event from an element matching the id.
+        /// </summary>
+        /// <param name="caller"></param>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public ValueTask RemoveEventAsync<T>(T caller, string id, EventType type, CancellationToken? cancellationToken = null) where T: class
+        {
+            var name = typeof(T).Name.ToLower();
+            return _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveEvent", CancellationToken.None, id, name, type.NameToLower());
+        }
+
+        /// <summary>
+        /// Removes an event from the document matching the id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public ValueTask RemoveDocumentEventAsync<T>(T caller, string id, EventType type, CancellationToken? cancellationToken = null)
+        {
+            var name = typeof(T).Name.ToLower();
+            return _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveDocumentEvent", CancellationToken.None, id, name, type.NameToLower());
+        }
+            
         
         /// <summary>
         /// Removes a Popover 
@@ -254,7 +252,7 @@ namespace BlazorStrap.Service
         /// <param name="theme"></param>
         /// <param name="version"></param>
         public ValueTask<bool> SetBootstrapCssAsync(string? theme, string version)
-            => _jsRuntime.InvokeAsync<bool>("blazorStrap.setBootstrapCss", theme, version);
+            => _jsRuntime.InvokeAsync<bool>("blazorStrap.SetBootstrapCss", theme, version);
         
         [Obsolete]
         public ValueTask<bool> SetBootstrapCss(string? theme, string version)
@@ -270,18 +268,28 @@ namespace BlazorStrap.Service
         /// <param name="value"></param>
         /// <param name="delay"></param>
         /// <param name="cancellationToken"></param>
-        public ValueTask SetStyleAsync(ElementReference elementReference, string style, string value, int delay, CancellationToken? cancellationToken = null)
+        public ValueTask SetStyleAsync(ElementReference elementReference, string style, string value, int delay = 0, CancellationToken? cancellationToken = null)
             => _jsRuntime.InvokeVoidAsync("blazorStrap.SetStyle", CancellationToken.None, elementReference, style,value, delay);
+        
+        /// <summary>
+        /// Adds the toast timer to ElementReference
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="time"></param>
+        /// <param name="timeRemaining"></param>
+        /// <param name="rendered"></param>
+        /// <param name="cancellationToken"></param>
+        public ValueTask ToastTimerAsync(ElementReference elementReference, int time, int timeRemaining, bool rendered, CancellationToken? cancellationToken = null) 
+            => _jsRuntime.InvokeVoidAsync("blazorStrap.ToastTimer", cancellationToken ?? CancellationToken.None, elementReference, time, timeRemaining, rendered);
         
         /// <summary>
         /// Returns true if no transition starts after given delay
         /// </summary>
         /// <param name="elementReference"></param>
-        /// <param name="delay"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>bool</returns>
-        public ValueTask<bool> TransitionDidNotStartAsync(ElementReference elementReference, int delay = 200, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeAsync<bool>("blazorStrap.SetStyle", CancellationToken.None, elementReference, delay);
+        public ValueTask<bool> TransitionDidNotStartAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
+            => _jsRuntime.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", CancellationToken.None, elementReference);
         
         /// <summary>
         /// Calls Update on the popover
@@ -303,16 +311,7 @@ namespace BlazorStrap.Service
         
         
         
-        /// <summary>
-        /// Adds the toast timer to ElementReference
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="time"></param>
-        /// <param name="timeRemaining"></param>
-        /// <param name="rendered"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask ToastTimerAsync(ElementReference elementReference, int time, int timeRemaining, bool rendered, CancellationToken? cancellationToken = null) 
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.ToastTimer", cancellationToken ?? CancellationToken.None, elementReference, time, timeRemaining, rendered);
+        
 
         
         // Sync Methods
@@ -341,9 +340,6 @@ namespace BlazorStrap.Service
             if (_jSInProcessRuntime == null) throw InProcessError();
             _jSInProcessRuntime.InvokeVoid("blazorStrap.ToastTimer", elementReference, time, timeRemaining, rendered);
         }
-
-
-      
         
         protected virtual void Dispose(bool disposing)
         {

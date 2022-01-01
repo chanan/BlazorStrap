@@ -7,6 +7,7 @@ namespace BlazorStrap
 {
     public partial class BSAccordionItem : BlazorStrapToggleBase<BSAccordionItem>, IDisposable
     {
+        private DotNetObjectReference<BSAccordionItem> _objectRef;
         private bool _lock;
         [Parameter] public bool NoAnimations { get; set; }
         [Parameter] public bool AlwaysOpen { get; set; }
@@ -17,6 +18,11 @@ namespace BlazorStrap
         {
             get => _defaultShown;
             set { _defaultShown = value; Shown = value; }
+        }
+
+        protected override void OnInitialized()
+        {
+            _objectRef = DotNetObjectReference.Create<BSAccordionItem>(this);
         }
 
         protected override bool ShouldRender()
@@ -51,7 +57,8 @@ namespace BlazorStrap
             
             if (_lock) return;
             _lock = true;
-            if(!NoAnimations) await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, true, DataId, "bsAccordionItem", "transitionend");
+            if (!NoAnimations)
+                await BlazorStrap.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, true);
             Shown = true;
             if (NoAnimations)
                 await TransitionEndAsync();
@@ -62,7 +69,8 @@ namespace BlazorStrap
                 await OnHide.InvokeAsync(this);
             if (_lock) return;
             _lock = true;
-            if(!NoAnimations) await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, false, DataId, "bsAccordionItem", "transitionend");
+            if(!NoAnimations)
+                await BlazorStrap.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, false);
             Shown = false;
             if (NoAnimations)
                 await TransitionEndAsync();
@@ -79,11 +87,6 @@ namespace BlazorStrap
             {
                 HasRendered = true;
             }
-        }
-
-        protected override void OnInitialized()
-        {
-            JSCallback.EventHandler += OnEventHandler;
         }
 
         protected override void OnParametersSet()
@@ -110,9 +113,10 @@ namespace BlazorStrap
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
         }
 
-        private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList, JavascriptEvent? e)
+        [JSInvokable]
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type)
         {
-            if (DataId == id && name == "bsAccordionItem" && type == "transitionend")
+            if (DataId == id && name.Equals(this) && type == EventType.TransitionEnd)
             {
                 await TransitionEndAsync();
             }
@@ -128,8 +132,8 @@ namespace BlazorStrap
 
         public void Dispose()
         {
+            _objectRef.Dispose();
             if (Parent != null) Parent.ChildHandler -= Parent_ChildHandler;
-            JSCallback.EventHandler -= OnEventHandler;
         }
     }
 }

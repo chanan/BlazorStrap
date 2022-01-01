@@ -18,7 +18,7 @@ namespace BlazorStrap
         private async Task ClickEvent()
         {   
             if(!string.IsNullOrEmpty(Target))
-                BlazorStrap.OnForwardClick(Target);
+                BlazorStrap.ForwardClick(Target);
             if (CollapseParent != null)
                 await CollapseParent.ToggleAsync();
             await OnClick.InvokeAsync();

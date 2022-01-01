@@ -1,5 +1,6 @@
 ﻿using BlazorComponentUtilities;
 using BlazorStrap.Service;
+using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -12,7 +13,26 @@ namespace BlazorStrap
         // ReSharper disable once NullableWarningSuppressionIsUsed
         [Inject] public IBlazorStrap BlazorStrapSrc { get; set; } = null!;
         // ReSharper disable once NullableWarningSuppressionIsUsed
-        [Inject] public IJSRuntime Js { get; set; } = null!;
+        
+       // [Inject] public IJSRuntime Js { get; set; } = null!;
+
+        /// <summary>
+        /// Add [JSInvokable] above your override
+        /// </summary>
+        public virtual Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList , JavascriptEvent? e )
+            => Task.CompletedTask;
+        
+        /// <summary>
+        /// Add [JSInvokable] above your override
+        /// </summary>
+        public virtual Task InteropEventCallback(string id, CallerName name, EventType type)
+            => Task.CompletedTask;
+        
+        /// <summary>
+        /// Add [JSInvokable] above your override
+        /// </summary>
+        public virtual Task InteropResizeComplete(int width)
+            => Task.CompletedTask;
 
         [Parameter(CaptureUnmatchedValues = true)]
         public IDictionary<string, object> Attributes { get; set; } = new Dictionary<string, object>();

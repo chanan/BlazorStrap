@@ -9,6 +9,8 @@ namespace BlazorStrap.Utilities
         public Target Target { get; set; } = new Target();
         [JsonPropertyName("key")]
         public string Key { get; set; } = "";
+        [JsonPropertyName("clientWidth")]
+        public int ClientWidth { get; set; } = 0;
         [JsonExtensionData]
         public IDictionary<string, JsonElement> Unmatched { get; set; } = new Dictionary<string, JsonElement>();
     }

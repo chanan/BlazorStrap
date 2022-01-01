@@ -8,6 +8,7 @@ namespace BlazorStrap
 {
     public partial class BSOffCanvas : BlazorStrapToggleBase<BSOffCanvas>, IAsyncDisposable
     {
+        private DotNetObjectReference<BSOffCanvas> _objectRef;
         [Parameter] public bool AllowScroll { get; set; }
         [Parameter] public string? BodyClass { get; set; }
         [Parameter] public string? ButtonClass { get; set; }
@@ -60,24 +61,26 @@ namespace BlazorStrap
 
         public override async Task ShowAsync()
         {
+            // Used to hide popovers
+            BlazorStrap.ForwardToggle("", this);
             _lock = true;
             if (!EventsSet)
             {
-                await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsOffCanvas", "transitionend");
+                await BlazorStrap.Interop.AddEventAsync(_objectRef, DataId, EventType.TransitionEnd);
                 EventsSet = true;
             }
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
-            JSCallback.EventCallback("", "ModalorOffcanvas", "toggled");
+            BlazorStrap.ForwardToggle(DataId, this);
             if (ShowBackdrop)
             {
-                await Js.InvokeVoidAsync("blazorStrap.SetStyle", BackdropRef, "display", "block", 100);
-                await Js.InvokeVoidAsync("blazorStrap.AddClass", BackdropRef, "show");
+                await BlazorStrap.Interop.SetStyleAsync(BackdropRef, "display", "block", 100);
+                await BlazorStrap.Interop.AddClassAsync(BackdropRef, "show");
                 BackdropStyle = "display: block;";
             
             }
-            await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "show");
-            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", MyRef))
+            await BlazorStrap.Interop.AddClassAsync(MyRef, "show");
+            if(await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
             {
                 await TransitionEndAsync();
             }
@@ -87,23 +90,24 @@ namespace BlazorStrap
 
         public override async Task HideAsync()
         {
+            // Used to hide popovers
+            BlazorStrap.ForwardToggle("", this);
             _lock = true;
             if (!EventsSet)
             {
-                await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsOffCanvas", "transitionend");
+                await BlazorStrap.Interop.AddEventAsync(_objectRef, DataId, EventType.TransitionEnd);
                 EventsSet = true;
             }
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
-            JSCallback.EventCallback("", "ModalorOffcanvas", "toggled");
+            
             if (ShowBackdrop)
-            {
-                await Js.InvokeVoidAsync("blazorStrap.RemoveClass", BackdropRef, "show", 100);
+                await BlazorStrap.Interop.RemoveClassAsync(BackdropRef, "show", 100);{
                 BackdropStyle = "display: none;";
-                
             }
-            await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "show");
-            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", MyRef))
+
+            await BlazorStrap.Interop.RemoveClassAsync(MyRef, "show");
+            if(await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
             {
                 await TransitionEndAsync();
             }
@@ -113,11 +117,13 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
-            JSCallback.EventHandler += OnEventHandler;
+            _objectRef = DotNetObjectReference.Create<BSOffCanvas>(this);
         }
-        private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList, JavascriptEvent? e)
+        
+        [JSInvokable]
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
         {
-            if (DataId == id && name == "bsOffCanvas" && type == "transitionend")
+            if (DataId == id && name.Equals(this) && type == EventType.TransitionEnd)
             {
                 await TransitionEndAsync();
             }
@@ -148,7 +154,7 @@ namespace BlazorStrap
 
             if (EventsSet)
             {
-                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "bsOffCanvas", "transitionend");
+                await BlazorStrap.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);
                 EventsSet = false;
             }
             _lock = false;
@@ -172,17 +178,17 @@ namespace BlazorStrap
                 {
                     if (!AllowScroll)
                     {
-                        var scrollWidth = await Js.InvokeAsync<int>("blazorStrap.GetScrollBarWidth");
-                        await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "hidden");
-                        await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", $"{scrollWidth}px");
+                        var scrollWidth = await BlazorStrap.Interop.GetScrollBarWidth();
+                        await BlazorStrap.Interop.SetBodyStyleAsync("overflow", "hidden");
+                        await BlazorStrap.Interop.SetBodyStyleAsync("paddingRight",  $"{scrollWidth}px");
                     }
                 }
             }
             else
             {
                 {
-                    await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "");
-                    await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", "");
+                    await BlazorStrap.Interop.SetBodyStyleAsync("overflow", "");
+                    await BlazorStrap.Interop.SetBodyStyleAsync("paddingRight",  "");
                 }
             }
         }
@@ -191,9 +197,8 @@ namespace BlazorStrap
         {
             if (!EventsSet)
             {
-                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "bsoffCanvas", "transitionend");
+                await BlazorStrap.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);
             }
-            JSCallback.EventHandler -= OnEventHandler;
         }
     }
 }

@@ -85,12 +85,12 @@ namespace BlazorStrap
                     CloseAfter = self.CloseAfter;
                     if (self?.Timer?.Enabled == false && CloseAfter != 0)
                     {
-                        await Js.InvokeVoidAsync("blazorStrap.ToastTimer", MyRef, CloseAfter,0,self.Rendered);
+                        await BlazorStrap.Interop.ToastTimerAsync(MyRef, CloseAfter, 0, self.Rendered);
                         self.Timer.Start();
                     }
                     else
                     {
-                        await Js.InvokeVoidAsync("blazorStrap.ToastTimer", MyRef, CloseAfter, self.Timer.TimeLeft,self.Rendered );
+                        await BlazorStrap.Interop.ToastTimerAsync(MyRef, CloseAfter, Convert.ToInt32(self?.Timer?.TimeLeft ?? 0), self?.Rendered ?? true);
                     }
                     self.Rendered = true;
                 }
@@ -100,8 +100,8 @@ namespace BlazorStrap
         private async void TimerOnElapsed(object sender, ElapsedEventArgs e)
         {
             // Delay for animation .15 seconds = 150 ms move this to transition end later
-                await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "showing");
-                await Task.Delay(150);
+            await BlazorStrap.Interop.AddClassAsync(MyRef, "showing");
+            await Task.Delay(150);
             if(BlazorStrap.Toaster.Children.FirstOrDefault(q => q.Id == ToasterId) != null )
                 BlazorStrap.Toaster.RemoveChild(ToasterId);
             
@@ -110,7 +110,7 @@ namespace BlazorStrap
         private async Task ClickEvent()
         {
             // Delay for animation .15 seconds = 150 ms move this to transition end later
-            await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "showing");
+            await BlazorStrap.Interop.AddClassAsync(MyRef, "showing");
             await Task.Delay(150);
             if(BlazorStrap.Toaster.Children.FirstOrDefault(q => q.Id == ToasterId) != null )
                 BlazorStrap.Toaster.RemoveChild(ToasterId);
