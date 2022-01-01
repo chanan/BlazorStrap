@@ -67,13 +67,10 @@ namespace BlazorStrap
                 return;
             }
 
-            if (!AllowOutsideClick)
+            if ((Group != null && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper))
             {
-                if ((Group != null && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper))
-                {
-                    if (PopoverRef != null)
-                        await PopoverRef.HideAsync();
-                }
+                if (PopoverRef != null)
+                    await PopoverRef.HideAsync();
             }
 
             if (!string.IsNullOrEmpty(ShownAttribute))
@@ -83,6 +80,7 @@ namespace BlazorStrap
 
             await InvokeAsync(StateHasChanged);
         }
+
         // ReSharper disable once MemberCanBePrivate.Global
         public async Task ShowAsync()
         {
@@ -90,7 +88,7 @@ namespace BlazorStrap
 
             if (!AllowOutsideClick)
             {
-                await BlazorStrap.Interop.AddDocumentEventAsync(_objectRef, DataRefId, EventType.Click,AllowItemClick);
+                await BlazorStrap.Interop.AddDocumentEventAsync(_objectRef, DataRefId, EventType.Click, AllowItemClick);
             }
 
             if (IsCssHover)
@@ -138,7 +136,8 @@ namespace BlazorStrap
         }
 
         [JSInvokable]
-        public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type,
+            Dictionary<string, string>? classList, JavascriptEvent? e)
         {
             // The if statement was getting hard to read so split into parts 
             if (id == DataRefId && name.Equals(this) && type == EventType.Click)
@@ -154,6 +153,7 @@ namespace BlazorStrap
                 await HideAsync();
             }
         }
+
         public async ValueTask DisposeAsync()
         {
             _objectRef.Dispose();
