@@ -1,5 +1,6 @@
 ﻿// noinspection JSUnusedGlobalSymbols
-var link;
+let link;
+let navbarShown = false;
 if (!Element.prototype.matches) {
     Element.prototype.matches =
         Element.prototype.msMatchesSelector ||
@@ -45,6 +46,22 @@ window.blazorStrap = {
         });
     },
     AddEventInternal: function (objRef, element, id, name, type, ignoreChildren = false, filter = "") {
+        let expandedWidth = 0;
+        if(type === "resize" && element == document)
+        {
+            let navbar = document.querySelector("[class*=navbar-expand]");
+            // Gets the expanded size
+            if(navbar !== null) {
+
+                if(navbar.classList.contains("navbar-expand") || navbar.classList.contains("navbar-expand-ex")) expandedWidth = 576;
+                else if(navbar.classList.contains("navbar-expand-md")) expandedWidth = 768;
+                else if(navbar.classList.contains("navbar-expand-lg")) expandedWidth = 992;
+                else if(navbar.classList.contains("navbar-expand-xl")) expandedWidth = 1200;
+                else if(navbar.classList.contains("navbar-expand-xxl")) expandedWidth = 1400;
+            }
+            if(expandedWidth > window.innerWidth)
+                navbarShown = true;
+        }
         if (blazorStrap.EventHandlers[id] === undefined) {
             blazorStrap.EventHandlers[id] = {};
         }
@@ -57,16 +74,21 @@ window.blazorStrap = {
             Callback: function (event) {
                 let resizeFunc;
                 if (type === "resize" && element === document) {
-
                     clearTimeout(resizeFunc);
                     resizeFunc = setTimeout(function () {
-                        // noinspection JSUnresolvedVariable,JSUnresolvedFunction
-                        try {
-                            objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
-                        } catch {
-                            // Element by be gone by time this fires   
+                        if(window.innerWidth < expandedWidth)
+                            navbarShown = false;
+                        if(window.innerWidth > expandedWidth && navbarShown === false)
+                        {
+                            navbarShown = true;
+                            // noinspection JSUnresolvedVariable,JSUnresolvedFunction
+                            try {
+                                var test = objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
+                            } catch {
+                                // ObjectRef may be gone by time this fires   
+                            }
                         }
-                    }, 500);
+                    }, 100);
                     return;
                 }
                 if (type === "transitionend" && id !== event.target.getAttribute("data-blazorstrap")) return;

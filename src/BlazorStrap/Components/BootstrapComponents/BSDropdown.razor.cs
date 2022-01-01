@@ -19,7 +19,7 @@ namespace BlazorStrap
         [Parameter] public bool IsStatic { get; set; }
         [Parameter] public bool IsCssHover { get; set; }
         [Parameter] public bool IsNavPopper { get; set; }
-        
+        private bool _LastIsNavPopper { get; set; }
         [Parameter] public string? Offset { get; set; }
         [Parameter] public string? ShownAttribute { get; set; }
         [Parameter] public string Target { get; set; } = Guid.NewGuid().ToString();
@@ -86,6 +86,11 @@ namespace BlazorStrap
         {
             if (IsNavPopper == false)
             {
+                if (_LastIsNavPopper)
+                {
+                    Shown = false;
+                    StateHasChanged();
+                }
                 PopoverRef = null;
             }
         }
@@ -132,6 +137,7 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
+            _LastIsNavPopper = IsNavPopper;
             _objectRef = DotNetObjectReference.Create<BSDropdown>(this);
             BlazorStrap.OnEventForward += InteropEventCallback;
         }
