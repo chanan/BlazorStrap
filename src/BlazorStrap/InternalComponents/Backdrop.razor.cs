@@ -11,7 +11,6 @@ public partial class Backdrop : ComponentBase
     // ReSharper disable once NullableWarningSuppressionIsUsed
     [Inject] private IBlazorStrap BlazorStrapService { get; set; } = default!;
     // ReSharper disable once NullableWarningSuppressionIsUsed
-    [Inject] private IJSRuntime Js { get; set; } = default!;
     [Parameter] public bool ShowBackdrop { get; set; }
     private bool Shown { get; set; }
     private BlazorStrapCore BlazorStrap => (BlazorStrapCore)BlazorStrapService;
@@ -27,13 +26,13 @@ public partial class Backdrop : ComponentBase
     {
         if (Shown)
         {
-            await Js.InvokeVoidAsync("blazorStrap.RemoveClass", BackdropRef, "show", 10);
+            await BlazorStrap.Interop.RemoveClassAsync(BackdropRef, "show", 10);
             BackdropStyle = "display: none;";
         }
         else
         {
-            await Js.InvokeVoidAsync("blazorStrap.SetStyle", BackdropRef, "display", "block");
-            await Js.InvokeVoidAsync("blazorStrap.AddClass", BackdropRef, "show", 10);
+            await BlazorStrap.Interop.SetStyleAsync(BackdropRef, "display", "block");
+            await BlazorStrap.Interop.AddClassAsync(BackdropRef, "show", 10);
             BackdropStyle = "display: block;";
         }
 

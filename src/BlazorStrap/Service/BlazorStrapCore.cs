@@ -1,17 +1,18 @@
-﻿using Microsoft.JSInterop;
-
-namespace BlazorStrap.Service
+﻿namespace BlazorStrap.Service
 {
     public class BlazorStrapCore : IBlazorStrap
     {
-        internal readonly BlazorStrapInterop BlazorStrapInterop;
+        
+        internal readonly BlazorStrapInterop Interop;
+
+        internal Func<string, CallerName, EventType, Task>? OnEventForward;
         //private readonly CurrentTheme _currentTheme;
         public Toaster Toaster { get;} = new Toaster();
         public Theme CurrentTheme { get; internal set; } = Theme.Bootstrap;
 
-        public BlazorStrapCore(BlazorStrapInterop blazorStrapInterop)
+        public BlazorStrapCore(BlazorStrapInterop interop)
         {
-            BlazorStrapInterop = blazorStrapInterop;
+            Interop = interop;
         }
         public Task SetBootstrapCss()
         {
@@ -31,7 +32,7 @@ namespace BlazorStrap.Service
             if (theme == null) return;
             var enumTheme = (Theme)Enum.Parse(typeof(Theme), theme);
             CurrentTheme = enumTheme;
-            await BlazorStrapInterop.SetBootstrapCss(theme.ToLowerInvariant(), version);
+            await Interop.SetBootstrapCssAsync(theme.ToLowerInvariant(), version);
         }
 
         public Task SetBootstrapCss(Theme theme, string version)
@@ -40,14 +41,6 @@ namespace BlazorStrap.Service
             return SetBootstrapCss(theme.ToString().ToLowerInvariant(), version);
         }
         
-        // All This needs cleaned up
-        
-        [JSInvokable("ModalBackdropClick")]
-        public static void ModalBackdropClick()
-        {
-            ModalChange?.Invoke(null, true);
-        }
-
         internal static event Action<BSModal?, bool>? ModalChange;
 
         public static void ModalChanged(BSModal obj)
@@ -55,9 +48,13 @@ namespace BlazorStrap.Service
             ModalChange?.Invoke(obj, false);
         }
 
-        internal void OnForwardClick(string id)
+        internal void ForwardClick(string id)
         {
-            JSCallback.EventCallback(id, "clickforward", "click");
+            OnEventForward?.Invoke(id, new CallerName(typeof(ClickForward).Name.ToLower()), EventType.Click );
+        }
+        internal void ForwardToggle<T>(string id, T name) where T: class
+        {
+            OnEventForward?.Invoke(id, new CallerName(typeof(T).Name.ToLower()), EventType.Toggle );
         }
     }
 }

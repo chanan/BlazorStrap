@@ -5,8 +5,9 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
-    public partial class BSCollapse : BlazorStrapToggleBase<BSCollapse>, IDisposable
+    public partial class BSCollapse : BlazorStrapToggleBase<BSCollapse>, IAsyncDisposable
     {
+        private DotNetObjectReference<BSCollapse> _objectRef;
         private bool _lock;
         [Parameter] public bool NoAnimations { get; set; }
         [Parameter] public RenderFragment? Content { get; set; }
@@ -25,7 +26,6 @@ namespace BlazorStrap
 
         //Prevents the default state from overriding current state
         private bool _hasRendered;
-        private DotNetObjectReference<BSCollapse>? _objRef;
 
         [CascadingParameter] public BSNavbar? NavbarParent { get; set; }
 
@@ -52,7 +52,8 @@ namespace BlazorStrap
             
             if (_lock) return;
             _lock = true;
-            if(!NoAnimations) await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, true, DataId, "bsCollapse", "transitionend");
+            if (!NoAnimations)
+                await BlazorStrap.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, true);
             Shown = true;
             if (NoAnimations)
                 await TransitionEndAsync();
@@ -63,7 +64,8 @@ namespace BlazorStrap
                 await OnHide.InvokeAsync(this);
             if (_lock) return;
             _lock = true;
-            if(!NoAnimations) await Js.InvokeVoidAsync("blazorStrap.AnimateCollapse", MyRef, false, DataId, "bsCollapse", "transitionend");
+            if(!NoAnimations)
+                await BlazorStrap.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, false);
             Shown = false;
             if (NoAnimations)
                 await TransitionEndAsync();
@@ -74,20 +76,22 @@ namespace BlazorStrap
             return Shown ? HideAsync() : ShowAsync();
         }
 
-        protected override void OnAfterRender(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if(firstRender)
             {
-                _objRef = DotNetObjectReference.Create(this);
+                if (IsInNavbar)
+                {
+                    await BlazorStrap.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Resize);
+                }
                 _hasRendered = true;
             }
         }
 
         protected override void OnInitialized()
         {
-            JSCallback.EventHandler += OnEventHandler;
-            if (!IsInNavbar) return;
-            JSCallback.ResizeEvent += JSCallback_ResizeEvent;
+            _objectRef = DotNetObjectReference.Create(this);
+            BlazorStrap.OnEventForward += InteropEventCallback;
         }
 
         private async Task TransitionEndAsync()
@@ -101,7 +105,7 @@ namespace BlazorStrap
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
         }
 
-        private async void JSCallback_ResizeEvent(int width)
+        private async Task OnResize(int width)
         {
             if (!IsInNavbar) return;
             if (width > 576 && NavbarParent?.Expand == Size.ExtraSmall ||
@@ -113,14 +117,14 @@ namespace BlazorStrap
             {
                 Shown = false;
                 if (OnHidden.HasDelegate && !Shown)
-                    await OnHidden.InvokeAsync();
-                StateHasChanged();
+                    _ = OnHidden.InvokeAsync();
+                await InvokeAsync(StateHasChanged);
             }
         }
 
-        private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList, JavascriptEvent? e)
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type)
         {
-            if (id.Contains(",") && name == "clickforward" && type == "click")
+            if (id.Contains(",") && name.Equals(typeof(ClickForward)) && type == EventType.Click)
             {
                 var ids = id.Split(",");
                 if (ids.Any(q => q == DataId))
@@ -128,22 +132,32 @@ namespace BlazorStrap
                     await ToggleAsync();
                 }
             }
-            else if (DataId == id && name == "clickforward" && type == "click")
+            else if (DataId == id && name.Equals(typeof(ClickForward)) && type == EventType.Click)
             {
                 await ToggleAsync();
             }
-            else if (DataId == id && name == "bsCollapse" && type == "transitionend")
+        }
+
+        [JSInvokable]
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
+        {
+            if (id == DataId && name.Equals(this) && type == EventType.Resize)
+            {
+                await OnResize(e?.ClientWidth ?? 0);
+            }
+            
+            else if (DataId == id && name.Equals(this) && type == EventType.TransitionEnd)
             {
                 await TransitionEndAsync();
             }
         }
-
-        public void Dispose()
+        
+        public async ValueTask DisposeAsync()
         {
-            JSCallback.EventHandler -= OnEventHandler;
             if(IsInNavbar)
-                JSCallback.ResizeEvent -= JSCallback_ResizeEvent;
-            _objRef?.Dispose();
+                await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Resize);   
+            BlazorStrap.OnEventForward -= InteropEventCallback;
+            _objectRef.Dispose();
         }
     }
 }

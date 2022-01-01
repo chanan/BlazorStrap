@@ -9,6 +9,7 @@ namespace BlazorStrap
 {
     public partial class BSModal : BlazorStrapToggleBase<BSModal>, IAsyncDisposable
     {
+        private DotNetObjectReference<BSModal> _objectRef;
         private bool _lock;
         private bool _called;
         [Parameter] public bool AllowScroll { get; set; }
@@ -78,30 +79,30 @@ namespace BlazorStrap
             Shown = false;
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
-
-            await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "document", "keyup", true);
-            await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "document", "click", true);
+            await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
+            await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
 
             if (!EventsSet)
             {
-                await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsModal", "transitionend");
+                await BlazorStrap.Interop.AddEventAsync(_objectRef, DataId, EventType.TransitionEnd);
                 EventsSet = true;
             }
-
-            JSCallback.EventCallback("", "ModalorOffcanvas", "toggled");
+            
+            // Used to hide popovers
+            BlazorStrap.ForwardToggle("", this);
 
             if (!_leaveBodyAlone)
             {
-                await Js.InvokeVoidAsync("blazorStrap.RemoveBodyClass", "modal-open");
-                await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "");
-                await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", "");
+                await BlazorStrap.Interop.RemoveBodyClassAsync("modal-open");
+                await BlazorStrap.Interop.SetBodyStyleAsync("overflow", "");
+                await BlazorStrap.Interop.SetBodyStyleAsync("paddingRight", "");
             }
 
-            await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "show", 50);
+            await BlazorStrap.Interop.RemoveClassAsync(MyRef, "show", 50);
             if (BackdropRef != null)
                 await BackdropRef.ToggleAsync();
 
-            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", MyRef))
+            if(await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
             {
                 await TransitionEndAsync();
             }
@@ -116,30 +117,31 @@ namespace BlazorStrap
             Shown = true;
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
-            await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "document", "keyup", true);
-            await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "document", "click", true);
+            await BlazorStrap.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
+            await BlazorStrap.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Click);
 
             if (!EventsSet)
             {
-                await Js.InvokeVoidAsync("blazorStrap.AddEvent", DataId, "bsModal", "transitionend");
+                await BlazorStrap.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.TransitionEnd);
                 EventsSet = true;
             }
 
-            JSCallback.EventCallback("", "ModalorOffcanvas", "toggled");
-
-            await Js.InvokeVoidAsync("blazorStrap.AddBodyClass", "modal-open");
+            // Used to hide popovers
+            BlazorStrap.ForwardToggle("", this);
+            
+            await BlazorStrap.Interop.AddBodyClassAsync("modal-open");
 
             if (!AllowScroll)
             {
-                var scrollWidth = await Js.InvokeAsync<int>("blazorStrap.GetScrollBarWidth");
-                var viewportHeight = await Js.InvokeAsync<int>("blazorStrap.GetInnerHeight");
-                var peakHeight = await Js.InvokeAsync<int>("blazorStrap.PeakHeight", MyRef);
+                var scrollWidth = await BlazorStrap.Interop.GetScrollBarWidth();
+                var viewportHeight = await BlazorStrap.Interop.GetWindowInnerHeightAsync();
+                var peakHeight = await BlazorStrap.Interop.PeakHeightAsync(MyRef); 
 
                 if (viewportHeight > peakHeight)
                 {
-                    await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "overflow", "hidden");
+                    await BlazorStrap.Interop.SetBodyStyleAsync("overflow", "hidden");
                     if (scrollWidth != 0)
-                        await Js.InvokeVoidAsync("blazorStrap.SetBodyStyle", "paddingRight", $"{scrollWidth}px");
+                        await BlazorStrap.Interop.SetBodyStyleAsync("paddingRight", $"{scrollWidth}px");
                 }
             }
 
@@ -148,10 +150,10 @@ namespace BlazorStrap
 
             if (BackdropRef != null)
                 await BackdropRef.ToggleAsync();
-            await Js.InvokeVoidAsync("blazorStrap.SetStyle", MyRef, "display", "block", 50);
-            await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "show");
+            await BlazorStrap.Interop.SetStyleAsync(MyRef, "display", "block", 50);
+            await BlazorStrap.Interop.AddClassAsync(MyRef, "show");
 
-            if (await Js.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", MyRef))
+            if(await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
             {
                 await TransitionEndAsync();
             }
@@ -164,7 +166,8 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
-            JSCallback.EventHandler += OnEventHandler;
+            _objectRef = DotNetObjectReference.Create<BSModal>(this);
+            BlazorStrap.OnEventForward += InteropEventCallback;
             BlazorStrapCore.ModalChange += OnModalChange;
         }
 
@@ -172,8 +175,8 @@ namespace BlazorStrap
         {
             if (IsStaticBackdrop)
             {
-                await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "modal-static");
-                await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "modal-static", 250);
+                await BlazorStrap.Interop.AddClassAsync(MyRef, "modal-static");
+                await BlazorStrap.Interop.RemoveClassAsync(MyRef, "modal-static", 250);
                 return;
             }
 
@@ -188,6 +191,7 @@ namespace BlazorStrap
 
         private async Task TransitionEndAsync()
         {
+            await BlazorStrap.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);
             Style = Shown ? "display: block;" : "display: none;";
             _lock = false;
 
@@ -209,50 +213,54 @@ namespace BlazorStrap
             Toggle();
         }
 
-        private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList,
-            JavascriptEvent? e)
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type)
         {
-            if (DataId == id && name == "clickforward" && type == "click")
+            if (DataId == id && name.Equals(typeof(ClickForward))  && type == EventType.Click)
             {
                 await ToggleAsync();
             }
-            else if (DataId == id && name == "bsModal" && type == "transitionend")
+        }
+        [JSInvokable]
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
+        {
+            
+            if (DataId == id && name.Equals(this) && type == EventType.TransitionEnd)
             {
                 await TransitionEndAsync();
             }
-            else if (DataId == id && name == "document" && type == "keyup" && e?.Key == "Escape")
+            else if (DataId == id && name.Equals(this) && type == EventType.Keyup && e?.Key == "Escape")
             {
                 if (IsStaticBackdrop)
                 {
-                    await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "modal-static", 250);
-                    await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "modal-static");
+                    await BlazorStrap.Interop.AddClassAsync(MyRef, "modal-static", 250);
+                    await BlazorStrap.Interop.RemoveClassAsync(MyRef, "modal-static");
                     return;
                 }
 
                 await HideAsync();
             }
-            else if (DataId == id && name == "document" && type == "click" &&
+            else if (DataId == id && name.Equals(this) && type == EventType.Click &&
                      e?.Target.ClassList.Any(q => q.Value == "modal") == true)
             {
                 if (IsStaticBackdrop)
                 {
-                    await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "modal-static", 250);
-                    await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "modal-static");
+                    await BlazorStrap.Interop.AddClassAsync(MyRef, "modal-static", 250);
+                    await BlazorStrap.Interop.RemoveClassAsync(MyRef, "modal-static");
                     return;
                 }
 
                 await HideAsync();
             }
         }
-
+        
         private async void OnModalChange(BSModal? model, bool fromJs)
         {
             if (fromJs)
             {
                 if (IsStaticBackdrop)
                 {
-                    await Js.InvokeVoidAsync("blazorStrap.AddClass", MyRef, "modal-static", 250);
-                    await Js.InvokeVoidAsync("blazorStrap.RemoveClass", MyRef, "modal-static");
+                    await BlazorStrap.Interop.AddClassAsync(MyRef, "modal-static", 250);
+                    await BlazorStrap.Interop.RemoveClassAsync(MyRef, "modal-static");
                     return;
                 }
 
@@ -269,12 +277,14 @@ namespace BlazorStrap
 
         public async ValueTask DisposeAsync()
         {
-            await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "document", "click", true);
-            await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "document", "keyup", true);
+            
+            await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
+            await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
             if (EventsSet)
-                await Js.InvokeVoidAsync("blazorStrap.RemoveEvent", DataId, "bsModal", "transitionend");
-            JSCallback.EventHandler -= OnEventHandler;
+                await BlazorStrap.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);
+            BlazorStrap.OnEventForward -= InteropEventCallback;
             BlazorStrapCore.ModalChange -= OnModalChange;
+            _objectRef.Dispose();
             GC.SuppressFinalize(this);
         }
     }

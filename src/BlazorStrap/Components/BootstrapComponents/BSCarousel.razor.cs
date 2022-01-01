@@ -9,6 +9,7 @@ namespace BlazorStrap
 {
     public partial class BSCarousel : BlazorStrapBase, IDisposable
     {
+        private DotNetObjectReference<BSCarousel> _objectRef;
         [Parameter] public bool HasControls { get; set; }
         [Parameter] public bool HasIndicators { get; set; }
         [Parameter] public bool IsDark { get; set; }
@@ -20,6 +21,7 @@ namespace BlazorStrap
         private int _last;
         private System.Timers.Timer? _transitionTimer;
         private bool ClickLocked { get; set; }
+        
         private List<BSCarouselItem> Callback { get; set; } = new List<BSCarouselItem>();
 
         private List<BSCarouselItem> Children { get; set; } = new List<BSCarouselItem>();
@@ -32,6 +34,11 @@ namespace BlazorStrap
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
+
+        protected override void OnInitialized()
+        {
+            _objectRef = DotNetObjectReference.Create<BSCarousel>(this);
+        }
 
         protected override bool ShouldRender()
         {
@@ -49,19 +56,15 @@ namespace BlazorStrap
         {
             return GotoChildSlide(slide == Children.First() ? Children.Last() : Children.First());
         }
-
-        protected override void OnInitialized()
+        
+        [JSInvokable]
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type)
         {
-            JSCallback.EventHandler += OnEventHandler;
-        }
-        private async void OnEventHandler(string id, string name, string type, Dictionary<string, string>? classList, JavascriptEvent? e)
-        {
-            if (DataId == id && name == "bsCarousel" && type == "transitionend")
+            if (DataId == id && name.Equals(this) && type == EventType.TransitionEnd)
             {
                 await TransitionEndAsync();
             }
         }
-
         private async Task TransitionEndAsync()
         {
             ClickLocked = false;
@@ -152,7 +155,7 @@ namespace BlazorStrap
 
         private async Task DoAnimations(bool back)
         {
-            if (await Js.InvokeAsync<bool>("blazorStrap.AnimateCarousel", DataId, Children[_active].MyRef, Children[_last].MyRef, back))
+            if(await BlazorStrap.Interop.AnimateCarouselAsync(_objectRef, DataId, Children[_active].MyRef, Children[_last].MyRef, back))
             {
                 ClickLocked = false;
                 await Children[_active].Refresh();
@@ -216,6 +219,7 @@ namespace BlazorStrap
         
         public void Dispose()
         {
+            _objectRef.Dispose();
             _transitionTimer?.Stop();
             _transitionTimer?.Dispose();
         }

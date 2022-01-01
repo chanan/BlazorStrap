@@ -44,7 +44,7 @@ public class BlazorStrapActionBase : BlazorStrapBase
     private async Task ClickEvent(MouseEventArgs e)
     {
         if (!string.IsNullOrEmpty(Target))
-            BlazorStrap.OnForwardClick(Target);
+            BlazorStrap.ForwardClick(Target);
         if(OnClick.HasDelegate)
             await OnClick.InvokeAsync(e);
     }
