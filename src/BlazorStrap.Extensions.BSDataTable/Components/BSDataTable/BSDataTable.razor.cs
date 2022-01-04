@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
@@ -15,6 +16,8 @@ namespace BlazorStrap.Extensions.BSDataTable
         [Parameter] public bool IsSmall { get; set; }
         [Parameter] public bool IsResponsive { get; set; }
         [Parameter] public string Class { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IDictionary<string, object> Attributes { get; set; } = new Dictionary<string, object>();
 
         private string _sortColumn { get; set; } = "";
         private bool _desc { get; set; }
