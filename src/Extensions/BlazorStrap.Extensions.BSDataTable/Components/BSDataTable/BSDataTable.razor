@@ -3,7 +3,7 @@
 @inherits DataComponentBase<TItem>
 
 <BSTable IsDark="@IsDark" IsBordered="@IsBordered" IsHoverable="@IsHoverable" IsResponsive="@IsResponsive"
-         IsStriped="@IsStriped" IsSmall="@IsSmall" IsBorderless="@IsBorderless">
+         IsStriped="@IsStriped" IsSmall="@IsSmall" IsBorderless="@IsBorderless" Class="@Class" @attributes="@Attributes">
     <BSTableHead>
         <CascadingValue Value="this">
             @HeaderTemplate
