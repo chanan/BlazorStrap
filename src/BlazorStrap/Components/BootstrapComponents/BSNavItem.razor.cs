@@ -9,6 +9,7 @@ namespace BlazorStrap
     {
         // ReSharper disable once NullableWarningSuppressionIsUsed
         [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+        [Parameter] public string? Target { get; set; }
         [Parameter] public bool? IsActive { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
         [Parameter] public bool IsDropdown { get; set; }
@@ -66,8 +67,13 @@ namespace BlazorStrap
 
         private async Task ClickEvent()
         {
-            IsActive = true;
-            Parent?.Invoke(this);
+            if (!string.IsNullOrEmpty(Target))
+                BlazorStrap.ForwardClick(Target);
+            else
+            {
+                IsActive = true;
+                Parent?.Invoke(this);
+            }
             if (OnClick.HasDelegate)
                 await OnClick.InvokeAsync();
         }

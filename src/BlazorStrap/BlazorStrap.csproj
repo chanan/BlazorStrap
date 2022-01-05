@@ -6,7 +6,6 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<IsPackable>true</IsPackable>
 		<PackageId>BlazorStrap</PackageId>
-		<Version>5.0.000-RC-6</Version>
 		<Authors>Chanan Braunstein; John Bomhold</Authors>
 		<Title>Blazor BootStrap</Title>
 		<Description>A bootstrap 5 component library for Blazor</Description>
@@ -14,7 +13,7 @@
 		<PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
 		<RootNamespace>BlazorStrap</RootNamespace>
-		<PackageVersion>5.0.000-RC-6</PackageVersion>
+		<PackageVersion>5.0.0</PackageVersion> <!--Next Use 5.0.101-->
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -26,7 +25,7 @@
 		<PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
 	</ItemGroup>
 	<ItemGroup Condition="  '$(TargetFramework)' == 'net6.0'  ">
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.*" />
 		<PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
 	</ItemGroup>
 </Project>

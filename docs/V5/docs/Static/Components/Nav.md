@@ -31,6 +31,7 @@ See [shared](layout/shared) for additional parameters
 | NoNavItem      | bool           | true/false     | Removes `.nav-item`                          |
 | PreventDefault | bool           | true/false     | Prevents default onclick                     |
 | Url            | bool           | true/false     | href = Url                                   |
+| Target         | string         | string         | `data-blazorstrap` of target                 |
 | TabContent     | RenderFragment | RenderFragment | Nested Content                               |
 | TabLabel       | RenderFragment | RenderFragment | Nested Content                               |
 | OnClick        | EventCallback  | MouseEventArgs |                                              |

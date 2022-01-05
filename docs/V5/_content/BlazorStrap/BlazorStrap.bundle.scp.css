@@ -1,13 +1,13 @@
 /* _content/BlazorStrap/Components/BootstrapComponents/BSPopover.razor.rz.scp.css */
-.popover:not(.show)[b-kex6n1b759] {
+.popover:not(.show)[b-v6hj3lghhw] {
    visibility:hidden;
 }
 /* _content/BlazorStrap/Components/BootstrapComponents/BSTooltip.razor.rz.scp.css */
-.popover:not(.show)[b-1h1bjrpzgl] {
+.popover:not(.show)[b-1qjh2l4l1w] {
    visibility:hidden;
 }
 /* _content/BlazorStrap/InternalComponents/Error.razor.rz.scp.css */
-.bserror[b-doufk0x9zt] {
+.bserror[b-suipre3wo3] {
     padding: .25rem 1rem;
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
@@ -18,9 +18,9 @@
     border-left-color: var(--bs-red);
     border-right-color: var(--bs-red);
 }
-.bserror-header[b-doufk0x9zt] {
+.bserror-header[b-suipre3wo3] {
     font-size: 1.5em;
 }
-    .bserror-header svg[b-doufk0x9zt]{
+    .bserror-header svg[b-suipre3wo3]{
         vertical-align: middle;
     }
