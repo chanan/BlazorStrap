@@ -21,7 +21,7 @@ namespace BlazorStrap
         [Parameter] public bool IsInNavbar { get; set; }
         [Parameter] public bool IsList { get; set; }
         [Parameter] public RenderFragment? Toggler { get; set; }
-
+    
         private bool _defaultShown;
 
         //Prevents the default state from overriding current state

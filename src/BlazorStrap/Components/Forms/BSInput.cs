@@ -58,6 +58,7 @@ namespace BlazorStrap
                 float @float => BindConverter.FormatValue(@float, CultureInfo.InvariantCulture),
                 double @double => BindConverter.FormatValue(@double, CultureInfo.InvariantCulture),
                 decimal @decimal => BindConverter.FormatValue(@decimal, CultureInfo.InvariantCulture),
+                CultureInfo @cultureInfo => BindConverter.FormatValue(@cultureInfo.Name),
                 DateTime @dateTimeValue => BindConverter.FormatValue(@dateTimeValue, _dateFormat, CultureInfo.InvariantCulture),
                 DateTimeOffset @dateTimeOffsetValue => BindConverter.FormatValue(@dateTimeOffsetValue, _dateFormat, CultureInfo.InvariantCulture),
                 #if NET6_0_OR_GREATER

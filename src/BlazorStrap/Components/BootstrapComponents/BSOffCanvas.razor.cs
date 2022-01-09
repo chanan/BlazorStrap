@@ -117,9 +117,18 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
+            BlazorStrap.OnEventForward += InteropEventCallback;
             _objectRef = DotNetObjectReference.Create<BSOffCanvas>(this);
         }
-        
+
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type)
+        {
+            if (id == DataId && name.Equals(typeof(ClickForward)) && type == EventType.Click)
+            {
+                await ToggleAsync();
+            }
+        }
+
         [JSInvokable]
         public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
         {
@@ -195,6 +204,7 @@ namespace BlazorStrap
 
         public async ValueTask DisposeAsync()
         {
+            BlazorStrap.OnEventForward -= InteropEventCallback;
             if (!EventsSet)
             {
                 await BlazorStrap.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);

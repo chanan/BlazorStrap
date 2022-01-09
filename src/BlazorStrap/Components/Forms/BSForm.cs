@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata;
-using BlazorComponentUtilities;
+﻿using BlazorComponentUtilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;

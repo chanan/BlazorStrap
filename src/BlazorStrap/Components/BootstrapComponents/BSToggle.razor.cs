@@ -18,6 +18,9 @@ namespace BlazorStrap
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [CascadingParameter] public BSCollapse? CollapseParent { get; set; }
         [CascadingParameter] public BSDropdown? DropDownParent { get; set; }
+        private ElementReference MyRef { get; set; }
+        private string Element =>
+            (CollapseParent != null) ? "collapse" : (DropDownParent != null) ? "dropdown" : "unknown"; 
         private bool _canHandleActive;
         private bool _childSetActive;
         private BSDropdownItem? _activeOwner;
@@ -81,27 +84,34 @@ namespace BlazorStrap
         {
             if (DropDownParent != null)
             {
+                await BlazorStrap.Interop.AddAttributeAsync(MyRef, "aria-expanded", (!Show()).ToString().ToLower());
                 await DropDownParent.ToggleAsync();
             }
             else if (CollapseParent != null)
             {
+                await BlazorStrap.Interop.AddAttributeAsync(MyRef, "aria-expanded", (!Show()).ToString().ToLower());
                 await CollapseParent.ToggleAsync();
             }
             else
             {
                 await OnClick.InvokeAsync();
-                await InvokeAsync(StateHasChanged);
             }
         }
-
+        
         private bool Show()
         {
             if (DropDownParent != null)
             {
                 return DropDownParent.Shown;
             }
-            else
-                return CollapseParent?.Shown ?? false;
+
+            if(CollapseParent != null)
+            {
+                return CollapseParent.Shown;
+              
+            }
+            return false;
+                
         }
 
         public void Dispose()

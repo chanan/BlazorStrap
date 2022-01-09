@@ -1,4 +1,5 @@
-﻿// noinspection JSUnusedGlobalSymbols
+﻿// Release 5.0
+// noinspection JSUnusedGlobalSymbols
 let link;
 let navbarShown = false;
 if (!Element.prototype.matches) {

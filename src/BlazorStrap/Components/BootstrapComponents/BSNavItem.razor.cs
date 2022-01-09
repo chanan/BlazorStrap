@@ -31,6 +31,7 @@ namespace BlazorStrap
             .Build().ToNullString();
         
         private string? ListClassBuilder => new CssBuilder()
+            .AddClass("nav-item", !NoNavItem)
             .AddClass("dropdown", IsDropdown)
             .AddClass(ListItemClass)
             .Build().ToNullString();
@@ -69,11 +70,7 @@ namespace BlazorStrap
         {
             if (!string.IsNullOrEmpty(Target))
                 BlazorStrap.ForwardClick(Target);
-            else
-            {
-                IsActive = true;
-                Parent?.Invoke(this);
-            }
+           
             if (OnClick.HasDelegate)
                 await OnClick.InvokeAsync();
         }

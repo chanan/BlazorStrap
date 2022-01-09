@@ -1,5 +1,4 @@
-﻿
-using BlazorStrap.Service;
+﻿using BlazorStrap.Service;
 using BlazorStrap.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using CurrentTheme = BlazorStrap.Utilities.CurrentTheme;

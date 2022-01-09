@@ -106,6 +106,12 @@ namespace BlazorStrap.Utilities
                 validationErrorMessage = null;
                 return true;
             }
+            else if (typeof(T) == typeof(CultureInfo))
+            {
+                result = (T) (object) CultureInfo.CreateSpecificCulture(value);
+                validationErrorMessage = null;
+                return true;
+            }
             else if (value == null && (Nullable.GetUnderlyingType(type) != null))
             {
                 result = (T)(object)default(T);
