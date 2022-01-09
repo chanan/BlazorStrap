@@ -51,6 +51,8 @@ namespace BlazorStrap
 
         public override async Task ShowAsync()
         {
+            await BlazorStrap.Interop.RemoveClassAsync(ButtonRef, "collapsed");
+            await BlazorStrap.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             Parent?.Invoke(this);
@@ -65,6 +67,8 @@ namespace BlazorStrap
         }
         public override async Task HideAsync()
         {
+            await BlazorStrap.Interop.AddClassAsync(ButtonRef, "collapsed");
+            await BlazorStrap.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
             if (_lock) return;
