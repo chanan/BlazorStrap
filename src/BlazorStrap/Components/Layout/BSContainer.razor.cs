@@ -5,16 +5,16 @@ namespace BlazorStrap
 {
     public partial class BSContainer : BlazorStrapBase
     {
-        [Parameter] public Container Container { get; set; } 
+        [Parameter] public Container Container { get; set; } = Container.Default; 
 
         private string? ClassBuilder => new CssBuilder()
-            .AddClass("container", Container.HasFlag(Container.Default))
-            .AddClass("container-fluid", Container.HasFlag(Container.Fluid))
-            .AddClass("container-sm", Container.HasFlag(Container.Small))
-            .AddClass("container-md", Container.HasFlag(Container.Medium))
-            .AddClass("container-lg", Container.HasFlag(Container.Large))
-            .AddClass("container-xl", Container.HasFlag(Container.ExrtaLarge))
-            .AddClass("container-xxl", Container.HasFlag(Container.ExtraExtraLarge))
+            .AddClass("container", Container == Container.Default)
+            .AddClass("container-fluid", Container == Container.Fluid)
+            .AddClass("container-sm", Container == Container.Small)
+            .AddClass("container-md", Container == Container.Medium)
+            .AddClass("container-lg", Container == Container.Large)
+            .AddClass("container-xl", Container == Container.ExrtaLarge)
+            .AddClass("container-xxl", Container == Container.ExtraExtraLarge)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
