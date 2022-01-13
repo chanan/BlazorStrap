@@ -1,3 +1,3 @@
-﻿<BSContainer Size="Container.Fluid">
+﻿<BSContainer Container="Container.Fluid">
     <!-- Content here -->
 </BSContainer>
