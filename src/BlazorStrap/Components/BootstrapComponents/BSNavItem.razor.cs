@@ -19,7 +19,7 @@ namespace BlazorStrap
         [Parameter] public bool PreventDefault { get; set; }
         [Parameter] public RenderFragment? TabContent { get; set; }
         [Parameter] public RenderFragment? TabLabel { get; set; }
-        [Parameter] public string? Url { get; set; } 
+        [Parameter] public string? Url { get; set; } = "javascript:void(0);";
         [CascadingParameter] public BSNav? Parent { get; set; }
         private bool _canHandleActive;
         private bool _childSetActive;
@@ -73,6 +73,11 @@ namespace BlazorStrap
            
             if (OnClick.HasDelegate)
                 await OnClick.InvokeAsync();
+            if (Parent.IsTabs)
+            {
+                Parent.Invoke(this);
+
+            }
         }
 
         private async void Parent_ChildHandler(BSNavItem sender)
