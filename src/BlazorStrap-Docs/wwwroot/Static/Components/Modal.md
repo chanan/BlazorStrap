@@ -51,6 +51,10 @@ You can also scroll content in the modals body
 
 {{sample=Components/Modal/Modal7}}
 
+### Optional sizes
+
+{{sample=Components/Modal/Modal8}}
+
 ### Methods / Events
 TValue = BSModal
 :::

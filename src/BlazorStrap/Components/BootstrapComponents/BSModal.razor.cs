@@ -39,7 +39,7 @@ namespace BlazorStrap
         private string? ClassBuilder => new CssBuilder("modal")
             .AddClass("fade")
             .AddClass("show", Shown)
-            .AddClass($"modal-{Size.ToDescriptionString()}", Size != Size.None)
+       //     .AddClass($"modal-{Size.ToDescriptionString()}", Size != Size.None)
             .AddClass("modal-fullscreen", IsFullScreen && FullScreenSize == Size.None)
             .AddClass($"modal-fullscreen-{FullScreenSize.ToDescriptionString()}-down", FullScreenSize != Size.None)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
