@@ -26,6 +26,10 @@ See [shared](layout/shared) for additional parameters
 
 {{sample=Components/Accordion/Accordion3}}
 
+### Default shown false first item
+
+{{sample=Components/Accordion/Accordion4}}
+
 ### Methods / Events
 TValue = BSAccordionItem
 :::
