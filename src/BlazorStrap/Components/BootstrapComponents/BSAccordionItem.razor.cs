@@ -17,7 +17,7 @@ namespace BlazorStrap
         public bool DefaultShown
         {
             get => _defaultShown;
-            set { _defaultShown = value; Shown = value; }
+            set { _defaultShown = value; Shown = value; _isDefaultShownSet = true; }
         }
 
         protected override void OnInitialized()
@@ -33,6 +33,8 @@ namespace BlazorStrap
         [Parameter] public RenderFragment? Header { get; set; }
 
         private bool _defaultShown;
+        private bool _isDefaultShownSet;
+
         [CascadingParameter] public BSAccordion? Parent {get;set; }
         private ElementReference ButtonRef { get; set; }
 
@@ -97,7 +99,7 @@ namespace BlazorStrap
         {
             if(Parent != null)
             {
-                if(Parent.FirstChild())
+                if(!_isDefaultShownSet && Parent.FirstChild())
                 {
                     DefaultShown = true;
                 }
