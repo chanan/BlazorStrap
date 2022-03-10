@@ -50,7 +50,38 @@ public class BSInputTests
         cut.Find("input").Change(expected);
         Assert.Equal(expected, value);
     }    
-    
+    [Fact]
+    public async Task NullAbleIntValueNullTest()
+    {
+        var expected = 100;
+        int? value = 0;
+        using var ctx = new TestContext();
+        var cut = ctx.RenderComponent<BSInput<int?>>(parameters => 
+            parameters.Add(p => p.Value, value)
+                .Add(p => p.ValueChanged, e =>
+                {
+                    value = e;
+                } )
+        );
+        cut.Find("input").Change(expected);
+        Assert.Equal(expected, value);
+    }   
+    [Fact]
+    public async Task NullAbleIntValueTest()
+    {
+        int? expected = null;
+        int? value = 0;
+        using var ctx = new TestContext();
+        var cut = ctx.RenderComponent<BSInput<int?>>(parameters => 
+            parameters.Add(p => p.Value, value)
+                .Add(p => p.ValueChanged, e =>
+                {
+                    value = e;
+                } )
+        );
+        cut.Find("input").Change(expected);
+        Assert.Equal(expected, value);
+    }     
     [Fact]
     public async Task LongValueTest()
     {

@@ -148,7 +148,15 @@ namespace BlazorStrap.Utilities
             }
             else if (typeof(T) == typeof(int?))
             {
-                result = default(T);
+                if (value.Equals(default(T)))
+                {
+                    result = default(T);
+                }
+                else
+                {
+                    result = (T)(object)Convert.ToInt32(value, CultureInfo.InvariantCulture);
+                }
+                
                 validationErrorMessage = null;
                 return true;
             }
