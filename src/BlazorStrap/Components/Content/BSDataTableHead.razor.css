@@ -1,0 +1,71 @@
+﻿/*Credit https://codepen.io/imarkrige/pen/kyOjoL */
+th a,
+td a {
+    display: block;
+    width: 100%;
+}
+th a.sort-by {
+    padding-right: 18px;
+    position: relative;
+}
+a.sort-by:before,
+a.sort-by:after {
+    border: 4px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 5px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+a.sort-by:before {
+    border-bottom-color: #666;
+    margin-top: -9px;
+}
+a.sort-by:after {
+    border-top-color: #666;
+    margin-top: 1px;
+}
+
+th a.sort {
+    padding-right: 18px;
+    position: relative;
+}
+
+a.sort:before,
+a.sort:after {
+    border: 4px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 5px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+a.sort:before {
+    border-bottom-color: #666;
+    margin-top: -9px;
+}
+th a.sort-desc {
+    padding-right: 18px;
+    position: relative;
+}
+
+a.sort-desc:before,
+a.sort-desc:after {
+    border: 4px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 5px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+
+a.sort-desc:after {
+    border-top-color: #666;
+    margin-top: 1px;
+}

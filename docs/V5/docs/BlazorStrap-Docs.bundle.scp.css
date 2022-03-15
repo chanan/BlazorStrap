@@ -1,13 +1,13 @@
 /* docs/Samples/Content/Images/Images6.razor.rz.scp.css */
-text#svg-text[b-cgnic66nho]  {
-    animation-name: animateSvg-b-cgnic66nho;
+text#svg-text[b-1lgjffb7c2]  {
+    animation-name: animateSvg-b-1lgjffb7c2;
     transform-origin: 50% 50%;
     animation-duration: 5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
 
-@keyframes animateSvg-b-cgnic66nho  {
+@keyframes animateSvg-b-1lgjffb7c2  {
     from  {
         transform: rotate(0deg);
     }

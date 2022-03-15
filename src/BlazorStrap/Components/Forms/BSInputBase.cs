@@ -19,6 +19,7 @@ namespace BlazorStrap
         [Parameter] public bool ValidateOnChange { get; set; }
         [Parameter] public bool ValidateOnInput { get; set; } = false;
         [Parameter] public string ValidClass { get; set; } = "is-valid";
+        [Parameter] public bool UpdateOnInput { get; set; } = false;
 
         protected void OnBlurEvent(FocusEventArgs? e)
         {
@@ -55,6 +56,9 @@ namespace BlazorStrap
         protected void OnInputEvent(string? e)
         {
             if (ValidateOnInput && EditContext != null)
+                RateLimitingExceptionForObject.Debounce(e, DebounceInterval,
+                    (CurrentValueAsString) => { InvokeAsync(() => OnChangeEvent(e)); });
+            if(UpdateOnInput)
                 RateLimitingExceptionForObject.Debounce(e, DebounceInterval,
                     (CurrentValueAsString) => { InvokeAsync(() => OnChangeEvent(e)); });
         }

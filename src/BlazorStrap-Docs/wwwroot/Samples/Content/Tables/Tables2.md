@@ -1,8 +1,9 @@
-﻿<BSDataTable PaginationBottom="true" Items="Items" Context="item" ItemCount="100" PageChanged="PageChanged" StartPage="StartPage" RowsPerPage="20">
+﻿@using System.ComponentModel
+<BSDataTable DataSet="DataSet" PaginationBottom="true" Context="item" TotalRecords="TotalRecords" StartPage="StartPage" RowsPerPage="20">
     <Header>
-        <BSDataTableHead Sortable="true" Column="@(nameof(Employ.Name))">Id</BSDataTableHead>
-        <BSDataTableHead Sortable="true" Column="@(nameof(Employ.Name))">Name</BSDataTableHead>
-        <BSDataTableHead Sortable="true" Column="@(nameof(Employ.Name))">Email</BSDataTableHead>
+        <BSDataTableHead TValue="Employ" Sortable="true" Column="@(nameof(Employ.Id))">Id</BSDataTableHead>
+        <BSDataTableHead TValue="Employ" Sortable="true" Column="@(nameof(Employ.Name))" ColumnFilter="true">Name</BSDataTableHead>
+        <BSDataTableHead TValue="Employ" Sortable="true" Column="@(nameof(Employ.Email))" ColumnFilter="true">Email</BSDataTableHead>
     </Header>
     <Body>
     <BSTD>
@@ -20,8 +21,8 @@
 @code
 {
     private int StartPage = 2;
-    private List<Employ> FakeDataSet { get; set; } = new List<Employ>();
-    private List<Employ> Items { get; set; } = new List<Employ>();
+    private int count = 0;
+    private IList<Employ> FakeDataSet { get; set; } = new List<Employ>();
 
     protected override void OnInitialized()
     {
@@ -37,15 +38,38 @@
                 Email = name.Replace(" ", ".") + "@" + email[rd.Next(0, email.Length - 1)]
             });
         }
-
-        Items = FakeDataSet.Skip(StartPage * 20).Take(20).ToList();
+        count = FakeDataSet.Count();
     }
 
-    private void PageChanged(int page)
+    private Task<IEnumerable<Employ>> DataSet(int page, string sortColumn, bool desc, string filterColumn, string filter)
     {
-        Console.WriteLine(page);
-        Items.Clear();
-        Items = FakeDataSet.Skip(page * 20).Take(20).ToList();
+        count = FakeDataSet.Count();
+        var _prop = TypeDescriptor.GetProperties(typeof(Employ)).Find(sortColumn, false);
+        var _propFilter = TypeDescriptor.GetProperties(typeof(Employ)).Find(filterColumn, false);
+        
+        var data = FakeDataSet;
+        Console.WriteLine(filter);
+        if (!string.IsNullOrEmpty(filterColumn))
+        {
+            data = FakeDataSet.Where(q => 
+                (q.Name.ToLower().Contains(filter) && nameof(q.Name) == filterColumn) ||
+                (q.Email.ToLower().Contains(filter) && nameof(q.Email) == filterColumn)
+                ).ToList();
+            count = data.Count();
+        }
+        
+        if(string.IsNullOrEmpty(sortColumn))
+            return Task.FromResult(data.Skip(page * 20).Take(20));
+        
+        if(desc)
+            return Task.FromResult(data.OrderByDescending(x => _prop.GetValue(x)).Skip(page * 20).Take(20));
+
+        return Task.FromResult(data.OrderBy(x => _prop.GetValue(x)).Skip(page * 20).Take(20));
+    }
+    
+    private int TotalRecords()
+    {
+        return count;
     }
 
     public static string RandomName()
@@ -62,4 +86,6 @@
         public string Name { get; set; }
         public string Email { get; set; }
     }
+
+   
 }

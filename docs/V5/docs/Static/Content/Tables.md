@@ -40,3 +40,35 @@ Shared Parameters only
 ### Example with parameter tester
 
 {{sample=Content/Tables/Tables1}}
+
+#### Component \<BSDataTable<TValue>\>
+See [shared](layout/shared) for additional parameters    
+:::
+
+| Parameter        | Type                   | Valid                                                        | Remarks/Output                  | 
+|------------------|------------------------|--------------------------------------------------------------|---------------------------------|
+| DataSet          | Func                   | int, string, bool, string, string, Task<IEnumerable<TValue>> |                                 | {.table-striped .p-2}  
+| TotalRecords     | Func                   | int                                                          |                                 |
+| Body             | RenderFragment<TValue> | RenderFragment                                               |                                 |
+| Header           | RenderFragment         | RenderFragment                                               |                                 |
+| Footer           | RenderFragment         | RenderFragment                                               |                                 |
+| NoData           | RenderFragment         | RenderFragment                                               | Displayed when dataset is empty |
+| PaginationTop    | bool                   | bool                                                         |                                 |
+| PaginationBottom | bool                   | bool                                                         | Default                         |
+| RowsPerPage      | int                    | int                                                          | Default 20                      |
+| StartPage        | int                    | int                                                          | Default 1                       |
+| Refresh          | Method                 |                                                              | Can be invoked with @ref        |
+
+#### Component \<BSDataTableHead\>
+See [shared](layout/shared) for additional parameters    
+:::
+
+| Parameter    | Type   | Valid       | Remarks/Output | 
+|--------------|--------|-------------|----------------|
+| Column       | string | column name |                | {.table-striped .p-2} 
+| Sortable     | bool   | bool        |                |
+| ColumnFilter | bool   | bool        |                |
+
+### Data Table Example
+
+{{sample=Content/Tables/Tables2}}

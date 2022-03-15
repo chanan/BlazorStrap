@@ -8,9 +8,9 @@
   "resources": {
     "assembly": {
       "BlazorComponentUtilities.dll": "sha256-UapksNiQg3lu5QM9uVSLyjEuzRH\/7o22fmcmxcLAAeI=",
-      "BlazorStrap-Docs.dll": "sha256-eeHiHgf2NiBnrXEx3Dm76qzetlUhMppW5pYcNOJyARg=",
-      "BlazorStrap.dll": "sha256-U\/I+Z0HucHkOYWRa3BO5TjgdJ4iz\/8+YFoq5ypP38kg=",
-      "BlazorStrap.WASM.dll": "sha256-5iTFY2+nSkvk7d6ltpouHTM2RVVXRzdl4TZLF2v5E60=",
+      "BlazorStrap-Docs.dll": "sha256-aeka2dT6ymyvVCUxOp36JuJeHa9AFwxyu6ewMnukvsY=",
+      "BlazorStrap.dll": "sha256-xBBF7w4Ky6zbp9wCVjhV6MNJtDv0aWkNjYgZ7JqOZC8=",
+      "BlazorStrap.WASM.dll": "sha256-uqrtfjhYt7feJXEBhPRvYlc\/yv2CW\/9ViHmvM8Ld2mI=",
       "ColorCode.dll": "sha256-hF07ps23in9mbwaN4uSoZklQVfyJIw2Ep4R448bfkOk=",
       "Markdig.dll": "sha256-9\/ICq2gSL+hjhMdZXNoIRs8wyZFtZpr3yFSW+RQVdoQ=",
       "Markdig.SyntaxHighlighting.dll": "sha256-qkuHEt7805bTVSkNsvDi5CT5M3Q4VSK619BHVC+FdKs=",
@@ -209,7 +209,7 @@
     "libraryInitializers": null,
     "pdb": null,
     "runtime": {
-      "dotnet.6.0.1.vxv4k8rjqz.js": "sha256-awQsJ\/WxYhouHPuE+i3eJqjA4XClQlr2rD6nKvW80ww=",
+      "dotnet.6.0.1.ynjylm5yl3.js": "sha256-awQsJ\/WxYhouHPuE+i3eJqjA4XClQlr2rD6nKvW80ww=",
       "dotnet.timezones.blat": "sha256-2kYo2V\/aZ7htYEvY5PVJlrMYhFf1jH8\/VS+SP7B7QUg=",
       "dotnet.wasm": "sha256-bxECtWW45VwGuhtEvznFHHDNj4dgblnpcjcqKR44GgE="
     },

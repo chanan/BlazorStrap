@@ -10,6 +10,7 @@ See [shared](layout/shared) for additional parameters
 | Align     | Enum | Align   | `.justify-content-[]` | {.table-striped .p-2}
 | Color     | Enum | BSColor | `.bg-[]`              | 
 | Size      | Enum | Size    | `.pagination-[]`      |
+| Pages     | int  | int     |                       |
 
 :::
 
@@ -29,5 +30,9 @@ See [shared](layout/shared) for additional parameters
 ### Example
 
 {{sample=Components/Pagination/Pagination1}}
+
+### Dynamic Example
+
+{{sample=Components/Pagination/Pagination2}}
 
 For more examples of buttons see Bootstrap's official documentation

@@ -72,6 +72,9 @@ window.blazorStrap = {
         }
 
         blazorStrap.EventHandlers[id][name][type] = {
+            resizeFunc: function (){}
+        }
+        blazorStrap.EventHandlers[id][name][type] = {
             Callback: function (event) {
                 let resizeFunc;
                 if (type === "resize" && element === document) {
@@ -90,6 +93,14 @@ window.blazorStrap = {
                             }
                         }
                     }, 100);
+                    return;
+                }
+                if (type === "resize")
+                {
+                    clearTimeout(blazorStrap.EventHandlers[id][name][type][resizeFunc]);
+                    blazorStrap.EventHandlers[id][name][type][resizeFunc] = setTimeout(function () {
+                        objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
+                    }, 250);
                     return;
                 }
                 if (type === "transitionend" && id !== event.target.getAttribute("data-blazorstrap")) return;
@@ -303,6 +314,12 @@ window.blazorStrap = {
         if (element === null || element === undefined) return;
         return new Promise(function (resolve) {
             resolve(element.offsetHeight);
+        });
+    },
+    GetWidth: async function (element) {
+        if (element === null || element === undefined) return 0;
+        return new Promise(function (resolve) {
+            resolve(element.offsetWidth);
         });
     },
     GetWindowInnerHeight: async function () {

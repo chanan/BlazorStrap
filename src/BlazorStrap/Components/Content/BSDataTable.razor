@@ -10,7 +10,9 @@
 <table class="@ClassBuilder" @attributes="Attributes">
     <thead>
     <tr>
-        @Header
+        <CascadingValue Value="this">
+            @Header
+        </CascadingValue>
     </tr>
     </thead>
     <tbody>
@@ -24,25 +26,11 @@
     }
     else
     {
-        // Static Loading of items.
-        if (ItemCount == Items.Count())
+        @foreach (var item in Items)
         {
-            @foreach (var item in Items.Skip((Page - 1) * RowsPerPage).Take(RowsPerPage))
-            {
-                <tr>
-                    @Body(item)
-                </tr>
-            }
-        }
-        // Allows Dynamic Loading of items.
-        else
-        {
-            @foreach (var item in Items)
-            {
-                <tr>
-                    @Body(item)
-                </tr>
-            }
+            <tr>
+                @Body(item)
+            </tr>
         }
     }
     </tbody>
