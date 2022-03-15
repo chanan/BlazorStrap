@@ -101,7 +101,7 @@ https://github.com/chanan/BlazorStrap/releases
 * Tabs
 * Tooltip
 
-## Extensions:
+## V1 Extensions:
 * [![NuGet Pre Release](https://img.shields.io/nuget/v/BlazorStrap.Extensions.BSDataTable.svg)](https://www.nuget.org/packages/BlazorStrap.Extensions.BSDataTable) BlazorStrap.Extensions.BSDataTable
 * [![NuGet Pre Release](https://img.shields.io/nuget/v/BlazorStrap.Extensions.FluentValidation.svg)](https://www.nuget.org/packages/BlazorStrap.Extensions.FluentValidation/) BlazorStrap.Extensions.FluentValidation
 * [![NuGet Pre Release](https://img.shields.io/nuget/v/BlazorStrap.Extensions.TreeView.svg)](https://www.nuget.org/packages/BlazorStrap.Extensions.TreeView/) BlazorStrap.Extensions.TreeView
