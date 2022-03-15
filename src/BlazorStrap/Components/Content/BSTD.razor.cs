@@ -10,7 +10,7 @@ namespace BlazorStrap
         [Parameter] public string? ColSpan { get; set; }
         [Parameter] public bool IsActive { get; set; }
 
-        private string? ClassBuilder => new CssBuilder()
+        internal string? ClassBuilder => new CssBuilder()
           .AddClass("table-active", IsActive)
           .AddClass($"table-{Color.NameToLower()}", Color != BSColor.Default)
           .AddClass($"align-{AlignRow.NameToLower()}", AlignRow != AlignRow.Default)

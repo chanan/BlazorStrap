@@ -1,7 +1,46 @@
 ﻿@namespace BlazorStrap
 @inherits BlazorStrapBase
-<nav>
-    <ul class="@ClassBuilder" @attributes="Attributes">
-        @ChildContent
-    </ul>
-</nav>
+@if (Pages < 0)
+{
+    <nav>
+        <ul class="@ClassBuilder" @attributes="Attributes">
+            @ChildContent
+        </ul>
+    </nav>
+}
+else
+{
+    <nav @ref="NavReference" data-blazorstrap="@MyId">
+        <ul class="@ClassBuilder" @attributes="Attributes">
+            <li class="page-item" style="width: 35px">
+                <a href="javascript:void(0);" class="page-link" @onclick="() => ChangePage(1)">«</a>
+            </li>
+            <li class="page-item" style="width: 35px">
+                <a href="javascript:void(0);" class="page-link" @onclick="() => ChangePage(Page - 1)">‹</a>
+            </li>
+            @for (var i = GetPreviousPages(); i < Page; ++i)
+            {
+                var id = i;
+                <li class="page-item" style="width: @(_pageWidth)px;text-align: center">
+                    <a href="javascript:void(0);" class="page-link" @onclick="() => ChangePage(id)" >@i</a>
+                </li>
+            }
+            <li class="page-item active" style="width: @(_pageWidth)px;text-align: center">
+                <a href="javascript:void(0);" class="page-link" >@Page</a>
+            </li>
+            @for (var i = Page + 1; i <= (Page + GetMaxAfter() ) && i <= Pages  ; ++i)
+            {
+                var id = i;
+                <li class="page-item" style="width: @(_pageWidth)px;text-align: center" >
+                    <a href="javascript:void(0);" class="page-link" @onclick="() => ChangePage(id)" >@i</a>
+                </li>
+            }
+            <li class="page-item" style="width: 35px">
+                <a href="javascript:void(0);" class="page-link" @onclick="() => ChangePage(Page + 1)">›</a>
+            </li>
+            <li class="page-item" style="width: 35px">
+                <a href="javascript:void(0);" class="page-link" @onclick="() => ChangePage(Pages)">»</a>
+            </li>
+        </ul>
+    </nav>
+}

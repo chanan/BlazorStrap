@@ -1,0 +1,61 @@
+﻿@namespace BlazorStrap
+@inherits BSTable
+@typeparam TValue
+
+
+@if (PaginationTop)
+{
+    <BSPagination Pages="GetPages()" Value="Page" ValueChanged="ChangePage"/>
+}
+<table class="@ClassBuilder" @attributes="Attributes">
+    <thead>
+    <tr>
+        @Header
+    </tr>
+    </thead>
+    <tbody>
+    @if (!Items.Any())
+    {
+        <tr>
+            <td>
+                @NoData
+            </td>
+        </tr>
+    }
+    else
+    {
+        // Static Loading of items.
+        if (ItemCount == Items.Count())
+        {
+            @foreach (var item in Items.Skip((Page - 1) * RowsPerPage).Take(RowsPerPage))
+            {
+                <tr>
+                    @Body(item)
+                </tr>
+            }
+        }
+        // Allows Dynamic Loading of items.
+        else
+        {
+            @foreach (var item in Items)
+            {
+                <tr>
+                    @Body(item)
+                </tr>
+            }
+        }
+    }
+    </tbody>
+    @if (Footer is not null)
+    {
+        <tfoot>
+        <tr>
+            @Footer
+        </tr>
+        </tfoot>
+    }
+</table>
+@if (PaginationBottom)
+{
+    <BSPagination Pages="GetPages()" Value="Page" ValueChanged="ChangePage"/>
+}

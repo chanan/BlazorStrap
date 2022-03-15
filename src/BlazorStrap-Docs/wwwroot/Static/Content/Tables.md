@@ -40,3 +40,7 @@ Shared Parameters only
 ### Example with parameter tester
 
 {{sample=Content/Tables/Tables1}}
+
+### Data Table Example
+
+{{sample=Content/Tables/Tables2}}

@@ -15,7 +15,7 @@ namespace BlazorStrap
         [Parameter] public bool IsCaptionTop { get; set; }
         [Parameter] public bool IsStriped { get; set; }
 
-        private string? ClassBuilder => new CssBuilder("table")
+        internal string? ClassBuilder => new CssBuilder("table")
          .AddClass("table-striped", IsStriped)
          .AddClass("table-dark", IsDark)
          .AddClass("table-hover", IsHoverable)

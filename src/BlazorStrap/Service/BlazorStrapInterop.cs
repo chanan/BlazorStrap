@@ -138,6 +138,15 @@ namespace BlazorStrap.Service
             => _jsRuntime.InvokeAsync<int>("blazorStrap.GetHeight", CancellationToken.None, elementReference);
         
         /// <summary>
+        /// Returns the width of the ElementReference
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>int</returns>
+        public ValueTask<int> GetWidthAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
+            => _jsRuntime.InvokeAsync<int>("blazorStrap.GetWidth", CancellationToken.None, elementReference);
+        
+        /// <summary>
         /// Returns the windows inner height
         /// </summary>
         /// <param name="cancellationToken"></param>
@@ -340,7 +349,7 @@ namespace BlazorStrap.Service
             if (_jSInProcessRuntime == null) throw InProcessError();
             _jSInProcessRuntime.InvokeVoid("blazorStrap.ToastTimer", elementReference, time, timeRemaining, rendered);
         }
-        
+
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposedValue)
