@@ -19,7 +19,7 @@ Bootstrap 5 Components for Blazor Framework
 4. In ```_Imports.razor``` add
    1. ```@using BlazorStrap```
 -----
-##### Blazor WebAssembly
+##### Blazor Server Side
 1. Download the V5.0 package from nuget:[![nuget](https://img.shields.io/badge/nuget-Download%205.x-blue)](https://www.nuget.org/packages/BlazorStrap)
 2. Modify your _host.cshtml with the following.
    1. Inside the ```<head>``` add
