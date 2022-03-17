@@ -4,6 +4,7 @@
 </div>
 
 Bootstrap 5 Components for Blazor Framework
+`We do not include bootstrap.min.css in the package. This already exists in the blazor wasm and blazor server side templates.`
 
 ### Install
 ##### Blazor WebAssembly
@@ -11,6 +12,7 @@ Bootstrap 5 Components for Blazor Framework
 2. Modify your index.html with the following.
    1. Inside the ```<head>``` add 
       1. ```<link href="YourAssemblyName.styles.css" rel="stylesheet">``` )
+      2. ```<link href="path_to_bootstrap.min.css" rel="stylesheet" integrity="if_needed" />"```
    2. At the end of the ```<body>``` add 
       1. ```<script src="_content/BlazorStrap/popper.min.js"></script>```
       2. ```<script src="_content/BlazorStrap/blazorstrap.js"></script>```
@@ -24,6 +26,7 @@ Bootstrap 5 Components for Blazor Framework
 2. Modify your _host.cshtml with the following.
    1. Inside the ```<head>``` add
       1. ```<link href="YourAssemblyName.styles.css" rel="stylesheet">```
+      2. ```<link href="path_to_bootstrap.min.css" rel="stylesheet" integrity="if_needed" />"```
    2. At the end of the ```<body>``` add
       1. ```<script src="_content/BlazorStrap/popper.min.js"></script>```
       2. ```<script src="_content/BlazorStrap/blazorstrap.js"></script>```
