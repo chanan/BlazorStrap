@@ -17,6 +17,26 @@ public class BSInputCheckboxTests
     }
 
     [Fact]
+    public async Task BoolValueTest()
+    {
+        var expected = true;
+        var value = false;
+        using var ctx = new TestContext();
+        var cut = ctx.RenderComponent<BSInputCheckbox<bool>>(parameters => 
+            parameters.Add(p => p.Value, value)
+                      .Add(p => p.CheckedValue, true)
+                      .Add(p => p.UnCheckedValue, false)
+                      .Add(p => p.ValueChanged, e =>
+                      {
+                          value = e;
+                      } )
+            );
+        cut.Find("input").Click();
+        Assert.Equal(expected, value);
+        cut.Find("input").Click();
+        Assert.False(value);
+    }
+    [Fact]
     public async Task StringValueTest()
     {
         var expected = "hello world";

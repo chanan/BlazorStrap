@@ -10,8 +10,8 @@
 }
 
     <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="@Style" @ref="MyRef" data-blazorstrap="@DataId">
-        <div class="@DialogClass">
-            <div class="modal-content">
+        <div class="@DialogClassBuilder">
+            <div class="@ContentClassBuilder">
                 @if (Header != null)
                 {
                     <div class="@HeaderClassBuilder">
@@ -19,7 +19,7 @@
                         <button type="button" class="ms-auto btn-close @ButtonClass" data-bs-dismiss="modal" aria-label="Close" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)"></button>
                     </div>
                 }
-                <div class="@ContentClassBuilder">
+                <div class="@BodyClassBuilder">
                     @Content
                 </div>
                 <div class="modal-footer">

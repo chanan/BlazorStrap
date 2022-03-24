@@ -107,7 +107,7 @@ namespace BlazorStrap
             ResetTransitionTimer(Children[_active].Interval);
         }
 
-        internal async Task BackAsync()
+        public async Task BackAsync()
         {
             if (ClickLocked) return;
             ClickLocked = true;
@@ -130,7 +130,7 @@ namespace BlazorStrap
             ResetTransitionTimer(Children[_active].Interval);
         }
 
-        internal async Task NextAsync()
+        public async Task NextAsync()
         {
             if (ClickLocked) return;
             ClickLocked = true;

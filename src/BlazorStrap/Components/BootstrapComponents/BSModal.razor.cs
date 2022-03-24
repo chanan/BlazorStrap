@@ -12,8 +12,10 @@ namespace BlazorStrap
         private DotNetObjectReference<BSModal> _objectRef;
         private bool _lock;
         private bool _called;
+        [Parameter] public BSColor ModalColor { get; set; } = BSColor.Default;
         [Parameter] public bool AllowScroll { get; set; }
         [Parameter] public string? ButtonClass { get; set; }
+        [Parameter] public string? DialogClass { get; set; }
         [Parameter] public RenderFragment? Content { get; set; }
         [Parameter] public string? ContentClass { get; set; }
         [Parameter] public RenderFragment<BSModal>? Footer { get; set; }
@@ -46,16 +48,20 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
-        private string? ContentClassBuilder => new CssBuilder("modal-body")
+        private string? BodyClassBuilder => new CssBuilder("modal-body")
             .AddClass(ContentClass)
             .Build().ToNullString();
-
-        private string? DialogClass => new CssBuilder("modal-dialog")
+        
+        private string? ContentClassBuilder => new CssBuilder("modal-content")
+            .AddClass($"bg-{ModalColor.NameToLower()}", ModalColor != BSColor.Default)
+            .Build().ToNullString();
+        private string? DialogClassBuilder => new CssBuilder("modal-dialog")
             .AddClass("modal-dialog-scrollable", IsScrollable)
             .AddClass("modal-dialog-centered", IsCentered)
             .AddClass((IsScrollable ? "modal-dialog-scrollable" : string.Empty))
             .AddClass($"modal-{Size.ToDescriptionString()}", Size != Size.None)
             .AddClass("modal-dialog-centered", IsCentered)
+            .AddClass(DialogClass)
             .Build().ToNullString();
 
         private string? HeaderClassBuilder => new CssBuilder("modal-header")
