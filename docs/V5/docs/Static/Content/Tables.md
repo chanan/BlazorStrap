@@ -41,7 +41,7 @@ Shared Parameters only
 
 {{sample=Content/Tables/Tables1}}
 
-#### Component \<BSDataTable<TValue>\>
+#### Component \<BSDataTable<TValue>\> (Version  >= 5.0.105-Preview1)
 See [shared](layout/shared) for additional parameters    
 :::
 
@@ -59,7 +59,7 @@ See [shared](layout/shared) for additional parameters
 | StartPage        | int                    | int                                                          | Default 1                       |
 | Refresh          | Method                 |                                                              | Can be invoked with @ref        |
 
-#### Component \<BSDataTableHead\>
+#### Component \<BSDataTableHead\> (Version  >= 5.0.105-Preview1)
 See [shared](layout/shared) for additional parameters    
 :::
 
