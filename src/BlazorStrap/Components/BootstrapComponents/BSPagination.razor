@@ -21,8 +21,8 @@ else
             @for (var i = GetPreviousPages(); i < Page; ++i)
             {
                 var id = i;
-                <li class="page-item" style="width: @(_pageWidth)px;text-align: center">
-                    <a href="javascript:void(0);" class="page-link" @onclick="() => ChangePage(id)" >@i</a>
+                <li class="page-item" style="width: @(_pageWidth)px;text-align: center" >
+                    <a href="javascript:void(0);" class="page-link" @onclick="() => ChangePage(id)" @key="i" >@i</a>
                 </li>
             }
             <li class="page-item active" style="width: @(_pageWidth)px;text-align: center">
@@ -31,8 +31,8 @@ else
             @for (var i = Page + 1; i <= (Page + GetMaxAfter() ) && i <= Pages  ; ++i)
             {
                 var id = i;
-                <li class="page-item" style="width: @(_pageWidth)px;text-align: center" >
-                    <a href="javascript:void(0);" class="page-link" @onclick="() => ChangePage(id)" >@i</a>
+                <li class="page-item" style="width: @(_pageWidth)px;text-align: center">
+                    <a href="javascript:void(0);" class="page-link" @onclick="() => ChangePage(id)" @key="i">@i</a>
                 </li>
             }
             <li class="page-item" style="width: 35px">

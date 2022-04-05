@@ -20,6 +20,14 @@ if (!Element.prototype.closest) {
     };
 }
 window.blazorStrap = {
+    BlurAll: function () {
+        var tmp = document.createElement("input");
+        tmp.position = "absolute";
+        tmp.top = -500;
+        document.body.appendChild(tmp);
+        tmp.focus();
+        document.body.removeChild(tmp);
+    },
     AddAttribute: async function (element, name, value) {
         if (element === null || element === undefined) return;
         return new Promise(function (resolve) {
@@ -48,19 +56,18 @@ window.blazorStrap = {
     },
     AddEventInternal: function (objRef, element, id, name, type, ignoreChildren = false, filter = "") {
         let expandedWidth = 0;
-        if(type === "resize" && element == document)
-        {
+        if (type === "resize" && element == document) {
             let navbar = document.querySelector("[class*=navbar-expand]");
             // Gets the expanded size
-            if(navbar !== null) {
+            if (navbar !== null) {
 
-                if(navbar.classList.contains("navbar-expand") || navbar.classList.contains("navbar-expand-ex")) expandedWidth = 576;
-                else if(navbar.classList.contains("navbar-expand-md")) expandedWidth = 768;
-                else if(navbar.classList.contains("navbar-expand-lg")) expandedWidth = 992;
-                else if(navbar.classList.contains("navbar-expand-xl")) expandedWidth = 1200;
-                else if(navbar.classList.contains("navbar-expand-xxl")) expandedWidth = 1400;
+                if (navbar.classList.contains("navbar-expand") || navbar.classList.contains("navbar-expand-ex")) expandedWidth = 576;
+                else if (navbar.classList.contains("navbar-expand-md")) expandedWidth = 768;
+                else if (navbar.classList.contains("navbar-expand-lg")) expandedWidth = 992;
+                else if (navbar.classList.contains("navbar-expand-xl")) expandedWidth = 1200;
+                else if (navbar.classList.contains("navbar-expand-xxl")) expandedWidth = 1400;
             }
-            if(expandedWidth > window.innerWidth)
+            if (expandedWidth > window.innerWidth)
                 navbarShown = true;
         }
         if (blazorStrap.EventHandlers[id] === undefined) {
@@ -72,7 +79,7 @@ window.blazorStrap = {
         }
 
         blazorStrap.EventHandlers[id][name][type] = {
-            resizeFunc: function (){}
+            resizeFunc: function () { }
         }
         blazorStrap.EventHandlers[id][name][type] = {
             Callback: function (event) {
@@ -80,10 +87,9 @@ window.blazorStrap = {
                 if (type === "resize" && element === document) {
                     clearTimeout(resizeFunc);
                     resizeFunc = setTimeout(function () {
-                        if(window.innerWidth < expandedWidth)
+                        if (window.innerWidth < expandedWidth)
                             navbarShown = false;
-                        if(window.innerWidth > expandedWidth && navbarShown === false)
-                        {
+                        if (window.innerWidth > expandedWidth && navbarShown === false) {
                             navbarShown = true;
                             // noinspection JSUnresolvedVariable,JSUnresolvedFunction
                             try {
@@ -95,8 +101,7 @@ window.blazorStrap = {
                     }, 100);
                     return;
                 }
-                if (type === "resize")
-                {
+                if (type === "resize") {
                     clearTimeout(blazorStrap.EventHandlers[id][name][type][resizeFunc]);
                     blazorStrap.EventHandlers[id][name][type][resizeFunc] = setTimeout(function () {
                         objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
@@ -261,7 +266,7 @@ window.blazorStrap = {
 
                 if (await blazorStrap.TransitionDidNotStart(element, 50)) {
                     cleanup();
-                    element.removeEventListener("transitionend", cleanup, {once: true});
+                    element.removeEventListener("transitionend", cleanup, { once: true });
                     objRef.invokeMethodAsync("InteropEventCallback", id, name, "transitionend", null, null);
                 }
             }, 10);

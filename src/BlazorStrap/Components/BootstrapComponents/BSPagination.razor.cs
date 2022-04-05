@@ -74,6 +74,11 @@ namespace BlazorStrap
             if (page < 1) page = 1;
             if (page > Pages) page = Pages;
             CurrentValue = page;
+            try
+            {
+                BlazorStrap.Interop.BlurAllAsync();
+            }
+            catch { }
         }
         private int GetPreviousPages()
         {

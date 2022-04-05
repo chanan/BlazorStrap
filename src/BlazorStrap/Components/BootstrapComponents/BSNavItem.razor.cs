@@ -14,6 +14,7 @@ namespace BlazorStrap
         [Parameter] public bool IsDisabled { get; set; }
         [Parameter] public bool IsDropdown { get; set; }
         [Parameter] public bool NoNavItem { get; set; }
+        [Parameter] public bool ActiveOnChildRoutes { get; set; } = false;
         [Parameter] public string? ListItemClass { get; set; }
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public bool PreventDefault { get; set; }
@@ -29,7 +30,7 @@ namespace BlazorStrap
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
-        
+
         private string? ListClassBuilder => new CssBuilder()
             .AddClass("nav-item", !NoNavItem)
             .AddClass("dropdown", IsDropdown)
@@ -43,6 +44,8 @@ namespace BlazorStrap
                 _canHandleActive = true;
                 if (NavigationManager.Uri == NavigationManager.BaseUri + Url?.TrimStart('/'))
                     IsActive = true;
+                if (NavigationManager.Uri.Contains(NavigationManager.BaseUri + Url?.TrimStart('/')) && ActiveOnChildRoutes)
+                    IsActive = true;
                 NavigationManager.LocationChanged += OnLocationChanged;
             }
         }
@@ -53,13 +56,15 @@ namespace BlazorStrap
             IsActive = false;
             if (NavigationManager.Uri == NavigationManager.BaseUri + Url?.TrimStart('/'))
                 IsActive = true;
+            if (NavigationManager.Uri.Contains(NavigationManager.BaseUri + Url?.TrimStart('/')) && ActiveOnChildRoutes)
+                IsActive = true;
             StateHasChanged();
         }
 
         protected override void OnParametersSet()
         {
             if (Parent == null) return;
-            if(Parent.IsTabs)
+            if (Parent.IsTabs)
             {
                 IsActive = Parent.SetFirstChild(this);
             }
@@ -70,7 +75,7 @@ namespace BlazorStrap
         {
             if (!string.IsNullOrEmpty(Target))
                 BlazorStrap.ForwardClick(Target);
-           
+
             if (OnClick.HasDelegate)
                 await OnClick.InvokeAsync();
             if (Parent.IsTabs)
@@ -88,10 +93,10 @@ namespace BlazorStrap
         }
         public void Dispose()
         {
-            if(_canHandleActive)
+            if (_canHandleActive)
                 NavigationManager.LocationChanged -= OnLocationChanged;
             if (Parent == null) return;
-            if(Parent.ActiveChild == this)
+            if (Parent.ActiveChild == this)
                 Parent.ActiveChild = null;
             Parent.ChildHandler -= Parent_ChildHandler;
         }

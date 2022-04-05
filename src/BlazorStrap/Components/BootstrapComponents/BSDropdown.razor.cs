@@ -167,7 +167,11 @@ namespace BlazorStrap
         public async ValueTask DisposeAsync()
         {
             _objectRef.Dispose();
-            await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataRefId, EventType.Click);
+            try
+            {
+                await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataRefId, EventType.Click);
+            }
+            catch { }
             BlazorStrap.OnEventForward -= InteropEventCallback;
             GC.SuppressFinalize(this);
         }

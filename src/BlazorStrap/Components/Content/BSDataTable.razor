@@ -16,7 +16,7 @@
     </tr>
     </thead>
     <tbody>
-    @if (!Items.Any())
+    @if (!Items?.Any() ?? true)
     {
         <tr>
             <td>

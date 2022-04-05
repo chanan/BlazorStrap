@@ -7,49 +7,104 @@ namespace BlazorStrap
 {
     public partial class BSDataTable<TValue> : BSTable
     {
-        [Parameter] public Func<int, string, bool, string, string, Task<IEnumerable<TValue>>> DataSet { get; set; }
-        [Parameter] public Func<int> TotalRecords { get; set; }
+        
+        [Parameter] public IEnumerable<TValue>? Items { get; set; }
+      
+        [Parameter] public EventCallback<DataRequest> OnChange { get; set; }
+        [Parameter] public Func<DataRequest, Task<IEnumerable<TValue>>>? FetchItems { get; set; }
+        [Parameter] public int TotalItems { get; set; }
+
+        [Parameter] public string Name { get; set; }
+
+        [Obsolete]
+        [Parameter] public Func<int, string, bool, string, string, Task<IEnumerable<TValue>>>? DataSet { get; set; }
+        [Obsolete]
+        [Parameter] public Func<int>? TotalRecords { get; set; }
+
         [Parameter] public RenderFragment<TValue>? Body { get; set; }
         [Parameter] public RenderFragment? Header { get; set; }
         [Parameter] public RenderFragment? Footer { get; set; }
         [Parameter, AllowNull] public RenderFragment? NoData { get; set; }
         [Parameter] public bool PaginationTop { get; set; }
         [Parameter] public bool PaginationBottom { get; set; } = true;
-        [Parameter] public int RowsPerPage { get; set; }= 20;
-        
+        [Parameter] public int RowsPerPage { get; set; } = 20;
+
         [Parameter] public int StartPage { get; set; } = 1;
         internal Func<string, bool, Task>? OnSort;
         internal Func<string, Task>? OnFilter;
-        private IList<TValue> Items { get; set; }
         private int Page { get; set; } = 1;
         private int _itemCount;
         private string _sortColumn = "";
         private string _filterColumn = "";
         private string _filterValue = "";
         private bool _desc;
+
         protected override async Task OnInitializedAsync()
         {
             Page = StartPage;
-            _itemCount = TotalRecords.Invoke();
-            Items = (await DataSet.Invoke(Page -1, _sortColumn , false, _filterColumn, _filterValue)).ToList();
+          
         }
-        
+
+        private DataRequest DataRequest(int page)
+        {
+            return new DataRequest
+            {
+                Page = page,
+                Descending = _desc,
+                Filter = _filterValue,
+                FilterColumn = _filterColumn,
+                FilterColumnProperty = TypeDescriptor.GetProperties(typeof(TValue)).Find(_filterColumn, false),
+                SortColumn = _sortColumn,
+                SortColumnProperty = TypeDescriptor.GetProperties(typeof(TValue)).Find(_sortColumn, false)
+            };
+        }
         private async Task ChangePage(int page)
         {
-            Items = (await DataSet.Invoke(page -1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
+           
+            if (TotalRecords != null && DataSet != null)
+            {
+                Items = (await DataSet.Invoke(page - 1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
+                await InvokeAsync(StateHasChanged);
+            }
+            else if(FetchItems != null)
+            {
+                Items = await FetchItems.Invoke(DataRequest(page - 1));
+                await InvokeAsync(StateHasChanged);
+            }
+            else
+            {
+                await OnChange.InvokeAsync(DataRequest(page - 1));
+            }
+            
             Page = page;
         }
         private int GetPages()
         {
-            var value = _itemCount / RowsPerPage;
-            
-            return value < 1 ? 1: value;
+            var value = 0;
+            if (TotalRecords != null && DataSet != null)
+            {
+                value = (int)Math.Ceiling(((float)_itemCount / (float)RowsPerPage));
+            }
+            else
+            {
+                value = (int)Math.Ceiling(((float)TotalItems / (float)RowsPerPage));
+            }
+
+            return value < 1 ? 1 : value;
         }
 
         public async Task Refresh()
         {
-            _itemCount = TotalRecords.Invoke();
-            Items = (await DataSet.Invoke(Page -1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
+            if (TotalRecords != null && DataSet != null)
+            {
+                _itemCount = TotalRecords.Invoke();
+                Items = (await DataSet.Invoke(Page - 1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
+            }
+            else if (FetchItems != null)
+            {
+                Items = await FetchItems.Invoke(DataRequest(Page - 1));
+                await InvokeAsync(StateHasChanged);
+            }
             await InvokeAsync(StateHasChanged);
         }
         public async Task FilterAsync(string name, string value)
@@ -58,9 +113,21 @@ namespace BlazorStrap
             _filterValue = value;
             _filterColumn = name;
             OnFilter?.Invoke(name);
-            Items = (await DataSet.Invoke(Page -1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
-            _itemCount = TotalRecords.Invoke();
-            await InvokeAsync(StateHasChanged);
+            if (TotalRecords != null && DataSet != null)
+            {
+                Items = (await DataSet.Invoke(Page - 1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
+                _itemCount = TotalRecords.Invoke();
+                await InvokeAsync(StateHasChanged);
+            }
+            else if (FetchItems != null)
+            {
+                Items = await FetchItems.Invoke(DataRequest(Page -1));
+                await InvokeAsync(StateHasChanged);
+            }
+            else
+            {
+                await OnChange.InvokeAsync(DataRequest(Page -1));
+            }
         }
         public async Task SortAsync(string name)
         {
@@ -70,10 +137,41 @@ namespace BlazorStrap
             else
                 _desc = !_desc;
             _sortColumn = name;
+
+            if (TotalRecords != null && DataSet != null)
+            {
+                Items = (await DataSet.Invoke(Page - 1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
+                await InvokeAsync(StateHasChanged);
+            }
+            else if (FetchItems != null)
+            {
+                Items = await FetchItems.Invoke(DataRequest(Page - 1));
+                await InvokeAsync(StateHasChanged);
+            }
+            else
+            {
+                await OnChange.InvokeAsync(DataRequest(Page - 1));
+            }
             
-            Items = (await DataSet.Invoke(Page -1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
             OnSort?.Invoke(name, _desc);
-            await InvokeAsync(StateHasChanged);
         }
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if(firstRender)
+            {
+                if (TotalRecords != null && DataSet != null)
+                {
+                    _itemCount = TotalRecords.Invoke();
+                    Items = (await DataSet.Invoke(Page - 1, _sortColumn, false, _filterColumn, _filterValue)).ToList();
+                    await InvokeAsync(StateHasChanged);
+                }
+                else if (FetchItems != null)
+                {
+                    Items = await FetchItems.Invoke(DataRequest(Page - 1));
+                    await InvokeAsync(StateHasChanged);
+                }
+            }
+        }
+
     }
 }

@@ -16,6 +16,9 @@ namespace BlazorStrap.Service
             _jsRuntime = jsRuntime;
             _jSInProcessRuntime = jsRuntime as IJSInProcessRuntime;
         }
+        public ValueTask BlurAllAsync(CancellationToken? cancellationToken = null)
+            => _jsRuntime.InvokeVoidAsync("blazorStrap.BlurAll", cancellationToken ?? CancellationToken.None);
+       
         /// <summary>
         /// Adds Attribute to ElementReference
         /// </summary>
@@ -217,10 +220,14 @@ namespace BlazorStrap.Service
         /// <param name="cancellationToken"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public ValueTask RemoveEventAsync<T>(T caller, string id, EventType type, CancellationToken? cancellationToken = null) where T: class
+        public async ValueTask RemoveEventAsync<T>(T caller, string id, EventType type, CancellationToken? cancellationToken = null) where T: class
         {
-            var name = typeof(T).Name.ToLower();
-            return _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveEvent", CancellationToken.None, id, name, type.NameToLower());
+            try
+            {
+                var name = typeof(T).Name.ToLower();
+                await _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveEvent", CancellationToken.None, id, name, type.NameToLower());
+            }
+            catch {  }
         }
 
         /// <summary>
@@ -230,10 +237,14 @@ namespace BlazorStrap.Service
         /// <param name="type"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public ValueTask RemoveDocumentEventAsync<T>(T caller, string id, EventType type, CancellationToken? cancellationToken = null)
+        public async ValueTask RemoveDocumentEventAsync<T>(T caller, string id, EventType type, CancellationToken? cancellationToken = null)
         {
-            var name = typeof(T).Name.ToLower();
-            return _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveDocumentEvent", CancellationToken.None, id, name, type.NameToLower());
+            try
+            {
+                var name = typeof(T).Name.ToLower();
+                await _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveDocumentEvent", CancellationToken.None, id, name, type.NameToLower());
+            }
+            catch { }
         }
             
         

@@ -15,6 +15,15 @@
 		<RootNamespace>BlazorStrap</RootNamespace>
 		<PackageVersion>5.0.105-Preview1b</PackageVersion> <!--Next Use 5.0.105-->
 	</PropertyGroup>
+	<ItemGroup>
+	  <Content Remove="bundleconfig.json" />
+	</ItemGroup>
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="bundleconfig.json" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="bundleconfig.json" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />

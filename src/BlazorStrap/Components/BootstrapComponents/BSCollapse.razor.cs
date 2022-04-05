@@ -11,8 +11,9 @@ namespace BlazorStrap
         private bool _lock;
         [Parameter] public bool NoAnimations { get; set; }
         [Parameter] public RenderFragment? Content { get; set; }
-        
-        [Parameter] public bool DefaultShown
+
+        [Parameter]
+        public bool DefaultShown
         {
             get => _defaultShown;
             set { _defaultShown = value; if (!_hasRendered) Shown = value; }
@@ -21,7 +22,7 @@ namespace BlazorStrap
         [Parameter] public bool IsInNavbar { get; set; }
         [Parameter] public bool IsList { get; set; }
         [Parameter] public RenderFragment? Toggler { get; set; }
-    
+
         private bool _defaultShown;
 
         //Prevents the default state from overriding current state
@@ -49,7 +50,7 @@ namespace BlazorStrap
         {
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
-            
+
             if (_lock) return;
             _lock = true;
             if (!NoAnimations)
@@ -64,13 +65,13 @@ namespace BlazorStrap
                 await OnHide.InvokeAsync(this);
             if (_lock) return;
             _lock = true;
-            if(!NoAnimations)
+            if (!NoAnimations)
                 await BlazorStrap.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, false);
             Shown = false;
             if (NoAnimations)
                 await TransitionEndAsync();
         }
-        
+
         public override Task ToggleAsync()
         {
             return Shown ? HideAsync() : ShowAsync();
@@ -78,7 +79,7 @@ namespace BlazorStrap
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if(firstRender)
+            if (firstRender)
             {
                 if (IsInNavbar)
                 {
@@ -98,7 +99,7 @@ namespace BlazorStrap
         {
             _lock = false;
             await InvokeAsync(StateHasChanged);
-            
+
             if (OnShown.HasDelegate && Shown)
                 _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
             if (OnHidden.HasDelegate && !Shown)
@@ -145,17 +146,17 @@ namespace BlazorStrap
             {
                 await OnResize(e?.ClientWidth ?? 0);
             }
-            
+
             else if (DataId == id && name.Equals(this) && type == EventType.TransitionEnd)
             {
                 await TransitionEndAsync();
             }
         }
-        
+
         public async ValueTask DisposeAsync()
         {
-            if(IsInNavbar)
-                await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Resize);   
+            if (IsInNavbar)
+                await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Resize);
             BlazorStrap.OnEventForward -= InteropEventCallback;
             _objectRef.Dispose();
         }
