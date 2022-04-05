@@ -6,8 +6,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap", "src\BlazorSt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8BC77845-4555-4F8B-9502-0F1619F0BA2D}"
 	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
 		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Server", "src\BlazorStrap.Server\BlazorStrap.Server.csproj", "{4D1CD190-DA57-410E-8B80-99BC55E071E5}"
@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap-Docs", "src\Bla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.WASM", "src\BlazorStrap-WASM\BlazorStrap.WASM.csproj", "{87EC6C53-E1FC-4E3F-A089-F4D20FF19E70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorStrap.Tests", "src\BlazorStrap.Tests\BlazorStrap.Tests.csproj", "{63E96825-F8C9-4505-B2BB-89A4F8A54A36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Tests", "src\BlazorStrap.Tests\BlazorStrap.Tests.csproj", "{63E96825-F8C9-4505-B2BB-89A4F8A54A36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,24 +121,6 @@ Global
 		{63E96825-F8C9-4505-B2BB-89A4F8A54A36}.Release|x64.Build.0 = Release|Any CPU
 		{63E96825-F8C9-4505-B2BB-89A4F8A54A36}.Release|x86.ActiveCfg = Release|Any CPU
 		{63E96825-F8C9-4505-B2BB-89A4F8A54A36}.Release|x86.Build.0 = Release|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.Debug|x64.Build.0 = Debug|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.Debug|x86.Build.0 = Debug|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.NoVariablesDefault|Any CPU.ActiveCfg = Debug|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.NoVariablesDefault|Any CPU.Build.0 = Debug|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.NoVariablesDefault|x64.ActiveCfg = Debug|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.NoVariablesDefault|x64.Build.0 = Debug|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.NoVariablesDefault|x86.ActiveCfg = Debug|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.NoVariablesDefault|x86.Build.0 = Debug|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.Release|Any CPU.Build.0 = Release|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.Release|x64.ActiveCfg = Release|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.Release|x64.Build.0 = Release|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.Release|x86.ActiveCfg = Release|Any CPU
-		{61F6943D-80A0-414A-BDD0-E38FD1F25A69}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

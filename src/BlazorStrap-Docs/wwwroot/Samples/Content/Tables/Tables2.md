@@ -6,15 +6,17 @@
         <BSDataTableHead TValue="Employ" Sortable="true" Column="@(nameof(Employ.Email))" ColumnFilter="true">Email</BSDataTableHead>
     </Header>
     <Body>
-    <BSTD>
-        @item.Id
-    </BSTD>
-    <BSTD>
-        @item.Name
-    </BSTD>
-    <BSTD>
-        @item.Email
-    </BSTD>
+        <BSDataTableRow Color="item.RowColor">
+            <BSTD>
+                @item.Id
+            </BSTD>
+            <BSTD>
+                @item.Name
+            </BSTD>
+            <BSTD>
+                @item.Email
+            </BSTD>
+        </BSDataTableRow>
     </Body>
 </BSDataTable>
 
@@ -35,7 +37,8 @@
             {
                 Id = (i + 1000).ToString(),
                 Name = name,
-                Email = name.Replace(" ", ".") + "@" + email[rd.Next(0, email.Length - 1)]
+                Email = name.Replace(" ", ".") + "@" + email[rd.Next(0, email.Length - 1)],
+                RowColor = GetRandomColor()
             });
         }
         count = FakeDataSet.Count();
@@ -46,7 +49,7 @@
         count = FakeDataSet.Count();
         var _prop = TypeDescriptor.GetProperties(typeof(Employ)).Find(sortColumn, false);
         var _propFilter = TypeDescriptor.GetProperties(typeof(Employ)).Find(filterColumn, false);
-        
+
         var data = FakeDataSet;
         Console.WriteLine(filter);
         if (!string.IsNullOrEmpty(filterColumn))
@@ -57,16 +60,16 @@
                 ).ToList();
             count = data.Count();
         }
-        
+
         if(string.IsNullOrEmpty(sortColumn))
             return Task.FromResult(data.Skip(page * 20).Take(20));
-        
+
         if(desc)
             return Task.FromResult(data.OrderByDescending(x => _prop.GetValue(x)).Skip(page * 20).Take(20));
 
         return Task.FromResult(data.OrderBy(x => _prop.GetValue(x)).Skip(page * 20).Take(20));
     }
-    
+
     private int TotalRecords()
     {
         return count;
@@ -80,12 +83,18 @@
         return $"{firstNames[rand.Next(0, firstNames.Length - 1)]} {lastNames[rand.Next(0, lastNames.Length - 1)]}";
     }
 
+    private static BSColor GetRandomColor()
+    {
+        var rand = new Random();
+        var colors = Enum.GetValues(typeof(BSColor));
+        return (BSColor)colors.GetValue(rand.Next(colors.Length));
+    }
+
     public class Employ
     {
         public string Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-    }
-
-   
+        public BSColor RowColor { get; set; }
+    }   
 }
