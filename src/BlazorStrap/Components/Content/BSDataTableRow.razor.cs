@@ -3,13 +3,10 @@ using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap
 {
-    public partial class BSDataTableRow : BlazorStrapBase
+    public partial class BSDataTableRow : BSTR
     {
-        [Parameter] public AlignRow AlignRow { get; set; }
-
-        [Parameter] public BSColor Color { get; set; }
-
-        [Parameter] public bool IsActive { get; set; }
+        [Parameter]
+        public bool IsHidden { get; set; } = false;
 
         private string? ClassBuilder => new CssBuilder()
           .AddClass("table-active", IsActive)

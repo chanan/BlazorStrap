@@ -1,6 +1,9 @@
 ﻿@namespace BlazorStrap
-@inherits BlazorStrapBase
+@inherits BSTR
 
-<tr class="@ClassBuilder" @attributes="Attributes">
-    @ChildContent
-</tr>
+@if (!IsHidden)
+{
+    <tr class="@ClassBuilder" @attributes="Attributes">
+        @ChildContent
+    </tr>
+}
