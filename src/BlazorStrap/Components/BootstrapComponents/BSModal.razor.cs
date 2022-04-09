@@ -19,6 +19,7 @@ namespace BlazorStrap
         [Parameter] public RenderFragment? Content { get; set; }
         [Parameter] public string? ContentClass { get; set; }
         [Parameter] public RenderFragment<BSModal>? Footer { get; set; }
+        [Parameter] public string? FooterClass { get; set; }
         [Parameter] public Size FullScreenSize { get; set; } = Size.None;
         [Parameter] public RenderFragment? Header { get; set; }
         [Parameter] public string? HeaderClass { get; set; }
@@ -66,6 +67,10 @@ namespace BlazorStrap
 
         private string? HeaderClassBuilder => new CssBuilder("modal-header")
             .AddClass(HeaderClass)
+            .Build().ToNullString();
+
+        private string? FooterClassBuilder => new CssBuilder("modal-footer")
+            .AddClass(FooterClass)
             .Build().ToNullString();
 
         private ElementReference MyRef { get; set; }

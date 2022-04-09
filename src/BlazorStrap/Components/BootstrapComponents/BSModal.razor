@@ -22,9 +22,12 @@
                 <div class="@BodyClassBuilder">
                     @Content
                 </div>
-                <div class="modal-footer">
-                    @Footer!(this)
-                </div>
+                @if (Footer != null)
+                {
+                    <div class="@FooterClassBuilder">
+                        @Footer!(this)
+                    </div>
+                }
             </div>
         </div>
     </div>
