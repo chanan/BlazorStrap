@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.DependencyInjection;
 
 // Created by Harold Collins
 namespace BlazorStrap.Utilities
@@ -9,10 +10,21 @@ namespace BlazorStrap.Utilities
     public class SvgLoader : ISvgLoader
     {
         private readonly HttpClient _httpClient;
-
-        public SvgLoader(HttpClient httpClient)
+        private bool isServerSide = false;
+        private NavigationManager _navman;
+        public SvgLoader(HttpClient httpClient, NavigationManager navman, IServiceProvider services)
         {
-            _httpClient = httpClient;
+            // Server Side Blazor doesn't register HttpClient by default
+            if (services.GetService(typeof(HttpClient)) == null)
+            {
+                isServerSide = true;
+            }
+            else
+            {
+                _httpClient = httpClient;    
+            }
+
+            _navman = navman;
         }
 
         /// <summary>
@@ -26,8 +38,18 @@ namespace BlazorStrap.Utilities
 
             try
             {
-                var markup = await _httpClient.GetStringAsync(url);
-
+                string markup;
+                if (isServerSide)
+                {
+                    using (var httpClient = new HttpClient() { BaseAddress = new Uri(_navman.BaseUri) })
+                    {
+                        markup = await httpClient.GetStringAsync(url);
+                    }
+                }
+                else
+                {
+                    markup = await _httpClient.GetStringAsync(url);
+                }
                 return new MarkupString(markup);
             }
             catch (ArgumentNullException)

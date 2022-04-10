@@ -57,10 +57,10 @@ namespace BlazorStrap
         {
             if (ValidateOnInput && EditContext != null)
                 RateLimitingExceptionForObject.Debounce(e, DebounceInterval,
-                    (CurrentValueAsString) => { InvokeAsync(() => OnChangeEvent(e)); });
+                    (_) => { InvokeAsync(() => OnChangeEvent(e)); });
             if(UpdateOnInput)
                 RateLimitingExceptionForObject.Debounce(e, DebounceInterval,
-                    (CurrentValueAsString) => { InvokeAsync(() => OnChangeEvent(e)); });
+                    (_) => { InvokeAsync(() => OnChangeEvent(e)); });
         }
 
         private void DoValidation()

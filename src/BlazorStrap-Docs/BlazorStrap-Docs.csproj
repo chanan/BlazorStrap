@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
+    <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -177,6 +178,10 @@
     <_ContentIncludedByDefault Remove="wwwroot\Samples\Layout\Containers\ResponsiveContainers.md" />
     <_ContentIncludedByDefault Remove="wwwroot\Samples\Components\Button\Button1.md" />
     <_ContentIncludedByDefault Remove="wwwroot\Samples\Components\Button\Button2.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SampleModels\Content" />
   </ItemGroup>
 
 

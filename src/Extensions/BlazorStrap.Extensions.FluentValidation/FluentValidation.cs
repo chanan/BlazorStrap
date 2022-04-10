@@ -56,7 +56,13 @@ namespace BlazorStrap.Extensions.FluentValidation
 
         private void ValidateModel(EditContext editContext, ValidationMessageStore messages)
         {
+#if NET5_0_OR_GREATER
+            var validationResult =
+                _validator.Validate(ValidationContext<object>.CreateWithOptions(editContext.Model,
+                    options => options.IncludeAllRuleSets()));
+#else
             var validationResult = _validator.Validate(editContext.Model);
+#endif
             messages.Clear();
             foreach (var error in validationResult.Errors)
             {
@@ -64,12 +70,20 @@ namespace BlazorStrap.Extensions.FluentValidation
                 messages.Add(fieldIdentifier, error.ErrorMessage);
             }
             editContext.NotifyValidationStateChanged();
+
         }
-        private void ValidateModelField(EditContext editContext, ValidationMessageStore messages, FieldChangedEventArgs fieldChangedEventArgs)
+
+        private void ValidateModelField(EditContext editContext, ValidationMessageStore messages,
+            FieldChangedEventArgs fieldChangedEventArgs)
         {
             var type = editContext.Model.GetType();
+#if NET5_0_OR_GREATER
+            var validationResult =
+                _validator.Validate(ValidationContext<object>.CreateWithOptions(editContext.Model,
+                    options => options.IncludeAllRuleSets()));
+#else
             var validationResult = _validator.Validate(editContext.Model);
-
+#endif
             messages.Clear(fieldChangedEventArgs.FieldIdentifier);
             foreach (var error in validationResult.Errors.Where(w => ToFieldIdentifier(editContext, w.PropertyName).FieldName == fieldChangedEventArgs.FieldIdentifier.FieldName))
             {
@@ -77,7 +91,9 @@ namespace BlazorStrap.Extensions.FluentValidation
                 messages.Add(fieldIdentifier, error.ErrorMessage);
             }
             editContext.NotifyValidationStateChanged();
+
         }
+
         private static FieldIdentifier ToFieldIdentifier(EditContext editContext, string propertyPath)
         {
             // This method parses property paths like 'SomeProp.MyCollection[123].ChildProp'
@@ -115,8 +131,10 @@ namespace BlazorStrap.Extensions.FluentValidation
                     var prop = obj.GetType().GetProperty(nextToken);
                     if (prop == null)
                     {
-                        throw new InvalidOperationException($"Could not find property named {nextToken} on object of type {obj.GetType().FullName}.");
+                        throw new InvalidOperationException(
+                            $"Could not find property named {nextToken} on object of type {obj.GetType().FullName}.");
                     }
+
                     newObj = prop.GetValue(obj);
                 }
 

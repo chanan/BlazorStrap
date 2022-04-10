@@ -7,7 +7,7 @@
     </BSCol>
     <BSCol Position="Position.Relative" ColumnMedium="4">
         <BSLabel>First name</BSLabel>
-        <BSInput InputType="InputType.Text" @bind-Value="Modal.FirstName"/>
+        <BSInput InputType="InputType.Text" @bind-Value="Modal.FirstName" ValidateOnInput="true"/>
         <BSFeedback For="@(() => Modal.FirstName)" ValidMessage="First name looks good."/>
     </BSCol>
     <BSCol Position="Position.Relative" ColumnMedium="4">

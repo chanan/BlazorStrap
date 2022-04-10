@@ -41,23 +41,27 @@ Shared Parameters only
 
 {{sample=Content/Tables/Tables1}}
 
-#### Component \<BSDataTable<TValue>\> (Version  >= 5.0.105-Preview1)
+#### Component \<BSDataTable<TValue>\> (Version  >= 5.0.105-Preview2)
 See [shared](layout/shared) for additional parameters    
 :::
 
-| Parameter        | Type                   | Valid                                                        | Remarks/Output                  | 
-|------------------|------------------------|--------------------------------------------------------------|---------------------------------|
-| DataSet          | Func                   | int, string, bool, string, string, Task<IEnumerable<TValue>> |                                 | {.table-striped .p-2}  
-| TotalRecords     | Func                   | int                                                          |                                 |
-| Body             | RenderFragment<TValue> | RenderFragment                                               |                                 |
-| Header           | RenderFragment         | RenderFragment                                               |                                 |
-| Footer           | RenderFragment         | RenderFragment                                               |                                 |
-| NoData           | RenderFragment         | RenderFragment                                               | Displayed when dataset is empty |
-| PaginationTop    | bool                   | bool                                                         |                                 |
-| PaginationBottom | bool                   | bool                                                         | Default                         |
-| RowsPerPage      | int                    | int                                                          | Default 20                      |
-| StartPage        | int                    | int                                                          | Default 1                       |
-| Refresh          | Method                 |                                                              | Can be invoked with @ref        |
+| Parameter              | Type                       | Valid                                                        | Remarks/Output                                               | 
+|------------------------|----------------------------|--------------------------------------------------------------|--------------------------------------------------------------|
+| Items                  | IEnumerable<TValue>        | IEnumerable<TValue>                                          | Not Required using FetchData. <br/>StateHasChanged Required  | {.table-striped .p-2}  
+| TotalItems             | int                        | int                                                          | Not Required using FetchData. <br/>StateHasChanged Required  |
+| OnChange               | EventCallback<DataRequest> | Method                                                       | Not Required using FetchData. <br/>StateHasChanged Required  |
+| FetchItems             | Func                       | DataRequest, Task<(IEnumerable<TValue>,int)>                 | return (IEnumerable<TValue> data, TotalItems for pagination) |
+| Body                   | RenderFragment<TValue>     | RenderFragment                                               |                                                              |
+| Header                 | RenderFragment             | RenderFragment                                               |                                                              |
+| Footer                 | RenderFragment             | RenderFragment                                               |                                                              |
+| NoData                 | RenderFragment             | RenderFragment                                               | Displayed when dataset is empty                              |
+| PaginationTop          | bool                       | bool                                                         |                                                              |
+| PaginationBottom       | bool                       | bool                                                         | Default                                                      |
+| RowsPerPage            | int                        | int                                                          | Default 20                                                   |
+| StartPage              | int                        | int                                                          | Default 1                                                    |
+| Refresh                | Method                     |                                                              | Can be invoked with @ref                                     |
+| (Obsolete)DataSet      | Func                       | int, string, bool, string, string, Task<IEnumerable<TValue>> | Version >= 5.0.105-Preview1 will be removed in release       | {.table-striped .p-2}  
+| (Obsolete)TotalRecords | Func                       | int                                                          | Version >= 5.0.105-Preview1 will be removed in release       |
 
 #### Component \<BSDataTableHead\> (Version  >= 5.0.105-Preview1)
 See [shared](layout/shared) for additional parameters    
@@ -77,6 +81,20 @@ See [shared](layout/shared) for additional parameters
 |--------------|--------|-------------|----------------|
 | IsHidden     | bool   | bool        |                | {.table-striped .p-2} 
 
-### Data Table Example
+### Data Table Example using FetchData
 
 {{sample=Content/Tables/Tables2}}
+
+### Data Table Example using OnChange event
+
+{{sample=Content/Tables/Tables3}}
+
+
+## Custom Filters
+### Data Table Example using FetchData and Custom Filter
+
+{{sample=Content/Tables/Tables4}}
+
+### Data Table Example using OnChange event and Custom Filter
+
+{{sample=Content/Tables/Tables5}}

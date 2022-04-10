@@ -45,7 +45,6 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
-            Console.WriteLine(Pages);
             if(Pages > 999)
                 _pageWidth = 66;
             if(Pages > 9999)
@@ -70,7 +69,6 @@ namespace BlazorStrap
 
         private void ChangePage(int page)
         {
-            Console.WriteLine(Pages);
             if (page < 1) page = 1;
             if (page > Pages) page = Pages;
             CurrentValue = page;

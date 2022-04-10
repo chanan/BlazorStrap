@@ -18,6 +18,9 @@ namespace BlazorStrap_Docs.Helper
         [Inject] private HttpClient? HttpClient { get; set; }
         [Parameter] public string? Source { get; set; }
         [Parameter] public bool CSS { get; set; }
+        private bool _hasMarkup = false;
+        private bool _hasCss = false;
+        private bool _hasCode = false;
         private MarkupString _code = new MarkupString();
         private MarkupString _css = new MarkupString();
         private MarkupString _markup = new MarkupString();
@@ -62,15 +65,23 @@ namespace BlazorStrap_Docs.Helper
                 html = markdown;
                 html = html.TrimEnd('\n', '\r');
             }
-                html = "```html\n" + html + "\n```";
+            if (!string.IsNullOrWhiteSpace(html))
+                _hasMarkup = true;
+            if (!string.IsNullOrWhiteSpace(code))
+                _hasCode = true;
+            if (!string.IsNullOrWhiteSpace(css))
+                _hasCss = true;
+            
+            html = "```html\n" + html + "\n```";
             if(CSS)
                 css = "```css\n" + css + "\n```";
             if(!string.IsNullOrEmpty(code))
                 code = "```C#\n" + code + "\n```";
+            
             _markup = new MarkupString(Markdown.ToHtml(html, Pipeline));
             _code = new MarkupString(Markdown.ToHtml(code, Pipeline));
             _css = new MarkupString(Markdown.ToHtml(css, Pipeline));
-
+       
             await base.OnParametersSetAsync();
         }
         

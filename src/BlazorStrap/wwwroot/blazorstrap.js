@@ -2,6 +2,7 @@
 // noinspection JSUnusedGlobalSymbols
 let link;
 let navbarShown = false;
+
 if (!Element.prototype.matches) {
     Element.prototype.matches =
         Element.prototype.msMatchesSelector ||

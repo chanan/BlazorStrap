@@ -86,6 +86,17 @@
                 </Content>
             </BSCollapse>
         </li>
-
+        <li class="mb-1">
+            <BSCollapse DefaultShown="@(NavManager.Uri.Contains("/extensions/"))">
+                <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Extensions</BSToggle></Toggler>
+                <Content>
+                    <ul class="list-unstyled fw-normal pb-1 small">
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="extensions/fluentvalidation">FluentValidation</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="extensions/bsdatatable">BSDataTable</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="extensions/treeview">TreeView</BSLink></li>
+                    </ul>
+                </Content>
+            </BSCollapse>
+        </li>
     </ul>
 </nav>

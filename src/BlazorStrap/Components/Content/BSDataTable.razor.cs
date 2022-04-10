@@ -11,15 +11,13 @@ namespace BlazorStrap
         [Parameter] public IEnumerable<TValue>? Items { get; set; }
       
         [Parameter] public EventCallback<DataRequest> OnChange { get; set; }
-        [Parameter] public Func<DataRequest, Task<IEnumerable<TValue>>>? FetchItems { get; set; }
+        [Parameter] public Func<DataRequest, Task<(IEnumerable<TValue>,int)>>? FetchItems { get; set; }
+
         [Parameter] public int TotalItems { get; set; }
 
-        [Parameter] public string Name { get; set; }
+        [Obsolete("Replaced with FetchItems"), Parameter] public Func<int, string, bool, string, string, Task<IEnumerable<TValue>>>? DataSet { get; set; }
 
-        [Obsolete]
-        [Parameter] public Func<int, string, bool, string, string, Task<IEnumerable<TValue>>>? DataSet { get; set; }
-        [Obsolete]
-        [Parameter] public Func<int>? TotalRecords { get; set; }
+        [Obsolete("Replaced with TotalItems"), Parameter] public Func<int>? TotalRecords { get; set; }
 
         [Parameter] public RenderFragment<TValue>? Body { get; set; }
         [Parameter] public RenderFragment? Header { get; set; }
@@ -32,8 +30,7 @@ namespace BlazorStrap
         [Parameter] public int StartPage { get; set; } = 1;
         internal Func<string, bool, Task>? OnSort;
         internal Func<string, Task>? OnFilter;
-        private int Page { get; set; } = 1;
-        private int _itemCount;
+        public int Page { get; set; } = 1;
         private string _sortColumn = "";
         private string _filterColumn = "";
         private string _filterValue = "";
@@ -42,7 +39,23 @@ namespace BlazorStrap
         protected override async Task OnInitializedAsync()
         {
             Page = StartPage;
-          
+            //Might be Prerendered
+            try
+            {
+                if (TotalRecords != null && DataSet != null)
+                {
+                    TotalItems = TotalRecords.Invoke();
+                    Items = (await DataSet.Invoke(Page - 1, _sortColumn, false, _filterColumn, _filterValue)).ToList();
+                    await InvokeAsync(StateHasChanged);
+                }
+                else if (FetchItems != null)
+                {
+                    var data = await FetchItems.Invoke(DataRequest(Page - 1));
+                    Items = data.Item1;
+                    TotalItems = data.Item2;
+                    await InvokeAsync(StateHasChanged);
+                }
+            }catch{}
         }
 
         private DataRequest DataRequest(int page)
@@ -60,7 +73,6 @@ namespace BlazorStrap
         }
         private async Task ChangePage(int page)
         {
-           
             if (TotalRecords != null && DataSet != null)
             {
                 Items = (await DataSet.Invoke(page - 1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
@@ -68,7 +80,9 @@ namespace BlazorStrap
             }
             else if(FetchItems != null)
             {
-                Items = await FetchItems.Invoke(DataRequest(page - 1));
+                var data = await FetchItems.Invoke(DataRequest(page - 1));
+                Items = data.Item1;
+                TotalItems = data.Item2;
                 await InvokeAsync(StateHasChanged);
             }
             else
@@ -83,11 +97,11 @@ namespace BlazorStrap
             var value = 0;
             if (TotalRecords != null && DataSet != null)
             {
-                value = (int)Math.Ceiling(((float)_itemCount / (float)RowsPerPage));
+                value = (int)Math.Ceiling(((float)TotalItems / RowsPerPage));
             }
             else
             {
-                value = (int)Math.Ceiling(((float)TotalItems / (float)RowsPerPage));
+                value = (int)Math.Ceiling(((float)TotalItems / RowsPerPage));
             }
 
             return value < 1 ? 1 : value;
@@ -97,12 +111,14 @@ namespace BlazorStrap
         {
             if (TotalRecords != null && DataSet != null)
             {
-                _itemCount = TotalRecords.Invoke();
+                TotalItems = TotalRecords.Invoke();
                 Items = (await DataSet.Invoke(Page - 1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
             }
             else if (FetchItems != null)
             {
-                Items = await FetchItems.Invoke(DataRequest(Page - 1));
+                var data = await FetchItems.Invoke(DataRequest(Page - 1));
+                Items = data.Item1;
+                TotalItems = data.Item2;
                 await InvokeAsync(StateHasChanged);
             }
             await InvokeAsync(StateHasChanged);
@@ -116,12 +132,14 @@ namespace BlazorStrap
             if (TotalRecords != null && DataSet != null)
             {
                 Items = (await DataSet.Invoke(Page - 1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
-                _itemCount = TotalRecords.Invoke();
+                TotalItems = TotalRecords.Invoke();
                 await InvokeAsync(StateHasChanged);
             }
             else if (FetchItems != null)
             {
-                Items = await FetchItems.Invoke(DataRequest(Page -1));
+                var data = await FetchItems.Invoke(DataRequest(Page - 1));
+                Items = data.Item1;
+                TotalItems = data.Item2;
                 await InvokeAsync(StateHasChanged);
             }
             else
@@ -131,7 +149,6 @@ namespace BlazorStrap
         }
         public async Task SortAsync(string name)
         {
-            Console.WriteLine(".." + name);
             if (_sortColumn != name)
                 _desc = false;
             else
@@ -145,7 +162,9 @@ namespace BlazorStrap
             }
             else if (FetchItems != null)
             {
-                Items = await FetchItems.Invoke(DataRequest(Page - 1));
+                var data = await FetchItems.Invoke(DataRequest(Page - 1));
+                Items = data.Item1;
+                TotalItems = data.Item2;
                 await InvokeAsync(StateHasChanged);
             }
             else
@@ -155,23 +174,5 @@ namespace BlazorStrap
             
             OnSort?.Invoke(name, _desc);
         }
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if(firstRender)
-            {
-                if (TotalRecords != null && DataSet != null)
-                {
-                    _itemCount = TotalRecords.Invoke();
-                    Items = (await DataSet.Invoke(Page - 1, _sortColumn, false, _filterColumn, _filterValue)).ToList();
-                    await InvokeAsync(StateHasChanged);
-                }
-                else if (FetchItems != null)
-                {
-                    Items = await FetchItems.Invoke(DataRequest(Page - 1));
-                    await InvokeAsync(StateHasChanged);
-                }
-            }
-        }
-
     }
 }
