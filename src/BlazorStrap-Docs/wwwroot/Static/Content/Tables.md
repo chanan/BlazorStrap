@@ -69,6 +69,14 @@ See [shared](layout/shared) for additional parameters
 | Sortable     | bool   | bool        |                |
 | ColumnFilter | bool   | bool        |                |
 
+#### Component \<BSDataTableRow\> (Version  >= 5.0.105-Preview1)
+See [shared](layout/shared) for additional parameters    
+:::
+
+| Parameter    | Type   | Valid       | Remarks/Output | 
+|--------------|--------|-------------|----------------|
+| IsHidden     | bool   | bool        |                | {.table-striped .p-2} 
+
 ### Data Table Example
 
 {{sample=Content/Tables/Tables2}}
