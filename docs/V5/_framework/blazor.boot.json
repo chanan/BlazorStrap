@@ -8,10 +8,12 @@
   "resources": {
     "assembly": {
       "BlazorComponentUtilities.dll": "sha256-UapksNiQg3lu5QM9uVSLyjEuzRH\/7o22fmcmxcLAAeI=",
-      "BlazorStrap-Docs.dll": "sha256-aeka2dT6ymyvVCUxOp36JuJeHa9AFwxyu6ewMnukvsY=",
-      "BlazorStrap.dll": "sha256-xBBF7w4Ky6zbp9wCVjhV6MNJtDv0aWkNjYgZ7JqOZC8=",
-      "BlazorStrap.WASM.dll": "sha256-uqrtfjhYt7feJXEBhPRvYlc\/yv2CW\/9ViHmvM8Ld2mI=",
+      "BlazorStrap-Docs.dll": "sha256-ucZa7XRSLExSNwp9ez8UAfiBYr6Q+Gjj0OKcDSqgEu8=",
+      "BlazorStrap.dll": "sha256-KOpBKvG4Zz9IO9+6CPYdZiR9AZ83Zr8mhvqPLjsdzSI=",
+      "BlazorStrap.Extensions.FluentValidation.dll": "sha256-O9sBkF2vX8vJ22E+k9Mww3wKC46kfvRyHTa0V5WJsCo=",
+      "BlazorStrap.WASM.dll": "sha256-WKEhcJr6AVw0eqshcd5NlUmp5aLWJ2lhi9ZJ5BTNDGg=",
       "ColorCode.dll": "sha256-hF07ps23in9mbwaN4uSoZklQVfyJIw2Ep4R448bfkOk=",
+      "FluentValidation.dll": "sha256-NflrIQKcfYxeVjrVYw+AP1+xnZJp67Wq9L5Vsd5Cr\/8=",
       "Markdig.dll": "sha256-9\/ICq2gSL+hjhMdZXNoIRs8wyZFtZpr3yFSW+RQVdoQ=",
       "Markdig.SyntaxHighlighting.dll": "sha256-qkuHEt7805bTVSkNsvDi5CT5M3Q4VSK619BHVC+FdKs=",
       "Microsoft.AspNetCore.Authorization.dll": "sha256-ODuGqSb\/EjQtAKtKGIHBUB8NM5h18TZENSXeu+IQyNk=",

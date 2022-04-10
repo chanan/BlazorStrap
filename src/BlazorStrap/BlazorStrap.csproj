@@ -13,7 +13,7 @@
 		<PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
 		<RootNamespace>BlazorStrap</RootNamespace>
-		<PackageVersion>5.0.105-Preview2</PackageVersion> <!--Next Use 5.0.105-Preview3 -->
+		<PackageVersion>5.0.105-Preview3</PackageVersion> <!--Next Use 5.0.105-Preview4 -->
 	</PropertyGroup>
 	<ItemGroup>
 	  <Content Remove="bundleconfig.json" />
