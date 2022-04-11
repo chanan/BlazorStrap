@@ -56,10 +56,7 @@ namespace BlazorStrap
                     _hasInitialized = true;
                     EditContext = CascadedEditContext;
                     if (ValidWhen != null) FieldIdentifier = FieldIdentifier.Create(ValidWhen);
-                    //Field Changed
-                    EditContext.OnFieldChanged += OnFieldChanged;
-                    // Submitted
-                    EditContext.OnValidationRequested += OnValidationRequested;
+                    EditContext.OnValidationStateChanged += OnValidationStateChanged;
                 }
 
 
@@ -112,13 +109,7 @@ namespace BlazorStrap
             }
         }
 
-        private void OnFieldChanged(object? sender, FieldChangedEventArgs e)
-        {
-            if (e.FieldIdentifier.Equals(FieldIdentifier))
-                DoValidation();
-        }
-
-        private void OnValidationRequested(object? sender, ValidationRequestedEventArgs e)
+        private void OnValidationStateChanged(object? sender, ValidationStateChangedEventArgs e)
         {
             DoValidation();
         }
@@ -127,8 +118,7 @@ namespace BlazorStrap
         {
             if (EditContext is not null)
             {
-                EditContext.OnFieldChanged -= OnFieldChanged;
-                EditContext.OnValidationRequested -= OnValidationRequested;
+                EditContext.OnValidationStateChanged -= OnValidationStateChanged;
             }
         }
     }
