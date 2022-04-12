@@ -17,6 +17,17 @@ namespace BlazorStrap.Extensions.FluentValidation
         }
     }
 
+    public class FluentValidatorInjectable<TValidator> : BaseFluentValidator
+        where TValidator : IValidator
+    {
+        [Inject] private IServiceProvider _services { get; set; }
+
+        protected override IValidator CreateValidator()
+        {
+            return ActivatorUtilities.GetServiceOrCreateInstance<TValidator>(_services);
+        }
+    }
+
     public class FluentValidatorInjected : BaseFluentValidator
     {
         [Inject] private IServiceProvider _services { get; set; }
@@ -28,18 +39,21 @@ namespace BlazorStrap.Extensions.FluentValidation
         }
     }
 
-    public abstract class BaseFluentValidator : ComponentBase
+    public abstract class BaseFluentValidator : ComponentBase, IDisposable
     {
         private readonly static char[] _separators = new[] { '.', '[' };
 
+        [Parameter] public bool ValidateAll { get; set; }
+
         [CascadingParameter] protected EditContext _editContext { get; set; }
         protected IValidator _validator;
+        protected ValidationMessageStore _messages;
         protected abstract IValidator CreateValidator();
 
         protected override void OnInitialized()
         {
             _validator = CreateValidator();
-            var messages = new ValidationMessageStore(_editContext);
+            _messages = new ValidationMessageStore(_editContext);
 
             // Revalidate when any field changes, or if the entire form requests validation
             // (e.g., on submit)
@@ -47,11 +61,25 @@ namespace BlazorStrap.Extensions.FluentValidation
             //_editContext.OnFieldChanged += (sender, eventArgs)
             //    => ValidateModel((EditContext)sender, messages);
 
-            _editContext.OnFieldChanged += (sender, eventArgs)
-                => ValidateModelField((EditContext)sender, messages, eventArgs);
+            _editContext.OnFieldChanged += OnFieldChanged;
+            _editContext.OnValidationRequested += OnValidationRequested;
+        }
 
-            _editContext.OnValidationRequested += (sender, eventArgs)
-                => ValidateModel((EditContext)sender, messages);
+        private void OnFieldChanged(object sender, FieldChangedEventArgs e)
+        {
+            if (ValidateAll)
+            {
+                ValidateModel(_editContext, _messages);
+            }
+            else
+            {
+                ValidateModelField(_editContext, _messages, e);
+            }
+        }
+
+        private void OnValidationRequested(object sender, ValidationRequestedEventArgs e)
+        {
+            ValidateModel(_editContext, _messages);
         }
 
         private void ValidateModel(EditContext editContext, ValidationMessageStore messages)
@@ -85,10 +113,9 @@ namespace BlazorStrap.Extensions.FluentValidation
             var validationResult = _validator.Validate(editContext.Model);
 #endif
             messages.Clear(fieldChangedEventArgs.FieldIdentifier);
-            foreach (var error in validationResult.Errors.Where(w => ToFieldIdentifier(editContext, w.PropertyName).FieldName == fieldChangedEventArgs.FieldIdentifier.FieldName))
+            foreach (var error in validationResult.Errors.Where(w => ToFieldIdentifier(editContext, w.PropertyName).Equals(fieldChangedEventArgs.FieldIdentifier)))
             {
-                var fieldIdentifier = ToFieldIdentifier(editContext, error.PropertyName);
-                messages.Add(fieldIdentifier, error.ErrorMessage);
+                messages.Add(fieldChangedEventArgs.FieldIdentifier, error.ErrorMessage);
             }
             editContext.NotifyValidationStateChanged();
 
@@ -146,6 +173,13 @@ namespace BlazorStrap.Extensions.FluentValidation
 
                 obj = newObj;
             }
+        }
+
+        public void Dispose()
+        {
+            if (_editContext is null) return;
+            _editContext.OnFieldChanged -= OnFieldChanged;
+            _editContext.OnValidationRequested -= OnValidationRequested;
         }
     }
 }
