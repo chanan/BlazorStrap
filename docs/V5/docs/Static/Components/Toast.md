@@ -26,7 +26,13 @@ See [shared](layout/shared) for additional parameters
 ### Without header
 {{sample=Components/Toast/Toast2}}
 
+
 ### Toaster Example
+#### Component \<BSToaster\>
+| Parameter    | Type   | Valid            | Remarks/Output                  | 
+|--------------|--------|------------------|---------------------------------|
+| WrapperClass | string | css class string | Adds your class(es) to wrapper  | {.table-striped .p-2}
+
 <BSToaster/> should be placed before you `@Body` in your layout. Exact placement depends on your requirements for where you want the toasts to show up. 
 
 {{sample=Components/Toast/Toast3}}

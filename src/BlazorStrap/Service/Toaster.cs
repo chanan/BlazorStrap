@@ -45,7 +45,7 @@ namespace BlazorStrap
                 Options = new Options()
                 {
                     ButtonClass = opts.ButtonClass,
-                    CloseAfter = opts.CloseAfter,
+                    CloseAfter = opts.CloseAfter ,
                     Color = opts.Color,
                     ContentClass = opts.ContentClass,
                     HeaderClass = opts.HeaderClass,
@@ -77,7 +77,7 @@ namespace BlazorStrap
     public class Options
     {
         public string? ButtonClass { get; set; }
-        public int CloseAfter { get; set; } = 30;
+        public int CloseAfter { get; set; } = 0;
         public BSColor Color { get; set; } = BSColor.Default;
         public Toast Toast { get; set; } = Toast.Default;
         public string? ContentClass { get; set; }

@@ -1,4 +1,5 @@
-﻿using BlazorStrap.Utilities;
+﻿using BlazorComponentUtilities;
+using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -8,7 +9,7 @@ namespace BlazorStrap
     {
         // ReSharper disable once NullableWarningSuppressionIsUsed
         [Inject] private IBlazorStrap BlazorStrap { get; set; } = default!;
-        
+        [Parameter] public string WrapperClass { get; set; }
         protected override void OnInitialized()
         {
             BlazorStrap.Toaster.OnChange += OnChange;
@@ -93,13 +94,17 @@ namespace BlazorStrap
                 builder.AddAttribute(8, "TimeOut",
                     EventCallback.Factory.Create<BSToast>(this, BlazorStrap.Toaster.OnChange));
                 builder.AddAttribute(9, "ToasterId", Toast.Id);
+                builder.AddAttribute(10, "style", "z-index:1080;position:relative");
                 builder.CloseComponent();
             };
         }
 
         public string GetClass(Toast pos)
         {
-            return pos switch
+            var rootClassBuilder = new CssBuilder("blazorstrap-toaster")
+                .AddClass(WrapperClass, !string.IsNullOrEmpty(WrapperClass))
+                .Build().ToNullString();
+            return rootClassBuilder + " " + pos switch
             {
                 Toast.TopLeft => "position-absolute top-0 start-0",
                 Toast.TopCenter => "position-absolute top-0 start-50 translate-middle-x",

@@ -1,8 +1,11 @@
 ﻿@inject IBlazorStrap _blazorStrap
+<!--\\-->
 <div aria-live="polite" aria-atomic="true" class="position-relative bd-example-toasts" style="overflow-y: scroll ">
+<!--//-->
     <BSToaster/>
+<!--\\-->
 </div>
-
+<!--//-->
 <div class="input-group">
     <span class="input-group-text">Toast Placement</span>
     <BSInput InputType="InputType.Select" @bind-Value="ToastPlacement">
@@ -24,12 +27,14 @@
     <BSInput InputType="InputType.Text" @bind-Value="Time"/>
     <BSButton @onclick="Show" Color="BSColor.Primary">Show</BSButton>
 </div>
+
 @code
 {
     private Toast ToastPlacement { get; set; }
     private BSColor Color { get; set; }
     private int Time { get; set; } = 0;
     private int i = 0;
+
     private void Show()
     {
         _blazorStrap.Toaster.Add("Live Example " + @i, "Live Example Text", o =>
