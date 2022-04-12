@@ -67,14 +67,22 @@ namespace BlazorStrap
                 return;
             }
 
-            if (EditContext.GetValidationMessages(FieldIdentifier).Any())
+            if (EditContext.IsModified(FieldIdentifier))
             {
-                IsInvalid = true;
-                IsValid = false;
+                if (EditContext.GetValidationMessages(FieldIdentifier).Any())
+                {
+                    IsInvalid = true;
+                    IsValid = false;
+                }
+                else
+                {
+                    IsValid = true;
+                    IsInvalid = false;
+                }
             }
             else
             {
-                IsValid = true;
+                IsValid = false;
                 IsInvalid = false;
             }
         }
