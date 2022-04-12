@@ -1,4 +1,4 @@
-﻿<BSModal DataId="modal1">
+﻿<BSModal DataId="modal1" IsFullScreen="true">
     <Header>Modal Title</Header>
     <Content>Woohoo, you're reading this text in a modal!</Content>
     <Footer Context="modal">

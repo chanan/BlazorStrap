@@ -42,9 +42,7 @@ namespace BlazorStrap
         private string? ClassBuilder => new CssBuilder("modal")
             .AddClass("fade")
             .AddClass("show", Shown)
-       //     .AddClass($"modal-{Size.ToDescriptionString()}", Size != Size.None)
-            .AddClass("modal-fullscreen", IsFullScreen && FullScreenSize == Size.None)
-            .AddClass($"modal-fullscreen-{FullScreenSize.ToDescriptionString()}-down", FullScreenSize != Size.None)
+            //     .AddClass($"modal-{Size.ToDescriptionString()}", Size != Size.None)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
@@ -52,11 +50,14 @@ namespace BlazorStrap
         private string? BodyClassBuilder => new CssBuilder("modal-body")
             .AddClass(ContentClass)
             .Build().ToNullString();
-        
+
         private string? ContentClassBuilder => new CssBuilder("modal-content")
             .AddClass($"bg-{ModalColor.NameToLower()}", ModalColor != BSColor.Default)
             .Build().ToNullString();
+
         private string? DialogClassBuilder => new CssBuilder("modal-dialog")
+            .AddClass("modal-fullscreen", IsFullScreen && FullScreenSize == Size.None)
+            .AddClass($"modal-fullscreen-{FullScreenSize.ToDescriptionString()}-down", FullScreenSize != Size.None)
             .AddClass("modal-dialog-scrollable", IsScrollable)
             .AddClass("modal-dialog-centered", IsCentered)
             .AddClass((IsScrollable ? "modal-dialog-scrollable" : string.Empty))
@@ -98,7 +99,7 @@ namespace BlazorStrap
                 await BlazorStrap.Interop.AddEventAsync(_objectRef, DataId, EventType.TransitionEnd);
                 EventsSet = true;
             }
-            
+
             // Used to hide popovers
             BlazorStrap.ForwardToggle("", this);
 
@@ -113,7 +114,7 @@ namespace BlazorStrap
             if (BackdropRef != null)
                 await BackdropRef.ToggleAsync();
 
-            if(await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
+            if (await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
             {
                 await TransitionEndAsync();
             }
@@ -139,14 +140,14 @@ namespace BlazorStrap
 
             // Used to hide popovers
             BlazorStrap.ForwardToggle("", this);
-            
+
             await BlazorStrap.Interop.AddBodyClassAsync("modal-open");
 
             if (!AllowScroll)
             {
                 var scrollWidth = await BlazorStrap.Interop.GetScrollBarWidth();
                 var viewportHeight = await BlazorStrap.Interop.GetWindowInnerHeightAsync();
-                var peakHeight = await BlazorStrap.Interop.PeakHeightAsync(MyRef); 
+                var peakHeight = await BlazorStrap.Interop.PeakHeightAsync(MyRef);
 
                 if (viewportHeight > peakHeight)
                 {
@@ -164,7 +165,7 @@ namespace BlazorStrap
             await BlazorStrap.Interop.SetStyleAsync(MyRef, "display", "block", 50);
             await BlazorStrap.Interop.AddClassAsync(MyRef, "show");
 
-            if(await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
+            if (await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
             {
                 await TransitionEndAsync();
             }
@@ -226,15 +227,16 @@ namespace BlazorStrap
 
         public override async Task InteropEventCallback(string id, CallerName name, EventType type)
         {
-            if (DataId == id && name.Equals(typeof(ClickForward))  && type == EventType.Click)
+            if (DataId == id && name.Equals(typeof(ClickForward)) && type == EventType.Click)
             {
                 await ToggleAsync();
             }
         }
+
         [JSInvokable]
-        public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type,
+            Dictionary<string, string>? classList, JavascriptEvent? e)
         {
-            
             if (DataId == id && name.Equals(this) && type == EventType.TransitionEnd)
             {
                 await TransitionEndAsync();
@@ -263,7 +265,7 @@ namespace BlazorStrap
                 await HideAsync();
             }
         }
-        
+
         private async void OnModalChange(BSModal? model, bool fromJs)
         {
             if (fromJs)
@@ -288,7 +290,6 @@ namespace BlazorStrap
 
         public async ValueTask DisposeAsync()
         {
-            
             await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
             await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
             if (EventsSet)
