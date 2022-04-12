@@ -42,10 +42,7 @@ namespace BlazorStrap
                     _hasInitialized = true;
                     EditContext = CascadedEditContext;
                     if (For != null) FieldIdentifier = FieldIdentifier.Create(For);
-                    //Field Changed
-                    EditContext.OnFieldChanged += OnFieldChanged;
-                    // Submitted
-                    EditContext.OnValidationRequested += OnValidationRequested;
+                    EditContext.OnValidationStateChanged += OnValidationStateChanged;
                 }
             }
             else if (CascadedEditContext != EditContext)
@@ -59,12 +56,7 @@ namespace BlazorStrap
             }
         }
 
-        private void OnFieldChanged(object? sender, FieldChangedEventArgs e)
-        {
-            if (e.FieldIdentifier.Equals(FieldIdentifier))
-                DoValidation();
-        }
-        private void OnValidationRequested(object? sender, ValidationRequestedEventArgs e)
+        private void OnValidationStateChanged(object? sender, ValidationStateChangedEventArgs e)
         {
             DoValidation();
         }
@@ -75,14 +67,22 @@ namespace BlazorStrap
                 return;
             }
 
-            if (EditContext.GetValidationMessages(FieldIdentifier).Any())
+            if (EditContext.IsModified(FieldIdentifier))
             {
-                IsInvalid = true;
-                IsValid = false;
+                if (EditContext.GetValidationMessages(FieldIdentifier).Any())
+                {
+                    IsInvalid = true;
+                    IsValid = false;
+                }
+                else
+                {
+                    IsValid = true;
+                    IsInvalid = false;
+                }
             }
             else
             {
-                IsValid = true;
+                IsValid = false;
                 IsInvalid = false;
             }
         }
@@ -117,8 +117,7 @@ namespace BlazorStrap
         public void Dispose()
         {
             if (EditContext is null) return;
-            EditContext.OnFieldChanged -= OnFieldChanged;
-            EditContext.OnValidationRequested -= OnValidationRequested;
+            EditContext.OnValidationStateChanged -= OnValidationStateChanged;
         }
     }
 }
