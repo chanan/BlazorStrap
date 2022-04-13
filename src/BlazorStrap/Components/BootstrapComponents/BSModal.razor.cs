@@ -26,6 +26,7 @@ namespace BlazorStrap
         [Parameter] public bool IsCentered { get; set; }
         [Parameter] public bool IsFullScreen { get; set; }
         [Parameter] public bool IsScrollable { get; set; }
+        [Parameter] public bool HasCloseButton { get; set; } = true;
         [Parameter] public bool IsStaticBackdrop { get; set; }
         [Parameter] public bool ShowBackdrop { get; set; } = true;
         [Parameter] public Size Size { get; set; } = Size.None;
