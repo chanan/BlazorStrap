@@ -9,6 +9,7 @@ namespace BlazorStrap
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
         [Parameter] public bool IsAnimated { get; set; }
         [Parameter] public bool IsStriped { get; set; }
+        [Parameter] public double Min { get; set; } = 0;
         [Parameter] public double Max { get; set; } = 100;
         
         [Parameter] public double Value
@@ -39,15 +40,16 @@ namespace BlazorStrap
                 Parent.AddChild(this);
             }
         }
+        protected override void OnParametersSet()
+        {
+            NotifyChildren();
+            base.OnParametersSet();
+        }
         private void NotifyChildren()
         {
-            var percent = (_value / Max * 100);
-            if (Parent != null)
-            {
-                percent = (_value / Max * 100) / (Parent.Children.Count);
-            }
+            var percent = (_value - Min) / (Max - Min) * 100;
 
-            Width = $"width:{Math.Round(percent).ToString(CultureInfo.InvariantCulture)}%;" ;
+            Width = $"width:{percent.ToString(CultureInfo.InvariantCulture)}%;" ;
         }
         protected virtual void Dispose(bool disposing) { }
         public void Dispose()
