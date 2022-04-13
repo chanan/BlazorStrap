@@ -12,7 +12,7 @@ See [shared](layout/shared) for additional parameters
 | IsCentered       | bool           | true/false     | `.modal-dialog-centered`          |
 | IsFullScreen     | bool           | true/false     | `.modal-fullscreen`               |
 | IsScrollable     | bool           | true/false     | `.modal-dialog-scrollable`        |
-| IsCloseable      | bool           | true/false     | Includes `.btn-close`             |
+| HasCloseButton   | bool           | true/false     | Includes `.btn-close`             |
 | ShowBackdrop     | bool           | true/false     |                                   |
 | ButtonClass      | string         | string         | custom class for the close button |
 | ContentClass     | string         | string         | custom class for `modal-body`     |
