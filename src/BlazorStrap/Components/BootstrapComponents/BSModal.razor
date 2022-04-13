@@ -16,7 +16,10 @@
                 {
                     <div class="@HeaderClassBuilder">
                         @Header
-                        <button type="button" class="ms-auto btn-close @ButtonClass" data-bs-dismiss="modal" aria-label="Close" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)"></button>
+                        @if (IsCloseable)
+                        {
+                            <button type="button" class="ms-auto btn-close @ButtonClass" data-bs-dismiss="modal" aria-label="Close" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)"></button>
+                        }
                     </div>
                 }
                 <div class="@BodyClassBuilder">
