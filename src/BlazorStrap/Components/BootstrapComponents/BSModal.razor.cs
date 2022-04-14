@@ -77,16 +77,18 @@ namespace BlazorStrap
 
         private ElementReference MyRef { get; set; }
 
-        private bool Shown
+        public bool Shown
         {
             get => _shown;
-            set => _shown = value;
+            private set => _shown = value;
         }
 
         private string Style { get; set; } = "display: none;";
 
         public override async Task HideAsync()
         {
+            if (!Shown) return;
+
             _called = true;
             _lock = true;
             Shown = false;
@@ -125,6 +127,8 @@ namespace BlazorStrap
 
         public override async Task ShowAsync()
         {
+            if (Shown) return;
+
             _called = true;
             _lock = true;
             Shown = true;

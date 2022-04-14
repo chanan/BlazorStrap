@@ -65,7 +65,7 @@ namespace BlazorStrap
             return false;
         }
 
-        private bool Shown { get; set; } = true;
+        public bool Shown { get; private set; } = true;
 
         public void Toggle()
         {

@@ -49,10 +49,12 @@ namespace BlazorStrap
         private ElementReference MyRef { get; set; }
 
         // Can be access by @ref
-        private bool Shown { get; set; }
+        public bool Shown { get; private set; }
 
         public override async Task ShowAsync()
         {
+            if (Shown) return;
+
             await BlazorStrap.Interop.RemoveClassAsync(ButtonRef, "collapsed");
             await BlazorStrap.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
             if (OnShow.HasDelegate)
@@ -69,6 +71,8 @@ namespace BlazorStrap
         }
         public override async Task HideAsync()
         {
+            if (!Shown) return;
+
             await BlazorStrap.Interop.AddClassAsync(ButtonRef, "collapsed");
             await BlazorStrap.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
             if (OnHide.HasDelegate)

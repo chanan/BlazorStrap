@@ -54,11 +54,13 @@ namespace BlazorStrap
         private ElementReference MyRef { get; set; }
         internal Action<bool, BSDropdownItem>? OnSetActive { get; set; }
         private BSPopover? PopoverRef { get; set; }
-        internal bool Shown { get; private set; }
+        public bool Shown { get; private set; }
 
         // ReSharper disable once MemberCanBePrivate.Global
         public async Task HideAsync()
         {
+            if (!Shown) return;
+
             Shown = false;
             await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataRefId, EventType.Click);
 
@@ -106,6 +108,8 @@ namespace BlazorStrap
         // ReSharper disable once MemberCanBePrivate.Global
         public async Task ShowAsync()
         {
+            if (Shown) return;
+
             Shown = true;
 
             if (!AllowOutsideClick)
