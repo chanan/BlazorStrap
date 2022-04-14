@@ -20,11 +20,13 @@ namespace BlazorStrap
         private bool HasRender { get; set; }
 
         private ElementReference MyRef { get; set; }
-        private bool Shown { get; set; }
+        public bool Shown { get; private set; }
         private string Style { get; set; } = "display:none";
 
         public override async Task HideAsync()
         {
+            if (!Shown) return;
+
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
             Shown = false;
@@ -38,6 +40,8 @@ namespace BlazorStrap
 
         public override async Task ShowAsync()
         {
+            if (Shown) return;
+
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             Shown = true;

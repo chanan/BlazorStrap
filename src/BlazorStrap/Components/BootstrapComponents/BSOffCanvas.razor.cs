@@ -53,14 +53,16 @@ namespace BlazorStrap
             return !_lock;
         }
 
-        private bool Shown
+        public bool Shown
         {
             get => _shown;
-            set => _shown = value;
+            private set => _shown = value;
         }
 
         public override async Task ShowAsync()
         {
+            if (Shown) return;
+
             // Used to hide popovers
             BlazorStrap.ForwardToggle("", this);
             _lock = true;
@@ -90,6 +92,8 @@ namespace BlazorStrap
 
         public override async Task HideAsync()
         {
+            if (!Shown) return;
+
             // Used to hide popovers
             BlazorStrap.ForwardToggle("", this);
             _lock = true;

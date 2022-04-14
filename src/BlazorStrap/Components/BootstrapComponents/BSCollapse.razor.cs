@@ -48,6 +48,8 @@ namespace BlazorStrap
 
         public override async Task ShowAsync()
         {
+            if (Shown) return;
+
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
 
@@ -61,6 +63,8 @@ namespace BlazorStrap
         }
         public override async Task HideAsync()
         {
+            if (!Shown) return;
+
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
             if (_lock) return;
