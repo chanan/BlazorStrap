@@ -9,7 +9,9 @@ namespace BlazorStrap
     public partial class BSPopover : BlazorStrapToggleBase<BSPopover>, IAsyncDisposable
     {
         private DotNetObjectReference<BSPopover> _objectRef;
-        [Parameter] public RenderFragment? Content { get; set; }
+        [Parameter]
+        public RenderFragment? Content { get; set; }
+
         private bool _called;
 
         /// <summary>
@@ -19,7 +21,8 @@ namespace BlazorStrap
         public string? DropdownOffset { get; set; }
 
         [Parameter] public bool IsNavItemList { get; set; }
-        [Parameter] public RenderFragment? Header { get; set; }
+        [Parameter]
+        public RenderFragment? Header { get; set; }
         [Parameter] public BSColor HeaderColor { get; set; }
 
         /// <summary>
@@ -29,7 +32,8 @@ namespace BlazorStrap
         public bool IsDropdown { get; set; }
 
         [Parameter] public bool MouseOver { get; set; }
-        [Parameter] public Placement Placement { get; set; } = Placement.Top;
+        [Parameter]
+        public Placement Placement { get; set; } = Placement.Top;
         [Parameter] public string? Target { get; set; }
 
         private string? ClassBuilder => new CssBuilder()
@@ -100,13 +104,35 @@ namespace BlazorStrap
 
             await InvokeAsync(StateHasChanged);
         }
+        public async Task ShowAsync(string? target, string? content, Placement placement, string? header = null)
+        {
+            
+            if (target == null || content == null)
+            {
+                throw new NullReferenceException("Target and Content cannot be null");
+            }
+            Placement = placement;
+            Target = target;
+            Content = CreateFragment(content);
+            if(header != null)
+                Header = CreateFragment(header);
 
+            //Hides the old pop up. Placed here allows sizing to work properly don't move
+            if (Shown)
+                await HideAsync();
+            else
+                await InvokeAsync(StateHasChanged);
+            await ShowAsync();
+        }
 
         public override Task ToggleAsync()
         {
             return !Shown ? ShowAsync() : HideAsync();
         }
-
+        public Task ToggleAsync(string? target, string? content, Placement placement, string? header = null)
+        {
+            return target == Target && Shown ? HideAsync() : ShowAsync(target, content, placement, header);
+        }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -219,7 +245,7 @@ namespace BlazorStrap
                 {
                 }
         }
-
+        private RenderFragment CreateFragment(string value) => (builder) => builder.AddMarkupContent(0, value);
         #endregion
     }
 }

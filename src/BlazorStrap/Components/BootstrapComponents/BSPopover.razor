@@ -1,7 +1,7 @@
 ﻿@namespace BlazorStrap
 @inherits BlazorStrapToggleBase<BSPopover>
 
-@if (Content == null)
+@if (Content == null && Target != null)
 {
     <BlazorStrap.InternalComponents.Error Name="BSPopover">
         The <strong>Content</strong> RenderFragment is required.
