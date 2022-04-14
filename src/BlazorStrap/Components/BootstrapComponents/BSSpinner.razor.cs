@@ -11,6 +11,7 @@ namespace BlazorStrap
  
         private string? ClassBuilder => new CssBuilder()
             .AddClass("spinner-border", SpinnerType != SpinnerType.Grow)
+            .AddClass("spinner-grow", SpinnerType == SpinnerType.Grow)
             .AddClass($"text-{Color.NameToLower()}", Color != BSColor.Default)
             .AddClass($"{(SpinnerType == SpinnerType.Border ? "spinner-border" : "spinner-grow")}-{Size.ToDescriptionString()}", Size != Size.None)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
