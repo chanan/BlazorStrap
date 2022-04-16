@@ -11,7 +11,6 @@ public partial class Backdrop : ComponentBase
     // ReSharper disable once NullableWarningSuppressionIsUsed
     [Inject] private IBlazorStrap BlazorStrapService { get; set; } = default!;
     // ReSharper disable once NullableWarningSuppressionIsUsed
-    [Parameter] public bool ShowBackdrop { get; set; }
     public bool Shown { get; private set; }
     private BlazorStrapCore BlazorStrap => (BlazorStrapCore)BlazorStrapService;
     private string? BackdropClass => new CssBuilder("modal-backdrop")

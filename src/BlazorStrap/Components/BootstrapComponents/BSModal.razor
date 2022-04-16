@@ -35,4 +35,7 @@
         </div>
     </div>
 
-<BlazorStrap.InternalComponents.Backdrop ShowBackdrop="@ShowBackdrop" @ref="BackdropRef"/>
+@if (ShowBackdrop)
+{
+    <BlazorStrap.InternalComponents.Backdrop @ref="BackdropRef"/>
+}
