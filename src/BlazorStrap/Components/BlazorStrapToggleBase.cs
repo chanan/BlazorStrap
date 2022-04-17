@@ -10,6 +10,10 @@ namespace BlazorStrap
         [Parameter] public EventCallback<TValue> OnShow { get; set; }
         [Parameter] public EventCallback<TValue> OnHide { get; set; }
         
+        public virtual Task RefreshAsync()
+        {
+            return InvokeAsync(StateHasChanged);
+        }
         public virtual Task HideAsync()
         {
             return Task.CompletedTask;
