@@ -62,7 +62,7 @@ namespace BlazorStrap
         public override async Task ShowAsync()
         {
             if (Shown) return;
-
+            CanRefresh = false;
             // Used to hide popovers
             BlazorStrap.ForwardToggle("", this);
             _lock = true;
@@ -93,7 +93,7 @@ namespace BlazorStrap
         public override async Task HideAsync()
         {
             if (!Shown) return;
-
+            CanRefresh = false;
             // Used to hide popovers
             BlazorStrap.ForwardToggle("", this);
             _lock = true;
@@ -182,6 +182,7 @@ namespace BlazorStrap
                 if (OnHidden.HasDelegate)
                     _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
             }
+            CanRefresh = true;
         }
         private async Task DoAnimationsAsync(bool value)
         {

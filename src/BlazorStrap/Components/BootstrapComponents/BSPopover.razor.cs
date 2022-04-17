@@ -60,7 +60,6 @@ namespace BlazorStrap
         public override async Task HideAsync()
         {
             if (!Shown) return;
-
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
             _called = true;
@@ -75,7 +74,6 @@ namespace BlazorStrap
         public override async Task ShowAsync()
         {
             if (Shown) return;
-
             if (Target == null)
             {
                 throw new NullReferenceException("Target cannot be null");

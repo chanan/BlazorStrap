@@ -54,7 +54,7 @@ namespace BlazorStrap
         public override async Task ShowAsync()
         {
             if (Shown) return;
-
+            CanRefresh = false;
             await BlazorStrap.Interop.RemoveClassAsync(ButtonRef, "collapsed");
             await BlazorStrap.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
             if (OnShow.HasDelegate)
@@ -72,7 +72,7 @@ namespace BlazorStrap
         public override async Task HideAsync()
         {
             if (!Shown) return;
-
+            CanRefresh = false;
             await BlazorStrap.Interop.AddClassAsync(ButtonRef, "collapsed");
             await BlazorStrap.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
             if (OnHide.HasDelegate)
@@ -115,12 +115,13 @@ namespace BlazorStrap
         {
             _lock = false;
             await InvokeAsync(StateHasChanged);
-
+            
             if (OnShown.HasDelegate && Shown)
                 _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
 
             if (OnHidden.HasDelegate && !Shown)
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
+            CanRefresh = true;
         }
 
         [JSInvokable]

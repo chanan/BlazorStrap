@@ -28,6 +28,7 @@ namespace BlazorStrap
         public override async Task HideAsync()
         {
             if (Parent == null) return;
+            CanRefresh = false;
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
             await Parent.HideSlide(this);
@@ -36,6 +37,7 @@ namespace BlazorStrap
         public override async Task ShowAsync()
         {
             if (Parent == null) return;
+            CanRefresh = false;
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             await Parent.GotoChildSlide(this);
@@ -47,7 +49,7 @@ namespace BlazorStrap
 
         internal async Task InternalHide()
         {
-            
+            CanRefresh = false;
             if (OnHide.HasDelegate)
                 _ = OnHide.InvokeAsync(this);
             _active = false;
@@ -55,6 +57,7 @@ namespace BlazorStrap
 
         internal async Task InternalShow()
         {
+            CanRefresh = false;
             if (OnShow.HasDelegate)
                 _ = OnShow.InvokeAsync(this);
             _active = true;
@@ -62,6 +65,7 @@ namespace BlazorStrap
         
         internal Task Refresh()
         {
+            CanRefresh = true;
             return InvokeAsync(StateHasChanged);
         }
         protected override void OnInitialized()

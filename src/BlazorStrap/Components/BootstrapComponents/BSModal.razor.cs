@@ -88,7 +88,7 @@ namespace BlazorStrap
         public override async Task HideAsync()
         {
             if (!Shown) return;
-
+            CanRefresh = false;
             _called = true;
             _lock = true;
             Shown = false;
@@ -128,7 +128,7 @@ namespace BlazorStrap
         public override async Task ShowAsync()
         {
             if (Shown) return;
-
+            CanRefresh = false;
             _called = true;
             _lock = true;
             Shown = true;
@@ -223,6 +223,7 @@ namespace BlazorStrap
                 if (OnHidden.HasDelegate)
                     _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
             }
+            CanRefresh = true;
         }
 
         private void ClickEvent()

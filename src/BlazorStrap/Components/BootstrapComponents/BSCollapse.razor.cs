@@ -49,7 +49,7 @@ namespace BlazorStrap
         public override async Task ShowAsync()
         {
             if (Shown) return;
-
+            CanRefresh = false;
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
 
@@ -64,7 +64,7 @@ namespace BlazorStrap
         public override async Task HideAsync()
         {
             if (!Shown) return;
-
+            CanRefresh = false;
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
             if (_lock) return;
@@ -108,6 +108,7 @@ namespace BlazorStrap
                 _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
             if (OnHidden.HasDelegate && !Shown)
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
+            CanRefresh = true;
         }
 
         private async Task OnResize(int width)
