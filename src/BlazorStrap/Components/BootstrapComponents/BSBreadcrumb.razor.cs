@@ -24,8 +24,8 @@ namespace BlazorStrap
             if (NavigationManager == null) return;
             NavigationManager.LocationChanged += OnLocationChanged;
             
-            Tree = GetPath(NavigationManager.Uri, BasePath, Labels, "https://localhost:7262/V5/" ?? "");
-            //Tree = GetPath(NavigationManager.Uri, BasePath, Labels, NavigationManager?.BaseUri ?? "");
+            //Tree = GetPath(NavigationManager.Uri, BasePath, Labels, "https://localhost:7262/V5/" ?? "");
+            Tree = GetPath(NavigationManager.Uri, BasePath, Labels, NavigationManager?.BaseUri ?? "");
         }
 
         private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
