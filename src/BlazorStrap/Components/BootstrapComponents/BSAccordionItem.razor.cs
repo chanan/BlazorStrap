@@ -17,12 +17,13 @@ namespace BlazorStrap
         public bool DefaultShown
         {
             get => _defaultShown;
-            set { _defaultShown = value; Shown = value; _isDefaultShownSet = true; }
+            set { _defaultShown = value; _isDefaultShownSet = true; }
         }
 
         protected override void OnInitialized()
         {
             _objectRef = DotNetObjectReference.Create<BSAccordionItem>(this);
+            Shown = DefaultShown;
         }
 
         protected override bool ShouldRender()
