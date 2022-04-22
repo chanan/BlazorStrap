@@ -13,6 +13,7 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
+
         public bool FirstChild()
         {
             return ChildHandler == null;
@@ -23,6 +24,7 @@ namespace BlazorStrap
             if(ChildHandler != null)
                 ChildHandler(sender);
         }
+        
 
         internal Action<BSAccordionItem>? ChildHandler;
     }

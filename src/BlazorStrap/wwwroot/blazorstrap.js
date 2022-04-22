@@ -350,8 +350,9 @@ window.blazorStrap = {
             element.style.position = "absolute";
             element.style.display = "block";
             setTimeout(function () {
+                var height = element.offsetHeight;
                 element.style = oldStyle;
-                resolve(element.offsetHeight);
+                resolve(height);
             }, 1);
         });
     },
