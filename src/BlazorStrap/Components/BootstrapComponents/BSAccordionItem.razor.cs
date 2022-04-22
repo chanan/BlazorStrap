@@ -107,6 +107,7 @@ namespace BlazorStrap
                 if(!_isDefaultShownSet && Parent.FirstChild())
                 {
                     DefaultShown = true;
+                    Shown = true;
                 }
                 Parent.ChildHandler += Parent_ChildHandler;
             }
@@ -124,7 +125,7 @@ namespace BlazorStrap
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
             CanRefresh = true;
         }
-
+        
         [JSInvokable]
         public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
         {
