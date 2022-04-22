@@ -1,36 +1,38 @@
 ﻿@namespace BlazorStrap
 @inherits BlazorStrapToggleBase<BSCollapse>
 
-@if (Toggler != null)
-{
-    <CascadingValue Value="this">
+<CascadingValue Value="this">
+    @if (Toggler != null)
+    {
+
         @Toggler
-    </CascadingValue>
-    @if (IsList)
-    {
-        <li href="javascript:void(0)" class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
-            @Content
-        </li>
+
+        @if (IsList)
+        {
+            <li href="javascript:void(0)" class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
+                @Content
+            </li>
+        }
+        else
+        {
+            <div class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
+                @Content
+            </div>
+        }
     }
     else
     {
-        <div class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
-            @Content
-        </div>
+        @if (IsList)
+        {
+            <li href="javascript:void(0)" class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
+                @ChildContent
+            </li>
+        }
+        else
+        {
+            <div class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
+                @ChildContent
+            </div>
+        }
     }
-}
-else
-{
-    @if (IsList)
-    {
-        <li href="javascript:void(0)" class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId"> 
-            @ChildContent
-        </li>
-    }
-    else
-    {
-        <div class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
-            @ChildContent
-        </div>
-    }
-}
+</CascadingValue>

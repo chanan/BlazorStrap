@@ -8,7 +8,7 @@ namespace BlazorStrap
     public partial class BSAccordionItem : BlazorStrapToggleBase<BSAccordionItem>, IDisposable
     {
         // This is for nesting allows the child to jump to transition end if the parent is hidden or shown while in transition.
-        internal Action ParentHandler { get; set; }
+        internal Action? NestedHandler { get; set; }
         private DotNetObjectReference<BSAccordionItem> _objectRef;
         private bool _lock;
         [Parameter] public bool NoAnimations { get; set; }
@@ -57,7 +57,7 @@ namespace BlazorStrap
         public override async Task ShowAsync()
         {
             if (Shown) return;
-            ParentHandler?.Invoke();
+            NestedHandler?.Invoke();
             CanRefresh = false;
             await BlazorStrap.Interop.RemoveClassAsync(ButtonRef, "collapsed");
             await BlazorStrap.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
@@ -76,7 +76,7 @@ namespace BlazorStrap
         public override async Task HideAsync()
         {
             if (!Shown) return;
-            ParentHandler?.Invoke();
+            NestedHandler?.Invoke();
             CanRefresh = false;
             await BlazorStrap.Interop.AddClassAsync(ButtonRef, "collapsed");
             await BlazorStrap.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
@@ -143,6 +143,7 @@ namespace BlazorStrap
         {
             if (sender == null)
             {
+                if (!_lock) return;
                 //Parent is changing discard all animations
                 await TransitionEndAsync();
             }

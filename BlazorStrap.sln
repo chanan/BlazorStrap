@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.WASM", "src\Bla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Tests", "src\BlazorStrap.Tests\BlazorStrap.Tests.csproj", "{63E96825-F8C9-4505-B2BB-89A4F8A54A36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorStrap.Extensions.FluentValidation", "src\Extensions\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj", "{A45258C8-4672-4493-9626-5F4342AC3641}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Extensions.FluentValidation", "src\Extensions\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj", "{A45258C8-4672-4493-9626-5F4342AC3641}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

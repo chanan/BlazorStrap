@@ -8,8 +8,9 @@ namespace BlazorStrap
         
         [Parameter] public bool IsFlushed { get; set; }
         
-        [CascadingParameter] public BSAccordionItem Parent { get; set; }
-        
+        [CascadingParameter] public BSAccordionItem? Parent { get; set; }
+        [CascadingParameter] public BSCollapse? CollapseParent { get; set; }
+
 
         private string? ClassBuilder => new CssBuilder("accordion")
             .AddClass("accordion-flush", IsFlushed)
@@ -20,10 +21,12 @@ namespace BlazorStrap
         protected override void OnInitialized()
         {
             if(Parent != null)
-                Parent.ParentHandler += ParentHandler;
+                Parent.NestedHandler += NestedHandler;
+            if(CollapseParent != null)
+                CollapseParent.NestedHandler += NestedHandler;
         }
 
-        private void ParentHandler()
+        private void NestedHandler()
         {
             ChildHandler?.Invoke(null);
         }
@@ -42,10 +45,10 @@ namespace BlazorStrap
 
         public void Dispose()
         {
-            if (Parent != null)
-            {
-                Parent.ParentHandler -= ParentHandler;
-            }
+            if (Parent?.NestedHandler != null)
+                Parent.NestedHandler -= NestedHandler;
+            if (CollapseParent != null)
+                CollapseParent.NestedHandler -= NestedHandler;
         }
 
 

@@ -8,6 +8,11 @@ namespace BlazorStrap
     public partial class BSCollapse : BlazorStrapToggleBase<BSCollapse>, IAsyncDisposable
     {
         private DotNetObjectReference<BSCollapse> _objectRef;
+        [CascadingParameter] BSCollapse? Parent { get; set; }
+        [CascadingParameter] BSAccordionItem? AccordionParent { get; set; }
+
+        internal Action? NestedHandler { get; set; }
+
         private bool _lock;
         [Parameter] public bool NoAnimations { get; set; }
         [Parameter] public RenderFragment? Content { get; set; }
@@ -49,6 +54,7 @@ namespace BlazorStrap
         public override async Task ShowAsync()
         {
             if (Shown) return;
+            NestedHandler?.Invoke();
             CanRefresh = false;
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
@@ -64,6 +70,7 @@ namespace BlazorStrap
         public override async Task HideAsync()
         {
             if (!Shown) return;
+            NestedHandler?.Invoke();
             CanRefresh = false;
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
@@ -97,8 +104,17 @@ namespace BlazorStrap
         {
             _objectRef = DotNetObjectReference.Create(this);
             BlazorStrap.OnEventForward += InteropEventCallback;
+            if (Parent != null)
+                Parent.NestedHandler += NestedHandlerEvent;
+            if (AccordionParent != null)
+                AccordionParent.NestedHandler += NestedHandlerEvent;
         }
 
+        private async void NestedHandlerEvent()
+        {
+            if (!_lock) return;
+            await TransitionEndAsync();
+        }
         private async Task TransitionEndAsync()
         {
             _lock = false;
@@ -162,6 +178,11 @@ namespace BlazorStrap
         {
             if (IsInNavbar)
                 await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Resize);
+            if (Parent?.NestedHandler != null)
+                Parent.NestedHandler -= NestedHandlerEvent;
+            if (AccordionParent?.NestedHandler != null)
+                AccordionParent.NestedHandler -= NestedHandlerEvent;
+
             BlazorStrap.OnEventForward -= InteropEventCallback;
             _objectRef.Dispose();
         }
