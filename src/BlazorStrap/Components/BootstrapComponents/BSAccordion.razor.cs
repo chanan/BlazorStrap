@@ -3,9 +3,13 @@ using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap
 {
-    public partial class BSAccordion : BlazorStrapBase
+    public partial class BSAccordion : BlazorStrapBase, IDisposable
     {
+        
         [Parameter] public bool IsFlushed { get; set; }
+        
+        [CascadingParameter] public BSAccordionItem Parent { get; set; }
+        
 
         private string? ClassBuilder => new CssBuilder("accordion")
             .AddClass("accordion-flush", IsFlushed)
@@ -13,6 +17,16 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
+        protected override void OnInitialized()
+        {
+            if(Parent != null)
+                Parent.ParentHandler += ParentHandler;
+        }
+
+        private void ParentHandler()
+        {
+            ChildHandler?.Invoke(null);
+        }
 
         public bool FirstChild()
         {
@@ -23,9 +37,19 @@ namespace BlazorStrap
         {
             if(ChildHandler != null)
                 ChildHandler(sender);
+            
         }
-        
 
-        internal Action<BSAccordionItem>? ChildHandler;
+        public void Dispose()
+        {
+            if (Parent != null)
+            {
+                Parent.ParentHandler -= ParentHandler;
+            }
+        }
+
+
+        internal Action<BSAccordionItem?>? ChildHandler;
+        
     }
 }
