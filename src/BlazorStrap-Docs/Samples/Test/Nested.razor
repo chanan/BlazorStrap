@@ -11,9 +11,42 @@
                         <NavLink class="nav-link" href="javascript:void(0)">
                             Test
                         </NavLink>
+                        <NavLink class="nav-link" href="javascript:void(0)">
+                            Test
+                        </NavLink>
+                        <NavLink class="nav-link" href="javascript:void(0)">
+                            Test
+                        </NavLink>
+                        <NavLink class="nav-link" href="javascript:void(0)">
+                            Test
+                        </NavLink>
+                        <NavLink class="nav-link" href="javascript:void(0)">
+                            Test
+                        </NavLink>
+                        <NavLink class="nav-link" href="javascript:void(0)">
+                            Test
+                        </NavLink>
                     </Content>
                 </BSAccordionItem>
             </BSAccordion>
+            <NavLink class="nav-link" href="javascript:void(0)">
+                Test
+            </NavLink>
+            <NavLink class="nav-link" href="javascript:void(0)">
+                Test
+            </NavLink>
+            <NavLink class="nav-link" href="javascript:void(0)">
+                Test
+            </NavLink>
+            <NavLink class="nav-link" href="javascript:void(0)">
+                Test
+            </NavLink>
+            <NavLink class="nav-link" href="javascript:void(0)">
+                Test
+            </NavLink>
+            <NavLink class="nav-link" href="javascript:void(0)">
+                Test
+            </NavLink>
         </Content>
     </BSAccordionItem>
 </BSAccordion>
@@ -72,13 +105,13 @@
         </Content>
     </BSAccordionItem>
 </BSAccordion>
-<h4>Nested Collapse inside of Acorddion in side of Collapse</h4>
+<h4>Nested Collapse inside of Acorddion in side of Collapse Plus StateHasChanged tossed in for good messure</h4>
 <hr />
 <BSButton Color="BSColor.Primary" OnClick="FifthTest">FifthTest</BSButton>
 <BSCollapse @ref="Test9">
     <Toggler><BSToggle>Toggle Test</BSToggle></Toggler>
     <Content>
-        
+
         <BSAccordion>
             <BSAccordionItem DefaultShown="false" @ref="Test10">
                 <Header>Test</Header>
@@ -112,27 +145,31 @@
     {
         await Test2.HideAsync();
         await Task.Delay(2);
-        await Test1.HideAsync();
+        _ = Test1.HideAsync();
+        await InvokeAsync(StateHasChanged);
     }
 
     private async Task SecondTest()
     {
         await Test4.HideAsync();
         await Task.Delay(2);
-        await Test3.HideAsync();
+        _ = Test3.HideAsync();
+        await InvokeAsync(StateHasChanged);
     }
     private async Task ThirdTest()
     {
         await Test6.HideAsync();
         await Task.Delay(2);
-        await Test5.HideAsync();
+        _ = Test5.HideAsync();
+        await InvokeAsync(StateHasChanged);
     }
 
     private async Task ForthTest()
     {
         await Test8.HideAsync();
         await Task.Delay(2);
-        await Test7.HideAsync();
+        _ = Test7.HideAsync();
+        await InvokeAsync(StateHasChanged);
     }
     private async Task FifthTest()
     {
@@ -140,6 +177,7 @@
         await Task.Delay(2);
         await Test10.HideAsync();
         await Task.Delay(2);
-        await Test9.HideAsync();
+        _ = Test9.HideAsync();
+        await InvokeAsync(StateHasChanged);
     }
 }
