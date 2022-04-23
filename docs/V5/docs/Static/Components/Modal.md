@@ -3,25 +3,25 @@
 See [shared](layout/shared) for additional parameters    
 :::
 
-| Parameter        | Type                    | Valid          | Remarks/Output                                                                     | 
-|------------------|-------------------------|----------------|------------------------------------------------------------------------------------|
-| FullScreenSize   | Enum                    | Side           | `.modal-fullscreen-[]-down`                                                        | {.table-striped}
-| AllowScroll      | bool                    | true/false     | Allows Body Scrolling                                                              | 
-| ModalColor       | BSColor                 | BSColor        |                                                                                    |
-| Size             | Enum                    | Size           | `.modal-[]`                                                                        |
-| IsCentered       | bool                    | true/false     | `.modal-dialog-centered`                                                           |
-| IsFullScreen     | bool                    | true/false     | `.modal-fullscreen`                                                                |
-| IsScrollable     | bool                    | true/false     | `.modal-dialog-scrollable`                                                         |
-| HasCloseButton   | bool                    | true/false     | Includes `.btn-close`                                                              |
-| ShowBackdrop     | bool                    | true/false     |                                                                                    |
-| ButtonClass      | string                  | string         | custom class for the close button                                                  |
-| ContentClass     | string                  | string         | custom class for `modal-body`                                                      |
-| DialogClass      | string                  | string         | custom class for `modal-dialog`                                                    |
-| HeaderClass      | string                  | string         | custom class for `modal-header`                                                    |
-| IsStaticBackdrop | bool                    | true/false     | Ignores backdrop clicks                                                            |
-| Header           | RenderFragment          | RenderFragment | Nested Content                                                                     |
-| Content          | RenderFragment          | RenderFragment | Nested Content                                                                     |
-| Footer           | RenderFragment<BSModal> | RenderFragment | Nested Content BSModal is assigned by a self reference you do not need to pass it. |
+| Parameter        | Type                      | Valid          | Remarks/Output                                                                     | 
+|------------------|---------------------------|----------------|------------------------------------------------------------------------------------|
+| FullScreenSize   | Enum                      | Side           | `.modal-fullscreen-[]-down`                                                        | {.table-striped}
+| AllowScroll      | bool                      | true/false     | Allows Body Scrolling                                                              | 
+| ModalColor       | BSColor                   | BSColor        |                                                                                    |
+| Size             | Enum                      | Size           | `.modal-[]`                                                                        |
+| IsCentered       | bool                      | true/false     | `.modal-dialog-centered`                                                           |
+| IsFullScreen     | bool                      | true/false     | `.modal-fullscreen`                                                                |
+| IsScrollable     | bool                      | true/false     | `.modal-dialog-scrollable`                                                         |
+| HasCloseButton   | bool                      | true/false     | Includes `.btn-close`                                                              |
+| ShowBackdrop     | bool                      | true/false     |                                                                                    |
+| ButtonClass      | string                    | string         | custom class for the close button                                                  |
+| ContentClass     | string                    | string         | custom class for `modal-body`                                                      |
+| DialogClass      | string                    | string         | custom class for `modal-dialog`                                                    |
+| HeaderClass      | string                    | string         | custom class for `modal-header`                                                    |
+| IsStaticBackdrop | bool                      | true/false     | Ignores backdrop clicks                                                            |
+| Header           | RenderFragment            | RenderFragment | Nested Content                                                                     |
+| Content          | RenderFragment            | RenderFragment | Nested Content                                                                     |
+| Footer           | RenderFragment\<BSModal\> | RenderFragment | Nested Content BSModal is assigned by a self reference you do not need to pass it. |
 
 :::
 
