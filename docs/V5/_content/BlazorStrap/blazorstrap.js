@@ -343,17 +343,17 @@ window.blazorStrap = {
         return element.style.cssText;
     },
     PeakHeight: async function (element) {
-        var oldStyle = element.style;
         if (element === null || element === undefined) return;
         return new Promise(function (resolve) {
             element.style.visibility = "hidden";
             element.style.position = "absolute";
             element.style.display = "block";
             setTimeout(function () {
-                var height = element.offsetHeight;
-                element.style = oldStyle;
-                resolve(height);
+                element.style.display = "";
+                element.style.visibility = "";
+                element.style.position = "";
             }, 1);
+            resolve(element.offsetHeight);
         });
     },
     RemoveAttribute: async function (element, name) { //Likely can be removed
