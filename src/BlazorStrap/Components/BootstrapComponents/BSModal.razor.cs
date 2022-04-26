@@ -88,7 +88,6 @@ namespace BlazorStrap
 
         public override async Task HideAsync()
         {
-            Console.WriteLine(_rendered);
             if (_rendered == false)
             {
                 throw new InvalidOperationException("You are required to render this component before making any changes to it's state.");
@@ -133,7 +132,6 @@ namespace BlazorStrap
 
         public override async Task ShowAsync()
         {
-            Console.WriteLine(_rendered);
             if (_rendered == false)
             {
                 throw new InvalidOperationException("You are required to render this component before making any changes to it's state.");
