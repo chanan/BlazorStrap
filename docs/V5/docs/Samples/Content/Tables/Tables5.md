@@ -14,6 +14,7 @@
         <BSDataTableHead TValue="Employee" Sortable="true" Column="@(nameof(Employee.Email))" ColumnFilter="true">Email</BSDataTableHead>
     </Header>
     <Body>
+<!--\\-->
         <BSDataTableRow Color="item.RowColor">
             <BSTD>
                 @item.Id
@@ -25,9 +26,10 @@
                 @item.Email
             </BSTD>
         </BSDataTableRow>
+<!--//-->
     </Body>
 </BSDataTable>
-<!--//-->
+
 @code
 {
     private string? _customFilter;

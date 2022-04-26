@@ -19,6 +19,10 @@ See [shared](layout/shared) for additional parameters
 
 :::
 
+:::{.bd-callout .bd-callout-info}
+**Note: Sometimes you need addition child content inside this component. Such as `\<BSForm\>`. We now provide `\<BSOffCanvasHeader\>`, `\<BSOffCanvasContent\>` to be used in place of the render fragments.
+:::
+
 ### Example
 
 {{sample=Components/OffCanvas/OffCanvas1}}
@@ -32,6 +36,10 @@ See [shared](layout/shared) for additional parameters
 
 ### Backdrop
 {{sample=Components/OffCanvas/OffCanvas5}}
+
+### Offcanvas requiring more complex content
+
+{{sample=Components/OffCanvas/OffCanvas6}}
 
 ### Methods / Events
 TValue = BSOffCanvas
@@ -47,3 +55,7 @@ TValue = BSOffCanvas
 | OnHide      | Event  | TValue       | Raised when starting to hide |
 | OnHidden    | Event  | TValue       | Raised when hidden           |
 :::
+
+If you get the follow exception "You are required to render this component before making any changes to it's state.". Likly causes are as follows
+* You have attempted to show the component before it has rendered.
+* The parent of the component disposed of it and will need to render before any changes can be made.

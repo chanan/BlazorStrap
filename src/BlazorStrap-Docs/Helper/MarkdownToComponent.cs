@@ -12,12 +12,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Rendering;
-
+using BlazorStrap;
 namespace BlazorStrap_Docs.Helper
 { 
     public class MarkdownToComponent : ComponentBase
     {
-        [Inject] private HttpClient? HttpClient { get; set; }
+        [Inject] public NavigationManager NavigationManager { get; set; }
         [Parameter] public string? NamespaceRoot { get; set; }
         [Parameter] public string? WebRoot { get; set; }
         [Parameter] public string? DefaultClass { get; set; }
@@ -45,10 +45,12 @@ namespace BlazorStrap_Docs.Helper
 
         protected override async Task OnParametersSetAsync()
         {
+       
             if (_init is false || _lastSource != Source)
             {
-                if (Source == null || HttpClient == null) return;
-                using var response = await HttpClient.GetAsync(Source + "?" + Guid.NewGuid().ToString());
+                if (Source == null ) return;
+                using var httpClient = new HttpClient() { BaseAddress = new Uri(NavigationManager.BaseUri)};
+                    using var response = await httpClient.GetAsync(Source + "?" + Guid.NewGuid().ToString());
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     _rawData = await response.Content.ReadAsStringAsync();

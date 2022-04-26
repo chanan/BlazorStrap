@@ -15,7 +15,7 @@ namespace BlazorStrap_Docs.Helper
 { 
     public sealed partial class CodeBlock : ComponentBase
     {
-        [Inject] private HttpClient? HttpClient { get; set; }
+        [Inject] public NavigationManager NavigationManager { get; set; }
         [Parameter] public string? Source { get; set; }
         [Parameter] public bool CSS { get; set; }
         private bool _hasMarkup = false;
@@ -34,12 +34,13 @@ namespace BlazorStrap_Docs.Helper
         protected override async Task OnParametersSetAsync()
         {
             string css = "";
-            if (Source == null || HttpClient == null) return;
-            using var response = await HttpClient.GetAsync(Source + ".md" + "?" + Guid.NewGuid().ToString());
+            using var httpClient = new HttpClient() { BaseAddress = new Uri(NavigationManager.BaseUri) };
+            if (Source == null || httpClient == null) return;
+            using var response = await httpClient.GetAsync(Source + ".md" + "?" + Guid.NewGuid().ToString());
             if (CSS)
             {
                 using var cssResponse =
-                    await HttpClient.GetAsync(Source + ".razor.md" + "?" + Guid.NewGuid().ToString());
+                    await httpClient.GetAsync(Source + ".razor.md" + "?" + Guid.NewGuid().ToString());
                 if (cssResponse.StatusCode != HttpStatusCode.OK)
                     return;
                 css = await cssResponse.Content.ReadAsStringAsync();

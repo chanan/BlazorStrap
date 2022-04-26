@@ -343,8 +343,8 @@ window.blazorStrap = {
         return element.style.cssText;
     },
     PeakHeight: async function (element) {
-        var oldStyle = element.style;
         if (element === null || element === undefined) return;
+        var oldStyle = element.style;
         return new Promise(function (resolve) {
             element.style.visibility = "hidden";
             element.style.position = "absolute";

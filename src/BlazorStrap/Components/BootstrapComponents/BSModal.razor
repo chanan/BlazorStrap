@@ -2,13 +2,18 @@
 @inherits BlazorStrapToggleBase<BSModal>
 @if (Content == null)
 {
-    <BlazorStrap.InternalComponents.Error Name="BSModal">
-        The <strong>Content</strong> RenderFragment is required.
-    </BlazorStrap.InternalComponents.Error>
-
-    return;
+    <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="@Style" @ref="MyRef" data-blazorstrap="@DataId">
+        <div class="@DialogClassBuilder">
+            <div class="@ContentClassBuilder">
+                <CascadingValue Value="this">
+                    @ChildContent
+                </CascadingValue>
+            </div>
+        </div>
+    </div>
 }
-
+else
+{
     <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="@Style" @ref="MyRef" data-blazorstrap="@DataId">
         <div class="@DialogClassBuilder">
             <div class="@ContentClassBuilder">
@@ -34,8 +39,8 @@
             </div>
         </div>
     </div>
-
+}
 @if (ShowBackdrop)
 {
-    <BlazorStrap.InternalComponents.Backdrop @ref="BackdropRef"/>
+    <BlazorStrap.InternalComponents.Backdrop @ref="BackdropRef" />
 }

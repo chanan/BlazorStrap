@@ -2,7 +2,6 @@
 {
     public class BlazorStrapCore : IBlazorStrap
     {
-        
         internal readonly BlazorStrapInterop Interop;
 
         internal Func<string, CallerName, EventType, Task>? OnEventForward;
@@ -10,6 +9,12 @@
         public Toaster Toaster { get;} = new Toaster();
         public Theme CurrentTheme { get; internal set; } = Theme.Bootstrap;
 
+        public BlazorStrapCore(BlazorStrapInterop? interop, string basepath)
+        {
+            if(interop == null)
+                throw new ArgumentNullException(nameof(interop));
+            Interop = interop;
+        }
         public BlazorStrapCore(BlazorStrapInterop interop)
         {
             Interop = interop;
@@ -48,7 +53,7 @@
             ModalChange?.Invoke(obj, false);
         }
 
-        internal void ForwardClick(string id)
+        public void ForwardClick(string id)
         {
             OnEventForward?.Invoke(id, new CallerName(typeof(ClickForward).Name.ToLower()), EventType.Click );
         }

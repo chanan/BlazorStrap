@@ -12,7 +12,7 @@ namespace BlazorStrap.Utilities
         private readonly HttpClient _httpClient;
         private bool isServerSide = false;
         private NavigationManager _navman;
-        public SvgLoader(HttpClient httpClient, NavigationManager navman, IServiceProvider services)
+        public SvgLoader(NavigationManager navman, IServiceProvider services)
         {
             // Server Side Blazor doesn't register HttpClient by default
             if (services.GetService(typeof(HttpClient)) == null)
@@ -21,7 +21,7 @@ namespace BlazorStrap.Utilities
             }
             else
             {
-                _httpClient = httpClient;    
+                _httpClient = services.GetServices<HttpClient>().First();
             }
 
             _navman = navman;

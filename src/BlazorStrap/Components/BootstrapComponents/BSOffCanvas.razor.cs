@@ -20,6 +20,7 @@ namespace BlazorStrap
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public Placement Placement { get; set; } = Placement.Left;
         [Parameter] public bool ShowBackdrop { get; set; } = true;
+        private bool _rendered = false;
 
         private bool _lock;
         private bool _shown;
@@ -58,22 +59,36 @@ namespace BlazorStrap
             get => _shown;
             private set => _shown = value;
         }
-
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if (firstRender)
+            {
+                _rendered = true;
+            }
+        }
         public override async Task ShowAsync()
         {
+            if (_rendered == false)
+            {
+                throw new InvalidOperationException("You are required to render this component before making any changes to it's state.");
+            }
+
             if (Shown) return;
             CanRefresh = false;
             // Used to hide popovers
             BlazorStrap.ForwardToggle("", this);
             _lock = true;
+
             if (!EventsSet)
             {
                 await BlazorStrap.Interop.AddEventAsync(_objectRef, DataId, EventType.TransitionEnd);
                 EventsSet = true;
             }
+
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             BlazorStrap.ForwardToggle(DataId, this);
+                       
             if (ShowBackdrop)
             {
                 await BlazorStrap.Interop.SetStyleAsync(BackdropRef, "display", "block", 100);
@@ -81,6 +96,7 @@ namespace BlazorStrap
                 BackdropStyle = "display: block;";
             
             }
+       
             await BlazorStrap.Interop.AddClassAsync(MyRef, "show");
             if(await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
             {
@@ -92,10 +108,16 @@ namespace BlazorStrap
 
         public override async Task HideAsync()
         {
+            if (_rendered == false)
+            {
+                throw new InvalidOperationException("You are required to render this component before making any changes to it's state.");
+            }
+
             if (!Shown) return;
             CanRefresh = false;
             // Used to hide popovers
             BlazorStrap.ForwardToggle("", this);
+
             _lock = true;
             if (!EventsSet)
             {
@@ -111,6 +133,7 @@ namespace BlazorStrap
             }
 
             await BlazorStrap.Interop.RemoveClassAsync(MyRef, "show");
+
             if(await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
             {
                 await TransitionEndAsync();

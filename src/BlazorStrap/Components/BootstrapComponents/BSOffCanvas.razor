@@ -3,27 +3,30 @@
 
 @if (Content == null)
 {
-    <BlazorStrap.InternalComponents.Error Name="BSOffCanvas">
-        The <strong>Content</strong> RenderFragment is required.
-    </BlazorStrap.InternalComponents.Error>
-
-    return;
-}
-
-<div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="visibility:visible;" @ref="MyRef" data-blazorstrap="@DataId">
-
-    @if (Header != null)
-    {
-        <div class="@HeaderClassBuilder">
-            @Header
-            <button type="button" class="ms-auto btn-close @ButtonClass" data-bs-dismiss="toast" aria-label="Close" @onclick="ClickEvent"></button>
-        </div>
-    }
-    <div class="@BodyClassBuilder">
-        @Content
+    <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="visibility:visible;" @ref="MyRef" data-blazorstrap="@DataId">
+        <CascadingValue Value="this">
+            @ChildContent
+        </CascadingValue>
     </div>
-</div>
-@if (ShowBackdrop )
+
+}
+else
+{
+    <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="visibility:visible;" @ref="MyRef" data-blazorstrap="@DataId">
+
+        @if (Header != null)
+        {
+            <div class="@HeaderClassBuilder">
+                @Header
+                <button type="button" class="ms-auto btn-close @ButtonClass" data-bs-dismiss="toast" aria-label="Close" @onclick="ClickEvent"></button>
+            </div>
+        }
+        <div class="@BodyClassBuilder">
+            @Content
+        </div>
+    </div>
+}
+@if (ShowBackdrop)
 {
     <div class="@BackdropClass" style="@BackdropStyle" @ref="BackdropRef" @onclick="EventUtil.AsNonRenderingEventHandler(BackdropClicked)" @onclick:preventDefault></div>
 }

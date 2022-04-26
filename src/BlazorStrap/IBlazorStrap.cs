@@ -13,5 +13,6 @@ namespace BlazorStrap
         Task SetBootstrapCss(string version);
         Task SetBootstrapCss(string theme, string version);
         Task SetBootstrapCss(Theme theme, string version);
+        void ForwardClick(string id);
     }
 }
