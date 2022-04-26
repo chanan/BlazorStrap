@@ -80,7 +80,3 @@ TValue = BSModal
 | OnHide      | Event  | TValue       | Raised when starting to hide |
 | OnHidden    | Event  | TValue       | Raised when hidden           |
 :::
-
-If you get the follow exception "You are required to render this component before making any changes to it's state.". Likly causes are as follows
-* You have attempted to show the component before it has rendered.
-* The parent of the component disposed of it and will need to render before any changes can be made.

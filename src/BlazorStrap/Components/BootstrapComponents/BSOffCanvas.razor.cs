@@ -20,7 +20,6 @@ namespace BlazorStrap
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public Placement Placement { get; set; } = Placement.Left;
         [Parameter] public bool ShowBackdrop { get; set; } = true;
-        private bool _rendered = false;
 
         private bool _lock;
         private bool _shown;
@@ -59,20 +58,9 @@ namespace BlazorStrap
             get => _shown;
             private set => _shown = value;
         }
-        protected override void OnAfterRender(bool firstRender)
-        {
-            if (firstRender)
-            {
-                _rendered = true;
-            }
-        }
+
         public override async Task ShowAsync()
         {
-            if (_rendered == false)
-            {
-                throw new InvalidOperationException("You are required to render this component before making any changes to it's state.");
-            }
-
             if (Shown) return;
             CanRefresh = false;
             // Used to hide popovers
@@ -108,11 +96,6 @@ namespace BlazorStrap
 
         public override async Task HideAsync()
         {
-            if (_rendered == false)
-            {
-                throw new InvalidOperationException("You are required to render this component before making any changes to it's state.");
-            }
-
             if (!Shown) return;
             CanRefresh = false;
             // Used to hide popovers

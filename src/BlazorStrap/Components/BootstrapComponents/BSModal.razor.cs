@@ -30,7 +30,6 @@ namespace BlazorStrap
         [Parameter] public bool IsStaticBackdrop { get; set; }
         [Parameter] public bool ShowBackdrop { get; set; } = true;
         [Parameter] public Size Size { get; set; } = Size.None;
-        private bool _rendered = false;
         private bool _leaveBodyAlone;
 
         private bool _shown;
@@ -88,10 +87,6 @@ namespace BlazorStrap
 
         public override async Task HideAsync()
         {
-            if (_rendered == false)
-            {
-                throw new InvalidOperationException("You are required to render this component before making any changes to it's state.");
-            }
             if (!Shown) return;
             CanRefresh = false;
             _called = true;
@@ -132,10 +127,6 @@ namespace BlazorStrap
 
         public override async Task ShowAsync()
         {
-            if (_rendered == false)
-            {
-                throw new InvalidOperationException("You are required to render this component before making any changes to it's state.");
-            }
             if (Shown) return;
             CanRefresh = false;
             _called = true;
@@ -185,13 +176,6 @@ namespace BlazorStrap
             }
         }
 
-        protected override void OnAfterRender(bool firstRender)
-        {
-            if(firstRender)
-            {
-                _rendered = true;
-            }
-        }
         private void Toggle()
         {
             EventUtil.AsNonRenderingEventHandler(ToggleAsync).Invoke();
@@ -199,7 +183,6 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
-            _rendered = false;
             _objectRef = DotNetObjectReference.Create<BSModal>(this);
             BlazorStrap.OnEventForward += InteropEventCallback;
             BlazorStrapCore.ModalChange += OnModalChange;
