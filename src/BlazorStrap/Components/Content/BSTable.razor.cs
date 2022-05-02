@@ -19,7 +19,6 @@ namespace BlazorStrap
          .AddClass("table-striped", IsStriped)
          .AddClass("table-dark", IsDark)
          .AddClass("table-hover", IsHoverable)
-         .AddClass("table-responsive", IsResponsive)
          .AddClass("table-sm", IsSmall)
          .AddClass("table-bordered", IsBordered)
          .AddClass("table-borderless", IsBorderLess)

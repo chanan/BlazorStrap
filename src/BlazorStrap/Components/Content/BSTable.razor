@@ -1,5 +1,16 @@
 ﻿@namespace BlazorStrap
 @inherits BlazorStrapBase
-<table class="@ClassBuilder" @attributes="Attributes">
-    @ChildContent
-</table>
+@if (IsResponsive)
+{
+    <div class="table-responsive bs-table-responsive">
+        <table class="@ClassBuilder" @attributes="Attributes">
+            @ChildContent
+        </table>
+    </div>
+}
+else
+{
+    <table class="@ClassBuilder" @attributes="Attributes">
+        @ChildContent
+    </table>
+}
