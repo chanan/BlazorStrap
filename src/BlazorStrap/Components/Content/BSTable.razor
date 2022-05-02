@@ -2,7 +2,7 @@
 @inherits BlazorStrapBase
 @if (IsResponsive)
 {
-    <div class="table-responsive bs-table-responsive">
+    <div class="@WrapperClassBuilder">
         <table class="@ClassBuilder" @attributes="Attributes">
             @ChildContent
         </table>

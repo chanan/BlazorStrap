@@ -9,6 +9,7 @@ namespace BlazorStrap
         [Parameter] public bool IsDark { get; set; }
         [Parameter] public bool IsHoverable { get; set; }
         [Parameter] public bool IsResponsive { get; set; }
+        [Parameter] public Size ResponsiveSize { get; set; } = Size.None;
         [Parameter] public bool IsSmall { get; set; }
         [Parameter] public bool IsBordered { get; set; }
         [Parameter] public bool IsBorderLess { get; set; }
@@ -22,10 +23,16 @@ namespace BlazorStrap
          .AddClass("table-sm", IsSmall)
          .AddClass("table-bordered", IsBordered)
          .AddClass("table-borderless", IsBorderLess)
-         .AddClass($"table-{Color.NameToLower()}" , Color != BSColor.Default)
+         .AddClass($"table-{Color.NameToLower()}", Color != BSColor.Default)
          .AddClass("caption-top", IsCaptionTop)
          .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
          .AddClass(Class, !string.IsNullOrEmpty(Class))
          .Build().ToNullString();
+
+        internal string? WrapperClassBuilder => new CssBuilder("bs-table-responsive")
+            .AddClass("table-responsive", ResponsiveSize == Size.None)
+            .AddClass($"table-responsive-{ResponsiveSize.ToDescriptionString()}", ResponsiveSize != Size.None)
+            .Build().ToNullString();
+            
     }
 }
