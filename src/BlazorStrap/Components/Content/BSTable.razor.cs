@@ -9,6 +9,7 @@ namespace BlazorStrap
         [Parameter] public bool IsDark { get; set; }
         [Parameter] public bool IsHoverable { get; set; }
         [Parameter] public bool IsResponsive { get; set; }
+        [Parameter] public string? ResponsiveWrapperClass { get; set; }
         [Parameter] public Size ResponsiveSize { get; set; } = Size.None;
         [Parameter] public bool IsSmall { get; set; }
         [Parameter] public bool IsBordered { get; set; }
@@ -32,6 +33,7 @@ namespace BlazorStrap
         internal string? WrapperClassBuilder => new CssBuilder("bs-table-responsive")
             .AddClass("table-responsive", ResponsiveSize == Size.None)
             .AddClass($"table-responsive-{ResponsiveSize.ToDescriptionString()}", ResponsiveSize != Size.None)
+            .AddClass(ResponsiveWrapperClass, !string.IsNullOrEmpty(ResponsiveWrapperClass))
             .Build().ToNullString();
             
     }
