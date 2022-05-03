@@ -35,6 +35,7 @@ namespace BlazorStrap
             .AddClass($"justify-content-{Justify.NameToLower()}", Justify != Justify.Default)
             .AddClass($"align-items-{Align.NameToLower()}", Align != Align.Default)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
+            .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
     }
 }
