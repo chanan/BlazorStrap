@@ -1,5 +1,5 @@
 ﻿<BSNav IsTabs="true">
-    <BSNavItem IsActive="true">
+    <BSNavItem>
         <TabLabel>Active</TabLabel>
         <TabContent>Active Tab content</TabContent>
     </BSNavItem>

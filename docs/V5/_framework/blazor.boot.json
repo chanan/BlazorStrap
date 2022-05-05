@@ -8,10 +8,10 @@
   "resources": {
     "assembly": {
       "BlazorComponentUtilities.dll": "sha256-UapksNiQg3lu5QM9uVSLyjEuzRH\/7o22fmcmxcLAAeI=",
-      "BlazorStrap.dll": "sha256-wTJQMWJWvOVpuUx\/+RkUgcZ0GozuzSuMygCggIkn42E=",
+      "BlazorStrap.dll": "sha256-j7\/JZhREGVPE0ED2YtJ4kbp\/PDh2kON40S3s4Mg2lTU=",
       "BlazorStrap.Extensions.FluentValidation.dll": "sha256-u6LpgajdJjmKuQ1F+ktPtlTpvuN6Lb95V5+Eu1XTUds=",
-      "BlazorStrap.WASM.dll": "sha256-7gnOrMGpH6X3QEw6NEm7lyAOH0CtFp6rWsw9Rnnlsfc=",
-      "BlazorStrap-Docs.dll": "sha256-w+px5Z37ltgxKEALFGofAULCNE\/yt7TRZ2XRjVbY570=",
+      "BlazorStrap.WASM.dll": "sha256-uR\/riVSaLUOCVgdm01A4Uc9tv2Cnd1nMNZ0Vk0iweKg=",
+      "BlazorStrap-Docs.dll": "sha256-ooi8sGoqOHcqEziDtZb4t9Ix0CwEWFG0CzrIhl9HooY=",
       "ColorCode.dll": "sha256-hF07ps23in9mbwaN4uSoZklQVfyJIw2Ep4R448bfkOk=",
       "FluentValidation.dll": "sha256-NflrIQKcfYxeVjrVYw+AP1+xnZJp67Wq9L5Vsd5Cr\/8=",
       "Markdig.dll": "sha256-9\/ICq2gSL+hjhMdZXNoIRs8wyZFtZpr3yFSW+RQVdoQ=",

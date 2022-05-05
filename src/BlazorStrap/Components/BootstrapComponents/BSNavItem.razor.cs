@@ -52,6 +52,7 @@ namespace BlazorStrap
         private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
         {
             if (!_canHandleActive) return;
+            if (Parent?.IsTabs ?? false) return;
             IsActive = false;
             if (NavigationManager.Uri == NavigationManager.BaseUri + Url?.TrimStart('/'))
                 IsActive = true;
@@ -80,14 +81,13 @@ namespace BlazorStrap
             if (Parent?.IsTabs ?? false)
             {
                 Parent.Invoke(this);
-
             }
         }
 
         private async void Parent_ChildHandler(BSNavItem sender)
         {
-            if (sender == this) return;
-            IsActive = false;
+            if (Parent != null)
+                IsActive = Parent.ActiveChild == this;
             await InvokeAsync(StateHasChanged);
         }
         public void Dispose()
