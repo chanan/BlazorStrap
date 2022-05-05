@@ -6,12 +6,12 @@ namespace BlazorStrap
 {
     public partial class BSDataTableHead<TValue> : BSTD, IDisposable
     {
-        [Parameter] public string Column { get; set; }
+        [Parameter] public string? Column { get; set; }
         [Parameter] public bool Sortable { get; set; }
         [Parameter] public bool ColumnFilter { get; set; }
         [CascadingParameter] public BSDataTable<TValue>? Parent { get; set; }
         private bool? _desc;
-        private string Filter { get; set; }
+        private string? Filter { get; set; }
         internal string? SortClassBuilder => new CssBuilder()
             .AddClass("sort-by", _desc == null)
             .AddClass("sort", _desc == false)
@@ -43,25 +43,18 @@ namespace BlazorStrap
                 }
                 else
                 {
-                    await Parent.FilterAsync(Column, Filter);
+                    await Parent.FilterAsync(Column ?? "", Filter);
                 }
         }
         private async Task OnSort(string name, bool desc)
         {
-            if (name != Column)
-            {
-                _desc = null;
-            }
-            else
-            {
-                _desc = desc;
-            }
+            _desc = name != Column ? null : desc;
             await InvokeAsync(StateHasChanged);
         }
 
         private Task SortAsync()
         {
-            return Parent != null ? Parent.SortAsync(Column) : Task.CompletedTask;
+            return Parent != null ? Parent.SortAsync(Column ?? "") : Task.CompletedTask;
         }
 
         public void Dispose()

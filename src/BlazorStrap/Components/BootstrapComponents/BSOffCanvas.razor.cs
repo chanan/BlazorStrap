@@ -8,7 +8,8 @@ namespace BlazorStrap
 {
     public partial class BSOffCanvas : BlazorStrapToggleBase<BSOffCanvas>, IAsyncDisposable
     {
-        private DotNetObjectReference<BSOffCanvas> _objectRef;
+        private Func<Task>? _callback;
+        private DotNetObjectReference<BSOffCanvas>? _objectRef;
         [Parameter] public bool AllowScroll { get; set; }
         [Parameter] public string? BodyClass { get; set; }
         [Parameter] public string? ButtonClass { get; set; }
@@ -22,6 +23,7 @@ namespace BlazorStrap
         [Parameter] public bool ShowBackdrop { get; set; } = true;
 
         private bool _lock;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0032:Use auto property", Justification = "<Pending>")]
         private bool _shown;
 
         private string? BackdropClass => new CssBuilder("offcanvas-backdrop fade")
@@ -47,7 +49,7 @@ namespace BlazorStrap
             .AddClass(HeaderClass)
             .Build().ToNullString();
 
-        private ElementReference MyRef { get; set; }
+        private ElementReference? MyRef { get; set; }
         protected override bool ShouldRender()
         {
             return !_lock;
@@ -58,10 +60,42 @@ namespace BlazorStrap
             get => _shown;
             private set => _shown = value;
         }
-
-        public override async Task ShowAsync()
+        private async Task TryCallback(bool renderOnFail = true)
         {
-            if (Shown) return;
+            try
+            {
+                // Check if objectRef set if not callback will be handled after render.
+                // If anything fails callback will will be handled after render.
+                if (_objectRef != null)
+                {
+                    if (_callback != null)
+                    {
+                        await _callback();
+                        _callback = null;
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("No object ref");
+                }
+            }
+            catch
+            {
+                if(renderOnFail)
+                    await InvokeAsync(StateHasChanged);
+            }
+        }
+        public override Task ShowAsync()
+        {
+            if (Shown) return Task.CompletedTask;
+            _callback = async () =>
+            {
+                await ShowActionsAsync();
+            };
+            return TryCallback();
+        }
+        private async Task ShowActionsAsync()
+        { 
             CanRefresh = false;
             // Used to hide popovers
             BlazorStrap.ForwardToggle("", this);
@@ -94,9 +128,17 @@ namespace BlazorStrap
             await DoAnimationsAsync(_shown);
         }
 
-        public override async Task HideAsync()
+        public override Task HideAsync()
         {
-            if (!Shown) return;
+            if (!Shown) return Task.CompletedTask;
+            _callback = async () =>
+            {
+                await HideActionsAsync();
+            };
+            return TryCallback();
+        }
+        private async Task HideActionsAsync()
+        { 
             CanRefresh = false;
             // Used to hide popovers
             BlazorStrap.ForwardToggle("", this);
@@ -123,12 +165,6 @@ namespace BlazorStrap
             }
             Shown = false;
             await DoAnimationsAsync(_shown);
-        }
-
-        protected override void OnInitialized()
-        {
-            BlazorStrap.OnEventForward += InteropEventCallback;
-            _objectRef = DotNetObjectReference.Create<BSOffCanvas>(this);
         }
 
         public override async Task InteropEventCallback(string id, CallerName name, EventType type)
@@ -173,7 +209,11 @@ namespace BlazorStrap
 
             if (EventsSet)
             {
-                await BlazorStrap.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);
+                _callback = async () =>
+                {
+                    await BlazorStrap.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);
+                };
+                await TryCallback(false);
                 EventsSet = false;
             }
             _lock = false;
@@ -212,14 +252,31 @@ namespace BlazorStrap
                 }
             }
         }
-
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                BlazorStrap.OnEventForward += InteropEventCallback;
+                _objectRef = DotNetObjectReference.Create<BSOffCanvas>(this);
+            }
+            if (_callback != null)
+            {
+                await _callback.Invoke();
+                _callback = null;
+            }
+        }
         public async ValueTask DisposeAsync()
         {
-            BlazorStrap.OnEventForward -= InteropEventCallback;
-            if (!EventsSet)
+            _objectRef?.Dispose();
+            try
             {
-                await BlazorStrap.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);
+                BlazorStrap.OnEventForward -= InteropEventCallback;
+                if (!EventsSet)
+                {
+                    await BlazorStrap.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);
+                }
             }
+            catch { }
         }
     }
 }

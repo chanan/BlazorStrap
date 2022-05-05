@@ -1,4 +1,4 @@
-﻿<BSModal DataId="modal7a" IsCentered="true">
+﻿<BSModal DataId="modal7a" IsCentered="true" IsStaticBackdrop="true">
     <Header>Modal 1</Header>
     <Content>Hide this modal and show the second with the button below.</Content>
     <Footer>

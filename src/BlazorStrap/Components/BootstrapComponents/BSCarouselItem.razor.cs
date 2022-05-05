@@ -1,7 +1,5 @@
 ﻿using BlazorComponentUtilities;
-using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
@@ -9,7 +7,6 @@ namespace BlazorStrap
     {
         [Parameter] public int Interval { get; set; } = 5000;
         private bool _active;
-        private bool _once;
         [CascadingParameter] public BSCarousel? Parent { get; set; }
         private string? ClassBuilder => new CssBuilder("carousel-item")
             .AddClass("active", _active)
@@ -17,7 +14,7 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
-        internal ElementReference MyRef { get; private set; }
+        internal ElementReference? MyRef { get; private set; }
 
         public void First()
         {
@@ -47,20 +44,22 @@ namespace BlazorStrap
             return (_active) ? HideAsync() : ShowAsync();
         }
 
-        internal async Task InternalHide()
+        internal Task InternalHide()
         {
             CanRefresh = false;
             if (OnHide.HasDelegate)
                 _ = OnHide.InvokeAsync(this);
             _active = false;
+            return Task.CompletedTask;
         }
 
-        internal async Task InternalShow()
+        internal Task InternalShow()
         {
             CanRefresh = false;
             if (OnShow.HasDelegate)
                 _ = OnShow.InvokeAsync(this);
             _active = true;
+            return Task.CompletedTask;
         }
         
         internal Task Refresh()

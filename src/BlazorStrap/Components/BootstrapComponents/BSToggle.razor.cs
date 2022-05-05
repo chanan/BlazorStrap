@@ -22,8 +22,9 @@ namespace BlazorStrap
         private string Element =>
             (CollapseParent != null) ? "collapse" : (DropDownParent != null) ? "dropdown" : "unknown"; 
         private bool _canHandleActive;
-        private bool _childSetActive;
         private BSDropdownItem? _activeOwner;
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>")]
         private string Target
         {
             get
@@ -79,7 +80,7 @@ namespace BlazorStrap
             }
             StateHasChanged();
         }
-
+        //Event can't be access until it's rendered no callback needed.
         private async Task ClickEvent()
         {
             if (DropDownParent != null)
@@ -97,7 +98,8 @@ namespace BlazorStrap
                 await OnClick.InvokeAsync();
             }
         }
-        
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>")]
         private bool Show()
         {
             if (DropDownParent != null)
@@ -111,7 +113,6 @@ namespace BlazorStrap
               
             }
             return false;
-                
         }
 
         public void Dispose()

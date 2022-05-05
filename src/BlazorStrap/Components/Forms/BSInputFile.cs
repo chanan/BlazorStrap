@@ -18,6 +18,7 @@ namespace BlazorStrap
         [Parameter] public TValue? IsBasic { get; set; }
         [Parameter] public bool IsDisabled { get; set; }
         [Parameter] public bool IsInvalid { get; set; }
+        [Parameter] public bool RemoveDefaultClass { get; set; }
         [Parameter] public bool IsValid { get; set; }
         [Parameter] public EventCallback<InputFileChangeEventArgs> OnChange { get; set; }
         [Parameter] public string ValidClass { get; set; } = "is-valid";
@@ -25,11 +26,14 @@ namespace BlazorStrap
         private bool _hasInitialized;
         [CascadingParameter] private EditContext? CascadedEditContext { get; set; }
 
-        private string? ClassBuilder => new CssBuilder("form-control")
+        private string? ClassBuilder => new CssBuilder()
+            .AddClass("form-control", !RemoveDefaultClass)
             .AddClass(ValidClass, IsValid)
             .AddClass(InvalidClass, IsInvalid)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
+            .AddClass(ValidClass, IsValid)
+            .AddClass(InvalidClass, IsInvalid)
             .Build().ToNullString();
 
         protected EditContext? EditContext { get; set; }
@@ -43,7 +47,7 @@ namespace BlazorStrap
             builder.AddAttribute(2, "class", ClassBuilder);
             builder.AddAttribute(3, "onclick",  OnFileClick);
             builder.AddMultipleAttributes(4, Attributes);
-            builder.CloseElement();
+            builder.CloseComponent();
         }
 
         protected override void OnParametersSet()
@@ -57,6 +61,7 @@ namespace BlazorStrap
                     EditContext = CascadedEditContext;
                     if (ValidWhen != null) FieldIdentifier = FieldIdentifier.Create(ValidWhen);
                     EditContext.OnValidationStateChanged += OnValidationStateChanged;
+                    EditContext.OnValidationRequested += EditContext_OnValidationRequested;
                 }
 
 
@@ -70,6 +75,12 @@ namespace BlazorStrap
                 // emerges, we can consider changing this.
                 throw new InvalidOperationException($"{GetType()} does not support changing the EditContext dynamically.");
             }
+        }
+
+        private void EditContext_OnValidationRequested(object? sender, ValidationRequestedEventArgs e)
+        {
+            if (sender != null)
+                ((EditContext)sender).NotifyFieldChanged(FieldIdentifier);
         }
 
         private async Task OnFileChange(InputFileChangeEventArgs e)

@@ -7,6 +7,7 @@ namespace BlazorStrap
 {
     public partial class BSTooltip : BlazorStrapToggleBase<BSTooltip>, IAsyncDisposable
     {
+        private Func<Task>? _callback;
         [Parameter] public Placement Placement { get; set; }
         [Parameter] public string? Target { get; set; }
 
@@ -19,14 +20,37 @@ namespace BlazorStrap
 
         private bool HasRender { get; set; }
 
-        private ElementReference MyRef { get; set; }
+        private ElementReference? MyRef { get; set; }
         public bool Shown { get; private set; }
         private string Style { get; set; } = "display:none";
-
-        public override async Task HideAsync()
+        private async Task TryCallback(bool renderOnFail = true)
         {
-            if (!Shown) return;
-
+            try
+            {
+                // If anything fails callback will will be handled after render.
+                if (_callback != null)
+                {
+                    await _callback();
+                    _callback = null;
+                }
+            }
+            catch
+            {
+                if (renderOnFail)
+                    await InvokeAsync(StateHasChanged);
+            }
+        }
+        public override Task HideAsync()
+        {
+            if (!Shown) return Task.CompletedTask;
+            _callback = async () =>
+            {
+                await HideActionsAsync();
+            };
+            return TryCallback();
+        }
+        private async Task HideActionsAsync()
+        { 
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
             Shown = false;
@@ -38,10 +62,17 @@ namespace BlazorStrap
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
         }
 
-        public override async Task ShowAsync()
+        public override Task ShowAsync()
         {
-            if (Shown) return;
-
+            if (Shown) return Task.CompletedTask;
+            _callback = async () =>
+            {
+                await ShowActionsAsync();
+            };
+            return TryCallback();
+        }
+        private async Task ShowActionsAsync()
+        { 
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             Shown = true;
@@ -75,6 +106,11 @@ namespace BlazorStrap
                     EventsSet = true;
                 }
             }
+            if (_callback != null)
+            {
+                await _callback.Invoke();
+                _callback = null;
+            }
         }
 
         [JSInvokable]
@@ -94,18 +130,21 @@ namespace BlazorStrap
         public async ValueTask DisposeAsync()
         {
             // Prerendering error suppression 
-            if (HasRender)
-                await BlazorStrap.Interop.RemovePopoverAsync(MyRef, DataId);
-            
-            if (Target != null)
+            try
             {
-                if (EventsSet)
+                if (HasRender)
+                    await BlazorStrap.Interop.RemovePopoverAsync(MyRef, DataId);
+
+                if (Target != null)
                 {
-                    await BlazorStrap.Interop.RemoveEventAsync(this,Target, EventType.Mouseenter);
-                    await BlazorStrap.Interop.RemoveEventAsync(this,Target, EventType.Mouseleave);
+                    if (EventsSet)
+                    {
+                        await BlazorStrap.Interop.RemoveEventAsync(this, Target, EventType.Mouseenter);
+                        await BlazorStrap.Interop.RemoveEventAsync(this, Target, EventType.Mouseleave);
+                    }
                 }
             }
-
+            catch { }
 
             GC.SuppressFinalize(this);
         }

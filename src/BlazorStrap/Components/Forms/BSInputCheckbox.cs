@@ -61,6 +61,7 @@ namespace BlazorStrap
             }
         }
 
+        [SuppressMessage("Style", "IDE0045:Convert to conditional expression", Justification = "<Pending>")]
         private void RadioOnClickEvent(MouseEventArgs e)
         {
             if (Value == null)

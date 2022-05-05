@@ -37,8 +37,7 @@ public class BlazorStrapActionBase : BlazorStrapBase
 
     private string ButtonType()
     {
-        if (IsSubmitType) return "submit";
-        return IsResetType ? "reset" : "button";
+        return IsSubmitType ? "submit" : IsResetType ? "reset" : "button";
     }
 
     private async Task ClickEvent(MouseEventArgs e)

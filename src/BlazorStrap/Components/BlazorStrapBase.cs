@@ -2,7 +2,6 @@
 using BlazorStrap.Service;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 
 
 namespace BlazorStrap

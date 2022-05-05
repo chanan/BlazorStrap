@@ -20,6 +20,7 @@ namespace BlazorStrap
 
         [CascadingParameter] public BSProgress? Parent { get;set;}
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0032:Use auto property", Justification = "<Pending>")]
         private double _value;
         private string? Width { get; set; } = null;
         

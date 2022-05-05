@@ -15,10 +15,6 @@ namespace BlazorStrap
 
         [Parameter] public int TotalItems { get; set; }
 
-        [Obsolete("Replaced with FetchItems"), Parameter] public Func<int, string, bool, string, string, Task<IEnumerable<TValue>>>? DataSet { get; set; }
-
-        [Obsolete("Replaced with TotalItems"), Parameter] public Func<int>? TotalRecords { get; set; }
-
         [Parameter] public RenderFragment<TValue>? Body { get; set; }
         [Parameter] public RenderFragment? Header { get; set; }
         [Parameter] public RenderFragment? Footer { get; set; }
@@ -42,13 +38,7 @@ namespace BlazorStrap
             //Might be Prerendered
             try
             {
-                if (TotalRecords != null && DataSet != null)
-                {
-                    TotalItems = TotalRecords.Invoke();
-                    Items = (await DataSet.Invoke(Page - 1, _sortColumn, false, _filterColumn, _filterValue)).ToList();
-                    await InvokeAsync(StateHasChanged);
-                }
-                else if (FetchItems != null)
+                if (FetchItems != null)
                 {
                     var data = await FetchItems.Invoke(DataRequest(Page - 1));
                     Items = data.Item1;
@@ -73,12 +63,7 @@ namespace BlazorStrap
         }
         private async Task ChangePage(int page)
         {
-            if (TotalRecords != null && DataSet != null)
-            {
-                Items = (await DataSet.Invoke(page - 1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
-                await InvokeAsync(StateHasChanged);
-            }
-            else if(FetchItems != null)
+            if(FetchItems != null)
             {
                 var data = await FetchItems.Invoke(DataRequest(page - 1));
                 Items = data.Item1;
@@ -95,26 +80,13 @@ namespace BlazorStrap
         private int GetPages()
         {
             var value = 0;
-            if (TotalRecords != null && DataSet != null)
-            {
                 value = (int)Math.Ceiling(((float)TotalItems / RowsPerPage));
-            }
-            else
-            {
-                value = (int)Math.Ceiling(((float)TotalItems / RowsPerPage));
-            }
-
             return value < 1 ? 1 : value;
         }
 
         public async Task Refresh()
         {
-            if (TotalRecords != null && DataSet != null)
-            {
-                TotalItems = TotalRecords.Invoke();
-                Items = (await DataSet.Invoke(Page - 1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
-            }
-            else if (FetchItems != null)
+            if (FetchItems != null)
             {
                 var data = await FetchItems.Invoke(DataRequest(Page - 1));
                 Items = data.Item1;
@@ -129,13 +101,7 @@ namespace BlazorStrap
             _filterValue = value;
             _filterColumn = name;
             OnFilter?.Invoke(name);
-            if (TotalRecords != null && DataSet != null)
-            {
-                Items = (await DataSet.Invoke(Page - 1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
-                TotalItems = TotalRecords.Invoke();
-                await InvokeAsync(StateHasChanged);
-            }
-            else if (FetchItems != null)
+            if (FetchItems != null)
             {
                 var data = await FetchItems.Invoke(DataRequest(Page - 1));
                 Items = data.Item1;
@@ -149,18 +115,10 @@ namespace BlazorStrap
         }
         public async Task SortAsync(string name)
         {
-            if (_sortColumn != name)
-                _desc = false;
-            else
-                _desc = !_desc;
+            _desc = _sortColumn != name ? false : !_desc;
             _sortColumn = name;
 
-            if (TotalRecords != null && DataSet != null)
-            {
-                Items = (await DataSet.Invoke(Page - 1, _sortColumn, _desc, _filterColumn, _filterValue)).ToList();
-                await InvokeAsync(StateHasChanged);
-            }
-            else if (FetchItems != null)
+            if (FetchItems != null)
             {
                 var data = await FetchItems.Invoke(DataRequest(Page - 1));
                 Items = data.Item1;

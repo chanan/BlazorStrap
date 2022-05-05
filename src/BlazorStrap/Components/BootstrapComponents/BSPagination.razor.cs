@@ -7,7 +7,7 @@ namespace BlazorStrap
 {
     public partial class BSPagination : BlazorStrapBase
     {
-        private DotNetObjectReference<BSPagination> _objectRef;
+        private DotNetObjectReference<BSPagination>? _objectRef;
         private string MyId { get; set; }= Guid.NewGuid().ToString();
         [Parameter] public Align Align { get; set; } = Align.Default;
         [Parameter] public EventCallback<int> ValueChanged { get; set; }
@@ -33,7 +33,6 @@ namespace BlazorStrap
         private int _pageWidth = 50;
         private int MaxItems { get; set; }= 0;
         private bool _resized;
-        private bool _hasRendered;
         private ElementReference NavReference { get; set; }
         private string? ClassBuilder => new CssBuilder("pagination")
           .AddClass($"bg-{Color.NameToLower()}", Color != BSColor.Default)
@@ -59,7 +58,7 @@ namespace BlazorStrap
         private async Task GetMaxItems()
         {
             var navWidth = await BlazorStrap.Interop.GetWidthAsync(NavReference) - 140;
-            var max = ((navWidth / _pageWidth) / 2) ;
+            var max = (navWidth / _pageWidth / 2) ;
             if (MaxItems != max)
             {
                 MaxItems = max;    
@@ -104,7 +103,6 @@ namespace BlazorStrap
                // await BlazorStrap.Interop.AddEventAsync(_objectRef, MyId, EventType.Resize);
                 await GetMaxItems();
                 await InvokeAsync(StateHasChanged);
-                _hasRendered = true;
             }
             else if (_resized)
             {

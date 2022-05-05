@@ -19,7 +19,7 @@
             base.Start();
         }
 
-        private void ElapsedAction(object sender, System.Timers.ElapsedEventArgs e)
+        private void ElapsedAction(object? sender, System.Timers.ElapsedEventArgs e)
         {
             if (AutoReset)
                 m_dueTime = DateTime.Now.AddMilliseconds(Interval);

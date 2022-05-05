@@ -15,7 +15,7 @@ else
         <ol class="@ClassBuilder" @attributes="Attributes">
             @foreach(var item in Tree)
             {
-                if (NavigationManager.Uri == item.Key )
+                if (NavigationManager?.Uri == item.Key )
                 {
                     <li class="breadcrumb-item active" @key="item.Key">
                     @item.Value

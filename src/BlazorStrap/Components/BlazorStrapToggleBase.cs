@@ -18,9 +18,7 @@ namespace BlazorStrap
         /// <returns></returns>
         public virtual Task RefreshAsync()
         {
-            if(CanRefresh)
-                return InvokeAsync(StateHasChanged);
-            return Task.CompletedTask;
+            return CanRefresh ? InvokeAsync(StateHasChanged) : Task.CompletedTask;
         }
         public virtual Task HideAsync()
         {

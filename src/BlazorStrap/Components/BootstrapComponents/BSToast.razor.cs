@@ -12,8 +12,7 @@ namespace BlazorStrap
         
         private int CloseAfter { get; set; } = 0;
         private int TimeRemaining { get; set; } = 0;
-        private bool _showTimer = false;
-        private ElementReference MyRef { get; set; }
+        private ElementReference? MyRef { get; set; }
         [Parameter] public Guid? ToasterId { get; set; } = null;
         [Parameter] public bool IsBackgroundInRoot { get; set; }
         [Parameter] public string? ButtonClass { get; set; }
@@ -79,10 +78,10 @@ namespace BlazorStrap
                 var self = BlazorStrap.Toaster.Children.FirstOrDefault(q => q.Id == ToasterId);
                 if(self != null)
                 {
-                    
                     if (self.Timer == null) return;
                     self.Timer.Elapsed += TimerOnElapsed;
                     CloseAfter = self.CloseAfter;
+                    
                     if (self?.Timer?.Enabled == false && CloseAfter != 0)
                     {
                         await BlazorStrap.Interop.ToastTimerAsync(MyRef, CloseAfter, 0, self.Rendered);
@@ -92,12 +91,13 @@ namespace BlazorStrap
                     {
                         await BlazorStrap.Interop.ToastTimerAsync(MyRef, CloseAfter, Convert.ToInt32(self?.Timer?.TimeLeft ?? 0), self?.Rendered ?? true);
                     }
-                    self.Rendered = true;
+                    if (self != null)
+                        self.Rendered = true;
                 }
             }
         }
 
-        private async void TimerOnElapsed(object sender, ElapsedEventArgs e)
+        private async void TimerOnElapsed(object? sender, ElapsedEventArgs e)
         {
             // Delay for animation .15 seconds = 150 ms move this to transition end later
             await BlazorStrap.Interop.AddClassAsync(MyRef, "showing");

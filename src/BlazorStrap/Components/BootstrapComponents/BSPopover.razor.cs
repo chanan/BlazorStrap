@@ -8,7 +8,8 @@ namespace BlazorStrap
 {
     public partial class BSPopover : BlazorStrapToggleBase<BSPopover>, IAsyncDisposable
     {
-        private DotNetObjectReference<BSPopover> _objectRef;
+        private Func<Task>? _callback;
+        private DotNetObjectReference<BSPopover>? _objectRef;
         [Parameter]
         public RenderFragment? Content { get; set; }
 
@@ -53,27 +54,69 @@ namespace BlazorStrap
             .AddClass($"bg-{HeaderColor.NameToLower()}", HeaderColor != BSColor.Default)
             .Build().ToNullString();
 
-        private ElementReference MyRef { get; set; }
+        private ElementReference? MyRef { get; set; }
         public bool Shown { get; private set; }
         private string Style { get; set; } = "display:none;";
 
-        public override async Task HideAsync()
+        private async Task TryCallback(bool renderOnFail = true)
         {
-            if (!Shown) return;
+            try
+            {
+                // Check if objectRef set if not callback will be handled after render.
+                // If anything fails callback will will be handled after render.
+                if (_objectRef != null)
+                {
+                    if (_callback != null)
+                    {
+                        await _callback();
+                        _callback = null;
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("No object ref");
+                }
+            }
+            catch
+            {
+                if (renderOnFail)
+                    await InvokeAsync(StateHasChanged);
+            }
+        }
+
+        public override Task HideAsync()
+        {
+            if (!Shown) return Task.CompletedTask;
+            _callback = async () =>
+            {
+                await HideActionsAsync();
+            };
+            return TryCallback();
+        }
+        private async Task HideActionsAsync()
+        {
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
             _called = true;
             Shown = false;
-            await BlazorStrap.Interop.RemoveClassAsync( MyRef, "show", 100);
+            await BlazorStrap.Interop.RemoveClassAsync(MyRef, "show", 100);
             await BlazorStrap.Interop.SetStyleAsync(MyRef, "display", "none");
             await BlazorStrap.Interop.RemovePopoverAsync(MyRef, DataId);
             Style = "display:none;";
             await InvokeAsync(StateHasChanged);
         }
 
-        public override async Task ShowAsync()
+        public override Task ShowAsync()
         {
-            if (Shown) return;
+            if (Shown) return Task.CompletedTask;
+            _callback = async () =>
+            {
+                await ShowActionsAsync();
+            };
+            return TryCallback();
+        }
+        private async Task ShowActionsAsync()
+        {
             if (Target == null)
             {
                 throw new NullReferenceException("Target cannot be null");
@@ -104,7 +147,7 @@ namespace BlazorStrap
         }
         public async Task ShowAsync(string? target, string? content, Placement placement, string? header = null)
         {
-            
+
             if (target == null || content == null)
             {
                 throw new NullReferenceException("Target and Content cannot be null");
@@ -112,7 +155,7 @@ namespace BlazorStrap
             Placement = placement;
             Target = target;
             Content = CreateFragment(content);
-            if(header != null)
+            if (header != null)
                 Header = CreateFragment(header);
 
             //Hides the old pop up. Placed here allows sizing to work properly don't move
@@ -136,6 +179,8 @@ namespace BlazorStrap
         {
             if (firstRender)
             {
+                _objectRef = DotNetObjectReference.Create<BSPopover>(this);
+                BlazorStrap.OnEventForward += InteropEventCallback;
                 HasRender = true;
                 if (Target != null)
                 {
@@ -168,12 +213,11 @@ namespace BlazorStrap
                         await OnHidden.InvokeAsync(this);
                 }
             }
-        }
-
-        protected override void OnInitialized()
-        {
-            _objectRef = DotNetObjectReference.Create<BSPopover>(this);
-            BlazorStrap.OnEventForward += InteropEventCallback;
+            if (_callback != null)
+            {
+                await _callback.Invoke();
+                _callback = null;
+            }
         }
 
         public override async Task InteropEventCallback(string id, CallerName name, EventType type)
@@ -199,7 +243,7 @@ namespace BlazorStrap
             {
                 await ShowAsync();
             }
-            else if (id == Target && name.Equals(this) && type == EventType.Mouseleave )
+            else if (id == Target && name.Equals(this) && type == EventType.Mouseleave)
             {
                 await HideAsync();
             }
@@ -207,21 +251,25 @@ namespace BlazorStrap
             {
                 await ToggleAsync();
             }
-          
+
         }
-        
+
         #region Dispose
 
         public async ValueTask DisposeAsync()
         {
-            _objectRef.Dispose();
+            _objectRef?.Dispose();
             BlazorStrap.OnEventForward -= InteropEventCallback;
             if (Target != null)
             {
                 if (MouseOver)
                 {
-                    await BlazorStrap.Interop.RemoveEventAsync(this, Target, EventType.Mouseenter);
-                    await BlazorStrap.Interop.RemoveEventAsync(this, Target, EventType.Mouseleave);
+                    try
+                    {
+                        await BlazorStrap.Interop.RemoveEventAsync(this, Target, EventType.Mouseenter);
+                        await BlazorStrap.Interop.RemoveEventAsync(this, Target, EventType.Mouseleave);
+                    }
+                    catch { }
                 }
             }
 
@@ -231,12 +279,16 @@ namespace BlazorStrap
                 {
                     if (Target != null)
                     {
-                        await BlazorStrap.Interop.RemovePopoverAsync(MyRef, DataId);
-                        if (EventsSet)
+                        try
                         {
-                            if (!IsDropdown)
-                                await BlazorStrap.Interop.RemoveEventAsync(this, Target, EventType.Click);
+                            await BlazorStrap.Interop.RemovePopoverAsync(MyRef, DataId);
+                            if (EventsSet)
+                            {
+                                if (!IsDropdown)
+                                    await BlazorStrap.Interop.RemoveEventAsync(this, Target, EventType.Click);
+                            }
                         }
+                        catch { }
                     }
                 }
                 catch (Exception ex) when (ex.GetType().Name == "JSDisconnectedException")

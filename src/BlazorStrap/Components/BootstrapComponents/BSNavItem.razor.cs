@@ -23,7 +23,6 @@ namespace BlazorStrap
         [Parameter] public string? Url { get; set; } = "javascript:void(0);";
         [CascadingParameter] public BSNav? Parent { get; set; }
         private bool _canHandleActive;
-        private bool _childSetActive;
         private string? ClassBuilder => new CssBuilder("nav-link")
             .AddClass("active", IsActive ?? false)
             .AddClass("disabled", IsDisabled)
@@ -52,7 +51,7 @@ namespace BlazorStrap
 
         private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
         {
-            if (!_canHandleActive || _childSetActive) return;
+            if (!_canHandleActive) return;
             IsActive = false;
             if (NavigationManager.Uri == NavigationManager.BaseUri + Url?.TrimStart('/'))
                 IsActive = true;
@@ -78,7 +77,7 @@ namespace BlazorStrap
 
             if (OnClick.HasDelegate)
                 await OnClick.InvokeAsync();
-            if (Parent.IsTabs)
+            if (Parent?.IsTabs ?? false)
             {
                 Parent.Invoke(this);
 

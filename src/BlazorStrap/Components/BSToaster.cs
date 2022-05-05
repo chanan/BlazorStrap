@@ -8,10 +8,12 @@ namespace BlazorStrap
     public class BSToaster : ComponentBase, IDisposable
     {
         // ReSharper disable once NullableWarningSuppressionIsUsed
-        [Inject] private IBlazorStrap BlazorStrap { get; set; } = default!;
-        [Parameter] public string WrapperClass { get; set; }
+        [Inject] private IBlazorStrap? BlazorStrap { get; set; } = default!;
+        [Parameter] public string WrapperClass { get; set; } = "";
         protected override void OnInitialized()
         {
+            if (BlazorStrap == null) throw new ArgumentNullException(nameof(BlazorStrap));
+            if (BlazorStrap.Toaster == null) throw new ArgumentNullException(nameof(BlazorStrap.Toaster));
             BlazorStrap.Toaster.OnChange += OnChange;
         }
 
@@ -26,6 +28,8 @@ namespace BlazorStrap
             var lastPlacment = Toast.Default;
             var building = false;
             var i = 0;
+            if (BlazorStrap == null) throw new ArgumentNullException(nameof(BlazorStrap));
+            if (BlazorStrap.Toaster == null) throw new ArgumentNullException(nameof(BlazorStrap.Toaster));
             foreach (var toast in BlazorStrap.Toaster.Children.OrderBy(q => q.Placement).ThenBy(q => q.Created))
             {
                 if (toast.Placement != Toast.Default)
@@ -64,11 +68,15 @@ namespace BlazorStrap
 
         public void Dispose()
         {
+            if (BlazorStrap == null) throw new ArgumentNullException(nameof(BlazorStrap));
+            if (BlazorStrap.Toaster == null) throw new ArgumentNullException(nameof(BlazorStrap.Toaster));
             BlazorStrap.Toaster.OnChange -= OnChange;
         }
 
-        internal RenderFragment GetFragment(Toasts Toast)
+        internal RenderFragment GetFragment(Toasts? Toast)
         {
+            if (Toast == null) throw new ArgumentNullException(nameof(Toast));
+
             var header = new RenderFragment(childBuilder =>
             {
                 childBuilder.AddContent(0, new MarkupString(Toast.HeaderText ?? ""));
@@ -80,6 +88,11 @@ namespace BlazorStrap
             
             return builder =>
             {
+                if (Toast.Options == null) throw new ArgumentNullException(nameof(Toast.Options));
+                if (BlazorStrap == null) throw new ArgumentNullException(nameof(BlazorStrap));
+                if (BlazorStrap.Toaster == null) throw new ArgumentNullException(nameof(BlazorStrap.Toaster));
+                if (BlazorStrap.Toaster.OnChange == null) throw new ArgumentNullException(nameof(BlazorStrap.Toaster.OnChange));
+
                 builder.OpenComponent<BSToast>(0);
                 builder.AddAttribute(1, "ButtonClass", Toast.Options.ButtonClass);
                 builder.AddAttribute(2, "CloseAfter", Toast.Options.CloseAfter);

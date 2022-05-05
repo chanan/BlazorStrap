@@ -95,7 +95,8 @@ namespace BlazorStrap.Utilities
             }
         }
 
-        public static bool ToValue(string value, out T result, out string validationErrorMessage)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0045:Convert to conditional expression", Justification = "<Pending>")]
+        public static bool ToValue(string? value, out T result, out string validationErrorMessage)
         {
             Type type = typeof(T);
             result = default;

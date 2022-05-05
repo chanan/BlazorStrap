@@ -20,7 +20,7 @@ namespace BlazorStrap
         [Parameter] public bool ValidateOnInput { get; set; } = false;
         [Parameter] public string ValidClass { get; set; } = "is-valid";
         [Parameter] public bool UpdateOnInput { get; set; } = false;
-
+        
         protected void OnBlurEvent(FocusEventArgs? e)
         {
             if (ValidateOnBlur && EditContext != null)
@@ -47,7 +47,14 @@ namespace BlazorStrap
             if (EditContext is not null)
             {
                 EditContext.OnValidationStateChanged += OnValidationStateChanged;
+                EditContext.OnValidationRequested += EditContext_OnValidationRequested;
             }
+        }
+
+        private void EditContext_OnValidationRequested(object? sender, ValidationRequestedEventArgs e)
+        {
+            if (sender != null)
+                ((EditContext)sender).NotifyFieldChanged(FieldIdentifier);
         }
 
         protected void OnInputEvent(string? e)

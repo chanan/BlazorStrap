@@ -7,6 +7,7 @@ namespace BlazorStrap
 {
     public partial class BSDropdown : BlazorStrapBase, IAsyncDisposable
     {
+        private Func<Task>? _callback;
         [Parameter] public bool AllowItemClick { get; set; }
         [Parameter] public bool AllowOutsideClick { get; set; }
         [Parameter] public RenderFragment? Content { get; set; }
@@ -22,7 +23,7 @@ namespace BlazorStrap
         [Parameter] public string Target { get; set; } = Guid.NewGuid().ToString();
         [Parameter] public RenderFragment? Toggler { get; set; }
         private bool _lastIsNavPopper;
-        private DotNetObjectReference<BSDropdown> _objectRef;
+        private DotNetObjectReference<BSDropdown>? _objectRef;
         [CascadingParameter] public BSNavItem? DropdownItem { get; set; }
         [CascadingParameter] public BSButtonGroup? Group { get; set; }
         [CascadingParameter] public BSNavItem? NavItem { get; set; }
@@ -51,16 +52,48 @@ namespace BlazorStrap
             .AddClass("dropend", Placement is Placement.Right or Placement.RightEnd or Placement.RightStart)
             .Build().ToNullString();
 
-        private ElementReference MyRef { get; set; }
+        private ElementReference? MyRef { get; set; }
         internal Action<bool, BSDropdownItem>? OnSetActive { get; set; }
         private BSPopover? PopoverRef { get; set; }
         public bool Shown { get; private set; }
+        private async Task TryCallback(bool renderOnFail = true)
+        {
+            try
+            {
+                // Check if objectRef set if not callback will be handled after render.
+                // If anything fails callback will will be handled after render.
+                if (_objectRef != null)
+                {
+                    if (_callback != null)
+                    {
+                        await _callback();
+                        _callback = null;
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("No object ref");
+                }
+            }
+            catch
+            {
+                if (renderOnFail)
+                    await InvokeAsync(StateHasChanged);
+            }
+        }
 
         // ReSharper disable once MemberCanBePrivate.Global
-        public async Task HideAsync()
+        public Task HideAsync()
         {
-            if (!Shown) return;
-
+            if (!Shown) return Task.CompletedTask;
+            _callback = async () =>
+            {
+                await HideActionsAsync();
+            };
+            return TryCallback();
+        }
+        private async Task HideActionsAsync()
+        { 
             Shown = false;
             await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataRefId, EventType.Click);
 
@@ -106,10 +139,17 @@ namespace BlazorStrap
         }
 
         // ReSharper disable once MemberCanBePrivate.Global
-        public async Task ShowAsync()
+        public Task ShowAsync()
         {
-            if (Shown) return;
-
+            if (Shown) return Task.CompletedTask;
+            _callback = async () =>
+            {
+                await ShowActionsAsync();
+            };
+            return TryCallback();
+        }
+        private async Task ShowActionsAsync()
+        { 
             Shown = true;
 
             if (!AllowOutsideClick)
@@ -138,8 +178,6 @@ namespace BlazorStrap
         protected override void OnInitialized()
         {
             _lastIsNavPopper = IsNavPopper;
-            _objectRef = DotNetObjectReference.Create<BSDropdown>(this);
-            BlazorStrap.OnEventForward += InteropEventCallback;
         }
 
         protected override void OnParametersSet()
@@ -167,10 +205,22 @@ namespace BlazorStrap
         {
             OnSetActive?.Invoke(active, item);
         }
-
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                _objectRef = DotNetObjectReference.Create<BSDropdown>(this);
+                BlazorStrap.OnEventForward += InteropEventCallback;
+            }
+            if (_callback != null)
+            {
+                await _callback.Invoke();
+                _callback = null;
+            }
+        }
         public async ValueTask DisposeAsync()
         {
-            _objectRef.Dispose();
+            _objectRef?.Dispose();
             try
             {
                 await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataRefId, EventType.Click);

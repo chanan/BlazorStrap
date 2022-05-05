@@ -20,7 +20,22 @@ if (!Element.prototype.closest) {
         return null;
     };
 }
+
 window.blazorStrap = {
+    CleanUpEvents: function () {
+        Object.keys(blazorStrap.EventHandlers).forEach(key => {
+            if (document.querySelector("[data-blazorstrap='" + key + "']") === null) {
+                Object.keys(blazorStrap.EventHandlers[key]).forEach(name => {
+                    Object.keys(blazorStrap.EventHandlers[key][name]).forEach(type => {
+                        try {
+                            window.removeEventListener(type, blazorStrap.EventHandlers[key][name][type].Callback, false);
+                        } catch {}
+                    });
+                });
+                delete blazorStrap.EventHandlers[key];
+            }
+        });
+    },
     BlurAll: function () {
         var tmp = document.createElement("input");
         tmp.position = "absolute";
@@ -56,6 +71,8 @@ window.blazorStrap = {
         });
     },
     AddEventInternal: function (objRef, element, id, name, type, ignoreChildren = false, filter = "") {
+        blazorStrap.CleanUpEvents();
+        
         let expandedWidth = 0;
         if (type === "resize" && element == document) {
             let navbar = document.querySelector("[class*=navbar-expand]");
@@ -83,57 +100,62 @@ window.blazorStrap = {
             resizeFunc: function () { }
         }
         blazorStrap.EventHandlers[id][name][type] = {
-            Callback: function (event) {
-                let resizeFunc;
-                if (type === "resize" && element === document) {
-                    clearTimeout(resizeFunc);
-                    resizeFunc = setTimeout(function () {
-                        if (window.innerWidth < expandedWidth)
-                            navbarShown = false;
-                        if (window.innerWidth > expandedWidth && navbarShown === false) {
-                            navbarShown = true;
-                            // noinspection JSUnresolvedVariable,JSUnresolvedFunction
-                            try {
-                                var test = objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
-                            } catch {
-                                // ObjectRef may be gone by time this fires   
+            Callback: async function (event) {
+                try {
+                    let resizeFunc;
+                    if (type === "resize" && element === document) {
+                        clearTimeout(resizeFunc);
+                        resizeFunc = setTimeout(function () {
+                            if (window.innerWidth < expandedWidth)
+                                navbarShown = false;
+                            if (window.innerWidth > expandedWidth && navbarShown === false) {
+                                navbarShown = true;
+                                // noinspection JSUnresolvedVariable,JSUnresolvedFunction
+                                try {
+                                    var test = objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
+                                } catch {
+                                    // ObjectRef may be gone by time this fires   
+                                }
+                            }
+                        }, 100);
+                        return;
+                    }
+                    if (type === "resize") {
+                        clearTimeout(blazorStrap.EventHandlers[id][name][type][resizeFunc]);
+                        blazorStrap.EventHandlers[id][name][type][resizeFunc] = setTimeout(function () {
+                            objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
+                        }, 250);
+                        return;
+                    }
+                    if (type === "transitionend" && id !== event.target.getAttribute("data-blazorstrap")) return;
+
+                    if (name === "bsdropdown") {
+                        let parent = document.querySelector("[data-blazorstrap='" + id + "']");
+
+                        if (parent !== null) {
+                            if (parent.contains(event.target)) {
+                                if (event.target.closest(".dropdown-toggle") !== null) {
+                                    return;
+                                }
                             }
                         }
-                    }, 100);
-                    return;
-                }
-                if (type === "resize") {
-                    clearTimeout(blazorStrap.EventHandlers[id][name][type][resizeFunc]);
-                    blazorStrap.EventHandlers[id][name][type][resizeFunc] = setTimeout(function () {
+                    }
+                    if (ignoreChildren) {
+                        let parent = document.querySelector("[data-blazorstrap='" + id + "']");
+
+                        if (parent !== null) {
+                            if (parent.contains(event.target)) return;
+                        }
+                    }
+                    if (filter === "") {
                         objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
-                    }, 250);
-                    return;
-                }
-                if (type === "transitionend" && id !== event.target.getAttribute("data-blazorstrap")) return;
-
-                if (name === "bsdropdown") {
-                    let parent = document.querySelector("[data-blazorstrap='" + id + "']");
-
-                    if (parent !== null) {
-                        if (parent.contains(event.target)) {
-                            if (event.target.closest(".dropdown-toggle") !== null) {
-                                return;
-                            }
-                        }
+                    } else if (element.getElementsByClassName(filter)) {
+                        // noinspection JSUnresolvedVariable,JSUnresolvedFunction
+                        objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
                     }
-                }
-                if (ignoreChildren) {
-                    let parent = document.querySelector("[data-blazorstrap='" + id + "']");
-
-                    if (parent !== null) {
-                        if (parent.contains(event.target)) return;
-                    }
-                }
-                if (filter === "") {
-                    objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
-                } else if (element.getElementsByClassName(filter)) {
-                    // noinspection JSUnresolvedVariable,JSUnresolvedFunction
-                    objRef.invokeMethodAsync("InteropEventCallback", id, name, type, element.classList, blazorStrap.GetEvents(event));
+                } catch
+                {
+                    await blazorStrap.RemoveEventInternal(element, id, name, type);
                 }
             }
         };
@@ -389,8 +411,9 @@ window.blazorStrap = {
         });
     },
     RemoveEventInternal: function (element, id, name, type) {
+        blazorStrap.CleanUpEvents();
         if (blazorStrap.EventHandlers[id] === undefined) return;
-
+        
         if (name !== "null" && type !== "null") {
             if (blazorStrap.EventHandlers[id][name] === undefined) return;
             if (blazorStrap.EventHandlers[id][name][type] === undefined) return;

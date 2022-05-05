@@ -77,6 +77,7 @@ namespace BlazorStrap
             return result;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>")]
         private static string LabelLookup(string path, string item, string prefix, Dictionary<string, string> labels, string navManBase, string basePath)
         {
             var query = path.Replace(prefix, "");

@@ -7,7 +7,8 @@ namespace BlazorStrap
 {
     public partial class BSCollapse : BlazorStrapToggleBase<BSCollapse>, IAsyncDisposable
     {
-        private DotNetObjectReference<BSCollapse> _objectRef;
+        private Func<Task>? _callback;
+        private DotNetObjectReference<BSCollapse>? _objectRef;
         [CascadingParameter] BSCollapse? Parent { get; set; }
         [CascadingParameter] BSAccordionItem? AccordionParent { get; set; }
 
@@ -45,15 +46,48 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
-        private ElementReference MyRef { get; set; }
+        private ElementReference? MyRef { get; set; }
+        private async Task TryCallback(bool renderOnFail = true)
+        {
+            try
+            {
+                // Check if objectRef set if not callback will be handled after render.
+                // If anything fails callback will will be handled after render.
+                if (_objectRef != null)
+                {
+                    if (_callback != null)
+                    {
+                        await _callback();
+                        _callback = null;
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("No object ref");
+                }
+            }
+            catch
+            {
+                if (renderOnFail)
+                    await InvokeAsync(StateHasChanged);
+            }
+        }
         protected override bool ShouldRender()
         {
             return !_lock;
         }
 
-        public override async Task ShowAsync()
+        public override Task ShowAsync()
         {
-            if (Shown) return;
+            if (Shown) return Task.CompletedTask;
+            _callback = async () =>
+            {
+                await ShowActionsAsync();
+            };
+            return TryCallback();
+        }
+        private async Task ShowActionsAsync()
+        { 
             NestedHandler?.Invoke();
             CanRefresh = false;
             if (OnShow.HasDelegate)
@@ -67,9 +101,17 @@ namespace BlazorStrap
             if (NoAnimations)
                 await TransitionEndAsync();
         }
-        public override async Task HideAsync()
+        public override Task HideAsync()
         {
-            if (!Shown) return;
+            if (!Shown) return Task.CompletedTask;
+            _callback = async () =>
+            {
+                await HideActionsAsync();
+            };
+            return TryCallback();
+        }
+        private async Task HideActionsAsync()
+        {
             NestedHandler?.Invoke();
             CanRefresh = false;
             if (OnHide.HasDelegate)
@@ -92,22 +134,29 @@ namespace BlazorStrap
         {
             if (firstRender)
             {
+                _objectRef = DotNetObjectReference.Create(this);
+                BlazorStrap.OnEventForward += InteropEventCallback;
+                if (Parent != null)
+                    Parent.NestedHandler += NestedHandlerEvent;
+                if (AccordionParent != null)
+                    AccordionParent.NestedHandler += NestedHandlerEvent;
+
                 if (IsInNavbar)
                 {
                     await BlazorStrap.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Resize);
                 }
                 _hasRendered = true;
             }
+            if (_callback != null)
+            {
+                await _callback.Invoke();
+                _callback = null;
+            }
         }
 
         protected override void OnInitialized()
         {
-            _objectRef = DotNetObjectReference.Create(this);
-            BlazorStrap.OnEventForward += InteropEventCallback;
-            if (Parent != null)
-                Parent.NestedHandler += NestedHandlerEvent;
-            if (AccordionParent != null)
-                AccordionParent.NestedHandler += NestedHandlerEvent;
+            
         }
 
         private async void NestedHandlerEvent()
@@ -177,14 +226,20 @@ namespace BlazorStrap
         public async ValueTask DisposeAsync()
         {
             if (IsInNavbar)
-                await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Resize);
+            {
+                try
+                {
+                    await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Resize);
+                }
+                catch { }
+            }
             if (Parent?.NestedHandler != null)
                 Parent.NestedHandler -= NestedHandlerEvent;
             if (AccordionParent?.NestedHandler != null)
                 AccordionParent.NestedHandler -= NestedHandlerEvent;
 
             BlazorStrap.OnEventForward -= InteropEventCallback;
-            _objectRef.Dispose();
+            _objectRef?.Dispose();
         }
     }
 }

@@ -85,6 +85,7 @@ namespace BlazorStrap
                 IsValid = false;
                 IsInvalid = false;
             }
+            StateHasChanged();
         }
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -107,6 +108,7 @@ namespace BlazorStrap
                     }
                 }
             }
+
             if (!IsInvalid && !IsInvalid) return;
             builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", ClassBuilder);

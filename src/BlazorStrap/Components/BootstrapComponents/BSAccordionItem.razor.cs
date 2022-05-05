@@ -8,8 +8,9 @@ namespace BlazorStrap
     public partial class BSAccordionItem : BlazorStrapToggleBase<BSAccordionItem>, IDisposable
     {
         // This is for nesting allows the child to jump to transition end if the parent is hidden or shown while in transition.
+        private Func<Task>? _callback;
         internal Action? NestedHandler { get; set; }
-        private DotNetObjectReference<BSAccordionItem> _objectRef;
+        private DotNetObjectReference<BSAccordionItem>? _objectRef;
         private bool _lock;
         [Parameter] public bool NoAnimations { get; set; }
         [Parameter] public bool AlwaysOpen { get; set; }
@@ -24,7 +25,6 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
-            _objectRef = DotNetObjectReference.Create<BSAccordionItem>(this);
             Shown = DefaultShown;
         }
 
@@ -39,7 +39,7 @@ namespace BlazorStrap
         private bool _isDefaultShownSet;
 
         [CascadingParameter] public BSAccordion? Parent {get;set; }
-        private ElementReference ButtonRef { get; set; }
+        private ElementReference? ButtonRef { get; set; }
 
         private string? ClassBuilder => new CssBuilder("accordion-collapse collapse")
             .AddClass("show", Shown)
@@ -49,14 +49,47 @@ namespace BlazorStrap
 
         private bool HasRendered { get; set; }
 
-        private ElementReference MyRef { get; set; }
+        private ElementReference? MyRef { get; set; }
 
         // Can be access by @ref
         public bool Shown { get; private set; }
 
-        public override async Task ShowAsync()
+        private async Task TryCallback(bool renderOnFail = true)
         {
-            if (Shown) return;
+            try
+            {
+                // Check if objectRef set if not callback will be handled after render.
+                // If anything fails callback will will be handled after render.
+                if (_objectRef != null)
+                {
+                    if (_callback != null)
+                    {
+                        await _callback();
+                        _callback = null;
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("No object ref");
+                }
+            }
+            catch
+            {
+                if (renderOnFail)
+                    await InvokeAsync(StateHasChanged);
+            }
+        }
+        public override Task ShowAsync()
+        {
+            if (Shown) return Task.CompletedTask;
+            _callback = async () =>
+            {
+                await ShowActionsAsync();
+            };
+            return TryCallback();
+        }
+        private async Task ShowActionsAsync()
+        { 
             NestedHandler?.Invoke();
             CanRefresh = false;
             await BlazorStrap.Interop.RemoveClassAsync(ButtonRef, "collapsed");
@@ -73,9 +106,17 @@ namespace BlazorStrap
             if (NoAnimations)
                 await TransitionEndAsync();
         }
-        public override async Task HideAsync()
+        public override Task HideAsync()
         {
-            if (!Shown) return;
+            if (!Shown) return Task.CompletedTask;
+            _callback = async () =>
+            {
+                await HideActionsAsync();
+            };
+            return TryCallback();
+        }
+        private async Task HideActionsAsync()
+        { 
             NestedHandler?.Invoke();
             CanRefresh = false;
             await BlazorStrap.Interop.AddClassAsync(ButtonRef, "collapsed");
@@ -96,11 +137,17 @@ namespace BlazorStrap
             return Shown ? HideAsync() : ShowAsync();
         }
 
-        protected override void OnAfterRender(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
+                _objectRef = DotNetObjectReference.Create<BSAccordionItem>(this);
                 HasRendered = true;
+            }
+            if (_callback != null)
+            {
+                await _callback.Invoke();
+                _callback = null;
             }
         }
 
@@ -139,7 +186,7 @@ namespace BlazorStrap
             }
         }
 
-        private async void Parent_ChildHandler(BSAccordionItem sender)
+        private async void Parent_ChildHandler(BSAccordionItem? sender)
         {
             if (sender == null)
             {
@@ -158,7 +205,7 @@ namespace BlazorStrap
 
         public void Dispose()
         {
-            _objectRef.Dispose();
+            _objectRef?.Dispose();
             if (Parent != null) Parent.ChildHandler -= Parent_ChildHandler;
         }
     }

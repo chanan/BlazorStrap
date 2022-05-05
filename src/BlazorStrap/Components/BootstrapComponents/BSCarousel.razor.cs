@@ -9,7 +9,8 @@ namespace BlazorStrap
 {
     public partial class BSCarousel : BlazorStrapBase, IDisposable
     {
-        private DotNetObjectReference<BSCarousel> _objectRef;
+        private DotNetObjectReference<BSCarousel>? _objectRef;
+        private bool _hasRendered;
         [Parameter] public bool HasControls { get; set; }
         [Parameter] public bool HasIndicators { get; set; }
         [Parameter] public bool IsDark { get; set; }
@@ -35,11 +36,6 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
-        protected override void OnInitialized()
-        {
-            _objectRef = DotNetObjectReference.Create<BSCarousel>(this);
-        }
-
         protected override bool ShouldRender()
         {
             return !ClickLocked;
@@ -47,9 +43,7 @@ namespace BlazorStrap
 
         public Task GotoSlideAsync(int slide)
         {
-            if (slide >= Children.Count && slide < 0)
-                return Task.CompletedTask;
-            return GotoChildSlide(Children[slide]);
+            return slide >= Children.Count && slide < 0 ? Task.CompletedTask : GotoChildSlide(Children[slide]);
         }
 
         internal Task HideSlide(BSCarouselItem slide)
@@ -107,6 +101,7 @@ namespace BlazorStrap
             ResetTransitionTimer(Children[_active].Interval);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0045:Convert to conditional expression", Justification = "<Pending>")]
         public async Task BackAsync()
         {
             if (ClickLocked) return;
@@ -130,6 +125,7 @@ namespace BlazorStrap
             ResetTransitionTimer(Children[_active].Interval);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0045:Convert to conditional expression", Justification = "<Pending>")]
         public async Task NextAsync()
         {
             if (ClickLocked) return;
@@ -155,6 +151,7 @@ namespace BlazorStrap
 
         private async Task DoAnimations(bool back)
         {
+            if (!_hasRendered) return;
             if(await BlazorStrap.Interop.AnimateCarouselAsync(_objectRef, DataId, Children[_active].MyRef, Children[_last].MyRef, back))
             {
                 ClickLocked = false;
@@ -216,10 +213,18 @@ namespace BlazorStrap
                 interval); // Avoid an System.ObjectDisposedException due to the timer being disposed. This occurs when the Enabled property of the timer is set to false by the call to Stop() above.
             _transitionTimer?.Start();
         }
-        
+        protected override Task OnAfterRenderAsync(bool firstRender)
+        {
+            if(firstRender)
+            {
+                _hasRendered = true;
+                _objectRef = DotNetObjectReference.Create<BSCarousel>(this);
+            }
+            return base.OnAfterRenderAsync(firstRender);
+        }
         public void Dispose()
         {
-            _objectRef.Dispose();
+            _objectRef?.Dispose();
             _transitionTimer?.Stop();
             _transitionTimer?.Dispose();
         }

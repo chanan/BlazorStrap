@@ -18,6 +18,7 @@ namespace BlazorStrap.Utilities
             if (services.GetService(typeof(HttpClient)) == null)
             {
                 isServerSide = true;
+                _httpClient = new HttpClient();
             }
             else
             {
