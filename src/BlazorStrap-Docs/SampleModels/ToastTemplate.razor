@@ -1,0 +1,14 @@
+﻿<BSCard CardType="CardType.Card" style="width: 18rem;">
+    <BSCard CardType="CardType.Image" src="placeholder:286x180" alt="Card image cap"/>
+    <BSCard CardType="CardType.Body">
+        <BSCard CardType="CardType.Title">@TypedData.Title</BSCard>
+        <BSCard CardType="CardType.Text">
+            @TypedData.Text
+        </BSCard>
+    </BSCard>
+</BSCard>
+
+@code {
+    [Parameter] public object? Data { get; set; }
+    public ToastSample? TypedData { get => (ToastSample?)Data; }
+}

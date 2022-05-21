@@ -2,20 +2,29 @@
 <CascadingValue Value="this">
     <Header />
 </CascadingValue>
-<div class="container-xxl bd-layout">
-    <aside class="bd-sidebar">
-        <NavMenu />
-    </aside>
 
+<div class="container-xxl bd-layout">
+    <CascadingValue Value="this">
+        <aside class="bd-sidebar">
+            <NavMenu />
+        </aside>
+    </CascadingValue>
     <main>
-        <BSBreadcrumb Class="float-end mt-3 position-relative" style="margin-bottom: -3rem;z-index:500" BasePath="/V5" Labels="_labels"/>
+        <BSBreadcrumb Class="float-end mt-3 position-relative" style="margin-bottom: -3rem;z-index:500" BasePath="/V5" Labels="_labels" />
         @Body
     </main>
 </div>
 
 @code {
-    private static Dictionary<string,string> _labels = new()
+    public Func<bool,Task>? OnSideBarShown { get; set; }
+    private static Dictionary<string, string> _labels = new()
+        {
+            { "/V5", "BlazorStrap V5" },
+        };
+
+    public Task InvokeSidebarAsync(bool state)
     {
-        {"/V5", "BlazorStrap V5"},
-    };
+        if (OnSideBarShown == null) return Task.CompletedTask;
+        return OnSideBarShown.Invoke(state);
+    }
 }

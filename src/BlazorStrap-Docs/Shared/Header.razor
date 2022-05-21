@@ -1,12 +1,13 @@
 ﻿@inject IBlazorStrap _blazorStrap
+@implements IDisposable
 <BSNavbar IsHeader="true" Expand="Size.Medium" IsDark="true" Class="bd-navbar">
     <BSNav IsNav="true" Class="container-xxl flex-wrap flex-md-nowrap" aria-label="Main navigation" NoNavbarNav="true">
         <BSNavbarBrand Padding="Padding.None" MarginEnd="Margins.Small">
-            <img class="d-block my-1" src="logo-inverted.svg" height="32" alt="BlazorStrap"/>
+            <img class="d-block my-1" src="logo-inverted.svg" height="32" alt="BlazorStrap" />
         </BSNavbarBrand>
         <BSCollapse IsInNavbar="true">
             <Toggler>
-                <BSNavbarToggle/>
+                <BSNavbarToggle />
             </Toggler>
             <Content>
                 <BSNav Class="flex-row flex-wrap bd-navbar-nav pt-2 py-md-0">
@@ -24,7 +25,7 @@
                     </BSNavItem>
                     <BSNavItem ListItemClass="col-6 col-md-auto" Padding="Padding.Small" Url="https://gitter.im/BlazorStrap/community">
                         <svg fill="currentColor" fill-rule="evenodd" viewBox="0 0 51 75" height="36" width="36" xmlns="http://www.w3.org/2000/svg" class="navbar-nav-svg d-inline-block align-text-top">
-                            <path d="m0 0h6v48h-6zm15 13h6v62h-6zm15 0h6v62h-6zm15 0h6v34h-6z"/>
+                            <path d="m0 0h6v48h-6zm15 13h6v62h-6zm15 0h6v62h-6zm15 0h6v34h-6z" />
                         </svg>
                         <small class="d-md-none ms-2">Gitter</small>
                     </BSNavItem>
@@ -41,7 +42,7 @@
         <BSDropdown Class="dropdown-menu-end" ShownAttribute="data-bs-popper">
             <Toggler>
                 <BSToggle IsButton="true" Class="btn-bd-light dropdown-toggle">
-                    <span class="d-none d-lg-inline">Themes</span>
+                    Themes
                 </BSToggle>
             </Toggler>
             <Content>
@@ -51,32 +52,18 @@
                 }
             </Content>
         </BSDropdown>
-
+        <BSButton Class="@(_sidebarButtonClass)" Target="sidebar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi bi-expand" fill="currentColor" viewBox="0 0 16 16">
+                <title>Expand</title>
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zM7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10z"></path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi bi-collapse" fill="currentColor" viewBox="0 0 16 16">
+                <title>Collapse</title>
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707l-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z"></path>
+            </svg>
+        </BSButton>
     </BSContainer>
     <div class="container-xxl ">
-
     </div>
 </nav>
 
-@code {
-    private string? Selected { get; set; }
-    private List<string> _themes = new List<string>();
-
-    protected override void OnInitialized()
-    {
-        _themes = Enum.GetNames(typeof(Theme)).ToList();
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstrun)
-    {
-        if (firstrun)
-        {
-            await _blazorStrap.SetBootstrapCss("5.1.3");
-        }
-    }
-    private async Task SelectedChanged(string value)
-    {
-        Selected = value;
-        await _blazorStrap.SetBootstrapCss(value, "5.1.3");
-    }
-}

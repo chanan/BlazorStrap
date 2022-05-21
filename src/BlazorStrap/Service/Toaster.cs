@@ -49,7 +49,9 @@ namespace BlazorStrap
                     Color = opts.Color,
                     ContentClass = opts.ContentClass,
                     HeaderClass = opts.HeaderClass,
-                    Toast = opts.Toast
+                    Toast = opts.Toast,
+                    Template = opts.Template,
+                    Data = opts.Data,
                 },
                 Placement = opts.Toast,
                 HeaderText = headerText,
@@ -82,6 +84,8 @@ namespace BlazorStrap
         public Toast Toast { get; set; } = Toast.Default;
         public string? ContentClass { get; set; }
         public string? HeaderClass { get; set; }
+        public object? Data { get; set; }
+        public Type? Template { get; set; }
     }
     internal class Toasts
     {

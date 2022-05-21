@@ -84,6 +84,14 @@ namespace BlazorStrap
             var content = new RenderFragment(childBuilder =>
             {
                 childBuilder.AddContent(0, new MarkupString(Toast.ContentText ?? ""));
+                Console.WriteLine("Here 1");
+                if (Toast.Options?.Template != null)
+                {
+                    Console.WriteLine("Here");
+                    childBuilder.OpenComponent(1, Toast.Options.Template);
+                    childBuilder.AddAttribute(2, "Data", Toast.Options.Data);
+                    childBuilder.CloseComponent();
+                }
             });
             
             return builder =>
