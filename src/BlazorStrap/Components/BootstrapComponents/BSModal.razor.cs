@@ -12,24 +12,100 @@ namespace BlazorStrap
         private Func<Task>? _callback;
         private DotNetObjectReference<BSModal>? _objectRef;
         private bool _lock;
+
+        /// <summary>
+        /// Color of modal. Defaults to <see cref="BSColor.Default"/>
+        /// </summary>
         [Parameter] public BSColor ModalColor { get; set; } = BSColor.Default;
+
+        /// <summary>
+        /// Allows the page to be scrolled while the Modal is being shown.
+        /// </summary>
         [Parameter] public bool AllowScroll { get; set; }
+
+        /// <summary>
+        /// CSS classes to be added to Modal activation button.
+        /// </summary>
         [Parameter] public string? ButtonClass { get; set; }
+
+        /// <summary>
+        /// CSS classes to add to modal dialog
+        /// </summary>
         [Parameter] public string? DialogClass { get; set; }
+
+        /// <summary>
+        /// Modal content.
+        /// </summary>
         [Parameter] public RenderFragment? Content { get; set; }
+
+        /// <summary>
+        /// CSS classes to apply to the modal content.
+        /// </summary>
         [Parameter] public string? ContentClass { get; set; }
+
+        /// <summary>
+        /// Modal footer.
+        /// </summary>
         [Parameter] public RenderFragment<BSModal>? Footer { get; set; }
+
+        /// <summary>
+        /// CSS classes to be applied to the modal footer.
+        /// </summary>
         [Parameter] public string? FooterClass { get; set; }
+
+        /// <summary>
+        /// Sets the full screen modal size. Only has effect if <see cref="IsFullScreen"/> is true.
+        /// See <see href="https://getbootstrap.com/docs/5.2/components/modal/#fullscreen-modal">Bootstrap Documentation</see>
+        /// </summary>
         [Parameter] public Size FullScreenSize { get; set; } = Size.None;
+
+        /// <summary>
+        /// Modal header content.
+        /// </summary>
         [Parameter] public RenderFragment? Header { get; set; }
+
+        /// <summary>
+        /// CSS classes to be applied to the modal header.
+        /// </summary>
         [Parameter] public string? HeaderClass { get; set; }
+
+        /// <summary>
+        /// Centers the modal.
+        /// </summary>
         [Parameter] public bool IsCentered { get; set; }
+
+        /// <summary>
+        /// Enables the modal to be full screen. Set the size with <see cref="FullScreenSize"/>
+        /// </summary>
         [Parameter] public bool IsFullScreen { get; set; }
+
+        /// <summary>
+        /// Whether or not the modal is scrollable.
+        /// </summary>
         [Parameter] public bool IsScrollable { get; set; }
+
+        /// <summary>
+        /// Adds a close button to the modal.
+        /// </summary>
         [Parameter] public bool HasCloseButton { get; set; } = true;
+
+        /// <summary>
+        /// Enables the static backdrop. 
+        /// See <see href="https://getbootstrap.com/docs/5.2/components/modal/#static-backdrop">Bootstrap Documentation</see>
+        /// </summary>
         [Parameter] public bool IsStaticBackdrop { get; set; }
+
+        /// <summary>
+        /// Show backdrop. Defaults to true.
+        /// </summary>
         [Parameter] public bool ShowBackdrop { get; set; } = true;
+
+        /// <summary>
+        /// Sets modal size.
+        /// See <see href="https://getbootstrap.com/docs/5.2/components/modal/#optional-sizes">Bootstrap Documentation</see>
+        /// </summary>
         [Parameter] public Size Size { get; set; } = Size.None;
+
         private bool _leaveBodyAlone;
 
         private bool _shown;
@@ -77,6 +153,9 @@ namespace BlazorStrap
 
         private ElementReference? MyRef { get; set; }
 
+        /// <summary>
+        /// Whether or not modal is shown.
+        /// </summary>
         public bool Shown
         {
             get => _shown;
@@ -110,18 +189,20 @@ namespace BlazorStrap
                     await InvokeAsync(StateHasChanged);
             }
         }
+
+        /// <inheritdoc/>
         public override Task HideAsync()
         {
-            if (!Shown) return Task.CompletedTask; 
+            if (!Shown) return Task.CompletedTask;
             _callback = async () =>
             {
                 await HideActionsAsync();
             };
             return TryCallback();
         }
-        
+
         private async Task HideActionsAsync()
-        { 
+        {
             CanRefresh = false;
             _lock = true;
             Shown = false;
@@ -158,6 +239,7 @@ namespace BlazorStrap
             _leaveBodyAlone = false;
         }
 
+        /// <inheritdoc/>
         public override Task ShowAsync()
         {
             if (Shown) return Task.CompletedTask;
@@ -167,8 +249,9 @@ namespace BlazorStrap
             };
             return TryCallback();
         }
+
         private async Task ShowActionsAsync()
-        { 
+        {
             CanRefresh = false;
             _lock = true;
             Shown = true;
@@ -237,6 +320,7 @@ namespace BlazorStrap
             return ToggleAsync();
         }
 
+        /// <inheritdoc/>
         public override Task ToggleAsync()
         {
             return Shown ? HideAsync() : ShowAsync();
@@ -333,7 +417,7 @@ namespace BlazorStrap
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if(firstRender)
+            if (firstRender)
             {
                 _objectRef = DotNetObjectReference.Create<BSModal>(this);
                 BlazorStrap.OnEventForward += InteropEventCallback;
@@ -354,7 +438,7 @@ namespace BlazorStrap
                 if (EventsSet)
                     await BlazorStrap.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);
             }
-            catch {}
+            catch { }
             BlazorStrap.OnEventForward -= InteropEventCallback;
             BlazorStrapCore.ModalChange -= OnModalChange;
             _objectRef?.Dispose();

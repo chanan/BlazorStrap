@@ -5,16 +5,59 @@ namespace BlazorStrap
 {
     public partial class BSTable : BlazorStrapBase
     {
+        /// <summary>
+        /// Table background color.
+        /// </summary>
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
+
+        /// <summary>
+        /// Adds the <c>table-dark</c> class.
+        /// </summary>
         [Parameter] public bool IsDark { get; set; }
+
+        /// <summary>
+        /// Adds the <c>table-hover</c> class.
+        /// </summary>
         [Parameter] public bool IsHoverable { get; set; }
+
+        /// <summary>
+        /// Adds the <c>table-responsive</c> class.
+        /// </summary>
         [Parameter] public bool IsResponsive { get; set; }
+
+        /// <summary>
+        /// Additional classes to add to the table wrapper.
+        /// </summary>
         [Parameter] public string? ResponsiveWrapperClass { get; set; }
+
+        /// <summary>
+        /// Responsive table size. See <see href="https://getbootstrap.com/docs/5.2/content/tables/#responsive-tables">Bootstrap Documentation</see>.
+        /// </summary>
         [Parameter] public Size ResponsiveSize { get; set; } = Size.None;
+
+        /// <summary>
+        /// Adds the <c>table-sm</c> class.
+        /// </summary>
         [Parameter] public bool IsSmall { get; set; }
+
+        /// <summary>
+        /// Adds the <c>table-bordered</c> class.
+        /// </summary>
         [Parameter] public bool IsBordered { get; set; }
+
+        /// <summary>
+        /// Adds the <c>table-borderless</c> class.
+        /// </summary>
         [Parameter] public bool IsBorderLess { get; set; }
+
+        /// <summary>
+        /// Adds the <c>caption-top</c> class.
+        /// </summary>
         [Parameter] public bool IsCaptionTop { get; set; }
+
+        /// <summary>
+        /// Adds the <c>table-striped</c> class.
+        /// </summary>
         [Parameter] public bool IsStriped { get; set; }
 
         internal string? ClassBuilder => new CssBuilder("table")
@@ -35,6 +78,6 @@ namespace BlazorStrap
             .AddClass($"table-responsive-{ResponsiveSize.ToDescriptionString()}", ResponsiveSize != Size.None)
             .AddClass(ResponsiveWrapperClass, !string.IsNullOrEmpty(ResponsiveWrapperClass))
             .Build().ToNullString();
-            
+
     }
 }

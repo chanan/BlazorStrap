@@ -8,18 +8,64 @@ namespace BlazorStrap
     public partial class BSDropdownItem : BlazorStrapBase, IDisposable
     {
         [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+
+        /// <summary>
+        /// Display the Dropdown item as active.
+        /// </summary>
         [Parameter] public bool? IsActive { get; set; }
+
+        /// <summary>
+        /// Renders the DropdownItem as a horizontal divider. <see cref="ChildContent"/> is ignored.
+        /// </summary>
         [Parameter] public bool IsDivider { get; set; }
-        [Parameter] public int Header { get; set; } 
+
+        /// <summary>
+        /// Renders Dropdown item as a header and sets the size. Valid values are 1-6
+        /// </summary>
+        [Parameter] public int Header { get; set; }
+
+        /// <summary>
+        /// Sets the dropdown item as disabled.
+        /// </summary>
         [Parameter] public bool IsDisabled { get; set; }
+
+        /// <summary>
+        /// Renders as HTML Button element.
+        /// </summary>
         [Parameter] public bool IsButton { get; set; }
+
+        /// <summary>
+        /// Outputs correctly for a nested Dropdown
+        /// </summary>
         [Parameter] public bool IsSubmenu { get; set; }
+
+        /// <summary>
+        /// Adds the dropdown-item-text css class.
+        /// </summary>
         [Parameter] public bool IsText { get; set; }
+
+        /// <summary>
+        /// Submenu css class. Defaults to dropdown-submenu.
+        /// </summary>
         [Parameter] public string? SubmenuClass { get; set; } = "dropdown-submenu";
+
+        /// <summary>
+        /// Event called when dropdown item is clicked.
+        /// </summary>
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
         [CascadingParameter] public BSDropdown? Parent { get; set; }
+
         [CascadingParameter] public BSDropdownItem? DropdownItem { get; set; }
+
+        /// <summary>
+        /// Prevents the default onclick behavior.
+        /// </summary>
         [Parameter] public bool PreventDefault { get; set; }
+
+        /// <summary>
+        /// Url for dropdown. Defaults to <c>javascript:void(0)</c>
+        /// </summary>
         [Parameter] public string? Url { get; set; } = "javascript:void(0)";
 
         private bool _canHandleActive;
@@ -36,7 +82,7 @@ namespace BlazorStrap
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
- 
+
         protected override void OnInitialized()
         {
             if (IsActive == null)
@@ -68,7 +114,7 @@ namespace BlazorStrap
             }
         }
 
-        
+
         private async Task ClickEvent()
         {
             if (Parent is { AllowOutsideClick: true, AllowItemClick: false })
@@ -81,7 +127,7 @@ namespace BlazorStrap
 
         public void Dispose()
         {
-            if(_canHandleActive)
+            if (_canHandleActive)
                 NavigationManager.LocationChanged -= OnLocationChanged;
         }
     }

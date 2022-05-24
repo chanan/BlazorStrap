@@ -8,7 +8,15 @@ namespace BlazorStrap
     public partial class BSTooltip : BlazorStrapToggleBase<BSTooltip>, IAsyncDisposable
     {
         private Func<Task>? _callback;
+
+        /// <summary>
+        /// Tooltip placement.
+        /// </summary>
         [Parameter] public Placement Placement { get; set; }
+
+        /// <summary>
+        /// DataID of target.
+        /// </summary>
         [Parameter] public string? Target { get; set; }
 
         private string? ClassBuilder => new CssBuilder("tooltip")
@@ -40,6 +48,8 @@ namespace BlazorStrap
                     await InvokeAsync(StateHasChanged);
             }
         }
+
+        /// <inheritdoc/>
         public override Task HideAsync()
         {
             if (!Shown) return Task.CompletedTask;
@@ -49,8 +59,9 @@ namespace BlazorStrap
             };
             return TryCallback();
         }
+
         private async Task HideActionsAsync()
-        { 
+        {
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
             Shown = false;
@@ -62,6 +73,7 @@ namespace BlazorStrap
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
         }
 
+        /// <inheritdoc/>
         public override Task ShowAsync()
         {
             if (Shown) return Task.CompletedTask;
@@ -72,7 +84,7 @@ namespace BlazorStrap
             return TryCallback();
         }
         private async Task ShowActionsAsync()
-        { 
+        {
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             Shown = true;
@@ -87,6 +99,7 @@ namespace BlazorStrap
                 _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
         }
 
+        /// <inheritdoc/>
         public override Task ToggleAsync()
         {
             return !Shown ? ShowAsync() : HideAsync();

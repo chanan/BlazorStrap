@@ -9,6 +9,10 @@ namespace BlazorStrap
     {
         // ReSharper disable once NullableWarningSuppressionIsUsed
         [Inject] private IBlazorStrap? BlazorStrap { get; set; } = default!;
+
+        /// <summary>
+        /// Sets the wrapper class for the toaster.
+        /// </summary>
         [Parameter] public string WrapperClass { get; set; } = "";
         protected override void OnInitialized()
         {
@@ -93,7 +97,7 @@ namespace BlazorStrap
                     childBuilder.CloseComponent();
                 }
             });
-            
+
             return builder =>
             {
                 if (Toast.Options == null) throw new ArgumentNullException(nameof(Toast.Options));

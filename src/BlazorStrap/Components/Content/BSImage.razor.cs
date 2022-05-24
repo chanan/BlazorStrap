@@ -5,12 +5,36 @@ namespace BlazorStrap
 {
     public partial class BSImage : BlazorStrapBase
     {
+        /// <summary>
+        /// Image alignment
+        /// </summary>
         [Parameter] public Align Align { get; set; }
+
+        /// <summary>
+        /// Adds the <c>img-fluid</c> class.
+        /// </summary>
         [Parameter] public bool IsFluid { get; set; }
+
+        /// <summary>
+        /// Adds the <c>rounded</c> class.
+        /// </summary>
         [Parameter] public bool IsRounded { get; set; }
+
+        /// <summary>
+        /// Adds the <c>img-thumbnail</c> class.
+        /// </summary>
         [Parameter] public bool IsThumbnail { get; set; }
+
+        /// <summary>
+        /// Outputs SVG placeholder.
+        /// </summary>
         [Parameter] public bool IsPlaceholder { get; set; }
+
+        /// <summary>
+        /// Image source.
+        /// </summary>
         [Parameter] public string? Source { get; set; }
+
         [CascadingParameter] public BSFigure? Figure { get; set; }
         private int PlaceHolderHeight { get; set; } = 100;
         private int PlaceHolderWidth { get; set; } = 100;

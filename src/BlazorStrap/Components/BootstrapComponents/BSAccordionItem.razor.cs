@@ -12,10 +12,26 @@ namespace BlazorStrap
         internal Action? NestedHandler { get; set; }
         private DotNetObjectReference<BSAccordionItem>? _objectRef;
         private bool _lock;
+
+        /// <summary>
+        /// Disables animations during collapsing of the accoridion item.
+        /// </summary>
         [Parameter] public bool NoAnimations { get; set; }
+
+        /// <summary>
+        /// Makes accordion item stay open when another item is opened.
+        /// See <see href="https://getbootstrap.com/docs/5.2/components/accordion/#always-open">Bootstrap Documentation</see>
+        /// </summary>
         [Parameter] public bool AlwaysOpen { get; set; }
+
+        /// <summary>
+        /// Accordion item content.
+        /// </summary>
         [Parameter] public RenderFragment? Content { get; set; }
 
+        /// <summary>
+        /// Accordion item is shown by default.
+        /// </summary>
         [Parameter]
         public bool DefaultShown
         {
@@ -33,12 +49,15 @@ namespace BlazorStrap
             return !_lock;
         }
 
+        /// <summary>
+        /// Accordion item header content.
+        /// </summary>
         [Parameter] public RenderFragment? Header { get; set; }
 
         private bool _defaultShown;
         private bool _isDefaultShownSet;
 
-        [CascadingParameter] public BSAccordion? Parent {get;set; }
+        [CascadingParameter] public BSAccordion? Parent { get; set; }
         private ElementReference? ButtonRef { get; set; }
 
         private string? ClassBuilder => new CssBuilder("accordion-collapse collapse")
@@ -51,7 +70,10 @@ namespace BlazorStrap
 
         private ElementReference? MyRef { get; set; }
 
-        // Can be access by @ref
+        /// <summary>
+        /// Returns whether or not the accordion item is shown.
+        /// </summary>
+        /// <remarks>Can be accessed using @ref</remarks>
         public bool Shown { get; private set; }
 
         private async Task TryCallback(bool renderOnFail = true)
@@ -79,6 +101,8 @@ namespace BlazorStrap
                     await InvokeAsync(StateHasChanged);
             }
         }
+
+        /// <inheritdoc/>
         public override Task ShowAsync()
         {
             if (Shown) return Task.CompletedTask;
@@ -88,8 +112,9 @@ namespace BlazorStrap
             };
             return TryCallback();
         }
+
         private async Task ShowActionsAsync()
-        { 
+        {
             NestedHandler?.Invoke();
             CanRefresh = false;
             await BlazorStrap.Interop.RemoveClassAsync(ButtonRef, "collapsed");
@@ -97,7 +122,7 @@ namespace BlazorStrap
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             Parent?.Invoke(this);
-            
+
             if (_lock) return;
             _lock = true;
             if (!NoAnimations)
@@ -106,6 +131,8 @@ namespace BlazorStrap
             if (NoAnimations)
                 await TransitionEndAsync();
         }
+
+        /// <inheritdoc/>
         public override Task HideAsync()
         {
             if (!Shown) return Task.CompletedTask;
@@ -115,8 +142,9 @@ namespace BlazorStrap
             };
             return TryCallback();
         }
+
         private async Task HideActionsAsync()
-        { 
+        {
             NestedHandler?.Invoke();
             CanRefresh = false;
             await BlazorStrap.Interop.AddClassAsync(ButtonRef, "collapsed");
@@ -125,13 +153,14 @@ namespace BlazorStrap
                 await OnHide.InvokeAsync(this);
             if (_lock) return;
             _lock = true;
-            if(!NoAnimations)
+            if (!NoAnimations)
                 await BlazorStrap.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, false);
             Shown = false;
             if (NoAnimations)
                 await TransitionEndAsync();
         }
-        
+
+        /// <inheritdoc/>
         public override Task ToggleAsync()
         {
             return Shown ? HideAsync() : ShowAsync();
@@ -153,9 +182,9 @@ namespace BlazorStrap
 
         protected override void OnParametersSet()
         {
-            if(Parent != null)
+            if (Parent != null)
             {
-                if(!_isDefaultShownSet && Parent.FirstChild())
+                if (!_isDefaultShownSet && Parent.FirstChild())
                 {
                     DefaultShown = true;
                     Shown = true;
@@ -168,7 +197,7 @@ namespace BlazorStrap
         {
             _lock = false;
             await InvokeAsync(StateHasChanged);
-            
+
             if (OnShown.HasDelegate && Shown)
                 _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
 
@@ -176,7 +205,7 @@ namespace BlazorStrap
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
             CanRefresh = true;
         }
-        
+
         [JSInvokable]
         public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
         {

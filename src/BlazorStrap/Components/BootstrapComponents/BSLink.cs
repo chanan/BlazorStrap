@@ -1,29 +1,52 @@
-﻿using BlazorComponentUtilities;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
     public class BSLink : BlazorStrapActionBase
     {
         [Inject] private NavigationManager NavigationManager { get; set; } = default!;
-        [Parameter] public bool IsReset {
+
+        /// <summary>
+        /// Sets button as reset type.
+        /// </summary>
+        [Parameter]
+        public bool IsReset
+        {
             get => IsResetType;
             set => IsResetType = value;
         }
-        [Parameter] public bool IsSubmit{
+
+        /// <summary>
+        /// Sets button as submit type.
+        /// </summary>
+        [Parameter]
+        public bool IsSubmit
+        {
             get => IsSubmitType;
             set => IsSubmitType = value;
         }
-        [Parameter] public bool IsButton{
+
+        /// <summary>
+        /// Renders link as a button.
+        /// </summary>
+        [Parameter]
+        public bool IsButton
+        {
             get => HasButtonClass;
             set => HasButtonClass = value;
         }
-        [Parameter] public string? Url{
+
+        /// <summary>
+        /// Url to link to.
+        /// </summary>
+        [Parameter]
+        public string? Url
+        {
             get => UrlBase;
             set => UrlBase = value;
         }
+
         public BSLink()
         {
             IsLinkType = true;
@@ -52,10 +75,10 @@ namespace BlazorStrap
             }
             StateHasChanged();
         }
-        
+
         public void Dispose()
         {
-            if( _canHandleActive)
+            if (_canHandleActive)
                 NavigationManager.LocationChanged -= OnLocationChanged;
         }
     }

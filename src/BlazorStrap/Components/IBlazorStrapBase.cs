@@ -2,7 +2,14 @@
 {
     public interface IBlazorStrapBase
     {
+        /// <summary>
+        /// Css classes to pass to item.
+        /// </summary>
         string Class { get; set; }
+
+        /// <summary>
+        /// data-blazorstrap value. Used to uniquely identify element on a page.
+        /// </summary>
         string DataId { get; set; }
 
         /// <summary>

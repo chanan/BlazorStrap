@@ -5,10 +5,15 @@ namespace BlazorStrap
 {
     public partial class BSAccordion : BlazorStrapBase, IDisposable
     {
-        
+        /// <summary>
+        /// Adds the accordian-flush class. See 
+        /// <see href="https://getbootstrap.com/docs/5.2/components/accordion/#flush">Bootstrap Documentation</see> 
+        /// for details
+        /// </summary>
         [Parameter] public bool IsFlushed { get; set; }
-        
+
         [CascadingParameter] public BSAccordionItem? Parent { get; set; }
+
         [CascadingParameter] public BSCollapse? CollapseParent { get; set; }
 
 
@@ -20,9 +25,9 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
-            if(Parent != null)
+            if (Parent != null)
                 Parent.NestedHandler += NestedHandler;
-            if(CollapseParent != null)
+            if (CollapseParent != null)
                 CollapseParent.NestedHandler += NestedHandler;
         }
 
@@ -38,9 +43,9 @@ namespace BlazorStrap
 
         public void Invoke(BSAccordionItem sender)
         {
-            if(ChildHandler != null)
+            if (ChildHandler != null)
                 ChildHandler(sender);
-            
+
         }
 
         public void Dispose()
@@ -53,6 +58,6 @@ namespace BlazorStrap
 
 
         internal Action<BSAccordionItem?>? ChildHandler;
-        
+
     }
 }

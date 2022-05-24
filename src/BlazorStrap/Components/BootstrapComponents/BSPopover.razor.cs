@@ -10,6 +10,10 @@ namespace BlazorStrap
     {
         private Func<Task>? _callback;
         private DotNetObjectReference<BSPopover>? _objectRef;
+
+        /// <summary>
+        /// Popover content.
+        /// </summary>
         [Parameter]
         public RenderFragment? Content { get; set; }
 
@@ -21,9 +25,20 @@ namespace BlazorStrap
         [Parameter]
         public string? DropdownOffset { get; set; }
 
+        /// <summary>
+        /// For use when the popover is in a nav list.
+        /// </summary>
         [Parameter] public bool IsNavItemList { get; set; }
+
+        /// <summary>
+        /// Popover header content.
+        /// </summary>
         [Parameter]
         public RenderFragment? Header { get; set; }
+
+        /// <summary>
+        /// Background color of header.
+        /// </summary>
         [Parameter] public BSColor HeaderColor { get; set; }
 
         /// <summary>
@@ -32,9 +47,20 @@ namespace BlazorStrap
         [Parameter]
         public bool IsDropdown { get; set; }
 
+        /// <summary>
+        /// Whether or not the popover is shown on mouseover
+        /// </summary>
         [Parameter] public bool MouseOver { get; set; }
+
+        /// <summary>
+        /// Popover placement.
+        /// </summary>
         [Parameter]
         public Placement Placement { get; set; } = Placement.Top;
+
+        /// <summary>
+        /// Data-Blazorstrap attribute value to target.
+        /// </summary>
         [Parameter] public string? Target { get; set; }
 
         private string? ClassBuilder => new CssBuilder()
@@ -55,7 +81,12 @@ namespace BlazorStrap
             .Build().ToNullString();
 
         private ElementReference? MyRef { get; set; }
+
+        /// <summary>
+        /// Whether or not the popover is shown.
+        /// </summary>
         public bool Shown { get; private set; }
+
         private string Style { get; set; } = "display:none;";
 
         private async Task TryCallback(bool renderOnFail = true)
@@ -84,6 +115,7 @@ namespace BlazorStrap
             }
         }
 
+        /// <inheritdoc/>
         public override Task HideAsync()
         {
             if (!Shown) return Task.CompletedTask;
@@ -93,6 +125,7 @@ namespace BlazorStrap
             };
             return TryCallback();
         }
+
         private async Task HideActionsAsync()
         {
             if (OnHide.HasDelegate)
@@ -106,6 +139,7 @@ namespace BlazorStrap
             await InvokeAsync(StateHasChanged);
         }
 
+        /// <inheritdoc/>
         public override Task ShowAsync()
         {
             if (Shown) return Task.CompletedTask;
@@ -115,6 +149,7 @@ namespace BlazorStrap
             };
             return TryCallback();
         }
+
         private async Task ShowActionsAsync()
         {
             if (Target == null)
@@ -145,6 +180,16 @@ namespace BlazorStrap
 
             await InvokeAsync(StateHasChanged);
         }
+
+        /// <summary>
+        /// Method used to dynamically create and show popover element.
+        /// </summary>
+        /// <param name="target">Data-Blazorstrap attribute value to target.</param>
+        /// <param name="content">Popover content.</param>
+        /// <param name="placement">Popover placement. See <see cref="Placement"/></param>
+        /// <param name="header">Header content</param>
+        /// <returns>Completed task when popover is shown.</returns>
+        /// <exception cref="NullReferenceException">When <paramref name="target"/> or <paramref name="content"/> is null</exception>
         public async Task ShowAsync(string? target, string? content, Placement placement, string? header = null)
         {
 
@@ -166,10 +211,20 @@ namespace BlazorStrap
             await ShowAsync();
         }
 
+        /// <inheritdoc/>
         public override Task ToggleAsync()
         {
             return !Shown ? ShowAsync() : HideAsync();
         }
+
+        /// <summary>
+        /// Dynamically creates a popover and shows or closes if it's open.
+        /// </summary>
+        /// <param name="target">Data-Blazorstrap attribute value to target.</param>
+        /// <param name="content">Popover content.</param>
+        /// <param name="placement">Popover placement. See <see cref="Placement"/></param>
+        /// <param name="header">Header content</param>
+        /// <returns>Completed task when render is complete.</returns>
         public Task ToggleAsync(string? target, string? content, Placement placement, string? header = null)
         {
             return target == Target && Shown ? HideAsync() : ShowAsync(target, content, placement, header);

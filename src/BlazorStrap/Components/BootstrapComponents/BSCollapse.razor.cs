@@ -15,9 +15,20 @@ namespace BlazorStrap
         internal Action? NestedHandler { get; set; }
 
         private bool _lock;
+
+        /// <summary>
+        /// Disables animations when set.
+        /// </summary>
         [Parameter] public bool NoAnimations { get; set; }
+
+        /// <summary>
+        /// Content of collapse.
+        /// </summary>
         [Parameter] public RenderFragment? Content { get; set; }
 
+        /// <summary>
+        /// Collapse content is shown by default.
+        /// </summary>
         [Parameter]
         public bool DefaultShown
         {
@@ -25,8 +36,19 @@ namespace BlazorStrap
             set { _defaultShown = value; if (!_hasRendered) Shown = value; }
         }
 
+        /// <summary>
+        /// Adds the navbar-collapse class to the item.
+        /// </summary>
         [Parameter] public bool IsInNavbar { get; set; }
+
+        /// <summary>
+        /// Sets if the collarpse should be rendered with <c>&lt;ul&gt;</c>
+        /// </summary>
         [Parameter] public bool IsList { get; set; }
+
+        /// <summary>
+        /// Fragment used as the toggler.
+        /// </summary>
         [Parameter] public RenderFragment? Toggler { get; set; }
 
         private bool _defaultShown;
@@ -87,7 +109,7 @@ namespace BlazorStrap
             return TryCallback();
         }
         private async Task ShowActionsAsync()
-        { 
+        {
             NestedHandler?.Invoke();
             CanRefresh = false;
             if (OnShow.HasDelegate)
@@ -156,7 +178,7 @@ namespace BlazorStrap
 
         protected override void OnInitialized()
         {
-            
+
         }
 
         private async void NestedHandlerEvent()

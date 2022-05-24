@@ -11,10 +11,27 @@ namespace BlazorStrap
     {
         private DotNetObjectReference<BSCarousel>? _objectRef;
         private bool _hasRendered;
+
+        /// <summary>
+        /// Whether or not previous and next controls are rendered.
+        /// </summary>
         [Parameter] public bool HasControls { get; set; }
+
+        /// <summary>
+        /// Whether or not indicators are shown.
+        /// </summary>
         [Parameter] public bool HasIndicators { get; set; }
+
+        /// <summary>
+        /// Adds the carousel-dark class. See <see href="https://getbootstrap.com/docs/5.2/components/carousel/#dark-variant">Bootstrap Documentation</see>
+        /// </summary>
         [Parameter] public bool IsDark { get; set; }
+
+        /// <summary>
+        /// Adds the carousel-fade class. See <see href="https://getbootstrap.com/docs/5.2/components/carousel/#crossfade">Bootstrap Documentation</see>
+        /// </summary>
         [Parameter] public bool IsFade { get; set; }
+
         [Parameter] public bool IsSlide { get; set; } = true;
 
         private int _active;
@@ -22,12 +39,11 @@ namespace BlazorStrap
         private int _last;
         private System.Timers.Timer? _transitionTimer;
         private bool ClickLocked { get; set; }
-        
+
         private List<BSCarouselItem> Callback { get; set; } = new List<BSCarouselItem>();
 
         private List<BSCarouselItem> Children { get; set; } = new List<BSCarouselItem>();
 
-        // private Func<Task>? Callback { get; set; }
         private string? ClassBuilder => new CssBuilder("carousel")
             .AddClass("slide", IsSlide)
             .AddClass("carousel-fade", IsFade)
@@ -50,7 +66,7 @@ namespace BlazorStrap
         {
             return GotoChildSlide(slide == Children.First() ? Children.Last() : Children.First());
         }
-        
+
         [JSInvokable]
         public override async Task InteropEventCallback(string id, CallerName name, EventType type)
         {
@@ -59,12 +75,13 @@ namespace BlazorStrap
                 await TransitionEndAsync();
             }
         }
+
         private async Task TransitionEndAsync()
         {
             ClickLocked = false;
             await Children[_active].Refresh();
             await Children[_last].Refresh();
-            
+
             await Children[_last].Refresh();
             if (Callback.Count > 0)
             {
@@ -96,11 +113,15 @@ namespace BlazorStrap
             await Children[_last].InternalHide();
             await Children[_active].InternalShow();
             await DoAnimations(back);
-            
+
             await InvokeAsync(() => { _indicatorsRef?.Refresh(Children.Count, _active); });
             ResetTransitionTimer(Children[_active].Interval);
         }
 
+        /// <summary>
+        /// Advances carousel back one slide
+        /// </summary>
+        /// <returns><see cref="Task"/></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0045:Convert to conditional expression", Justification = "<Pending>")]
         public async Task BackAsync()
         {
@@ -125,6 +146,10 @@ namespace BlazorStrap
             ResetTransitionTimer(Children[_active].Interval);
         }
 
+        /// <summary>
+        /// Advances the carousel forward one slide.
+        /// </summary>
+        /// <returns><see cref="Task"/></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0045:Convert to conditional expression", Justification = "<Pending>")]
         public async Task NextAsync()
         {
@@ -152,13 +177,14 @@ namespace BlazorStrap
         private async Task DoAnimations(bool back)
         {
             if (!_hasRendered) return;
-            if(await BlazorStrap.Interop.AnimateCarouselAsync(_objectRef, DataId, Children[_active].MyRef, Children[_last].MyRef, back))
+            if (await BlazorStrap.Interop.AnimateCarouselAsync(_objectRef, DataId, Children[_active].MyRef, Children[_last].MyRef, back))
             {
                 ClickLocked = false;
                 await Children[_active].Refresh();
                 await Children[_last].Refresh();
             }
         }
+
         internal void AddChild(BSCarouselItem item)
         {
             Children.Add(item);
@@ -213,15 +239,17 @@ namespace BlazorStrap
                 interval); // Avoid an System.ObjectDisposedException due to the timer being disposed. This occurs when the Enabled property of the timer is set to false by the call to Stop() above.
             _transitionTimer?.Start();
         }
+
         protected override Task OnAfterRenderAsync(bool firstRender)
         {
-            if(firstRender)
+            if (firstRender)
             {
                 _hasRendered = true;
                 _objectRef = DotNetObjectReference.Create<BSCarousel>(this);
             }
             return base.OnAfterRenderAsync(firstRender);
         }
+
         public void Dispose()
         {
             _objectRef?.Dispose();

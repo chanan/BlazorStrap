@@ -1,9 +1,7 @@
 ﻿using BlazorComponentUtilities;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace BlazorStrap
 {
@@ -11,11 +9,32 @@ namespace BlazorStrap
     {
         // ReSharper disable once NullableWarningSuppressionIsUsed
         [Inject] public ISvgLoader SvgLoader { get; set; } = null!;
+
+        /// <summary>
+        /// SVG alignment
+        /// </summary>
         [Parameter] public Align Align { get; set; }
-        [Parameter] public bool IsFluid { get; set; } 
+
+        /// <summary>
+        /// Adds the <c>img-fluid</c> class.
+        /// </summary>
+        [Parameter] public bool IsFluid { get; set; }
+
+        /// <summary>
+        /// Adds the <c>rounded</c> class.
+        /// </summary>
         [Parameter] public bool IsRounded { get; set; }
+
+        /// <summary>
+        /// Adds the <c>img-thumbnail</c> class.
+        /// </summary>
         [Parameter] public bool IsThumbnail { get; set; }
+
+        /// <summary>
+        /// SVG source
+        /// </summary>
         [Parameter] public string? Source { get; set; }
+
         [CascadingParameter] public BSFigure? Figure { get; set; }
         private MarkupString Markup { get; set; }
 
@@ -43,7 +62,7 @@ namespace BlazorStrap
         private MarkupString AddClass(MarkupString svg)
         {
             var svgData = svg.ToString();
-            var svgLine = Regex.Match(svg.ToString(),@"<svg(.*?)>" , RegexOptions.Singleline).Value;
+            var svgLine = Regex.Match(svg.ToString(), @"<svg(.*?)>", RegexOptions.Singleline).Value;
             svgData = svgData.Replace(svgLine, "");
             var classIndex = svgLine.IndexOf("class=", StringComparison.Ordinal);
             if (classIndex > -1)

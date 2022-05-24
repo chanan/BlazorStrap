@@ -1,27 +1,42 @@
-﻿using BlazorComponentUtilities;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap
 {
     public class BSButton : BlazorStrapActionBase
     {
-        [Parameter] public bool IsReset {
+        /// <summary>
+        /// Whether or not the button type is Reset.
+        /// </summary>
+        [Parameter]
+        public bool IsReset
+        {
             get => IsResetType;
             set => IsResetType = value;
         }
-        [Parameter] public bool IsSubmit{
+
+        /// <summary>
+        /// Whether or not the button type is Submit.
+        /// </summary>
+        [Parameter]
+        public bool IsSubmit
+        {
             get => IsSubmitType;
             set => IsSubmitType = value;
         }
-        [Parameter] public bool IsLink{
+
+        /// <summary>
+        /// Whether or not the button is a link
+        /// </summary>
+        [Parameter]
+        public bool IsLink
+        {
             get => HasLinkClass;
             set => HasLinkClass = value;
         }
+
         public BSButton()
         {
             HasButtonClass = true;
         }
-        
     }
 }
