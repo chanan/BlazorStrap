@@ -5,6 +5,9 @@ namespace BlazorStrap
 {
     public partial class BSDataTableRow : BSTR
     {
+        /// <summary>
+        /// Hides the row.
+        /// </summary>
         [Parameter]
         public bool IsHidden { get; set; } = false;
 

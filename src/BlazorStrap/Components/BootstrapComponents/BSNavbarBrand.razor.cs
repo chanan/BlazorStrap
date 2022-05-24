@@ -5,6 +5,9 @@ namespace BlazorStrap
 {
     public partial class BSNavbarBrand : BlazorStrapBase
     {
+        /// <summary>
+        /// Url for brand link. See <see href="https://getbootstrap.com/docs/5.2/components/navbar/#brand">Bootstrap Documentation</see>
+        /// </summary>
         [Parameter] public string? Url { get; set; }
 
         private string? ClassBuilder => new CssBuilder("navbar-brand")

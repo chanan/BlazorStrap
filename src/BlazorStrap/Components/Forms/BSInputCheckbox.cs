@@ -10,14 +10,39 @@ namespace BlazorStrap
 
     public class BSInputCheckbox<T> : BSInputBase<T>
     {
+        /// <summary>
+        /// Sets checkbox color.
+        /// </summary>
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
+
+        /// <summary>
+        /// Adds the <c>btn-outline</c> class.
+        /// </summary>
         [Parameter] public bool IsOutlined { get; set; }
+
+        /// <summary>
+        /// Value of <typeparamref name="T"/> when input is checked.
+        /// </summary>
         [Parameter] public virtual T? CheckedValue { get; set; }
+
+        /// <summary>
+        /// Value of <typeparamref name="T"/> when input is unchecked.
+        /// </summary>
         [Parameter] public virtual T? UnCheckedValue { get; set; }
+
         protected bool IsRadio { get; set; }
+
+        /// <summary>
+        /// Display as toggle buttons.
+        /// </summary>
         [Parameter] public bool IsToggle { get; set; }
+
         [DisallowNull] private ElementReference? Element { get; set; }
         private string InputType => IsRadio ? "radio" : "checkbox";
+
+        /// <summary>
+        /// Size of input.
+        /// </summary>
         [Parameter] public Size Size { get; set; }
 
         private string? ClassBuilder => new CssBuilder()
@@ -32,7 +57,7 @@ namespace BlazorStrap
         private string? ToggleClassBuilder => new CssBuilder("btn")
             .AddClass($"btn-outline-{Color.NameToLower()}", IsOutlined)
             .AddClass($"btn-{Size.ToDescriptionString()}", Size != Size.None)
-            .AddClass($"btn-{Color.NameToLower()}", Color != BSColor.Default && !IsOutlined) 
+            .AddClass($"btn-{Color.NameToLower()}", Color != BSColor.Default && !IsOutlined)
             .Build().ToNullString();
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -46,7 +71,7 @@ namespace BlazorStrap
             builder.AddAttribute(8, "onfocus", OnFocusEvent);
             builder.AddAttribute(8, "checked", Checked());
             builder.AddAttribute(8, "disabled", IsDisabled);
-            if(IsToggle)
+            if (IsToggle)
                 builder.AddAttribute(8, "id", id);
             builder.AddMultipleAttributes(10, AdditionalAttributes);
             builder.AddElementReferenceCapture(11, elReference => Element = elReference);

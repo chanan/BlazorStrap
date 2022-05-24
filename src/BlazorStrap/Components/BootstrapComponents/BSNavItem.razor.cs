@@ -9,18 +9,67 @@ namespace BlazorStrap
     {
         // ReSharper disable once NullableWarningSuppressionIsUsed
         [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+
+        /// <summary>
+        /// Data-Blazorstrap attribute value to target.
+        /// </summary>
         [Parameter] public string? Target { get; set; }
+
+        /// <summary>
+        /// Sets if the NavItem is active.
+        /// </summary>
         [Parameter] public bool? IsActive { get; set; }
+
+        /// <summary>
+        /// Sets if the NavItem is disabled.
+        /// </summary>
         [Parameter] public bool IsDisabled { get; set; }
+
+        /// <summary>
+        /// Sets if the NavItem is a dropdown.
+        /// </summary>
         [Parameter] public bool IsDropdown { get; set; }
+
+        /// <summary>
+        /// Removes the <c>nav-item</c> class.
+        /// </summary>
         [Parameter] public bool NoNavItem { get; set; }
+
+        /// <summary>
+        /// Display nav item as active if a child route of the nav item is active.
+        /// </summary>
         [Parameter] public bool ActiveOnChildRoutes { get; set; } = false;
+
+        /// <summary>
+        /// CSS class to apply to the nav bar list items.
+        /// </summary>
         [Parameter] public string? ListItemClass { get; set; }
+
+        /// <summary>
+        /// Event called when item is clicked.
+        /// </summary>
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+        /// <summary>
+        /// Prevent default on click behavior.
+        /// </summary>
         [Parameter] public bool PreventDefault { get; set; }
+
+        /// <summary>
+        /// Content of tab.
+        /// </summary>
         [Parameter] public RenderFragment? TabContent { get; set; }
+
+        /// <summary>
+        /// Tab label.
+        /// </summary>
         [Parameter] public RenderFragment? TabLabel { get; set; }
+
+        /// <summary>
+        /// Url for nav link.
+        /// </summary>
         [Parameter] public string? Url { get; set; } = "javascript:void(0);";
+
         [CascadingParameter] public BSNav? Parent { get; set; }
         private bool _canHandleActive;
         private string? ClassBuilder => new CssBuilder("nav-link")

@@ -5,7 +5,14 @@ namespace BlazorStrap
 {
     public partial class BSBreadcrumbItem : BlazorStrapBase
     {
+        /// <summary>
+        /// Whether or not the breadcrumb item is active.
+        /// </summary>
         [Parameter] public bool IsActive { get; set; }
+
+        /// <summary>
+        /// Link for breadcrumb item.
+        /// </summary>
         [Parameter] public string? Url { get; set; }
 
         private string? ClassBuilder => new CssBuilder("breadcrumb-item")

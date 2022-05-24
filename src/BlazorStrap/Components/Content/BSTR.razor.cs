@@ -5,8 +5,19 @@ namespace BlazorStrap
 {
     public partial class BSTR : BlazorStrapBase
     {
+        /// <summary>
+        /// Content alignment within the row.
+        /// </summary>
         [Parameter] public AlignRow AlignRow { get; set; }
+
+        /// <summary>
+        /// Row background color.
+        /// </summary>
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
+
+        /// <summary>
+        /// Whether or not the row is active.
+        /// </summary>
         [Parameter] public bool IsActive { get; set; }
 
         private string? ClassBuilder => new CssBuilder()

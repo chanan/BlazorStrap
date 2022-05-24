@@ -6,9 +6,21 @@ namespace BlazorStrap
 {
     public partial class BSDataTableHead<TValue> : BSTD, IDisposable
     {
+        /// <summary>
+        /// Column Name
+        /// </summary>
         [Parameter] public string? Column { get; set; }
+
+        /// <summary>
+        /// Enables sorting for this column
+        /// </summary>
         [Parameter] public bool Sortable { get; set; }
+
+        /// <summary>
+        /// Enables a filter for this column.
+        /// </summary>
         [Parameter] public bool ColumnFilter { get; set; }
+
         [CascadingParameter] public BSDataTable<TValue>? Parent { get; set; }
         private bool? _desc;
         private string? Filter { get; set; }

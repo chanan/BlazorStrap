@@ -8,7 +8,6 @@ using BlazorComponentUtilities;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
@@ -29,14 +28,31 @@ namespace BlazorStrap
             _ => "input"
         };
         [DisallowNull] public ElementReference? Element { get; protected set; }
+
+        /// <summary>
+        /// Adds the <c>form-control-plaintext</c> class.
+        /// </summary>
         [Parameter] public bool IsPlainText { get; set; }
+
+        /// <summary>
+        /// Sets the component to be readonly.
+        /// </summary>
         [Parameter] public bool IsReadonly { get; set; }
+
+        /// <summary>
+        /// Form input type. Defaults to <see cref="InputType.Text"/>
+        /// </summary>
+        /// <remarks>If set to <see cref="InputType.Select"/> multiple select can be enabled by binding an array to the component.</remarks>
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
+
+        /// <summary>
+        /// Size of input
+        /// </summary>
         [Parameter] public Size InputSize { get; set; }
 
         private string? ClassBuilder => new CssBuilder()
-            .AddClass($"form-control-{InputSize.ToDescriptionString()}", InputSize != Size.None && InputType != InputType.Select )
-            .AddClass($"form-select-{InputSize.ToDescriptionString()}", InputSize != Size.None && InputType == InputType.Select )
+            .AddClass($"form-control-{InputSize.ToDescriptionString()}", InputSize != Size.None && InputType != InputType.Select)
+            .AddClass($"form-select-{InputSize.ToDescriptionString()}", InputSize != Size.None && InputType == InputType.Select)
             .AddClass("form-control", InputType != InputType.Select && InputType != InputType.Range)
             .AddClass("form-range", InputType == InputType.Range)
             .AddClass(BS.Form_Control_Plaintext, IsPlainText)
@@ -47,7 +63,7 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
-    
+
         protected override string? FormatValueAsString(TValue? value)
         {
             return value switch
@@ -61,10 +77,10 @@ namespace BlazorStrap
                 CultureInfo @cultureInfo => BindConverter.FormatValue(@cultureInfo.Name),
                 DateTime @dateTimeValue => BindConverter.FormatValue(@dateTimeValue, _dateFormat, CultureInfo.InvariantCulture),
                 DateTimeOffset @dateTimeOffsetValue => BindConverter.FormatValue(@dateTimeOffsetValue, _dateFormat, CultureInfo.InvariantCulture),
-                #if NET6_0_OR_GREATER
-                    DateOnly dateOnlyValue => BindConverter.FormatValue(dateOnlyValue, _dateFormat, CultureInfo.InvariantCulture),
-                    TimeOnly timeOnlyValue => BindConverter.FormatValue(timeOnlyValue, _dateFormat, CultureInfo.InvariantCulture),
-                #endif
+#if NET6_0_OR_GREATER
+                DateOnly dateOnlyValue => BindConverter.FormatValue(dateOnlyValue, _dateFormat, CultureInfo.InvariantCulture),
+                TimeOnly timeOnlyValue => BindConverter.FormatValue(timeOnlyValue, _dateFormat, CultureInfo.InvariantCulture),
+#endif
                 _ => base.FormatValueAsString(value),
             };
         }
@@ -79,15 +95,15 @@ namespace BlazorStrap
                 _ => _dateFormat
             };
         }
-        
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             builder.OpenElement(0, Tag);
-            if(Tag == "input")
+            if (Tag == "input")
                 builder.AddAttribute(1, "type", InputType.ToDescriptionString());
             builder.AddAttribute(2, "class", ClassBuilder);
             if (_isMultipleSelect) // Microsoft
-            {   
+            {
                 builder.AddAttribute(4, "value", BindConverter.FormatValue(CurrentValue)?.ToString());
                 builder.AddAttribute(5, "onchange", EventCallback.Factory.CreateBinder<string?[]?>(this, SetCurrentValueAsStringArray, default));
             }
@@ -104,7 +120,7 @@ namespace BlazorStrap
             builder.AddMultipleAttributes(8, AdditionalAttributes);
             builder.AddAttribute(10, "multiple", _isMultipleSelect);
             builder.AddElementReferenceCapture(11, elReference => Element = elReference);
-            if(Tag != "input")
+            if (Tag != "input")
                 builder.AddContent(12, ChildContent);
             builder.CloseElement();
         }

@@ -6,15 +6,51 @@ namespace BlazorStrap
 {
     public partial class BSNav : BlazorStrapBase
     {
+        /// <summary>
+        /// Adds the <c>nav-fill</c> class.
+        /// </summary>
         [Parameter] public bool IsFill { get; set; }
+
+        /// <summary>
+        /// Adds the <c>nav-justified</c> class.
+        /// </summary>
         [Parameter] public bool IsJustified { get; set; }
+
+        /// <summary>
+        /// Renders using a HTML &lt;Nav&gt; element instead of a &lt;ul&gt;
+        /// </summary>
         [Parameter] public bool IsNav { get; set; }
+
+        /// <summary>
+        /// Adds the <c>nav-pills</c> class to render as pills.
+        /// </summary>
         [Parameter] public bool IsPills { get; set; }
+
+        /// <summary>
+        /// Adds the <c>nav-tabs</c> class to render as tabs.
+        /// </summary>
         [Parameter] public bool IsTabs { get; set; }
+
+        /// <summary>
+        /// Displays nav items vertically.
+        /// </summary>
         [Parameter] public bool IsVertical { get; set; }
+
+        /// <summary>
+        /// Alignment of content.
+        /// </summary>
         [Parameter] public Justify Justify { get; set; }
+
+        /// <summary>
+        /// Removes the <c>navbar-nav</c> class.
+        /// </summary>
         [Parameter] public bool NoNavbarNav { get; set; }
+
+        /// <summary>
+        /// Removes the <c>nav</c> class.
+        /// </summary>
         [Parameter] public bool NoNav { get; set; }
+
         [CascadingParameter] public BSNavbar? Navbar { get; set; }
         internal BSNavItem? ActiveChild { get; set; }
 
@@ -45,7 +81,7 @@ namespace BlazorStrap
         public void Invoke(BSNavItem sender)
         {
             ActiveChild = sender;
-            if(IsTabs)
+            if (IsTabs)
             {
                 TabRender?.Render();
             }
@@ -55,7 +91,7 @@ namespace BlazorStrap
 
         internal event Action<BSNavItem>? ChildHandler;
 
-        internal void Rerender ()
+        internal void Rerender()
         {
             StateHasChanged();
         }

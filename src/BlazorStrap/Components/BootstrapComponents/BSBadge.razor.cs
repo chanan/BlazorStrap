@@ -5,7 +5,14 @@ namespace BlazorStrap
 {
     public partial class BSBadge : BlazorStrapBase
     {
+        /// <summary>
+        /// Color class of badge
+        /// </summary>
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
+
+        /// <summary>
+        /// Whether or not the badge is styled as a pill.
+        /// </summary>
         [Parameter] public bool IsPill { get; set; }
 
         private string? ClassBuilder => new CssBuilder("badge")

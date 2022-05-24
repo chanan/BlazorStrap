@@ -12,7 +12,7 @@ See [shared](layout/shared) for additional parameters
 | HeaderClass          | bool           | true/false     | `.d-flex` `.align-items-center` |
 | ShowBackdrop         | bool           | true/false     |                                 |
 | AllowScroll          | bool           | true/false     |                                 |
-| ButtonClass          | int            | 1-6            | `<h1>` to `<h6>`                |
+| ButtonClass          | int            | 1-6            |                                 |
 | Header               | RenderFragment | RenderFragment | Nested Content                  |
 | Content              | RenderFragment | RenderFragment | Nested Content                  |
 | OnClick              | EventCallback  | EventCallback  | EventCallback                   |

@@ -8,19 +8,63 @@ namespace BlazorStrap
 {
     public abstract class BSInputBase<TValue> : BlazorInputBase<TValue>, IBlazorStrapBase, IDisposable
     {
+        /// <summary>
+        /// Debounce interval in ms to filter input. Default is 500ms.
+        /// </summary>
         [Parameter] public int DebounceInterval { get; set; } = 500;
+
+        /// <summary>
+        /// CSS class to apply when input is invalid. Defaults to <c>is-invalid</c>
+        /// </summary>
         [Parameter] public string InvalidClass { get; set; } = "is-invalid";
+
+        /// <summary>
+        /// Sets input as disabled.
+        /// </summary>
         [Parameter] public bool IsDisabled { get; set; }
+
+        /// <summary>
+        /// Is the input invalid.
+        /// </summary>
         [Parameter] public bool IsInvalid { get; set; }
+
+        /// <summary>
+        /// Is the input valid.
+        /// </summary>
         [Parameter] public bool IsValid { get; set; }
+
+        /// <summary>
+        /// Event called when the OnBlur event occurs.
+        /// </summary>
         [Parameter] public EventCallback<FocusEventArgs> OnBlur { get; set; }
+
+        /// <summary>
+        /// Event called when the OnFocus event occurs.
+        /// </summary>
         [Parameter] public EventCallback<FocusEventArgs> OnFocus { get; set; }
+
+        /// <summary>
+        /// Set to validate input on blur.
+        /// </summary>
         [Parameter] public bool ValidateOnBlur { get; set; } = true;
+
+        /// <summary>
+        /// Set to validate input on change.
+        /// </summary>
         [Parameter] public bool ValidateOnChange { get; set; }
+
+        /// <summary>
+        /// Set to validate input on input.
+        /// </summary>
         [Parameter] public bool ValidateOnInput { get; set; } = false;
+
+        /// <summary>
+        /// CSS class to apply when input is valid. Defaults to <c>is-valid</c>.
+        /// </summary>
         [Parameter] public string ValidClass { get; set; } = "is-valid";
+
         [Parameter] public bool UpdateOnInput { get; set; } = false;
-        
+
         protected void OnBlurEvent(FocusEventArgs? e)
         {
             if (ValidateOnBlur && EditContext != null)
@@ -41,7 +85,7 @@ namespace BlazorStrap
             if (OnFocus.HasDelegate)
                 OnFocus.InvokeAsync(e);
         }
-        
+
         protected override void OnInitialized()
         {
             if (EditContext is not null)
@@ -62,7 +106,7 @@ namespace BlazorStrap
             if (ValidateOnInput && EditContext != null)
                 RateLimitingExceptionForObject.Debounce(e, DebounceInterval,
                     (_) => { InvokeAsync(() => OnChangeEvent(e)); });
-            if(UpdateOnInput)
+            if (UpdateOnInput)
                 RateLimitingExceptionForObject.Debounce(e, DebounceInterval,
                     (_) => { InvokeAsync(() => OnChangeEvent(e)); });
         }

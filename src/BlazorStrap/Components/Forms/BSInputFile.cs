@@ -14,15 +14,48 @@ namespace BlazorStrap
 {
     public class BSInputFile<TValue> : BlazorStrapBase, IDisposable
     {
+        /// <summary>
+        /// CSS class added to input when input is invalid. Defaults to <c>is-invalid</c>.
+        /// </summary>
         [Parameter] public string InvalidClass { get; set; } = "is-invalid";
+
         [Parameter] public TValue? IsBasic { get; set; }
+
+        /// <summary>
+        /// Sets the input to be disabled.
+        /// </summary>
         [Parameter] public bool IsDisabled { get; set; }
+
+        /// <summary>
+        /// Whether the input is invalid.
+        /// </summary>
         [Parameter] public bool IsInvalid { get; set; }
+
+        /// <summary>
+        /// Removes default class.
+        /// </summary>
         [Parameter] public bool RemoveDefaultClass { get; set; }
+
+        /// <summary>
+        /// Whether the input is valid.
+        /// </summary>
         [Parameter] public bool IsValid { get; set; }
+
+        /// <summary>
+        /// Event called when input is changed.
+        /// </summary>
         [Parameter] public EventCallback<InputFileChangeEventArgs> OnChange { get; set; }
+
+        /// <summary>
+        /// CSS class added to input when input is valid. Defaults to <c>is-valid</c>.
+        /// </summary>
         [Parameter] public string ValidClass { get; set; } = "is-valid";
+
+        /// <summary>
+        /// Custom validator.
+        /// </summary>
         [Parameter] public Expression<Func<TValue>>? ValidWhen { get; set; }
+
         private bool _hasInitialized;
         [CascadingParameter] private EditContext? CascadedEditContext { get; set; }
 
@@ -45,7 +78,7 @@ namespace BlazorStrap
             builder.OpenComponent<InputFile>(0);
             builder.AddAttribute(1, "OnChange", EventCallback.Factory.Create<InputFileChangeEventArgs>(this, OnFileChange));
             builder.AddAttribute(2, "class", ClassBuilder);
-            builder.AddAttribute(3, "onclick",  OnFileClick);
+            builder.AddAttribute(3, "onclick", OnFileClick);
             builder.AddMultipleAttributes(4, Attributes);
             builder.CloseComponent();
         }

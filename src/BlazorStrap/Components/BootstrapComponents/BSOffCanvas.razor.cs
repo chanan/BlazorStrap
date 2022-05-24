@@ -10,16 +10,60 @@ namespace BlazorStrap
     {
         private Func<Task>? _callback;
         private DotNetObjectReference<BSOffCanvas>? _objectRef;
+
+        /// <summary>
+        /// Allows the page body to be scrolled while the OffCanvas is being shown.
+        /// </summary>
         [Parameter] public bool AllowScroll { get; set; }
+
+        /// <summary>
+        /// CSS classes to be added to the OffCanvas body.
+        /// </summary>
         [Parameter] public string? BodyClass { get; set; }
+
+        /// <summary>
+        /// CSS classes to be added to OffCanvas activation button.
+        /// </summary>
         [Parameter] public string? ButtonClass { get; set; }
+
+        /// <summary>
+        /// Color of OffCanvas element. Defaults to <see cref="BSColor.Default"/>
+        /// </summary>
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
+
+        /// <summary>
+        /// Content of OffCanvas element.
+        /// </summary>
         [Parameter] public RenderFragment? Content { get; set; }
+
+        /// <summary>
+        /// Disables dismissing the element if the backdrop is clicked.
+        /// </summary>
         [Parameter] public bool DisableBackdropClick { get; set; }
+
+        /// <summary>
+        /// Header content.
+        /// </summary>
         [Parameter] public RenderFragment? Header { get; set; }
+
+        /// <summary>
+        /// CSS classes to apply to the header.
+        /// </summary>
         [Parameter] public string? HeaderClass { get; set; }
+
+        /// <summary>
+        /// Can override the default activation button click event.
+        /// </summary>
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+        /// <summary>
+        /// OffCanvas element placement. Defaults to <see cref="Placement.Left"/>
+        /// </summary>
         [Parameter] public Placement Placement { get; set; } = Placement.Left;
+
+        /// <summary>
+        /// Whether or not to show backdrop. Defaults to true.
+        /// </summary>
         [Parameter] public bool ShowBackdrop { get; set; } = true;
 
         private bool _lock;
@@ -81,10 +125,12 @@ namespace BlazorStrap
             }
             catch
             {
-                if(renderOnFail)
+                if (renderOnFail)
                     await InvokeAsync(StateHasChanged);
             }
         }
+
+        /// <inheritdoc/>
         public override Task ShowAsync()
         {
             if (Shown) return Task.CompletedTask;
@@ -94,8 +140,9 @@ namespace BlazorStrap
             };
             return TryCallback();
         }
+
         private async Task ShowActionsAsync()
-        { 
+        {
             CanRefresh = false;
             // Used to hide popovers
             BlazorStrap.ForwardToggle("", this);
@@ -110,17 +157,17 @@ namespace BlazorStrap
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             BlazorStrap.ForwardToggle(DataId, this);
-                       
+
             if (ShowBackdrop)
             {
                 await BlazorStrap.Interop.SetStyleAsync(BackdropRef, "display", "block", 100);
                 await BlazorStrap.Interop.AddClassAsync(BackdropRef, "show");
                 BackdropStyle = "display: block;";
-            
+
             }
-       
+
             await BlazorStrap.Interop.AddClassAsync(MyRef, "show");
-            if(await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
+            if (await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
             {
                 await TransitionEndAsync();
             }
@@ -128,6 +175,7 @@ namespace BlazorStrap
             await DoAnimationsAsync(_shown);
         }
 
+        /// <inheritdoc/>
         public override Task HideAsync()
         {
             if (!Shown) return Task.CompletedTask;
@@ -137,8 +185,9 @@ namespace BlazorStrap
             };
             return TryCallback();
         }
+
         private async Task HideActionsAsync()
-        { 
+        {
             CanRefresh = false;
             // Used to hide popovers
             BlazorStrap.ForwardToggle("", this);
@@ -151,15 +200,16 @@ namespace BlazorStrap
             }
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
-            
+
             if (ShowBackdrop)
-                await BlazorStrap.Interop.RemoveClassAsync(BackdropRef, "show", 100);{
+                await BlazorStrap.Interop.RemoveClassAsync(BackdropRef, "show", 100);
+            {
                 BackdropStyle = "display: none;";
             }
 
             await BlazorStrap.Interop.RemoveClassAsync(MyRef, "show");
 
-            if(await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
+            if (await BlazorStrap.Interop.TransitionDidNotStartAsync(MyRef))
             {
                 await TransitionEndAsync();
             }
@@ -184,6 +234,7 @@ namespace BlazorStrap
             }
         }
 
+        /// <inheritdoc/>
         public override Task ToggleAsync()
         {
             return Shown ? HideAsync() : ShowAsync();
@@ -201,7 +252,7 @@ namespace BlazorStrap
                 await ToggleAsync();
             await OnClick.InvokeAsync();
         }
-        
+
         private async Task TransitionEndAsync()
         {
             _lock = false;
@@ -240,7 +291,7 @@ namespace BlazorStrap
                     {
                         var scrollWidth = await BlazorStrap.Interop.GetScrollBarWidth();
                         await BlazorStrap.Interop.SetBodyStyleAsync("overflow", "hidden");
-                        await BlazorStrap.Interop.SetBodyStyleAsync("paddingRight",  $"{scrollWidth}px");
+                        await BlazorStrap.Interop.SetBodyStyleAsync("paddingRight", $"{scrollWidth}px");
                     }
                 }
             }
@@ -248,7 +299,7 @@ namespace BlazorStrap
             {
                 {
                     await BlazorStrap.Interop.SetBodyStyleAsync("overflow", "");
-                    await BlazorStrap.Interop.SetBodyStyleAsync("paddingRight",  "");
+                    await BlazorStrap.Interop.SetBodyStyleAsync("paddingRight", "");
                 }
             }
         }

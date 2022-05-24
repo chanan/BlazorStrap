@@ -1,26 +1,56 @@
 ﻿using BlazorComponentUtilities;
-using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
 
 namespace BlazorStrap
 {
     public partial class BSToggle : BlazorStrapBase, IDisposable
     {
+        /// <summary>
+        /// Renders as a HTML Button element.
+        /// </summary>
         [Parameter] public bool IsButton { get; set; }
+
+        /// <summary>
+        /// Color of Toggle
+        /// </summary>
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
+
+        /// <summary>
+        /// Use when in a nav bar.
+        /// </summary>
         [Parameter] public bool IsNavLink { get; set; }
+
+        /// <summary>
+        /// Whether or not the toggle is active.
+        /// </summary>
         [Parameter] public bool? IsActive { get; set; }
+
+        /// <summary>
+        /// Button rendered as an outline.
+        /// </summary>
         [Parameter] public bool IsOutlined { get; set; }
+
+        /// <summary>
+        /// Dropdown arrow is separate from main button.
+        /// </summary>
         [Parameter] public bool IsSplitButton { get; set; }
+
+        /// <summary>
+        /// Size of toggle.
+        /// </summary>
         [Parameter] public Size Size { get; set; }
+
+        /// <summary>
+        /// Event called when toggle is clicked.
+        /// </summary>
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
         [CascadingParameter] public BSCollapse? CollapseParent { get; set; }
         [CascadingParameter] public BSDropdown? DropDownParent { get; set; }
         private ElementReference MyRef { get; set; }
         private string Element =>
-            (CollapseParent != null) ? "collapse" : (DropDownParent != null) ? "dropdown" : "unknown"; 
+            (CollapseParent != null) ? "collapse" : (DropDownParent != null) ? "dropdown" : "unknown";
         private bool _canHandleActive;
         private BSDropdownItem? _activeOwner;
 
@@ -44,13 +74,13 @@ namespace BlazorStrap
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .AddClass("nav-link", !IsButton && IsNavLink)
-            .AddClass("dropdown-item", DropDownParent?.Parent != null && !IsNavLink )
+            .AddClass("dropdown-item", DropDownParent?.Parent != null && !IsNavLink)
             .AddClass("dropdown-toggle", DropDownParent != null)
             .AddClass("dropdown-toggle-split", DropDownParent != null && IsSplitButton)
             .AddClass("collapsed", (!CollapseParent?.Shown ?? false) && DropDownParent == null)
             .Build().ToNullString();
 
-        
+
         protected override void OnInitialized()
         {
             if (IsActive == null)
@@ -68,14 +98,14 @@ namespace BlazorStrap
             if (!_canHandleActive) return;
             if (_activeOwner == item && !active)
             {
-                if(IsActive == active) return;
-                
+                if (IsActive == active) return;
+
                 IsActive = false;
             }
             if (active)
             {
                 _activeOwner = item;
-                if(IsActive == active) return;
+                if (IsActive == active) return;
                 IsActive = true;
             }
             StateHasChanged();
@@ -107,10 +137,10 @@ namespace BlazorStrap
                 return DropDownParent.Shown;
             }
 
-            if(CollapseParent != null)
+            if (CollapseParent != null)
             {
                 return CollapseParent.Shown;
-              
+
             }
             return false;
         }

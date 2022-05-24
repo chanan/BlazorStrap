@@ -6,12 +6,39 @@ namespace BlazorStrap
 {
     public class BSCard : BlazorStrapBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         [Parameter] public Alignment Alignment { get; set; } = Alignment.Left;
+
+        /// <summary>
+        /// Sets card type.
+        /// </summary>
         [Parameter] public CardType CardType { get; set; } = CardType.Card;
+
+        /// <summary>
+        /// Sets the card color.
+        /// </summary>
         [Parameter] public BSColor Color { get; set; } = BSColor.Default;
+
+        /// <summary>
+        /// Sets card heading size.
+        /// </summary>
         [Parameter] public HeadingSize HeadingSize { get; set; } = HeadingSize.None;
+
+        /// <summary>
+        /// Inverts color scheme.
+        /// </summary>
         [Parameter] public bool IsInverse { get; set; }
+
+        /// <summary>
+        /// Sets styling to be outlined.
+        /// </summary>
         [Parameter] public bool IsOutline { get; set; }
+
+        /// <summary>
+        /// Sets image to be on top or bottom of card. Only used if <see cref="CardType"/> is <see cref="CardType.Image"/>
+        /// </summary>
         [Parameter] public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
 
         private string? ClassBuilder => new CssBuilder()
@@ -47,10 +74,10 @@ namespace BlazorStrap
                 builder.OpenElement(0, Tag);
                 builder.AddAttribute(1, "class", ClassBuilder);
                 builder.AddMultipleAttributes(2, Attributes);
-                builder.AddContent(3,ChildContent);
-                builder.CloseElement();    
+                builder.AddContent(3, ChildContent);
+                builder.CloseElement();
             }
-            
+
         }
 
         private string? GetCardAlignment()
@@ -62,7 +89,6 @@ namespace BlazorStrap
                 _ => null
             };
         }
-
 
         private string? GetCardColor()
         {

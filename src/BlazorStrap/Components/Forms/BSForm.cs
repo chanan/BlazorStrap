@@ -8,28 +8,56 @@ namespace BlazorStrap
     public class BSForm<TValue> : BlazorStrapBase
     {
         /// <summary>
-        /// Align
+        /// Form alignment.
         /// </summary>
         [Parameter] public Align Align { get; set; }
+
+        /// <summary>
+        /// Form editcontext.
+        /// </summary>
         [Parameter] public EditContext? EditContext { get; set; }
+
         /// <summary>
         /// Gutters
         /// </summary>
         [Parameter] public Gutters Gutters { get; set; }
+
+        /// <summary>
+        /// Horizontal Gutters.
+        /// </summary>
         [Parameter] public Gutters HorizontalGutters { get; set; }
         [Parameter] public TValue? IsBasic { get; set; }
         [Parameter] public bool IsFloating { get; set; }
         [Parameter] public bool IsRow { get; set; }
+
         /// <summary>
         /// Justify
         /// </summary>
         [Parameter] public Justify Justify { get; set; }
+
         [Parameter] public TValue? Model { get; set; }
+
+        /// <summary>
+        /// Method called when form is submitted and validation fails.
+        /// </summary>
         [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
+
+        /// <summary>
+        /// Method called when form is submitted.
+        /// </summary>
         [Parameter] public EventCallback<EditContext> OnSubmit { get; set; }
+
+        /// <summary>
+        /// Method called when form is reset.
+        /// </summary>
         [Parameter] public EventCallback<EventArgs> OnReset { get; set; }
+
+        /// <summary>
+        /// Method called when form is submitted and validation passes.
+        /// </summary>
         [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
-       // [Parameter] public bool ValidateOnInit { get; set; }
+
+        // [Parameter] public bool ValidateOnInit { get; set; }
 
         /// <summary>
         /// Vertical Gutters
@@ -82,7 +110,7 @@ namespace BlazorStrap
                         child.AddContent(1, ChildContent);
                     };
             };
-            
+
             Form = formBuilder =>
             {
                 formBuilder.OpenComponent<EditForm>(0);

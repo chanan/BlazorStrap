@@ -12,21 +12,21 @@ namespace BlazorStrap
         // ReSharper disable once NullableWarningSuppressionIsUsed
         [Inject] public IBlazorStrap BlazorStrapSrc { get; set; } = null!;
         // ReSharper disable once NullableWarningSuppressionIsUsed
-        
-       // [Inject] public IJSRuntime Js { get; set; } = null!;
+
+        // [Inject] public IJSRuntime Js { get; set; } = null!;
 
         /// <summary>
         /// Add [JSInvokable] above your override
         /// </summary>
-        public virtual Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList , JavascriptEvent? e )
+        public virtual Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
             => Task.CompletedTask;
-        
+
         /// <summary>
         /// Add [JSInvokable] above your override
         /// </summary>
         public virtual Task InteropEventCallback(string id, CallerName name, EventType type)
             => Task.CompletedTask;
-        
+
         /// <summary>
         /// Add [JSInvokable] above your override
         /// </summary>
@@ -38,96 +38,70 @@ namespace BlazorStrap
 
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
+        /// <inheritdoc/>
         [Parameter] public string Class { get; set; } = "";
+
+        /// <inheritdoc/>
         [Parameter] public string DataId { get; set; } = Guid.NewGuid().ToString();
 
-        /// <summary>
-        /// Top, Bottom, Left, Right Margins
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Margins Margin { get; set; }
 
-        /// <summary>
-        /// Bottom Margin
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Margins MarginBottom { get; set; }
 
-        /// <summary>
-        /// End/Right Margin
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Margins MarginEnd { get; set; }
 
-        /// <summary>
-        /// Left and Right Margins
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Margins MarginLeftAndRight { get; set; }
 
-        /// <summary>
-        /// Start/Left Margin
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Margins MarginStart { get; set; }
 
-        /// <summary>
-        /// Top Margin
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Margins MarginTop { get; set; }
 
-        /// <summary>
-        /// Top and Bottom Margins
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Margins MarginTopAndBottom { get; set; }
 
-        /// <summary>
-        /// Top, Bottom, Left, Right Padding
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Padding Padding { get; set; }
 
-        /// <summary>
-        /// Bottom Padding
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Padding PaddingBottom { get; set; }
 
-        /// <summary>
-        /// End/Right Padding
-        /// </summary>
+        /// <inheritdoc/>
+
         [Parameter]
         public Padding PaddingEnd { get; set; }
 
-        /// <summary>
-        /// Left and Right Padding
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Padding PaddingLeftAndRight { get; set; }
 
-        /// <summary>
-        /// Start/Left Padding
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Padding PaddingStart { get; set; }
 
-        /// <summary>
-        /// Top Padding
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Padding PaddingTop { get; set; }
 
-        /// <summary>
-        /// Top and Bottom Padding
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Padding PaddingTopAndBottom { get; set; }
 
-        /// <summary>
-        /// Position Helper
-        /// </summary>
+        /// <inheritdoc/>
         [Parameter]
         public Position Position { get; set; } = Position.Default;
 

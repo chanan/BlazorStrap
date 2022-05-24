@@ -8,8 +8,20 @@ namespace BlazorStrap
     public partial class BSBreadcrumb : BlazorStrapBase, IDisposable
     {
         [Inject] private NavigationManager? NavigationManager { get; set; }
+
+        /// <summary>
+        /// Divider used to separate the breadcrumb tree
+        /// </summary>
         [Parameter] public string Divider { get; set; } = "'/'";
+
+        /// <summary>
+        /// 
+        /// </summary>
         [Parameter] public string? BasePath { get; set; }
+
+        /// <summary>
+        /// Custom labels for paths. The key is the path and the value is the custom label.
+        /// </summary>
         [Parameter] public Dictionary<string, string> Labels { get; set; } = new();
         private Dictionary<string, string> Tree { get; set; } = new();
 
@@ -23,7 +35,7 @@ namespace BlazorStrap
             if (string.IsNullOrEmpty(BasePath)) return;
             if (NavigationManager == null) return;
             NavigationManager.LocationChanged += OnLocationChanged;
-            
+
             //Tree = GetPath(NavigationManager.Uri, BasePath, Labels, "https://localhost:7262/V5/" ?? "");
             Tree = GetPath(NavigationManager.Uri, BasePath, Labels, NavigationManager?.BaseUri ?? "");
         }
@@ -89,7 +101,7 @@ namespace BlazorStrap
             {
                 return labels[query];
             }
-         
+
             return item.ToLower().FirstCharToUpper() ?? "";
         }
 

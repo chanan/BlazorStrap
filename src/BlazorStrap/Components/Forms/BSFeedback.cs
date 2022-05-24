@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using BlazorComponentUtilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
@@ -13,6 +11,10 @@ namespace BlazorStrap
         private bool _hasInitialized;
         [CascadingParameter] private EditContext? CascadedEditContext { get; set; }
         protected EditContext? EditContext { get; set; }
+
+        /// <summary>
+        /// Input feedback is for.
+        /// </summary>
         [Parameter] public Expression<Func<TValue>>? For { get; set; }
         [Parameter] public TValue? IsManual { get; set; }
 
@@ -25,11 +27,31 @@ namespace BlazorStrap
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
+        /// <summary>
+        /// Is the input valid.
+        /// </summary>
         [Parameter] public bool IsValid { get; set; }
+
+        /// <summary>
+        /// Is the input invalid.
+        /// </summary>
         [Parameter] public bool IsInvalid { get; set; }
+
+        /// <summary>
+        /// Rendered as tooltip.
+        /// </summary>
         [Parameter] public bool IsTooltip { get; set; }
+
+        /// <summary>
+        /// Message to show when input is valid.
+        /// </summary>
         [Parameter] public string? ValidMessage { get; set; }
+
+        /// <summary>
+        /// Message to show when input is invalid.
+        /// </summary>
         [Parameter] public string? InvalidMessage { get; set; }
+
         protected internal FieldIdentifier FieldIdentifier { get; set; }
 
         protected override void OnParametersSet()
