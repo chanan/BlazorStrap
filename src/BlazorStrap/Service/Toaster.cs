@@ -68,9 +68,15 @@ namespace BlazorStrap
         internal void RemoveChild(Guid? id)
         {
             var toast = Children.FirstOrDefault(q => q.Id == id);
-            toast?.Timer?.Stop();
-            toast?.Timer?.Dispose();
-            if (toast != null) 
+            // Child might be disposed of. 
+            try
+            {
+                toast?.Timer?.Stop();
+                toast?.Timer?.Dispose();
+            }
+            catch { }
+            
+            if (toast != null ) 
                 Children.Remove(toast);
  
             OnChange?.Invoke();

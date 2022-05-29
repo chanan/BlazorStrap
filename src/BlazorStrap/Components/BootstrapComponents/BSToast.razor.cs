@@ -133,8 +133,13 @@ namespace BlazorStrap
 
         private async void TimerOnElapsed(object? sender, ElapsedEventArgs e)
         {
-            // Delay for animation .15 seconds = 150 ms move this to transition end later
-            await BlazorStrap.Interop.AddClassAsync(MyRef, "showing");
+            // If this fails the only thing that will happen, the smooth closing animation wont be shown this is completely safe to keep in try catch.
+            try
+            {
+                await BlazorStrap.Interop.AddClassAsync(MyRef, "showing");
+            }
+            catch 
+            { }
             await Task.Delay(150);
             if (BlazorStrap.Toaster.Children.FirstOrDefault(q => q.Id == ToasterId) != null)
                 BlazorStrap.Toaster.RemoveChild(ToasterId);
