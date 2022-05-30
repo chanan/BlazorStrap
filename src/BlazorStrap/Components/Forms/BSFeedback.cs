@@ -19,7 +19,7 @@ namespace BlazorStrap
         [Parameter] public TValue? IsManual { get; set; }
 
         private string? ClassBuilder => new CssBuilder()
-            .AddClass("valid-tooltip", IsTooltip && !IsValid)
+            .AddClass("valid-tooltip", IsTooltip && IsValid)
             .AddClass("valid-feedback", !IsTooltip && IsValid)
             .AddClass("invalid-tooltip", IsTooltip && IsInvalid)
             .AddClass("invalid-feedback", !IsTooltip && IsInvalid)
@@ -54,6 +54,8 @@ namespace BlazorStrap
 
         protected internal FieldIdentifier FieldIdentifier { get; set; }
 
+        private string? _ActualInvalidMessage;
+
         protected override void OnParametersSet()
         {
             if (!_hasInitialized)
@@ -65,6 +67,7 @@ namespace BlazorStrap
                     EditContext = CascadedEditContext;
                     if (For != null) FieldIdentifier = FieldIdentifier.Create(For);
                     EditContext.OnValidationStateChanged += OnValidationStateChanged;
+                    DoValidation();
                 }
             }
             else if (CascadedEditContext != EditContext)
@@ -88,6 +91,8 @@ namespace BlazorStrap
             {
                 return;
             }
+
+            _ActualInvalidMessage = InvalidMessage;
 
             if (EditContext.IsModified(FieldIdentifier))
             {
@@ -113,29 +118,30 @@ namespace BlazorStrap
         {
             if (EditContext != null)
             {
-                if (InvalidMessage == null)
+                if (_ActualInvalidMessage == null)
                 {
                     var first = true;
                     foreach (var message in EditContext.GetValidationMessages(FieldIdentifier))
                     {
                         if (first)
                         {
-                            InvalidMessage = message;
+                            _ActualInvalidMessage = message;
                             first = false;
                         }
                         else
                         {
-                            InvalidMessage += $"<br/>{message}";
+                            _ActualInvalidMessage += $"<br/>{message}";
                         }
                     }
                 }
             }
 
-            if (!IsInvalid && !IsInvalid) return;
+            var content = IsInvalid ? _ActualInvalidMessage : IsValid ? ValidMessage : null;
+            if (content == null) return;
             builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", ClassBuilder);
             builder.AddMultipleAttributes(2, Attributes);
-            builder.AddContent(3, InvalidMessage);
+            builder.AddContent(3, content);
             builder.CloseElement();
         }
         public void Dispose()
