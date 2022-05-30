@@ -22,9 +22,13 @@ namespace BlazorStrap.Extensions.FluentValidation
     {
         [Inject] private IServiceProvider _services { get; set; }
 
+        [Parameter] public object? Context { get; set; }
+
         protected override IValidator CreateValidator()
         {
-            return ActivatorUtilities.GetServiceOrCreateInstance<TValidator>(_services);
+            return Context == null
+                ? ActivatorUtilities.GetServiceOrCreateInstance<TValidator>(_services)
+                : ActivatorUtilities.CreateInstance<TValidator>(_services, Context);
         }
     }
 
