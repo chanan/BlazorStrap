@@ -9,21 +9,21 @@ namespace BlazorStrap
 
         public void Add(string? header, string? content)
         {
-            AddChild(header,content, o =>
+            AddChild(header, content, o =>
             {
                 o.Color = BSColor.Primary;
-            });   
+            });
         }
         public void Add(string? content)
         {
-            AddChild(null,content, o =>
+            AddChild(null, content, o =>
             {
                 o.Color = BSColor.Primary;
-            });   
+            });
         }
         public void Add(string? content, Action<Options>? options)
         {
-            AddChild(null,content, options);   
+            AddChild(null, content, options);
         }
 
         public void Add(string? header, string? content, Action<Options>? options)
@@ -36,7 +36,7 @@ namespace BlazorStrap
             options?.Invoke(opts);
             if (opts.Toast == Toast.Default)
                 opts.Toast = Toast.TopRight;
-       
+
             var newChild = new Toasts
             {
                 Id = Guid.NewGuid(),
@@ -45,7 +45,7 @@ namespace BlazorStrap
                 Options = new Options()
                 {
                     ButtonClass = opts.ButtonClass,
-                    CloseAfter = opts.CloseAfter ,
+                    CloseAfter = opts.CloseAfter,
                     Color = opts.Color,
                     ContentClass = opts.ContentClass,
                     HeaderClass = opts.HeaderClass,
@@ -68,17 +68,17 @@ namespace BlazorStrap
         internal void RemoveChild(Guid? id)
         {
             var toast = Children.FirstOrDefault(q => q.Id == id);
-            // Child might be disposed of. 
+            toast?.Timer?.Stop();
+            toast?.Timer?.Dispose();
+
+            // Concurrency error on list can cause element to already be removed between when retrieved and removed.
             try
             {
-                toast?.Timer?.Stop();
-                toast?.Timer?.Dispose();
+                if (toast != null)
+                    Children.Remove(toast);
             }
             catch { }
-            
-            if (toast != null ) 
-                Children.Remove(toast);
- 
+
             OnChange?.Invoke();
         }
     }
