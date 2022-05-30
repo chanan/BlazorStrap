@@ -67,6 +67,7 @@ namespace BlazorStrap
                     EditContext = CascadedEditContext;
                     if (For != null) FieldIdentifier = FieldIdentifier.Create(For);
                     EditContext.OnValidationStateChanged += OnValidationStateChanged;
+                    DoValidation();
                 }
             }
             else if (CascadedEditContext != EditContext)
