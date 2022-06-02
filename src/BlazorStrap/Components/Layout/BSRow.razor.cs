@@ -29,9 +29,9 @@ namespace BlazorStrap
         [Parameter] public Gutters VerticalGutters { get; set; }
 
         private string? ClassBuilder => new CssBuilder("row")
-            .AddClass($"g-{HorizontalGutters.ToIndex()}", HorizontalGutters != Gutters.Default)
-            .AddClass($"gx-{VerticalGutters.ToIndex()}", VerticalGutters != Gutters.Default)
-            .AddClass($"gy-{Gutters.ToIndex()}", Gutters != Gutters.Default)
+            .AddClass($"g-{Gutters.ToIndex()}", Gutters != Gutters.Default)
+            .AddClass($"gx-{HorizontalGutters.ToIndex()}", HorizontalGutters != Gutters.Default)
+            .AddClass($"gy-{VerticalGutters.ToIndex()}", VerticalGutters != Gutters.Default)
             .AddClass($"justify-content-{Justify.NameToLower()}", Justify != Justify.Default)
             .AddClass($"align-items-{Align.NameToLower()}", Align != Align.Default)
             .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
