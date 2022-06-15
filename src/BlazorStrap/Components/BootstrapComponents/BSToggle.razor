@@ -9,7 +9,7 @@
 }
 else
 {
-    <button class="@ClassBuilder" aria-expanded="@Show().ToString().ToLower()" @attributes="Attributes" @onclick="ClickEvent" data-blazorstrap="@DataId" data-blazorstrap-target="@Target" data-bs-toggle="@Element" @ref="MyRef">
+    <button type="button" class="@ClassBuilder" aria-expanded="@Show().ToString().ToLower()" @attributes="Attributes" @onclick="ClickEvent" data-blazorstrap="@DataId" data-blazorstrap-target="@Target" data-bs-toggle="@Element" @ref="MyRef">
         @ChildContent
     </button>
 }

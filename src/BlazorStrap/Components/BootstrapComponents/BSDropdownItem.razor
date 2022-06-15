@@ -19,7 +19,7 @@
     {
         @if (IsButton)
         {
-            <button class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</button>
+            <button type="button" class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</button>
         }
         else if (IsText)
         {
@@ -74,7 +74,7 @@
         <li>
             @if (IsButton)
             {
-                <button class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</button>
+                <button type="button" class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</button>
             }
             else if (IsText)
             {
