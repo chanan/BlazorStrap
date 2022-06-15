@@ -1,32 +1,32 @@
-﻿<div class="@BS.Input_Group mb-3">
+﻿<BSInputGroup MarginBottom="Margins.Medium">
     <span class="@BS.Input_Group_Text">@@</span>
     <BSInput InputType="InputType.Text" placeholder="Username"  Value="@("")"/>
-</div>
+</BSInputGroup>
 
-<div class="@BS.Input_Group mb-3">
+<BSInputGroup MarginBottom="Margins.Medium">
     <BSInput InputType="InputType.Text" placeholder="Recipient's username"  Value="@("")"/>
     <span class="@BS.Input_Group_Text">@@example.com</span>
-</div>
+</BSInputGroup>
 
 <BSLabel>Your vanity URL</BSLabel>
-<div class="@BS.Input_Group mb-3">
+<BSInputGroup MarginBottom="Margins.Medium">
     <span class="@BS.Input_Group_Text" id="basic-addon3">https://example.com/users/</span>
     <BSInput InputType="InputType.Text"  Value="@("")"/>
-</div>
+</BSInputGroup>
 
-<div class="@BS.Input_Group mb-3">
+<BSInputGroup MarginBottom="Margins.Medium">
     <span class="@BS.Input_Group_Text">$</span>
     <BSInput InputType="InputType.Text"  Value="@("")"/>
     <span class="@BS.Input_Group_Text">.00</span>
-</div>
+</BSInputGroup>
 
-<div class="@BS.Input_Group mb-3">
+<BSInputGroup MarginBottom="Margins.Medium">
     <BSInput InputType="InputType.Text" placeholder="Username"  Value="@("")"/>
     <span class="@BS.Input_Group_Text" >@@</span>
     <BSInput InputType="InputType.Text" placeholder="Server"  Value="@("")"/>
-</div>
+</BSInputGroup>
 
-<div class="@BS.Input_Group mb-3">
+<BSInputGroup MarginBottom="Margins.Medium">
     <span class="@BS.Input_Group_Text">With textarea</span>
     <BSInput InputType="InputType.TextArea"  Value="@("")"></BSInput>
-</div>
+</BSInputGroup>

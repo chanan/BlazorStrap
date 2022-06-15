@@ -43,6 +43,15 @@
             </Content>
         </BSPopover>
     }
+    else if (InputGroup != null && !IsStatic)
+    {
+        @Toggler
+        <BSPopover DropdownOffset="@Offset" Placement="@Placement" IsDropdown="true" Class="@GroupClassBuilder" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
+            <Content>
+                @Content
+            </Content>
+        </BSPopover>
+    }
     else if (IsDiv)
     {
         <div class="@IsDivClassBuilder">
