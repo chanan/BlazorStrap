@@ -84,6 +84,7 @@ namespace BlazorStrap
         private DotNetObjectReference<BSDropdown>? _objectRef;
         [CascadingParameter] public BSNavItem? DropdownItem { get; set; }
         [CascadingParameter] public BSButtonGroup? Group { get; set; }
+        [CascadingParameter] public BSInputGroup? InputGroup { get; set; }
         [CascadingParameter] public BSNavItem? NavItem { get; set; }
         [CascadingParameter] public BSDropdown? Parent { get; set; }
         internal bool Active { get; private set; }
@@ -165,7 +166,7 @@ namespace BlazorStrap
             Shown = false;
             await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataRefId, EventType.Click);
 
-            if ((Group != null && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper))
+            if (((Group != null || InputGroup != null) && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper))
             {
                 if (PopoverRef != null)
                     await PopoverRef.HideAsync();
@@ -230,7 +231,7 @@ namespace BlazorStrap
                 await BlazorStrap.Interop.AddDocumentEventAsync(_objectRef, DataRefId, EventType.Click, AllowItemClick);
             }
 
-            if ((Group != null && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper))
+            if (((Group != null || InputGroup != null) && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper))
             {
                 if (PopoverRef != null) await PopoverRef.ShowAsync();
             }
