@@ -118,7 +118,6 @@ namespace BlazorStrap
         /// <inheritdoc/>
         public override Task HideAsync()
         {
-            if (!Shown) return Task.CompletedTask;
             _callback = async () =>
             {
                 await HideActionsAsync();
@@ -128,6 +127,7 @@ namespace BlazorStrap
 
         private async Task HideActionsAsync()
         {
+            if (!Shown) return;
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
             _called = true;
@@ -142,7 +142,6 @@ namespace BlazorStrap
         /// <inheritdoc/>
         public override Task ShowAsync()
         {
-            if (Shown) return Task.CompletedTask;
             _callback = async () =>
             {
                 await ShowActionsAsync();
@@ -157,6 +156,7 @@ namespace BlazorStrap
                 throw new NullReferenceException("Target cannot be null");
             }
 
+            if (Shown) return;
             _called = true;
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
