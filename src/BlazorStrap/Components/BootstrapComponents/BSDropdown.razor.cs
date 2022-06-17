@@ -153,7 +153,6 @@ namespace BlazorStrap
         // ReSharper disable once MemberCanBePrivate.Global
         public Task HideAsync()
         {
-            if (!Shown) return Task.CompletedTask;
             _callback = async () =>
             {
                 await HideActionsAsync();
@@ -163,6 +162,7 @@ namespace BlazorStrap
 
         private async Task HideActionsAsync()
         {
+            if (!Shown) return;
             Shown = false;
             await BlazorStrap.Interop.RemoveDocumentEventAsync(this, DataRefId, EventType.Click);
 
@@ -214,7 +214,6 @@ namespace BlazorStrap
         // ReSharper disable once MemberCanBePrivate.Global
         public Task ShowAsync()
         {
-            if (Shown) return Task.CompletedTask;
             _callback = async () =>
             {
                 await ShowActionsAsync();
@@ -224,6 +223,7 @@ namespace BlazorStrap
 
         private async Task ShowActionsAsync()
         {
+            if (Shown) return;
             Shown = true;
 
             if (!AllowOutsideClick)
