@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Globalization;
+using System.Reflection;
 using static System.Nullable;
 
 // Not messing with this class it does a lot of goofy things to make inputs work with all types of values
@@ -95,13 +96,22 @@ namespace BlazorStrap.Utilities
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0045:Convert to conditional expression", Justification = "<Pending>")]
-        public static bool ToValue(string? value, out T result, out string validationErrorMessage)
+        public static bool ToValue(string? value, out T result, out string? validationErrorMessage)
         {
             Type type = typeof(T);
             result = default;
             validationErrorMessage = string.Empty;
-            if (typeof(T) == typeof(string))
+            if (Nullable.GetUnderlyingType(type) != null)
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    validationErrorMessage = null;
+                    return true;
+                }
+
+                return NotNullValueToNullableType(value, out result, out validationErrorMessage);
+            }
+            else if (typeof(T) == typeof(string))
             {
                 result = (T)(object)value;
                 validationErrorMessage = null;
@@ -110,12 +120,6 @@ namespace BlazorStrap.Utilities
             else if (typeof(T) == typeof(CultureInfo))
             {
                 result = (T) (object) CultureInfo.CreateSpecificCulture(value);
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (value == null && (Nullable.GetUnderlyingType(type) != null))
-            {
-                result = (T)(object)default(T);
                 validationErrorMessage = null;
                 return true;
             }
@@ -147,45 +151,31 @@ namespace BlazorStrap.Utilities
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T) == typeof(int?))
-            {
-                if (value.Equals(default(T)))
-                {
-                    result = default(T);
-                }
-                else
-                {
-                    result = (T)(object)Convert.ToInt32(value, CultureInfo.InvariantCulture);
-                }
-                
-                validationErrorMessage = null;
-                return true;
-            }
-            else if (typeof(T) == typeof(long) || typeof(T) == typeof(long?))
+            else if (typeof(T) == typeof(long))
             {
                 result = (T)(object)Convert.ToInt64(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T) == typeof(double) || typeof(T) == typeof(double?))
+            else if (typeof(T) == typeof(double))
             {
                 result = (T)(object)double.Parse(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T) == typeof(decimal) || typeof(T) == typeof(decimal?))
+            else if (typeof(T) == typeof(decimal))
             {
                 result = (T)(object)decimal.Parse(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T) == typeof(float) || typeof(T) == typeof(float?))
+            else if (typeof(T) == typeof(float))
             {
                 result = (T)(object)float.Parse(value, CultureInfo.InvariantCulture);
                 validationErrorMessage = null;
                 return true;
             }
-            else if (typeof(T) == typeof(Guid) || typeof(T) == typeof(Guid?))
+            else if (typeof(T) == typeof(Guid))
             {
                 try
                 {
@@ -200,7 +190,7 @@ namespace BlazorStrap.Utilities
 
                 return true;
             }
-            else if (typeof(T) == typeof(bool) || typeof(T) == typeof(bool?))
+            else if (typeof(T) == typeof(bool))
             {
                 try
                 {
@@ -214,11 +204,6 @@ namespace BlazorStrap.Utilities
                     {
                         result = (T)(object)true;
                         validationErrorMessage = null;
-                        return true;
-                    }
-                    else if (string.IsNullOrEmpty(value.ToString()))
-                    {
-                        result = (T)default;
                         return true;
                     }
                     else
@@ -237,7 +222,7 @@ namespace BlazorStrap.Utilities
                     return false;
                 }
             }
-            else if (typeof(T) == typeof(DateTime) || typeof(T) == typeof(DateTime?))
+            else if (typeof(T) == typeof(DateTime))
             {
                 if (TryParseString<T>.ToDateTime(value, out result))
                 {
@@ -253,7 +238,7 @@ namespace BlazorStrap.Utilities
             }
         
             #if NET6_0_OR_GREATER
-            else if (typeof(T) == typeof(DateOnly) || typeof(T) == typeof(DateOnly?))
+            else if (typeof(T) == typeof(DateOnly))
             {
                 if (TryParseString<T>.ToDateOnly(value, out result))
                 {
@@ -267,7 +252,7 @@ namespace BlazorStrap.Utilities
                     return false;
                 }
             }
-            else if (typeof(T) == typeof(TimeOnly) || typeof(T) == typeof(TimeOnly?))
+            else if (typeof(T) == typeof(TimeOnly))
             {
                 if (TryParseString<T>.ToTimeOnly(value, out result))
                 {
@@ -283,7 +268,7 @@ namespace BlazorStrap.Utilities
             }
             #endif
             
-            else if (typeof(T) == typeof(DateTimeOffset) || typeof(T) == typeof(DateTimeOffset?))
+            else if (typeof(T) == typeof(DateTimeOffset))
             {
                 if (ToDateTimeOffset(value, out result))
                 {
@@ -297,23 +282,29 @@ namespace BlazorStrap.Utilities
                     return false;
                 }
             }
-            else if (typeof(T).IsEnum)
+            return false;
+        }
+
+        private static readonly MethodInfo ToNullableValueMethod = typeof(TryParseString<T>).GetMethod(nameof(ToNullableValue), BindingFlags.NonPublic | BindingFlags.Static);
+        private static bool NotNullValueToNullableType(string value, out T result, out string? validationErrorMessage)
+        {
+            var parameters = new object[] { value, null, null };
+            var returnValue = (bool)ToNullableValueMethod.MakeGenericMethod(Nullable.GetUnderlyingType(typeof(T))).Invoke(null, parameters)!;
+            result = (T)parameters[1];
+            validationErrorMessage = (string?)parameters[2];
+            return returnValue;
+        }
+
+        private static bool ToNullableValue<TUnderlying>(string value, out TUnderlying? result, out string? validationErrorMessage)
+            where TUnderlying : struct
+        {
+            if (TryParseString<TUnderlying>.ToValue(value, out var underlyingResult, out validationErrorMessage))
             {
-                var success = BindConverter.TryConvertTo<T>(value, CultureInfo.CurrentCulture, out var parsedValue);
-                if (success)
-                {
-                    result = parsedValue;
-                    validationErrorMessage = null;
-                    return true;
-                }
-                else
-                {
-                    result = default;
-                    validationErrorMessage =
-                        string.Format(CultureInfo.InvariantCulture, "The {0} is not valid.", type.Name);
-                    return false;
-                }
+                result = underlyingResult;
+                return true;
             }
+
+            result = default;
             return false;
         }
     }
