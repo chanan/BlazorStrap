@@ -285,27 +285,14 @@ namespace BlazorStrap.Utilities
             return false;
         }
 
-        private static readonly MethodInfo ToNullableValueMethod = typeof(TryParseString<T>).GetMethod(nameof(ToNullableValue), BindingFlags.NonPublic | BindingFlags.Static);
         private static bool NotNullValueToNullableType(string value, out T result, out string? validationErrorMessage)
         {
+            var method = typeof(TryParseString<>).MakeGenericType(Nullable.GetUnderlyingType(typeof(T))).GetMethod(nameof(ToValue));
             var parameters = new object[] { value, null, null };
-            var returnValue = (bool)ToNullableValueMethod.MakeGenericMethod(Nullable.GetUnderlyingType(typeof(T))).Invoke(null, parameters)!;
+            var success = (bool)method.Invoke(null, parameters)!;
             result = (T)parameters[1];
             validationErrorMessage = (string?)parameters[2];
-            return returnValue;
-        }
-
-        private static bool ToNullableValue<TUnderlying>(string value, out TUnderlying? result, out string? validationErrorMessage)
-            where TUnderlying : struct
-        {
-            if (TryParseString<TUnderlying>.ToValue(value, out var underlyingResult, out validationErrorMessage))
-            {
-                result = underlyingResult;
-                return true;
-            }
-
-            result = default;
-            return false;
+            return success;
         }
     }
 }
