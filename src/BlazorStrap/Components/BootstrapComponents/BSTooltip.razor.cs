@@ -65,7 +65,7 @@ namespace BlazorStrap
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
             Shown = false;
-            await BlazorStrap.Interop.SetStyleAsync(MyRef, "display", "name");
+            await BlazorStrap.Interop.SetStyleAsync(MyRef, "display", "none");
             await BlazorStrap.Interop.RemoveClassAsync(MyRef, "show");
             await BlazorStrap.Interop.RemovePopoverAsync(MyRef, DataId);
 
