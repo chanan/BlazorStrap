@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.ComponentModel;
+using Microsoft.AspNetCore.Components;
 using System.Globalization;
 using System.Reflection;
 using static System.Nullable;
@@ -282,6 +283,15 @@ namespace BlazorStrap.Utilities
                     return false;
                 }
             }
+
+            if (BindConverter.TryConvertTo<T>(value, CultureInfo.CurrentCulture, out var parsedValue))
+            {
+                result = parsedValue;
+                validationErrorMessage = null;
+                return true;
+            }
+
+            validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} is not valid.", type.Name);
             return false;
         }
 
