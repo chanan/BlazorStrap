@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Web;
 using BlazorComponentUtilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
@@ -130,7 +131,7 @@ namespace BlazorStrap
                         }
                         else
                         {
-                            _ActualInvalidMessage += $"<br/>{message}";
+                            _ActualInvalidMessage += $"\n{message}";
                         }
                     }
                 }
@@ -141,7 +142,7 @@ namespace BlazorStrap
             builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", ClassBuilder);
             builder.AddMultipleAttributes(2, Attributes);
-            builder.AddContent(3, content);
+            builder.AddContent(3, (MarkupString) HttpUtility.HtmlEncode(content).Replace("\n", "<br/>"));
             builder.CloseElement();
         }
         public void Dispose()
