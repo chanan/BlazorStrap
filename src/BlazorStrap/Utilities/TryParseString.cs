@@ -284,11 +284,19 @@ namespace BlazorStrap.Utilities
                 }
             }
 
-            if (BindConverter.TryConvertTo<T>(value, CultureInfo.CurrentCulture, out var parsedValue))
+            try
             {
-                result = parsedValue;
-                validationErrorMessage = null;
-                return true;
+                if (BindConverter.TryConvertTo<T>(value, CultureInfo.CurrentCulture, out var parsedValue))
+                {
+                    result = parsedValue;
+                    validationErrorMessage = null;
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                validationErrorMessage = ex.Message;
+                return false;
             }
 
             validationErrorMessage = string.Format(CultureInfo.InvariantCulture, "The {0} is not valid.", type.Name);
