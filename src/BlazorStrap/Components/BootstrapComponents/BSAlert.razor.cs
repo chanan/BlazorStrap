@@ -1,10 +1,25 @@
 ﻿using BlazorComponentUtilities;
+using BlazorStrap.Interfaces;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
-    public partial class BSAlert : BlazorStrapBase
+    public partial class BSAlert : BlazorStrapBase, IAlertParameters
     {
+        private IAlert? alert = null;
+        protected override void OnParametersSet()
+        {
+            if (alert == null)
+            {
+                var type = Type.GetType($"BlazorStrap.Bootstrap.V{(int)BlazorStrap.bootStrapVersion}.Alert");
+                if (type != null)
+                {
+                    alert = (IAlert) (Activator.CreateInstance(type) ?? throw new NullReferenceException("Could not Create Instance"));
+                    alert.SetParameters(Color, Content, EventCallback.Factory.Create(this, CloseEventAsync), HasIcon, Header, Heading, IsDismissible, Attributes, ChildContent, DataId, Class, LayoutClass);
+                }
+            }
+        }
         /// <summary>
         /// Color class of alert
         /// </summary>
@@ -40,15 +55,8 @@ namespace BlazorStrap
         /// </summary>
         [Parameter] public bool IsDismissible { get; set; }
 
-        private bool _dismissed;
 
-        private string? ClassBuilder => new CssBuilder("alert")
-            .AddClass($"alert-{Color.NameToLower()}", Color != BSColor.Default)
-            .AddClass("d-flex align-items-center", HasIcon)
-            .AddClass("alert-dismissible", IsDismissible)
-            .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
-            .AddClass(Class, !string.IsNullOrEmpty(Class))
-            .Build().ToNullString();
+        private bool _dismissed;
 
         /// <summary>
         /// Dismisses the alert
@@ -68,5 +76,7 @@ namespace BlazorStrap
         {
             _dismissed = false;
         }
+
+        
     }
 }

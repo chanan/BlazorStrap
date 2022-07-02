@@ -1,11 +1,12 @@
-using BlazorComponentUtilities;
+using BlazorStrap.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
-    public partial class BSCloseButton : BlazorStrapBase
+    public partial class BSCloseButton : BlazorStrapBase, ICloseButtonParameters
     {
+        private ICloseButton? closeButton;
         /// <summary>
         /// Whether or not the button is disabled.
         /// </summary>
@@ -21,11 +22,19 @@ namespace BlazorStrap
         /// </summary>
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-        private string? ClassBuilder => new CssBuilder("btn-close")
-         .AddClass("btn-close-white", IsWhite)
-         .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
-         .AddClass(Class, !string.IsNullOrEmpty(Class))
-         .Build().ToNullString();
+        protected override void OnParametersSet()
+        {
+            if(closeButton == null)
+            {
+                Console.WriteLine((int)BlazorStrap.bootStrapVersion);
+                var type = Type.GetType($"BlazorStrap.Bootstrap.V{(int)BlazorStrap.bootStrapVersion}.CloseButton");
+                if (type != null)
+                {
+                    closeButton = (ICloseButton)(Activator.CreateInstance(type) ?? throw new NullReferenceException("Could not Create Instance"));
+                    closeButton.SetParameters(IsDisabled,IsWhite,EventCallback.Factory.Create<MouseEventArgs>(this, ClickEventAsync),Attributes,ChildContent,DataId,Class,LayoutClass);
+                }
+            }
+        }
 
         private async Task ClickEventAsync()
         {

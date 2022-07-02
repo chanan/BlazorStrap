@@ -7,6 +7,7 @@ namespace BlazorStrap_Docs.Shared
     {
         [CascadingParameter]
         public MainLayout? Parent { get; set; }
+        private string _version = "5.1.3";
         private string _sidebarButtonClass = "bd-sidebar-toggle d-md-none collapsed";
 
 
@@ -24,14 +25,19 @@ namespace BlazorStrap_Docs.Shared
         {
             if (firstrun)
             {
-                await _blazorStrap.SetBootstrapCss("5.1.3");
+                await _blazorStrap.SetBootstrapCss(_version);
             }
         }
-
+        private async Task VersionChanged(string version)
+        {
+            _version = version;
+            await _blazorStrap.SetBootstrapCss(_version);
+            await Parent.Refresh();
+        }
         private async Task SelectedChanged(string value)
         {
             Selected = value;
-            await _blazorStrap.SetBootstrapCss(value, "5.1.3");
+            await _blazorStrap.SetBootstrapCss(value, "_version");
         }
         private async Task OnSideBarShown(bool state)
         {

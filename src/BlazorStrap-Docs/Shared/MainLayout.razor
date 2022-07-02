@@ -11,11 +11,15 @@
     </CascadingValue>
     <main>
         <BSBreadcrumb Class="float-end mt-3 position-relative" style="margin-bottom: -3rem;z-index:500" BasePath="/V5" Labels="_labels" />
-        @Body
+        @if (render)
+        {
+            @Body
+        }
     </main>
 </div>
 
 @code {
+    private bool render = true;
     public Func<bool,Task>? OnSideBarShown { get; set; }
     private static Dictionary<string, string> _labels = new()
         {
@@ -26,5 +30,18 @@
     {
         if (OnSideBarShown == null) return Task.CompletedTask;
         return OnSideBarShown.Invoke(state);
+    }
+    public async Task Refresh()
+    {
+        render = false;
+        await InvokeAsync(StateHasChanged);
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if(render == false)
+        {
+            render = true;
+            StateHasChanged();
+        }
     }
 }

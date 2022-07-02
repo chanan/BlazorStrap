@@ -43,6 +43,15 @@
 <nav class="bd-subnavbar py-2" aria-label="Secondary navigation">
     <BSContainer Container="Container.ExtraExtraLarge" Class="d-flex align-items-md-center">
         <div class="me-auto"></div>
+        <BSDropdown Placement="Placement.Right" ShownAttribute="data-bs-popper">
+            <Toggler>
+                <BSToggle IsButton="true" Class="btn-bd-light dropdown-toggle">Version</BSToggle>
+            </Toggler>
+            <Content>
+                <BSDropdownItem @onclick="@(() =>VersionChanged("4.1.3"))">Bootstrap 4</BSDropdownItem>
+                <BSDropdownItem @onclick="@(() =>VersionChanged("5.1.3"))">Bootstrap 5</BSDropdownItem>
+            </Content>
+        </BSDropdown>
         <BSDropdown Class="dropdown-menu-end" ShownAttribute="data-bs-popper">
             <Toggler>
                 <BSToggle IsButton="true" Class="btn-bd-light dropdown-toggle">

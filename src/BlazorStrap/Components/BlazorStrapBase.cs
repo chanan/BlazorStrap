@@ -107,22 +107,48 @@ namespace BlazorStrap
 
         protected bool EventsSet;
 
-        public string? LayoutClass => new CssBuilder()
-            .AddClass($"p-{Padding.ToIndex()}", Padding != Padding.Default)
-            .AddClass($"pt-{PaddingTop.ToIndex()}", PaddingTop != Padding.Default)
-            .AddClass($"pb-{PaddingBottom.ToIndex()}", PaddingBottom != Padding.Default)
-            .AddClass($"ps-{PaddingStart.ToIndex()}", PaddingStart != Padding.Default)
-            .AddClass($"pe-{PaddingEnd.ToIndex()}", PaddingEnd != Padding.Default)
-            .AddClass($"px-{PaddingLeftAndRight.ToIndex()}", PaddingLeftAndRight != Padding.Default)
-            .AddClass($"py-{PaddingTopAndBottom.ToIndex()}", PaddingTopAndBottom != Padding.Default)
-            .AddClass($"m-{Margin.ToIndex()}", Margin != Margins.Default)
-            .AddClass($"mt-{MarginTop.ToIndex()}", MarginTop != Margins.Default)
-            .AddClass($"mb-{MarginBottom.ToIndex()}", MarginBottom != Margins.Default)
-            .AddClass($"ms-{MarginStart.ToIndex()}", MarginStart != Margins.Default)
-            .AddClass($"me-{MarginEnd.ToIndex()}", MarginEnd != Margins.Default)
-            .AddClass($"mx-{MarginLeftAndRight.ToIndex()}", MarginLeftAndRight != Margins.Default)
-            .AddClass($"my-{MarginTopAndBottom.ToIndex()}", MarginTopAndBottom != Margins.Default)
-            .AddClass($"position-{Position.NameToLower()}", Position != Position.Default)
-            .Build().ToNullString();
+        public string? LayoutClass => ClassBuilder();
+
+        //Maybe Move this but easier from here
+        private string? ClassBuilder()
+        {
+            if(BlazorStrap.bootStrapVersion == BootStrapVersion.Bootstrap4)
+            {
+                return new CssBuilder()
+                   .AddClass($"p-{Padding.ToIndex()}", Padding != Padding.Default)
+                   .AddClass($"pt-{PaddingTop.ToIndex()}", PaddingTop != Padding.Default)
+                   .AddClass($"pb-{PaddingBottom.ToIndex()}", PaddingBottom != Padding.Default)
+                   .AddClass($"pr-{PaddingStart.ToIndex()}", PaddingStart != Padding.Default)
+                   .AddClass($"pl-{PaddingEnd.ToIndex()}", PaddingEnd != Padding.Default)
+                   .AddClass($"px-{PaddingLeftAndRight.ToIndex()}", PaddingLeftAndRight != Padding.Default)
+                   .AddClass($"py-{PaddingTopAndBottom.ToIndex()}", PaddingTopAndBottom != Padding.Default)
+                   .AddClass($"m-{Margin.ToIndex()}", Margin != Margins.Default)
+                   .AddClass($"mt-{MarginTop.ToIndex()}", MarginTop != Margins.Default)
+                   .AddClass($"mb-{MarginBottom.ToIndex()}", MarginBottom != Margins.Default)
+                   .AddClass($"mr-{MarginStart.ToIndex()}", MarginStart != Margins.Default)
+                   .AddClass($"ml-{MarginEnd.ToIndex()}", MarginEnd != Margins.Default)
+                   .AddClass($"mx-{MarginLeftAndRight.ToIndex()}", MarginLeftAndRight != Margins.Default)
+                   .AddClass($"my-{MarginTopAndBottom.ToIndex()}", MarginTopAndBottom != Margins.Default)
+                   .AddClass($"position-{Position.NameToLower()}", Position != Position.Default)
+                   .Build().ToNullString();
+            }
+            return new CssBuilder()
+                .AddClass($"p-{Padding.ToIndex()}", Padding != Padding.Default)
+                .AddClass($"pt-{PaddingTop.ToIndex()}", PaddingTop != Padding.Default)
+                .AddClass($"pb-{PaddingBottom.ToIndex()}", PaddingBottom != Padding.Default)
+                .AddClass($"ps-{PaddingStart.ToIndex()}", PaddingStart != Padding.Default)
+                .AddClass($"pe-{PaddingEnd.ToIndex()}", PaddingEnd != Padding.Default)
+                .AddClass($"px-{PaddingLeftAndRight.ToIndex()}", PaddingLeftAndRight != Padding.Default)
+                .AddClass($"py-{PaddingTopAndBottom.ToIndex()}", PaddingTopAndBottom != Padding.Default)
+                .AddClass($"m-{Margin.ToIndex()}", Margin != Margins.Default)
+                .AddClass($"mt-{MarginTop.ToIndex()}", MarginTop != Margins.Default)
+                .AddClass($"mb-{MarginBottom.ToIndex()}", MarginBottom != Margins.Default)
+                .AddClass($"ms-{MarginStart.ToIndex()}", MarginStart != Margins.Default)
+                .AddClass($"me-{MarginEnd.ToIndex()}", MarginEnd != Margins.Default)
+                .AddClass($"mx-{MarginLeftAndRight.ToIndex()}", MarginLeftAndRight != Margins.Default)
+                .AddClass($"my-{MarginTopAndBottom.ToIndex()}", MarginTopAndBottom != Margins.Default)
+                .AddClass($"position-{Position.NameToLower()}", Position != Position.Default)
+                .Build().ToNullString();
+        }
     }
 }
