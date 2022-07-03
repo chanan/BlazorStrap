@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace BlazorStrap.Interfaces
+namespace BlazorStrap.Bootstrap.Interfaces
 {
-    internal interface ICloseButtonParameters
+    internal interface ICloseButton
     {
         /// <summary>
         /// Whether or not the button is disabled.

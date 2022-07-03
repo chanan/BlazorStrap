@@ -1,25 +1,14 @@
 ﻿using BlazorComponentUtilities;
-using BlazorStrap.Interfaces;
+using BlazorStrap.Bootstrap.Interfaces;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
-    public partial class BSAlert : BlazorStrapBase, IAlertParameters
+    public class BSAlert : BlazorStrapBase, IAlert
     {
-        private IAlert? alert = null;
-        protected override void OnParametersSet()
-        {
-            if (alert == null)
-            {
-                var type = Type.GetType($"BlazorStrap.Bootstrap.V{(int)BlazorStrap.bootStrapVersion}.Alert");
-                if (type != null)
-                {
-                    alert = (IAlert) (Activator.CreateInstance(type) ?? throw new NullReferenceException("Could not Create Instance"));
-                    alert.SetParameters(Color, Content, EventCallback.Factory.Create(this, CloseEventAsync), HasIcon, Header, Heading, IsDismissible, Attributes, ChildContent, DataId, Class, LayoutClass);
-                }
-            }
-        }
+        private IAlert? _reference;
         /// <summary>
         /// Color class of alert
         /// </summary>
@@ -56,17 +45,15 @@ namespace BlazorStrap
         [Parameter] public bool IsDismissible { get; set; }
 
 
-        private bool _dismissed;
-
         /// <summary>
         /// Dismisses the alert
         /// </summary>
         /// <returns><see cref="Task"/></returns>
-        public async Task CloseEventAsync()
+        public Task CloseEventAsync()
         {
-            await Dismissed.InvokeAsync();
-            _dismissed = true;
-            await InvokeAsync(StateHasChanged);
+           if(_reference != null)
+                return _reference.CloseEventAsync();
+           return Task.CompletedTask;   
         }
 
         /// <summary>
@@ -74,9 +61,13 @@ namespace BlazorStrap
         /// </summary>
         public void Open()
         {
-            _dismissed = false;
+            //Console.WriteLine();
+            _reference.Open();
         }
-
-        
+       
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+            builder.AddContent(0, this.BuildRenderFragment("Alert", (int)BlazorStrap.bootStrapVersion, (c) => _reference = (IAlert) c));
+        }
     }
 }

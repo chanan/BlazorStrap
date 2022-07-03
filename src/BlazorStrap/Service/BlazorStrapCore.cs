@@ -67,7 +67,6 @@
         }
         private BootStrapVersion GetBootstrapVersion(string version)
         {
-            Console.WriteLine(version.Substring(0,1));
             if(version.Substring(0,1) == "4")
             {
                 return BootStrapVersion.Bootstrap4;

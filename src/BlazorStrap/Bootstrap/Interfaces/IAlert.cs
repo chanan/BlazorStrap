@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorStrap.Interfaces
+namespace BlazorStrap.Bootstrap.Interfaces
 {
-    internal interface IAlertParameters
+    internal interface IAlert
     {
         /// <summary>
         /// Color class of alert
@@ -43,5 +43,8 @@ namespace BlazorStrap.Interfaces
         /// Determines whether or not an alter is dismissible. See <see cref="Dismissed"/> for the callback
         /// </summary>
         bool IsDismissible { get; set; }
+        Task CloseEventAsync();
+
+        void Open();
     }
 }

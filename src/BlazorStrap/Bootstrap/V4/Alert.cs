@@ -1,42 +1,14 @@
 ﻿using BlazorComponentUtilities;
-using BlazorStrap.Interfaces;
+using BlazorStrap.Bootstrap.Base;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap.Bootstrap.V4
 {
-    internal class Alert : IAlert
+    internal class Alert : AlertBase
     {
-        public void SetParameters(BSColor color, RenderFragment? content, EventCallback dismissed, bool hasIcon, RenderFragment? header, int heading, bool isDismissible, IDictionary<string, object> attributes, RenderFragment? childContent, string dataId, string? @class, string? layoutClass)
-        {
-            Color = color;
-            Content = content;
-            Dismissed = dismissed;
-            HasIcon = hasIcon;
-            Header = header;
-            Heading = heading;
-            IsDismissible = isDismissible;
-            Attributes = attributes;
-            ChildContent = childContent;
-            DataId = dataId;
-            Class = @class;
-            LayoutClass = layoutClass;
-        }
-
-        public BSColor Color { get; set; }
-        public RenderFragment? Content { get; set; }
-        public EventCallback Dismissed { get; set; }
-        public bool HasIcon { get; set; }
-        public RenderFragment? Header { get; set; }
-        public int Heading { get; set; }
-        public bool IsDismissible { get; set; }
-        public IDictionary<string, object> Attributes { get; set; } = new Dictionary<string, object>();
-        public RenderFragment? ChildContent { get; set; }
-        public string DataId { get; set; } = Guid.NewGuid().ToString();
-        public string? Class { get; set; }
-        public string? LayoutClass { get; set; }
-
         public string? ClassBuilder() => new CssBuilder("alert")
             .AddClass($"alert-{Color.NameToLower()}", Color != BSColor.Default)
             .AddClass("d-flex align-items-center", HasIcon)
@@ -45,41 +17,40 @@ namespace BlazorStrap.Bootstrap.V4
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .Build().ToNullString();
 
-        public RenderFragment Output()
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var secquence = 0;
-            var result = new RenderFragment(builder =>
+            if (IsDismissed) return;
+            var s = 0;
+            builder.OpenElement(s, "div");
+            builder.AddAttribute(s++, "class", ClassBuilder());
+            builder.AddAttribute(s++, "role", "alert");
+            builder.AddMultipleAttributes(s++, Attributes);
+            if (Header != null)
             {
-                builder.OpenElement(secquence, "div");
-                builder.AddAttribute(secquence++, "class", ClassBuilder());
-                builder.AddAttribute(secquence++, "role", "alert");
-                builder.AddMultipleAttributes(secquence++, Attributes);
-                if (Header != null)
-                {
-                    builder.OpenElement(secquence++, $"h{Heading}");
-                    builder.AddAttribute(secquence++, "class", "alert-heading");
-                    builder.AddContent(secquence++, Header);
-                    builder.CloseElement();
-                    builder.AddContent(secquence++, Content);
-                }
-                else if (HasIcon)
-                {
-                    builder.AddContent(secquence++, (MarkupString)(Icons.GetAlertIcon(Color.NameToLower()) ?? ""));
-                    builder.AddContent(secquence++, ChildContent);
-                }
-                else
-                {
-                    builder.AddContent(secquence++, ChildContent);
-                }
-                if (IsDismissible)
-                {
-                    builder.OpenComponent(secquence++, typeof(BSCloseButton));
-                    builder.AddAttribute(0, "OnClick", EventCallback.Factory.Create<MouseEventArgs>(this, Dismissed));
-                    builder.CloseComponent();
-                }
+                builder.OpenElement(s++, $"h{Heading}");
+                builder.AddAttribute(s++, "class", "alert-heading");
+                builder.AddContent(s++, Header);
                 builder.CloseElement();
-            });
-            return result;
+                builder.AddContent(s++, Content);
+            }
+            else if (HasIcon)
+            {
+                builder.AddContent(s++, (MarkupString)(Icons.GetAlertIcon(Color.NameToLower()) ?? ""));
+                builder.OpenElement(s++, "div");
+                builder.AddContent(s++, ChildContent);
+                builder.CloseElement();
+            }
+            else
+            {
+                builder.AddContent(s++, ChildContent);
+            }
+            if (IsDismissible)
+            {
+                builder.OpenComponent(s++, typeof(BSCloseButton));
+                builder.AddAttribute(s++, "OnClick", EventCallback.Factory.Create<MouseEventArgs>(this, CloseEventAsync));
+                builder.CloseComponent();
+            }
+            builder.CloseElement();
         }
 
     }
