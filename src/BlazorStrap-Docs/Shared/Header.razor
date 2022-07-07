@@ -1,7 +1,9 @@
 ﻿@inject IBlazorStrap _blazorStrap
 @implements IDisposable
+
 <BSNavbar IsHeader="true" Expand="Size.Medium" IsDark="true" Class="bd-navbar">
-    <BSNav IsNav="true" Class="container-xxl flex-wrap flex-md-nowrap" aria-label="Main navigation" NoNavbarNav="true">
+    <BSContainer Container="Container.ExtraExtraLarge">
+    <BSNav IsNav="true" Class="w-100 d-flex flex-wrap flex-md-nowrap" aria-label="Main navigation" NoNavbarNav="true">
         <BSNavbarBrand Padding="Padding.None" MarginEnd="Margins.Small">
             <img class="d-block my-1" src="logo-inverted.svg" height="32" alt="BlazorStrap" />
         </BSNavbarBrand>
@@ -38,6 +40,7 @@
             </Content>
         </BSCollapse>
     </BSNav>
+    </BSContainer>
 </BSNavbar>
 
 <nav class="bd-subnavbar py-2" aria-label="Secondary navigation">
