@@ -148,33 +148,157 @@ namespace BlazorStrap.Utilities
             }
             else if (typeof(T) == typeof(int))
             {
-                result = (T)(object)Convert.ToInt32(value, CultureInfo.InvariantCulture);
-                validationErrorMessage = null;
-                return true;
+                try
+                {
+                    result = (T)(object)Convert.ToInt32(value, CultureInfo.InvariantCulture);
+                    validationErrorMessage = null;
+                    return true;
+                }
+                catch
+                {
+                    try
+                    {
+                        var convert = Convert.ToInt32(value.Substring(0, 3), CultureInfo.InvariantCulture);
+                        if (convert >= 0)
+                        {
+                            validationErrorMessage = $"Value cannot be greater than {int.MaxValue}";
+                        }
+                        else
+                        {
+                            validationErrorMessage = $"Value cannot be less than {int.MinValue}";
+                        }
+                        return false;
+                    }
+                    catch
+                    {
+                        validationErrorMessage = $"Failed to convert value.";
+                        return false;
+                    }
+                }
+
+
             }
             else if (typeof(T) == typeof(long))
             {
-                result = (T)(object)Convert.ToInt64(value, CultureInfo.InvariantCulture);
-                validationErrorMessage = null;
-                return true;
+                try
+                {
+                    result = (T)(object)Convert.ToInt64(value, CultureInfo.InvariantCulture);
+                    validationErrorMessage = null;
+                    return true;
+                }
+                catch
+                {
+                    try
+                    {
+                        var convert = Convert.ToInt64(value.Substring(0, 3), CultureInfo.InvariantCulture);
+                        if (convert >= 0)
+                        {
+                            validationErrorMessage = $"Value cannot be greater than {long.MaxValue}";
+                        }
+                        else
+                        {
+                            validationErrorMessage = $"Value cannot be less than {long.MinValue}";
+                        }
+                        return false;
+                    }
+                    catch
+                    {
+                        validationErrorMessage = $"Failed to convert value.";
+                        return false;
+                    }
+                }
             }
             else if (typeof(T) == typeof(double))
             {
-                result = (T)(object)double.Parse(value, CultureInfo.InvariantCulture);
-                validationErrorMessage = null;
-                return true;
+                try
+                {
+                    result = (T)(object)double.Parse(value, CultureInfo.InvariantCulture);
+                    validationErrorMessage = null;
+                    return true;
+                }
+                catch
+                {
+                    try
+                    {
+                        var convert = double.Parse(value.Substring(0, 3), CultureInfo.InvariantCulture);
+                        if (convert >= 0)
+                        {
+                            validationErrorMessage = $"Value cannot be greater than {double.MaxValue}";
+                        }
+                        else
+                        {
+                            validationErrorMessage = $"Value cannot be less than {double.MinValue}";
+                        }
+                        return false;
+                    }
+                    catch
+                    {
+                        validationErrorMessage = $"Failed to convert value.";
+                        return false;
+                    }
+                }
             }
             else if (typeof(T) == typeof(decimal))
             {
-                result = (T)(object)decimal.Parse(value, CultureInfo.InvariantCulture);
-                validationErrorMessage = null;
-                return true;
+                try
+                {
+                    result = (T)(object)decimal.Parse(value, CultureInfo.InvariantCulture);
+                    validationErrorMessage = null;
+                    return true;
+                }
+                catch
+                {
+                    try
+                    {
+                        var convert = decimal.Parse(value.Substring(0, 3), CultureInfo.InvariantCulture);
+                        if (convert >= 0)
+                        {
+                            validationErrorMessage = $"Value cannot be greater than {decimal.MaxValue}";
+                        }
+                        else
+                        {
+                            validationErrorMessage = $"Value cannot be less than {decimal.MinValue}";
+                        }
+                        return false;
+                    }
+                    catch
+                    {
+                        validationErrorMessage = $"Failed to convert value.";
+                        return false;
+                    }
+                }
             }
             else if (typeof(T) == typeof(float))
             {
-                result = (T)(object)float.Parse(value, CultureInfo.InvariantCulture);
-                validationErrorMessage = null;
-                return true;
+                try
+                {
+                    result = (T)(object)float.Parse(value, CultureInfo.InvariantCulture);
+                    validationErrorMessage = null;
+                    return true;
+                }
+                catch
+                {
+                    try
+                    {
+                        var convert = float.Parse(value.Substring(0, 3), CultureInfo.InvariantCulture);
+                        if (convert >= 0)
+                        {
+                            result = (T)(object)float.MaxValue;
+                            validationErrorMessage = $"Value cannot be greater than {float.MinValue}";
+                        }
+                        else
+                        {
+                            result = (T)(object)float.MinValue;
+                            validationErrorMessage = $"Value cannot be less than {float.MinValue}";
+                        }
+                        return false;
+                    }
+                    catch
+                    {
+                        validationErrorMessage = $"Failed to convert value.";
+                        return false;
+                    }
+                }
             }
             else if (typeof(T) == typeof(Guid))
             {

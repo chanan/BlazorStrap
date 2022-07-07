@@ -1,9 +1,40 @@
 ﻿@using System.ComponentModel.DataAnnotations
 <BSForm Model="Modal" IsRow="true" Gutters="Gutters.Medium" OnSubmit="OnSubmit" OnReset="Reset">
+
     <DataAnnotationsValidator />
     <BSCol Position="Position.Relative" ColumnMedium="12">
         @_message
         <BSValidationSummary />
+    </BSCol>
+    <BSCol Position="Position.Relative" ColumnMedium="4">
+        <BSLabel>Int Test</BSLabel>
+        <BSInput InputType="InputType.Text" @bind-Value="Modal.TestInt" ValidateOnInput="true" />
+        <BSFeedback For="@(() => Modal.TestInt)" />
+    </BSCol>
+    <BSCol Position="Position.Relative" ColumnMedium="4">
+        <BSLabel>Long Test</BSLabel>
+        <BSInput InputType="InputType.Text" @bind-Value="Modal.TestLong" ValidateOnInput="true" />
+        <BSFeedback For="@(() => Modal.TestLong)" />
+    </BSCol>
+    <BSCol Position="Position.Relative" ColumnMedium="4">
+        <BSLabel>Float Test</BSLabel>
+        <BSInput InputType="InputType.Text" @bind-Value="Modal.TestFloat" ValidateOnInput="true" />
+        <BSFeedback For="@(() => Modal.TestFloat)"  />
+    </BSCol>
+    <BSCol Position="Position.Relative" ColumnMedium="4">
+        <BSLabel>Double Test</BSLabel>
+        <BSInput InputType="InputType.Text" @bind-Value="Modal.TestDouble" ValidateOnInput="true" />
+        <BSFeedback For="@(() => Modal.TestDouble)"  />
+    </BSCol>
+       <BSCol Position="Position.Relative" ColumnMedium="4">
+        <BSLabel>Double Test</BSLabel>
+        <BSInput InputType="InputType.Text" @bind-Value="Modal.TestDecimal" ValidateOnInput="true" />
+        <BSFeedback For="@(() => Modal.TestDecimal)"  />
+    </BSCol>
+    <BSCol Position="Position.Relative" ColumnMedium="4">
+        <BSLabel>Int Test</BSLabel>
+        <BSInput InputType="InputType.Text" @bind-Value="Modal.TestInt" ValidateOnInput="true" />
+        <BSFeedback For="@(() => Modal.TestInt)" aValidMessage="First name looks good." />
     </BSCol>
     <BSCol Position="Position.Relative" ColumnMedium="4">
         <BSLabel>First name</BSLabel>
@@ -56,6 +87,11 @@
     }
     public class EmployeeModal
     {
+        public int TestInt { get; set; }
+        public long TestLong { get; set; }
+        public double TestDouble { get; set; }
+        public float TestFloat { get; set; }
+        public decimal TestDecimal { get; set; }
         [Required(ErrorMessage = "Employee's First name must be provided.")]
         public string? FirstName { get; set; }
 
