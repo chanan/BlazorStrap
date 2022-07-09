@@ -121,10 +121,10 @@
     <value>Must be between 0 and 12</value>
   </data>
   <data name="Between 1 and 12 Auto" xml:space="preserve">
-    <value>Must be \"auto\" or between 1 and 12</value>
+    <value>Must be "auto" or between 1 and 12</value>
   </data>
   <data name="Between 1 and 12 Last First" xml:space="preserve">
-    <value>Must be \"last\", \"first\", or between 1 and 12</value>
+    <value>Must be "last", "first", or between 1 and 12</value>
   </data>
   <data name="cannot be empty" xml:space="preserve">
     <value>{0} cannot be empty</value>

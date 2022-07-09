@@ -1,6 +1,6 @@
 ﻿namespace BlazorStrap
 {
-    public interface IBlazorStrapBase
+    public interface IBlazorStrapBase 
     {
         /// <summary>
         /// Css classes to pass to item.

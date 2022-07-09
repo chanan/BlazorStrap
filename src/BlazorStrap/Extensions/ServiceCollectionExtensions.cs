@@ -7,10 +7,10 @@ namespace BlazorStrap
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddBlazorStrap(this IServiceCollection serviceCollection, BootStrapVersion version = BootStrapVersion.Bootstrap5)
+        public static IServiceCollection AddBlazorStrap(this IServiceCollection serviceCollection, Action<BlazorStrapOptions>? options = null)
         {
             serviceCollection.AddScoped<BlazorStrapInterop>();
-            serviceCollection.AddScoped<IBlazorStrap>(x => new BlazorStrapCore(x.GetRequiredService<BlazorStrapInterop>(), version));
+            serviceCollection.AddScoped<IBlazorStrap>(x => new BlazorStrapCore(x.GetRequiredService<BlazorStrapInterop>(), options));
             serviceCollection.AddScoped<ISvgLoader, SvgLoader>();
             return serviceCollection;
         }

@@ -6,7 +6,7 @@ namespace BlazorStrap
 {
     public interface IBlazorStrap
     {
-        
+        bool ShowDebugMessages { get; }
         Toaster Toaster { get; }
         Theme CurrentTheme { get; }
         Task SetBootstrapCss();

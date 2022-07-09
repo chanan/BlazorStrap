@@ -3,8 +3,10 @@
     public class BlazorStrapCore : IBlazorStrap
     {
         internal readonly BlazorStrapInterop Interop;
-        internal BootStrapVersion bootStrapVersion;
+        internal BootstrapVersion BootstrapVersion;
+        public bool ShowDebugMessages { get; private set; }
         internal Func<string, CallerName, EventType, Task>? OnEventForward;
+        
         //private readonly CurrentTheme _currentTheme;
         public Toaster Toaster { get;} = new Toaster();
         public Theme CurrentTheme { get; internal set; } = Theme.Bootstrap;
@@ -15,10 +17,16 @@
                 throw new ArgumentNullException(nameof(interop));
             Interop = interop;
         }
-        public BlazorStrapCore(BlazorStrapInterop interop, BootStrapVersion version)
+        public BlazorStrapCore(BlazorStrapInterop interop, Action<BlazorStrapOptions>? buildOptions)
         {
+            var options = new BlazorStrapOptions();
+            if (buildOptions != null)
+            {
+                buildOptions.Invoke(options);
+            }
             Interop = interop;
-            bootStrapVersion = version;
+            BootstrapVersion = options.BootstrapVersion;
+            ShowDebugMessages = options.ShowDebugMessages;
         }
         public Task SetBootstrapCss()
         {
@@ -29,13 +37,13 @@
         public Task SetBootstrapCss(string version)
         {
             CurrentTheme = Theme.Bootstrap;
-            bootStrapVersion = GetBootstrapVersion(version);
+            BootstrapVersion = GetBootstrapVersion(version);
             return SetBootstrapCss("bootstrap", version);
         }
 
         public async Task SetBootstrapCss(string? theme, string version)
         {
-            bootStrapVersion = GetBootstrapVersion(version);
+            BootstrapVersion = GetBootstrapVersion(version);
             theme = theme.FirstCharToUpper();
             if (theme == null) return;
             var enumTheme = (Theme)Enum.Parse(typeof(Theme), theme);
@@ -45,7 +53,7 @@
 
         public Task SetBootstrapCss(Theme theme, string version)
         {
-            bootStrapVersion = GetBootstrapVersion(version);
+            BootstrapVersion = GetBootstrapVersion(version);
             CurrentTheme = theme;
             return SetBootstrapCss(theme.ToString().ToLowerInvariant(), version);
         }
@@ -65,13 +73,13 @@
         {
             OnEventForward?.Invoke(id, new CallerName(typeof(T).Name.ToLower()), EventType.Toggle );
         }
-        private BootStrapVersion GetBootstrapVersion(string version)
+        private BootstrapVersion GetBootstrapVersion(string version)
         {
             if(version.Substring(0,1) == "4")
             {
-                return BootStrapVersion.Bootstrap4;
+                return BootstrapVersion.Bootstrap4;
             }
-            return BootStrapVersion.Bootstrap5;
+            return BootstrapVersion.Bootstrap5;
         }
     }
 }

@@ -22,7 +22,7 @@ public class BlazorStrapActionBase : BlazorStrapBase
     [Parameter] public string? Target { get; set; }
     protected string? UrlBase { get; set; }
     
-    private string? ClassBuilder => new CssBuilder()
+    private new string? ClassBuilder => new CssBuilder()
         .AddClass("btn", !IsLinkType || HasButtonClass)
         .AddClass($"btn-outline-{Color.NameToLower()}", IsOutlined && (!IsLinkType || HasButtonClass))
         .AddClass($"btn-{Color.NameToLower()}",

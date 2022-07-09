@@ -1,6 +1,6 @@
 ﻿namespace BlazorStrap
 {
-    public enum BootStrapVersion
+    public enum BootstrapVersion
     {
         Bootstrap4 = 4,
         Bootstrap5 = 5

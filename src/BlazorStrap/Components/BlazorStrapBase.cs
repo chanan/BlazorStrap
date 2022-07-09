@@ -2,7 +2,7 @@
 using BlazorStrap.Service;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
-
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazorStrap
 {
@@ -107,14 +107,16 @@ namespace BlazorStrap
 
         protected bool EventsSet;
 
-        public string? LayoutClass => ClassBuilder();
+        public string? LayoutClass => BaseClassBuilder();
 
-        //Maybe Move this but easier from here
-        private string? ClassBuilder()
+        private string? BaseClassBuilder()
         {
-            if(BlazorStrap.bootStrapVersion == BootStrapVersion.Bootstrap4)
-            {
-                return new CssBuilder()
+            return BlazorStrap.BootstrapVersion == BootstrapVersion.Bootstrap4 ? BaseVersion4ClassBuilder() : BaseVersion5ClassBuilder();
+        }
+
+        private string? BaseVersion4ClassBuilder()
+        {
+            return new CssBuilder()
                    .AddClass($"p-{Padding.ToIndex()}", Padding != Padding.Default)
                    .AddClass($"pt-{PaddingTop.ToIndex()}", PaddingTop != Padding.Default)
                    .AddClass($"pb-{PaddingBottom.ToIndex()}", PaddingBottom != Padding.Default)
@@ -131,7 +133,10 @@ namespace BlazorStrap
                    .AddClass($"my-{MarginTopAndBottom.ToIndex()}", MarginTopAndBottom != Margins.Default)
                    .AddClass($"position-{Position.NameToLower()}", Position != Position.Default)
                    .Build().ToNullString();
-            }
+        }
+
+        private string? BaseVersion5ClassBuilder()
+        {
             return new CssBuilder()
                 .AddClass($"p-{Padding.ToIndex()}", Padding != Padding.Default)
                 .AddClass($"pt-{PaddingTop.ToIndex()}", PaddingTop != Padding.Default)
@@ -150,5 +155,16 @@ namespace BlazorStrap
                 .AddClass($"position-{Position.NameToLower()}", Position != Position.Default)
                 .Build().ToNullString();
         }
+        //protected abstract string? ClassBuilder();
+        //protected abstract string? Version4ClassBuilder();
+        //protected abstract string? Version5ClassBuilder();
+        //protected abstract void Version4RenderBuilder(RenderTreeBuilder builder);
+        //protected abstract void Version5RenderBuilder(RenderTreeBuilder builder);
+
+        protected virtual string? ClassBuilder() => null;
+        protected virtual string? Version4ClassBuilder() => null;
+        protected virtual string? Version5ClassBuilder() => null;
+        protected virtual void Version4RenderBuilder(RenderTreeBuilder builder) { }
+        protected virtual void Version5RenderBuilder(RenderTreeBuilder builder) { }
     }
 }

@@ -48,17 +48,17 @@
         <div class="me-auto"></div>
         <BSDropdown Placement="Placement.Right" ShownAttribute="data-bs-popper">
             <Toggler>
-                <BSToggle IsButton="true" Class="btn-bd-light dropdown-toggle">Version</BSToggle>
+                <BSToggle IsButton="true" Class="btn-bd-light dropdown-toggle">@_version</BSToggle>
             </Toggler>
             <Content>
-                <BSDropdownItem @onclick="@(() =>VersionChanged("4.1.3"))">Bootstrap 4</BSDropdownItem>
-                <BSDropdownItem @onclick="@(() =>VersionChanged("5.1.3"))">Bootstrap 5</BSDropdownItem>
+                <BSDropdownItem @onclick="@(() =>VersionChanged("4.6.1"))">4.6.1</BSDropdownItem>
+                <BSDropdownItem @onclick="@(() =>VersionChanged("5.1.3"))">5.1.3</BSDropdownItem>
             </Content>
         </BSDropdown>
         <BSDropdown Class="dropdown-menu-end" ShownAttribute="data-bs-popper">
             <Toggler>
                 <BSToggle IsButton="true" Class="btn-bd-light dropdown-toggle">
-                    Themes
+                    @Selected
                 </BSToggle>
             </Toggler>
             <Content>

@@ -1,14 +1,13 @@
 ﻿using BlazorComponentUtilities;
-using BlazorStrap.Bootstrap.Interfaces;
+using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap
 {
-    public class BSAlert : BlazorStrapBase, IAlert
+    public class BSAlert : BlazorStrapBase
     {
-        private IAlert? _reference;
         /// <summary>
         /// Color class of alert
         /// </summary>
@@ -43,31 +42,108 @@ namespace BlazorStrap
         /// Determines whether or not an alter is dismissible. See <see cref="Dismissed"/> for the callback
         /// </summary>
         [Parameter] public bool IsDismissible { get; set; }
-
+        private bool _isDismissed;
 
         /// <summary>
         /// Dismisses the alert
         /// </summary>
         /// <returns><see cref="Task"/></returns>
-        public Task CloseEventAsync()
+        public virtual async Task CloseEventAsync()
         {
-           if(_reference != null)
-                return _reference.CloseEventAsync();
-           return Task.CompletedTask;   
+            await EventUtil.AsNonRenderingEventHandler(Dismissed.InvokeAsync).Invoke();
+            _isDismissed = true;
         }
 
         /// <summary>
         /// Opens the alert
         /// </summary>
-        public void Open()
+        public virtual void Open()
         {
-            //Console.WriteLine();
-            _reference.Open();
+            _isDismissed = false;
         }
-       
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            builder.AddContent(0, this.BuildRenderFragment("Alert", (int)BlazorStrap.bootStrapVersion, (c) => _reference = (IAlert) c));
+            if (_isDismissed) return;
+
+            if (BlazorStrap.BootstrapVersion == BootstrapVersion.Bootstrap4)
+                Version4RenderBuilder(builder);
+            else
+                Version5RenderBuilder(builder);
         }
+
+        #region Bootstrap render support methods
+        
+        protected override string? ClassBuilder()
+        {
+            return BlazorStrap.BootstrapVersion == BootstrapVersion.Bootstrap4 ? Version4ClassBuilder() : Version5ClassBuilder();
+        }
+
+        #region Bootstrap 4
+        protected override string? Version4ClassBuilder()
+        {
+            return new CssBuilder("alert")
+                .AddClass($"alert-{Color.NameToLower()}", Color != BSColor.Default)
+                .AddClass("d-flex align-items-center", HasIcon)
+                .AddClass("alert-dismissible", IsDismissible)
+                .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
+                .AddClass(Class, !string.IsNullOrEmpty(Class))
+                .Build().ToNullString();
+        }
+
+        protected override void Version4RenderBuilder(RenderTreeBuilder builder)
+        {
+            Version5RenderBuilder(builder);
+        }
+        #endregion
+
+        #region Bootstrap 5
+        protected override string? Version5ClassBuilder()
+        {
+            return new CssBuilder("alert")
+                .AddClass($"alert-{Color.NameToLower()}", Color != BSColor.Default)
+                .AddClass("d-flex align-items-center", HasIcon)
+                .AddClass("alert-dismissible", IsDismissible)
+                .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
+                .AddClass(Class, !string.IsNullOrEmpty(Class))
+                .Build().ToNullString();
+        }
+
+        protected override void Version5RenderBuilder(RenderTreeBuilder builder)
+        {
+            var s = 0;
+            builder.OpenElement(s, "div");
+            builder.AddAttribute(s++, "class", ClassBuilder());
+            builder.AddAttribute(s++, "role", "alert");
+            builder.AddMultipleAttributes(s++, Attributes);
+            if (Header != null)
+            {
+                builder.OpenElement(s++, $"h{Heading}");
+                builder.AddAttribute(s++, "class", "alert-heading");
+                builder.AddContent(s++, Header);
+                builder.CloseElement();
+                builder.AddContent(s++, Content);
+            }
+            else if (HasIcon)
+            {
+                builder.AddContent(s++, (MarkupString)(Icons.GetAlertIcon(Color.NameToLower()) ?? ""));
+                builder.OpenElement(s++, "div");
+                builder.AddContent(s++, ChildContent);
+                builder.CloseElement();
+            }
+            else
+            {
+                builder.AddContent(s++, ChildContent);
+            }
+            if (IsDismissible)
+            {
+                builder.OpenComponent(s++, typeof(BSCloseButton));
+                builder.AddAttribute(s++, "OnClick", EventCallback.Factory.Create<MouseEventArgs>(this, EventUtil.AsNonRenderingEventHandler(CloseEventAsync)));
+                builder.CloseComponent();
+            }
+            builder.CloseElement();
+        }
+        #endregion
+        #endregion
     }
 }
