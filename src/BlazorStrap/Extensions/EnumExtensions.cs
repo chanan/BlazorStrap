@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel;
 using BlazorStrap.Properties;
 
-namespace BlazorStrap
+namespace BlazorStrap.Extensions
 {
     public static class EnumExtensions
     {
-        internal static bool VaildGridSize(this string? value)
+        public static bool VaildGridSize(this string? value)
         {
             if (value is "auto" or "0" or "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "10" or "11" or "12")
             {
@@ -17,19 +17,19 @@ namespace BlazorStrap
                 Console.WriteLine(Resources.Between_1_and_12_Auto,value);
             return false;
         }
-        internal static string Name<T>(this T val) where T : Enum?
+        public static string Name<T>(this T val) where T : Enum?
         {
             if (val == null) throw new NullReferenceException("Enum values should not be null");
             return Enum.GetName(typeof(T), val) ?? "";
         }
 
-        internal static string NameToLower<T>(this T val) where T : Enum?
+        public static string NameToLower<T>(this T val) where T : Enum?
         {
             if (val == null) throw new NullReferenceException("Enum values should not be null");
             return Enum.GetName(typeof(T), val)?.ToLower() ?? "";
         }
 
-        internal static string ToDescriptionString<T>(this T val) where T : Enum?
+        public static string ToDescriptionString<T>(this T val) where T : Enum?
         {
             if (val == null) throw new NullReferenceException("Enum values should not be null");
             var field = val.GetType().GetField(val.ToString());
@@ -39,7 +39,7 @@ namespace BlazorStrap
             var attributes = (DescriptionAttribute[]) field.GetCustomAttributes(typeof(DescriptionAttribute), false);
             return attributes.Length > 0 ? attributes[0].Description : string.Empty;
         }
-        internal static string ToIndex(this Gutters value)
+        public static string ToIndex(this Gutters value)
         {
             return value switch
             {
@@ -52,7 +52,7 @@ namespace BlazorStrap
                 _ => ""
             };
         }
-        internal static string ToIndex(this Margins value)
+        public static string ToIndex(this Margins value)
         {
             return value switch
             {
@@ -67,7 +67,7 @@ namespace BlazorStrap
             };
         }
 
-        internal static string ToIndex(this Padding value)
+        public static string ToIndex(this Padding value)
         {
             return value switch
             {

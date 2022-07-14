@@ -1,0 +1,22 @@
+﻿<div class="container">
+    <div class="bserror d-flex">
+        <div class="me-4 my-auto" style="height:100%">
+            <svg viewBox="0 0 32 32" height="32" color="red" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" id="BG" r="16" style="fill:var(--bs-red);" />
+                <path d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z" id="Exclamatory_x5F_Sign" style="fill:white" />
+            </svg>
+        </div>
+        <div>
+            <div class="bserror-header">
+                <strong>Error: </strong>@Name has an error
+            </div>
+            <p>
+                @ChildContent
+            </p>
+        </div>
+    </div>
+</div>
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public string? Name { get; set; }
+}

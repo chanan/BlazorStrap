@@ -1,0 +1,75 @@
+﻿@namespace BlazorStrapService
+@inherits BlazorStrapBase
+@if (Group != null && string.IsNullOrEmpty(Target))
+{
+    <BlazorStrap.InternalComponents.Error Name="BSDropdown">
+        <strong>Target</strong> can not be empty when inside a button group.
+    </BlazorStrap.InternalComponents.Error>
+
+    return;
+}
+<CascadingValue Value="this">
+    @if (NavItem != null && !IsDiv)
+    {
+        if (IsNavPopper)
+        {
+            @Toggler
+            <BSPopover IsNavItemList="true" DropdownOffset="@Offset" Placement="@Placement" IsDropdown="true" Class="@Class" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
+                <Content>
+                    @Content
+                </Content>
+            </BSPopover>
+        }
+        else
+        {
+            @Toggler
+            <ul class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-bs-popper="blazorstrap" data-blazorstrap="@DataId">
+                @Content
+            </ul>
+        }
+    }
+    else if (Demo)
+    {
+        <ul class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
+            @Content
+        </ul>
+    }
+    else if (Group != null && !IsStatic)
+    {
+        @Toggler
+        <BSPopover DropdownOffset="@Offset" Placement="@Group.DropdownPlacement" IsDropdown="true" Class="@GroupClassBuilder" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
+            <Content>
+                @Content
+            </Content>
+        </BSPopover>
+    }
+    else if (InputGroup != null && !IsStatic)
+    {
+        @Toggler
+        <BSPopover DropdownOffset="@Offset" Placement="@Placement" IsDropdown="true" Class="@GroupClassBuilder" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
+            <Content>
+                @Content
+            </Content>
+        </BSPopover>
+    }
+    else if (IsDiv)
+    {
+        <div class="@IsDivClassBuilder">
+            @Toggler
+            <BSPopover DropdownOffset="@Offset" Placement="@Placement" IsDropdown="true" Class="@GroupClassBuilder" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
+                <Content>
+                    @Content
+                </Content>
+            </BSPopover>
+        </div>
+    }
+    else
+    {
+        <div class="dropdown">
+            @Toggler
+            <ul class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-bs-popper="blazorstrap" data-blazorstrap="@DataId">
+                @Content
+            </ul>
+        </div>
+    }
+</CascadingValue>

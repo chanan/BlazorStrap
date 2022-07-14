@@ -3,7 +3,7 @@ using BlazorStrap.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using CurrentTheme = BlazorStrap.Utilities.CurrentTheme;
 
-namespace BlazorStrap
+namespace BlazorStrap.Extensions
 {
     public static class ServiceCollectionExtensions
     {

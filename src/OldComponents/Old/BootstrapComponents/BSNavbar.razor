@@ -1,0 +1,17 @@
+﻿@namespace BlazorStrapService
+@inherits BlazorStrapBase
+
+<CascadingValue Value="this">
+    @if (IsHeader)
+    {
+        <header class="@ClassBuilder" @attributes="Attributes">
+            @ChildContent
+        </header>
+    }
+    else
+    {
+        <nav class="@ClassBuilder" @attributes="Attributes">
+            @ChildContent
+        </nav>
+    }
+</CascadingValue>

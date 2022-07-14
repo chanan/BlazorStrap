@@ -1,0 +1,25 @@
+﻿@namespace BlazorStrapService
+@inherits BlazorStrapBase
+
+<CascadingValue Value="this">
+    <div class="@ClassBuilder" data-bs-ride="carousel" data-blazorstrap="@DataId" @attributes="Attributes">
+        @if (HasIndicators)
+        {
+            <BlazorStrap.InternalComponents.Indicators @ref="_indicatorsRef" />
+        }
+        <div class="carousel-inner">
+            @ChildContent
+        </div>
+        @if (HasControls)
+        {
+            <button class="carousel-control-prev" type="button" @onclick="EventUtil.AsNonRenderingEventHandler(BackAsync)" @onkeyup="@(e => { EventUtil.AsNonRenderingEventHandler(() => { _ = PressEvent(e); }); })">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button">
+                <span class="carousel-control-next-icon" aria-hidden="true" @onclick="EventUtil.AsNonRenderingEventHandler(NextAsync)" @onkeyup="@(e => { EventUtil.AsNonRenderingEventHandler(() => { _ = PressEvent(e); }); })"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        }
+    </div>
+</CascadingValue>

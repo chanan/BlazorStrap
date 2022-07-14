@@ -1,0 +1,8 @@
+﻿@namespace BlazorStrapService
+@inherits BlazorStrapBase
+
+<CascadingValue Value="this">
+    <div class="@ClassBuilder" @attributes="Attributes">
+        @ChildContent
+    </div>
+</CascadingValue>

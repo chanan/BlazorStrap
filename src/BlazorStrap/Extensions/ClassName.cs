@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using BlazorStrap.JsonConverters;
 
-namespace BlazorStrap;
+namespace BlazorStrap.Extensions;
 
 [JsonConverter(typeof(CallerNameJsonConverter))]
 public class CallerName

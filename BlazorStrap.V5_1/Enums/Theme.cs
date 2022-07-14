@@ -1,0 +1,32 @@
+﻿namespace BlazorStrap.V5_1
+{
+    public enum Theme
+    {
+        Bootstrap,
+        Cerulean,
+        Cosmo,
+        Cyborg,
+        Darkly,
+        Flatly,
+        Journal,
+        Litera,
+        Lumen,
+        Lux,
+        Materia,
+        Morph,
+        Minty,
+        Pulse,
+        Quartz,
+        Sandstone,
+        Simplex,
+        Sketchy,
+        Slate,
+        Solar,
+        Spacelab,
+        Superhero,
+        United,
+        Vapor,
+        Yeti,
+        Zephyr
+    }
+}

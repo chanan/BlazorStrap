@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorStrap.Extensions;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap
 {

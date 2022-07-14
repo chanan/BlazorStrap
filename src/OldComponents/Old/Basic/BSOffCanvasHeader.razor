@@ -1,0 +1,7 @@
+﻿@inherits BlazorStrapBase
+@namespace BlazorStrapService
+
+<div class="@ClassBuilder" @attributes="Attributes">
+    @ChildContent
+    <button type="button" class="ms-auto btn-close @ButtonClass" data-bs-dismiss="toast" aria-label="Close" @onclick="ClickEvent"></button>
+</div>

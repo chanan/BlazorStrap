@@ -1,0 +1,18 @@
+﻿namespace BlazorStrap.Bootstrap.Common.Enums.Public
+{
+    public enum Placement
+    {
+        Top,
+        TopStart,
+        TopEnd,
+        Right,
+        RightStart,
+        RightEnd,
+        Bottom,
+        BottomStart,
+        BottomEnd,
+        Left,
+        LeftStart,
+        LeftEnd
+    }
+}

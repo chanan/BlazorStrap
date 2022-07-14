@@ -1,4 +1,4 @@
-﻿namespace BlazorStrap
+﻿namespace BlazorStrap.Extensions
 {
     public static class DoubleExtensions
     {

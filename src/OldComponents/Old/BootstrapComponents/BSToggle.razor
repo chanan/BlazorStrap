@@ -1,0 +1,15 @@
+﻿@namespace BlazorStrapService
+@inherits BlazorStrapBase
+
+@if (!IsButton)
+{
+    <a href="javascript:void(0)" class="@ClassBuilder" aria-expanded="@Show().ToString().ToLower()" @attributes="Attributes" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)" data-blazorstrap="@DataId" data-blazorstrap-target="@Target" data-bs-toggle="@Element" @ref="MyRef">
+        @ChildContent 
+    </a>
+}
+else
+{
+    <button type="button" class="@ClassBuilder" aria-expanded="@Show().ToString().ToLower()" @attributes="Attributes" @onclick="ClickEvent" data-blazorstrap="@DataId" data-blazorstrap-target="@Target" data-bs-toggle="@Element" @ref="MyRef">
+        @ChildContent
+    </button>
+}
