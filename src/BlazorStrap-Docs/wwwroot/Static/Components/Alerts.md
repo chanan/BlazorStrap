@@ -16,24 +16,24 @@ See [shared](layout/shared) for additional parameters
 
 ### Example
 
-{{sample=Components/Alerts/Alerts1}}
+{{sample=V5_1/Components/Alerts/Alerts1}}
 
 ### Live Example
 
-{{sample=Components/Alerts/Alerts2}}
+{{sample=V5_1/Components/Alerts/Alerts2}}
 
 ### Links
 
-{{sample=Components/Alerts/Alerts3}}
+{{sample=V5_1/Components/Alerts/Alerts3}}
 
 ### Heading
 
-{{sample=Components/Alerts/Alerts4}}
+{{sample=V5_1/Components/Alerts/Alerts4}}
 
 ### Icons
 
-{{sample=Components/Alerts/Alerts5}}
+{{sample=V5_1/Components/Alerts/Alerts5}}
 
 ### Dismissing
 
-{{sample=Components/Alerts/Alerts6}}
+{{sample=V5_1/Components/Alerts/Alerts6}}

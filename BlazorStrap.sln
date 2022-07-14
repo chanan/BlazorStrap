@@ -14,15 +14,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Tests", "src\Bl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Extensions.FluentValidation", "src\Extensions\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj", "{A45258C8-4672-4493-9626-5F4342AC3641}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorStrap.V4_6", "src\BlazorStrap.V4_6\BlazorStrap.V4_6.csproj", "{10951FEE-64FA-4262-8EB0-09CE6D493620}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.V4_6", "src\BlazorStrap.V4_6\BlazorStrap.V4_6.csproj", "{10951FEE-64FA-4262-8EB0-09CE6D493620}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorStrap.V5_1", "BlazorStrap.V5_1\BlazorStrap.V5_1.csproj", "{A7BA9368-FB51-4C76-AD74-9D886CE5D6C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.V5_1", "BlazorStrap.V5_1\BlazorStrap.V5_1.csproj", "{A7BA9368-FB51-4C76-AD74-9D886CE5D6C8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{4CCADAD5-2EEF-4288-B798-E35E3A7E0B6E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{A0B51BD8-0223-4A74-AA59-E82128852667}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9B2E0DB5-84FB-40D3-BB84-1A268B27ED10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DF934580-E5CE-49C1-9FD2-D034F038F6DF}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

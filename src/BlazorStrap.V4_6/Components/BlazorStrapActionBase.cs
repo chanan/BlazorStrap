@@ -1,4 +1,5 @@
 ﻿using BlazorComponentUtilities;
+using BlazorStrap.Extensions;
 using BlazorStrap.Shared.Components;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
@@ -44,7 +45,7 @@ public class BlazorStrapActionBase : BlazorStrapBase
     private async Task ClickEvent(MouseEventArgs e)
     {
         if (!string.IsNullOrEmpty(Target))
-            BlazorStrap.ForwardClick(Target);
+            BlazorStrapService.ForwardClick(Target);
         if(OnClick.HasDelegate)
             await OnClick.InvokeAsync(e);
     }

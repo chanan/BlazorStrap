@@ -1,4 +1,4 @@
-﻿@inject NavigationManager NavManager
+﻿@*@inject NavigationManager NavManager
 <BSCollapse IsSidebar="true" DataId="sidebar" Class="d-md-inline" OnShow="@(() => SidebarChange(true))" OnHide="@(() => SidebarChange(false))">
 <nav class="bd-links" id="bd-docs-nav" aria-label="Docs navigation">
 
@@ -113,4 +113,4 @@
         if (Parent == null) return Task.CompletedTask;
         return Parent.InvokeSidebarAsync(state);
     }
-}
+}*@

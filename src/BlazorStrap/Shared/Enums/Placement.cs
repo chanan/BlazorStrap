@@ -1,4 +1,4 @@
-﻿namespace BlazorStrap.Bootstrap.Common.Enums.Public
+﻿namespace BlazorStrap
 {
     public enum Placement
     {

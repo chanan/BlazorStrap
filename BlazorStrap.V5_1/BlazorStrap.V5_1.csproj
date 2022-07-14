@@ -27,5 +27,8 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\src\BlazorStrap\BlazorStrap.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Components\Content\" />
+	</ItemGroup>
 
 </Project>

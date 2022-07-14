@@ -22,6 +22,7 @@
 	  <_ContentIncludedByDefault Remove="bundleconfig.json" />
 	</ItemGroup>
 	<ItemGroup>
+	  <None Include="..\..\.editorconfig" Link=".editorconfig" />
 	  <None Include="bundleconfig.json" />
 	</ItemGroup>
 
@@ -36,5 +37,8 @@
 	<ItemGroup Condition="  '$(TargetFramework)' == 'net6.0'  ">
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.*" />
 		<PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Shared\Layout\" />
 	</ItemGroup>
 </Project>
