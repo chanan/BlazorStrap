@@ -1,0 +1,19 @@
+﻿@namespace BlazorStrap.V5_1
+@typeparam TValue
+@inherits BlazorStrap.Shared.Components.Datatable.BSDataTableHeadBase<TValue>
+
+<th class="@ClassBuilder" @attributes="Attributes" colspan="@ColSpan" style="vertical-align: top;">
+    @if (Sortable)
+    {
+        <a href="javascript:void(0)" @onclick="SortAsync" class="@SortClassBuilder">@ChildContent</a>
+    }
+    else
+    {
+        @ChildContent
+    }
+    @if (ColumnFilter)
+    {
+        <BSInput InputType="InputType.Text" Value="Filter" placeholder="Type to filter" UpdateOnInput="true" ValueChanged="(string e) => FilterChanged(e)" />
+    }
+</th>
+

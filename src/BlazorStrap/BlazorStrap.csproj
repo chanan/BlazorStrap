@@ -16,11 +16,18 @@
 		<PackageVersion>5.0.106-Preview3</PackageVersion> <!--Next Use 5.0.106-Preview4 -->
 	</PropertyGroup>
 	<ItemGroup>
+	  <Compile Remove="Shared\Layout\**" />
+	  <Content Remove="Shared\Layout\**" />
+	  <EmbeddedResource Remove="Shared\Layout\**" />
+	  <None Remove="Shared\Layout\**" />
+	</ItemGroup>
+	<ItemGroup>
 	  <Content Remove="bundleconfig.json" />
 	</ItemGroup>
 	<ItemGroup>
 	  <_ContentIncludedByDefault Remove="bundleconfig.json" />
 	</ItemGroup>
+	
 	<ItemGroup>
 	  <None Include="..\..\.editorconfig" Link=".editorconfig" />
 	  <None Include="bundleconfig.json" />
@@ -37,8 +44,5 @@
 	<ItemGroup Condition="  '$(TargetFramework)' == 'net6.0'  ">
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.*" />
 		<PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Shared\Layout\" />
 	</ItemGroup>
 </Project>

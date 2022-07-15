@@ -1,0 +1,37 @@
+﻿@inherits BlazorStrap.Shared.Components.Common.BSCollapseBase
+@namespace BlazorStrap.V5_1
+
+<CascadingValue Value="this">
+    @if (Toggler != null)
+    {
+        @Toggler
+
+        @if (IsList)
+        {
+            <li href="javascript:void(0)" class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
+                @Content
+            </li>
+        }
+        else
+        {
+            <div class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
+                @Content
+            </div>
+        }
+    }
+    else
+    {
+        @if (IsList)
+        {
+            <li href="javascript:void(0)" class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
+                @ChildContent
+            </li>
+        }
+        else
+        {
+            <div class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
+                @ChildContent
+            </div>
+        }
+    }
+</CascadingValue>

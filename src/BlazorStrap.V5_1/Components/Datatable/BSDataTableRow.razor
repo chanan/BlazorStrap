@@ -1,0 +1,9 @@
+﻿@namespace BlazorStrap.V5_1
+@inherits BlazorStrap.Shared.Components.Datatable.BSDataTableRowBase
+
+@if (!IsHidden)
+{
+    <tr class="@ClassBuilder" @attributes="Attributes">
+        @ChildContent
+    </tr>
+}

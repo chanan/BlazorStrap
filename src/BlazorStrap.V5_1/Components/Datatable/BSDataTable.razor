@@ -1,0 +1,51 @@
+﻿@namespace BlazorStrap.V5_1
+@typeparam TValue
+@inherits BlazorStrap.Shared.Components.Datatable.BSDataTableBase<TValue>
+@implements BlazorStrap.Interfaces.IBSDataTable<TValue>
+
+@if (PaginationTop)
+{
+    <BSPagination Pages="GetPages()" Value="Page" ValueChanged="ChangePage" />
+}
+<table class="@ClassBuilder" @attributes="Attributes">
+    <thead>
+        <tr>
+            <CascadingValue Value="this">
+                @Header
+            </CascadingValue>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Items?.Any() ?? true)
+        {
+            <tr>
+                <td>
+                    @NoData
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Items ?? new List<TValue>())
+            {
+                if (Body != null)
+                {
+                    @Body(item)
+                }
+            }
+        }
+    </tbody>
+    @if (Footer is not null)
+    {
+        <tfoot>
+            <tr>
+                @Footer
+            </tr>
+        </tfoot>
+    }
+</table>
+@if (PaginationBottom)
+{
+    <BSPagination Pages="GetPages()" Value="Page" ValueChanged="ChangePage" />
+}
+

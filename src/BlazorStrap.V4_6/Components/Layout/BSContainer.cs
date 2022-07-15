@@ -1,6 +1,6 @@
 ﻿using BlazorComponentUtilities;
 using BlazorStrap.Extensions;
-using BlazorStrap.Shared.Components.Layout.Base;
+using BlazorStrap.Shared.Components.Layout;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap.V4_6

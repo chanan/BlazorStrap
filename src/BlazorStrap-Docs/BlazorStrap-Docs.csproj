@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BlazorStrap.V5_1\BlazorStrap.V5_1.csproj" />
+    <ProjectReference Include="..\BlazorStrap.V5_1\BlazorStrap.V5_1.csproj" />
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
     <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj" />
   </ItemGroup>

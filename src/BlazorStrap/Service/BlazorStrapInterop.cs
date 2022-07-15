@@ -1,5 +1,4 @@
-﻿using BlazorStrap.Bootstrap.Common.Enums.Public;
-using BlazorStrap.Extensions;
+﻿using BlazorStrap.Extensions;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;

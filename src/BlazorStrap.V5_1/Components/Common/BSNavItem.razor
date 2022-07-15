@@ -1,0 +1,116 @@
+﻿@inherits BlazorStrap.Shared.Components.Common.BSNavItemBase
+@namespace BlazorStrap.V5_1
+
+<CascadingValue Value="this">
+    @if (!Parent?.IsTabs ?? false)
+    {
+        @if (Parent?.IsNav ?? false)
+        {
+            @if (!IsDropdown)
+            {
+                <a href="@Url" class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">
+                    @ChildContent
+                </a>
+            }
+            else
+            {
+                <div class="dropdown">
+                    @ChildContent
+                </div>
+            }
+
+        }
+        else
+        {
+            if (!IsDropdown)
+            {
+                <li class="@ListClassBuilder">
+                    <a href="@Url" class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">
+                        @ChildContent
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="@ListClassBuilder">
+                    @ChildContent
+                </li>
+            }
+        }
+    }
+    else
+    {
+        // Tabs
+        if (TabContent == null && TabLabel == null)
+        {
+            if (Parent?.IsNav ?? false)
+            {
+                if (IsDropdown)
+                {
+                    @ChildContent
+                }
+                else
+                {
+                    <a href="@Url" class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">
+                        @ChildContent
+                    </a>    
+                }
+                
+            }
+            else
+            {
+                if (IsDropdown)
+                {
+                    <li class="@ListClassBuilder">
+                        @ChildContent
+                    </li>
+                }
+                else
+                {
+                    <li class="@ListClassBuilder">
+                        <a href="@Url" class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">
+                            @ChildContent
+                        </a>
+                    </li>    
+                }
+                
+            }
+        }
+        else
+        {
+            if (Parent?.IsNav ?? false)
+            {
+                if (IsDropdown)
+                {
+                    <a href="@Url" class="@ClassBuilder " @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">
+                        @TabLabel
+                    </a>
+                }
+                else
+                {
+                    <div class="dropdown">
+                        @ChildContent
+                    </div>
+                }
+            }
+            else
+            {
+                if (IsDropdown)
+                {
+                    <li class="@ListClassBuilder">
+                        @TabLabel
+                    </li>    
+                }
+                else
+                {
+                    <li class="@ListClassBuilder">
+                        <a href="@Url" class="@ClassBuilder" @attributes="Attributes" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">
+                            @TabLabel
+                        </a>
+                    </li>    
+                }
+            }
+        }
+        
+    }
+</CascadingValue>

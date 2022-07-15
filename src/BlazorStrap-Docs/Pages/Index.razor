@@ -1,4 +1,4 @@
-﻿@page "/{Area?}/{Page?}"
+﻿@page "/{Version?}/{Area?}/{Page?}"
 @implements IDisposable;
 @inject NavigationManager Navman
 
@@ -14,6 +14,9 @@
 @code {
 
     [ParameterAttribute]
+    public string? Version { get; set; }
+
+    [ParameterAttribute]
     public string? Area { get; set; }
 
     [ParameterAttribute]
@@ -23,17 +26,17 @@
 
     protected override void OnInitialized()
     {
-        if (Area is null) Source = $"docs/Static/index.md";
-        else if (Page is null) Source = $"docs/Static/{FirstCharToUpper(Area)}.md";
-        else Source = $"docs/Static/{FirstCharToUpper(Area)}/{FirstCharToUpper(Page)}.md";
+        if (Version is null) Source = $"docs/Static/index.md";
+        else if (Page is null) Source = $"docs/Static/{FirstCharToUpper(Version)}/{FirstCharToUpper(Area)}.md";
+        else Source = $"docs/Static/{FirstCharToUpper(Version)}/{FirstCharToUpper(Area)}/{FirstCharToUpper(Page)}.md";
         Navman.LocationChanged += NavmanOnLocationChanged;
     }
 
     private void NavmanOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        if (Area is null) Source = $"docs/Static/index.md";
-        else if (Page is null) Source = $"docs/Static/{FirstCharToUpper(Area)}.md";
-        else Source = $"docs/Static/{FirstCharToUpper(Area)}/{FirstCharToUpper(Page)}.md";
+        if (Version is null) Source = $"docs/Static/index.md";
+        else if (Page is null) Source = $"docs/Static/{FirstCharToUpper(Version)}/{FirstCharToUpper(Area)}.md";
+        else Source = $"docs/Static/{FirstCharToUpper(Version)}/{FirstCharToUpper(Area)}/{FirstCharToUpper(Page)}.md";
         StateHasChanged();
     }
 

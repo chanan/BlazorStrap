@@ -1,0 +1,17 @@
+﻿@inherits BlazorStrap.Shared.Components.Common.BSNavbarBase
+@namespace BlazorStrap.V5_1
+
+<CascadingValue Value="this">
+    @if (IsHeader)
+    {
+        <header class="@ClassBuilder" @attributes="Attributes">
+            @ChildContent
+        </header>
+    }
+    else
+    {
+        <nav class="@ClassBuilder" @attributes="Attributes">
+            @ChildContent
+        </nav>
+    }
+</CascadingValue>

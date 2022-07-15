@@ -36,9 +36,9 @@ namespace BlazorStrap.Shared.Components.Content
         [Parameter] public string? Source { get; set; }
 
         [CascadingParameter] public IBSFigure? Figure { get; set; }
-        private int PlaceHolderHeight { get; set; } = 100;
-        private int PlaceHolderWidth { get; set; } = 100;
-        private string PlaceHolderText { get; set; } = "";
+        protected int PlaceHolderHeight { get; set; } = 100;
+        protected int PlaceHolderWidth { get; set; } = 100;
+        protected string PlaceHolderText { get; set; } = "";
 
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }

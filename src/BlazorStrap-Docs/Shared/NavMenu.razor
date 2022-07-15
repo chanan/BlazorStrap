@@ -1,4 +1,4 @@
-﻿@*@inject NavigationManager NavManager
+﻿@inject NavigationManager NavManager
 <BSCollapse IsSidebar="true" DataId="sidebar" Class="d-md-inline" OnShow="@(() => SidebarChange(true))" OnHide="@(() => SidebarChange(false))">
 <nav class="bd-links" id="bd-docs-nav" aria-label="Docs navigation">
 
@@ -19,9 +19,9 @@
                 <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Layout</BSToggle></Toggler>
                 <Content>
                     <ul class="list-unstyled fw-normal pb-1 small">
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="layout/overview">Overview</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="layout/containers">Containers</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="layout/columns">Columns</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/layout/overview">Overview</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/layout/containers">Containers</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/layout/columns">Columns</BSLink></li>
                     </ul>
                 </Content>
             </BSCollapse>
@@ -31,9 +31,9 @@
                         <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Content</BSToggle></Toggler>
                         <Content>
                             <ul class="list-unstyled fw-normal pb-1 small">
-                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="content/tables">Tables</BSLink></li>
-                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="content/images">Images</BSLink></li>
-                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="content/figures">Figures</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/content/tables">Tables</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/content/images">Images</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/content/figures">Figures</BSLink></li>
                             </ul>
                         </Content>
                     </BSCollapse>
@@ -43,14 +43,14 @@
                         <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Forms</BSToggle></Toggler>
                         <Content>
                             <ul class="list-unstyled fw-normal pb-1 small">
-                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="forms/shared">Shared</BSLink></li>
-                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="forms/formcontrols">Form control</BSLink></li>
-                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="forms/select">Select</BSLink></li>
-                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="forms/checkbox">Checks & Radios</BSLink></li>
-                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="forms/range">Range</BSLink></li>
-                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="forms/inputgroup">Input Group</BSLink></li>
-                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="forms/inputfile">Input File</BSLink></li>
-                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="forms/validation">Validation</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/forms/shared">Shared</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/forms/formcontrols">Form control</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/forms/select">Select</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/forms/checkbox">Checks & Radios</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/forms/range">Range</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/forms/inputgroup">Input Group</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/forms/inputfile">Input File</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/forms/validation">Validation</BSLink></li>
                             </ul>
                         </Content>
                     </BSCollapse>
@@ -60,29 +60,29 @@
                 <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Components</BSToggle></Toggler>
                 <Content>
                     <ul class="list-unstyled fw-normal pb-1 small">
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/accordion">Accordion</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/alerts">Alerts</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/badge">Badge</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/breadcrumb">Breadcrumb</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/link">Action Links</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/buttons">Buttons</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/buttongroup">Button group</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/card">Card</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/carousel">Carousel</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/closebutton">Close Button</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/collapse">Collapse</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/dropdowns">Dropdowns</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/listgroup">List Group</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/modal">Modal</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/nav">Nav & Tabs</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/navbar">Navbar</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/offcanvas">Offcanvas</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/pagination">Pagination</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/popovers">Popovers</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/progress">Progress</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/spinner">Spinners</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/toast">Toasts</BSLink></li>
-                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="components/tooltips">Tooltips</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/accordion">Accordion</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/alerts">Alerts</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/badge">Badge</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/breadcrumb">Breadcrumb</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/link">Action Links</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/buttons">Buttons</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/buttongroup">Button group</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/card">Card</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/carousel">Carousel</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/closebutton">Close Button</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/collapse">Collapse</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/dropdowns">Dropdowns</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/listgroup">List Group</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/modal">Modal</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/nav">Nav & Tabs</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/navbar">Navbar</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/offcanvas">Offcanvas</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/pagination">Pagination</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/popovers">Popovers</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/progress">Progress</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/spinner">Spinners</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/toast">Toasts</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5_1/components/tooltips">Tooltips</BSLink></li>
 
                     </ul>
                 </Content>
@@ -113,4 +113,4 @@
         if (Parent == null) return Task.CompletedTask;
         return Parent.InvokeSidebarAsync(state);
     }
-}*@
+}

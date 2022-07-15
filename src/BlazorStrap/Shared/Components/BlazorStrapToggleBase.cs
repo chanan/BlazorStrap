@@ -28,10 +28,16 @@ namespace BlazorStrap.Shared.Components
         [Parameter] public EventCallback<TValue> OnHide { get; set; }
 
         /// <summary>
+        /// Whether or not element is shown.
+        /// </summary>
+        public abstract bool Shown { get; protected set; }
+
+        /// <summary>
         /// Triggers a StateHasChanged Event on the component. 
         /// Important! Use Only after OnShown is fired to avoid odd behaviour with transitions.
         /// </summary>
         /// <returns></returns>
+        /// 
         public virtual Task RefreshAsync()
         {
             return CanRefresh ? InvokeAsync(StateHasChanged) : Task.CompletedTask;

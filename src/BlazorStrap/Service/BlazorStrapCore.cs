@@ -59,9 +59,9 @@ namespace BlazorStrap.Service
             return SetBootstrapCss(theme.ToString().ToLowerInvariant(), version);
         }
         
-        internal static event Action<IBSModal?, bool>? ModalChange;
+        internal event Action<IBSModal?, bool>? ModalChange;
 
-        public static void ModalChanged(IBSModal obj)
+        public void ModalChanged(IBSModal obj)
         {
             ModalChange?.Invoke(obj, false);
         }

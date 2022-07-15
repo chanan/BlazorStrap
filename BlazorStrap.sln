@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Extensions.Flue
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.V4_6", "src\BlazorStrap.V4_6\BlazorStrap.V4_6.csproj", "{10951FEE-64FA-4262-8EB0-09CE6D493620}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.V5_1", "BlazorStrap.V5_1\BlazorStrap.V5_1.csproj", "{A7BA9368-FB51-4C76-AD74-9D886CE5D6C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.V5_1", "src\BlazorStrap.V5_1\BlazorStrap.V5_1.csproj", "{A7BA9368-FB51-4C76-AD74-9D886CE5D6C8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{4CCADAD5-2EEF-4288-B798-E35E3A7E0B6E}"
 EndProject

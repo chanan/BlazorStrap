@@ -105,5 +105,6 @@ namespace BlazorStrap.Shared.Components
         public Position Position { get; set; } = Position.Default;
 
         protected bool EventsSet;
+
     }
 }

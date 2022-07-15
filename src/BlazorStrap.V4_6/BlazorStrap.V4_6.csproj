@@ -13,7 +13,7 @@
 		<PackageTags>blazor;bootstrap;bootstrap4</PackageTags>
 		<PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
-		<RootNamespace>BlazorStrap</RootNamespace>
+		<RootNamespace>BlazorStrap.V4_6</RootNamespace>
 		<PackageVersion>5.1.100-Beta1</PackageVersion><!--Next Use 5.1.100-Beta2 -->
 	</PropertyGroup>
 	

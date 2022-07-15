@@ -1,0 +1,15 @@
+﻿@namespace BlazorStrap.V5_1
+@inherits BlazorStrap.Shared.Components.Content.BSTDBase
+
+@if (TableHead != null)
+{
+    <th class="@ClassBuilder" @attributes="Attributes" colspan="@ColSpan" >
+        @ChildContent
+    </th>
+}
+else
+{
+    <td class="@ClassBuilder" @attributes="Attributes" colspan="@ColSpan">
+        @ChildContent
+    </td>
+}

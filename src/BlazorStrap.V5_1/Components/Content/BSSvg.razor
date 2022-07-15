@@ -1,0 +1,13 @@
+﻿@namespace BlazorStrap.V5_1
+@inherits BlazorStrap.Shared.Components.Content.BSSvgBase
+
+@if (string.IsNullOrWhiteSpace(Source))
+{
+    <svg @attributes="Attributes" class="@ClassBuilder">
+        @ChildContent
+    </svg>
+}
+else
+{
+    @Markup
+}
