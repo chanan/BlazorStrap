@@ -185,7 +185,7 @@ namespace BlazorStrap.Shared.Components.Common
             if (id == DataRefId && name.Equals(this) && type == EventType.Click)
             {
                 // Prevent close on form items
-                if (e?.Target?.NodeName?.ToLower() is "form" or "input" or "label" or "button")
+                if (e?.Target?.NodeName?.ToLower() is "form" or "input" or "label")
                     return;
                 var parent = e?.Parent;
 
@@ -193,7 +193,7 @@ namespace BlazorStrap.Shared.Components.Common
                 {
                     if (parent != null)
                     {
-                        if (parent?.Target?.NodeName?.ToLower() is "form" or "input" or "label" or "button")
+                        if (parent?.Target?.NodeName?.ToLower() is "form" or "input" or "label" )
                             return;
                         parent = parent?.Parent;
                     }

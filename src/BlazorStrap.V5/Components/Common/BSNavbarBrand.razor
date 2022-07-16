@@ -1,0 +1,15 @@
+﻿@inherits BlazorStrap.Shared.Components.Common.BSNavbarBrandBase
+@namespace BlazorStrap.V5
+
+@if (Url != null)
+{
+    <a href="@Url" class="@ClassBuilder" @attributes="Attributes">
+        @ChildContent
+    </a>
+}
+else
+{
+    <span class="@ClassBuilder" @attributes="Attributes">
+        @ChildContent
+    </span>
+}

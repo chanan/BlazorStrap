@@ -15,12 +15,7 @@
 		<RootNamespace>BlazorStrap</RootNamespace>
 		<PackageVersion>5.0.106-Preview3</PackageVersion> <!--Next Use 5.0.106-Preview4 -->
 	</PropertyGroup>
-	<ItemGroup>
-	  <Compile Remove="Shared\Layout\**" />
-	  <Content Remove="Shared\Layout\**" />
-	  <EmbeddedResource Remove="Shared\Layout\**" />
-	  <None Remove="Shared\Layout\**" />
-	</ItemGroup>
+	
 	<ItemGroup>
 	  <Content Remove="bundleconfig.json" />
 	</ItemGroup>
