@@ -1,1 +1,0 @@
-<BSSpinner SpinnerType="SpinnerType.Grow"/>

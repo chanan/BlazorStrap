@@ -18,16 +18,16 @@ See [shared](forms/shared) for additional parameters
 
 ### Overview
 
-{{sample=Forms/Range/Range1}}
+{{sample=V5_1/Forms/Range/Range1}}
 
 ### Disabled
 
-{{sample=Forms/Range/Range2}}
+{{sample=V5_1/Forms/Range/Range2}}
 
 ### Min and max
 
-{{sample=Forms/Range/Range3}}
+{{sample=V5_1/Forms/Range/Range3}}
 
 ### Steps
 
-{{sample=Forms/Range/Range4}}
+{{sample=V5_1/Forms/Range/Range4}}

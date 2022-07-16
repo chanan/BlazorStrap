@@ -1,5 +1,4 @@
 ﻿using BlazorStrap.Extensions;
-using BlazorStrap.Interfaces;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -7,7 +6,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap.Shared.Components.OffCanvas
 {
-    public abstract class BSOffCanvasBase : BlazorStrapToggleBase<BSOffCanvasBase>, IBSOffCanvas
+    public abstract class BSOffCanvasBase : BlazorStrapToggleBase<BSOffCanvasBase>
     {
         private Func<Task>? _callback;
         private DotNetObjectReference<BSOffCanvasBase>? _objectRef;

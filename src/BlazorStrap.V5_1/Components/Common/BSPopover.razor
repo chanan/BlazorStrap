@@ -1,0 +1,43 @@
+﻿@inherits BlazorStrap.Shared.Components.Common.BSPopoverBase
+@namespace BlazorStrap.V5_1
+
+@if (Content == null && Target != null)
+{
+    <BlazorStrap.Shared.InternalComponents.Error Name="BSPopover">
+        The <strong>Content</strong> RenderFragment is required.
+    </BlazorStrap.Shared.InternalComponents.Error>
+
+    return;
+}
+<CascadingValue Value="this">
+    @if (IsDropdown)
+    {
+        if (IsNavItemList)
+        {
+            <ul class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap">
+                @Content
+            </ul>
+        }
+        else
+        {
+            <div class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap">
+                @Content
+            </div>
+        }
+    }
+    else
+    {
+        <div class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap">
+            <div class="popover-arrow"></div>
+            @if (Header != null)
+            {
+                <div class="@HeaderClass">
+                    @Header
+                </div>
+            }
+            <div class="popover-body">
+                @Content
+            </div>
+        </div>
+    }
+</CascadingValue>

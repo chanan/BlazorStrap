@@ -17,21 +17,21 @@ See [shared](forms/shared) for additional parameters
 
 ### Example
 
-{{sample=Forms/Select/Select1}}
+{{sample=V5_1/Forms/Select/Select1}}
 
 ### Sizing
 
-{{sample=Forms/Select/Select2}}
+{{sample=V5_1/Forms/Select/Select2}}
 
 The 'multiple' attribute is also supported.
 
-{{sample=Forms/Select/Select3}}
+{{sample=V5_1/Forms/Select/Select3}}
 
 As is the 'size' attribute.
 
-{{sample=Forms/Select/Select4}}
+{{sample=V5_1/Forms/Select/Select4}}
 
 ### Disabled
 Since 'readonly' is not valid for select we automatically assign it's true value to 'disabled'
 
-{{sample=Forms/Select/Select5}}
+{{sample=V5_1/Forms/Select/Select5}}

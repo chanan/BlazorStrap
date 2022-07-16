@@ -22,7 +22,7 @@ When using multiple bars, their total percentage should not exceed 100%.
 :::
 
 ### Example
-{{sample=Components/Progress/Progress1}}
+{{sample=V5_1/Components/Progress/Progress1}}
 
 ### Dynamic
-{{sample=Components/Progress/Progress2}}
+{{sample=V5_1/Components/Progress/Progress2}}

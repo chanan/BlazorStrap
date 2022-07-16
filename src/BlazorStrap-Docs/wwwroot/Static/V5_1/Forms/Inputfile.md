@@ -24,5 +24,4 @@ See [shared](forms/shared) for additional parameters
 
 ### Example
 
-{{sample=Forms/InputFile/InputFile1}}
-
+{{sample=V5_1/Forms/InputFile/InputFile1}}

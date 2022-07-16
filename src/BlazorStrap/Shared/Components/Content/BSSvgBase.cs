@@ -1,5 +1,4 @@
-﻿using BlazorStrap.Interfaces;
-using BlazorStrap.Utilities;
+﻿using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using System.Text.RegularExpressions;
 
@@ -34,7 +33,7 @@ namespace BlazorStrap.Shared.Components.Content
         /// </summary>
         [Parameter] public string? Source { get; set; }
 
-        [CascadingParameter] public IBSFigure? Figure { get; set; }
+        [CascadingParameter] public BSFigureBase? Figure { get; set; }
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
         protected MarkupString Markup { get; set; }

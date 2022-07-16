@@ -18,35 +18,35 @@ See [shared](forms/shared) for additional parameters
 
 ### Example
 
-{{sample=Forms/FormControls/FormControls1}}
+{{sample=V5_1/Forms/FormControls/FormControls1}}
 
 ### Sizing
 
-{{sample=Forms/FormControls/FormControls2}}
+{{sample=V5_1/Forms/FormControls/FormControls2}}
 
 ### Disabled
 
-{{sample=Forms/FormControls/FormControls3}}
+{{sample=V5_1/Forms/FormControls/FormControls3}}
 
 ### Readonly
 
-{{sample=Forms/FormControls/FormControls4}}
+{{sample=V5_1/Forms/FormControls/FormControls4}}
 
 ### Readonly plain text
 
-{{sample=Forms/FormControls/FormControls5}}
+{{sample=V5_1/Forms/FormControls/FormControls5}}
 
-{{sample=Forms/FormControls/FormControls6}}
+{{sample=V5_1/Forms/FormControls/FormControls6}}
 
 ### Color
 
-{{sample=Forms/FormControls/FormControls8}}
+{{sample=V5_1/Forms/FormControls/FormControls8}}
 
 ### Datalists
 
-{{sample=Forms/FormControls/FormControls9}}
+{{sample=V5_1/Forms/FormControls/FormControls9}}
 
 ### Live
 Note TimeOnly and DataOnly are not in .net 5.0 
 
-{{sample=Forms/FormControls/FormControls10}}
+{{sample=V5_1/Forms/FormControls/FormControls10}}

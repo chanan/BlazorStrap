@@ -42,99 +42,99 @@ Dropdown Items
 
 ### Single button
 
-{{sample=Components/Dropdowns/Dropdowns1}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns1}}
 
-{{sample=Components/Dropdowns/Dropdowns2}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns2}}
 
-{{sample=Components/Dropdowns/Dropdowns3}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns3}}
 
 ### Split button
 
-{{sample=Components/Dropdowns/Dropdowns4}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns4}}
 
 ### Sizing
 Button dropdowns work with buttons of all sizes, including default and split dropdown buttons.
 
-{{sample=Components/Dropdowns/Dropdowns5}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns5}}
 
-{{sample=Components/Dropdowns/Dropdowns6}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns6}}
 
 ### Dark
 
-{{sample=Components/Dropdowns/Dropdowns7}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns7}}
 
 And putting it to use in a navbar:
-{{sample=Components/Dropdowns/Dropdowns8}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns8}}
 
 ### Directions
 {.mt-4}
 ### Dropup
 
-{{sample=Components/Dropdowns/Dropdowns9}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns9}}
 
 ### Dropright
 
-{{sample=Components/Dropdowns/Dropdowns10}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns10}}
 
 ### Dropleft
 
-{{sample=Components/Dropdowns/Dropdowns11}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns11}}
 
 ### Menu items
 Default type of menu items are `<a>` You can use `IsButton` to return a `<button>`
 
-{{sample=Components/Dropdowns/Dropdowns12}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns12}}
 
-{{sample=Components/Dropdowns/Dropdowns13}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns13}}
 
 ### Active
 Add `IsActive` to items in the dropdown to style them as active.
 
-{{sample=Components/Dropdowns/Dropdowns14}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns14}}
 
 ### Disabled
 Add `IsDisabled` to items in the dropdown to style them as disabled.
 
-{{sample=Components/Dropdowns/Dropdowns15}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns15}}
 
 ### Menu alignment
 Dropdowns in `<BSButtonGroup>` are treated as popovers and can be aligned using DropdownPlacement
 
-{{sample=Components/Dropdowns/Dropdowns16}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns16}}
 
 ### Responsive alignment
 If you want to use responsive alignment, disable dynamic positioning by adding the `IsStatic` parameter and use the responsive variation classes.
 To align right the dropdown menu with the given breakpoint or larger, add .dropdown-menu{-sm|-md|-lg|-xl|-xxl}-end.
 
-{{sample=Components/Dropdowns/Dropdowns17}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns17}}
 
 To align left the dropdown menu with the given breakpoint or larger, add `.dropdown-menu-end` and `.dropdown-menu{-sm|-md|-lg|-xl|-xxl}-start`.
 
-{{sample=Components/Dropdowns/Dropdowns18}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns18}}
 
 ### Alignment options
 
-{{sample=Components/Dropdowns/Dropdowns19}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns19}}
 
 ### Headers
 
-{{sample=Components/Dropdowns/Dropdowns20}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns20}}
 
 ### Dividers
 
-{{sample=Components/Dropdowns/Dropdowns21}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns21}}
 
 ### Text
 Place any freeform text within a dropdown menu with text and use [spacing utilities](https://getbootstrap.com/docs/5.1/utilities/spacing). Note that you’ll likely need additional sizing styles to constrain the menu width.
 
-{{sample=Components/Dropdowns/Dropdowns22}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns22}}
 
 ### Forms
 
-{{sample=Components/Dropdowns/Dropdowns23}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns23}}
 
-{{sample=Components/Dropdowns/Dropdowns24}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns24}}
 
 ### Dropdown options
 
-{{sample=Components/Dropdowns/Dropdowns25}}
+{{sample=V5_1/Components/Dropdowns/Dropdowns25}}

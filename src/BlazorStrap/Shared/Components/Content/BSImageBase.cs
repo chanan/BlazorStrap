@@ -1,5 +1,4 @@
-﻿using BlazorStrap.Interfaces;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap.Shared.Components.Content
 {
@@ -35,7 +34,7 @@ namespace BlazorStrap.Shared.Components.Content
         /// </summary>
         [Parameter] public string? Source { get; set; }
 
-        [CascadingParameter] public IBSFigure? Figure { get; set; }
+        [CascadingParameter] public BSFigureBase? Figure { get; set; }
         protected int PlaceHolderHeight { get; set; } = 100;
         protected int PlaceHolderWidth { get; set; } = 100;
         protected string PlaceHolderText { get; set; } = "";

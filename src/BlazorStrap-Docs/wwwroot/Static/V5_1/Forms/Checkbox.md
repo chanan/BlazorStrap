@@ -20,40 +20,40 @@ See [shared](layout/shared) for additional parameters
 
 ### Default
 
-{{sample=Forms/Checkbox/Checkbox1}}
+{{sample=V5_1/Forms/Checkbox/Checkbox1}}
 
 ### Indeterminate
 
-{{sample=Forms/Checkbox/Checkbox2;d-none}}
+{{sample=V5_1/Forms/Checkbox/Checkbox2;d-none}}
 
 ### Disabled
 
-{{sample=Forms/Checkbox/Checkbox3}}
+{{sample=V5_1/Forms/Checkbox/Checkbox3}}
 
 ### Radios
 
-{{sample=Forms/Checkbox/Checkbox4}}
+{{sample=V5_1/Forms/Checkbox/Checkbox4}}
 
 ### Disabled radios
 
-{{sample=Forms/Checkbox/Checkbox5}}
+{{sample=V5_1/Forms/Checkbox/Checkbox5}}
 
 ### Switchs
 
-{{sample=Forms/Checkbox/Checkbox6}}
+{{sample=V5_1/Forms/Checkbox/Checkbox6}}
 
 ### Inline
 
-{{sample=Forms/Checkbox/Checkbox7}}
+{{sample=V5_1/Forms/Checkbox/Checkbox7}}
 
 ### Toggle buttons
 
-{{sample=Forms/Checkbox/Checkbox8}}
+{{sample=V5_1/Forms/Checkbox/Checkbox8}}
 
 ### Radio toggle buttons
 
-{{sample=Forms/Checkbox/Checkbox9}}
+{{sample=V5_1/Forms/Checkbox/Checkbox9}}
 
 ### Outlined styles
 
-{{sample=Forms/Checkbox/Checkbox10}}
+{{sample=V5_1/Forms/Checkbox/Checkbox10}}

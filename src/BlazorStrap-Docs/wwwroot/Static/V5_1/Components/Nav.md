@@ -40,52 +40,52 @@ See [shared](layout/shared) for additional parameters
 
 ### Base nav
 
-{{sample=Components/Nav/Nav1}}
+{{sample=V5_1/Components/Nav/Nav1}}
 
 Use `IsNav` to output as a non list
 
-{{sample=Components/Nav/Nav2}}
+{{sample=V5_1/Components/Nav/Nav2}}
 
 ### Horizontal alignment
 
-{{sample=Components/Nav/Nav3}}
+{{sample=V5_1/Components/Nav/Nav3}}
 
-{{sample=Components/Nav/Nav4}}
+{{sample=V5_1/Components/Nav/Nav4}}
 
 ### Vertical
 
-{{sample=Components/Nav/Nav5}}
+{{sample=V5_1/Components/Nav/Nav5}}
 
 ### Tabs
 
-{{sample=Components/Nav/Nav6}}
+{{sample=V5_1/Components/Nav/Nav6}}
 
 ### Tabs with content
 
-{{sample=Components/Nav/Nav7}}
+{{sample=V5_1/Components/Nav/Nav7}}
 
 ### Pills
 
-{{sample=Components/Nav/Nav8}}
+{{sample=V5_1/Components/Nav/Nav8}}
 
 ### Fill and justify
 
-{{sample=Components/Nav/Nav9}}
+{{sample=V5_1/Components/Nav/Nav9}}
 
-{{sample=Components/Nav/Nav10}}
+{{sample=V5_1/Components/Nav/Nav10}}
 
 ### Working with flex
 
-{{sample=Components/Nav/Nav11}}
+{{sample=V5_1/Components/Nav/Nav11}}
 
 ### Tabs with dropdowns
 
-{{sample=Components/Nav/Nav12}}
+{{sample=V5_1/Components/Nav/Nav12}}
 
 ### Pills with dropdowns
 
-{{sample=Components/Nav/Nav13}}
+{{sample=V5_1/Components/Nav/Nav13}}
 
 ### Submenu Example
 
-{{sample=Components/Nav/Nav14}}
+{{sample=V5_1/Components/Nav/Nav14}}

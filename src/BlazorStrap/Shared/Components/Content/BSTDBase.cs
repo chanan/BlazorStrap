@@ -1,5 +1,4 @@
-﻿using BlazorStrap.Interfaces;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap.Shared.Components.Content
 {
@@ -24,7 +23,7 @@ namespace BlazorStrap.Shared.Components.Content
         /// Whether or not the cell is active.
         /// </summary>
         [Parameter] public bool IsActive { get; set; }
-        [CascadingParameter] public IBSTHead? TableHead { get; set; }
+        [CascadingParameter] public BSTHeadBase? TableHead { get; set; }
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
     }

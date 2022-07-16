@@ -1,6 +1,5 @@
 using BlazorComponentUtilities;
 using BlazorStrap.Extensions;
-using BlazorStrap.Interfaces;
 using BlazorStrap.Shared.Components.Modal;
 using Microsoft.AspNetCore.Components;
 

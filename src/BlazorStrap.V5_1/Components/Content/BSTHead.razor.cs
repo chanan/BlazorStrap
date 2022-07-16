@@ -1,11 +1,10 @@
 using BlazorComponentUtilities;
 using BlazorStrap.Extensions;
-using BlazorStrap.Interfaces;
 using BlazorStrap.Shared.Components.Content;
 
 namespace BlazorStrap.V5_1
 {
-    public partial class BSTHead : BSTHeadBase, IBSTHead
+    public partial class BSTHead : BSTHeadBase
     {
         protected override string? LayoutClass => LayoutClassBuilder.Build(this);
 

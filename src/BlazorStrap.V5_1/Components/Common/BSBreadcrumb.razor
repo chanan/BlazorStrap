@@ -1,0 +1,33 @@
+﻿@inherits BlazorStrap.Shared.Components.Common.BSBreadcrumbBase
+@namespace BlazorStrap.V5_1
+
+@if (string.IsNullOrEmpty(BasePath))
+{
+    <nav style="--bs-breadcrumb-divider: @Divider;" aria-label="breadcrumb">
+        <ol class="@ClassBuilder" @attributes="Attributes">
+            @ChildContent
+        </ol>
+    </nav>
+}
+else
+{
+    <nav style="--bs-breadcrumb-divider: @Divider;" aria-label="breadcrumb">
+        <ol class="@ClassBuilder" @attributes="Attributes">
+            @foreach(var item in Tree)
+            {
+                if (NavigationManager?.Uri == item.Key )
+                {
+                    <li class="breadcrumb-item active" @key="item.Key">
+                    @item.Value
+                    </li>
+                }
+                else
+                {
+                    <li class="breadcrumb-item" @key="item.Key">
+                        <a href="@item.Key">@item.Value</a>
+                    </li>
+                }
+            }
+        </ol>
+    </nav>
+}

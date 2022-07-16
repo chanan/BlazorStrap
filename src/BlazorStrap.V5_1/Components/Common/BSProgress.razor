@@ -1,0 +1,8 @@
+﻿@inherits BlazorStrap.Shared.Components.Common.BSProgressBase
+@namespace BlazorStrap.V5_1
+
+<div class="@ClassBuilder" @attributes="@Attributes" >
+    <CascadingValue Value="this">
+        @ChildContent
+    </CascadingValue>
+</div>

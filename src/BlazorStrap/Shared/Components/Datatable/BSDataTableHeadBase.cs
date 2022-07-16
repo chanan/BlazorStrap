@@ -1,6 +1,5 @@
 ﻿using BlazorStrap.Shared.Components.Content;
 using Microsoft.AspNetCore.Components;
-using BlazorStrap.Interfaces;
 
 namespace BlazorStrap.Shared.Components.Datatable
 {
@@ -21,7 +20,7 @@ namespace BlazorStrap.Shared.Components.Datatable
         /// </summary>
         [Parameter] public bool ColumnFilter { get; set; }
 
-        [CascadingParameter] public IBSDataTable<TValue>? Parent { get; set; }
+        [CascadingParameter] public BSDataTableBase<TValue>? Parent { get; set; }
         protected bool? Desc;
         protected string? Filter { get; set; }
         protected abstract string? SortClassBuilder { get; }

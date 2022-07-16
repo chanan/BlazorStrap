@@ -35,7 +35,7 @@ namespace BlazorStrap.Shared.Components.Forms
         [Parameter] public bool IsToggle { get; set; }
 
         [DisallowNull] private ElementReference? Element { get; set; }
-        private string InputType => IsRadio ? "radio" : "checkbox";
+        protected string InputType => IsRadio ? "radio" : "checkbox";
 
         /// <summary>
         /// Size of input.

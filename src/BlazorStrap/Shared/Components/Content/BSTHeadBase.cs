@@ -1,7 +1,4 @@
-﻿using BlazorStrap.Interfaces;
-using Microsoft.AspNetCore.Components;
-
-namespace BlazorStrap.Shared.Components.Content
+﻿namespace BlazorStrap.Shared.Components.Content
 {
     public abstract class BSTHeadBase : BlazorStrapBase
     {

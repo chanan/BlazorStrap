@@ -215,7 +215,7 @@ window.blazorStrap = {
         await blazorStrap.CleanupCarousel(showEl, hideEl);
 
         let callback = function () {
-            objref.invokeMethodAsync("InteropEventCallback", id, "bscarousel", "transitionend");
+            objref.invokeMethodAsync("InteropEventCallback", id, "bscarouselbase", "transitionend");
         };
 
         return new Promise(function (resolve) {
@@ -324,17 +324,36 @@ window.blazorStrap = {
             return {
                 key: event.key,
                 clientWidth: document.documentElement.clientWidth,
+                parent: blazorStrap.GetParent(event.target.parentElement),
                 target: {
+                    nodeName: event.target.nodeName,
                     classList: event.target.classList,
                     targetId: event.target.getAttribute("data-blazorstrap-target"),
                     childrenId: blazorStrap.GetChildrenIds(event.target),
                     dataId: event.target.getAttribute("data-blazorstrap")
                 }
             };
+            
         } catch {
             return {
                 key: event.key,
                 clientWidth: document.documentElement.clientWidth,
+            }
+        }
+    },
+    GetParent: function (parent, i =0) {
+         //Limited to 4 deep
+        i = i + 1;
+        if (i > 4 || parent === undefined) return;
+       
+        return {
+            parent: blazorStrap.GetParent(parent.parentElement, i),
+            target: {
+                nodeName: parent.nodeName,
+                classList: parent.classList,
+                targetId: parent.getAttribute("data-blazorstrap-target"),
+                childrenId: blazorStrap.GetChildrenIds(parent),
+                dataId: parent.getAttribute("data-blazorstrap")
             }
         }
     },

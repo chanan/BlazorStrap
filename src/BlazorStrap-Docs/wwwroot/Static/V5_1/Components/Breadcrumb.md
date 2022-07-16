@@ -29,23 +29,23 @@ All paths are case sensitive your dictionary keys should be set to match the cas
 
 ### Automatic
 
-{{sample=Components/Breadcrumb/Breadcrumb0}}
+{{sample=V5_1/Components/Breadcrumb/Breadcrumb0}}
 
 Or you can do it yourself, using our components.
 
 ### Example
 
-{{sample=Components/Breadcrumb/Breadcrumb1}}
+{{sample=V5_1/Components/Breadcrumb/Breadcrumb1}}
 
 ### Dividers
 
-{{sample=Components/Breadcrumb/Breadcrumb2}}
+{{sample=V5_1/Components/Breadcrumb/Breadcrumb2}}
 
 
 It’s also possible to use an **embedded** SVG icon. Apply it via Bootstraps CSS custom property, or use the Sass variable.
 
-{{sample=Components/Breadcrumb/Breadcrumb3}}
+{{sample=V5_1/Components/Breadcrumb/Breadcrumb3}}
 
 You can remove the divider by passing in a empty string to the `Divider` parameter
 
-{{sample=Components/Breadcrumb/Breadcrumb4}}
+{{sample=V5_1/Components/Breadcrumb/Breadcrumb4}}

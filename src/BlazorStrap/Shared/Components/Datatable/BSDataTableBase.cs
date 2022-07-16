@@ -1,12 +1,11 @@
-﻿using BlazorStrap.Interfaces;
-using BlazorStrap.Shared.Components.Content;
+﻿using BlazorStrap.Shared.Components.Content;
 using Microsoft.AspNetCore.Components;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorStrap.Shared.Components.Datatable
 {
-    public abstract class BSDataTableBase<TValue> : BSTableBase, IBSDataTable<TValue>
+    public abstract class BSDataTableBase<TValue> : BSTableBase
     {
         /// <summary>
         /// Items to drive the data table.
@@ -131,7 +130,7 @@ namespace BlazorStrap.Shared.Components.Datatable
                 SortColumnProperty = TypeDescriptor.GetProperties(typeof(TValue)).Find(_sortColumn, false)
             };
         }
-        private async Task ChangePage(int page)
+        protected async Task ChangePage(int page)
         {
             if (FetchItems != null)
             {
@@ -147,7 +146,7 @@ namespace BlazorStrap.Shared.Components.Datatable
 
             Page = page;
         }
-        private int GetPages()
+        protected int GetPages()
         {
             var value = 0;
             value = (int)Math.Ceiling(((float)TotalItems / RowsPerPage));

@@ -26,31 +26,31 @@ No Setting parameters
 
 ### Slides only
 
-{{sample=Components/Carousel/Carousel1}}
+{{sample=V5_1/Components/Carousel/Carousel1}}
 
 ### With controls
 
-{{sample=Components/Carousel/Carousel2}}
+{{sample=V5_1/Components/Carousel/Carousel2}}
 
 ### With indicators
 
-{{sample=Components/Carousel/Carousel3}}
+{{sample=V5_1/Components/Carousel/Carousel3}}
 
 ### With captions
 
-{{sample=Components/Carousel/Carousel4}}
+{{sample=V5_1/Components/Carousel/Carousel4}}
 
 ### Crossfade
 
-{{sample=Components/Carousel/Carousel5}}
+{{sample=V5_1/Components/Carousel/Carousel5}}
 
 ### Individual interval
 
-{{sample=Components/Carousel/Carousel6}}
+{{sample=V5_1/Components/Carousel/Carousel6}}
 
 ### Dark variant
 
-{{sample=Components/Carousel/Carousel8}}
+{{sample=V5_1/Components/Carousel/Carousel8}}
 
 ### Methods / Events
 TValue = BSCarouselItem

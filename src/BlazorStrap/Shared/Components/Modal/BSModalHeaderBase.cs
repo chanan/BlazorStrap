@@ -1,5 +1,4 @@
-﻿using BlazorStrap.Interfaces;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap.Shared.Components.Modal
 {
@@ -7,7 +6,7 @@ namespace BlazorStrap.Shared.Components.Modal
     {
         [Parameter] public bool HasCloseButton { get; set; } = true;
         [Parameter] public string? ButtonClass { get; set; }
-        [CascadingParameter] public IBSModal? Parent { get; set; }
+        [CascadingParameter] public BSModalBase? Parent { get; set; }
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
 

@@ -1,5 +1,5 @@
 ﻿using BlazorStrap.Extensions;
-using BlazorStrap.Interfaces;
+using BlazorStrap.Shared.Components.Modal;
 
 namespace BlazorStrap.Service
 {
@@ -59,9 +59,9 @@ namespace BlazorStrap.Service
             return SetBootstrapCss(theme.ToString().ToLowerInvariant(), version);
         }
         
-        internal event Action<IBSModal?, bool>? ModalChange;
+        internal event Action<BSModalBase?, bool>? ModalChange;
 
-        public void ModalChanged(IBSModal obj)
+        public void ModalChanged(BSModalBase obj)
         {
             ModalChange?.Invoke(obj, false);
         }

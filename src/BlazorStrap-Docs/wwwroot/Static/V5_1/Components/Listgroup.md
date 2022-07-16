@@ -29,6 +29,6 @@ See [shared](layout/shared) for additional parameters
 
 ### Example
 
-{{sample=Components/ListGroup/ListGroup1}}
+{{sample=V5_1/Components/ListGroup/ListGroup1}}
 
 For more examples of List Groups see Bootstrap's official documentation

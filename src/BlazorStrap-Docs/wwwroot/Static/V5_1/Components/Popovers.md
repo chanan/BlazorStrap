@@ -17,14 +17,14 @@ See [shared](layout/shared) for additional parameters
 
 ### Example
 
-{{sample=Components/Popover/Popover1}}
+{{sample=V5_1/Components/Popover/Popover1}}
 
 ### Dynamic Example
 :::{.bd-callout .bd-callout-info}
 Note `MouseOver` parameter will not work here
 :::
 
-{{sample=Components/Popover/Popover2}}
+{{sample=V5_1/Components/Popover/Popover2}}
 
 ### Methods / Events
 TValue = BSPopover

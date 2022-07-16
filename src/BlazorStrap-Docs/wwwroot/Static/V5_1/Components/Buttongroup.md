@@ -14,6 +14,6 @@ See [shared](layout/shared) for additional parameters
 
 # Examples
 
-{{sample=Components/ButtonGroup/ButtonGroup1}}
+{{sample=V5_1/Components/ButtonGroup/ButtonGroup1}}
 
 For more examples of button groups see Bootstrap's official documentation

@@ -29,10 +29,10 @@ See [shared](layout/shared) for additional parameters
 
 ### Example
 
-{{sample=Components/Pagination/Pagination1}}
+{{sample=V5_1/Components/Pagination/Pagination1}}
 
 ### Dynamic Example
 
-{{sample=Components/Pagination/Pagination2}}
+{{sample=V5_1/Components/Pagination/Pagination2}}
 
 For more examples of buttons see Bootstrap's official documentation

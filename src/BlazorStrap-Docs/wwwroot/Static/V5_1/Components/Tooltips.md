@@ -12,7 +12,7 @@ See [shared](layout/shared) for additional parameters
 
 ### Examples
 
-{{sample=Components/Tooltips/Tooltips1}}
+{{sample=V5_1/Components/Tooltips/Tooltips1}}
 
 ### Methods / Events
 TValue = BSTooltip

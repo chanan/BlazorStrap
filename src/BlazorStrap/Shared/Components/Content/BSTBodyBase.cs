@@ -1,5 +1,4 @@
-﻿using BlazorStrap.Interfaces;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap.Shared.Components.Content
 {

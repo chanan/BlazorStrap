@@ -1,5 +1,4 @@
-﻿using BlazorStrap.Interfaces;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap.Shared.Components.Common
@@ -43,12 +42,12 @@ namespace BlazorStrap.Shared.Components.Common
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
         [CascadingParameter] public BSCollapseBase? CollapseParent { get; set; }
-        [CascadingParameter] public IBSDropdown? DropDownParent { get; set; }
+        [CascadingParameter] public BSDropdownBase? DropDownParent { get; set; }
         protected ElementReference MyRef { get; set; }
         protected string Element =>
             CollapseParent != null ? "collapse" : DropDownParent != null ? "dropdown" : "unknown";
         private bool _canHandleActive;
-        private IBSDropdownItem? _activeOwner;
+        private BSDropdownItemBase? _activeOwner;
 
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
@@ -74,7 +73,7 @@ namespace BlazorStrap.Shared.Components.Common
                 DataId = DropDownParent.Target;
         }
 
-        private void OnSetActive(bool active, IBSDropdownItem item)
+        private void OnSetActive(bool active, BSDropdownItemBase item)
         {
             if (!_canHandleActive) return;
             if (_activeOwner == item && !active)

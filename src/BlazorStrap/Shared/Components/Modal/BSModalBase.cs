@@ -1,5 +1,4 @@
 ﻿using BlazorStrap.Extensions;
-using BlazorStrap.Interfaces;
 using BlazorStrap.InternalComponents;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
@@ -7,7 +6,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap.Shared.Components.Modal
 {
-    public abstract class BSModalBase : BlazorStrapToggleBase<BSModalBase>, IAsyncDisposable, IBSModal
+    public abstract class BSModalBase : BlazorStrapToggleBase<BSModalBase>, IAsyncDisposable
     {
         private Func<Task>? _callback;
         private DotNetObjectReference<BSModalBase>? _objectRef;
@@ -46,7 +45,7 @@ namespace BlazorStrap.Shared.Components.Modal
         /// <summary>
         /// Modal footer.
         /// </summary>
-        [Parameter] public RenderFragment<IBSModal>? Footer { get; set; }
+        [Parameter] public RenderFragment<BSModalBase>? Footer { get; set; }
 
         /// <summary>
         /// CSS classes to be applied to the modal footer.
@@ -221,7 +220,6 @@ namespace BlazorStrap.Shared.Components.Modal
                 await OnShow.InvokeAsync(this);
             await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
             await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Click);
-            Console.WriteLine(EventsSet);
             if (!EventsSet)
             {
                 await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.TransitionEnd);
@@ -364,7 +362,7 @@ namespace BlazorStrap.Shared.Components.Modal
             }
         }
 
-        private async void OnModalChange(IBSModal? model, bool fromJs)
+        private async void OnModalChange(BSModalBase? model, bool fromJs)
         {
             if (fromJs)
             {

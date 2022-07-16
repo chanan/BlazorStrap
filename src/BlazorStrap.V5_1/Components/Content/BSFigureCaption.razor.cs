@@ -1,6 +1,5 @@
 using BlazorComponentUtilities;
 using BlazorStrap.Extensions;
-using BlazorStrap.Interfaces;
 using BlazorStrap.Shared.Components.Content;
 
 namespace BlazorStrap.V5_1

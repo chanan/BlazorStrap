@@ -19,10 +19,10 @@ See [shared](layout/shared) for additional parameters
 
 ### Example
 
-{{sample=Components/Toast/Toast1}}
+{{sample=V5_1/Components/Toast/Toast1}}
 
 ### Without header
-{{sample=Components/Toast/Toast2}}
+{{sample=V5_1/Components/Toast/Toast2}}
 
 
 ### Toaster Example
@@ -33,4 +33,4 @@ See [shared](layout/shared) for additional parameters
 
 <BSToaster/> should be placed before you `@Body` in your layout. Exact placement depends on your requirements for where you want the toasts to show up. 
 
-{{sample=Components/Toast/Toast3}}
+{{sample=V5_1/Components/Toast/Toast3}}
