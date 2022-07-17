@@ -42,7 +42,6 @@ namespace BlazorStrap.Shared.Components.Forms
         /// Message to show when input is invalid.
         /// </summary>
         [Parameter] public string? InvalidMessage { get; set; }
-
         protected internal FieldIdentifier FieldIdentifier { get; set; }
 
         protected string? ActualInvalidMessage;

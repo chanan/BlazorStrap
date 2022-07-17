@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlazorStrap.Shared.Components.Forms
 {
@@ -56,7 +51,7 @@ namespace BlazorStrap.Shared.Components.Forms
 
         private bool _hasInitialized;
         [CascadingParameter] private EditContext? CascadedEditContext { get; set; }
-
+        [CascadingParameter] public BSInputHelperBase? Helper { get; set; }
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
         

@@ -6,18 +6,23 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazorStrap.V5
 {
-    public class BSInput<TValue> : BSInputBase<TValue, Size>
-    {
+    public class BSInput<TValue> : BSInputBase<TValue>
+    {  
+        /// <summary>
+        /// Size of input
+        /// </summary>
+        [Parameter] public Size InputSize { get; set; }
+
         protected override string? LayoutClass => LayoutClassBuilder.Build(this);
 
         protected override string? ClassBuilder => new CssBuilder()
-                .AddClass($"form-control-{InputSize.ToDescriptionString()}", InputSize != Size.None && InputType != InputType.Select)
-                .AddClass($"form-select-{InputSize.ToDescriptionString()}", InputSize != Size.None && InputType == InputType.Select)
-                .AddClass("form-control", InputType != InputType.Select && InputType != InputType.Range)
-                .AddClass("form-range", InputType == InputType.Range)
+                .AddClass($"form-control-{InputSize.ToDescriptionString()}", InputSize != Size.None && InputType != InputType.Select && !RemoveDefaultClass)
+                .AddClass($"form-select-{InputSize.ToDescriptionString()}", InputSize != Size.None && InputType == InputType.Select && !RemoveDefaultClass) 
+                .AddClass("form-control", InputType != InputType.Select && InputType != InputType.Range && !RemoveDefaultClass)
+                .AddClass("form-range", InputType == InputType.Range && !RemoveDefaultClass)
                 .AddClass(BS.Form_Control_Plaintext, IsPlainText)
                 .AddClass(ValidClass, IsValid)
-                .AddClass("form-select", InputType == InputType.Select)
+                .AddClass("form-select", InputType == InputType.Select && !RemoveDefaultClass)
                 .AddClass(InvalidClass, IsInvalid)
                 .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
                 .AddClass(Class, !string.IsNullOrEmpty(Class))
@@ -46,9 +51,13 @@ namespace BlazorStrap.V5
             builder.AddAttribute(9, "onfocus", OnFocusEvent);
             builder.AddMultipleAttributes(8, AdditionalAttributes);
             builder.AddAttribute(10, "multiple", IsMultipleSelect);
-            builder.AddElementReferenceCapture(11, elReference => Element = elReference);
+            if (Helper?.Id != null)
+            {
+                builder.AddAttribute(11, "id", Helper.Id);
+            }
+            builder.AddElementReferenceCapture(12, elReference => Element = elReference);
             if (Tag != "input")
-                builder.AddContent(12, ChildContent);
+                builder.AddContent(13, ChildContent);
             builder.CloseElement();
         }
     }

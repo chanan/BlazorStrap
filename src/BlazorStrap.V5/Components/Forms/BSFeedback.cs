@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using System.Web;
 
-namespace BlazorStrap.V5.Components.Forms
+namespace BlazorStrap.V5
 {
     public class BSFeedback<TValue> : BSFeedbackBase<TValue>
     {

@@ -28,7 +28,11 @@ namespace BlazorStrap.Shared.Components.Forms
         [Parameter] public bool IsCheckLabel { get; set; }
         [Parameter] public bool IsRadioLabel { get; set; }
         [Parameter] public bool IsFloating { get; set; }
-
+        /// <summary>
+        /// Removes default class.
+        /// </summary>
+        [Parameter] public bool RemoveDefaultClass { get; set; }
+        [CascadingParameter] public BSInputHelperBase? Helper { get; set; }
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
     }

@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace BlazorStrap.Shared.Components.Forms
 {
-    public abstract class BSInputBase<TValue, TSize> : BlazorStrapInputBase<TValue> where TSize : Enum
+    public abstract class BSInputBase<TValue> : BlazorStrapInputBase<TValue>
     {
         private string _dateFormat = "yyyy-MM-dd";
         protected readonly bool IsMultipleSelect;
@@ -37,11 +37,13 @@ namespace BlazorStrap.Shared.Components.Forms
         /// <remarks>If set to <see cref="InputType.Select"/> multiple select can be enabled by binding an array to the component.</remarks>
         [Parameter] public InputType InputType { get; set; } = InputType.Text;
 
+      
+        
         /// <summary>
-        /// Size of input
+        /// Removes default class.
         /// </summary>
-        [Parameter] public TSize InputSize { get; set; }
-
+        [Parameter] public bool RemoveDefaultClass { get; set; }
+        [CascadingParameter] public BSInputHelperBase? Helper { get; set; }
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
         protected override string? FormatValueAsString(TValue? value)

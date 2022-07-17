@@ -1,6 +1,15 @@
 ﻿@namespace BlazorStrap.V5
 @inherits BlazorStrap.Shared.Components.Forms.BSLabelBase<Size>
 
-<label class="@ClassBuilder" @attributes="Attributes">
-    @ChildContent
-</label>
+@if (Helper?.Id != null)
+{
+    <label class="@ClassBuilder" for="@Helper.Id" @attributes="Attributes">
+        @ChildContent
+    </label>
+}
+else
+{
+    <label class="@ClassBuilder" @attributes="Attributes">
+        @ChildContent
+    </label>
+}

@@ -27,7 +27,11 @@ namespace BlazorStrap.V5
             builder.AddAttribute(1, "OnChange", EventCallback.Factory.Create<InputFileChangeEventArgs>(this, OnFileChange));
             builder.AddAttribute(2, "class", ClassBuilder);
             builder.AddAttribute(3, "onclick", OnFileClick);
-            builder.AddMultipleAttributes(4, Attributes);
+            if (Helper?.Id != null)
+            {
+                builder.AddAttribute(4, "id", Helper.Id);
+            }
+            builder.AddMultipleAttributes(5, Attributes);
             builder.CloseComponent();
         }
     }

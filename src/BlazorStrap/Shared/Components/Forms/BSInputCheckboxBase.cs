@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorStrap.Shared.Components.Forms
 {
-    public abstract class BSInputCheckboxBase<T, TSize> : BSInputBase<T, TSize> where TSize : Enum
+    public abstract class BSInputCheckboxBase<T> : BSInputBase<T> 
     {
         /// <summary>
         /// Sets checkbox color.
@@ -29,50 +29,35 @@ namespace BlazorStrap.Shared.Components.Forms
 
         protected bool IsRadio { get; set; }
 
-        /// <summary>
-        /// Display as toggle buttons.
-        /// </summary>
-        [Parameter] public bool IsToggle { get; set; }
-
+        protected bool _isToggle;
         [DisallowNull] private ElementReference? Element { get; set; }
         protected string InputType => IsRadio ? "radio" : "checkbox";
 
-        /// <summary>
-        /// Size of input.
-        /// </summary>
-        [Parameter] public TSize Size { get; set; }
+     
         protected abstract string? ToggleClassBuilder { get; }
 
-
-        protected void RadioOnClickEvent(MouseEventArgs e)
+        protected void RadioOnClickEvent()
         {
-            if (Value == null)
+            if (IsRadio)
             {
-                if (CheckedValue == null)
-                    Value = default(T);
-            }
-            else if (IsToggle && Value.Equals(CheckedValue) && !IsRadio)
-            {
-                Value = UnCheckedValue;
-            }
-            else if (Value.Equals(CheckedValue) && !IsRadio)
-            {
-                Value = UnCheckedValue;
+                Value = CheckedValue;
             }
             else
-                Value = CheckedValue;
+            {
+                if (!object.Equals(CheckedValue, Value) && !IsRadio)
+                {
+                    Value = CheckedValue;
+                }
+                else
+                {
+                    Value = UnCheckedValue;
+                }
+            }
             ValueChanged.InvokeAsync(Value);
         }
         protected bool Checked()
         {
-            if (CheckedValue == null)
-            {
-                if (Value == null)
-                    return true;
-            }
-            else if (CheckedValue.Equals(Value))
-                return true;
-            return false;
+            return object.Equals(CheckedValue, Value);  
         }
         protected override bool TryParseValueFromString(string? value, out T result, [NotNullWhen(false)] out string? validationErrorMessage)
         {
