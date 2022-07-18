@@ -16,8 +16,8 @@ namespace BlazorStrap.V4
         protected override string? LayoutClass => LayoutClassBuilder.Build(this);
 
         protected override string? ClassBuilder => new CssBuilder()
-                .AddClass("input-group-append", IsAppend && !IsPrepend)
-                .AddClass("input-group-prepend", !IsAppend && IsPrepend)
+                .AddClass("input-group-append", IsAppend )
+                .AddClass("input-group-prepend", IsPrepend)
                 .AddClass("input-group", !IsAppend  && !IsPrepend)
                 .AddClass($"input-group-{Size.ToDescriptionString()}", Size != Size.None && !IsAppend && !IsPrepend)
                 .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass) && !IsAppend && !IsPrepend)

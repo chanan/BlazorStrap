@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorStrap.Utilities;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap.Shared.Components.Common
 {
@@ -40,13 +41,35 @@ namespace BlazorStrap.Shared.Components.Common
         [Parameter] public bool IsDismissible { get; set; }
 
         /// <summary>
+        /// Icon End Margin
+        /// </summary>
+        [Parameter] public Margins IconEndMargin { get; set; } = Margins.Small;
+
+        /// <summary>
         /// Dismisses the alert
         /// </summary>
         /// <returns><see cref="Task"/></returns>
         /// 
+        protected bool IsDismissed;
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
-        public abstract Task CloseEventAsync();
-        public abstract void Open();
+
+        /// <summary>
+        /// Dismisses the alert
+        /// </summary>
+        /// <returns><see cref="Task"/></returns>
+        public async Task CloseEventAsync()
+        {
+            await EventUtil.AsNonRenderingEventHandler(Dismissed.InvokeAsync).Invoke();
+            IsDismissed = true;
+        }
+
+        /// <summary>
+        /// Opens the alert
+        /// </summary>
+        public void Open()
+        {
+            IsDismissed = false;
+        }
     }
 }

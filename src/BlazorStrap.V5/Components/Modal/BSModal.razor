@@ -25,7 +25,7 @@ else
                         @Header
                         @if (HasCloseButton)
                         {
-                            <button type="button" class="ms-auto btn-close @ButtonClass" data-bs-dismiss="modal" aria-label="Close" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)"></button>
+                            <BSCloseButton Class="ms-auto" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)" data-bs-dismiss="modal" aria-label="Close"/>
                         }
                     </div>
                 }

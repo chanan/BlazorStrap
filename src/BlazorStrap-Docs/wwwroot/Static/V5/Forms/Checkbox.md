@@ -22,10 +22,6 @@ See [shared](layout/shared) for additional parameters
 
 {{sample=V5/Forms/Checkbox/Checkbox1}}
 
-### Indeterminate
-
-{{sample=V5/Forms/Checkbox/Checkbox2;d-none}}
-
 ### Disabled
 
 {{sample=V5/Forms/Checkbox/Checkbox3}}

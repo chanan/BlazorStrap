@@ -2,7 +2,7 @@
 @namespace BlazorStrap.V5
 
 
-@if (_dismissed) {return;}
+@if (IsDismissed) { return; }
 <div class="@ClassBuilder" role="alert" @attributes="Attributes">
     @if (Header != null)
     {
@@ -29,9 +29,11 @@
         }
         @Content
     }
-    else if(HasIcon)
+    else if (HasIcon)
     {
-        @((MarkupString)(Icons.GetAlertIcon(Color.NameToLower()) ?? ""));
+                <span class="@($"me-{IconEndMargin.ToIndex()}")">
+            @((MarkupString)(Icons.GetAlertIcon(Color.NameToLower()) ?? ""))
+                </span>
         @ChildContent
     }
     else
@@ -40,6 +42,6 @@
     }
     @if (IsDismissible)
     {
-        <BSCloseButton @onclick="CloseEventAsync" />
+                <BSCloseButton @onclick="CloseEventAsync" />
     }
 </div>

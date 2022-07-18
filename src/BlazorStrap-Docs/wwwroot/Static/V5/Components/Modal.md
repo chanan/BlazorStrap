@@ -52,7 +52,7 @@ You can also scroll content in the modals body
 
 ### Tooltips and popovers
 
-{{sample=V53_1/Components/Modal/Modal6}}
+{{sample=V5/Components/Modal/Modal6}}
 
 ### Toggle between modals
 

@@ -1,44 +1,82 @@
-﻿<div class="input-group mb-4">
-    <span class="input-group-text">Text</span>
-    <BSInput InputType="InputType.Text" @bind-Value="TextValue" ValidateOnInput="true"/>
-    <span class="input-group-text">Password</span>
-    <BSInput InputType="InputType.Password" @bind-Value="TextValue"/>
-    <span class="input-group-text">Email</span>
-    <BSInput InputType="InputType.Email" @bind-Value="TextValue"/>
-    <span class="input-group-text">Value = @TextValue</span>
-</div>
-<div class="input-group mb-4">
-    <span class="input-group-text">DateTimeLocal As DateTime</span>
-    <BSInput InputType="InputType.DateTimeLocal" @bind-Value="DateValue"/>
-    <span class="input-group-text">Value = @DateValue</span>
-</div>
-<div class="input-group mb-4">
-    <span class="input-group-text">DateTimeLocal As DateTimeOffset</span>
-    <BSInput InputType="InputType.DateTimeLocal" @bind-Value="DateOffsetValue"/>
-    <span class="input-group-text">Value = @DateOffsetValue</span>
-</div>
-<div class="input-group mb-4">
-    <span class="input-group-text">Date As DateTime</span>
-    <BSInput InputType="InputType.Date" @bind-Value="DateValue"/>
-    <span class="input-group-text">Value = @DateValue</span>
-</div>
-<div class="input-group mb-4">
-    <span class="input-group-text">Date As DateTimeOffset</span>
-    <BSInput InputType="InputType.Date" @bind-Value="DateOffsetValue"/>
-    <span class="input-group-text">Value = @DateOffsetValue</span>
-</div>
-<div class="input-group mb-4">
-    <span class="input-group-text">Month As DateOnly</span>
-    <BSInput InputType="InputType.Date" @bind-Value="DateOnlyValue"/>
-    <span class="input-group-text">Value = @DateOnlyValue</span>
-</div>
-<div class="input-group mb-4">
-    <span class="input-group-text">Time As TimeOnly</span>
-    <BSInput InputType="InputType.Time" @bind-Value="TimeOnlyValue"/>
-    <span class="input-group-text">Value = @TimeOnlyValue</span>
-</div>
+﻿<BSInputGroup MarginBottom="Margins.Medium">
+    <BSInputGroup IsPrepend="true">
+        <span class="input-group-text">Text</span>
+    </BSInputGroup>
+    <BSInput InputType="InputType.Text" @bind-Value="TextValue" ValidateOnInput="true" />
+    <BSInputGroup IsPrepend="true" IsAppend="true">
+        <span class="input-group-text">Password</span>
+    </BSInputGroup>
+    <BSInput InputType="InputType.Password" @bind-Value="TextValue" />
+    <BSInputGroup IsPrepend="true" IsAppend="true">
+        <span class="input-group-text">Email</span>
+    </BSInputGroup>
+    <BSInput InputType="InputType.Email" @bind-Value="TextValue" />
+    <BSInputGroup IsPrepend="true" IsAppend="true">
+        <span class="input-group-text">Value = @TextValue</span>
+    </BSInputGroup>
+</BSInputGroup>
 
-@code{
+<BSInputGroup MarginBottom="Margins.Medium">
+    <BSInputGroup IsPrepend="true">
+        <span class="input-group-text">DateTimeLocal As DateTime</span>
+    </BSInputGroup>
+    <BSInput InputType="InputType.DateTimeLocal" @bind-Value="DateValue" />
+    <BSInputGroup IsAppend="true">
+        <span class="input-group-text">Value = @DateValue</span>
+    </BSInputGroup>
+</BSInputGroup>
+
+<BSInputGroup MarginBottom="Margins.Medium">
+    <BSInputGroup IsPrepend="true">
+        <span class="input-group-text">DateTimeLocal As DateTimeOffset</span>
+    </BSInputGroup>
+    <BSInput InputType="InputType.DateTimeLocal" @bind-Value="DateOffsetValue" />
+    <BSInputGroup IsAppend="true">
+        <span class="input-group-text">Value = @DateOffsetValue</span>
+    </BSInputGroup>
+</BSInputGroup>
+
+<BSInputGroup MarginBottom="Margins.Medium">
+    <BSInputGroup IsPrepend="true">
+        <span class="input-group-text">Date As DateTime</span>
+    </BSInputGroup>
+    <BSInput InputType="InputType.Date" @bind-Value="DateValue" />
+    <BSInputGroup IsAppend="true">
+        <span class="input-group-text">Value = @DateValue</span>
+    </BSInputGroup>
+</BSInputGroup>
+
+<BSInputGroup MarginBottom="Margins.Medium">
+    <BSInputGroup IsPrepend="true">
+        <span class="input-group-text">Date As DateTimeOffset</span>
+    </BSInputGroup>
+    <BSInput InputType="InputType.Date" @bind-Value="DateOffsetValue" />
+    <BSInputGroup IsAppend="true">
+        <span class="input-group-text">Value = @DateOffsetValue</span>
+    </BSInputGroup>
+</BSInputGroup>
+
+<BSInputGroup MarginBottom="Margins.Medium">
+    <BSInputGroup IsPrepend="true">
+        <span class="input-group-text">Month As DateOnly</span>
+    </BSInputGroup>
+    <BSInput InputType="InputType.Date" @bind-Value="DateOnlyValue" />
+    <BSInputGroup IsAppend="true">
+        <span class="input-group-text">Value = @DateOnlyValue</span>
+    </BSInputGroup>
+</BSInputGroup>
+
+<BSInputGroup MarginBottom="Margins.Medium">
+    <BSInputGroup IsPrepend="true">
+        <span class="input-group-text">Time As TimeOnly</span>
+    </BSInputGroup>
+    <BSInput InputType="InputType.Time" @bind-Value="TimeOnlyValue" />
+    <BSInputGroup IsAppend="true">
+        <span class="input-group-text">Value = @TimeOnlyValue</span>
+    </BSInputGroup>
+</BSInputGroup>
+
+@code {
     private string? TextValue { get; set; }
     private DateTime DateValue { get; set; }
     private DateTimeOffset DateOffsetValue { get; set; }

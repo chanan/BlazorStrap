@@ -1,0 +1,30 @@
+﻿@inherits BlazorStrap.Shared.Components.Common.BSToastBase
+@namespace BlazorStrap.V4
+
+@if (Content == null)
+{
+<BlazorStrap.Shared.InternalComponents.Error Name="BSToast">
+    Both <strong>Header</strong> and <strong>Content</strong> RenderFragment are required.
+</BlazorStrap.Shared.InternalComponents.Error>
+
+return;
+}
+
+<div class="@ClassBuilder" @attributes="Attributes" @ref="MyRef">
+    @if (Header != null)
+    {
+        <div class="@HeaderClassBuilder">
+            @Header
+            <BSCloseButton Class="@($"ml-auto my-auto ButtonClassBuilder")" @onclick="ClickEvent" data-bs-dismiss="modal" aria-label="Close"/>
+        </div>
+    }
+    <div class="d-flex">
+        <div class="@ContentClassBuilder">
+            @Content
+        </div>
+        @if (Header == null)
+        {
+            <BSCloseButton Class="@($"ml-auto mr-2 {ButtonClassBuilder}")" @onclick="ClickEvent" data-bs-dismiss="modal" aria-label="Close"/>
+        }
+    </div>
+</div>

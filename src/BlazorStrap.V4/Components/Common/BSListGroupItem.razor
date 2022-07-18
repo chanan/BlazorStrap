@@ -1,0 +1,17 @@
+﻿@inherits BlazorStrap.Shared.Components.Common.BSListGroupItemBase
+@namespace BlazorStrap.V4
+
+@if (!string.IsNullOrEmpty(Url))
+{
+    <a href="@Url" class="@ClassBuilder" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</a>
+}
+else if (IsButton)
+{
+    <button type="button" class="@ClassBuilder" @onclick="ClickEvent" @onclick:preventDefault="PreventDefault">@ChildContent</button>
+}
+else
+{
+    <li class="@ClassBuilder" @attributes="Attributes">
+        @ChildContent
+    </li>
+}

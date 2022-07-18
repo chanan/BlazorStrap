@@ -1,0 +1,15 @@
+﻿@inherits BlazorStrap.Shared.Components.Common.BSPaginationItemBase
+@namespace BlazorStrap.V4
+
+<li class="@ClassBuilder" @attributes="Attributes">
+    @if (string.IsNullOrEmpty(Url))
+    {
+        <span class="page-link">
+            @ChildContent
+        </span>
+    }
+    else
+    {
+        <a href="@Url" class="page-link">@ChildContent</a>
+    }
+</li>
