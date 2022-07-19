@@ -9,7 +9,7 @@ namespace BlazorStrap.V4
         protected override string? LayoutClass => LayoutClassBuilder.Build(this);
 
         protected override string? ClassBuilder => new CssBuilder("tooltip")
-                .AddClass($"bs-tooltip-{Placement.NameToLower().LeftRightToStartEnd()}")
+                .AddClass($"bs-tooltip-{Placement.NameToLower()}")
                 .AddClass($"show", Shown)
                 .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
                 .AddClass(Class, !string.IsNullOrEmpty(Class))

@@ -1,5 +1,4 @@
-﻿# Work in Progress
-## Tooltips
+﻿## Tooltips
 
 #### Component \<BSTooltip\>
 See [shared](layout/shared) for additional parameters    

@@ -2,7 +2,7 @@
 <!--\\-->
 <div aria-live="polite" aria-atomic="true" class="position-relative bd-example-toasts" style="overflow-y: scroll ">
 <!--//-->
-    <BSToaster/>
+    <BSToaster WrapperStyle="width:300px;"/>
 <!--\\-->
 </div>
 <!--//-->

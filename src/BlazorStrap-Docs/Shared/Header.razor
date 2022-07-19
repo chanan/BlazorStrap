@@ -13,7 +13,7 @@
                     <BSNavItem ListItemClass="col-6 col-md-auto d-none d-md-block px-0" Url="">
                         <strong class="text-white">BlazorStrap</strong>
                     </BSNavItem>
-                    <BSNavItem ListItemClass="col-6 col-md-auto px-0" Url="https://getbootstrap.com/docs/5.1/getting-started/introduction/">Bootstrap Docs</BSNavItem>
+                    <BSNavItem ListItemClass="col-6 col-md-auto px-0" Url="@($"https://getbootstrap.com/docs/{_version.Substring(0,_version.Length - 2)}/getting-started/introduction/")">Bootstrap Docs</BSNavItem>
                 </BSNav>
                 <BSNav Class="flex-row flex-wrap ms-md-auto ml-md-auto">
                     <BSNavItem ListItemClass="col-6 col-md-auto px-0" Padding="Padding.Small" Url="https://github.com/chanan/BlazorStrap">

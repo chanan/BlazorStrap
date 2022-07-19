@@ -11,6 +11,7 @@ namespace BlazorStrap.Shared.Components
         /// Sets the wrapper class for the toaster.
         /// </summary>
         [Parameter] public string WrapperClass { get; set; } = "";
+        [Parameter] public string? WrapperStyle { get; set; } 
         protected override void OnInitialized()
         {
             if (BlazorStrapService == null) throw new ArgumentNullException(nameof(BlazorStrapService));

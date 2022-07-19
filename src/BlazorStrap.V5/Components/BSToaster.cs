@@ -26,6 +26,7 @@ namespace BlazorStrap.V5
                         builder.CloseElement();
                         builder.OpenElement(i, "div");
                         builder.AddAttribute(i + 1, "class", GetClass(toast.Placement));
+                        builder.AddAttribute(i + 1, "style", WrapperStyle);
                     }
 
                     //Open first wrapper
@@ -33,6 +34,7 @@ namespace BlazorStrap.V5
                     {
                         builder.OpenElement(i, "div");
                         builder.AddAttribute(i + 1, "class", GetClass(toast.Placement));
+                        builder.AddAttribute(i + 1, "style", WrapperStyle);
                     }
 
                     builder.OpenElement(i + 2, "div");

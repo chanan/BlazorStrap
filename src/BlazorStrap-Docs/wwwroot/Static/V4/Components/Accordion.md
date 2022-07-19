@@ -1,5 +1,4 @@
-﻿# Work in Progress
-## Accordion
+﻿## Accordion
 #### Component \<BSAccordion\>
 See [shared](layout/shared) for additional parameters
 

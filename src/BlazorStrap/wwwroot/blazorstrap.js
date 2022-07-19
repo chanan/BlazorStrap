@@ -574,6 +574,9 @@ window.blazorStrap = {
         let arrow;
         return new Promise(function (resolve) {
             if (tooltip === false) arrow = element.querySelector('.popover-arrow'); else arrow = element.querySelector('.tooltip-arrow');
+            if (arrow === undefined || arrow === null) {
+                arrow = element.querySelector('.arrow');
+            }
             position = position.replace("start", "");
             position = position.replace("end", "");
 

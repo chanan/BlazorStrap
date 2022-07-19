@@ -8,8 +8,9 @@ namespace BlazorStrap.V4
 {
     public class BSToaster : BSToasterBase
     {
-         protected override void BuildRenderTree(RenderTreeBuilder builder)
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+
             var lastPlacment = Toast.Default;
             var building = false;
             var i = 0;
@@ -26,6 +27,7 @@ namespace BlazorStrap.V4
                         builder.CloseElement();
                         builder.OpenElement(i, "div");
                         builder.AddAttribute(i + 1, "class", GetClass(toast.Placement));
+                        builder.AddAttribute(i + 2, "style", GetStyle(toast.Placement));
                     }
 
                     //Open first wrapper
@@ -33,9 +35,10 @@ namespace BlazorStrap.V4
                     {
                         builder.OpenElement(i, "div");
                         builder.AddAttribute(i + 1, "class", GetClass(toast.Placement));
+                        builder.AddAttribute(i + 2, "style", GetStyle(toast.Placement));
                     }
 
-                    builder.OpenElement(i + 2, "div");
+                    builder.OpenElement(i + 3, "div");
                     builder.SetKey(toast.Id);
                     builder.AddContent(i + 4, GetFragment(toast));
                     builder.CloseElement();
@@ -54,19 +57,24 @@ namespace BlazorStrap.V4
         protected override string GetClass(Toast pos)
         {
             var rootClassBuilder = new CssBuilder("blazorstrap-toaster")
-                .AddClass(WrapperClass, !string.IsNullOrEmpty(WrapperClass))
-                .Build().ToNullString();
-            return rootClassBuilder + " " + pos switch
+             .AddClass(WrapperClass, !string.IsNullOrEmpty(WrapperClass))
+             .Build().ToNullString();
+            return rootClassBuilder + " position-absolute";
+        }
+
+        protected string GetStyle(Toast pos)
+        {
+            return WrapperStyle + pos switch
             {
-                Toast.TopLeft => "position-absolute top-0 start-0",
-                Toast.TopCenter => "position-absolute top-0 start-50 translate-middle-x",
-                Toast.TopRight => "position-absolute top-0 end-0",
-                Toast.MiddleLeft => "position-absolute top-50 start-0 translate-middle-y",
-                Toast.MiddleCenter => "position-absolute top-50 start-50 translate-middle",
-                Toast.MiddleRight => "position-absolute top-50 end-0 translate-middle-y",
-                Toast.BottomLeft => "position-absolute bottom-0 start-0",
-                Toast.BottomCenter => "position-absolute bottom-0 start-50 translate-middle-x",
-                _ => "position-absolute bottom-0 end-0"
+                Toast.TopLeft => "top:0;left:0",
+                Toast.TopCenter => "top:0;left:50%;transform:translateX(-50%)",
+                Toast.TopRight => "top:0;right:0",
+                Toast.MiddleLeft => "top:50%;left:0;transform: translateY(-50%)!important;",
+                Toast.MiddleCenter => "top:50%;left:50%;transform: translate(-50%,-50%)!important;",
+                Toast.MiddleRight => "top:50%;right:0;transform: translateY(-50%)!important;",
+                Toast.BottomLeft => "bottom:0;left:0",
+                Toast.BottomCenter => "bottom:0;left:50%;transform: translateX(-50%)!important;",
+                _ => "bottom:0;right:0"
             };
         }
 

@@ -1,5 +1,7 @@
-﻿# Work in Progress
-## Popover
+﻿## Popover
+:::{.bd-callout .bd-callout-info}
+**Note:** Arrow placement is slightly off in this build
+:::
 
 #### Component \<BSPopover\>
 See [shared](layout/shared) for additional parameters    

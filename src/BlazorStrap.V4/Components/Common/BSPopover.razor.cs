@@ -17,7 +17,7 @@ namespace BlazorStrap.V4
                 .AddClass("popover", !IsDropdown)
                 .AddClass("fade", !IsDropdown)
                 .AddClass("dropdown-menu-end", Placement == Placement.BottomEnd && IsDropdown)
-                .AddClass($"bs-popover-{Placement.NameToLower().PurgeStartEnd().LeftRightToStartEnd()}", !IsDropdown)
+                .AddClass($"bs-popover-{Placement.NameToLower().PurgeStartEnd()}", !IsDropdown)
                 .AddClass("dropdown-menu", IsDropdown)
                 .AddClass($"show", Shown)
                 .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
