@@ -89,33 +89,26 @@ namespace BlazorStrap
         [SuppressMessage("Style", "IDE0045:Convert to conditional expression", Justification = "<Pending>")]
         private void RadioOnClickEvent(MouseEventArgs e)
         {
-            if (Value == null)
+            if (IsRadio)
             {
-                if (CheckedValue == null)
-                    Value = default(T);
-            }
-            else if (IsToggle && Value.Equals(CheckedValue) && !IsRadio)
-            {
-                Value = UnCheckedValue;
-            }
-            else if (Value.Equals(CheckedValue) && !IsRadio)
-            {
-                Value = UnCheckedValue;
+                Value = CheckedValue;
             }
             else
-                Value = CheckedValue;
+            {
+                if (!object.Equals(CheckedValue, Value) && !IsRadio)
+                {
+                    Value = CheckedValue;
+                }
+                else
+                {
+                    Value = UnCheckedValue;
+                }
+            }
             ValueChanged.InvokeAsync(Value);
         }
         private bool Checked()
         {
-            if (CheckedValue == null)
-            {
-                if (Value == null)
-                    return true;
-            }
-            else if (CheckedValue.Equals(Value))
-                return true;
-            return false;
+            return object.Equals(CheckedValue, Value);
         }
         protected override bool TryParseValueFromString(string? value, out T result, [NotNullWhen(false)] out string? validationErrorMessage)
         {
