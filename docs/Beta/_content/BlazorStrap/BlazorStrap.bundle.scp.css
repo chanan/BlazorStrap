@@ -1,0 +1,18 @@
+/* _content/BlazorStrap/Shared/InternalComponents/Error.razor.rz.scp.css */
+.bserror[b-pct091ldyq] {
+    padding: .25rem 1rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #d8d8d8;
+    border-left-width: .2rem;
+    border-right-width: .2rem;
+    border-radius: .25rem;
+    border-left-color: var(--bs-red);
+    border-right-color: var(--bs-red);
+}
+.bserror-header[b-pct091ldyq] {
+    font-size: 1.5em;
+}
+    .bserror-header svg[b-pct091ldyq]{
+        vertical-align: middle;
+    }
