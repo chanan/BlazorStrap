@@ -168,10 +168,23 @@ namespace BlazorStrap.Shared.Components.Common
             ResetTransitionTimer(Children[_active].Interval);
         }
 
-        private async Task DoAnimations(bool back)
+        protected abstract Task DoAnimations(bool back);
+        
+        protected async Task DoAnimationsV5(bool back)
         {
             if (!_hasRendered) return;
             if (await BlazorStrapService.Interop.AnimateCarouselAsync(_objectRef, DataId, Children[_active].MyRef, Children[_last].MyRef, back))
+            {
+                ClickLocked = false;
+                await Children[_active].Refresh();
+                await Children[_last].Refresh();
+            }
+        }
+
+        protected async Task DoAnimationsV4(bool back)
+        {
+            if (!_hasRendered) return;
+            if (await BlazorStrapService.Interop.AnimateCarouselV4Async(_objectRef, DataId, Children[_active].MyRef, Children[_last].MyRef, back))
             {
                 ClickLocked = false;
                 await Children[_active].Refresh();

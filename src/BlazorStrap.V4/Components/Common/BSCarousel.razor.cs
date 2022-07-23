@@ -15,5 +15,10 @@ namespace BlazorStrap.V4
                 .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
                 .AddClass(Class, !string.IsNullOrEmpty(Class))
                 .Build().ToNullString();
+
+        protected override async Task DoAnimations(bool back)
+        {
+            await DoAnimationsV4(back);
+        }
     }
 }

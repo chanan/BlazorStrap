@@ -242,6 +242,37 @@ window.blazorStrap = {
             }
         });
     },
+    AnimateCarouselV4: async function (objref, id, showEl, hideEl, back) {
+        await blazorStrap.CleanupCarousel(showEl, hideEl);
+
+        let callback = function () {
+            objref.invokeMethodAsync("InteropEventCallback", id, "bscarouselbase", "transitionend");
+        };
+
+        return new Promise(function (resolve) {
+            if (back) {
+                showEl.classList.add("carousel-item-prev");
+                setTimeout(async function () {
+                    showEl.classList.add("carousel-item-right");
+                    hideEl.classList.add("carousel-item-right");
+                    hideEl.addEventListener("transitionend", callback, {
+                        once: true
+                    });
+                    resolve((await blazorStrap.TransitionDidNotStart(showEl)));
+                }, 10);
+            } else {
+                showEl.classList.add("carousel-item-next");
+                setTimeout(async function () {
+                    showEl.classList.add("carousel-item-left");
+                    hideEl.classList.add("carousel-item-left");
+                    hideEl.addEventListener("transitionend", callback, {
+                        once: true
+                    });
+                    resolve((await blazorStrap.TransitionDidNotStart(showEl)));
+                }, 10);
+            }
+        });
+    },
     AnimateCollapse: async function (objRef, element, id, shown, name) {
         if (shown) {
             let cleanup = function () {

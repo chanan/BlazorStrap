@@ -8,6 +8,7 @@ namespace BlazorStrap.Shared.InternalComponents
     public partial class Indicators : ComponentBase
     {
         int _i = 0;
+        [Parameter] public string Version { get; set; } = "V5";
         private int Count { get; set; }
         private int Active { get; set; }
         [CascadingParameter] BSCarouselBase? Parent { get; set; }

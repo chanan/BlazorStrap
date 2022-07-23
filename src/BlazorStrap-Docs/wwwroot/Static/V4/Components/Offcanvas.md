@@ -1,7 +1,11 @@
-﻿# Work in Progress needs backported
-
-## Offcanvas
+﻿## Offcanvas
 #### Component \<BSOffCanvas\>
+:::{.bd-callout .bd-callout-warning}
+**Note: OffCanvas** is a backported component from Bootstrap 5 you must include. 
+\<link href="_content/BlazorStrap.V4/offcanvas.css" rel="stylesheet" \/> 
+or your custom version of it.
+:::
+
 See [shared](layout/shared) for additional parameters    
 :::
 
@@ -27,21 +31,21 @@ See [shared](layout/shared) for additional parameters
 
 ### Example
 
-{{sample=V5/Components/OffCanvas/OffCanvas1}}
+{{sample=V4/Components/OffCanvas/OffCanvas1}}
 
 ### Placement
-{{sample=V5/Components/OffCanvas/OffCanvas2}}
+{{sample=V4/Components/OffCanvas/OffCanvas2}}
 
-{{sample=V5/Components/OffCanvas/OffCanvas3}}
+{{sample=V4/Components/OffCanvas/OffCanvas3}}
 
-{{sample=V5/Components/OffCanvas/OffCanvas4}}
+{{sample=V4/Components/OffCanvas/OffCanvas4}}
 
 ### Backdrop
-{{sample=V5/Components/OffCanvas/OffCanvas5}}
+{{sample=V4/Components/OffCanvas/OffCanvas5}}
 
 ### Offcanvas requiring more complex content
 
-{{sample=V5/Components/OffCanvas/OffCanvas6}}
+{{sample=V4/Components/OffCanvas/OffCanvas6}}
 
 ### Methods / Events
 TValue = BSOffCanvas

@@ -3,5 +3,5 @@
 
 <div class="@ClassBuilder" @attributes="Attributes">
     @ChildContent
-    <button type="button" class="ms-auto btn-close @ButtonClass" data-bs-dismiss="toast" aria-label="Close" @onclick="ClickEvent"></button>
+    <BSCloseButton Class="@($"ml-auto {@ButtonClass}")" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)" data-bs-dismiss="modal" aria-label="Close"/>
 </div>

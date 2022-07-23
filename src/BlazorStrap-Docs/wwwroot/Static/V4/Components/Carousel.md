@@ -1,5 +1,4 @@
-﻿# Work in Progress
-## Carousel
+﻿## Carousel
 #### Component \<BSCarousel\>
 See [shared](layout/shared) for additional parameters    
 :::
