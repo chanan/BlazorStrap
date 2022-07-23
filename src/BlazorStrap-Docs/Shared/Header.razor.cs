@@ -50,7 +50,7 @@ namespace BlazorStrap_Docs.Shared
         }
         private void VersionChanged(string version)
         {
-            _navigationManager.NavigateTo($"/{version}");
+            _navigationManager.NavigateTo($"{_navigationManager.BaseUri}{version}");
         }
         private async Task SelectedChanged(string value)
         {
