@@ -1,4 +1,4 @@
-﻿namespace BlazorStrap
+﻿namespace BlazorStrap.Extensions
 {
     public class TimerPlus : System.Timers.Timer
     {

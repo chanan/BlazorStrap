@@ -1,0 +1,9 @@
+﻿@inherits BlazorStrap.Shared.Components.Common.BSCloseButtonBase
+@namespace BlazorStrap.V4
+
+<button type="button" class="@ClassBuilder" aria-label="Close" @onclick="ClickEventAsync" @attributes="Attributes" disabled="@IsDisabled">
+    <span aria-hidden="true">
+        &times;
+        @ChildContent
+    </span>
+</button>

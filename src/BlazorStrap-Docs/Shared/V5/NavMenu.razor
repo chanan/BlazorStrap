@@ -1,0 +1,115 @@
+﻿@inject NavigationManager NavManager
+<BSCollapse IsSidebar="true" DataId="sidebar" Class="d-md-inline" OnShow="@(() => SidebarChange(true))" OnHide="@(() => SidebarChange(false))">
+<nav class="bd-links" id="bd-docs-nav" aria-label="Docs navigation">
+    <ul class="list-unstyled mb-0 py-3 pt-md-3">
+        <BSCollapse DefaultShown="true">
+            <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Getting Started</BSToggle></Toggler>
+            <Content>
+                <ul class="list-unstyled fw-normal pb-1 small">
+                    <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5">Install</BSLink></li>
+                    <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/contribute">Contribute</BSLink></li>
+                    <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/shared">Shared Parameters</BSLink></li>
+                    <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/themes">Theme Switcher</BSLink></li>
+                </ul>
+            </Content>
+        </BSCollapse>
+        <li class="mb-1">
+            <BSCollapse DefaultShown="@(NavManager.Uri.Contains("/layout/"))">
+                <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Layout</BSToggle></Toggler>
+                <Content>
+                    <ul class="list-unstyled fw-normal pb-1 small">
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/layout/overview">Overview</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/layout/containers">Containers</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/layout/columns">Columns</BSLink></li>
+                    </ul>
+                </Content>
+            </BSCollapse>
+        </li>
+          <li class="mb-1">
+                    <BSCollapse DefaultShown="@(NavManager.Uri.Contains("/layout/"))">
+                        <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Content</BSToggle></Toggler>
+                        <Content>
+                            <ul class="list-unstyled fw-normal pb-1 small">
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/content/tables">Tables</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/content/images">Images</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/content/figures">Figures</BSLink></li>
+                            </ul>
+                        </Content>
+                    </BSCollapse>
+                </li>
+        <li class="mb-1">
+                    <BSCollapse DefaultShown="@(NavManager.Uri.Contains("/forms/"))">
+                        <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Forms</BSToggle></Toggler>
+                        <Content>
+                            <ul class="list-unstyled fw-normal pb-1 small">
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/forms/shared">Shared</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/forms/formcontrols">Form control</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/forms/select">Select</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/forms/checkbox">Checks & Radios</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/forms/range">Range</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/forms/inputgroup">Input Group</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/forms/inputfile">Input File</BSLink></li>
+                                <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/forms/validation">Validation</BSLink></li>
+                            </ul>
+                        </Content>
+                    </BSCollapse>
+                </li>
+        <li class="mb-1">
+            <BSCollapse DefaultShown="@(NavManager.Uri.Contains("/components/"))">
+                <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Components</BSToggle></Toggler>
+                <Content>
+                    <ul class="list-unstyled fw-normal pb-1 small">
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/accordion">Accordion</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/alerts">Alerts</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/badge">Badge</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/breadcrumb">Breadcrumb</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/link">Action Links</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/buttons">Buttons</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/buttongroup">Button group</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/card">Card</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/carousel">Carousel</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/closebutton">Close Button</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/collapse">Collapse</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/dropdowns">Dropdowns</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/listgroup">List Group</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/modal">Modal</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/nav">Nav & Tabs</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/navbar">Navbar</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/offcanvas">Offcanvas</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/pagination">Pagination</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/popovers">Popovers</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/progress">Progress</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/spinner">Spinners</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/toast">Toasts</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/components/tooltips">Tooltips</BSLink></li>
+
+                    </ul>
+                </Content>
+            </BSCollapse>
+        </li>
+        <li class="mb-1">
+            <BSCollapse DefaultShown="@(NavManager.Uri.Contains("/extensions/"))">
+                <Toggler><BSToggle IsButton="true" Class="d-inline-flex align-items-center rounded">Extensions</BSToggle></Toggler>
+                <Content>
+                    <ul class="list-unstyled fw-normal pb-1 small">
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/extensions/fluentValidation">FluentValidation</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/extensions/BSDataTable">BSDataTable</BSLink></li>
+                        <li><BSLink class="d-inline-flex align-items-center rounded" Url="V5/extensions/treeView">TreeView</BSLink></li>
+                    </ul>
+                </Content>
+            </BSCollapse>
+        </li>
+    </ul>
+</nav>
+</BSCollapse>
+
+@code
+{
+    [CascadingParameter] public MainLayout? Parent { get; set; }
+
+    private Task SidebarChange(bool state)
+    {
+        if (Parent == null) return Task.CompletedTask;
+        return Parent.InvokeSidebarAsync(state);
+    }
+}

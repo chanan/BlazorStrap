@@ -215,7 +215,7 @@ window.blazorStrap = {
         await blazorStrap.CleanupCarousel(showEl, hideEl);
 
         let callback = function () {
-            objref.invokeMethodAsync("InteropEventCallback", id, "bscarousel", "transitionend");
+            objref.invokeMethodAsync("InteropEventCallback", id, "bscarouselbase", "transitionend");
         };
 
         return new Promise(function (resolve) {
@@ -234,6 +234,37 @@ window.blazorStrap = {
                 setTimeout(async function () {
                     showEl.classList.add("carousel-item-start");
                     hideEl.classList.add("carousel-item-start");
+                    hideEl.addEventListener("transitionend", callback, {
+                        once: true
+                    });
+                    resolve((await blazorStrap.TransitionDidNotStart(showEl)));
+                }, 10);
+            }
+        });
+    },
+    AnimateCarouselV4: async function (objref, id, showEl, hideEl, back) {
+        await blazorStrap.CleanupCarousel(showEl, hideEl);
+
+        let callback = function () {
+            objref.invokeMethodAsync("InteropEventCallback", id, "bscarouselbase", "transitionend");
+        };
+
+        return new Promise(function (resolve) {
+            if (back) {
+                showEl.classList.add("carousel-item-prev");
+                setTimeout(async function () {
+                    showEl.classList.add("carousel-item-right");
+                    hideEl.classList.add("carousel-item-right");
+                    hideEl.addEventListener("transitionend", callback, {
+                        once: true
+                    });
+                    resolve((await blazorStrap.TransitionDidNotStart(showEl)));
+                }, 10);
+            } else {
+                showEl.classList.add("carousel-item-next");
+                setTimeout(async function () {
+                    showEl.classList.add("carousel-item-left");
+                    hideEl.classList.add("carousel-item-left");
                     hideEl.addEventListener("transitionend", callback, {
                         once: true
                     });
@@ -324,17 +355,36 @@ window.blazorStrap = {
             return {
                 key: event.key,
                 clientWidth: document.documentElement.clientWidth,
+                parent: blazorStrap.GetParent(event.target.parentElement),
                 target: {
+                    nodeName: event.target.nodeName,
                     classList: event.target.classList,
                     targetId: event.target.getAttribute("data-blazorstrap-target"),
                     childrenId: blazorStrap.GetChildrenIds(event.target),
                     dataId: event.target.getAttribute("data-blazorstrap")
                 }
             };
+            
         } catch {
             return {
                 key: event.key,
                 clientWidth: document.documentElement.clientWidth,
+            }
+        }
+    },
+    GetParent: function (parent, i =0) {
+         //Limited to 4 deep
+        i = i + 1;
+        if (i > 4 || parent === undefined) return;
+       
+        return {
+            parent: blazorStrap.GetParent(parent.parentElement, i),
+            target: {
+                nodeName: parent.nodeName,
+                classList: parent.classList,
+                targetId: parent.getAttribute("data-blazorstrap-target"),
+                childrenId: blazorStrap.GetChildrenIds(parent),
+                dataId: parent.getAttribute("data-blazorstrap")
             }
         }
     },
@@ -555,6 +605,9 @@ window.blazorStrap = {
         let arrow;
         return new Promise(function (resolve) {
             if (tooltip === false) arrow = element.querySelector('.popover-arrow'); else arrow = element.querySelector('.tooltip-arrow');
+            if (arrow === undefined || arrow === null) {
+                arrow = element.querySelector('.arrow');
+            }
             position = position.replace("start", "");
             position = position.replace("end", "");
 

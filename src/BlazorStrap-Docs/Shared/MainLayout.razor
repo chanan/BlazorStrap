@@ -3,28 +3,17 @@
     <Header />
 </CascadingValue>
 
-<div class="container-xxl bd-layout">
+<BSContainer Container="Container.ExrtaLarge" Class="bd-layout">
     <CascadingValue Value="this">
         <aside class="bd-sidebar">
-            <NavMenu />
+            <DynamicMenu Version="@_version"/>
         </aside>
     </CascadingValue>
     <main>
-        <BSBreadcrumb Class="float-end mt-3 position-relative" style="margin-bottom: -3rem;z-index:500" BasePath="/V5" Labels="_labels" />
-        @Body
-    </main>
-</div>
-
-@code {
-    public Func<bool,Task>? OnSideBarShown { get; set; }
-    private static Dictionary<string, string> _labels = new()
+        <BSBreadcrumb Class="float-end mt-3 position-relative" style="margin-bottom: -3rem;z-index:500;background:none; float:right" BasePath="/" Labels="_labels" />
+        @if (render)
         {
-            { "/V5", "BlazorStrap V5" },
-        };
-
-    public Task InvokeSidebarAsync(bool state)
-    {
-        if (OnSideBarShown == null) return Task.CompletedTask;
-        return OnSideBarShown.Invoke(state);
-    }
-}
+            @Body
+        }
+    </main>
+</BSContainer>

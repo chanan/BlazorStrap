@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using BlazorStrap.JsonConverters;
 
-namespace BlazorStrap;
+namespace BlazorStrap.Extensions;
 
 [JsonConverter(typeof(CallerNameJsonConverter))]
 public class CallerName
@@ -32,6 +32,11 @@ public class CallerName
         if (obj == null) throw new ArgumentNullException(nameof(obj));
         return typeof(T).Name.ToLower() == _name;
     }
+    public bool EqualsType<T>() 
+    {
+        return typeof(T).Name.ToLower() == _name;
+    }
+
     public bool Equals(Type obj)
     {
         return obj.Name.ToLower() == _name;

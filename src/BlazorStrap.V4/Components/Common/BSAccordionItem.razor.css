@@ -1,0 +1,11 @@
+﻿.accordion-flush .card:first-child {
+    border-top: 0;
+}
+.accordion-flush .card:last-child {
+    border-bottom: 0;
+}
+.accordion-flush .card {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+}

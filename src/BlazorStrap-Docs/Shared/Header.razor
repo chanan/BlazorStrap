@@ -1,7 +1,6 @@
-﻿@inject IBlazorStrap _blazorStrap
-@implements IDisposable
-<BSNavbar IsHeader="true" Expand="Size.Medium" IsDark="true" Class="bd-navbar">
-    <BSNav IsNav="true" Class="container-xxl flex-wrap flex-md-nowrap" aria-label="Main navigation" NoNavbarNav="true">
+﻿<BSNavbar IsHeader="true" Expand="Size.Medium" IsDark="true" Class="bd-navbar">
+    <BSContainer Container="Container.ExrtaLarge">
+    <BSNav IsNav="true" Class="w-100 d-flex flex-wrap flex-md-nowrap" aria-label="Main navigation" NoNavbarNav="true">
         <BSNavbarBrand Padding="Padding.None" MarginEnd="Margins.Small">
             <img class="d-block my-1" src="logo-inverted.svg" height="32" alt="BlazorStrap" />
         </BSNavbarBrand>
@@ -11,25 +10,25 @@
             </Toggler>
             <Content>
                 <BSNav Class="flex-row flex-wrap bd-navbar-nav pt-2 py-md-0">
-                    <BSNavItem ListItemClass="col-6 col-md-auto d-none d-md-block" Url="">
+                    <BSNavItem ListItemClass="col-6 col-md-auto d-none d-md-block px-0" Url="">
                         <strong class="text-white">BlazorStrap</strong>
                     </BSNavItem>
-                    <BSNavItem ListItemClass="col-6 col-md-auto" Url="https://getbootstrap.com/docs/5.1/getting-started/introduction/">Bootstrap Docs</BSNavItem>
+                    <BSNavItem ListItemClass="col-6 col-md-auto px-0" Url="@($"https://getbootstrap.com/docs/{_version.Substring(0,_version.Length - 2)}/getting-started/introduction/")">Bootstrap Docs</BSNavItem>
                 </BSNav>
-                <BSNav Class="flex-row flex-wrap ms-md-auto">
-                    <BSNavItem ListItemClass="col-6 col-md-auto" Padding="Padding.Small" Url="https://github.com/chanan/BlazorStrap">
+                <BSNav Class="flex-row flex-wrap ms-md-auto ml-md-auto">
+                    <BSNavItem ListItemClass="col-6 col-md-auto px-0" Padding="Padding.Small" Url="https://github.com/chanan/BlazorStrap">
                         <svg xmlns="http://www.w3.org/2000/svg" height="36" width="36" viewBox="0 0 512 499.36" role="img" focusable="false" class="navbar-nav-svg d-inline-block align-text-top">
                             <path fill="currentColor" fill-rule="evenodd" d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z"></path>
                         </svg>
                         <small class="d-md-none ms-2">GitHub</small>
                     </BSNavItem>
-                    <BSNavItem ListItemClass="col-6 col-md-auto" Padding="Padding.Small" Url="https://gitter.im/BlazorStrap/community">
+                    <BSNavItem ListItemClass="col-6 col-md-auto px-0" Padding="Padding.Small" Url="https://gitter.im/BlazorStrap/community">
                         <svg fill="currentColor" fill-rule="evenodd" viewBox="0 0 51 75" height="36" width="36" xmlns="http://www.w3.org/2000/svg" class="navbar-nav-svg d-inline-block align-text-top">
                             <path d="m0 0h6v48h-6zm15 13h6v62h-6zm15 0h6v62h-6zm15 0h6v34h-6z" />
                         </svg>
                         <small class="d-md-none ms-2">Gitter</small>
                     </BSNavItem>
-                    <BSNavItem ListItemClass="col-6 col-md-auto" Padding="Padding.Small" Url="https://discord.gg/V7Y8s7WprR">
+                    <BSNavItem ListItemClass="col-6 col-md-auto pl-0" Padding="Padding.Small" Url="https://discord.gg/V7Y8s7WprR">
                         <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="navbar-nav-svg d-inline-block align-text-top"> <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z" fill="white"></path> </svg>
                         <small class="d-md-none ms-2">Discord</small>
                     </BSNavItem>
@@ -38,15 +37,28 @@
             </Content>
         </BSCollapse>
     </BSNav>
+    </BSContainer>
 </BSNavbar>
 
 <nav class="bd-subnavbar py-2" aria-label="Secondary navigation">
-    <BSContainer Container="Container.ExtraExtraLarge" Class="d-flex align-items-md-center">
-        <div class="me-auto"></div>
+    <BSContainer Container="Container.ExrtaLarge" Class="d-flex align-items-md-center">
+        <div class="me-auto ml-auto"></div>
+        <BSDropdown Placement="Placement.Right" ShownAttribute="data-bs-popper">
+            <Toggler>
+                <BSToggle IsButton="true" Class="btn-bd-light dropdown-toggle">@_version</BSToggle>
+            </Toggler>
+            <Content>
+                @foreach(var version in Settings.Versions)
+                {
+                    <BSDropdownItem @onclick="@(() =>VersionChanged(version.Key))">@version.Value</BSDropdownItem>    
+                }
+                
+            </Content>
+        </BSDropdown>
         <BSDropdown Class="dropdown-menu-end" ShownAttribute="data-bs-popper">
             <Toggler>
                 <BSToggle IsButton="true" Class="btn-bd-light dropdown-toggle">
-                    Themes
+                    @Selected
                 </BSToggle>
             </Toggler>
             <Content>

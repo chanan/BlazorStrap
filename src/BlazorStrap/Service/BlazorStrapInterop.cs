@@ -1,4 +1,5 @@
-﻿using BlazorStrap.Utilities;
+﻿using BlazorStrap.Extensions;
+using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -129,6 +130,28 @@ namespace BlazorStrap.Service
                 throw new ArgumentNullException(nameof(hideElementReference));
 
             return _jsRuntime.InvokeAsync<bool>("blazorStrap.AnimateCarousel", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, showElementReference, hideElementReference, back);
+        }
+        /// <summary>
+        /// Triggers V4 Carousel to animate
+        /// </summary>
+        /// <param name="dotNetObjectReference"></param>
+        /// <param name="id"></param>
+        /// <param name="showElementReference"></param>
+        /// <param name="hideElementReference"></param>
+        /// <param name="back"></param>
+        /// <param name="cancellationToken"></param>
+        /// /// <returns>bool</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>")]
+        public ValueTask<bool> AnimateCarouselV4Async<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, ElementReference? showElementReference, ElementReference? hideElementReference, bool back, CancellationToken? cancellationToken = null) where T : class
+        {
+            if (dotNetObjectReference == null)
+                throw new ArgumentNullException(nameof(dotNetObjectReference));
+            if (showElementReference == null)
+                throw new ArgumentNullException(nameof(showElementReference));
+            if (hideElementReference == null)
+                throw new ArgumentNullException(nameof(hideElementReference));
+
+            return _jsRuntime.InvokeAsync<bool>("blazorStrap.AnimateCarouselV4", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, showElementReference, hideElementReference, back);
         }
 
         /// <summary>

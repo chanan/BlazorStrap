@@ -1,0 +1,55 @@
+﻿@page "/V4/{Area?}/{Page?}"
+@implements IDisposable;
+@inject NavigationManager Navman
+@inject Core Core
+
+<BSContainer Class="bd-main py-3" Container="Container.Fluid">
+    <div class="bd-content">
+        <MarkdownToComponent Source="@Source" NamespaceRoot="BlazorStrap_Docs.Samples" WebRoot="docs/Samples/" DefaultClass="bd-example">
+            404
+        </MarkdownToComponent>
+    </div>
+</BSContainer>
+
+@code {
+    public string Version { get; set; } = "V4";
+
+    [ParameterAttribute]
+    public string? Area { get; set; }
+
+    [ParameterAttribute]
+    public string? Page { get; set; }
+
+    private string Source { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Core.Version = Version;
+        if (Area is null) Source = $"docs/Static/{FirstCharToUpper(Version)}/index.md";
+        else if (Page is null) Source = $"docs/Static/{FirstCharToUpper(Version)}/{FirstCharToUpper(Area)}.md";
+        else Source = $"docs/Static/{FirstCharToUpper(Version)}/{FirstCharToUpper(Area)}/{FirstCharToUpper(Page)}.md";
+        Navman.LocationChanged += NavmanOnLocationChanged;
+    }
+
+    private void NavmanOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        if (Area is null) Source = $"docs/Static/{FirstCharToUpper(Version)}/index.md";
+        else if (Page is null) Source = $"docs/Static/{FirstCharToUpper(Version)}/{FirstCharToUpper(Area)}.md";
+        else Source = $"docs/Static/{FirstCharToUpper(Version)}/{FirstCharToUpper(Area)}/{FirstCharToUpper(Page)}.md";
+        StateHasChanged();
+    }
+
+    private static string FirstCharToUpper(string input) =>
+        input switch
+        {
+            null => throw new ArgumentNullException(nameof(input)),
+            "" => throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input)),
+            _ => string.Concat(input[0].ToString().ToUpper(), input.AsSpan(1))
+            };
+
+    public void Dispose()
+    {
+        Navman.LocationChanged -= NavmanOnLocationChanged;
+    }
+
+}

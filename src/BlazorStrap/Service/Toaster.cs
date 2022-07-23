@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorStrap.Extensions;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap
 {
     public class Toaster : ComponentBase
     {
         public Action? OnChange;
-        internal List<Toasts> Children { get; } = new List<Toasts>();
+        public List<Toasts> Children { get; } = new List<Toasts>();
 
         public void Add(string? header, string? content)
         {
@@ -93,7 +94,7 @@ namespace BlazorStrap
         public object? Data { get; set; }
         public Type? Template { get; set; }
     }
-    internal class Toasts
+    public class Toasts
     {
         public Guid? Id { get; set; }
         public bool Rendered { get; set; }

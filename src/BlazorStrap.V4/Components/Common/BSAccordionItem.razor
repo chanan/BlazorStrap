@@ -1,0 +1,23 @@
+﻿@inherits BlazorStrap.Shared.Components.Common.BSAccordionItemBase
+@namespace BlazorStrap.V4
+
+@if (Header == null || Content == null)
+{
+    <BlazorStrap.Shared.InternalComponents.Error Name="BSAccordionItem">
+        Both <strong>Header</strong> and <strong>Content</strong> RenderFragment are required.
+    </BlazorStrap.Shared.InternalComponents.Error>
+
+    return;
+}
+<CascadingValue Value="this">
+<div class="card">
+    <h2 class="card-header">
+        <button type="button" aria-expanded="@Shown.ToString().ToLower()" data-bs-toggle="collapse" class="btn btn-link btn-block text-left @(Shown ? "" : "collapsed")" @onclick="EventUtil.AsNonRenderingEventHandler(ToggleAsync)" @ref="ButtonRef">@Header</button>
+    </h2>
+    <div class="@ClassBuilder" @ref="MyRef" data-blazorstrap="@DataId">
+        <div class="card-body">
+            @Content
+        </div>
+    </div>
+</div>
+</CascadingValue>

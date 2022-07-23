@@ -1,0 +1,3 @@
+﻿.breadcrumb-item + .breadcrumb-item::before {
+    content: var(--bs-breadcrumb-divider, "/") !important;
+}

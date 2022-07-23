@@ -1,7 +1,5 @@
 using BlazorStrap;
-using BlazorStrap_Docs;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using BlazorStrap_Docs.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +8,7 @@ builder.Services.AddBlazorStrap();
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddScoped<Core>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

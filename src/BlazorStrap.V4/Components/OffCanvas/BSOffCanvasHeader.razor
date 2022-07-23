@@ -1,0 +1,7 @@
+﻿@namespace BlazorStrap.V4
+@inherits BlazorStrap.Shared.Components.OffCanvas.BSOffCanvasHeaderBase
+
+<div class="@ClassBuilder" @attributes="Attributes">
+    @ChildContent
+    <BSCloseButton Class="@($"ml-auto {@ButtonClass}")" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)" data-bs-dismiss="modal" aria-label="Close"/>
+</div>

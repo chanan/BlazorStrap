@@ -1,13 +1,21 @@
-﻿namespace BlazorStrap.Service
+﻿using BlazorStrap.Extensions;
+using BlazorStrap.Shared.Components.Modal;
+
+namespace BlazorStrap.Service
 {
     public class BlazorStrapCore : IBlazorStrap
     {
         internal readonly BlazorStrapInterop Interop;
-
+        public bool ShowDebugMessages { get; private set; }
         internal Func<string, CallerName, EventType, Task>? OnEventForward;
+        
         //private readonly CurrentTheme _currentTheme;
         public Toaster Toaster { get;} = new Toaster();
-        public Theme CurrentTheme { get; internal set; } = Theme.Bootstrap;
+        private string _currentTheme  = "bootstrap";
+        public T CurrentTheme<T>() where T : Enum
+        {
+            return (T) Enum.Parse(typeof(T), _currentTheme);
+        }
 
         public BlazorStrapCore(BlazorStrapInterop? interop, string basepath)
         {
@@ -15,19 +23,25 @@
                 throw new ArgumentNullException(nameof(interop));
             Interop = interop;
         }
-        public BlazorStrapCore(BlazorStrapInterop interop)
+        public BlazorStrapCore(BlazorStrapInterop interop, Action<BlazorStrapOptions>? buildOptions)
         {
+            var options = new BlazorStrapOptions();
+            if (buildOptions != null)
+            {
+                buildOptions.Invoke(options);
+            }
             Interop = interop;
+            ShowDebugMessages = options.ShowDebugMessages;
         }
         public Task SetBootstrapCss()
         {
-            CurrentTheme = Theme.Bootstrap;
+            _currentTheme = "bootstrap";
             return SetBootstrapCss("bootstrap", "latest");
         }
 
         public Task SetBootstrapCss(string version)
         {
-            CurrentTheme = Theme.Bootstrap;
+            _currentTheme = "bootstrap";
             return SetBootstrapCss("bootstrap", version);
         }
 
@@ -35,20 +49,19 @@
         {
             theme = theme.FirstCharToUpper();
             if (theme == null) return;
-            var enumTheme = (Theme)Enum.Parse(typeof(Theme), theme);
-            CurrentTheme = enumTheme;
+            _currentTheme = theme.ToLowerInvariant();
             await Interop.SetBootstrapCssAsync(theme.ToLowerInvariant(), version);
         }
 
-        public Task SetBootstrapCss(Theme theme, string version)
+        public Task SetBootstrapCss<T>(T theme, string version) where T : Enum
         {
-            CurrentTheme = theme;
+            _currentTheme = theme.NameToLower();
             return SetBootstrapCss(theme.ToString().ToLowerInvariant(), version);
         }
         
-        internal static event Action<BSModal?, bool>? ModalChange;
+        internal event Action<BSModalBase?, bool>? ModalChange;
 
-        public static void ModalChanged(BSModal obj)
+        public void ModalChanged(BSModalBase obj)
         {
             ModalChange?.Invoke(obj, false);
         }
@@ -61,5 +74,6 @@
         {
             OnEventForward?.Invoke(id, new CallerName(typeof(T).Name.ToLower()), EventType.Toggle );
         }
+        
     }
 }

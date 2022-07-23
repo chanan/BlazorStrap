@@ -1,0 +1,8 @@
+﻿@namespace BlazorStrap.V4
+@typeparam TValue
+@inherits BlazorStrap.Shared.Components.Forms.BSInputCheckboxBase<TValue>
+   
+<div class="custom-control custom-switch">
+    <input type="checkbox" class="@ClassBuilder" id="@Id" @onblur="OnBlurEvent" @onfocus="OnFocusEvent" checked="@Checked()" @onchange="RadioOnClickEvent" disabled="@IsDisabled">
+    <label class="custom-control-label" for="@Id" >@ChildContent</label>
+</div>

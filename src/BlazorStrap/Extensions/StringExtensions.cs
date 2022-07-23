@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
 using System.Text;
 
-namespace BlazorStrap
+namespace BlazorStrap.Extensions
 {
-    internal static class StringExtensions
+    public static class StringExtensions
     {
         public static string ToDashSeperated(this string text)
         {

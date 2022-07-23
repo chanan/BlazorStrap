@@ -1,0 +1,6 @@
+﻿@inherits BlazorStrap.Shared.Components.Common.BSProgressBarBase
+@namespace BlazorStrap.V5
+
+<div class="@ClassBuilder" style="@(Style+Width)" role="progressbar" aria-valuenow="@Value" aria-valuemin="@Min" aria-valuemax="@Max" @attributes="@Attributes">
+    @ChildContent
+</div>

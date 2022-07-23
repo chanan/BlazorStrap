@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using BlazorStrap.Extensions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace BlazorStrap.JsonConverters

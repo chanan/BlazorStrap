@@ -1,0 +1,17 @@
+﻿@namespace BlazorStrap.V4
+@inherits BlazorStrap.Shared.Components.Forms.BSInputGroupBase
+
+@if (IsAppend || IsPrepend)
+{
+    <div class="@ClassBuilder" @attributes="Attributes">
+        @ChildContent
+    </div>
+}
+else
+{
+    <CascadingValue Value="this">
+        <div class="@ClassBuilder" @attributes="Attributes">
+            @ChildContent
+        </div>
+    </CascadingValue>
+}

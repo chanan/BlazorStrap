@@ -15,13 +15,16 @@
 		<RootNamespace>BlazorStrap</RootNamespace>
 		<PackageVersion>5.0.106</PackageVersion> <!--Next Use 5.0.106-Preview4 -->
 	</PropertyGroup>
+	
 	<ItemGroup>
 	  <Content Remove="bundleconfig.json" />
 	</ItemGroup>
 	<ItemGroup>
 	  <_ContentIncludedByDefault Remove="bundleconfig.json" />
 	</ItemGroup>
+	
 	<ItemGroup>
+	  <None Include="..\..\.editorconfig" Link=".editorconfig" />
 	  <None Include="bundleconfig.json" />
 	</ItemGroup>
 
