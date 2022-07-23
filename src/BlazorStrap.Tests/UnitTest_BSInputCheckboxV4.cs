@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using BlazorStrap.V5;
+using BlazorStrap.V4;
 using Bunit;
 using Microsoft.AspNetCore.Components.Forms;
 using Xunit;
@@ -8,11 +8,11 @@ using Xunit.Abstractions;
 
 namespace BlazorStrap.Tests;
 
-public class BSInputCheckboxTests
+public class BSInputCheckboxTestsV4
 {
     private readonly ITestOutputHelper _testOutputHelper;
 
-    public BSInputCheckboxTests(ITestOutputHelper testOutputHelper)
+    public BSInputCheckboxTestsV4(ITestOutputHelper testOutputHelper)
     {
         _testOutputHelper = testOutputHelper;
     }

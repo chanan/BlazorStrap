@@ -21,7 +21,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
+      <ProjectReference Include="..\BlazorStrap.V4\BlazorStrap.V4.csproj" />
+      <ProjectReference Include="..\BlazorStrap.V5\BlazorStrap.V5.csproj" />
     </ItemGroup>
+
 
 </Project>
