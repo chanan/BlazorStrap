@@ -25,6 +25,7 @@
 	<ProjectReference Include="..\BlazorStrap.V4\BlazorStrap.V4.csproj" />
     <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
     <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj" />
+    <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.TreeView\BlazorStrap.Extensions.TreeView.csproj" />
   </ItemGroup>
 
   <ItemGroup>

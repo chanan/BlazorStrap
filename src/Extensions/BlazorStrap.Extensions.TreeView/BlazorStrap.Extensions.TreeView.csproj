@@ -1,30 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
-    <RazorLangVersion>3.0</RazorLangVersion>
+	<LangVersion>10.0</LangVersion>
+	  <Nullable>enable</Nullable>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <PackageId>BlazorStrap.Extensions.TreeView</PackageId>
-    <Version>1.5.0</Version>
+    <Version>5.1.100-Beta1</Version>
     <Authors>Chanan Braunstein; John Bomhold</Authors>
-    <Title>Blazor BootStrap Extensions TreeView</Title>
+    <Title>BlazorStrap Extension for TreeView</Title>
     <Description>A treeview component library for BlazorStrap</Description>
     <PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
-    <PackageTags>blazor;bootstrap;bootstrap4</PackageTags>
+    <PackageTags>blazor;bootstrap;bootstrap4;bootstrap5</PackageTags>
     <RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
     <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0-rc.2.21480.10" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0-rc.2.21480.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
 	</ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.*" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.4" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.*" />
   </ItemGroup>
 
 </Project>

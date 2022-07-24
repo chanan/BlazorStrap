@@ -1,17 +1,13 @@
 ﻿<CascadingValue Value="this">
     <li class="nav-item">
-        @if (!Root.DoubleClickToOpen)
-        {
-            <a class="nav-link @((Active) ? "active" : "") d-flex @((IsOpen && Child != null) ? "show" : "") @Class" @onclick="OnClickEvent" @onclick:preventDefault @onclick:stopPropagation @ondblclick="OnDblClickEvent" @ondblclick:preventDefault @ondblclick:stopPropagation @attributes="AdditionalAttributes">
-                <div class="mr-auto"><span class="@(Child != null ? "tree-toggle" : "tree-spacer")  @((IsOpen && Child != null) ? "open" : "")"></span> @Label</div><div>@Action</div>
+        <div class="nav-link @((IsActive) ? "active" : "") d-flex @Class">
+            <a @onclick="OnClickEvent" @onclick:preventDefault @onclick:stopPropagation @ondblclick="OnDblClickEvent" @ondblclick:preventDefault @ondblclick:stopPropagation @attributes="AdditionalAttributes">
+                <span class="@(Child != null ? "tree-toggle" : "tree-spacer")  @((IsOpen && Child != null) ? "open" : "")"></span>
+                @GetLabel()
             </a>
-        }
-        else
-        {
-            <a class="nav-link @((Active) ? "active" : "") d-flex @((IsOpen && Child != null) ? "show" : "") @Class" @ondblclick="OnDblClickEvent" @ondblclick:preventDefault @ondblclick:stopPropagation @onclick="OnClickEvent" @onclick:preventDefault @onclick:stopPropagation @attributes="AdditionalAttributes">
-                <div class="mr-auto"><span class="@(Child != null ? "tree-toggle" : "tree-spacer")  @((IsOpen && Child != null) ? "open" : "")"></span> @Label</div><div>@Action</div>
-            </a>
-        }
+            <div class="bs-tree-actions">@Action</div>
+        </div>
+
         @ChildContent
     </li>
 </CascadingValue>

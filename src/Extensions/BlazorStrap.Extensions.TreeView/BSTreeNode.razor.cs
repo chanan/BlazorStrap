@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlazorStrap.Extensions.TreeView
 {
@@ -25,7 +21,7 @@ namespace BlazorStrap.Extensions.TreeView
                 Parent.Child = this;
                 Parent.ChildSet();
             }
-            if(Root.Expand)
+            if(Root.IsExpanded)
             {
                 IsOpen = true;
             }

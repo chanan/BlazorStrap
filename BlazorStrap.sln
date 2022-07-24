@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Extensions.TreeView", "src\Extensions\BlazorStrap.Extensions.TreeView\BlazorStrap.Extensions.TreeView.csproj", "{944A2CCC-88AB-4CB9-9168-3D039A0B0325}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -186,6 +188,24 @@ Global
 		{A7BA9368-FB51-4C76-AD74-9D886CE5D6C8}.Release|x64.Build.0 = Release|Any CPU
 		{A7BA9368-FB51-4C76-AD74-9D886CE5D6C8}.Release|x86.ActiveCfg = Release|Any CPU
 		{A7BA9368-FB51-4C76-AD74-9D886CE5D6C8}.Release|x86.Build.0 = Release|Any CPU
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.Debug|x64.ActiveCfg = Debug|x64
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.Debug|x64.Build.0 = Debug|x64
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.Debug|x86.ActiveCfg = Debug|x86
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.Debug|x86.Build.0 = Debug|x86
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.NoVariablesDefault|Any CPU.ActiveCfg = Debug|Any CPU
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.NoVariablesDefault|Any CPU.Build.0 = Debug|Any CPU
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.NoVariablesDefault|x64.ActiveCfg = Debug|x64
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.NoVariablesDefault|x64.Build.0 = Debug|x64
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.NoVariablesDefault|x86.ActiveCfg = Debug|x86
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.NoVariablesDefault|x86.Build.0 = Debug|x86
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.Release|Any CPU.Build.0 = Release|Any CPU
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.Release|x64.ActiveCfg = Release|x64
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.Release|x64.Build.0 = Release|x64
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.Release|x86.ActiveCfg = Release|x86
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -196,6 +216,7 @@ Global
 		{87EC6C53-E1FC-4E3F-A089-F4D20FF19E70} = {4CCADAD5-2EEF-4288-B798-E35E3A7E0B6E}
 		{63E96825-F8C9-4505-B2BB-89A4F8A54A36} = {9B2E0DB5-84FB-40D3-BB84-1A268B27ED10}
 		{A45258C8-4672-4493-9626-5F4342AC3641} = {A0B51BD8-0223-4A74-AA59-E82128852667}
+		{944A2CCC-88AB-4CB9-9168-3D039A0B0325} = {A0B51BD8-0223-4A74-AA59-E82128852667}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45FC41D9-3D70-40A4-A9D0-938945CCBF73}
