@@ -26,7 +26,7 @@ namespace BlazorStrap.Shared.Components.Forms
         /// Value of <typeparamref name="T"/> when input is unchecked.
         /// </summary>
         [Parameter] public virtual T? UnCheckedValue { get; set; }
-
+        
         protected bool IsRadio { get; set; }
 
         protected bool _isToggle;
@@ -38,20 +38,29 @@ namespace BlazorStrap.Shared.Components.Forms
 
         protected void RadioOnClickEvent()
         {
+            T tempValue;
             if (IsRadio)
             {
-                Value = CheckedValue;
+                tempValue = CheckedValue;
             }
             else
             {
                 if (!object.Equals(CheckedValue, Value) && !IsRadio)
                 {
-                    Value = CheckedValue;
+                    tempValue = CheckedValue;
                 }
                 else
                 {
-                    Value = UnCheckedValue;
+                    tempValue = UnCheckedValue;
                 }
+            }
+            if ((ValidateOnChange || ValidateOnInput) && EditContext != null)
+            {
+                CurrentValue = tempValue;
+            }
+            else
+            {
+                Value = tempValue; 
             }
             ValueChanged.InvokeAsync(Value);
         }

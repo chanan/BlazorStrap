@@ -1,7 +1,7 @@
 ﻿<BSInputSwitch CheckedValue="@("on")" UnCheckedValue="@("off")" @bind-Value="Value">
     Default switch checkbox input @Value
 </BSInputSwitch>
-<BSInputSwitch CheckedValue="@("off")" UnCheckedValue="@("on")" @bind-Value="ValueTwo">
+<BSInputSwitch CheckedValue="@("enabled")" UnCheckedValue="@("disabled")" @bind-Value="ValueTwo">
     Checked switch checkbox input @ValueTwo
 </BSInputSwitch>
 <BSInputSwitch CheckedValue="1" Value="0" IsDisabled="true">
@@ -13,5 +13,5 @@
 
 @code {
     private string Value { get; set; } = "off";
-    private string ValueTwo { get; set; } = "off";
+    private string ValueTwo { get; set; } = "enabled";
 }

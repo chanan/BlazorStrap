@@ -31,6 +31,11 @@
         <BSInputFile ValidWhen="@(() => Modal.HasPendingPhoto)" OnChange="OnFileChange" />
         <BSFeedback For="@(() => Modal.HasPendingPhoto)" ValidMessage="Looks like you selected a photo." />
     </BSCol>
+       <BSCol Position="Position.Relative" ColumnMedium="6">
+        <BSLabel>Accept Terms</BSLabel>
+        <BSInputCheckbox @bind-Value="Modal.Terms" CheckedValue="true" UnCheckedValue="null" ValidateOnChange="true"/>
+        <BSFeedback For="@(() => Modal.Terms)" InvalidMessage="You must agree to the terms." />
+    </BSCol>
     <BSCol Column="12">
         <BSButton Color="BSColor.Primary" IsSubmit="true">Submit</BSButton>
         <BSButton Color="BSColor.Primary" IsReset="true" @onclick="Reset">Reset</BSButton>
@@ -72,6 +77,8 @@
         [Required(ErrorMessage = "Employee must have a photo")]
         public bool? HasPendingPhoto { get; set; }
         public string? PhotoName { get; set; }
+        [Required]
+        public bool? Terms { get; set; }
     }
     public void Reset()
     {
