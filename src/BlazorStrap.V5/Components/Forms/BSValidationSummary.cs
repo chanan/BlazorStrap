@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
 using System.Web;
 
-namespace BlazorStrap.V5.Components.Forms
+namespace BlazorStrap.V5
 {
     public class BSValidationSummary : BSValidationSummaryBase
     {
