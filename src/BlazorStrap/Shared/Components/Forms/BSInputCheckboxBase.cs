@@ -60,9 +60,10 @@ namespace BlazorStrap.Shared.Components.Forms
             }
             else
             {
-                Value = tempValue; 
+                Value = tempValue;
+                ValueChanged.InvokeAsync(Value);
             }
-            ValueChanged.InvokeAsync(Value);
+        
         }
         protected bool Checked()
         {
