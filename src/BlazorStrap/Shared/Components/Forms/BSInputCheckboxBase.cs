@@ -56,7 +56,22 @@ namespace BlazorStrap.Shared.Components.Forms
             }
             if ((ValidateOnChange || ValidateOnInput) && EditContext != null)
             {
-                CurrentValue = tempValue;
+                if (IsRadio)
+                {
+                    if(object.Equals(tempValue, CheckedValue))
+                    {
+                        CurrentValue = tempValue;
+                    }
+                    else
+                    {
+                        Value = tempValue;
+                        ValueChanged.InvokeAsync(Value);
+                    }
+                }
+                else
+                {
+                    CurrentValue = tempValue;
+                }
             }
             else
             {

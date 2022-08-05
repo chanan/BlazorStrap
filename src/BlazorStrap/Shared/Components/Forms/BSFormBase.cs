@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Components.Forms;
 
 namespace BlazorStrap.Shared.Components.Forms
 {
-    public abstract class BSFormBase<TValue, TJustify> : BlazorStrapBase where TJustify : Enum
+    public abstract class BSFormBase<TValue, TJustify> : BlazorStrapBase, IBSForm where TJustify : Enum
     {
+        public event Action? OnResetEventHandler;
         /// <summary>
         /// Form alignment.
         /// </summary>
@@ -46,11 +47,6 @@ namespace BlazorStrap.Shared.Components.Forms
         [Parameter] public EventCallback<EditContext> OnSubmit { get; set; }
 
         /// <summary>
-        /// Method called when form is reset.
-        /// </summary>
-        [Parameter] public EventCallback<EventArgs> OnReset { get; set; }
-
-        /// <summary>
         /// Method called when form is submitted and validation passes.
         /// </summary>
         [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
@@ -76,11 +72,19 @@ namespace BlazorStrap.Shared.Components.Forms
                 ForceValidate();
             }
         }*/
-
+        public void Refresh()
+        {
+            StateHasChanged();
+        }
+        public void Reset()
+        {
+            OnResetEventHandler?.Invoke();
+        }
         private void ForceValidate()
         {
             InvokeAsync(() => EditContext?.Validate());
             StateHasChanged();
         }
+
     }
 }

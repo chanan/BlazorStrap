@@ -65,11 +65,18 @@ namespace BlazorStrap.Shared.Components.Forms
         [Parameter] public string ValidClass { get; set; } = "is-valid";
 
         [Parameter] public bool UpdateOnInput { get; set; } = false;
+        [CascadingParameter] public IBSForm? BSForm { get; set; }
 
+        private TValue? _startValue;
         protected void OnBlurEvent(FocusEventArgs? e)
         {
-            if (ValidateOnBlur && EditContext != null)
-                EditContext.NotifyFieldChanged(FieldIdentifier);
+            if (ValidateOnBlur && EditContext != null && (!ValidateOnInput || !ValidateOnChange))
+            {
+                if (object.Equals(_startValue, CurrentValue))
+                    EditContext.NotifyFieldChanged(FieldIdentifier);
+                else
+                    BSForm?.Refresh();
+            }
             if (OnBlur.HasDelegate)
                 OnBlur.InvokeAsync(e);
         }
@@ -78,22 +85,36 @@ namespace BlazorStrap.Shared.Components.Forms
         {
             CurrentValueAsString = e;
             if (ValidateOnInput && EditContext != null)
-                EditContext.NotifyFieldChanged(FieldIdentifier);
+            {
+                BSForm?.Refresh();
+            }
         }
-
         protected void OnFocusEvent(FocusEventArgs? e)
         {
             if (OnFocus.HasDelegate)
                 OnFocus.InvokeAsync(e);
         }
 
+        
         protected override void OnInitialized()
         {
+            _startValue = Value;
+            if(BSForm != null)
+            {
+                BSForm.OnResetEventHandler += BSForm_OnResetEventHandler; 
+            }
             if (EditContext is not null)
             {
                 EditContext.OnValidationStateChanged += OnValidationStateChanged;
                 EditContext.OnValidationRequested += EditContext_OnValidationRequested;
             }
+        }
+
+        private void BSForm_OnResetEventHandler()
+        {
+            IsInvalid = false;
+            IsValid = false;
+            EditContext.MarkAsUnmodified(FieldIdentifier);
         }
 
         private void EditContext_OnValidationRequested(object? sender, ValidationRequestedEventArgs e)
@@ -104,6 +125,7 @@ namespace BlazorStrap.Shared.Components.Forms
 
         protected void OnInputEvent(string? e)
         {
+
             if (ValidateOnInput && EditContext != null)
                 RateLimitingExceptionForObject.Debounce(e, DebounceInterval,
                     (_) => { InvokeAsync(() => OnChangeEvent(e)); });
@@ -128,6 +150,7 @@ namespace BlazorStrap.Shared.Components.Forms
                 }
                 else
                 {
+                    Console.WriteLine("here");
                     IsValid = true;
                     IsInvalid = false;
                 }
@@ -148,6 +171,8 @@ namespace BlazorStrap.Shared.Components.Forms
 
         private void Dispose()
         {
+            if(BSForm != null)
+                BSForm.OnResetEventHandler -= BSForm_OnResetEventHandler;
             if (EditContext is not null)
             {
                 EditContext.OnValidationStateChanged -= OnValidationStateChanged;

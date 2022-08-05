@@ -22,8 +22,12 @@ namespace BlazorStrap.V5
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+   
             if (EditContext != null)
             {
+                if (!EditContext.IsModified(FieldIdentifier))
+                    return;
+
                 if (ActualInvalidMessage == null)
                 {
                     var first = true;

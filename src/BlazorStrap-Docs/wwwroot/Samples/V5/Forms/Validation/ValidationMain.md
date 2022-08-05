@@ -1,5 +1,5 @@
 ﻿@using System.ComponentModel.DataAnnotations
-<BSForm Model="Modal" IsRow="true" Gutters="Gutters.Medium" OnSubmit="OnSubmit" OnReset="Reset">
+<BSForm Model="Modal" IsRow="true" Gutters="Gutters.Medium" OnSubmit="OnSubmit" EditContext="editContext" @ref="BSFormRef">
 
     <DataAnnotationsValidator />
     <BSCol Position="Position.Relative" ColumnMedium="12">
@@ -31,19 +31,37 @@
         <BSInputFile ValidWhen="@(() => Modal.HasPendingPhoto)" OnChange="OnFileChange" />
         <BSFeedback For="@(() => Modal.HasPendingPhoto)" ValidMessage="Looks like you selected a photo." />
     </BSCol>
+
+
        <BSCol Position="Position.Relative" ColumnMedium="6">
         <BSLabel>Accept Terms</BSLabel>
-        <BSInputCheckbox @bind-Value="Modal.Terms" CheckedValue="true" UnCheckedValue="null" ValidateOnChange="true"/>
+        <BSInputRadio @bind-Value="Modal.Terms" CheckedValue="true" ValidateOnChange="true" ValidateOnBlur="false"/>
+        Yes
+        <BSInputRadio @bind-Value="Modal.Terms" CheckedValue="false" ValidateOnChange="true" ValidateOnBlur="false"/>
+        No
         <BSFeedback For="@(() => Modal.Terms)" InvalidMessage="You must agree to the terms." />
     </BSCol>
     <BSCol Column="12">
         <BSButton Color="BSColor.Primary" IsSubmit="true">Submit</BSButton>
-        <BSButton Color="BSColor.Primary" IsReset="true" @onclick="Reset">Reset</BSButton>
+        <BSButton Color="BSColor.Primary" OnClick="Reset">Reset</BSButton>
     </BSCol>
 </BSForm>
 @code {
+    private BSForm<EmployeeModal> BSFormRef;
+    private EditContext editContext;
     private EmployeeModal Modal { get; set; } = new EmployeeModal();
     private string _message = "";
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(Modal);
+        editContext.OnFieldChanged += OnFieldChanged;
+
+    }
+    private void OnFieldChanged(object sender, FieldChangedEventArgs e)
+    {
+        Console.WriteLine(e.FieldIdentifier.FieldName);
+    }
     private void OnFileChange(InputFileChangeEventArgs e)
     {
         Modal.HasPendingPhoto = null;
@@ -63,7 +81,7 @@
     public class EmployeeModal
     {
         [Required(ErrorMessage = "Employee's First name must be provided.")]
-        public string? FirstName { get; set; }
+        public string? FirstName { get; set; } = "Test";
 
         public string? MiddleName { get; set; }
 
@@ -82,6 +100,8 @@
     }
     public void Reset()
     {
-        Modal = new EmployeeModal();
+        BSFormRef.Reset();
+        Modal.Email = "test";
+        Modal.FirstName = default;
     }
 }

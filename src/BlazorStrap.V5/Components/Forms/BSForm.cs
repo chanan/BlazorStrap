@@ -22,6 +22,7 @@ namespace BlazorStrap.V5
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+
             if (Model != null && Model.Equals(default(TValue)) && EditContext == null)
             {
                 builder.OpenElement(0, "form");
@@ -61,7 +62,7 @@ namespace BlazorStrap.V5
                 formBuilder.AddAttribute(7, "ChildContent", EditFormChildContent);
                 formBuilder.CloseComponent();
             };
-
+          
             builder.OpenComponent<CascadingValue<BSForm<TValue>>>(3);
             builder.AddAttribute(4, "IsFixed", true);
             builder.AddAttribute(5, "Value", this);
