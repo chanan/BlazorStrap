@@ -1,5 +1,5 @@
 ﻿@using System.ComponentModel.DataAnnotations
-<BSForm Model="Modal" IsRow="true" Gutters="Gutters.Medium" OnSubmit="OnSubmit" OnReset="Reset">
+<BSForm Model="Modal" IsRow="true" Gutters="Gutters.Medium" OnSubmit="OnSubmit" OnReset="OnReset">
 
     <DataAnnotationsValidator />
     <BSCol Position="Position.Relative" ColumnMedium="12">
@@ -31,14 +31,30 @@
         <BSInputFile ValidWhen="@(() => Modal.HasPendingPhoto)" OnChange="OnFileChange" />
         <BSFeedback For="@(() => Modal.HasPendingPhoto)" ValidMessage="Looks like you selected a photo." />
     </BSCol>
+
+
+       <BSCol Position="Position.Relative" ColumnMedium="6">
+        <BSLabel>Accept Terms</BSLabel>
+        <BSInputRadio @bind-Value="Modal.Terms" CheckedValue="true" ValidateOnChange="true" ValidateOnBlur="false"/>
+        Yes
+        <BSInputRadio @bind-Value="Modal.Terms" CheckedValue="false" ValidateOnChange="true" ValidateOnBlur="false"/>
+        No
+        <BSFeedback For="@(() => Modal.Terms)" InvalidMessage="You must agree to the terms." />
+    </BSCol>
     <BSCol Column="12">
         <BSButton Color="BSColor.Primary" IsSubmit="true">Submit</BSButton>
-        <BSButton Color="BSColor.Primary" IsReset="true" @onclick="Reset">Reset</BSButton>
+        <BSButton Color="BSColor.Primary" IsReset="true">Reset</BSButton>
     </BSCol>
 </BSForm>
 @code {
     private EmployeeModal Modal { get; set; } = new EmployeeModal();
     private string _message = "";
+
+    private void OnReset(IBSForm bSForm)
+    {
+        bSForm.Reset();
+    }
+
     private void OnFileChange(InputFileChangeEventArgs e)
     {
         Modal.HasPendingPhoto = null;
@@ -58,7 +74,7 @@
     public class EmployeeModal
     {
         [Required(ErrorMessage = "Employee's First name must be provided.")]
-        public string? FirstName { get; set; }
+        public string? FirstName { get; set; } = "Test";
 
         public string? MiddleName { get; set; }
 
@@ -72,9 +88,7 @@
         [Required(ErrorMessage = "Employee must have a photo")]
         public bool? HasPendingPhoto { get; set; }
         public string? PhotoName { get; set; }
-    }
-    public void Reset()
-    {
-        Modal = new EmployeeModal();
+        [Required]
+        public bool? Terms { get; set; }
     }
 }
