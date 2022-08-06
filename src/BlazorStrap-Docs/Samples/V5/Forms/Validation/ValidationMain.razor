@@ -1,5 +1,5 @@
 ﻿@using System.ComponentModel.DataAnnotations
-<BSForm Model="Modal" IsRow="true" Gutters="Gutters.Medium" OnSubmit="OnSubmit" EditContext="editContext" @ref="BSFormRef">
+<BSForm Model="Modal" IsRow="true" Gutters="Gutters.Medium" OnSubmit="OnSubmit" OnReset="OnReset">
 
     <DataAnnotationsValidator />
     <BSCol Position="Position.Relative" ColumnMedium="12">
@@ -43,25 +43,18 @@
     </BSCol>
     <BSCol Column="12">
         <BSButton Color="BSColor.Primary" IsSubmit="true">Submit</BSButton>
-        <BSButton Color="BSColor.Primary" OnClick="Reset">Reset</BSButton>
+        <BSButton Color="BSColor.Primary" IsReset="true">Reset</BSButton>
     </BSCol>
 </BSForm>
 @code {
-    private BSForm<EmployeeModal> BSFormRef;
-    private EditContext editContext;
     private EmployeeModal Modal { get; set; } = new EmployeeModal();
     private string _message = "";
 
-    protected override void OnInitialized()
+    private void OnReset(IBSForm bSForm)
     {
-        editContext = new EditContext(Modal);
-        editContext.OnFieldChanged += OnFieldChanged;
+        bSForm.Reset();
+    }
 
-    }
-    private void OnFieldChanged(object sender, FieldChangedEventArgs e)
-    {
-        Console.WriteLine(e.FieldIdentifier.FieldName);
-    }
     private void OnFileChange(InputFileChangeEventArgs e)
     {
         Modal.HasPendingPhoto = null;
@@ -97,11 +90,5 @@
         public string? PhotoName { get; set; }
         [Required]
         public bool? Terms { get; set; }
-    }
-    public void Reset()
-    {
-        BSFormRef.Reset();
-        Modal.Email = "test";
-        Modal.FirstName = default;
     }
 }

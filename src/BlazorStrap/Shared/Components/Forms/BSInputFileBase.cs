@@ -52,6 +52,7 @@ namespace BlazorStrap.Shared.Components.Forms
         private bool _hasInitialized;
         [CascadingParameter] private EditContext? CascadedEditContext { get; set; }
         [CascadingParameter] public BSInputHelperBase? Helper { get; set; }
+        [CascadingParameter] public IBSForm? BSForm { get; set; }
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
         
@@ -59,6 +60,20 @@ namespace BlazorStrap.Shared.Components.Forms
 
         protected internal FieldIdentifier FieldIdentifier { get; set; }
 
+        protected override void OnInitialized()
+        {
+            if (BSForm != null)
+            {
+                BSForm.OnResetEventHandler += BSForm_OnResetEventHandler;
+            }
+        }
+        private void BSForm_OnResetEventHandler()
+        {
+            IsInvalid = false;
+            IsValid = false;
+            if(EditContext != null)
+                EditContext.MarkAsUnmodified(FieldIdentifier);
+        }
         protected override void OnParametersSet()
         {
             if (!_hasInitialized)
@@ -144,6 +159,10 @@ namespace BlazorStrap.Shared.Components.Forms
 
         public void Dispose()
         {
+            if (BSForm != null)
+            {
+                BSForm.OnResetEventHandler -= BSForm_OnResetEventHandler;
+            }
             if (EditContext is not null)
             {
                 EditContext.OnValidationStateChanged -= OnValidationStateChanged;

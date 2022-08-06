@@ -51,6 +51,11 @@ namespace BlazorStrap.Shared.Components.Forms
         /// </summary>
         [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
 
+        /// <summary>
+        /// Method called when form is reset.
+        /// </summary>
+        [Parameter] public EventCallback<IBSForm> OnReset { get; set; }
+
         // [Parameter] public bool ValidateOnInit { get; set; }
 
         /// <summary>
@@ -72,6 +77,12 @@ namespace BlazorStrap.Shared.Components.Forms
                 ForceValidate();
             }
         }*/
+        public Task OnResetEvent()
+        {
+            if (OnReset.HasDelegate)
+                return OnReset.InvokeAsync(this);
+            return Task.CompletedTask;
+        }
         public void Refresh()
         {
             StateHasChanged();

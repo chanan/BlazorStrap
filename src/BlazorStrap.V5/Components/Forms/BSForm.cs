@@ -4,6 +4,7 @@ using BlazorStrap.Shared.Components.Forms;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorStrap.V5
 {
@@ -59,7 +60,12 @@ namespace BlazorStrap.V5
                 formBuilder.AddAttribute(4, "OnSubmit", OnSubmit);
                 formBuilder.AddAttribute(5, "OnValidSubmit", OnValidSubmit);
                 formBuilder.AddAttribute(6, "OnInvalidSubmit", OnInvalidSubmit);
-                formBuilder.AddAttribute(7, "ChildContent", EditFormChildContent);
+                if (OnReset.HasDelegate)
+                {
+                    formBuilder.AddAttribute(7, "onreset", EventCallback.Factory.Create(this, OnResetEvent));
+                    formBuilder.AddEventPreventDefaultAttribute(8, "onreset", true);
+                }
+                formBuilder.AddAttribute(9, "ChildContent", EditFormChildContent);
                 formBuilder.CloseComponent();
             };
           

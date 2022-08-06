@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace BlazorStrap.Shared.Components.Forms
+namespace BlazorStrap
 {
-    public interface IBSForm
+    public interface IBSForm 
     {
         event Action? OnResetEventHandler;
         void Refresh();
+        public void Reset();
     }
 }

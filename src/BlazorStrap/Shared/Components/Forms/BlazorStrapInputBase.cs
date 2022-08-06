@@ -114,7 +114,10 @@ namespace BlazorStrap.Shared.Components.Forms
         {
             IsInvalid = false;
             IsValid = false;
-            EditContext.MarkAsUnmodified(FieldIdentifier);
+            Value = _startValue;
+            _ = ValueChanged.InvokeAsync(Value);
+            if(EditContext is not null)
+                EditContext.MarkAsUnmodified(FieldIdentifier);
         }
 
         private void EditContext_OnValidationRequested(object? sender, ValidationRequestedEventArgs e)
@@ -150,7 +153,6 @@ namespace BlazorStrap.Shared.Components.Forms
                 }
                 else
                 {
-                    Console.WriteLine("here");
                     IsValid = true;
                     IsInvalid = false;
                 }
