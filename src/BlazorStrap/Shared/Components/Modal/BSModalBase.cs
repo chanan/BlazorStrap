@@ -11,7 +11,7 @@ namespace BlazorStrap.Shared.Components.Modal
         private Func<Task>? _callback;
         private DotNetObjectReference<BSModalBase>? _objectRef;
         private bool _lock;
-
+        private Transition _transition = Transition.Default;
         /// <summary>
         /// Color of modal. Defaults to <see cref="BSColor.Default"/>
         /// </summary>
@@ -166,7 +166,8 @@ namespace BlazorStrap.Shared.Components.Modal
         {
             CanRefresh = false;
             _lock = true;
-            Shown = false;
+            _transition = Transition.Hiding;
+           // Shown = false;
             if (OnHide.HasDelegate)
                 await OnHide.InvokeAsync(this);
             await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
@@ -196,7 +197,20 @@ namespace BlazorStrap.Shared.Components.Modal
             {
                 await TransitionEndAsync();
             }
-
+            else
+            {
+                var tick = 0;
+                while (_transition != Transition.Default)
+                {
+                    await Task.Delay(50);
+                    tick++;
+                    if(tick > 40)
+                    {
+                        await TransitionEndAsync();
+                        break;
+                    }
+                }
+            }
             _leaveBodyAlone = false;
         }
 
@@ -204,6 +218,7 @@ namespace BlazorStrap.Shared.Components.Modal
         public override Task ShowAsync()
         {
             if (Shown) return Task.CompletedTask;
+            
             _callback = async () =>
             {
                 await ShowActionsAsync();
@@ -215,7 +230,8 @@ namespace BlazorStrap.Shared.Components.Modal
         {
             CanRefresh = false;
             _lock = true;
-            Shown = true;
+            _transition = Transition.Showing;
+            //Shown = true;
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
@@ -257,6 +273,20 @@ namespace BlazorStrap.Shared.Components.Modal
             {
                 await TransitionEndAsync();
             }
+            else
+            {
+                var tick = 0;
+                while (_transition != Transition.Default)
+                {
+                    await Task.Delay(50);
+                    tick++;
+                    if (tick > 40)
+                    {
+                        await TransitionEndAsync();
+                        break;
+                    }
+                }
+            }
         }
 
         private void Toggle()
@@ -296,20 +326,23 @@ namespace BlazorStrap.Shared.Components.Modal
             await TryCallback(false);
 
             //await BlazorStrapService.Interop.SetStyleAsync(MyRef, "display", "none", 50);
-            Style = Shown ? "display: block;" : "display: none;";
+            Style = _transition == Transition.Showing ? "display: block;" : "display: none;";
             _lock = false;
 
             await InvokeAsync(StateHasChanged);
-            if (Shown)
+            if (_transition == Transition.Showing)
             {
+                Shown = true;
                 if (OnShown.HasDelegate)
                     _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
             }
-            else
+            else if(_transition == Transition.Hiding)
             {
+                Shown = false;
                 if (OnHidden.HasDelegate)
                     _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
             }
+            _transition = Transition.Default;
             CanRefresh = true;
         }
 
