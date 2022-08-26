@@ -1,11 +1,16 @@
 using BlazorComponentUtilities;
 using BlazorStrap.Extensions;
 using BlazorStrap.Shared.Components.Datatable;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap.V4
 {
     public partial class BSDataTableHead<TValue> : BSDataTableHeadBase<TValue>
     {
+        /// <summary>
+        /// Size of the filter input.
+        /// </summary>
+        [Parameter] public Size FilterSize { get; set; }
         protected override string? SortClassBuilder => new CssBuilder()
                 .AddClass("sort-by", Desc == null)
                 .AddClass("sort", Desc == false)

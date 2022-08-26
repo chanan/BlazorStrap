@@ -77,11 +77,12 @@ See [shared](layout/shared) for additional parameters
 See [shared](layout/shared) for additional parameters    
 :::
 
-| Parameter    | Type   | Valid       | Remarks/Output | 
-|--------------|--------|-------------|----------------|
-| Column       | string | column name |                | {.table-striped .p-2} 
-| Sortable     | bool   | bool        |                |
-| ColumnFilter | bool   | bool        |                |
+| Parameter    | Type   | Valid       | Remarks/Output                      | 
+|--------------|--------|-------------|-------------------------------------|
+| Column       | string | column name |                                     | {.table-striped .p-2} 
+| Sortable     | bool   | bool        |                                     |
+| ColumnFilter | bool   | bool        |                                     |
+| FilterSize   | Size   | Size        | The size of the column filter input |
 
 #### Component \<BSDataTableRow\> (Version  >= 5.0.105-Preview1)
 See [shared](layout/shared) for additional parameters    
