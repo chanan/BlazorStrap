@@ -133,10 +133,10 @@ namespace BlazorStrap.Shared.Components.Modal
                 // If anything fails callback will will be handled after render.
                 if (_objectRef != null)
                 {
-                    if (_callback != null)
+                    var cb = Interlocked.Exchange(ref _callback, null);
+                    if (cb != null)
                     {
-                        await _callback();
-                        _callback = null;
+                        await cb();
                     }
                 }
                 else
@@ -418,10 +418,10 @@ namespace BlazorStrap.Shared.Components.Modal
                 BlazorStrapService.OnEventForward += InteropEventCallback;
                 BlazorStrapService.ModalChange += OnModalChange;
             }
-            if (_callback != null)
+            var cb = Interlocked.Exchange(ref _callback, null);
+            if (cb != null)
             {
-                await _callback.Invoke();
-                _callback = null;
+                await cb();
             }
         }
         public async ValueTask DisposeAsync()
