@@ -92,6 +92,7 @@ namespace BlazorStrap.Shared.Components.Common
 
         private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
         {
+           
             if (!_canHandleActive) return;
             if (Parent?.IsTabs ?? false) return;
             IsActive = false;
@@ -104,10 +105,12 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected override void OnParametersSet()
         {
+           
             if (Parent == null) return;
             if (Parent.IsTabs)
             {
-                IsActive = Parent.SetFirstChild(this);
+                if(Parent.ActiveChild == null)
+                    IsActive = Parent.SetFirstChild(this);
             }
             Parent.ChildHandler += Parent_ChildHandler;
         }
