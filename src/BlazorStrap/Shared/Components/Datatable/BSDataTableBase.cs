@@ -59,6 +59,11 @@ namespace BlazorStrap.Shared.Components.Datatable
         [Parameter, AllowNull] public RenderFragment? NoData { get; set; }
 
         /// <summary>
+        /// Sets the colspan value when <see cref="NoData"/> is shown
+        /// </summary>
+        [Parameter] public int NoDataColspan { get; set; } = 1;
+
+        /// <summary>
         /// Enable page navigation at the top of the table.
         /// </summary>
         [Parameter] public bool PaginationTop { get; set; }
