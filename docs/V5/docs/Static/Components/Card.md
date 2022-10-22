@@ -9,7 +9,7 @@ See [shared](layout/shared) for additional parameters
 |-------------------|------|-------------------|-------------------------------------------|
 | Alignment         | Enum | Alignment         | Nothing or `.text-center` or `.text-righ` | {.table-striped}
 | Color             | Enum | BSColor           | Varies                                    |
-| CardType          | Enum | CardType          | CardTy[e                                  |
+| CardType          | Enum | CardType          | CardType                                  |
 | HeadingSize       | Enum | HeadingSize       | `<div>` or `<h1>` to `<h6>`               |
 | VerticalAlignment | Enum | VerticalAlignment | Nothing or `.[]-top` or `.[]-bottom`      |
 | IsInverse         | bool | true/false        | `.bg-dark` `.text-white`                  |
