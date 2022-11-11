@@ -34,7 +34,7 @@ namespace BlazorStrap.Shared.Components.Common
         /// Dropdown arrow is separate from main button.
         /// </summary>
         [Parameter] public bool IsSplitButton { get; set; }
-
+        [Parameter] public bool NoDropdownToggleClass { get; set; }
 
         /// <summary>
         /// Event called when toggle is clicked.

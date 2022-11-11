@@ -25,8 +25,8 @@ namespace BlazorStrap.V4
             .AddClass(Class, !string.IsNullOrEmpty(Class))
             .AddClass("nav-link", !IsButton && IsNavLink)
             .AddClass("dropdown-item", DropDownParent?.Parent != null && !IsNavLink)
-            .AddClass("dropdown-toggle", DropDownParent != null)
-            .AddClass("dropdown-toggle-split", DropDownParent != null && IsSplitButton)
+            .AddClass("dropdown-toggle", DropDownParent != null && !NoDropdownToggleClass)
+            .AddClass("dropdown-toggle-split", DropDownParent != null && IsSplitButton && !NoDropdownToggleClass)
             .AddClass("collapsed", (!CollapseParent?.Shown ?? false) && DropDownParent == null)
             .Build().ToNullString();
     }
