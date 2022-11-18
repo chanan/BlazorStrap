@@ -50,7 +50,11 @@ namespace BlazorStrap.Service
             theme = theme.FirstCharToUpper();
             if (theme == null) return;
             _currentTheme = theme.ToLowerInvariant();
-            await Interop.SetBootstrapCssAsync(theme.ToLowerInvariant(), version);
+            try
+            {
+                await Interop.SetBootstrapCssAsync(theme.ToLowerInvariant(), version);
+            }
+            catch { }
         }
 
         public Task SetBootstrapCss<T>(T theme, string version) where T : Enum

@@ -21,7 +21,26 @@ if (!Element.prototype.closest) {
     };
 }
 
+const timeout = (ms, message) => {
+    return new Promise((_, reject) => {
+        setTimeout(() => {
+            reject(new Error(message));
+        }, ms);
+    });
+};
+
+
+const transitionEnd = (element) => {
+    return new Promise(resolve => {
+        resFunc = resolve;
+        element.addEventListener("transitionend", resFunc);
+    });
+}
 window.blazorStrap = {
+
+    WaitForTransitionEnd: function (element, timeoutLength) {
+        return Promise.race([timeout(timeoutLength), transitionEnd(element)]);
+    },
     CleanUpEvents: function () {
         Object.keys(blazorStrap.EventHandlers).forEach(key => {
             if (document.querySelector("[data-blazorstrap='" + key + "']") === null) {
@@ -29,7 +48,7 @@ window.blazorStrap = {
                     Object.keys(blazorStrap.EventHandlers[key][name]).forEach(type => {
                         try {
                             window.removeEventListener(type, blazorStrap.EventHandlers[key][name][type].Callback, false);
-                        } catch {}
+                        } catch { }
                     });
                 });
                 delete blazorStrap.EventHandlers[key];
@@ -72,7 +91,7 @@ window.blazorStrap = {
     },
     AddEventInternal: function (objRef, element, id, name, type, ignoreChildren = false, filter = "") {
         blazorStrap.CleanUpEvents();
-        
+
         let expandedWidth = 0;
         if (type === "resize" && element == document) {
             let navbar = document.querySelector("[class*=navbar-expand]");
@@ -364,7 +383,7 @@ window.blazorStrap = {
                     dataId: event.target.getAttribute("data-blazorstrap")
                 }
             };
-            
+
         } catch {
             return {
                 key: event.key,
@@ -372,11 +391,11 @@ window.blazorStrap = {
             }
         }
     },
-    GetParent: function (parent, i =0) {
-         //Limited to 4 deep
+    GetParent: function (parent, i = 0) {
+        //Limited to 4 deep
         i = i + 1;
         if (i > 4 || parent === undefined) return;
-       
+
         return {
             parent: blazorStrap.GetParent(parent.parentElement, i),
             target: {
@@ -463,7 +482,7 @@ window.blazorStrap = {
     RemoveEventInternal: function (element, id, name, type) {
         blazorStrap.CleanUpEvents();
         if (blazorStrap.EventHandlers[id] === undefined) return;
-        
+
         if (name !== "null" && type !== "null") {
             if (blazorStrap.EventHandlers[id][name] === undefined) return;
             if (blazorStrap.EventHandlers[id][name][type] === undefined) return;

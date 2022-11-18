@@ -20,23 +20,36 @@ namespace BlazorStrap.InternalComponents
         private ElementReference BackdropRef { get; set; }
 
         private string BackdropStyle { get; set; } = "display: none;";
-        public async Task ToggleAsync()
-        {
-            if (Shown)
-            {
-                await BlazorStrapService.Interop.RemoveClassAsync(BackdropRef, "show", 10);
-                BackdropStyle = "display: none;";
-            }
-            else
-            {
-                await BlazorStrapService.Interop.SetStyleAsync(BackdropRef, "display", "block");
-                await BlazorStrapService.Interop.AddClassAsync(BackdropRef, "show", 10);
-                BackdropStyle = "display: block;";
-            }
 
-            Shown = !Shown;
-            await Task.Delay(200);
+        public async Task ShowAsync()
+        {
+            await BlazorStrapService.Interop.SetStyleAsync(BackdropRef, "display", "block");
+            await BlazorStrapService.Interop.AddClassAsync(BackdropRef, "show", 10);
+            try
+            {
+                await BlazorStrapService.Interop.WaitForTransitionEnd(BackdropRef, 200);
+            }
+            catch { }
+
+            BackdropStyle = "display: block;";
+            Shown = true;
             await InvokeAsync(StateHasChanged);
+        }
+        public async Task HideAsync()
+        {
+            await BlazorStrapService.Interop.RemoveClassAsync(BackdropRef, "show", 10);
+            try{
+                await BlazorStrapService.Interop.WaitForTransitionEnd(BackdropRef, 200);
+            }
+            catch { }
+            BackdropStyle = "display: none;";
+            Shown = false;
+            await InvokeAsync(StateHasChanged);
+
+        }
+        public Task ToggleAsync()
+        {
+            return Shown ? HideAsync() : ShowAsync();
         }
     }
 }

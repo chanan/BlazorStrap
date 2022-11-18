@@ -2,21 +2,34 @@
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.Xml.Linq;
 
 namespace BlazorStrap.Service
 {
     public class BlazorStrapInterop : IDisposable
     {
-        public Action<string, string, string, Dictionary<string, string>?, JavascriptEvent?>? EventHandler { get;  set; }
-        
-        private readonly IJSRuntime _jsRuntime; 
+        public Action<string, string, string, Dictionary<string, string>?, JavascriptEvent?>? EventHandler { get; set; }
+
+        private readonly IJSRuntime _jsRuntime;
         private readonly IJSInProcessRuntime? _jSInProcessRuntime;
         private bool _disposedValue;
         public BlazorStrapInterop(IJSRuntime jsRuntime)
         {
             _jsRuntime = jsRuntime;
             _jSInProcessRuntime = jsRuntime as IJSInProcessRuntime;
+
         }
+        /// <summary>
+        /// Waits for transition to end
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="timeoutLength"></param>
+        /// <param name="cancellationToken"></param>
+        public ValueTask WaitForTransitionEnd(ElementReference? elementReference,int timeoutLength, CancellationToken? cancellationToken = null) =>
+                 elementReference == null
+                ? throw new ArgumentNullException(nameof(elementReference))
+                : _jsRuntime.InvokeVoidAsync("blazorStrap.WaitForTransitionEnd", cancellationToken ?? CancellationToken.None, elementReference, timeoutLength);
+
         public ValueTask BlurAllAsync(CancellationToken? cancellationToken = null)
             => _jsRuntime.InvokeVoidAsync("blazorStrap.BlurAll", cancellationToken ?? CancellationToken.None);
 
@@ -31,16 +44,16 @@ namespace BlazorStrap.Service
             elementReference == null
                 ? throw new ArgumentNullException(nameof(elementReference))
                 : _jsRuntime.InvokeVoidAsync("blazorStrap.AddAttribute", cancellationToken ?? CancellationToken.None, elementReference, name, value);
-        
+
 
         /// <summary>
         /// Adds a class to the body.
         /// </summary>
         /// <param name="className"></param>
         /// <param name="cancellationToken"></param>
-        public ValueTask AddBodyClassAsync(string className, CancellationToken? cancellationToken = null) 
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.AddBodyClass", cancellationToken ?? CancellationToken.None ,className);
-        
+        public ValueTask AddBodyClassAsync(string className, CancellationToken? cancellationToken = null)
+            => _jsRuntime.InvokeVoidAsync("blazorStrap.AddBodyClass", cancellationToken ?? CancellationToken.None, className);
+
         /// <summary>
         /// Adds a class to the ElementReference
         /// </summary>
@@ -66,7 +79,7 @@ namespace BlazorStrap.Service
         /// <param name="cancellationToken"></param>
         public ValueTask AddEventAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, EventType type, bool ignoreChildren = false, string classFilter = "", CancellationToken? cancellationToken = null) where T : class
         {
-            if(dotNetObjectReference == null)
+            if (dotNetObjectReference == null)
                 throw new ArgumentNullException(nameof(dotNetObjectReference));
             var name = typeof(T).Name.ToLower();
             return _jsRuntime.InvokeVoidAsync("blazorStrap.AddEvent", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, name, type.NameToLower(), ignoreChildren, classFilter);
@@ -83,12 +96,12 @@ namespace BlazorStrap.Service
         /// <param name="classFilter"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public ValueTask AddDocumentEventAsync<T>(DotNetObjectReference<T>? dotNetObjectReference,string id, EventType type, bool ignoreChildren = false, string classFilter = "", CancellationToken? cancellationToken = null) where T : class
+        public ValueTask AddDocumentEventAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, EventType type, bool ignoreChildren = false, string classFilter = "", CancellationToken? cancellationToken = null) where T : class
         {
-            if(dotNetObjectReference == null)
+            if (dotNetObjectReference == null)
                 throw new ArgumentNullException(nameof(dotNetObjectReference));
             var name = typeof(T).Name.ToLower();
-            return _jsRuntime.InvokeVoidAsync("blazorStrap.AddDocumentEvent", cancellationToken ?? CancellationToken.None, dotNetObjectReference,id, name, type.NameToLower(), ignoreChildren,classFilter);
+            return _jsRuntime.InvokeVoidAsync("blazorStrap.AddDocumentEvent", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, name, type.NameToLower(), ignoreChildren, classFilter);
         }
 
 
@@ -120,13 +133,13 @@ namespace BlazorStrap.Service
         /// <param name="cancellationToken"></param>
         /// /// <returns>bool</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>")]
-        public ValueTask<bool> AnimateCarouselAsync<T>(DotNetObjectReference<T>? dotNetObjectReference,string id, ElementReference? showElementReference, ElementReference? hideElementReference, bool back, CancellationToken? cancellationToken = null) where T : class
+        public ValueTask<bool> AnimateCarouselAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, ElementReference? showElementReference, ElementReference? hideElementReference, bool back, CancellationToken? cancellationToken = null) where T : class
         {
-            if(dotNetObjectReference == null)
+            if (dotNetObjectReference == null)
                 throw new ArgumentNullException(nameof(dotNetObjectReference));
-            if(showElementReference == null)
+            if (showElementReference == null)
                 throw new ArgumentNullException(nameof(showElementReference));
-            if(hideElementReference == null)
+            if (hideElementReference == null)
                 throw new ArgumentNullException(nameof(hideElementReference));
 
             return _jsRuntime.InvokeAsync<bool>("blazorStrap.AnimateCarousel", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, showElementReference, hideElementReference, back);
@@ -164,14 +177,14 @@ namespace BlazorStrap.Service
         /// <param name="cancellationToken"></param>
         public ValueTask AnimateCollapseAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, ElementReference? elementReference, string id, bool shown, CancellationToken? cancellationToken = null) where T : class
         {
-            if(dotNetObjectReference == null)
+            if (dotNetObjectReference == null)
                 throw new ArgumentNullException(nameof(dotNetObjectReference));
-            if(elementReference == null)
+            if (elementReference == null)
                 throw new ArgumentNullException(nameof(elementReference));
             var name = typeof(T).Name.ToLower();
-            return _jsRuntime.InvokeVoidAsync("blazorStrap.AnimateCollapse", cancellationToken ?? CancellationToken.None, dotNetObjectReference,elementReference, id, shown,name);
+            return _jsRuntime.InvokeVoidAsync("blazorStrap.AnimateCollapse", cancellationToken ?? CancellationToken.None, dotNetObjectReference, elementReference, id, shown, name);
         }
-            
+
 
         /// <summary>
         /// Returns a string array of all child data-blazorstrap ids
@@ -181,7 +194,7 @@ namespace BlazorStrap.Service
         /// <returns>string[]</returns>
         public ValueTask<string[]> GetChildrenIdsAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
          => _jsRuntime.InvokeAsync<string[]>("blazorStrap.GetChildrenIds", CancellationToken.None, elementReference);
-        
+
         /// <summary>
         /// Returns the height of the ElementReference
         /// </summary>
@@ -190,7 +203,7 @@ namespace BlazorStrap.Service
         /// <returns>int</returns>
         public ValueTask<int> GetHeightAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
             => _jsRuntime.InvokeAsync<int>("blazorStrap.GetHeight", CancellationToken.None, elementReference);
-        
+
         /// <summary>
         /// Returns the width of the ElementReference
         /// </summary>
@@ -199,7 +212,7 @@ namespace BlazorStrap.Service
         /// <returns>int</returns>
         public ValueTask<int> GetWidthAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
             => _jsRuntime.InvokeAsync<int>("blazorStrap.GetWidth", CancellationToken.None, elementReference);
-        
+
         /// <summary>
         /// Returns the windows inner height
         /// </summary>
@@ -207,7 +220,7 @@ namespace BlazorStrap.Service
         /// <returns>int</returns>
         public ValueTask<int> GetWindowInnerHeightAsync(CancellationToken? cancellationToken = null)
             => _jsRuntime.InvokeAsync<int>("blazorStrap.GetWindowInnerHeight", CancellationToken.None);
-        
+
         /// <summary>
         /// Gets the body's scrollbar width
         /// </summary>
@@ -287,14 +300,14 @@ namespace BlazorStrap.Service
         /// <param name="cancellationToken"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public async ValueTask RemoveEventAsync<T>(T caller, string id, EventType type, CancellationToken? cancellationToken = null) where T: class
+        public async ValueTask RemoveEventAsync<T>(T caller, string id, EventType type, CancellationToken? cancellationToken = null) where T : class
         {
             try
             {
                 var name = typeof(T).Name.ToLower();
                 await _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveEvent", CancellationToken.None, id, name, type.NameToLower());
             }
-            catch {  }
+            catch { }
         }
 
         /// <summary>
@@ -335,8 +348,8 @@ namespace BlazorStrap.Service
         /// <param name="value"></param>
         /// <param name="cancellationToken"></param>
         public ValueTask SetBodyStyleAsync(string style, string value, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.SetBodyStyle", CancellationToken.None, style,value);
-        
+            => _jsRuntime.InvokeVoidAsync("blazorStrap.SetBodyStyle", CancellationToken.None, style, value);
+
         /// <summary>
         /// Sets set css link for the theme switcher
         /// </summary>
@@ -344,7 +357,7 @@ namespace BlazorStrap.Service
         /// <param name="version"></param>
         public ValueTask<bool> SetBootstrapCssAsync(string? theme, string version)
             => _jsRuntime.InvokeAsync<bool>("blazorStrap.SetBootstrapCss", theme, version);
-        
+
         [Obsolete]
         public ValueTask<bool> SetBootstrapCss(string? theme, string version)
         {
@@ -433,7 +446,7 @@ namespace BlazorStrap.Service
             if (_jSInProcessRuntime == null) throw InProcessError();
             _jSInProcessRuntime.Invoke<string[]>("blazorStrap.GetChildrenIds", elementReference);
         }
-        
+
         /// <summary>
         /// Adds the toast timer to ElementReference
         /// </summary>
@@ -458,7 +471,7 @@ namespace BlazorStrap.Service
                 _disposedValue = true;
             }
         }
-        private InvalidOperationException InProcessError() 
+        private InvalidOperationException InProcessError()
             => new InvalidOperationException("Javascript in process interop not available");
         public void Dispose()
         {

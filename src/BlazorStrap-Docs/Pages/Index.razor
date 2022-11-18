@@ -5,6 +5,10 @@
 @code{
     protected override void OnInitialized()
     {
-        NavigationManager.NavigateTo("V5");
+        try
+        {
+            NavigationManager.NavigateTo("V5");
+        }
+        catch { }
     }
 }
