@@ -1,27 +1,31 @@
-﻿<EditForm Model="model" OnValidSubmit="@Update">
-    <BSModal @ref="ModelRef">
-        <Header>Head</Header>
-        <Content>
-            @model.ToString()
-        </Content>
-        <Footer Context="ctx">
-            <BSButton @onclick="@(() => ctx.HideAsync())">Cancel</BSButton>
-            <BSButton IsSubmit="true" Color="BSColor.Primary">Save</BSButton>
-        </Footer>
-    </BSModal>
-</EditForm>
+﻿<BSModal @ref="ModelRef">
+    <Header>Head</Header>
+    <Content>
+        @model.ToString()
+    </Content>
+    <Footer Context="ctx">
+        <BSButton @onclick="@(() => ctx.HideAsync())">Cancel</BSButton>
+        <BSButton IsSubmit="true" Color="BSColor.Primary">Save</BSButton>
+    </Footer>
+</BSModal>
 
 <BSButton Color="BSColor.Primary" OnClick="@(() => NewEmployee(new Employee()))">New Employee</BSButton>
 
 @code {
-    private BSModal ModelRef;
+    private BSModal? ModelRef;
     private Employee model = new Employee();
-    private InputText _inputRef;
+    private InputText? _inputRef;
     private async Task NewEmployee(Employee e)
     {
         model = e;
-        await ModelRef.ShowAsync();
-
+        for (var i = 0; i < 100; i++)
+        {
+            await ModelRef.ShowAsync();
+            Console.WriteLine("Show Async");
+            await ModelRef.HideAsync();
+            Console.WriteLine("Hide Async");
+        }
+        
     }
     private async Task Update()
     {

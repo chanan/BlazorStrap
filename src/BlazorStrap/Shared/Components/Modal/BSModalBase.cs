@@ -3,6 +3,7 @@ using BlazorStrap.InternalComponents;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
 
 namespace BlazorStrap.Shared.Components.Modal
 {
@@ -17,7 +18,7 @@ namespace BlazorStrap.Shared.Components.Modal
         protected Backdrop? BackdropRef { get; set; }
         protected ElementReference? MyRef { get; set; }
         protected string Style = "display:none";
-        private IList<Func<Task>> _eventQue = new List<Func<Task>>();
+        private IList<EventQue> _eventQue = new List<EventQue>();
         private DotNetObjectReference<BSModalBase>? _objectRef;
         private bool _shown;
         private bool _leaveBodyAlone;
@@ -117,11 +118,13 @@ namespace BlazorStrap.Shared.Components.Modal
         protected abstract string? FooterClassBuilder { get; }
         #endregion
         /// <inheritdoc/>
-        public override Task HideAsync()
+        public override async Task HideAsync()
         {
-            if(!_shown) return Task.CompletedTask;
+            if(!_shown) return ;
+            _ = Task.Run(() => { _ = OnHide.InvokeAsync(this); });
             //Kick off to event que
-            _eventQue.Add(async () =>
+            var taskSource = new TaskCompletionSource<bool>();
+            var func = async () =>
             {
                 await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
                 await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
@@ -152,22 +155,26 @@ namespace BlazorStrap.Shared.Components.Modal
                 Style = "display:none;";
                 _leaveBodyAlone = false;
                 await InvokeAsync(StateHasChanged);
-            });
+                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
+                taskSource.SetResult(true);
+            };
 
-
+            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
             // Run event que if only item.
-            if(_eventQue.Count == 1) {
-                return InvokeAsync(StateHasChanged);
+            if (_eventQue.Count == 1) {
+                await InvokeAsync(StateHasChanged);
             }
-            return Task.CompletedTask;
-
+            await taskSource.Task;
         }
         /// <inheritdoc/>
-        public override Task ShowAsync()
+        public override async Task ShowAsync()
         {
-            if (_shown) return Task.CompletedTask;
+            
+            if (_shown) return ;
+            _ = Task.Run(() => { _ = OnShow.InvokeAsync(this); });
             //Kick off to event que
-            _eventQue.Add(async () =>
+            var taskSource = new TaskCompletionSource<bool>();
+            var func = async () =>
             {
                 await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
                 await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Click);
@@ -200,20 +207,21 @@ namespace BlazorStrap.Shared.Components.Modal
                 }
                 catch //Animation failed cleaning up
                 {
-                    Console.WriteLine("Got Here");
                 }
                 _shown = true;
                 Style = "display:block;";
                 await InvokeAsync(StateHasChanged);
-            });
-
+                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
+                taskSource.SetResult(true);
+            };
+            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func});
 
             // Run event que if only item.
             if (_eventQue.Count == 1)
             {
-                return InvokeAsync(StateHasChanged);
+                await InvokeAsync(StateHasChanged);
             }
-            return Task.CompletedTask;
+            await taskSource.Task;
         }
         /// <inheritdoc/>
         public override Task ToggleAsync()
@@ -231,7 +239,7 @@ namespace BlazorStrap.Shared.Components.Modal
                     if (eventItem != null)
                     {
                         _eventQue.Remove(eventItem);
-                        await eventItem.Invoke();
+                        await eventItem.Func.Invoke();
                     }
                 }
             }
@@ -326,5 +334,10 @@ namespace BlazorStrap.Shared.Components.Modal
             _objectRef?.Dispose();
             GC.SuppressFinalize(this);
         }
+    }
+    public class EventQue
+    {
+        public TaskCompletionSource<bool> TaskSource { get; set; }
+        public Func<Task> Func { get; set; }
     }
 }
