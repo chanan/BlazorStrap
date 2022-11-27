@@ -5,7 +5,7 @@ namespace BlazorStrap.Service
 {
     public class BlazorStrapCore : IBlazorStrap
     {
-        internal readonly BlazorStrapInterop Interop;
+        public readonly BlazorStrapInterop Interop;
         public bool ShowDebugMessages { get; private set; }
         internal Func<string, CallerName, EventType, Task>? OnEventForward;
         
