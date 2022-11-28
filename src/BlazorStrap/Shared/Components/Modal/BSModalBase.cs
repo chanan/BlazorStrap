@@ -126,6 +126,7 @@ namespace BlazorStrap.Shared.Components.Modal
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
             {
+                CanRefresh = false;
                 await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
                 await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
 
@@ -157,6 +158,8 @@ namespace BlazorStrap.Shared.Components.Modal
                 await InvokeAsync(StateHasChanged);
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
                 taskSource.SetResult(true);
+                CanRefresh = true;
+
             };
 
             _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
@@ -176,6 +179,7 @@ namespace BlazorStrap.Shared.Components.Modal
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
             {
+                CanRefresh = false;
                 await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
                 await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Click);
 
@@ -213,6 +217,7 @@ namespace BlazorStrap.Shared.Components.Modal
                 await InvokeAsync(StateHasChanged);
                 _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
                 taskSource.SetResult(true);
+                CanRefresh = true;
             };
             _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func});
 
@@ -227,6 +232,10 @@ namespace BlazorStrap.Shared.Components.Modal
         public override Task ToggleAsync()
         {
             return Shown ? HideAsync() : ShowAsync();
+        }
+        protected override void OnInitialized()
+        {
+            CanRefresh = true;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
