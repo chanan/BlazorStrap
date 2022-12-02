@@ -25,10 +25,8 @@ else
             @Content
         </div>
     </div>
-}
+} 
 @if (ShowBackdrop)
 {
-    <div class="@BackdropClass" style="@BackdropStyle" @ref="BackdropRef" @onclick="EventUtil.AsNonRenderingEventHandler(BackdropClicked)" @onclick:preventDefault></div>
+    <BlazorStrap.InternalComponents.Backdrop @ref="BackdropRef" IsOffcanvas="true"/>
 }
-
-                

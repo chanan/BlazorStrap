@@ -7,12 +7,15 @@ namespace BlazorStrap.InternalComponents
 {
     public partial class Backdrop : ComponentBase
     {
+        [Parameter] public bool IsOffcanvas { get; set; }
         protected BlazorStrapCore BlazorStrapService => (BlazorStrapCore)BlazorStrapSrc;
         // ReSharper disable once NullableWarningSuppressionIsUsed
         [Inject] public IBlazorStrap BlazorStrapSrc { get; set; } = null!;
         // ReSharper disable once NullableWarningSuppressionIsUsed
         public bool Shown { get; private set; }
-        private string? BackdropClass => new CssBuilder("modal-backdrop")
+        private string? BackdropClass => new CssBuilder()
+            .AddClass("modal-backdrop", !IsOffcanvas)
+            .AddClass("offcanvas-backdrop", IsOffcanvas)
             .AddClass("fade")
             .AddClass("show", Shown)
             .Build().ToNullString();

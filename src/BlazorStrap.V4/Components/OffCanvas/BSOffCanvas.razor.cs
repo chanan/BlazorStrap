@@ -15,11 +15,7 @@ namespace BlazorStrap.V4
                 .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
                 .AddClass(Class, !string.IsNullOrEmpty(Class))
                 .Build().ToNullString();
-
-        protected override string? BackdropClass => new CssBuilder("offcanvas-backdrop fade")
-                .AddClass("show", Shown)
-                .Build().ToNullString();
-
+        
         protected override string? BodyClassBuilder => new CssBuilder("offcanvas-body")
                 .AddClass(BodyClass)
                 .Build().ToNullString();

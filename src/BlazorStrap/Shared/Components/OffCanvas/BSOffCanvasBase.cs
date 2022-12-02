@@ -1,4 +1,6 @@
 ﻿using BlazorStrap.Extensions;
+using BlazorStrap.InternalComponents;
+using BlazorStrap.Shared.Components.Modal;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -8,9 +10,21 @@ namespace BlazorStrap.Shared.Components.OffCanvas
 {
     public abstract class BSOffCanvasBase : BlazorStrapToggleBase<BSOffCanvasBase>
     {
-        private Func<Task>? _callback;
-        private DotNetObjectReference<BSOffCanvasBase>? _objectRef;
+        
+        public override bool Shown
+        {
+            get => _shown;
+            protected set => _shown = value;
+        }
 
+        protected Backdrop? BackdropRef { get; set; }
+        protected ElementReference? MyRef { get; set; }
+        
+        private IList<EventQue> _eventQue = new List<EventQue>();
+        private DotNetObjectReference<BSOffCanvasBase>? _objectRef;
+        private bool _shown;
+        private bool _leaveBodyAlone;
+        
         /// <summary>
         /// Allows the page body to be scrolled while the OffCanvas is being shown.
         /// </summary>
@@ -65,211 +79,89 @@ namespace BlazorStrap.Shared.Components.OffCanvas
         /// Whether or not to show backdrop. Defaults to true.
         /// </summary>
         [Parameter] public bool ShowBackdrop { get; set; } = true;
-
-        private bool _lock;
-        private bool _shown;
+        
+          
+        #region Render props
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
-        protected abstract string? BackdropClass { get; }
         protected abstract string? BodyClassBuilder { get; }
         protected abstract string? HeaderClassBuilder { get; }
-
-        protected ElementReference BackdropRef { get; set; }
-        protected string BackdropStyle { get; set; } = "display: none;";
-
-        
-        protected ElementReference? MyRef { get; set; }
-        protected override bool ShouldRender()
+        #endregion
+        /// <inheritdoc/>
+        public override async Task HideAsync()
         {
-            return !_lock;
-        }
-
-        public override bool Shown
-        {
-            get => _shown;
-            protected set => _shown = value;
-        }
-        private async Task TryCallback(bool renderOnFail = true)
-        {
-            try
+            if(!_shown) return ;
+            _ = Task.Run(() => { _ = OnHide.InvokeAsync(this); });
+            //Kick off to event que
+            var taskSource = new TaskCompletionSource<bool>();
+            var func = async () =>
             {
-                // Check if objectRef set if not callback will be handled after render.
-                // If anything fails callback will will be handled after render.
-                if (_objectRef != null)
+                CanRefresh = false;
+                await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
+                await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
+
+                if (ShowBackdrop)
                 {
-                    if (_callback != null)
+                    if (!AllowScroll)
                     {
-                        await _callback();
-                        _callback = null;
+                        var scrollWidth = await BlazorStrapService.Interop.GetScrollBarWidth();
+                        await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "");
+                        await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", "");
                     }
                 }
-                else
+                
+                // Used to hide popovers
+                BlazorStrapService.ForwardToggle("", this);
+
+                try
                 {
-                    throw new InvalidOperationException("No object ref");
+                    await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "show");
+                    await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 300);
                 }
-            }
-            catch
-            {
-                if (renderOnFail)
-                    await InvokeAsync(StateHasChanged);
-            }
-        }
-
-        /// <inheritdoc/>
-        public override Task ShowAsync()
-        {
-            if (Shown) return Task.CompletedTask;
-            _callback = async () =>
-            {
-                await ShowActionsAsync();
-            };
-            return TryCallback();
-        }
-
-        private async Task ShowActionsAsync()
-        {
-            CanRefresh = false;
-            // Used to hide popovers
-            BlazorStrapService.ForwardToggle("", this);
-            _lock = true;
-
-            if (!EventsSet)
-            {
-                await BlazorStrapService.Interop.AddEventAsync(_objectRef, DataId, EventType.TransitionEnd);
-                EventsSet = true;
-            }
-
-            if (OnShow.HasDelegate)
-                await OnShow.InvokeAsync(this);
-            BlazorStrapService.ForwardToggle(DataId, this);
-
-            if (ShowBackdrop)
-            {
-                await BlazorStrapService.Interop.SetStyleAsync(BackdropRef, "display", "block", 100);
-                await BlazorStrapService.Interop.AddClassAsync(BackdropRef, "show");
-                BackdropStyle = "display: block;";
-
-            }
-
-            await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
-            if (await BlazorStrapService.Interop.TransitionDidNotStartAsync(MyRef))
-            {
-                await TransitionEndAsync();
-            }
-            Shown = true;
-            await DoAnimationsAsync(_shown);
-        }
-
-        /// <inheritdoc/>
-        public override Task HideAsync()
-        {
-            if (!Shown) return Task.CompletedTask;
-            _callback = async () =>
-            {
-                await HideActionsAsync();
-            };
-            return TryCallback();
-        }
-
-        private async Task HideActionsAsync()
-        {
-            CanRefresh = false;
-            // Used to hide popovers
-            BlazorStrapService.ForwardToggle("", this);
-
-            _lock = true;
-            if (!EventsSet)
-            {
-                await BlazorStrapService.Interop.AddEventAsync(_objectRef, DataId, EventType.TransitionEnd);
-                EventsSet = true;
-            }
-            if (OnHide.HasDelegate)
-                await OnHide.InvokeAsync(this);
-
-            if (ShowBackdrop)
-                await BlazorStrapService.Interop.RemoveClassAsync(BackdropRef, "show", 100);
-            {
-                BackdropStyle = "display: none;";
-            }
-
-            await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "show");
-
-            if (await BlazorStrapService.Interop.TransitionDidNotStartAsync(MyRef))
-            {
-                await TransitionEndAsync();
-            }
-            Shown = false;
-            await DoAnimationsAsync(_shown);
-        }
-
-        public override async Task InteropEventCallback(string id, CallerName name, EventType type)
-        {
-            if (id == DataId && name.Equals(typeof(ClickForward)) && type == EventType.Click)
-            {
-                await ToggleAsync();
-            }
-        }
-
-        [JSInvokable]
-        public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
-        {
-            if (DataId == id && name.Equals(this) && type == EventType.TransitionEnd)
-            {
-                await TransitionEndAsync();
-            }
-        }
-
-        /// <inheritdoc/>
-        public override Task ToggleAsync()
-        {
-            return Shown ? HideAsync() : ShowAsync();
-        }
-
-        protected async Task BackdropClicked()
-        {
-            if (DisableBackdropClick) return;
-            await ToggleAsync();
-        }
-
-        protected async Task ClickEvent()
-        {
-            if (!OnClick.HasDelegate)
-                await ToggleAsync();
-            await OnClick.InvokeAsync();
-        }
-
-        private async Task TransitionEndAsync()
-        {
-            _lock = false;
-            await InvokeAsync(StateHasChanged);
-
-            if (EventsSet)
-            {
-                _callback = async () =>
+                
+                catch //Animation failed cleaning up
                 {
-                    await BlazorStrapService.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);
-                };
-                await TryCallback(false);
-                EventsSet = false;
+                }
+
+                if (BackdropRef != null)
+                    await BackdropRef.HideAsync();
+
+                _shown = false;
+                _leaveBodyAlone = false;
+                await InvokeAsync(StateHasChanged);
+                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
+                taskSource.SetResult(true);
+                CanRefresh = true;
+
+            };
+
+            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
+            // Run event que if only item.
+            if (_eventQue.Count == 1) {
+                await InvokeAsync(StateHasChanged);
             }
-            _lock = false;
-            await InvokeAsync(StateHasChanged);
-            if (Shown)
-            {
-                if (OnShown.HasDelegate)
-                    _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
-            }
-            else
-            {
-                if (OnHidden.HasDelegate)
-                    _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
-            }
-            CanRefresh = true;
+            await taskSource.Task;
         }
-        private async Task DoAnimationsAsync(bool value)
+        /// <inheritdoc/>
+        public override async Task ShowAsync()
         {
-            if (value)
+            if (_shown) return ;
+            _ = Task.Run(() => { _ = OnShow.InvokeAsync(this); });
+            
+            // Used to hide popovers
+            BlazorStrapService.ForwardToggle("", this);
+            
+            //Kick off to event que
+            var taskSource = new TaskCompletionSource<bool>();
+            var func = async () =>
             {
+                CanRefresh = false;
+                await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
+                await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Click);
+
+                if (BackdropRef != null)
+                    await BackdropRef.ShowAsync();
+
                 if (ShowBackdrop)
                 {
                     if (!AllowScroll)
@@ -279,40 +171,110 @@ namespace BlazorStrap.Shared.Components.OffCanvas
                         await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", $"{scrollWidth}px");
                     }
                 }
+                
+                try
+                {
+                    await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
+                    await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 300);
+                    
+                }
+                catch //Animation failed cleaning up
+                {
+                }
+                _shown = true;
+                await InvokeAsync(StateHasChanged);
+                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
+                taskSource.SetResult(true);
+                CanRefresh = true;
+            };
+            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func});
+
+            // Run event que if only item.
+            if (_eventQue.Count == 1)
+            {
+                await InvokeAsync(StateHasChanged);
+            }
+            await taskSource.Task;
+        }
+        /// <inheritdoc/>
+        public override Task ToggleAsync()
+        {
+            return Shown ? HideAsync() : ShowAsync();
+        }
+        protected override void OnInitialized()
+        {
+            CanRefresh = true;
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (!firstRender)
+            {
+                if (_eventQue.Count > 0)
+                {
+                    var eventItem = _eventQue.First();
+                    if (eventItem != null)
+                    {
+                        _eventQue.Remove(eventItem);
+                        await eventItem.Func.Invoke();
+                    }
+                }
             }
             else
             {
-                {
-                    await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "");
-                    await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", "");
-                }
-            }
-        }
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                BlazorStrapService.OnEventForward += InteropEventCallback;
                 _objectRef = DotNetObjectReference.Create(this);
-            }
-            if (_callback != null)
-            {
-                await _callback.Invoke();
-                _callback = null;
+                BlazorStrapService.OnEventForward += InteropEventCallback;
             }
         }
+
+
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type)
+        {
+            if (DataId == id && name.Equals(typeof(ClickForward)) && type == EventType.Click)
+            {
+                await ToggleAsync();
+            }
+        }
+
+        [JSInvokable]
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type,
+            Dictionary<string, string>? classList, JavascriptEvent? e)
+        {
+            if (MyRef == null)
+                return;
+            else if (DataId == id && name.Equals(this) && type == EventType.Keyup && e?.Key == "Escape")
+            {
+                await HideAsync();
+            }
+            else if (DataId == id && name.Equals(this) && type == EventType.Click &&
+                     e?.Target.ClassList.Any(q => q.Value == "offcanvas-backdrop") == true)
+            {
+                await HideAsync();
+            }
+        }
+
+        protected void ClickEvent()
+        {
+            Toggle();
+        }
+        private void Toggle()
+        {
+            EventUtil.AsNonRenderingEventHandler(ToggleAsync).Invoke();
+        }
+
         public async ValueTask DisposeAsync()
         {
-            _objectRef?.Dispose();
             try
             {
-                BlazorStrapService.OnEventForward -= InteropEventCallback;
-                if (!EventsSet)
-                {
+                await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
+                await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
+                if (EventsSet)
                     await BlazorStrapService.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);
-                }
             }
             catch { }
+            BlazorStrapService.OnEventForward -= InteropEventCallback;
+            _objectRef?.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }
