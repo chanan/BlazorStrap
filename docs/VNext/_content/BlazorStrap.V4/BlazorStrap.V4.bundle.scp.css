@@ -1,0 +1,133 @@
+/* _content/BlazorStrap.V4/Components/Common/BSAccordionItem.razor.rz.scp.css */
+.accordion-flush .card:first-child[b-3s0uegs48j] {
+    border-top: 0;
+}
+.accordion-flush .card:last-child[b-3s0uegs48j] {
+    border-bottom: 0;
+}
+.accordion-flush .card[b-3s0uegs48j] {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+}
+/* _content/BlazorStrap.V4/Components/Common/BSBreadcrumbItem.razor.rz.scp.css */
+.breadcrumb-item + .breadcrumb-item[b-q0kbtsabc5]::before {
+    content: var(--bs-breadcrumb-divider, "/") !important;
+}
+/* _content/BlazorStrap.V4/Components/Common/BSCarousel.razor.rz.scp.css */
+/*Backported from Bootstrap 5*/
+.visually-hidden[b-be4qt9zmtn] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+/* _content/BlazorStrap.V4/Components/Common/BSCloseButton.razor.rz.scp.css */
+.bs-close[b-tu9221m2mk]{
+    float:none!important;
+    opacity:.75;
+}
+/* _content/BlazorStrap.V4/Components/Common/BSPopover.razor.rz.scp.css */
+.popover:not(.show)[b-1x8613y8gp] {
+    visibility: hidden;
+}
+/* _content/BlazorStrap.V4/Components/Common/BSSpinner.razor.rz.scp.css */
+/*Backported from Bootstrap 5*/
+.visually-hidden[b-r7h4igaeag] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+/* _content/BlazorStrap.V4/Components/Common/BSTooltip.razor.rz.scp.css */
+.tooltip:not(.show)[b-h452n88zs1] {
+    visibility: hidden;
+}
+/* _content/BlazorStrap.V4/Components/Datatable/BSDataTableHead.razor.rz.scp.css */
+/*Credit https://codepen.io/imarkrige/pen/kyOjoL */
+th a[b-ghneu5ldqj],
+td a[b-ghneu5ldqj] {
+    display: block;
+    width: 100%;
+}
+
+    th a.sort-by[b-ghneu5ldqj] {
+        padding-right: 18px;
+        position: relative;
+    }
+
+a.sort-by[b-ghneu5ldqj]:before,
+a.sort-by[b-ghneu5ldqj]:after {
+    border: 4px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 5px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+
+a.sort-by[b-ghneu5ldqj]:before {
+    border-bottom-color: #666;
+    margin-top: -9px;
+}
+
+a.sort-by[b-ghneu5ldqj]:after {
+    border-top-color: #666;
+    margin-top: 1px;
+}
+
+th a.sort[b-ghneu5ldqj] {
+    padding-right: 18px;
+    position: relative;
+}
+
+a.sort[b-ghneu5ldqj]:before,
+a.sort[b-ghneu5ldqj]:after {
+    border: 4px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 5px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+
+a.sort[b-ghneu5ldqj]:before {
+    border-bottom-color: #666;
+    margin-top: -9px;
+}
+
+th a.sort-desc[b-ghneu5ldqj] {
+    padding-right: 18px;
+    position: relative;
+}
+
+a.sort-desc[b-ghneu5ldqj]:before,
+a.sort-desc[b-ghneu5ldqj]:after {
+    border: 4px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 5px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+
+a.sort-desc[b-ghneu5ldqj]:after {
+    border-top-color: #666;
+    margin-top: 1px;
+}

@@ -1,0 +1,86 @@
+/* _content/BlazorStrap.V5/Components/Common/BSPopover.razor.rz.scp.css */
+.popover:not(.show)[b-mzl1eppldb] {
+    visibility: hidden;
+}
+/* _content/BlazorStrap.V5/Components/Common/BSTooltip.razor.rz.scp.css */
+.tooltip:not(.show)[b-5wvy19tslq] {
+    visibility: hidden;
+}
+/* _content/BlazorStrap.V5/Components/Datatable/BSDataTableHead.razor.rz.scp.css */
+/*Credit https://codepen.io/imarkrige/pen/kyOjoL */
+th a[b-oags7sleff],
+td a[b-oags7sleff] {
+    display: block;
+    width: 100%;
+}
+
+    th a.sort-by[b-oags7sleff] {
+        padding-right: 18px;
+        position: relative;
+    }
+
+a.sort-by[b-oags7sleff]:before,
+a.sort-by[b-oags7sleff]:after {
+    border: 4px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 5px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+
+a.sort-by[b-oags7sleff]:before {
+    border-bottom-color: #666;
+    margin-top: -9px;
+}
+
+a.sort-by[b-oags7sleff]:after {
+    border-top-color: #666;
+    margin-top: 1px;
+}
+
+th a.sort[b-oags7sleff] {
+    padding-right: 18px;
+    position: relative;
+}
+
+a.sort[b-oags7sleff]:before,
+a.sort[b-oags7sleff]:after {
+    border: 4px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 5px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+
+a.sort[b-oags7sleff]:before {
+    border-bottom-color: #666;
+    margin-top: -9px;
+}
+
+th a.sort-desc[b-oags7sleff] {
+    padding-right: 18px;
+    position: relative;
+}
+
+a.sort-desc[b-oags7sleff]:before,
+a.sort-desc[b-oags7sleff]:after {
+    border: 4px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 5px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+
+a.sort-desc[b-oags7sleff]:after {
+    border-top-color: #666;
+    margin-top: 1px;
+}
