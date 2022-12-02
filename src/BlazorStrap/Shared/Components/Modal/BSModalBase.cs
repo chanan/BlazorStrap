@@ -47,7 +47,7 @@ namespace BlazorStrap.Shared.Components.Modal
         /// <summary>
         /// Modal content.
         /// </summary>
-        [Parameter] public RenderFragment? Content { get; set; }
+        [Parameter] public RenderFragment<BSModalBase>? Content { get; set; }
 
         /// <summary>
         /// CSS classes to apply to the modal content.
@@ -104,6 +104,16 @@ namespace BlazorStrap.Shared.Components.Modal
         /// Show backdrop. Defaults to true.
         /// </summary>
         [Parameter] public bool ShowBackdrop { get; set; } = true;
+        
+        /// <summary>
+        /// Hides the modal on valid submit
+        /// </summary>
+        [Parameter] public bool HideOnValidSubmit { get; set; } = false;
+        
+        /// <summary>
+        /// Hides the modal on submit
+        /// </summary>
+        [Parameter] public bool HideOnSubmit { get; set; } = false;
         #endregion
 
         

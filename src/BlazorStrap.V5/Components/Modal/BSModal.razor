@@ -30,7 +30,9 @@ else
                     </div>
                 }
                 <div class="@BodyClassBuilder">
-                    @Content
+                    <CascadingValue Value="this">
+                        @Content(this)
+                    </CascadingValue>
                 </div>
                 @if (Footer != null)
                 {
@@ -44,5 +46,5 @@ else
 }
 @if (ShowBackdrop)
 {
-    <BlazorStrap.InternalComponents.Backdrop @ref="BackdropRef" />
+    <BlazorStrap.InternalComponents.Backdrop @ref="BackdropRef"/>
 }

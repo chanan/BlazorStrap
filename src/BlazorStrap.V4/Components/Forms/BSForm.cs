@@ -56,8 +56,10 @@ namespace BlazorStrap.V4
                 {
                     formBuilder.AddAttribute(3, "Model", Model);
                 }
-                formBuilder.AddAttribute(4, "OnSubmit", OnSubmit);
-                formBuilder.AddAttribute(5, "OnValidSubmit", OnValidSubmit);
+                if(OnSubmit.HasDelegate)
+                    formBuilder.AddAttribute(4, "OnSubmit", EventCallback.Factory.Create<EditContext>(this, OnSubmitEvent));
+                if(OnValidSubmit.HasDelegate)
+                    formBuilder.AddAttribute(5, "OnValidSubmit", EventCallback.Factory.Create<EditContext>(this, OnValidSubmitEvent));
                 formBuilder.AddAttribute(6, "OnInvalidSubmit", OnInvalidSubmit);
                 if (OnReset.HasDelegate)
                 {

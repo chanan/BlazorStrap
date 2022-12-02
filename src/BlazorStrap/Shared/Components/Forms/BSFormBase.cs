@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorStrap.Shared.Components.Modal;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
 namespace BlazorStrap.Shared.Components.Forms
@@ -62,6 +63,8 @@ namespace BlazorStrap.Shared.Components.Forms
         /// Vertical Gutters
         /// </summary>
         [Parameter] public Gutters VerticalGutters { get; set; }
+        
+        [CascadingParameter] public BSModalBase? Modal { get; set; }
 
         protected RenderFragment<EditContext>? EditFormChildContent { get; set; }
 
@@ -77,6 +80,31 @@ namespace BlazorStrap.Shared.Components.Forms
                 ForceValidate();
             }
         }*/
+
+        public async Task OnValidSubmitEvent(EditContext context)
+        {
+            if (OnValidSubmit.HasDelegate)
+            {
+                if (Modal?.HideOnValidSubmit ?? false)
+                {
+                    await Modal.HideAsync();
+                }
+                await OnValidSubmit.InvokeAsync(context);
+            }
+        }
+
+        public async Task OnSubmitEvent(EditContext context)
+        {
+            if (OnSubmit.HasDelegate)
+            {
+                if (Modal?.HideOnSubmit ?? false)
+                {
+                    await Modal.HideAsync();
+                }
+                await OnSubmit.InvokeAsync(context);
+            }
+        }
+        
         public Task OnResetEvent()
         {
             if (OnReset.HasDelegate)
