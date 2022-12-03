@@ -301,8 +301,9 @@ window.blazorStrap = {
                 element.classList.add("show");
                 objRef.invokeMethodAsync("InteropEventCallback", id, name, "transitionend", null, null);
             };
-
+            
             let height = await blazorStrap.PeakHeight(element);
+            
             element.classList.remove("collapse");
             element.classList.add("collapsing");
             element.addEventListener("transitionend", cleanup, {
@@ -438,13 +439,14 @@ window.blazorStrap = {
         var oldStyle = element.style;
         return new Promise(function (resolve) {
             element.style.visibility = "hidden";
+            element.style.width = (element.parentNode.offsetWidth - 4) + "px";
             element.style.position = "absolute";
             element.style.display = "block";
             setTimeout(function () {
                 var height = element.offsetHeight;
                 element.style = oldStyle;
                 resolve(height);
-            }, 1);
+            }, 10);
         });
     },
     RemoveAttribute: async function (element, name) { //Likely can be removed

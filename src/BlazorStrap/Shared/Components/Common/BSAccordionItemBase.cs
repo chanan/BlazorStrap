@@ -7,11 +7,16 @@ namespace BlazorStrap.Shared.Components.Common
 {
     public abstract class BSAccordionItemBase : BlazorStrapToggleBase<BSAccordionItemBase>, IDisposable
     {
+        public override bool Shown
+        {
+            get => _shown;
+            protected set => _shown = value;
+        }
+        private bool _shown;
+        private IList<EventQue> _eventQue = new List<EventQue>();
         // This is for nesting allows the child to jump to transition end if the parent is hidden or shown while in transition.
-        private Func<Task>? _callback;
         internal Action? NestedHandler { get; set; }
         private DotNetObjectReference<BSAccordionItemBase>? _objectRef;
-        private bool _lock;
 
         /// <summary>
         /// Disables animations during collapsing of the accoridion item.
@@ -41,14 +46,9 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected override void OnInitialized()
         {
-            Shown = DefaultShown;
+            _shown = DefaultShown;
         }
-
-        protected override bool ShouldRender()
-        {
-            return !_lock;
-        }
-
+        
         /// <summary>
         /// Accordion item header content.
         /// </summary>
@@ -68,92 +68,92 @@ namespace BlazorStrap.Shared.Components.Common
         /// Returns whether or not the accordion item is shown.
         /// </summary>
         /// <remarks>Can be accessed using @ref</remarks>
-        public override bool Shown { get; protected set; }
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
 
-        private async Task TryCallback(bool renderOnFail = true)
+        /// <inheritdoc/>
+        public override async Task ShowAsync()
         {
-            try
+            if (_shown) return ;
+            _ = Task.Run(() => { _ = OnShow.InvokeAsync(this); });
+            //Kick off to event que
+            var taskSource = new TaskCompletionSource<bool>();
+                     var func = async () =>
             {
-                // Check if objectRef set if not callback will be handled after render.
-                // If anything fails callback will will be handled after render.
-                if (_objectRef != null)
+                CanRefresh = false;
+                
+                try
                 {
-                    if (_callback != null)
+                    await BlazorStrapService.Interop.RemoveClassAsync(ButtonRef, "collapsed");
+                    await BlazorStrapService.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
+                    Parent?.Invoke(this);
+                    if (!NoAnimations)
                     {
-                        await _callback();
-                        _callback = null;
+                        await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, true);
+                        await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 400);
+                        await Task.Delay(50);
+                        await BlazorStrapService.Interop.SetStyleAsync(MyRef, "height", "");
                     }
                 }
-                else
+                catch //Animation failed cleaning up
                 {
-                    throw new InvalidOperationException("No object ref");
                 }
-            }
-            catch
+                _shown = true;
+                await InvokeAsync(StateHasChanged);
+                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
+                taskSource.SetResult(true);
+                CanRefresh = true;
+            };
+            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func});
+
+            // Run event que if only item.
+            if (_eventQue.Count == 1)
             {
-                if (renderOnFail)
-                    await InvokeAsync(StateHasChanged);
+                await InvokeAsync(StateHasChanged);
             }
+            await taskSource.Task;
+            
         }
 
         /// <inheritdoc/>
-        public override Task ShowAsync()
+        public override async Task HideAsync()
         {
-            if (Shown) return Task.CompletedTask;
-            _callback = async () =>
+            if(!_shown) return ;
+            _ = Task.Run(() => { _ = OnHide.InvokeAsync(this); });
+            //Kick off to event que
+            var taskSource = new TaskCompletionSource<bool>();
+            var func = async () =>
             {
-                await ShowActionsAsync();
+                CanRefresh = false;
+
+                try
+                {
+                    await BlazorStrapService.Interop.AddClassAsync(ButtonRef, "collapsed");
+                    await BlazorStrapService.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
+                    if (!NoAnimations)
+                    {
+                        await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, false);
+                        await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 400);
+                    }
+                }
+                catch //Animation failed cleaning up
+                {
+                }
+
+                _shown = false;
+                await InvokeAsync(StateHasChanged);
+                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
+                taskSource.SetResult(true);
+                CanRefresh = true;
+
             };
-            return TryCallback();
-        }
 
-        private async Task ShowActionsAsync()
-        {
-            NestedHandler?.Invoke();
-            CanRefresh = false;
-            await BlazorStrapService.Interop.RemoveClassAsync(ButtonRef, "collapsed");
-            await BlazorStrapService.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
-            if (OnShow.HasDelegate)
-                await OnShow.InvokeAsync(this);
-            Parent?.Invoke(this);
-
-            if (_lock) return;
-            _lock = true;
-            if (!NoAnimations)
-                await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, true);
-            Shown = true;
-            if (NoAnimations)
-                await TransitionEndAsync();
-        }
-
-        /// <inheritdoc/>
-        public override Task HideAsync()
-        {
-            if (!Shown) return Task.CompletedTask;
-            _callback = async () =>
-            {
-                await HideActionsAsync();
-            };
-            return TryCallback();
-        }
-
-        private async Task HideActionsAsync()
-        {
-            NestedHandler?.Invoke();
-            CanRefresh = false;
-            await BlazorStrapService.Interop.AddClassAsync(ButtonRef, "collapsed");
-            await BlazorStrapService.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
-            if (OnHide.HasDelegate)
-                await OnHide.InvokeAsync(this);
-            if (_lock) return;
-            _lock = true;
-            if (!NoAnimations)
-                await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, false);
-            Shown = false;
-            if (NoAnimations)
-                await TransitionEndAsync();
+            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
+            // Run event que if only item.
+            if (_eventQue.Count == 1) {
+                await InvokeAsync(StateHasChanged);
+            }
+            await taskSource.Task;
         }
 
         /// <inheritdoc/>
@@ -164,15 +164,21 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (firstRender)
+            if (!firstRender)
             {
-                _objectRef = DotNetObjectReference.Create<BSAccordionItemBase>(this);
-                HasRendered = true;
+                if (_eventQue.Count > 0)
+                {
+                    var eventItem = _eventQue.First();
+                    if (eventItem != null)
+                    {
+                        _eventQue.Remove(eventItem);
+                        await eventItem.Func.Invoke();
+                    }
+                }
             }
-            if (_callback != null)
+            else
             {
-                await _callback.Invoke();
-                _callback = null;
+                _objectRef = DotNetObjectReference.Create(this);
             }
         }
 
@@ -188,38 +194,15 @@ namespace BlazorStrap.Shared.Components.Common
                 Parent.ChildHandler += Parent_ChildHandler;
             }
         }
-
-        private async Task TransitionEndAsync()
-        {
-            _lock = false;
-            await InvokeAsync(StateHasChanged);
-
-            if (OnShown.HasDelegate && Shown)
-                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
-
-            if (OnHidden.HasDelegate && !Shown)
-                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
-            CanRefresh = true;
-        }
-
+        
         [JSInvokable]
         public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
         {
-            if (DataId == id && name.Equals(this) && type == EventType.TransitionEnd)
-            {
-                await TransitionEndAsync();
-            }
         }
 
         private async void Parent_ChildHandler(BSAccordionItemBase? sender)
         {
-            if (sender == null)
-            {
-                if (!_lock) return;
-                //Parent is changing discard all animations
-                await TransitionEndAsync();
-            }
-            else
+            if (sender != null)
             {
                 if (sender != this && !AlwaysOpen && !sender.AlwaysOpen)
                 {
