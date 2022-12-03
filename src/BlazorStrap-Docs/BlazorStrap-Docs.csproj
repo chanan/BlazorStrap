@@ -34,6 +34,10 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\Static\V5\Test\Modal.md" />
+  </ItemGroup>
+
 
 	<Target Name="BeforeBuildStep" BeforeTargets="Build">
 		<ItemGroup>

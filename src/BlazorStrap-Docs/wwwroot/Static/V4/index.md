@@ -8,7 +8,9 @@ Bootstrap 4 Components for Blazor Framework
 
 ### Install
 ##### Blazor WebAssembly
-1. Download the V5.0 package from nuget: [![nuget](https://img.shields.io/badge/nuget-Download%205.x-blue)](https://www.nuget.org/packages/BlazorStrap)
+1. - Download BlazorStrap package from nuget: [![nuget](https://img.shields.io/badge/nuget-Download%205.1.x-blue)](https://www.nuget.org/packages/BlazorStrap)
+   - Download BlazorStrap.V4 package from nuget: [![nuget](https://img.shields.io/badge/nuget-Download%205.1.x-blue)](https://www.nuget.org/packages/BlazorStrap.V4)
+     - Both packages should be the same version.
 2. Modify your index.html with the following.
    1. Inside the ```<head>``` add 
       1. ```<link href="YourAssemblyName.styles.css" rel="stylesheet">``` )
@@ -19,10 +21,12 @@ Bootstrap 4 Components for Blazor Framework
 3. In ```Program.cs``` add 
    1. ```builder.Services.AddBlazorStrap();```
 4. In ```_Imports.razor``` add
-   1. ```@using BlazorStrap```
+   1. ```@using BlazorStrap.V4```
 -----
 ##### Blazor Server Side
-1. Download the V5.0 package from nuget:[![nuget](https://img.shields.io/badge/nuget-Download%205.x-blue)](https://www.nuget.org/packages/BlazorStrap)
+1. - Download BlazorStrap package from nuget: [![nuget](https://img.shields.io/badge/nuget-Download%205.1.x-blue)](https://www.nuget.org/packages/BlazorStrap)
+   - Download BlazorStrap.V4 package from nuget: [![nuget](https://img.shields.io/badge/nuget-Download%205.1.x-blue)](https://www.nuget.org/packages/BlazorStrap.V4)
+      - Both packages should be the same version.- 
 2. Modify your _host.cshtml with the following.
    1. Inside the ```<head>``` add
       1. ```<link href="YourAssemblyName.styles.css" rel="stylesheet">```
@@ -33,5 +37,5 @@ Bootstrap 4 Components for Blazor Framework
 3. In ```Program.cs``` or ```Startup.cs``` add
    1. ```Services.AddBlazorStrap();``` to your build pipeline
 4. In ```_Imports.razor``` add
-   1. ```@using BlazorStrap```
+   1. ```@using BlazorStrap.V4```
    

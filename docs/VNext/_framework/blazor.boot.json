@@ -8,13 +8,13 @@
   "resources": {
     "assembly": {
       "BlazorComponentUtilities.dll": "sha256-UapksNiQg3lu5QM9uVSLyjEuzRH\/7o22fmcmxcLAAeI=",
-      "BlazorStrap-Docs.dll": "sha256-y2t0s9W+thx3PsvFn\/XZGgQ1r5o\/gXRvmFtp4lNGysw=",
-      "BlazorStrap.dll": "sha256-D5dJtHrHbduS4lC33wN+XSvcVWbhJhpqSqu3HEIMM3w=",
+      "BlazorStrap-Docs.dll": "sha256-mZv2LVnEhPa448a4OJYCWNtSTIU\/R\/KT10d0xGdth0A=",
+      "BlazorStrap.dll": "sha256-PGLnKMIJqRoW9iuEG2fZrqPOzFeN7uWLIw\/E8o+1GpM=",
       "BlazorStrap.Extensions.FluentValidation.dll": "sha256-Xio62sN4IJ1mAFowVVQ78Sw++Lhx+7jplG\/s\/HPfzhs=",
       "BlazorStrap.Extensions.TreeView.dll": "sha256-heGt\/ize8gzArvkWQQP6nSAfC0wWyEaMOd9in8XWAc4=",
-      "BlazorStrap.V4.dll": "sha256-wVPVGJYcZHNhz84p3psey+whXKp8Z7tI4ScxQej1e94=",
-      "BlazorStrap.V5.dll": "sha256-BO+QWyiVAncTY8A0qnwu3uOPPNxpskK+ocQ+EFWLVj8=",
-      "BlazorStrap.WASM.dll": "sha256-FsaSrMlDbQ8S2TOn4tREymBBf7jEOe58dcwYCQw9gKY=",
+      "BlazorStrap.V4.dll": "sha256-4Hnq4rlS2wDivR0I77aEWuFnqXf3Lqvm+g3db\/8tSV0=",
+      "BlazorStrap.V5.dll": "sha256-WbppZa3O\/5noRVO6awBhUt3U\/tae7gfCn7JaSxcvEVg=",
+      "BlazorStrap.WASM.dll": "sha256-yzpUN6oxVsf0eU6WvbtPnHjvy3EmUoMNr+Eqy8\/3dGQ=",
       "ColorCode.dll": "sha256-hF07ps23in9mbwaN4uSoZklQVfyJIw2Ep4R448bfkOk=",
       "FluentValidation.dll": "sha256-NflrIQKcfYxeVjrVYw+AP1+xnZJp67Wq9L5Vsd5Cr\/8=",
       "Markdig.dll": "sha256-9\/ICq2gSL+hjhMdZXNoIRs8wyZFtZpr3yFSW+RQVdoQ=",
