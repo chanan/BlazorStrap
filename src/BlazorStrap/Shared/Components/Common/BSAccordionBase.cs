@@ -21,16 +21,16 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected override void OnInitialized()
         {
-            if (Parent != null)
-                Parent.NestedHandler += NestedHandler;
-            if (CollapseParent != null)
-                CollapseParent.NestedHandler += NestedHandler;
+            // if (Parent != null)
+            //     Parent.NestedHandler += NestedHandler;
+            // if (CollapseParent != null)
+            //     CollapseParent.NestedHandler += NestedHandler;
         }
 
-        private void NestedHandler()
-        {
-            ChildHandler?.Invoke(null);
-        }
+        // private void NestedHandler()
+        // {
+        //     ChildHandler?.Invoke(null);
+        // }
 
         public bool FirstChild()
         {
@@ -46,10 +46,10 @@ namespace BlazorStrap.Shared.Components.Common
 
         public void Dispose()
         {
-            if (Parent?.NestedHandler != null)
-                Parent.NestedHandler -= NestedHandler;
-            if (CollapseParent != null)
-                CollapseParent.NestedHandler -= NestedHandler;
+            // if (Parent?.NestedHandler != null)
+            //     Parent.NestedHandler -= NestedHandler;
+            // if (CollapseParent != null)
+            //     CollapseParent.NestedHandler -= NestedHandler;
         }
 
 

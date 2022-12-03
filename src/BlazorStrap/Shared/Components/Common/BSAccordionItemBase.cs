@@ -12,27 +12,35 @@ namespace BlazorStrap.Shared.Components.Common
             get => _shown;
             protected set => _shown = value;
         }
+
         private bool _shown;
+
         private IList<EventQue> _eventQue = new List<EventQue>();
-        // This is for nesting allows the child to jump to transition end if the parent is hidden or shown while in transition.
-        internal Action? NestedHandler { get; set; }
+
+        //TODO: This should not be needed
+        // This is for nesting allows the child to jump to 
+        /// Accordion item content.transition end if the parent is hidden or shown while in transition.
+        // internal Action? NestedHandler { get; set; }
+
         private DotNetObjectReference<BSAccordionItemBase>? _objectRef;
 
         /// <summary>
         /// Disables animations during collapsing of the accoridion item.
         /// </summary>
-        [Parameter] public bool NoAnimations { get; set; }
+        [Parameter]
+        public bool NoAnimations { get; set; }
 
         /// <summary>
         /// Makes accordion item stay open when another item is opened.
         /// See <see href="https://getbootstrap.com/docs/5.2/components/accordion/#always-open">Bootstrap Documentation</see>
         /// </summary>
-        [Parameter] public bool AlwaysOpen { get; set; }
+        [Parameter]
+        public bool AlwaysOpen { get; set; }
 
         /// <summary>
-        /// Accordion item content.
         /// </summary>
-        [Parameter] public RenderFragment? Content { get; set; }
+        [Parameter]
+        public RenderFragment? Content { get; set; }
 
         /// <summary>
         /// Accordion item is shown by default.
@@ -41,18 +49,23 @@ namespace BlazorStrap.Shared.Components.Common
         public bool DefaultShown
         {
             get => _defaultShown;
-            set { _defaultShown = value; _isDefaultShownSet = true; }
+            set
+            {
+                _defaultShown = value;
+                _isDefaultShownSet = true;
+            }
         }
 
         protected override void OnInitialized()
         {
             _shown = DefaultShown;
         }
-        
+
         /// <summary>
         /// Accordion item header content.
         /// </summary>
-        [Parameter] public RenderFragment? Header { get; set; }
+        [Parameter]
+        public RenderFragment? Header { get; set; }
 
         private bool _defaultShown;
         private bool _isDefaultShownSet;
@@ -69,19 +82,20 @@ namespace BlazorStrap.Shared.Components.Common
         /// </summary>
         /// <remarks>Can be accessed using @ref</remarks>
         protected abstract string? LayoutClass { get; }
+
         protected abstract string? ClassBuilder { get; }
 
         /// <inheritdoc/>
         public override async Task ShowAsync()
         {
-            if (_shown) return ;
+            if (_shown) return;
             _ = Task.Run(() => { _ = OnShow.InvokeAsync(this); });
             //Kick off to event que
             var taskSource = new TaskCompletionSource<bool>();
-                     var func = async () =>
+            var func = async () =>
             {
                 CanRefresh = false;
-                
+
                 try
                 {
                     await BlazorStrapService.Interop.RemoveClassAsync(ButtonRef, "collapsed");
@@ -98,27 +112,28 @@ namespace BlazorStrap.Shared.Components.Common
                 catch //Animation failed cleaning up
                 {
                 }
+
                 _shown = true;
                 await InvokeAsync(StateHasChanged);
                 _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
                 taskSource.SetResult(true);
                 CanRefresh = true;
             };
-            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func});
+            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
 
             // Run event que if only item.
             if (_eventQue.Count == 1)
             {
                 await InvokeAsync(StateHasChanged);
             }
+
             await taskSource.Task;
-            
         }
 
         /// <inheritdoc/>
         public override async Task HideAsync()
         {
-            if(!_shown) return ;
+            if (!_shown) return;
             _ = Task.Run(() => { _ = OnHide.InvokeAsync(this); });
             //Kick off to event que
             var taskSource = new TaskCompletionSource<bool>();
@@ -145,14 +160,15 @@ namespace BlazorStrap.Shared.Components.Common
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
                 taskSource.SetResult(true);
                 CanRefresh = true;
-
             };
 
             _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
             // Run event que if only item.
-            if (_eventQue.Count == 1) {
+            if (_eventQue.Count == 1)
+            {
                 await InvokeAsync(StateHasChanged);
             }
+
             await taskSource.Task;
         }
 
@@ -191,12 +207,14 @@ namespace BlazorStrap.Shared.Components.Common
                     DefaultShown = true;
                     Shown = true;
                 }
+
                 Parent.ChildHandler += Parent_ChildHandler;
             }
         }
-        
+
         [JSInvokable]
-        public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
+        public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList,
+            JavascriptEvent? e)
         {
         }
 

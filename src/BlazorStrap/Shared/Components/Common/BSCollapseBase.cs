@@ -7,15 +7,21 @@ namespace BlazorStrap.Shared.Components.Common
 {
     public abstract class BSCollapseBase : BlazorStrapToggleBase<BSCollapseBase>, IAsyncDisposable
     {
-        private Func<Task>? _callback;
+        public override bool Shown
+        {
+            get => _shown;
+            protected set => _shown = value;
+        }
+
+        private bool _shown;
+        private IList<EventQue> _eventQue = new List<EventQue>();
+                
         private DotNetObjectReference<BSCollapseBase>? _objectRef;
         [CascadingParameter] BSCollapseBase? Parent { get; set; }
         [CascadingParameter] BSAccordionItemBase? AccordionParent { get; set; }
 
-        internal Action? NestedHandler { get; set; }
-
-        private bool _lock;
-
+      //  internal Action? NestedHandler { get; set; }
+        
         /// <summary>
         /// Disables animations when set.
         /// </summary>
@@ -58,139 +64,129 @@ namespace BlazorStrap.Shared.Components.Common
 
         
 
-        // Can be access by @ref
-        public override bool Shown { get; protected set; }
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
 
         protected ElementReference? MyRef { get; set; }
-        private async Task TryCallback(bool renderOnFail = true)
+        
+        public override async Task ShowAsync()
         {
-            try
+            if (_shown) return ;
+            _ = Task.Run(() => { _ = OnShow.InvokeAsync(this); });
+            //Kick off to event que
+            var taskSource = new TaskCompletionSource<bool>();
+            var func = async () =>
             {
-                // Check if objectRef set if not callback will be handled after render.
-                // If anything fails callback will will be handled after render.
-                if (_objectRef != null)
+                CanRefresh = false;
+                
+                try
                 {
-                    if (_callback != null)
+                    if (!NoAnimations)
                     {
-                        await _callback();
-                        _callback = null;
+                        await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, true);
+                        await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 400);
+                        await Task.Delay(50);
+                        await BlazorStrapService.Interop.SetStyleAsync(MyRef, "height", "");
                     }
                 }
-                else
+                catch //Animation failed cleaning up
                 {
-                    throw new InvalidOperationException("No object ref");
                 }
-            }
-            catch
-            {
-                if (renderOnFail)
-                    await InvokeAsync(StateHasChanged);
-            }
-        }
-        protected override bool ShouldRender()
-        {
-            return !_lock;
-        }
-
-        public override Task ShowAsync()
-        {
-            if (Shown) return Task.CompletedTask;
-            _callback = async () =>
-            {
-                await ShowActionsAsync();
+                _shown = true;
+                await InvokeAsync(StateHasChanged);
+                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
+                taskSource.SetResult(true);
+                CanRefresh = true;
             };
-            return TryCallback();
-        }
-        private async Task ShowActionsAsync()
-        {
-            NestedHandler?.Invoke();
-            CanRefresh = false;
-            if (OnShow.HasDelegate)
-                await OnShow.InvokeAsync(this);
+            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func});
 
-            if (_lock) return;
-            _lock = true;
-            if (!NoAnimations)
-                await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, true);
-            Shown = true;
-            if (NoAnimations)
-                await TransitionEndAsync();
-        }
-        public override Task HideAsync()
-        {
-            if (!Shown) return Task.CompletedTask;
-            _callback = async () =>
+            // Run event que if only item.
+            if (_eventQue.Count == 1)
             {
-                await HideActionsAsync();
-            };
-            return TryCallback();
+                await InvokeAsync(StateHasChanged);
+            }
+            await taskSource.Task;
         }
-        private async Task HideActionsAsync()
+        
+        public override async Task HideAsync()
         {
-            NestedHandler?.Invoke();
-            CanRefresh = false;
-            if (OnHide.HasDelegate)
-                await OnHide.InvokeAsync(this);
-            if (_lock) return;
-            _lock = true;
-            if (!NoAnimations)
-                await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, false);
-            Shown = false;
-            if (NoAnimations)
-                await TransitionEndAsync();
-        }
+            if(!_shown) return ;
+            _ = Task.Run(() => { _ = OnHide.InvokeAsync(this); });
+            //Kick off to event que
+            var taskSource = new TaskCompletionSource<bool>();
+            var func = async () =>
+            {
+                CanRefresh = false;
 
+                try
+                {
+                    if (!NoAnimations)
+                    {
+                        await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, false);
+                        await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 400);
+                    }
+                }
+                catch //Animation failed cleaning up
+                {
+                }
+
+                _shown = false;
+                await InvokeAsync(StateHasChanged);
+                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
+                taskSource.SetResult(true);
+                CanRefresh = true;
+
+            };
+
+            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
+            // Run event que if only item.
+            if (_eventQue.Count == 1) {
+                await InvokeAsync(StateHasChanged);
+            }
+            await taskSource.Task;
+        }
+        
         public override Task ToggleAsync()
         {
             return Shown ? HideAsync() : ShowAsync();
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                _objectRef = DotNetObjectReference.Create(this);
-                BlazorStrapService.OnEventForward += InteropEventCallback;
-                if (Parent != null)
-                    Parent.NestedHandler += NestedHandlerEvent;
-                if (AccordionParent != null)
-                    AccordionParent.NestedHandler += NestedHandlerEvent;
-
-                if (IsInNavbar)
-                {
-                    await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Resize);
-                }
-                _hasRendered = true;
-            }
-            if (_callback != null)
-            {
-                await _callback.Invoke();
-                _callback = null;
-            }
-        }
-
         protected override void OnInitialized()
         {
-
+            BlazorStrapService.OnEventForward += InteropEventCallback;
+            // if (Parent?.NestedHandler != null)
+            //     Parent.NestedHandler += NestedHandlerEvent;
+            // if (AccordionParent?.NestedHandler != null)
+            //     AccordionParent.NestedHandler += NestedHandlerEvent;
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (!firstRender)
+            {
+                if (_eventQue.Count > 0)
+                {
+                    var eventItem = _eventQue.First();
+                    if (eventItem != null)
+                    {
+                        _eventQue.Remove(eventItem);
+                        await eventItem.Func.Invoke();
+                    }
+                }
+            }
+            else
+            {
+                _objectRef = DotNetObjectReference.Create(this);
+            }
+        }
+        
+        /// <summary>
+        /// TODO Test
+        /// </summary>
         private async void NestedHandlerEvent()
         {
-            if (!_lock) return;
-            await TransitionEndAsync();
-        }
-        private async Task TransitionEndAsync()
-        {
-            _lock = false;
-            await InvokeAsync(StateHasChanged);
-
-            if (OnShown.HasDelegate && Shown)
-                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
-            if (OnHidden.HasDelegate && !Shown)
-                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
-            CanRefresh = true;
+          //  if (!_lock) return;
+           // await TransitionEndAsync();
         }
 
         protected abstract Task OnResize(int width);
@@ -218,11 +214,6 @@ namespace BlazorStrap.Shared.Components.Common
             {
                 await OnResize(e?.ClientWidth ?? 0);
             }
-
-            else if (DataId == id && name.Equals(this) && type == EventType.TransitionEnd)
-            {
-                await TransitionEndAsync();
-            }
         }
 
         public async ValueTask DisposeAsync()
@@ -235,10 +226,11 @@ namespace BlazorStrap.Shared.Components.Common
                 }
                 catch { }
             }
-            if (Parent?.NestedHandler != null)
-                Parent.NestedHandler -= NestedHandlerEvent;
-            if (AccordionParent?.NestedHandler != null)
-                AccordionParent.NestedHandler -= NestedHandlerEvent;
+            
+            // if (Parent?.NestedHandler != null)
+            //     Parent.NestedHandler -= NestedHandlerEvent;
+            // if (AccordionParent?.NestedHandler != null)
+            //     AccordionParent.NestedHandler -= NestedHandlerEvent;
 
             BlazorStrapService.OnEventForward -= InteropEventCallback;
             _objectRef?.Dispose();
