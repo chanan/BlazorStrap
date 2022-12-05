@@ -56,6 +56,8 @@ namespace BlazorStrap.V5
         protected override string GetClass(Toast pos)
         {
             var position = $"position-{Position.NameToLower()}";
+            if (Position == CssPosition.Unset)
+                position = "";
             var rootClassBuilder = new CssBuilder("blazorstrap-toaster")
                 .AddClass(WrapperClass, !string.IsNullOrEmpty(WrapperClass))
                 .Build().ToNullString();
