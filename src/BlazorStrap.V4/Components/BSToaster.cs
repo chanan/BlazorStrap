@@ -27,7 +27,7 @@ namespace BlazorStrap.V4
                         builder.CloseElement();
                         builder.OpenElement(i, "div");
                         builder.AddAttribute(i + 1, "class", GetClass(toast.Placement));
-                        builder.AddAttribute(i + 2, "style", GetStyle(toast.Placement));
+                        builder.AddAttribute(i + 2, "style", $"z-index:{ZIndex};{GetStyle(toast.Placement)}{WrapperStyle}");
                     }
 
                     //Open first wrapper
@@ -35,7 +35,7 @@ namespace BlazorStrap.V4
                     {
                         builder.OpenElement(i, "div");
                         builder.AddAttribute(i + 1, "class", GetClass(toast.Placement));
-                        builder.AddAttribute(i + 2, "style", GetStyle(toast.Placement));
+                        builder.AddAttribute(i + 2, "style", $"z-index:{ZIndex};{GetStyle(toast.Placement)}{WrapperStyle}");
                     }
 
                     builder.OpenElement(i + 3, "div");
@@ -56,25 +56,26 @@ namespace BlazorStrap.V4
 
         protected override string GetClass(Toast pos)
         {
+            var position = $"position-{Position.NameToLower()}";
             var rootClassBuilder = new CssBuilder("blazorstrap-toaster")
              .AddClass(WrapperClass, !string.IsNullOrEmpty(WrapperClass))
              .Build().ToNullString();
-            return rootClassBuilder + " position-absolute";
+            return rootClassBuilder + $" {position}";
         }
 
         protected string GetStyle(Toast pos)
         {
             return WrapperStyle + pos switch
             {
-                Toast.TopLeft => "top:0;left:0",
-                Toast.TopCenter => "top:0;left:50%;transform:translateX(-50%)",
-                Toast.TopRight => "top:0;right:0",
+                Toast.TopLeft => "top:0;left:0;",
+                Toast.TopCenter => "top:0;left:50%;transform:translateX(-50%);",
+                Toast.TopRight => "top:0;right:0;",
                 Toast.MiddleLeft => "top:50%;left:0;transform: translateY(-50%)!important;",
                 Toast.MiddleCenter => "top:50%;left:50%;transform: translate(-50%,-50%)!important;",
                 Toast.MiddleRight => "top:50%;right:0;transform: translateY(-50%)!important;",
-                Toast.BottomLeft => "bottom:0;left:0",
+                Toast.BottomLeft => "bottom:0;left:0;",
                 Toast.BottomCenter => "bottom:0;left:50%;transform: translateX(-50%)!important;",
-                _ => "bottom:0;right:0"
+                _ => "bottom:0;right:0;"
             };
         }
 

@@ -11,6 +11,8 @@ namespace BlazorStrap.Shared.Components
         /// Sets the wrapper class for the toaster.
         /// </summary>
         [Parameter] public string WrapperClass { get; set; } = "";
+        [Parameter] public CssPosition Position { get; set; } = CssPosition.Fixed;
+        [Parameter] public int ZIndex { get; set; } = 1025;
         [Parameter] public string? WrapperStyle { get; set; } 
         protected override void OnInitialized()
         {

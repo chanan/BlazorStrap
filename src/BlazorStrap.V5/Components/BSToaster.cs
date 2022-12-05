@@ -8,7 +8,7 @@ namespace BlazorStrap.V5
 {
     public class BSToaster : BSToasterBase
     {
-         protected override void BuildRenderTree(RenderTreeBuilder builder)
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var lastPlacment = Toast.Default;
             var building = false;
@@ -26,7 +26,7 @@ namespace BlazorStrap.V5
                         builder.CloseElement();
                         builder.OpenElement(i, "div");
                         builder.AddAttribute(i + 1, "class", GetClass(toast.Placement));
-                        builder.AddAttribute(i + 1, "style", WrapperStyle);
+                        builder.AddAttribute(i + 1, "style", $"z-index:{ZIndex};{WrapperStyle}");
                     }
 
                     //Open first wrapper
@@ -34,7 +34,7 @@ namespace BlazorStrap.V5
                     {
                         builder.OpenElement(i, "div");
                         builder.AddAttribute(i + 1, "class", GetClass(toast.Placement));
-                        builder.AddAttribute(i + 1, "style", WrapperStyle);
+                        builder.AddAttribute(i + 1, "style", $"z-index:{ZIndex};{WrapperStyle}");
                     }
 
                     builder.OpenElement(i + 2, "div");
@@ -55,20 +55,21 @@ namespace BlazorStrap.V5
 
         protected override string GetClass(Toast pos)
         {
+            var position = $"position-{Position.NameToLower()}";
             var rootClassBuilder = new CssBuilder("blazorstrap-toaster")
                 .AddClass(WrapperClass, !string.IsNullOrEmpty(WrapperClass))
                 .Build().ToNullString();
             return rootClassBuilder + " " + pos switch
             {
-                Toast.TopLeft => "position-absolute top-0 start-0",
-                Toast.TopCenter => "position-absolute top-0 start-50 translate-middle-x",
-                Toast.TopRight => "position-absolute top-0 end-0",
-                Toast.MiddleLeft => "position-absolute top-50 start-0 translate-middle-y",
-                Toast.MiddleCenter => "position-absolute top-50 start-50 translate-middle",
-                Toast.MiddleRight => "position-absolute top-50 end-0 translate-middle-y",
-                Toast.BottomLeft => "position-absolute bottom-0 start-0",
-                Toast.BottomCenter => "position-absolute bottom-0 start-50 translate-middle-x",
-                _ => "position-absolute bottom-0 end-0"
+                Toast.TopLeft => $"{position} top-0 start-0",
+                Toast.TopCenter => $"{position} top-0 start-50 translate-middle-x",
+                Toast.TopRight => $"{position} top-0 end-0",
+                Toast.MiddleLeft => $"{position} top-50 start-0 translate-middle-y",
+                Toast.MiddleCenter => $"{position} top-50 start-50 translate-middle",
+                Toast.MiddleRight => $"{position} top-50 end-0 translate-middle-y",
+                Toast.BottomLeft => $"{position} bottom-0 start-0",
+                Toast.BottomCenter => $"{position} bottom-0 start-50 translate-middle-x",
+                _ => $"{position} bottom-0 end-0"
             };
         }
 
@@ -76,10 +77,7 @@ namespace BlazorStrap.V5
         {
             if (Toast == null) throw new ArgumentNullException(nameof(Toast));
 
-            var header = new RenderFragment(childBuilder =>
-            {
-                childBuilder.AddContent(0, new MarkupString(Toast.HeaderText ?? ""));
-            });
+            var header = new RenderFragment(childBuilder => { childBuilder.AddContent(0, new MarkupString(Toast.HeaderText ?? "")); });
             var content = new RenderFragment(childBuilder =>
             {
                 childBuilder.AddContent(0, new MarkupString(Toast.ContentText ?? ""));
@@ -96,7 +94,8 @@ namespace BlazorStrap.V5
                 if (Toast.Options == null) throw new ArgumentNullException(nameof(Toast.Options));
                 if (BlazorStrapService == null) throw new ArgumentNullException(nameof(BlazorStrap));
                 if (BlazorStrapService.Toaster == null) throw new ArgumentNullException(nameof(BlazorStrapService.Toaster));
-                if (BlazorStrapService.Toaster.OnChange == null) throw new ArgumentNullException(nameof(BlazorStrapService.Toaster.OnChange));
+                if (BlazorStrapService.Toaster.OnChange == null)
+                    throw new ArgumentNullException(nameof(BlazorStrapService.Toaster.OnChange));
 
                 builder.OpenComponent<BSToast>(0);
                 builder.AddAttribute(1, "ButtonClass", Toast.Options.ButtonClass);
@@ -106,6 +105,7 @@ namespace BlazorStrap.V5
                 {
                     builder.AddAttribute(4, "Header", header);
                 }
+
                 builder.AddAttribute(5, "Content", content);
                 builder.AddAttribute(6, "ContentClass", Toast.Options.ContentClass);
                 builder.AddAttribute(7, "HeaderClass", Toast.Options.HeaderClass);

@@ -2,10 +2,21 @@
 <!--\\-->
 <div aria-live="polite" aria-atomic="true" class="position-relative bd-example-toasts" style="overflow-y: scroll ">
 <!--//-->
-    <BSToaster/>
+    <BSToaster Position="ToastPosition" ZIndex="ZIndex"/>
 <!--\\-->
 </div>
 <!--//-->
+<div class="input-group">
+    <span class="input-group-text">Toaster Position</span>
+    <BSInput InputType="InputType.Select" @bind-Value="ToastPosition">
+        @foreach (var item in  Enum.GetNames(typeof(CssPosition)).ToList())
+        {
+            <option value="@item">@item</option>
+        }
+    </BSInput>
+    <span class="input-group-text">Toaster Z-Index</span>
+    <BSInput InputType="InputType.Text" @bind-Value="ZIndex"/>
+</div>
 <div class="input-group">
     <span class="input-group-text">Toast Placement</span>
     <BSInput InputType="InputType.Select" @bind-Value="ToastPlacement">
@@ -27,10 +38,11 @@
     <BSInput InputType="InputType.Text" @bind-Value="Time"/>
     <BSButton @onclick="Show" Color="BSColor.Primary">Show</BSButton>
 </div>
-
 @code
 {
     private Toast ToastPlacement { get; set; }
+    private int ZIndex { get; set; } = 1025;
+    private CssPosition ToastPosition { get; set; } = CssPosition.Fixed;
     private BSColor Color { get; set; }
     private int Time { get; set; } = 0;
     private int i = 0;
