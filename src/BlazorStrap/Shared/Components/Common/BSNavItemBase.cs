@@ -128,10 +128,12 @@ namespace BlazorStrap.Shared.Components.Common
             }
         }
 
+        protected abstract Task ChildHandler(BSNavItemBase sender);
         private async void Parent_ChildHandler(BSNavItemBase sender)
         {
             if (Parent != null)
                 IsActive = Parent.ActiveChild == this;
+            await ChildHandler(sender);
             await InvokeAsync(StateHasChanged);
         }
         public void Dispose()

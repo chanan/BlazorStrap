@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <LangVersion>10.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+        <PackageId>BlazorStrap.Extensions.Wizard</PackageId>
+        <Version>5.1.100-Beta1</Version>
+        <Authors>John Bomhold</Authors>
+        <Title>BlazorStrap Extension for Wizards</Title>
+        <Description>A treeview component library for BlazorStrap</Description>
+        <PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
+        <PackageTags>blazor;bootstrap;bootstrap4;bootstrap5</PackageTags>
+        <RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
+        <Platforms>AnyCPU;x64;x86</Platforms>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.*" />
+        <PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
+    </ItemGroup>
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.*" />
+        <PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
+    </ItemGroup>
+    
+</Project>

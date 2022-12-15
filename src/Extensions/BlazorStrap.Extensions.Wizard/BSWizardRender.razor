@@ -1,0 +1,18 @@
+@if (Parent?.ActiveChild?.Content != null)
+{
+    @Parent.ActiveChild.Content(Parent)
+}
+
+
+@code {
+    [CascadingParameter] public BSWizard? Parent { get; set; }
+
+    public async Task RefreshAsync()
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+    public async Task Refresh()
+    {
+        StateHasChanged();
+    }
+}

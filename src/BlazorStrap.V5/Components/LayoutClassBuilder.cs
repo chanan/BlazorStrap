@@ -3,9 +3,9 @@ using BlazorStrap.Extensions;
 
 namespace BlazorStrap.V5
 {
-    internal static class LayoutClassBuilder
+    public static class LayoutClassBuilder 
     {
-        internal static string? Build(IBlazorStrapBase blazorStrapBase )
+        public static string? Build(IBlazorStrapBase blazorStrapBase )
         {
             return new CssBuilder()
                 .AddClass($"p-{blazorStrapBase.Padding.ToIndex()}", blazorStrapBase.Padding != Padding.Default)

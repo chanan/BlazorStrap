@@ -89,7 +89,7 @@ namespace BlazorStrap.Shared.Components.Common
                 _ = Task.Run(() => OnTabChange.InvokeAsync(ActiveChild.TabContent));
         }
 
-        internal event Action<BSNavItemBase>? ChildHandler;
+        public event Action<BSNavItemBase>? ChildHandler;
 
         internal void Rerender()
         {

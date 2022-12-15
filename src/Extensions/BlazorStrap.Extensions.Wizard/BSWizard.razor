@@ -1,0 +1,20 @@
+@using BlazorStrap
+<CascadingValue Value="this">
+    <div class="card text-center @CardClass">
+        <div class="card-header @CardHeaderClass">
+            <ul class="@ClassBuilder">
+
+                @ChildContent
+            </ul>
+        </div>
+        <div class="card-body @CardBodyClass">
+            <BSWizardRender @ref="_wizardRender"/>
+        </div>
+        <div class="card-footer @CardBodyFooterClass">
+            <div class="d-flex">
+                <div>@BackButton?.Invoke(this)</div>
+                <div style="margin-left: auto">@NextButton?.Invoke(this)</div>
+            </div>
+        </div>
+    </div>
+</CascadingValue>

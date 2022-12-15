@@ -6,6 +6,11 @@ namespace BlazorStrap.V5
 {
     public partial class BSNavItem : BSNavItemBase
     {
+        protected override Task ChildHandler(BSNavItemBase sender)
+        {
+            return Task.CompletedTask;
+        }
+
         protected override string? LayoutClass => LayoutClassBuilder.Build(this);
 
         protected override string? ClassBuilder => new CssBuilder("nav-link")

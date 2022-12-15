@@ -5,7 +5,7 @@ namespace BlazorStrap.V4
 {
     internal static class LayoutClassBuilder
     {
-        internal static string? Build(IBlazorStrapBase blazorStrapBase)
+        public static string? Build(IBlazorStrapBase blazorStrapBase)
         {
             return new CssBuilder()
                 .AddClass($"p-{blazorStrapBase.Padding.ToIndex()}", blazorStrapBase.Padding != Padding.Default)
