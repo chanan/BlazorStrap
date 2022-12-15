@@ -19,3 +19,7 @@ Samples must have a line above and below. Listed are two examples one with custo
 :::
 This is a custom div
 :::
+
+:::{.bd-callout .bd-callout-info}
+**Note: BlazorStrap** is developed  free of charge by community members. This is not a full time job for our developers. While we try to provide quick support for issue it's not always possible.
+:::

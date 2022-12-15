@@ -1,10 +1,5 @@
 ﻿using BlazorStrap.InternalComponents;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlazorStrap.Shared.Components.Common
 {
@@ -49,7 +44,12 @@ namespace BlazorStrap.Shared.Components.Common
         /// Removes the <c>nav</c> class.
         /// </summary>
         [Parameter] public bool NoNav { get; set; }
-
+        /// <summary>
+        /// Event Callback for when a new tab is selected
+        /// </summary>
+        [Parameter] public EventCallback<RenderFragment> OnTabChange { get; set; }
+        [CascadingParameter] public BSTabWrapperBase? TabWrapper { get; set; }
+        
         [CascadingParameter] public BSNavbarBase? Navbar { get; set; }
         public BSNavItemBase? ActiveChild { get; set; }
 
@@ -59,10 +59,20 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected TabContentRender? TabRender { get; set; }
 
+        protected override void OnInitialized()
+        {
+            if (TabWrapper != null) TabWrapper.Nav = this;
+        }
+
         public bool SetFirstChild(BSNavItemBase sender)
         {
             if (ActiveChild != null) return false;
             ActiveChild = sender;
+            
+            ChildHandler?.Invoke(sender);
+            
+            if (OnTabChange.HasDelegate)
+                _ = Task.Run(() => OnTabChange.InvokeAsync(ActiveChild.TabContent));
             return true;
         }
 
@@ -75,6 +85,8 @@ namespace BlazorStrap.Shared.Components.Common
             }
 
             ChildHandler?.Invoke(sender);
+            if (OnTabChange.HasDelegate)
+                _ = Task.Run(() => OnTabChange.InvokeAsync(ActiveChild.TabContent));
         }
 
         internal event Action<BSNavItemBase>? ChildHandler;

@@ -38,6 +38,10 @@ See [shared](layout/shared) for additional parameters
 
 :::
 
+#### Component \<BSTabWrapper\>
+
+#### Component \<BSTabRender\>
+
 ### Base nav
 
 {{sample=V4/Components/Nav/Nav1}}
@@ -64,6 +68,17 @@ Use `IsNav` to output as a non list
 
 {{sample=V4/Components/Nav/Nav7}}
 
+### Tabs with Wrapper and Render
+
+{{sample=V5/Components/Nav/Nav15}}
+
+:::{.bd-callout .bd-callout-info}
+**Note:** BSTabWrapper prevents BSNav from rendering the TabContent. This is the only reason it's used here.
+:::
+
+### Tab Custom Render location.
+
+{{sample=V5/Components/Nav/Nav16}}
 ### Pills
 
 {{sample=V4/Components/Nav/Nav8}}

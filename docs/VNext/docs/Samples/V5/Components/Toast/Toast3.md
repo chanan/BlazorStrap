@@ -9,7 +9,7 @@
 <div class="input-group">
     <span class="input-group-text">Toaster Position</span>
     <BSInput InputType="InputType.Select" @bind-Value="ToastPosition">
-        @foreach (var item in  Enum.GetNames(typeof(CssPosition)).ToList())
+        @foreach (var item in  Enum.GetNames(typeof(Position)).ToList())
         {
             <option value="@item">@item</option>
         }
@@ -42,7 +42,7 @@
 {
     private Toast ToastPlacement { get; set; }
     private int ZIndex { get; set; } = 1025;
-    private CssPosition ToastPosition { get; set; } = CssPosition.Fixed;
+    private Position ToastPosition { get; set; } = Position.Fixed;
     private BSColor Color { get; set; }
     private int Time { get; set; } = 0;
     private int i = 0;

@@ -14,8 +14,10 @@
             @ChildContent
         </ul>
     }
-
+@if (TabWrapper == null)
+{
     <BlazorStrap.InternalComponents.TabContentRender @ref="TabRender">
         @ActiveChild?.TabContent
     </BlazorStrap.InternalComponents.TabContentRender>
+}
 </CascadingValue>
