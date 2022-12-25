@@ -1,14 +1,12 @@
 # BlazorStrap
-### Bootstrap 4/5 components for Blazor
-
-## Install
-
 [![NuGet Pre Release](https://img.shields.io/nuget/v/BlazorStrap.svg)](https://www.nuget.org/packages/BlazorStrap/)
 [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/BlazorStrap?color=orange)](https://www.nuget.org/packages/BlazorStrap/)
 ![Nuget](https://img.shields.io/nuget/dt/BlazorStrap)
 ![GitHub stars](https://img.shields.io/github/stars/chanan/BlazorStrap?color=orange)
 [![Gitter chat](https://img.shields.io/badge/gitter-join-na?logo=gitter)](https://gitter.im/BlazorStrap/community)
 [![Gitter chat](https://img.shields.io/badge/discord-join-na?logo=discord)](https://discord.gg/V7Y8s7WprR)
+
+### Bootstrap 4/5 components for Blazor
 
 ## Bootstrap 5 [![NuGet Pre Release](https://img.shields.io/nuget/v/BlazorStrap.V5.svg)](https://www.nuget.org/packages/BlazorStrap.V5/)
 `We do not include bootstrap.min.css in the package. This already exists in the blazor wasm and blazor server side templates.`
