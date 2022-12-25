@@ -21,7 +21,26 @@ if (!Element.prototype.closest) {
     };
 }
 
+const timeout = (ms, message) => {
+    return new Promise((_, reject) => {
+        setTimeout(() => {
+            reject(new Error(message));
+        }, ms);
+    });
+};
+
+
+const transitionEnd = (element) => {
+    return new Promise(resolve => {
+        resFunc = resolve;
+        element.addEventListener("transitionend", resFunc);
+    });
+}
 window.blazorStrap = {
+
+    WaitForTransitionEnd: function (element, timeoutLength) {
+        return Promise.race([timeout(timeoutLength), transitionEnd(element)]);
+    },
     CleanUpEvents: function () {
         Object.keys(blazorStrap.EventHandlers).forEach(key => {
             if (document.querySelector("[data-blazorstrap='" + key + "']") === null) {
@@ -29,7 +48,7 @@ window.blazorStrap = {
                     Object.keys(blazorStrap.EventHandlers[key][name]).forEach(type => {
                         try {
                             window.removeEventListener(type, blazorStrap.EventHandlers[key][name][type].Callback, false);
-                        } catch {}
+                        } catch { }
                     });
                 });
                 delete blazorStrap.EventHandlers[key];
@@ -72,7 +91,7 @@ window.blazorStrap = {
     },
     AddEventInternal: function (objRef, element, id, name, type, ignoreChildren = false, filter = "") {
         blazorStrap.CleanUpEvents();
-        
+
         let expandedWidth = 0;
         if (type === "resize" && element == document) {
             let navbar = document.querySelector("[class*=navbar-expand]");
@@ -215,7 +234,7 @@ window.blazorStrap = {
         await blazorStrap.CleanupCarousel(showEl, hideEl);
 
         let callback = function () {
-            objref.invokeMethodAsync("InteropEventCallback", id, "bscarousel", "transitionend");
+            objref.invokeMethodAsync("InteropEventCallback", id, "bscarouselbase", "transitionend");
         };
 
         return new Promise(function (resolve) {
@@ -242,6 +261,37 @@ window.blazorStrap = {
             }
         });
     },
+    AnimateCarouselV4: async function (objref, id, showEl, hideEl, back) {
+        await blazorStrap.CleanupCarousel(showEl, hideEl);
+
+        let callback = function () {
+            objref.invokeMethodAsync("InteropEventCallback", id, "bscarouselbase", "transitionend");
+        };
+
+        return new Promise(function (resolve) {
+            if (back) {
+                showEl.classList.add("carousel-item-prev");
+                setTimeout(async function () {
+                    showEl.classList.add("carousel-item-right");
+                    hideEl.classList.add("carousel-item-right");
+                    hideEl.addEventListener("transitionend", callback, {
+                        once: true
+                    });
+                    resolve((await blazorStrap.TransitionDidNotStart(showEl)));
+                }, 10);
+            } else {
+                showEl.classList.add("carousel-item-next");
+                setTimeout(async function () {
+                    showEl.classList.add("carousel-item-left");
+                    hideEl.classList.add("carousel-item-left");
+                    hideEl.addEventListener("transitionend", callback, {
+                        once: true
+                    });
+                    resolve((await blazorStrap.TransitionDidNotStart(showEl)));
+                }, 10);
+            }
+        });
+    },
     AnimateCollapse: async function (objRef, element, id, shown, name) {
         if (shown) {
             let cleanup = function () {
@@ -251,8 +301,9 @@ window.blazorStrap = {
                 element.classList.add("show");
                 objRef.invokeMethodAsync("InteropEventCallback", id, name, "transitionend", null, null);
             };
-
+            
             let height = await blazorStrap.PeakHeight(element);
+            
             element.classList.remove("collapse");
             element.classList.add("collapsing");
             element.addEventListener("transitionend", cleanup, {
@@ -324,17 +375,36 @@ window.blazorStrap = {
             return {
                 key: event.key,
                 clientWidth: document.documentElement.clientWidth,
+                parent: blazorStrap.GetParent(event.target.parentElement),
                 target: {
+                    nodeName: event.target.nodeName,
                     classList: event.target.classList,
                     targetId: event.target.getAttribute("data-blazorstrap-target"),
                     childrenId: blazorStrap.GetChildrenIds(event.target),
                     dataId: event.target.getAttribute("data-blazorstrap")
                 }
             };
+
         } catch {
             return {
                 key: event.key,
                 clientWidth: document.documentElement.clientWidth,
+            }
+        }
+    },
+    GetParent: function (parent, i = 0) {
+        //Limited to 4 deep
+        i = i + 1;
+        if (i > 4 || parent === undefined) return;
+
+        return {
+            parent: blazorStrap.GetParent(parent.parentElement, i),
+            target: {
+                nodeName: parent.nodeName,
+                classList: parent.classList,
+                targetId: parent.getAttribute("data-blazorstrap-target"),
+                childrenId: blazorStrap.GetChildrenIds(parent),
+                dataId: parent.getAttribute("data-blazorstrap")
             }
         }
     },
@@ -369,13 +439,14 @@ window.blazorStrap = {
         var oldStyle = element.style;
         return new Promise(function (resolve) {
             element.style.visibility = "hidden";
+            element.style.width = (element.parentNode.offsetWidth - 4) + "px";
             element.style.position = "absolute";
             element.style.display = "block";
             setTimeout(function () {
                 var height = element.offsetHeight;
                 element.style = oldStyle;
                 resolve(height);
-            }, 1);
+            }, 10);
         });
     },
     RemoveAttribute: async function (element, name) { //Likely can be removed
@@ -413,7 +484,7 @@ window.blazorStrap = {
     RemoveEventInternal: function (element, id, name, type) {
         blazorStrap.CleanUpEvents();
         if (blazorStrap.EventHandlers[id] === undefined) return;
-        
+
         if (name !== "null" && type !== "null") {
             if (blazorStrap.EventHandlers[id][name] === undefined) return;
             if (blazorStrap.EventHandlers[id][name][type] === undefined) return;
@@ -555,6 +626,9 @@ window.blazorStrap = {
         let arrow;
         return new Promise(function (resolve) {
             if (tooltip === false) arrow = element.querySelector('.popover-arrow'); else arrow = element.querySelector('.tooltip-arrow');
+            if (arrow === undefined || arrow === null) {
+                arrow = element.querySelector('.arrow');
+            }
             position = position.replace("start", "");
             position = position.replace("end", "");
 

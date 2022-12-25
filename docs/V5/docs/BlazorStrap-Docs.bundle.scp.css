@@ -1,13 +1,13 @@
-/* docs/Samples/Content/Images/Images6.razor.rz.scp.css */
-text#svg-text[b-1lgjffb7c2]  {
-    animation-name: animateSvg-b-1lgjffb7c2;
+/* docs/Samples/V4/Content/Images/Images6.razor.rz.scp.css */
+text#svg-text[b-wyhjb81w97]  {
+    animation-name: animateSvg-b-wyhjb81w97;
     transform-origin: 50% 50%;
     animation-duration: 5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
 
-@keyframes animateSvg-b-1lgjffb7c2  {
+@keyframes animateSvg-b-wyhjb81w97  {
     from  {
         transform: rotate(0deg);
     }
@@ -16,20 +16,55 @@ text#svg-text[b-1lgjffb7c2]  {
         transform: rotate(360deg);
     }
 }
-/* docs/Samples/Forms/Validation/ValidationMain.razor.rz.scp.css */
-[b-cv9jnflrzf] .custom-file-button input[type=file] {
+/* docs/Samples/V4/Forms/Validation/ValidationMain.razor.rz.scp.css */
+[b-4her6p9j9s] .custom-file-button input[type=file] {
     margin-left: -2px !important;
 }
 
-    [b-cv9jnflrzf] .custom-file-button input[type=file]::-webkit-file-upload-button {
+    [b-4her6p9j9s] .custom-file-button input[type=file]::-webkit-file-upload-button {
         display: none;
     }
 
-    [b-cv9jnflrzf].custom-file-button input[type=file]::file-selector-button {
+    [b-4her6p9j9s].custom-file-button input[type=file]::file-selector-button {
         display: none;
     }
 
-[b-cv9jnflrzf] .custom-file-button:hover label {
+[b-4her6p9j9s] .custom-file-button:hover label {
+    background-color: #dde0e3;
+    cursor: pointer;
+}
+/* docs/Samples/V5/Content/Images/Images6.razor.rz.scp.css */
+text#svg-text[b-aemurqktc1]  {
+    animation-name: animateSvg-b-aemurqktc1;
+    transform-origin: 50% 50%;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animateSvg-b-aemurqktc1  {
+    from  {
+        transform: rotate(0deg);
+    }
+
+    to  {
+        transform: rotate(360deg);
+    }
+}
+/* docs/Samples/V5/Forms/Validation/ValidationMain.razor.rz.scp.css */
+[b-5bqulee73b] .custom-file-button input[type=file] {
+    margin-left: -2px !important;
+}
+
+    [b-5bqulee73b] .custom-file-button input[type=file]::-webkit-file-upload-button {
+        display: none;
+    }
+
+    [b-5bqulee73b].custom-file-button input[type=file]::file-selector-button {
+        display: none;
+    }
+
+[b-5bqulee73b] .custom-file-button:hover label {
     background-color: #dde0e3;
     cursor: pointer;
 }

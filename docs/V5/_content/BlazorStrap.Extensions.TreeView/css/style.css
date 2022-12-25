@@ -1,0 +1,43 @@
+﻿.bs-tree a {
+    cursor: pointer;
+}
+
+.bs-tree > ul.nav ul.nav {
+    margin: 0 0 0 1rem;
+}
+
+.bs-tree > ul.nav ul {
+    display: none;
+}
+
+    .bs-tree > ul.nav ul.show {
+        display: flex;
+    }
+
+.tree-toggle {
+    transform: rotate(-90deg);
+    display: inline-block;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+.bs-tree .nav-link {
+    padding-left: .5rem;
+}
+
+    .bs-tree .nav-link .bs-tree-actions {
+        margin-left: auto !important;
+    }
+
+.tree-spacer {
+    display: inline-block;
+    margin-left: .855em;
+}
+
+.tree-toggle.open {
+    transform: rotate(0deg);
+}
