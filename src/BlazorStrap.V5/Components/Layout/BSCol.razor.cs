@@ -13,7 +13,8 @@ namespace BlazorStrap.V5
         protected override string? LayoutClass => LayoutClassBuilder.Build(this);
 
         protected override string? ClassBuilder => new CssBuilder()
-                .AddClass("col", Column == null && ColumnSmall == null && ColumnMedium == null && ColumnLarge == null && ColumnXL == null && ColumnXXL == null)
+                .AddClass("col-auto", Auto)
+                .AddClass("col", !Auto && Column == null && ColumnSmall == null && ColumnMedium == null && ColumnLarge == null && ColumnXL == null && ColumnXXL == null)
                 .AddClass($"col-{Column}", Column.VaildGridSize())
                 .AddClass($"col-sm-{ColumnSmall}", ColumnSmall.VaildGridSize())
                 .AddClass($"col-md-{ColumnMedium}", ColumnMedium.VaildGridSize())

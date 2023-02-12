@@ -4,6 +4,7 @@ namespace BlazorStrap.Shared.Components.Layout
 {
     public abstract class BSColBase : BlazorStrapBase
     {
+        [Parameter] public bool Auto { get; set; }
         [Parameter] public Align Align { get; set; }
         [Parameter] public string? Column { get; set; }
         [Parameter] public string? ColumnXL { get; set; }
