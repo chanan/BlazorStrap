@@ -142,7 +142,7 @@ namespace BlazorStrap.Shared.Components.Common
             _callback = async () =>
             {
                 await HideActionsAsync();
-                if(Parent != null)
+                if (Parent != null)
                     await Parent.HideActionsAsync();
             };
             return TryCallback();
@@ -184,22 +184,6 @@ namespace BlazorStrap.Shared.Components.Common
             // The if statement was getting hard to read so split into parts 
             if (id == DataRefId && name.Equals(this) && type == EventType.Click)
             {
-                // Prevent close on form items
-                if (e?.Target?.NodeName?.ToLower() is "form" or "input" or "label")
-                    return;
-                var parent = e?.Parent;
-
-                for (var i=1; i <= 4; i++)
-                {
-                    if (parent != null)
-                    {
-                        if (parent?.Target?.NodeName?.ToLower() is "form" or "input" or "label" )
-                            return;
-                        parent = parent?.Parent;
-                    }
-                    else break;
-                }
-
                 // Prevent Dropdown from closing with this. If it's a dropdown item.
                 if (e?.Target.ClassList.Any(q => q.Value == "dropdown-item") == true)
                     return;
