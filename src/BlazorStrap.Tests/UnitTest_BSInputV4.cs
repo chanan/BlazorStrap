@@ -8,6 +8,7 @@ using Xunit.Abstractions;
 
 namespace BlazorStrap.Tests;
 
+[UseCulture("en-US")]
 public class BSInputTestsV4
 {
     private readonly ITestOutputHelper _testOutputHelper;

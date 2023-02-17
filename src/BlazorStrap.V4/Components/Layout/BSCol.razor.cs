@@ -11,7 +11,8 @@ namespace BlazorStrap.V4
 
         protected override string? LayoutClass => LayoutClassBuilder.Build(this);
         protected override string? ClassBuilder => new CssBuilder()
-                .AddClass("col", Column == null && ColumnSmall == null && ColumnMedium == null && ColumnLarge == null && ColumnXL == null)
+                .AddClass("col-auto", Auto)
+                .AddClass("col", !Auto && Column == null && ColumnSmall == null && ColumnMedium == null && ColumnLarge == null && ColumnXL == null)
                 .AddClass($"px-{BSRow?.Gutters.ToIndex()} py-{BSRow?.Gutters.ToIndex()}", BSRow?.Gutters != Gutters.Default)
                 .AddClass($"px-{BSRow?.HorizontalGutters.ToIndex()}", BSRow?.HorizontalGutters != Gutters.Default)
                 .AddClass($"py-{BSRow?.VerticalGutters.ToIndex()}", BSRow?.VerticalGutters != Gutters.Default)
