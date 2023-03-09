@@ -3,12 +3,14 @@ using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
-
+using Microsoft.VisualBasic;
+using System.Globalization;
 
 namespace BlazorStrap.Shared.Components.Forms
 {
     public abstract class BlazorStrapInputBase<TValue> : BlazorInputBase<TValue>, IBlazorStrapBase, IDisposable
     {
+        private string _dateFormat = "yyyy-MM-dd";
         /// <summary>
         /// Debounce interval in ms to filter input. Default is 500ms.
         /// </summary>
@@ -43,6 +45,7 @@ namespace BlazorStrap.Shared.Components.Forms
         /// Event called when the OnFocus event occurs.
         /// </summary>
         [Parameter] public EventCallback<FocusEventArgs> OnFocus { get; set; }
+        [Parameter] public EventCallback<TValue> OnValueChange { get; set; }
 
         /// <summary>
         /// Set to validate input on blur.
@@ -67,6 +70,27 @@ namespace BlazorStrap.Shared.Components.Forms
         [Parameter] public bool UpdateOnInput { get; set; } = false;
         [CascadingParameter] public IBSForm? BSForm { get; set; }
 
+        protected override string? FormatValueAsString(TValue? value)
+        {
+            return value switch
+            {
+                null => null,
+                int @int => BindConverter.FormatValue(@int, CultureInfo.InvariantCulture),
+                long @long => BindConverter.FormatValue(@long, CultureInfo.InvariantCulture),
+                float @float => BindConverter.FormatValue(@float, CultureInfo.InvariantCulture),
+                double @double => BindConverter.FormatValue(@double, CultureInfo.InvariantCulture),
+                decimal @decimal => BindConverter.FormatValue(@decimal, CultureInfo.InvariantCulture),
+                CultureInfo @cultureInfo => BindConverter.FormatValue(@cultureInfo.Name),
+                DateTime @dateTimeValue => BindConverter.FormatValue(@dateTimeValue, _dateFormat, CultureInfo.InvariantCulture),
+                DateTimeOffset @dateTimeOffsetValue => BindConverter.FormatValue(@dateTimeOffsetValue, _dateFormat, CultureInfo.InvariantCulture),
+                #if NET6_0_OR_GREATER
+                DateOnly dateOnlyValue => BindConverter.FormatValue(dateOnlyValue, _dateFormat, CultureInfo.InvariantCulture),
+                TimeOnly timeOnlyValue => BindConverter.FormatValue(timeOnlyValue, _dateFormat, CultureInfo.InvariantCulture),
+                #endif
+                _ => base.FormatValueAsString(value),
+            };
+        }
+
         private TValue? _startValue;
         protected void OnBlurEvent(FocusEventArgs? e)
         {
@@ -84,6 +108,9 @@ namespace BlazorStrap.Shared.Components.Forms
         protected void OnChangeEvent(string? e)
         {
             CurrentValueAsString = e;
+            if(OnValueChange.HasDelegate)
+                OnValueChange.InvokeAsync(FormatValueAsString(e));
+
             if (ValidateOnInput && EditContext != null)
             {
                 BSForm?.Refresh();
