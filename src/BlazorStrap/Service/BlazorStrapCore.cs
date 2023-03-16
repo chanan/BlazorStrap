@@ -14,7 +14,7 @@ namespace BlazorStrap.Service
         private string _currentTheme  = "bootstrap";
         public T CurrentTheme<T>() where T : Enum
         {
-            return (T) Enum.Parse(typeof(T), _currentTheme);
+            return (T) Enum.Parse(typeof(T), _currentTheme, true);
         }
 
         public BlazorStrapCore(BlazorStrapInterop? interop, string basepath)

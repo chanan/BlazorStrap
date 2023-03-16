@@ -109,7 +109,7 @@ namespace BlazorStrap.Shared.Components.Forms
         {
             CurrentValueAsString = e;
             if(OnValueChange.HasDelegate)
-                OnValueChange.InvokeAsync(FormatValueAsString(e));
+                OnValueChange.InvokeAsync(Value);
 
             if (ValidateOnInput && EditContext != null)
             {

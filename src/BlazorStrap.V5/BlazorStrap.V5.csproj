@@ -13,7 +13,7 @@
 		<PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
 		<RootNamespace>BlazorStrap.V5</RootNamespace>
-		<PackageVersion>5.1.100</PackageVersion>			<!--Next Use 5.1.100 -->
+		<PackageVersion>5.1.101</PackageVersion>			<!--Next Use 5.1.100 -->
 	</PropertyGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net5.0'  ">
