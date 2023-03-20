@@ -30,7 +30,9 @@ else
                     </div>
                 }
                 <div class="@BodyClassBuilder">
-                    @Content(this)
+                    <CascadingValue Value="this">
+                        @Content(this)
+                    </CascadingValue>
                 </div>
                 @if (Footer != null)
                 {
