@@ -30,6 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Samples\V4\Components\Navbar\Navbar10.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Shared\MainLayout.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

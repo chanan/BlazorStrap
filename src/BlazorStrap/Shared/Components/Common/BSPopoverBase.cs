@@ -122,9 +122,10 @@ namespace BlazorStrap.Shared.Components.Common
                 await OnHide.InvokeAsync(this);
             _called = true;
             Shown = false;
-            await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "show", 100);
-            await BlazorStrapService.Interop.SetStyleAsync(MyRef, "display", "none");
-            await BlazorStrapService.Interop.RemovePopoverAsync(MyRef, DataId);
+            await BlazorStrapService.Interop.HidePopoverAsync(MyRef, DataId);
+            //await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "show", 100);
+            //await BlazorStrapService.Interop.SetStyleAsync(MyRef, "display", "none");
+            //await BlazorStrapService.Interop.RemovePopoverAsync(MyRef, DataId);
             Style = "display:none;";
             await InvokeAsync(StateHasChanged);
         }
@@ -151,20 +152,24 @@ namespace BlazorStrap.Shared.Components.Common
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             Shown = true;
-            await BlazorStrapService.Interop.SetStyleAsync(MyRef, "display", "");
+            //await BlazorStrapService.Interop.SetStyleAsync(MyRef, "display", "");
             if (!MyRef.Equals(null))
             {
-                await BlazorStrapService.Interop.SetStyleAsync(MyRef, "visibility", "hidden");
-                await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
-                if (!string.IsNullOrEmpty(DropdownOffset))
-                    await BlazorStrapService.Interop.AddPopoverAsync(MyRef, Placement, Target, DropdownOffset);
-                else
-                    await BlazorStrapService.Interop.AddPopoverAsync(MyRef, Placement, Target);
+                //await BlazorStrapService.Interop.SetStyleAsync(MyRef, "visibility", "hidden");
+                //await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
+                //if (!string.IsNullOrEmpty(DropdownOffset))
+                //    await BlazorStrapService.Interop.AddPopoverAsync(MyRef, Placement, Target, DropdownOffset);
+                //else
+                //    await BlazorStrapService.Interop.AddPopoverAsync(MyRef, Placement, Target);
 
-                if (!IsDropdown)
-                    await BlazorStrapService.Interop.UpdatePopoverArrowAsync(MyRef, Placement, false);
-                await BlazorStrapService.Interop.SetStyleAsync(MyRef, "visibility", "");
-                Style = await BlazorStrapService.Interop.GetStyleAsync(MyRef);
+                //if (!IsDropdown)
+                //    await BlazorStrapService.Interop.UpdatePopoverArrowAsync(MyRef, Placement, false);
+                //await BlazorStrapService.Interop.SetStyleAsync(MyRef, "visibility", "");
+                //Style = await BlazorStrapService.Interop.GetStyleAsync(MyRef);
+                if (!string.IsNullOrEmpty(DropdownOffset))
+                    Style = await BlazorStrapService.Interop.ShowPopoverAsync(MyRef, Placement, Target, DropdownOffset);
+                else
+                    Style = await BlazorStrapService.Interop.ShowPopoverAsync(MyRef, Placement, Target);
                 EventsSet = true;
             }
 

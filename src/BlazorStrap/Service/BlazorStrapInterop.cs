@@ -19,6 +19,65 @@ namespace BlazorStrap.Service
             _jSInProcessRuntime = jsRuntime as IJSInProcessRuntime;
 
         }
+
+
+        public ValueTask HideModalAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, ElementReference? elementReference, bool bodyAffected = true, CancellationToken? cancellationToken = null) where T : class
+        {
+            if (elementReference == null) throw new ArgumentNullException(nameof(elementReference));
+            var name = typeof(T).Name.ToLower();
+            return _jsRuntime.InvokeVoidAsync("blazorStrap.HideModal", cancellationToken ?? CancellationToken.None, id, name, elementReference, bodyAffected);
+        }
+        public ValueTask ShowOffcanvasAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, ElementReference? elementReference, bool bodyAffected = true, bool showBackdrop = true, CancellationToken? cancellationToken = null) where T : class
+        {
+            if (dotNetObjectReference == null)
+                throw new ArgumentNullException(nameof(dotNetObjectReference));
+
+            if (elementReference == null) throw new ArgumentNullException(nameof(elementReference));
+            var name = typeof(T).Name.ToLower();
+            return _jsRuntime.InvokeVoidAsync("blazorStrap.ShowOffcanvas", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, name, elementReference, bodyAffected, showBackdrop);
+        }
+        public ValueTask ShowModalAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, ElementReference? elementReference, bool bodyAffected = true, CancellationToken? cancellationToken = null) where T : class
+        {
+            if (dotNetObjectReference == null)
+                throw new ArgumentNullException(nameof(dotNetObjectReference));
+
+            if (elementReference == null) throw new ArgumentNullException(nameof(elementReference));
+            var name = typeof(T).Name.ToLower();
+            return _jsRuntime.InvokeVoidAsync("blazorStrap.ShowModal", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, name, elementReference, bodyAffected);
+        }
+
+        /// <summary>
+        /// Hides the Popover
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public ValueTask HidePopoverAsync(ElementReference? elementReference, string id, CancellationToken? cancellationToken = null)
+        {
+            return elementReference == null
+              ? throw new ArgumentNullException(nameof(elementReference))
+              : _jsRuntime.InvokeVoidAsync("blazorStrap.HidePopover", cancellationToken ?? CancellationToken.None, elementReference, id);
+        }
+
+
+        /// <summary>
+        /// Shows a Popover
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="placement"></param>
+        /// <param name="target"></param>
+        /// <param name="offset"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>the ElementReference style list</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public ValueTask<string> ShowPopoverAsync(ElementReference? elementReference, Placement placement, string target, string offset = "none", CancellationToken? cancellationToken = null)
+        {
+            return elementReference == null
+                ? throw new ArgumentNullException(nameof(elementReference))
+                : _jsRuntime.InvokeAsync<string>("blazorStrap.ShowPopover", CancellationToken.None, elementReference, placement.Name().ToDashSeperated(), target, offset);
+        }
+
         /// <summary>
         /// Waits for transition to end
         /// </summary>

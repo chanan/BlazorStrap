@@ -137,27 +137,33 @@ namespace BlazorStrap.Shared.Components.Modal
             var func = async () =>
             {
                 CanRefresh = false;
-                await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
-                await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
-
                 // Used to hide popovers
                 BlazorStrapService.ForwardToggle("", this);
 
-                if (!_leaveBodyAlone)
-                {
-                    await BlazorStrapService.Interop.RemoveBodyClassAsync("modal-open");
-                    await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "");
-                    await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", "");
-                }
+                await BlazorStrapService.Interop.HideModalAsync(_objectRef, DataId, MyRef, !_leaveBodyAlone);
 
-                try
-                {
-                    await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "show");
-                    await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 300);
-                }
-                catch //Animation failed cleaning up
-                {
-                }
+                //CanRefresh = false;
+                //await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
+                //await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
+
+                //// Used to hide popovers
+                //BlazorStrapService.ForwardToggle("", this);
+
+                //if (!_leaveBodyAlone)
+                //{
+                //    await BlazorStrapService.Interop.RemoveBodyClassAsync("modal-open");
+                //    await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "");
+                //    await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", "");
+                //}
+
+                //try
+                //{
+                //    await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "show");
+                //    await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 300);
+                //}
+                //catch //Animation failed cleaning up
+                //{
+                //}
 
                 if (BackdropRef != null)
                     await BackdropRef.HideAsync();
@@ -190,38 +196,39 @@ namespace BlazorStrap.Shared.Components.Modal
             var func = async () =>
             {
                 CanRefresh = false;
-                await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
-                await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Click);
+                await BlazorStrapService.Interop.ShowModalAsync(_objectRef, DataId, MyRef, !AllowScroll);
+                //await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
+                //await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Click);
 
-                if (!AllowScroll)
-                {
-                    var scrollWidth = await BlazorStrapService.Interop.GetScrollBarWidth();
-                    var viewportHeight = await BlazorStrapService.Interop.GetWindowInnerHeightAsync();
-                    var peakHeight = await BlazorStrapService.Interop.PeakHeightAsync(MyRef);
+                //if (!AllowScroll)
+                //{
+                //    var scrollWidth = await BlazorStrapService.Interop.GetScrollBarWidth();
+                //    var viewportHeight = await BlazorStrapService.Interop.GetWindowInnerHeightAsync();
+                //    var peakHeight = await BlazorStrapService.Interop.PeakHeightAsync(MyRef);
 
-                    if (viewportHeight > peakHeight)
-                    {
-                        await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "hidden");
-                        if (scrollWidth != 0)
-                            await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", $"{scrollWidth}px");
-                    }
-                }
-                BlazorStrapService.ModalChanged(this);
+                //    if (viewportHeight > peakHeight)
+                //    {
+                //        await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "hidden");
+                //        if (scrollWidth != 0)
+                //            await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", $"{scrollWidth}px");
+                //    }
+                //}
+                //BlazorStrapService.ModalChanged(this);
 
-                if (BackdropRef != null)
-                    await BackdropRef.ShowAsync();
+                //if (BackdropRef != null)
+                //    await BackdropRef.ShowAsync();
 
-                try
-                {
-                    await BlazorStrapService.Interop.SetStyleAsync(MyRef, "display", "block", 50);
-                    await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
+                //try
+                //{
+                //    await BlazorStrapService.Interop.SetStyleAsync(MyRef, "display", "block", 50);
+                //    await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
 
-                    await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 300);
+                //    await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 300);
                     
-                }
-                catch //Animation failed cleaning up
-                {
-                }
+                //}
+                //catch //Animation failed cleaning up
+                //{
+                //}
                 _shown = true;
                 Style = "display:block;";
                 await InvokeAsync(StateHasChanged);
@@ -279,6 +286,14 @@ namespace BlazorStrap.Shared.Components.Modal
             }
         }
 
+        [JSInvokable]
+        public async Task ToggleBackdropAndModalChange()
+        {
+            BlazorStrapService.ModalChanged(this);
+
+            if (BackdropRef != null)
+                await BackdropRef.ShowAsync();
+        }
         [JSInvokable]
         public override async Task InteropEventCallback(string id, CallerName name, EventType type,
             Dictionary<string, string>? classList, JavascriptEvent? e)

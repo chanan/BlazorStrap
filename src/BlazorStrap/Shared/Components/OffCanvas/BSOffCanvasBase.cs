@@ -97,31 +97,36 @@ namespace BlazorStrap.Shared.Components.OffCanvas
             var func = async () =>
             {
                 CanRefresh = false;
-                await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
-                await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
 
-                if (ShowBackdrop)
-                {
-                    if (!AllowScroll)
-                    {
-                        var scrollWidth = await BlazorStrapService.Interop.GetScrollBarWidth();
-                        await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "");
-                        await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", "");
-                    }
-                }
-                
                 // Used to hide popovers
                 BlazorStrapService.ForwardToggle("", this);
+                await BlazorStrapService.Interop.HideModalAsync(_objectRef, DataId, MyRef, !_leaveBodyAlone);
 
-                try
-                {
-                    await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "show");
-                    await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 300);
-                }
-                
-                catch //Animation failed cleaning up
-                {
-                }
+                //await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
+                //await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
+
+                //if (ShowBackdrop)
+                //{
+                //    if (!AllowScroll)
+                //    {
+                //        var scrollWidth = await BlazorStrapService.Interop.GetScrollBarWidth();
+                //        await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "");
+                //        await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", "");
+                //    }
+                //}
+
+                //// Used to hide popovers
+                //BlazorStrapService.ForwardToggle("", this);
+
+                //try
+                //{
+                //    await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "show");
+                //    await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 300);
+                //}
+
+                //catch //Animation failed cleaning up
+                //{
+                //}
 
                 if (BackdropRef != null)
                     await BackdropRef.HideAsync();
@@ -156,31 +161,32 @@ namespace BlazorStrap.Shared.Components.OffCanvas
             var func = async () =>
             {
                 CanRefresh = false;
-                await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
-                await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Click);
+                await BlazorStrapService.Interop.ShowOffcanvasAsync(_objectRef, DataId, MyRef, !AllowScroll, ShowBackdrop);
+                //await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
+                //await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Click);
 
-                if (BackdropRef != null)
-                    await BackdropRef.ShowAsync();
+                //if (BackdropRef != null)
+                //    await BackdropRef.ShowAsync();
 
-                if (ShowBackdrop)
-                {
-                    if (!AllowScroll)
-                    {
-                        var scrollWidth = await BlazorStrapService.Interop.GetScrollBarWidth();
-                        await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "hidden");
-                        await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", $"{scrollWidth}px");
-                    }
-                }
-                
-                try
-                {
-                    await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
-                    await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 300);
-                    
-                }
-                catch //Animation failed cleaning up
-                {
-                }
+                //if (ShowBackdrop)
+                //{
+                //    if (!AllowScroll)
+                //    {
+                //        var scrollWidth = await BlazorStrapService.Interop.GetScrollBarWidth();
+                //        await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "hidden");
+                //        await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", $"{scrollWidth}px");
+                //    }
+                //}
+
+                //try
+                //{
+                //    await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
+                //    await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 300);
+
+                //}
+                //catch //Animation failed cleaning up
+                //{
+                //}
                 _shown = true;
                 await InvokeAsync(StateHasChanged);
                 _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
@@ -234,6 +240,13 @@ namespace BlazorStrap.Shared.Components.OffCanvas
             {
                 await ToggleAsync();
             }
+        }
+        [JSInvokable]
+        public async Task ToggleBackdropAndModalChange()
+        {
+            Console.WriteLine("Here");
+            if (BackdropRef != null)
+                await BackdropRef.ShowAsync();
         }
 
         [JSInvokable]
