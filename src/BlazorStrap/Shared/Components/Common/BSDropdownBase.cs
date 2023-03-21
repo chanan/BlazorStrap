@@ -220,7 +220,7 @@ namespace BlazorStrap.Shared.Components.Common
 
             if (!AllowOutsideClick)
             {
-                await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataRefId, EventType.Click, AllowItemClick);
+               _ = BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataRefId, EventType.Click, AllowItemClick);
             }
 
             if (((Group != null || InputGroup != null) && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper))
@@ -232,7 +232,10 @@ namespace BlazorStrap.Shared.Components.Common
             {
                 await BlazorStrapService.Interop.AddAttributeAsync(MyRef, ShownAttribute, "blazorStrap");
             }
-
+            if (((Group != null || InputGroup != null) && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper))
+            {
+                return;
+            }
             await InvokeAsync(StateHasChanged);
         }
 

@@ -100,7 +100,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
 
                 // Used to hide popovers
                 BlazorStrapService.ForwardToggle("", this);
-                await BlazorStrapService.Interop.HideModalAsync(_objectRef, DataId, MyRef, !_leaveBodyAlone);
+                //await BlazorStrapService.Interop.HideModalAsync(_objectRef, DataId, MyRef, !_leaveBodyAlone);
 
                 //await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
                 //await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
