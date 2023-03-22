@@ -232,10 +232,7 @@ namespace BlazorStrap.Shared.Components.Common
             {
                 await BlazorStrapService.Interop.AddAttributeAsync(MyRef, ShownAttribute, "blazorStrap");
             }
-            if (((Group != null || InputGroup != null) && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper))
-            {
-                return;
-            }
+            
             await InvokeAsync(StateHasChanged);
         }
 
