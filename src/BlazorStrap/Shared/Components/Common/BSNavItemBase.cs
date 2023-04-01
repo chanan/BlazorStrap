@@ -136,6 +136,12 @@ namespace BlazorStrap.Shared.Components.Common
             await ChildHandler(sender);
             await InvokeAsync(StateHasChanged);
         }
+
+        public void Invoke()
+        {
+            if (Parent != null)
+                Parent.Invoke(this);
+        }
         public void Dispose()
         {
             if (_canHandleActive)
