@@ -121,7 +121,8 @@ namespace BlazorStrap.V4
                 builder.AddAttribute(8, "TimeOut",
                     EventCallback.Factory.Create<BSToast>(this, BlazorStrapService.Toaster.OnChange));
                 builder.AddAttribute(9, "ToasterId", Toast.Id);
-                builder.AddAttribute(10, "style", "z-index:1080;position:relative");
+                builder.AddAttribute(10, "HasIcon", Toast.Options.HasIcon);
+                builder.AddAttribute(11, "style", "z-index:1080;position:relative");
                 builder.CloseComponent();
             };
         }

@@ -1,26 +1,30 @@
 /* _content/BlazorStrap.V5/Components/Common/BSPopover.razor.rz.scp.css */
-.popover:not(.show)[b-mzl1eppldb] {
+.popover:not(.show)[b-jitnwoparl] {
     visibility: hidden;
 }
+/* _content/BlazorStrap.V5/Components/Common/BSToast.razor.rz.scp.css */
+.toast-icon[b-rmszuegdcu]{
+    color: rgba(255,255,255, .7);
+}
 /* _content/BlazorStrap.V5/Components/Common/BSTooltip.razor.rz.scp.css */
-.tooltip:not(.show)[b-5wvy19tslq] {
+.tooltip:not(.show)[b-t15xljjw7v] {
     visibility: hidden;
 }
 /* _content/BlazorStrap.V5/Components/Datatable/BSDataTableHead.razor.rz.scp.css */
 /*Credit https://codepen.io/imarkrige/pen/kyOjoL */
-th a[b-oags7sleff],
-td a[b-oags7sleff] {
+th a[b-cue1wbex1l],
+td a[b-cue1wbex1l] {
     display: block;
     width: 100%;
 }
 
-    th a.sort-by[b-oags7sleff] {
+    th a.sort-by[b-cue1wbex1l] {
         padding-right: 18px;
         position: relative;
     }
 
-a.sort-by[b-oags7sleff]:before,
-a.sort-by[b-oags7sleff]:after {
+a.sort-by[b-cue1wbex1l]:before,
+a.sort-by[b-cue1wbex1l]:after {
     border: 4px solid transparent;
     content: "";
     display: block;
@@ -31,23 +35,23 @@ a.sort-by[b-oags7sleff]:after {
     width: 0;
 }
 
-a.sort-by[b-oags7sleff]:before {
+a.sort-by[b-cue1wbex1l]:before {
     border-bottom-color: #666;
     margin-top: -9px;
 }
 
-a.sort-by[b-oags7sleff]:after {
+a.sort-by[b-cue1wbex1l]:after {
     border-top-color: #666;
     margin-top: 1px;
 }
 
-th a.sort[b-oags7sleff] {
+th a.sort[b-cue1wbex1l] {
     padding-right: 18px;
     position: relative;
 }
 
-a.sort[b-oags7sleff]:before,
-a.sort[b-oags7sleff]:after {
+a.sort[b-cue1wbex1l]:before,
+a.sort[b-cue1wbex1l]:after {
     border: 4px solid transparent;
     content: "";
     display: block;
@@ -58,18 +62,18 @@ a.sort[b-oags7sleff]:after {
     width: 0;
 }
 
-a.sort[b-oags7sleff]:before {
+a.sort[b-cue1wbex1l]:before {
     border-bottom-color: #666;
     margin-top: -9px;
 }
 
-th a.sort-desc[b-oags7sleff] {
+th a.sort-desc[b-cue1wbex1l] {
     padding-right: 18px;
     position: relative;
 }
 
-a.sort-desc[b-oags7sleff]:before,
-a.sort-desc[b-oags7sleff]:after {
+a.sort-desc[b-cue1wbex1l]:before,
+a.sort-desc[b-cue1wbex1l]:after {
     border: 4px solid transparent;
     content: "";
     display: block;
@@ -80,7 +84,7 @@ a.sort-desc[b-oags7sleff]:after {
     width: 0;
 }
 
-a.sort-desc[b-oags7sleff]:after {
+a.sort-desc[b-cue1wbex1l]:after {
     border-top-color: #666;
     margin-top: 1px;
 }

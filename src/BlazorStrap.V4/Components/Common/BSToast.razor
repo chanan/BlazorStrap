@@ -14,12 +14,24 @@ return;
     @if (Header != null)
     {
         <div class="@HeaderClassBuilder">
+            @if (HasIcon)
+            {
+                <span class="@($"mr-1") toast-icon">
+                    @((MarkupString)(Icons.GetAlertIcon(Color.NameToLower()) ?? ""))
+                </span>
+            }
             @Header
             <BSCloseButton Class="@($"ml-auto my-auto ButtonClassBuilder")" @onclick="ClickEvent" data-bs-dismiss="modal" aria-label="Close"/>
         </div>
     }
     <div class="d-flex">
         <div class="@ContentClassBuilder">
+            @if (Header == null && HasIcon)
+            {
+                <span class="@($"mr-1") toast-icon">
+                    @((MarkupString)(Icons.GetAlertIcon(Color.NameToLower()) ?? ""))
+                </span>
+            }
             @Content
         </div>
         @if (Header == null)

@@ -57,6 +57,11 @@ namespace BlazorStrap.Shared.Components.Common
         /// </summary>
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
+        /// <summary>
+        /// Toast has Icon
+        /// </summary>
+        [Parameter] public bool HasIcon { get; set; }
+
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
         protected abstract string? ButtonClassBuilder { get; }

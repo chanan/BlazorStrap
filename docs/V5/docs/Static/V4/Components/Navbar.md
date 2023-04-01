@@ -20,6 +20,10 @@ See [shared](layout/shared) for additional parameters
 
 {{sample=V4/Components/Navbar/Navbar1}}
 
+### Example Nav popper
+
+{{sample=V4/Components/Navbar/Navbar10}}
+
 ### Brand
 #### Text
 

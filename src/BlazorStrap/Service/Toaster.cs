@@ -53,6 +53,7 @@ namespace BlazorStrap
                     Toast = opts.Toast,
                     Template = opts.Template,
                     Data = opts.Data,
+                    HasIcon = opts.HasIcon,
                 },
                 Placement = opts.Toast,
                 HeaderText = headerText,
@@ -93,6 +94,7 @@ namespace BlazorStrap
         public string? HeaderClass { get; set; }
         public object? Data { get; set; }
         public Type? Template { get; set; }
+        public bool HasIcon { get; set; }
     }
     public class Toasts
     {
@@ -106,5 +108,6 @@ namespace BlazorStrap
         internal int TimeRemaining { get; set; } = 0;
         public DateTime Created { get; } = DateTime.Now;
         public Toast Placement { get; set; } = Toast.Default;
+        public bool HasIcon { get; set; }
     }
 }

@@ -37,7 +37,114 @@ const transitionEnd = (element) => {
     });
 }
 window.blazorStrap = {
+    HideModal: async function (id, name, element, bodyAffected = true) {
+        return new Promise(async function (resolve) {
+            blazorStrap.RemoveDocumentEvent(id, name, "click");
+            blazorStrap.RemoveDocumentEvent(id, name, "keyup");
 
+            if (bodyAffected) {
+                await blazorStrap.RemoveBodyClass("modal-open");
+                await blazorStrap.SetBodyStyle("overflow", "");
+                await blazorStrap.SetBodyStyle("paddingRight", "");
+            }
+
+
+            await blazorStrap.RemoveClass(element, "show");
+            await blazorStrap.WaitForTransitionEnd(element, 300);
+
+            resolve();
+        });
+    },
+    ShowOffcanvas: async function (objRef, id, name, element, bodyAffected = true, showBackdrop = true) {
+        return new Promise(async function (resolve) {
+            blazorStrap.AddDocumentEvent(objRef, id, name, "click");
+            blazorStrap.RemoveDocumentEvent(objRef, id, name, "keyup");
+
+            if (showBackdrop) {
+                if (bodyAffected) {
+                    var scrollWidth = await blazorStrap.GetScrollBarWidth();
+                    var viewportHeight = await blazorStrap.GetWindowInnerHeight();
+                    var peakHeight = await blazorStrap.PeakHeight(element);
+
+                    if (viewportHeight > peakHeight) {
+                        await blazorStrap.SetBodyStyle("overflow", "hidden");
+                        if (scrollWidth != 0)
+                            await blazorStrap.SetBodyStyle("paddingRight", scrollWidth + "px");
+                    }
+                }
+            }
+            //Clean up later
+            try {
+                objRef.invokeMethodAsync("ToggleBackdropAndModalChange");
+            } catch { }
+
+            await blazorStrap.SetStyle(element, "visibility", "visible", 1);
+            //await blazorStrap.SetStyle(element, "display", "block", 50);
+            
+            //await blazorStrap.AddClass(element, "show");
+            //await blazorStrap.WaitForTransitionEnd(element, 300);
+            resolve();
+        });
+    },
+    ShowModal: async function (objRef, id, name, element, bodyAffected = true) {
+        return new Promise(async function (resolve) {
+            blazorStrap.AddDocumentEvent(objRef, id, name, "click");
+            blazorStrap.RemoveDocumentEvent(objRef, id, name, "keyup");
+
+            //Clean up later
+            try {
+                objRef.invokeMethodAsync("ToggleBackdropAndModalChange");
+            } catch { }
+
+            setTimeout(async function () {
+                if (bodyAffected) {
+                    var scrollWidth = await blazorStrap.GetScrollBarWidth();
+                    var viewportHeight = await blazorStrap.GetWindowInnerHeight();
+                    var peakHeight = await blazorStrap.PeakHeight(element);
+
+                    if (viewportHeight > peakHeight) {
+                        await blazorStrap.SetBodyStyle("overflow", "hidden");
+                        if (scrollWidth != 0)
+                            await blazorStrap.SetBodyStyle("paddingRight", scrollWidth + "px");
+                    }
+                }
+
+
+                await blazorStrap.SetStyle(element, "display", "block", 1);
+                await blazorStrap.AddClass(element, "show");
+                await blazorStrap.WaitForTransitionEnd(element, 300);
+                resolve();
+            }, 300);
+        });
+    },
+    HidePopover: async function (element, id) {
+        return new Promise(async function (resolve) {
+            await blazorStrap.RemoveClass(element, "show", 10);
+            await blazorStrap.SetStyle(element, "display", "none");
+            await blazorStrap.RemovePopover(element, id);
+            // Waits 150 ms to allow any transition to end
+            setTimeout(async function () {
+                resolve();
+            }, 150);
+        });
+    },
+    ShowPopover: async function (element, position, target, offset = "none") {
+        return new Promise(async function (resolve) {
+            await blazorStrap.SetStyle(element, "display", "");
+            await blazorStrap.SetStyle(element, "visibility", "hidden", 1);
+            await blazorStrap.AddClass(element, "show", 1);
+            await blazorStrap.AddPopover(element, position, target, offset);
+            setTimeout(async function () {
+                await blazorStrap.UpdatePopoverArrow(element, position, false);
+                await blazorStrap.SetStyle(element, "visibility", "", 1);
+                // Waits 150 ms to allow any transition to end
+                setTimeout(async function () {
+                    resolve(element.style.cssText);
+                }, 150);
+            }, 1);
+
+        });
+    },
     WaitForTransitionEnd: function (element, timeoutLength) {
         return Promise.race([timeout(timeoutLength), transitionEnd(element)]);
     },
@@ -301,9 +408,9 @@ window.blazorStrap = {
                 element.classList.add("show");
                 objRef.invokeMethodAsync("InteropEventCallback", id, name, "transitionend", null, null);
             };
-            
+
             let height = await blazorStrap.PeakHeight(element);
-            
+
             element.classList.remove("collapse");
             element.classList.add("collapsing");
             element.addEventListener("transitionend", cleanup, {

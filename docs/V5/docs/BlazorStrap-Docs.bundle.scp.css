@@ -1,13 +1,13 @@
 /* docs/Samples/V4/Content/Images/Images6.razor.rz.scp.css */
-text#svg-text[b-wyhjb81w97]  {
-    animation-name: animateSvg-b-wyhjb81w97;
+text#svg-text[b-crzaczs78q]  {
+    animation-name: animateSvg-b-crzaczs78q;
     transform-origin: 50% 50%;
     animation-duration: 5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
 
-@keyframes animateSvg-b-wyhjb81w97  {
+@keyframes animateSvg-b-crzaczs78q  {
     from  {
         transform: rotate(0deg);
     }
@@ -17,32 +17,32 @@ text#svg-text[b-wyhjb81w97]  {
     }
 }
 /* docs/Samples/V4/Forms/Validation/ValidationMain.razor.rz.scp.css */
-[b-4her6p9j9s] .custom-file-button input[type=file] {
+[b-1639599w6h] .custom-file-button input[type=file] {
     margin-left: -2px !important;
 }
 
-    [b-4her6p9j9s] .custom-file-button input[type=file]::-webkit-file-upload-button {
+    [b-1639599w6h] .custom-file-button input[type=file]::-webkit-file-upload-button {
         display: none;
     }
 
-    [b-4her6p9j9s].custom-file-button input[type=file]::file-selector-button {
+    [b-1639599w6h].custom-file-button input[type=file]::file-selector-button {
         display: none;
     }
 
-[b-4her6p9j9s] .custom-file-button:hover label {
+[b-1639599w6h] .custom-file-button:hover label {
     background-color: #dde0e3;
     cursor: pointer;
 }
 /* docs/Samples/V5/Content/Images/Images6.razor.rz.scp.css */
-text#svg-text[b-aemurqktc1]  {
-    animation-name: animateSvg-b-aemurqktc1;
+text#svg-text[b-98h21irtwy]  {
+    animation-name: animateSvg-b-98h21irtwy;
     transform-origin: 50% 50%;
     animation-duration: 5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
 
-@keyframes animateSvg-b-aemurqktc1  {
+@keyframes animateSvg-b-98h21irtwy  {
     from  {
         transform: rotate(0deg);
     }
@@ -52,19 +52,19 @@ text#svg-text[b-aemurqktc1]  {
     }
 }
 /* docs/Samples/V5/Forms/Validation/ValidationMain.razor.rz.scp.css */
-[b-5bqulee73b] .custom-file-button input[type=file] {
+[b-0m5ch4ut38] .custom-file-button input[type=file] {
     margin-left: -2px !important;
 }
 
-    [b-5bqulee73b] .custom-file-button input[type=file]::-webkit-file-upload-button {
+    [b-0m5ch4ut38] .custom-file-button input[type=file]::-webkit-file-upload-button {
         display: none;
     }
 
-    [b-5bqulee73b].custom-file-button input[type=file]::file-selector-button {
+    [b-0m5ch4ut38].custom-file-button input[type=file]::file-selector-button {
         display: none;
     }
 
-[b-5bqulee73b] .custom-file-button:hover label {
+[b-0m5ch4ut38] .custom-file-button:hover label {
     background-color: #dde0e3;
     cursor: pointer;
 }

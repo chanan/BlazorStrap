@@ -14,12 +14,24 @@ return;
     @if (Header != null)
     {
         <div class="@HeaderClassBuilder">
+            @if (HasIcon)
+            {
+                <span class="@($"me-1") toast-icon">
+                @((MarkupString)(Icons.GetAlertIcon(Color.NameToLower()) ?? ""))
+            </span>
+            }
             @Header
             <button type="button" class="ms-auto my-auto btn-close @ButtonClassBuilder" data-bs-dismiss="toast" aria-label="Close" @onclick="ClickEvent"></button>
         </div>
     }
     <div class="d-flex">
         <div class="@ContentClassBuilder">
+            @if (Header == null && HasIcon)
+            {
+                <span class="@($"me-1") toast-icon">
+                    @((MarkupString)(Icons.GetAlertIcon(Color.NameToLower()) ?? ""))
+                </span>
+            }
             @Content
         </div>
         @if (Header == null)
