@@ -30,11 +30,12 @@ namespace BlazorStrap.V4
                 .Build().ToNullString();
 
         protected override string? BodyClassBuilder => new CssBuilder("modal-body")
-                .AddClass(ContentClass)
+                .AddClass(BodyClass)
                 .Build().ToNullString();
 
         protected override string? ContentClassBuilder => new CssBuilder("modal-content")
                 .AddClass($"bg-{ModalColor.NameToLower()}", ModalColor != BSColor.Default)
+                .AddClass(ModalContentClass, !string.IsNullOrEmpty(ModalContentClass))
                 .Build().ToNullString();
 
         protected override string? DialogClassBuilder => new CssBuilder("modal-dialog")
