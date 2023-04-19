@@ -64,6 +64,11 @@ namespace BlazorStrap.Shared.Components.Common
         /// </summary>
         [Parameter] public string? Target { get; set; }
 
+        /// <summary>
+        /// Setting this to true will disable the javascript click event on the target.
+        /// </summary>
+        [Parameter] public bool NoClickEvent { get; set; }
+
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
         protected abstract string? HeaderClass { get; }
@@ -235,7 +240,10 @@ namespace BlazorStrap.Shared.Components.Common
                 if (Target != null)
                 {
                     if (!IsDropdown)
-                        await BlazorStrapService.Interop.AddEventAsync(_objectRef, Target, EventType.Click);
+                    {
+                        if(!NoClickEvent)
+                            await BlazorStrapService.Interop.AddEventAsync(_objectRef, Target, EventType.Click);
+                    }
                     if (MouseOver)
                     {
                         await BlazorStrapService.Interop.AddEventAsync(_objectRef, Target, EventType.Mouseenter);
