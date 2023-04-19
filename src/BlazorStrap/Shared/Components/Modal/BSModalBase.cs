@@ -45,6 +45,16 @@ namespace BlazorStrap.Shared.Components.Modal
         [Parameter] public string? DialogClass { get; set; }
 
         /// <summary>
+        /// CSS classes to apply to the modal body.
+        /// </summary>
+        [Parameter] public string? BodyClass { get; set; }
+
+        /// <summary>
+        /// CSS classes to apply to the modal content.
+        /// </summary>
+        [Parameter] public string? ModalContentClass { get; set; }
+
+        /// <summary>
         /// Modal content.
         /// </summary>
         [Parameter] public RenderFragment<BSModalBase>? Content { get; set; }
@@ -52,7 +62,8 @@ namespace BlazorStrap.Shared.Components.Modal
         /// <summary>
         /// CSS classes to apply to the modal content.
         /// </summary>
-        [Parameter] public string? ContentClass { get; set; }
+        [Obsolete("ContentClass is deprecated, please use BodyClass instead.")]
+        [Parameter] public string? ContentClass { get => BodyClass; set => BodyClass = value; }
 
         /// <summary>
         /// Modal footer.
@@ -95,7 +106,7 @@ namespace BlazorStrap.Shared.Components.Modal
         [Parameter] public bool HasCloseButton { get; set; } = true;
 
         /// <summary>
-        /// Enables the static backdrop. 
+        /// Enables the static backdrop.
         /// See <see href="https://getbootstrap.com/docs/5.2/components/modal/#static-backdrop">Bootstrap Documentation</see>
         /// </summary>
         [Parameter] public bool IsStaticBackdrop { get; set; }
@@ -104,20 +115,20 @@ namespace BlazorStrap.Shared.Components.Modal
         /// Show backdrop. Defaults to true.
         /// </summary>
         [Parameter] public bool ShowBackdrop { get; set; } = true;
-        
+
         /// <summary>
         /// Hides the modal on valid submit
         /// </summary>
         [Parameter] public bool HideOnValidSubmit { get; set; } = false;
-        
+
         /// <summary>
         /// Hides the modal on submit
         /// </summary>
         [Parameter] public bool HideOnSubmit { get; set; } = false;
         #endregion
 
-        
-        
+
+
         #region Render props
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
@@ -188,7 +199,7 @@ namespace BlazorStrap.Shared.Components.Modal
         /// <inheritdoc/>
         public override async Task ShowAsync()
         {
-            
+
             if (_shown) return ;
             _ = Task.Run(() => { _ = OnShow.InvokeAsync(this); });
             //Kick off to event que
@@ -224,7 +235,7 @@ namespace BlazorStrap.Shared.Components.Modal
                 //    await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
 
                 //    await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 300);
-                    
+
                 //}
                 //catch //Animation failed cleaning up
                 //{
