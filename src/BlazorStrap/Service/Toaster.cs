@@ -1,12 +1,13 @@
 ﻿using BlazorStrap.Extensions;
 using Microsoft.AspNetCore.Components;
+using System.Collections.Concurrent;
 
 namespace BlazorStrap
 {
     public class Toaster : ComponentBase
     {
         public Action? OnChange;
-        public List<Toasts> Children { get; } = new List<Toasts>();
+        public ConcurrentDictionary<Guid, Toasts> Children { get; } = new ConcurrentDictionary<Guid, Toasts>();
 
         public void Add(string? header, string? content)
         {
@@ -64,24 +65,18 @@ namespace BlazorStrap
                 newChild.Timer.Interval = opts.CloseAfter;
             }
 
-            Children.Add(newChild);
-            OnChange?.Invoke();
+            if (Children.TryAdd(newChild.Id, newChild))
+                OnChange?.Invoke();
         }
-        internal void RemoveChild(Guid? id)
+        internal void RemoveChild(Guid id)
         {
-            var toast = Children.FirstOrDefault(q => q.Id == id);
-            toast?.Timer?.Stop();
-            toast?.Timer?.Dispose();
-
-            // Concurrency error on list can cause element to already be removed between when retrieved and removed.
-            try
+            if (Children.TryRemove(id, out var toast))
             {
-                if (toast != null)
-                    Children.Remove(toast);
-            }
-            catch { }
+                toast?.Timer?.Stop();
+                toast?.Timer?.Dispose();
 
-            OnChange?.Invoke();
+                OnChange?.Invoke();
+            }
         }
     }
     public class Options
@@ -98,7 +93,7 @@ namespace BlazorStrap
     }
     public class Toasts
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
         public bool Rendered { get; set; }
         public int CloseAfter { get; set; }
         public TimerPlus? Timer { get; set; }

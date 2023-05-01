@@ -15,7 +15,7 @@ namespace BlazorStrap.V5
             var i = 0;
             if (BlazorStrapService == null) throw new ArgumentNullException(nameof(BlazorStrapService));
             if (BlazorStrapService.Toaster == null) throw new ArgumentNullException(nameof(BlazorStrapService.Toaster));
-            foreach (var toast in BlazorStrapService.Toaster.Children.OrderBy(q => q.Placement).ThenBy(q => q.Created))
+            foreach (var toast in BlazorStrapService.Toaster.Children.Values.OrderBy(q => q.Placement).ThenBy(q => q.Created))
             {
                 if (toast.Placement != Toast.Default)
                 {

@@ -13,7 +13,7 @@ namespace BlazorStrap.Shared.Components.Common
         /// <summary>
         /// Toaster Id. See <see cref="BSToaster"/>
         /// </summary>
-        [Parameter] public Guid? ToasterId { get; set; } = null;
+        [Parameter] public Guid ToasterId { get; set; }
 
         [Parameter] public bool IsBackgroundInRoot { get; set; }
 
@@ -84,8 +84,7 @@ namespace BlazorStrap.Shared.Components.Common
         {
             if (firstRender)
             {
-                var self = BlazorStrapService.Toaster.Children.FirstOrDefault(q => q.Id == ToasterId);
-                if (self != null)
+                if (BlazorStrapService.Toaster.Children.TryGetValue(ToasterId, out var self))
                 {
                     if (self.Timer == null) return;
                     self.Timer.Elapsed += TimerOnElapsed;
@@ -116,9 +115,8 @@ namespace BlazorStrap.Shared.Components.Common
             catch
             { }
             await Task.Delay(150);
-            if (BlazorStrapService.Toaster.Children.FirstOrDefault(q => q.Id == ToasterId) != null)
-                BlazorStrapService.Toaster.RemoveChild(ToasterId);
 
+            BlazorStrapService.Toaster.RemoveChild(ToasterId);
         }
 
         protected async Task ClickEvent()
@@ -126,8 +124,8 @@ namespace BlazorStrap.Shared.Components.Common
             // Delay for animation .15 seconds = 150 ms move this to transition end later
             await BlazorStrapService.Interop.AddClassAsync(MyRef, "showing");
             await Task.Delay(150);
-            if (BlazorStrapService.Toaster.Children.FirstOrDefault(q => q.Id == ToasterId) != null)
-                BlazorStrapService.Toaster.RemoveChild(ToasterId);
+
+            BlazorStrapService.Toaster.RemoveChild(ToasterId);
 
             if (!OnClick.HasDelegate)
                 Toggle();
@@ -136,10 +134,9 @@ namespace BlazorStrap.Shared.Components.Common
 
         public void Dispose()
         {
-            var self = BlazorStrapService.Toaster.Children.FirstOrDefault(q => q.Id == ToasterId);
-            if (self != null && self.Timer != null)
+            if (BlazorStrapService.Toaster.Children.TryGetValue(ToasterId, out var self) && self.Timer != null)
             {
-                self.Timer.Elapsed += TimerOnElapsed;
+                self.Timer.Elapsed -= TimerOnElapsed;
             }
         }
     }

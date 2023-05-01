@@ -10,13 +10,12 @@ namespace BlazorStrap.V4
     {
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-
             var lastPlacment = Toast.Default;
             var building = false;
             var i = 0;
             if (BlazorStrapService == null) throw new ArgumentNullException(nameof(BlazorStrapService));
             if (BlazorStrapService.Toaster == null) throw new ArgumentNullException(nameof(BlazorStrapService.Toaster));
-            foreach (var toast in BlazorStrapService.Toaster.Children.OrderBy(q => q.Placement).ThenBy(q => q.Created))
+            foreach (var toast in BlazorStrapService.Toaster.Children.Values.OrderBy(q => q.Placement).ThenBy(q => q.Created))
             {
                 if (toast.Placement != Toast.Default)
                 {
