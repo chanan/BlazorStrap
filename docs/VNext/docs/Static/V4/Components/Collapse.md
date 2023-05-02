@@ -8,6 +8,7 @@ See [shared](layout/shared) for additional parameters
 | DefaultShown | bool           | true/false     |                    | {.table-striped}
 | IsInNavbar   | bool           | true/false     | `.navbar-collapse` |
 | IsList       | bool           | true/false     | `<ul>`             |
+| ISHorizontal | bool           | true/false     | `.collapse-horizontal` |
 | Content      | RenderFragment | RenderFragment | Nested Content     |
 | Toggler      | RenderFragment | RenderFragment | Nested Content     |
 
@@ -27,6 +28,10 @@ No Setting parameters
 ### Multiple targets
 
 {{sample=V4/Components/Collapse/Collapse3}}
+
+### Horizontal 
+
+{{sample=V4/Components/Collapse/Collapse4}}
 
 ### Methods / Events
 TValue = BSCollapse

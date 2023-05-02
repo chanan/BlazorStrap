@@ -11,6 +11,7 @@ namespace BlazorStrap.V5
         protected override string? LayoutClass => LayoutClassBuilder.Build(this);
 
         protected override string? ClassBuilder => new CssBuilder("collapse")
+                .AddClass("collapse-horizontal", IsHorizontal)
                 .AddClass("show", Shown)
                 .AddClass("navbar-collapse", IsInNavbar)
                 .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))

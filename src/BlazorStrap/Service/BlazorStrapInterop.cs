@@ -244,6 +244,23 @@ namespace BlazorStrap.Service
             return _jsRuntime.InvokeVoidAsync("blazorStrap.AnimateCollapse", cancellationToken ?? CancellationToken.None, dotNetObjectReference, elementReference, id, shown, name);
         }
 
+        /// <summary>
+        /// Triggers Collapse to animate
+        /// </summary>
+        /// <param name="dotNetObjectReference"></param>
+        /// <param name="elementReference"></param>
+        /// <param name="id"></param>
+        /// <param name="shown"></param>
+        /// <param name="cancellationToken"></param>
+        public ValueTask AnimateHorizontalCollapseAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, ElementReference? elementReference, string id, bool shown, CancellationToken? cancellationToken = null) where T : class
+        {
+            if (dotNetObjectReference == null)
+                throw new ArgumentNullException(nameof(dotNetObjectReference));
+            if (elementReference == null)
+                throw new ArgumentNullException(nameof(elementReference));
+            var name = typeof(T).Name.ToLower();
+            return _jsRuntime.InvokeVoidAsync("blazorStrap.AnimateHorizontalCollapse", cancellationToken ?? CancellationToken.None, dotNetObjectReference, elementReference, id, shown, name);
+        }
 
         /// <summary>
         /// Returns a string array of all child data-blazorstrap ids

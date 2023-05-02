@@ -1,0 +1,5 @@
+﻿.collapsing.collapse-horizontal {
+    width: 0;
+    height: auto;
+    transition: width .35s ease;
+}

@@ -453,6 +453,59 @@ window.blazorStrap = {
             }, 10);
         }
     },
+    AnimateHorizontalCollapse: async function (objRef, element, id, shown, name) {
+        if (shown) {
+            let cleanup = function () {
+                element.style["width"] = "";
+                element.classList.remove("collapsing");
+                element.classList.add("collapse");
+                element.classList.add("show");
+                objRef.invokeMethodAsync("InteropEventCallback", id, name, "transitionend", null, null);
+            };
+            let width = await blazorStrap.PeakWidth(element);
+
+            element.classList.remove("collapse");
+            element.classList.add("collapsing");
+            element.addEventListener("transitionend", cleanup, {
+                once: true
+            });
+            setTimeout(async function () {
+                element.style["width"] = width + "px";
+
+                if (await blazorStrap.TransitionDidNotStart(element, 50)) {
+                    cleanup();
+                    element.removeEventListener("transitionend", cleanup, {
+                        once: true
+                    });
+                    objRef.invokeMethodAsync("InteropEventCallback", id, name, "transitionend", null, null);
+                }
+            }, 10);
+        } else {
+            let cleanup = function () {
+                element.classList.remove("collapsing");
+                element.classList.add("collapse");
+                objRef.invokeMethodAsync("InteropEventCallback", id, name, "transitionend", null, null);
+            };
+
+            let width = await blazorStrap.GetWidth(element);
+            element.style["width"] = width + "px";
+            element.classList.remove("collapse");
+            element.classList.remove("show");
+            element.classList.add("collapsing");
+            element.addEventListener("transitionend", cleanup, {
+                once: true
+            });
+            setTimeout(async function () {
+                element.style["width"] = "";
+
+                if (await blazorStrap.TransitionDidNotStart(element, 50)) {
+                    cleanup();
+                    element.removeEventListener("transitionend", cleanup, { once: true });
+                    objRef.invokeMethodAsync("InteropEventCallback", id, name, "transitionend", null, null);
+                }
+            }, 10);
+        }
+    },
     CleanupCarousel: async function (showEl, hideEl) {
         //Cleans up any rogue calls
         return new Promise(function (resolve) {
@@ -553,6 +606,21 @@ window.blazorStrap = {
                 var height = element.offsetHeight;
                 element.style = oldStyle;
                 resolve(height);
+            }, 10);
+        });
+    },
+    PeakWidth: async function (element) {
+        if (element === null || element === undefined) return;
+        var oldStyle = element.style;
+        return new Promise(function (resolve) {
+            element.style.visibility = "hidden";
+            //element.style.height = (element.parentNode.offsetWidth - 4) + "px";
+            element.style.position = "absolute";
+            element.style.display = "block";
+            setTimeout(function () {
+                var width = element.offsetWidth;
+                element.style = oldStyle;
+                resolve(width);
             }, 10);
         });
     },

@@ -15,9 +15,11 @@ See [shared](layout/shared) for additional parameters
 | HasCloseButton    | bool                      | true/false     | Includes `.btn-close`                                                              |
 | ShowBackdrop      | bool                      | true/false     |                                                                                    |
 | ButtonClass       | string                    | string         | custom class for the close button                                                  |
-| ContentClass      | string                    | string         | custom class for `modal-body`                                                      |
+| ContentClass      | string                    | string         | custom class for `modal-body` - obsolete: use BodyClass                            |
+| BodyClass         | string                    | string         | custom class for `modal-body`                                                      |
 | DialogClass       | string                    | string         | custom class for `modal-dialog`                                                    |
 | HeaderClass       | string                    | string         | custom class for `modal-header`                                                    |
+| ModalContentClass | string                    |                | custom class for `modal-content`                                                   |
 | IsStaticBackdrop  | bool                      | true/false     | Ignores backdrop clicks                                                            |
 | Header            | RenderFragment            | RenderFragment | Nested Content                                                                     |
 | Content           | RenderFragment            | RenderFragment | Nested Content                                                                     |

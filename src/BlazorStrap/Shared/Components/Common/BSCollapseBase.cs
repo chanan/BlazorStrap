@@ -57,6 +57,8 @@ namespace BlazorStrap.Shared.Components.Common
         /// </summary>
         [Parameter] public RenderFragment? Toggler { get; set; }
 
+        [Parameter] public bool IsHorizontal { get; set; }
+
         private bool _defaultShown;
 
         //Prevents the default state from overriding current state
@@ -83,7 +85,14 @@ namespace BlazorStrap.Shared.Components.Common
                 {
                     if (!NoAnimations)
                     {
-                        await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, true);
+                        if(IsHorizontal)
+                        {
+                            await BlazorStrapService.Interop.AnimateHorizontalCollapseAsync(_objectRef, MyRef, DataId, true);
+                        }
+                        else
+                        {
+                            await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, true);
+                        }
                         await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 400);
                         await Task.Delay(50);
                         await BlazorStrapService.Interop.SetStyleAsync(MyRef, "height", "");
@@ -122,8 +131,16 @@ namespace BlazorStrap.Shared.Components.Common
                 {
                     if (!NoAnimations)
                     {
-                        await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, false);
-                        await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 400);
+                        if (IsHorizontal)
+                        {
+                            await BlazorStrapService.Interop.AnimateHorizontalCollapseAsync(_objectRef, MyRef, DataId, false);
+                            await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 400);
+                        }
+                        else
+                        {
+                            await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, false);
+                            await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 400);
+                        }
                     }
                 }
                 catch //Animation failed cleaning up
