@@ -96,8 +96,7 @@ namespace BlazorStrap.Shared.Components.Common
                         {
                             await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, true);
                         }
-                        await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 400);
-                        await Task.Delay(50);
+                        await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 500);
                         await BlazorStrapService.Interop.SetStyleAsync(MyRef, "height", "");
                     }
                 }
@@ -105,10 +104,10 @@ namespace BlazorStrap.Shared.Components.Common
                 {
                 }
                 _shown = true;
+                CanRefresh = true;
                 await InvokeAsync(StateHasChanged);
                 _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
                 taskSource.SetResult(true);
-                CanRefresh = true;
             };
             _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func});
 
@@ -122,7 +121,6 @@ namespace BlazorStrap.Shared.Components.Common
         
         public override async Task HideAsync()
         {
-       
             if (!_shown) return ;
             _ = Task.Run(() => { _ = OnHide.InvokeAsync(this); });
             //Kick off to event que
@@ -138,12 +136,12 @@ namespace BlazorStrap.Shared.Components.Common
                         if (IsHorizontal)
                         {
                             await BlazorStrapService.Interop.AnimateHorizontalCollapseAsync(_objectRef, MyRef, DataId, false);
-                            await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 400);
+                            await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 500);
                         }
                         else
                         {
                             await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, false);
-                            await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 400);
+                            await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 500);
                         }
                     }
                 }
@@ -151,11 +149,11 @@ namespace BlazorStrap.Shared.Components.Common
                 {
                 }
 
+                CanRefresh = true;
                 _shown = false;
                 await InvokeAsync(StateHasChanged);
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
                 taskSource.SetResult(true);
-                CanRefresh = true;
             };
 
             _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
@@ -186,7 +184,6 @@ namespace BlazorStrap.Shared.Components.Common
         {
             if (!firstRender)
             {
-                _hasRendered = true;
                 if (_eventQue.Count > 0)
                 {
                     var eventItem = _eventQue.First();
@@ -199,6 +196,7 @@ namespace BlazorStrap.Shared.Components.Common
             }
             else
             {
+                _hasRendered = true;
                 _objectRef = DotNetObjectReference.Create(this);
             }
         }
