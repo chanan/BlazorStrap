@@ -32,6 +32,12 @@
     float:none!important;
     opacity:.75;
 }
+/* _content/BlazorStrap.V4/Components/Common/BSCollapse.razor.rz.scp.css */
+.collapsing.collapse-horizontal[b-jgqdtcixkp] {
+    width: 0;
+    height: auto;
+    transition: width .35s ease;
+}
 /* _content/BlazorStrap.V4/Components/Common/BSPopover.razor.rz.scp.css */
 .popover:not(.show)[b-0jtbl6uhtr] {
     visibility: hidden;

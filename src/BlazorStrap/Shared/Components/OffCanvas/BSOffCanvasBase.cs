@@ -244,7 +244,6 @@ namespace BlazorStrap.Shared.Components.OffCanvas
         [JSInvokable]
         public async Task ToggleBackdropAndModalChange()
         {
-            Console.WriteLine("Here");
             if (BackdropRef != null)
                 await BackdropRef.ShowAsync();
         }

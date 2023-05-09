@@ -1,3 +1,9 @@
+/* _content/BlazorStrap.V5/Components/Common/BSCollapse.razor.rz.scp.css */
+.collapsing.collapse-horizontal[b-cu907r7tvn] {
+    width: 0;
+    height: auto;
+    transition: width .35s ease;
+}
 /* _content/BlazorStrap.V5/Components/Common/BSPopover.razor.rz.scp.css */
 .popover:not(.show)[b-jitnwoparl] {
     visibility: hidden;

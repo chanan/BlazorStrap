@@ -37,7 +37,6 @@
     
     private void OnChange(DataRequest dataRequest)
     {
-        Console.WriteLine(dataRequest.Descending);
         _count = _model.DataSet.Count();
         if (dataRequest.FilterColumnProperty != null && dataRequest.Filter != null)
         {

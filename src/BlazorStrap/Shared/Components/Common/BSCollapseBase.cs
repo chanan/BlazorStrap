@@ -70,7 +70,10 @@ namespace BlazorStrap.Shared.Components.Common
         protected abstract string? ClassBuilder { get; }
 
         protected ElementReference? MyRef { get; set; }
-        
+        protected override bool ShouldRender()
+        {
+            return CanRefresh;
+        }
         public override async Task ShowAsync()
         {
             if (_shown) return ;
@@ -119,7 +122,8 @@ namespace BlazorStrap.Shared.Components.Common
         
         public override async Task HideAsync()
         {
-            if(!_shown) return ;
+       
+            if (!_shown) return ;
             _ = Task.Run(() => { _ = OnHide.InvokeAsync(this); });
             //Kick off to event que
             var taskSource = new TaskCompletionSource<bool>();
@@ -152,7 +156,6 @@ namespace BlazorStrap.Shared.Components.Common
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
                 taskSource.SetResult(true);
                 CanRefresh = true;
-
             };
 
             _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
@@ -161,6 +164,7 @@ namespace BlazorStrap.Shared.Components.Common
                 await InvokeAsync(StateHasChanged);
             }
             await taskSource.Task;
+
         }
         
         public override Task ToggleAsync()
@@ -170,6 +174,7 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected override void OnInitialized()
         {
+            CanRefresh = true;
             BlazorStrapService.OnEventForward += InteropEventCallback;
             // if (Parent?.NestedHandler != null)
             //     Parent.NestedHandler += NestedHandlerEvent;
@@ -181,6 +186,7 @@ namespace BlazorStrap.Shared.Components.Common
         {
             if (!firstRender)
             {
+                _hasRendered = true;
                 if (_eventQue.Count > 0)
                 {
                     var eventItem = _eventQue.First();
