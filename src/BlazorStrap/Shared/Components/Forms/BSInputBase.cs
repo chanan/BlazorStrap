@@ -51,6 +51,7 @@ namespace BlazorStrap.Shared.Components.Forms
             return value switch
             {
                 null => null,
+                bool @bool => BindConverter.FormatValue(@bool.ToString().ToLowerInvariant(), CultureInfo.InvariantCulture),
                 int @int => BindConverter.FormatValue(@int, CultureInfo.InvariantCulture),
                 long @long => BindConverter.FormatValue(@long, CultureInfo.InvariantCulture),
                 float @float => BindConverter.FormatValue(@float, CultureInfo.InvariantCulture),
