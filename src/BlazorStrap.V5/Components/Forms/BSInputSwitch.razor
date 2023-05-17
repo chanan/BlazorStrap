@@ -2,7 +2,7 @@
 @typeparam TValue
 @inherits BlazorStrap.Shared.Components.Forms.BSInputCheckboxBase<TValue>
 
-<div class="form-check form-switch">
+<div class="@ContainerClassBuilder">
     <input type="checkbox" class="@ClassBuilder" id="@Id" @onblur="OnBlurEvent" @onfocus="OnFocusEvent" checked="@Checked()" @onchange="RadioOnClickEvent" disabled="@IsDisabled">
     <label class="form-check-label" for="@Id" >@ChildContent</label>
 </div>

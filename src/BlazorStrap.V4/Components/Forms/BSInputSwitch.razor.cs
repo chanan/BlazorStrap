@@ -7,7 +7,7 @@ namespace BlazorStrap.V4
 {
     public partial class BSInputSwitch<TValue> : BSInputCheckboxBase<TValue>
     {
-        [Parameter] public string Id { get; set; } = Guid.NewGuid().ToString().Replace("-","");
+        [Parameter] public string Id { get; set; } = Guid.NewGuid().ToString().Replace("-", "");
         protected override string? ToggleClassBuilder => null;
 
         protected override string? LayoutClass => null;
@@ -19,5 +19,10 @@ namespace BlazorStrap.V4
                 //.AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
                 .AddClass(Class, !string.IsNullOrEmpty(Class))
                 .Build().ToNullString();
+
+        protected override string? ContainerClassBuilder => new CssBuilder()
+            .AddClass("custom-control custom-switch")
+            .AddClass(ContainerClass)
+            .Build().ToNullString();
     }
 }
