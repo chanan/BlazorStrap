@@ -19,5 +19,10 @@ namespace BlazorStrap.V5
                 .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
                 .AddClass(Class, !string.IsNullOrEmpty(Class))
                 .Build().ToNullString();
+
+        protected override string? ContainerClassBuilder => new CssBuilder()
+            .AddClass("form-check form-switch")
+            .AddClass(ContainerClass)
+            .Build().ToNullString();
     }
 }

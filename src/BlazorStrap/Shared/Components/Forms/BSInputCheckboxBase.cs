@@ -26,7 +26,12 @@ namespace BlazorStrap.Shared.Components.Forms
         /// Value of <typeparamref name="T"/> when input is unchecked.
         /// </summary>
         [Parameter] public virtual T? UnCheckedValue { get; set; }
-        
+
+        /// <summary>
+        /// CSS classes to add to div container of the input.
+        /// </summary>
+        [Parameter] public string? ContainerClass { get; set; }
+
         protected bool IsRadio { get; set; }
 
         protected bool _isToggle;
@@ -35,6 +40,7 @@ namespace BlazorStrap.Shared.Components.Forms
 
      
         protected abstract string? ToggleClassBuilder { get; }
+        protected abstract string? ContainerClassBuilder { get; }
 
         protected void RadioOnClickEvent()
         {
