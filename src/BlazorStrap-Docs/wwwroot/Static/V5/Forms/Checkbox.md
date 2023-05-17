@@ -14,6 +14,7 @@ See [shared](layout/shared) for additional parameters
 | IsOutlined       | bool           | true-false     | `.btn-outline-[]`         |
 | IsReadonly       | bool           | true/false     | `readonly`                |
 | IsToggle         | bool           | true/false     | Toggle Button             |
+| ContainerClass   | string         | string         | custom class to add to `form-check form-switch` |
 
 :::
 `@("value")` is not required it's a line declaration of a string to make the demo work
