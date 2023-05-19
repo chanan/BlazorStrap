@@ -22,9 +22,10 @@ if (!Element.prototype.closest) {
 }
 
 const timeout = (ms, message) => {
-    return new Promise((_, reject) => {
+    return new Promise((resolve) => {
         setTimeout(() => {
-            reject(new Error(message));
+            resolve();
+            //reject(new Error(message));
         }, ms);
     });
 };

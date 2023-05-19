@@ -17,10 +17,12 @@ namespace BlazorStrap.V5
         /// Display as toggle buttons.
         /// </summary>
         [Parameter] public bool IsToggle { get => _isToggle; set => _isToggle = value; }
-
+        protected override string? ContainerClassBuilder => new CssBuilder()
+         .AddClass(ContainerClass).Build().ToNullString();
         protected override string? LayoutClass => LayoutClassBuilder.Build(this);
 
         protected override string? ClassBuilder => new CssBuilder()
+                .AddClass(ContainerClassBuilder, !string.IsNullOrEmpty(ContainerClassBuilder))
                 .AddClass("form-check-input", !IsToggle && !RemoveDefaultClass)
                 .AddClass("btn-check", IsToggle && !RemoveDefaultClass)
                 .AddClass(ValidClass, IsValid)

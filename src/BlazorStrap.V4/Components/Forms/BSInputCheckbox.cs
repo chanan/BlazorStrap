@@ -12,10 +12,12 @@ namespace BlazorStrap.V4
         /// Size of input.
         /// </summary>
         [Parameter] public Size Size { get; set; }
-
+        protected override string? ContainerClassBuilder => new CssBuilder()
+            .AddClass(ContainerClass).Build().ToNullString();
         protected override string? LayoutClass => LayoutClassBuilder.Build(this);
 
         protected override string? ClassBuilder => new CssBuilder()
+                .AddClass(ContainerClassBuilder, !string.IsNullOrEmpty(ContainerClassBuilder))
                 .AddClass("form-check-input", !RemoveDefaultClass)
                 .AddClass(ValidClass, IsValid)
                 .AddClass(InvalidClass, IsInvalid)
@@ -28,6 +30,8 @@ namespace BlazorStrap.V4
                 .AddClass($"btn-{Size.ToDescriptionString()}", Size != Size.None)
                 .AddClass($"btn-{Color.NameToLower()}", Color != BSColor.Default && !IsOutlined)
                 .Build().ToNullString();
+
+    
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
