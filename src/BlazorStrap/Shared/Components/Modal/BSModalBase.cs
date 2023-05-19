@@ -127,7 +127,10 @@ namespace BlazorStrap.Shared.Components.Modal
         [Parameter] public bool HideOnSubmit { get; set; } = false;
         #endregion
 
-
+        /// <summary>
+        /// Setting this to false will hide the content of the modal when it is hidden.
+        /// </summary>
+        [Parameter] public bool ContentAlwaysRendered { get; set; } = true;
 
         #region Render props
         protected abstract string? LayoutClass { get; }
@@ -138,6 +141,14 @@ namespace BlazorStrap.Shared.Components.Modal
         protected abstract string? HeaderClassBuilder { get; }
         protected abstract string? FooterClassBuilder { get; }
         #endregion
+
+        protected bool ShouldRenderContent { get; set; } = true;
+
+        protected override void OnInitialized()
+        {
+            ShouldRenderContent = ContentAlwaysRendered;
+            CanRefresh = true;
+        }
         /// <inheritdoc/>
         public override async Task HideAsync()
         {
@@ -182,6 +193,7 @@ namespace BlazorStrap.Shared.Components.Modal
                 _shown = false;
                 Style = "display:none;";
                 _leaveBodyAlone = false;
+                ShouldRenderContent = ContentAlwaysRendered;
                 await InvokeAsync(StateHasChanged);
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
                 taskSource.SetResult(true);
@@ -206,6 +218,12 @@ namespace BlazorStrap.Shared.Components.Modal
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
             {
+
+                if (!ContentAlwaysRendered)
+                {
+                    ShouldRenderContent = true;
+                    await InvokeAsync(StateHasChanged);
+                }
                 CanRefresh = false;
                 await BlazorStrapService.Interop.ShowModalAsync(_objectRef, DataId, MyRef, !AllowScroll);
                 //await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
@@ -260,10 +278,6 @@ namespace BlazorStrap.Shared.Components.Modal
         public override Task ToggleAsync()
         {
             return Shown ? HideAsync() : ShowAsync();
-        }
-        protected override void OnInitialized()
-        {
-            CanRefresh = true;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

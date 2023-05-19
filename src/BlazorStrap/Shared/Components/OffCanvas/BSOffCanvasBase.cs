@@ -79,14 +79,25 @@ namespace BlazorStrap.Shared.Components.OffCanvas
         /// Whether or not to show backdrop. Defaults to true.
         /// </summary>
         [Parameter] public bool ShowBackdrop { get; set; } = true;
-        
-          
+
+        /// <summary>
+        /// Setting this to false will hide the content of the offvanvas when it is hidden.
+        /// </summary>
+        [Parameter] public bool ContentAlwaysRendered { get; set; } = true;
         #region Render props
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
         protected abstract string? BodyClassBuilder { get; }
         protected abstract string? HeaderClassBuilder { get; }
         #endregion
+
+        protected bool ShouldRenderContent { get; set; } = true;
+
+        protected override void OnInitialized()
+        {
+            ShouldRenderContent = ContentAlwaysRendered;
+            CanRefresh = true;
+        }
         /// <inheritdoc/>
         public override async Task HideAsync()
         {
@@ -133,6 +144,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
 
                 _shown = false;
                 _leaveBodyAlone = false;
+                ShouldRenderContent = ContentAlwaysRendered;
                 await InvokeAsync(StateHasChanged);
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
                 taskSource.SetResult(true);
@@ -160,6 +172,11 @@ namespace BlazorStrap.Shared.Components.OffCanvas
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
             {
+                if (!ContentAlwaysRendered)
+                {
+                    ShouldRenderContent = true;
+                    await InvokeAsync(StateHasChanged);
+                }
                 CanRefresh = false;
                 await BlazorStrapService.Interop.ShowOffcanvasAsync(_objectRef, DataId, MyRef, !AllowScroll, ShowBackdrop);
                 //await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
@@ -206,10 +223,6 @@ namespace BlazorStrap.Shared.Components.OffCanvas
         public override Task ToggleAsync()
         {
             return Shown ? HideAsync() : ShowAsync();
-        }
-        protected override void OnInitialized()
-        {
-            CanRefresh = true;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

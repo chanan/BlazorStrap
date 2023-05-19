@@ -5,43 +5,49 @@
 @if (Content == null)
 {
     <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="@Style" @ref="MyRef" data-blazorstrap="@DataId">
-        <div class="@DialogClassBuilder">
-            <div class="@ContentClassBuilder">
+        @if (ShouldRenderContent)
+        {
+            <div class="@DialogClassBuilder">
+                <div class="@ContentClassBuilder">
                 <CascadingValue Value="this">
                     @ChildContent
                 </CascadingValue>
             </div>
         </div>
+        }
     </div>
 }
 else
 {
     <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="@Style" @ref="MyRef" data-blazorstrap="@DataId">
-        <div class="@DialogClassBuilder">
-            <div class="@ContentClassBuilder">
-                @if (Header != null)
-                {
-                    <div class="@HeaderClassBuilder">
-                        @Header
-                        @if (HasCloseButton)
-                        {
-                            <BSCloseButton Class="ml-auto" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)" data-bs-dismiss="modal" aria-label="Close"/>
-                        }
+        @if (ShouldRenderContent)
+        {
+            <div class="@DialogClassBuilder">
+                <div class="@ContentClassBuilder">
+                    @if (Header != null)
+                    {
+                        <div class="@HeaderClassBuilder">
+                            @Header
+                            @if (HasCloseButton)
+                            {
+                                <BSCloseButton Class="ml-auto" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)" data-bs-dismiss="modal" aria-label="Close"/>
+                            }
+                        </div>
+                    }
+                    <div class="@BodyClassBuilder">
+                        <CascadingValue Value="this">
+                            @Content(this)
+                        </CascadingValue>
                     </div>
-                }
-                <div class="@BodyClassBuilder">
-                    <CascadingValue Value="this">
-                        @Content(this)
-                    </CascadingValue>
+                    @if (Footer != null)
+                    {
+                        <div class="@FooterClassBuilder">
+                            @Footer!(this)
+                        </div>
+                    }
                 </div>
-                @if (Footer != null)
-                {
-                    <div class="@FooterClassBuilder">
-                        @Footer!(this)
-                    </div>
-                }
-            </div>
         </div>
+        }
     </div>
 }
 @if (ShowBackdrop)

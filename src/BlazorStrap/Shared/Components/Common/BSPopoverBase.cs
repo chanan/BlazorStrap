@@ -69,6 +69,11 @@ namespace BlazorStrap.Shared.Components.Common
         /// </summary>
         [Parameter] public bool NoClickEvent { get; set; }
 
+        /// <summary>
+        /// Setting this to false will hide the content of the popover when it is hidden.
+        /// </summary>
+        [Parameter] public bool ContentAlwaysRendered { get; set; } = true;
+
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
         protected abstract string? HeaderClass { get; }
@@ -84,6 +89,12 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected string Style { get; set; } = "display:none;";
 
+        protected bool ShouldRenderContent { get; set; } = true;
+
+        protected override void OnInitialized()
+        {
+            ShouldRenderContent = ContentAlwaysRendered;
+        }
         private async Task TryCallback(bool renderOnFail = true)
         {
             try
@@ -132,6 +143,7 @@ namespace BlazorStrap.Shared.Components.Common
             //await BlazorStrapService.Interop.SetStyleAsync(MyRef, "display", "none");
             //await BlazorStrapService.Interop.RemovePopoverAsync(MyRef, DataId);
             Style = "display:none;";
+            ShouldRenderContent = ContentAlwaysRendered;
             await InvokeAsync(StateHasChanged);
         }
 
@@ -153,6 +165,13 @@ namespace BlazorStrap.Shared.Components.Common
             }
 
             if (Shown) return;
+
+            if (!ContentAlwaysRendered)
+            {
+                ShouldRenderContent = true;
+                await InvokeAsync(StateHasChanged);
+            }
+
             _called = true;
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);

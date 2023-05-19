@@ -4,15 +4,21 @@
 See [shared](layout/shared) for additional parameters    
 :::
 
-| Parameter   | Type           | Valid          | Remarks/Output | 
-|-------------|----------------|----------------|----------------|
-| Placement   | Enum           | Placement      | Placement      | {.table-striped}
-| Target      | string		   | string         | DataIdOfTarget |   
+| Parameter             | Type           | Valid          | Remarks/Output												     | 
+|-----------------------|----------------|----------------|------------------------------------------------------------------|
+| Placement             | Enum           | Placement      | Placement													     | {.table-striped}
+| Target                | string		 | string         | DataIdOfTarget					   							     |   
+| ContentAlwaysRendered | bool           | bool           | default=true. Hides content for component when not show if false |
 :::
 
 ### Examples
 
 {{sample=V5/Components/Tooltips/Tooltips1}}
+
+### HtmlAlwaysRendered false
+By default content html for componets is always rendered to limit the rendering required when showing. If you want to hide the html when not shown set HtmlAlwaysRendered to false. This will cause the content html of component to be rendered when shown and removed when hidden. This may cause a slight delay when showing.
+
+{{sample=V5/Components/Tooltips/Tooltips2}}
 
 ### Methods / Events
 TValue = BSTooltip

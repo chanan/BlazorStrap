@@ -19,6 +19,11 @@ namespace BlazorStrap.Shared.Components.Common
         /// </summary>
         [Parameter] public string? Target { get; set; }
 
+        /// <summary>
+        /// Setting this to false will hide the content of the tooltip when it is hidden.
+        /// </summary>
+        [Parameter] public bool ContentAlwaysRendered { get; set; } = true;
+
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
 
@@ -27,6 +32,11 @@ namespace BlazorStrap.Shared.Components.Common
         protected ElementReference? MyRef { get; set; }
         public override bool Shown { get; protected set; }
         protected string Style { get; set; } = "display:none";
+        protected bool ShouldRenderContent { get; set; } = true;
+        protected override void OnInitialized()
+        {
+            ShouldRenderContent = ContentAlwaysRendered;
+        }
         private async Task TryCallback(bool renderOnFail = true)
         {
             try
@@ -67,6 +77,11 @@ namespace BlazorStrap.Shared.Components.Common
 
             if (OnHidden.HasDelegate)
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
+            if (!ContentAlwaysRendered)
+            {
+                ShouldRenderContent = false;
+                await InvokeAsync(StateHasChanged);
+            }
         }
 
         /// <inheritdoc/>
@@ -81,6 +96,11 @@ namespace BlazorStrap.Shared.Components.Common
         }
         private async Task ShowActionsAsync()
         {
+            if (!ContentAlwaysRendered)
+            {
+                ShouldRenderContent = true;
+                await InvokeAsync(StateHasChanged);
+            }
             if (OnShow.HasDelegate)
                 await OnShow.InvokeAsync(this);
             Shown = true;
@@ -125,7 +145,7 @@ namespace BlazorStrap.Shared.Components.Common
         [JSInvokable]
         public override async Task InteropEventCallback(string id, CallerName name, EventType type,
             Dictionary<string, string>? classList = null, JavascriptEvent? e = null)
-        {
+        { 
             if (id == Target && name.Equals(this) && type == EventType.Mouseenter)
             {
                 await ShowAsync();

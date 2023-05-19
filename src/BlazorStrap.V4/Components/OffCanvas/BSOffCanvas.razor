@@ -4,26 +4,31 @@
 @if (Content == null)
 {
     <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="visibility:visible;" @ref="MyRef" data-blazorstrap="@DataId">
-        <CascadingValue Value="this">
-            @ChildContent
+        @if (ShouldRenderContent)
+        {
+            <CascadingValue Value="this">
+                @ChildContent
         </CascadingValue>
+        }
     </div>
 
 }
 else
 {
     <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="visibility:visible;" @ref="MyRef" data-blazorstrap="@DataId">
-
-        @if (Header != null)
+        @if (ShouldRenderContent)
         {
-            <div class="@HeaderClassBuilder">
-                @Header
-                <BSCloseButton Class="@($"ml-auto {@ButtonClass}")" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)" data-bs-dismiss="modal" aria-label="Close"/>
-            </div>
-        }
-        <div class="@BodyClassBuilder">
+            @if (Header != null)
+            {
+                <div class="@HeaderClassBuilder">
+                    @Header
+                    <BSCloseButton Class="@($"ml-auto {@ButtonClass}")" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)" data-bs-dismiss="modal" aria-label="Close"/>
+                </div>
+            }
+            <div class="@BodyClassBuilder">
             @Content
         </div>
+        }
     </div>
 } 
 @if (ShowBackdrop)

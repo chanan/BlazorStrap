@@ -4,14 +4,15 @@
 See [shared](layout/shared) for additional parameters    
 :::
 
-| Parameter   | Type           | Valid          | Remarks/Output | 
-|-------------|----------------|----------------|----------------|
-| HeaderColor | Enum           | `BSColor`      | `.bg-[]`       | {.table-striped}
-| Placement   | Enum           | Placement      | Placement      |
-| MouseOver   | bool           | true/false     |                |
-| Header      | RenderFragment | RenderFragment | Nested Content |
-| Target      | string		   | string         | DataIdOfTarget |   
-| Content     | RenderFragment | RenderFragment | Nested Content |   
+| Parameter             | Type           | Valid          | Remarks/Output                                                   | 
+|-----------------------|----------------|----------------|------------------------------------------------------------------|
+| HeaderColor           | Enum           | `BSColor`      | `.bg-[]`                                                         | {.table-striped}
+| Placement             | Enum           | Placement      | Placement                                                        |
+| MouseOver             | bool           | true/false     |                                                                  |
+| Header                | RenderFragment | RenderFragment | Nested Content                                                   |
+| Target                | string		   | string       | DataIdOfTarget                                                   |   
+| Content               | RenderFragment | RenderFragment | Nested Content                                                   |   
+| ContentAlwaysRendered | bool           | bool           | default=true. Hides content for component when not show if false |
 
 :::
 
@@ -25,6 +26,11 @@ Note `MouseOver` parameter will not work here
 :::
 
 {{sample=V5/Components/Popover/Popover2}}
+
+### HtmlAlwaysRendered false
+By default content html for componets is always rendered to limit the rendering required when showing. If you want to hide the html when not shown set HtmlAlwaysRendered to false. This will cause the content html of component to be rendered when shown and removed when hidden. This may cause a slight delay when showing. 
+
+{{sample=V5/Components/Popover/Popover3}}
 
 ### Methods / Events
 TValue = BSPopover
