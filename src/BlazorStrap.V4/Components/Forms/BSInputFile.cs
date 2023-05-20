@@ -31,7 +31,8 @@ namespace BlazorStrap.V4
             {
                 builder.AddAttribute(4, "id", Helper.Id);
             }
-            builder.AddMultipleAttributes(5, Attributes);
+            builder.AddAttribute(5, "disabled", IsDisabled);
+            builder.AddMultipleAttributes(6, Attributes);
             builder.CloseComponent();
         }
     }
