@@ -132,6 +132,11 @@ namespace BlazorStrap.Shared.Components.Modal
         /// </summary>
         [Parameter] public bool ContentAlwaysRendered { get; set; } = true;
 
+        /// <summary>
+        /// Using this will allow you to manually control the modal show/hide state. It ignores all forwarded events and only responds to the Show/Hide methods.
+        /// </summary>
+        [Parameter] public bool IsManual { get; set; } 
+
         #region Render props
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
@@ -159,6 +164,7 @@ namespace BlazorStrap.Shared.Components.Modal
             var func = async () =>
             {
                 CanRefresh = false;
+                if(!ShowBackdrop) _leaveBodyAlone = true;
                 // Used to hide popovers
                 BlazorStrapService.ForwardToggle("", this);
 
@@ -305,7 +311,7 @@ namespace BlazorStrap.Shared.Components.Modal
 
         public override async Task InteropEventCallback(string id, CallerName name, EventType type)
         {
-            if (DataId == id && name.Equals(typeof(ClickForward)) && type == EventType.Click)
+            if (DataId == id && name.Equals(typeof(ClickForward)) && type == EventType.Click && !IsManual)
             {
                 await ToggleAsync();
             }
@@ -329,7 +335,7 @@ namespace BlazorStrap.Shared.Components.Modal
             {
                 //await TransitionEndAsync();
             }
-            else if (DataId == id && name.Equals(this) && type == EventType.Keyup && e?.Key == "Escape")
+            else if (DataId == id && name.Equals(this) && type == EventType.Keyup && e?.Key == "Escape" && !IsManual)
             {
                 if (IsStaticBackdrop)
                 {
@@ -341,7 +347,7 @@ namespace BlazorStrap.Shared.Components.Modal
                 await HideAsync();
             }
             else if (DataId == id && name.Equals(this) && type == EventType.Click &&
-                     e?.Target.ClassList.Any(q => q.Value == "modal") == true)
+                     e?.Target.ClassList.Any(q => q.Value == "modal") == true && !IsManual)
             {
                 if (IsStaticBackdrop)
                 {
@@ -357,6 +363,7 @@ namespace BlazorStrap.Shared.Components.Modal
 
         private async void OnModalChange(BSModalBase? model, bool fromJs)
         {
+            if (IsManual) return;
             if (fromJs)
             {
                 if (_shown)

@@ -27,6 +27,7 @@ See [shared](layout/shared) for additional parameters
 | HideOnSubmit			| bool                      | true/false     | Hides modal on BSForm submit.                                                      |
 | HideOnValidSubmit		| bool                      | true/false     | Hides modal on Valid BSForm submit.                                                |
 | ContentAlwaysRendered | bool                      | bool           | default=true. Hides content for component when not show if false                   |
+| IsManual				| bool                      | true/false     | default=false. If true you must control the show and hide of the modal yourself    |
 
 :::
 
@@ -75,6 +76,11 @@ You can also scroll content in the modals body
 By default content html for componets is always rendered to limit the rendering required when showing. If you want to hide the html when not shown set HtmlAlwaysRendered to false. This will cause the content html of component to be rendered when shown and removed when hidden. This may cause a slight delay when showing.
 
 {{sample=V4/Components/Modal/Modal10}}
+
+### IsManual
+If you want to control the show and hide of the modal yourself set IsManual to true. This will prevent the modal from being shown or hidden automatically. You can then use the ToggleAsync, ShowAsync and HideAsync methods to control the modal.
+
+{{sample=V4/Components/Modal/Modal11}}
 ### Methods / Events
 TValue = BSModal
 :::
