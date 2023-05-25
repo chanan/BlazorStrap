@@ -200,6 +200,9 @@ window.blazorStrap = {
     AddEventInternal: function (objRef, element, id, name, type, ignoreChildren = false, filter = "") {
         blazorStrap.CleanUpEvents();
 
+        if (element === null)
+            return;
+
         let expandedWidth = 0;
         if (type === "resize" && element == document) {
             let navbar = document.querySelector("[class*=navbar-expand]");
