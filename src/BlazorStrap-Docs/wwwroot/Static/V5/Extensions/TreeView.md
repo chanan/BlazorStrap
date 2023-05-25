@@ -24,6 +24,8 @@
 | IsOpen       | bool           | true/false     | `.show`                         |
 | TextLabel    | string?        | string         | Text Only Label                 |
 | Class        | string?        | string         | Custom classes                  | 
+| OnClick      | EventCallback  | func           | MouseEventArgs                  |
+| OnDblClick   | EventCallback  | func           | MouseEventArgs                  |
 | Action       | RenderFragment?| RenderFragment | Nested Content                  |
 | ChildContent | RenderFragment?| RenderFragment | Nested Content                  |
 | Label        | RenderFragment?| RenderFragment | Nested Content                  |
