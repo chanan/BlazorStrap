@@ -2,14 +2,15 @@
 using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlazorStrap.Extensions.TreeView
 {
-    public partial class BSTreeItem : ComponentBase
+    public partial class BSTreeItem : ComponentBase, IDisposable
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object>? AdditionalAttributes { get; set; }
-        [Parameter] public string? Id { get; set; }
+        [Parameter] public string Id { get; set; } = Guid.NewGuid().ToString();
         [Parameter] public RenderFragment? Label { get; set; }
         [Parameter] public string? TextLabel { get; set; }
         [Parameter] public string? Class { get; set; }
@@ -31,67 +32,86 @@ namespace BlazorStrap.Extensions.TreeView
             set { _isOpen = value; if (Child != null) Child.IsOpen = value; StateHasChanged(); }
         }
         private bool _isOpen { get; set; }
-        protected override void OnParametersSet()
+        protected async override Task OnParametersSetAsync()
         {
             if (IsAlwaysActive)
             {
                 IsActive = true;
-                if(!_defaultSet)
+                if (!_defaultSet)
                 {
-                    DoActive(new MouseEventArgs() { CtrlKey = true });
-                }    
+                    await DoActiveAsync(new MouseEventArgs() { CtrlKey = true });
+                }
                 _defaultSet = true;
             }
             else if (IsDefaultActive && !_defaultSet)
             {
                 _defaultSet = true;
                 IsActive = true;
-                DoActive(new MouseEventArgs() { CtrlKey = true });
+                await DoActiveAsync(new MouseEventArgs() { CtrlKey = true });
             }
             else if (Root != null)
             {
-                IsActive = Root.ActiveTreeItem.Contains(this);
+                IsActive = Root.ActiveTreeItem.Values.Contains(this);
             }
-       
         }
         protected override void OnInitialized()
         {
+            if(Root != null)
+            {
+                Root.OnRequest += OnRequestAsync;
+            }
             if (Root?.IsExpanded ?? false)
             {
                 IsOpen = true;
             }
         }
 
-        private void DoActive(MouseEventArgs e)
+        private async Task OnRequestAsync(string type, string id)
+        {
+            if (Root == null) return;
+            if(id != Id) return;
+            if (type == "select")
+            {
+                if(!Root.IsMultiSelect)
+                    await Root.ClearSelectionAsync();
+                await Root.SelectAsync(this);
+            }
+            else
+            {
+                await Root.UnselectAsync(this);
+            }
+        }
+
+        private async Task DoActiveAsync(MouseEventArgs e)
         {
             if (Root == null) return;
             if (Root.IsMultiSelect && e.CtrlKey)
             {
-                if (Root.ActiveTreeItem.Contains(this))
-                    Root.RemoveActiveChild(this);
+                if (Root.ActiveTreeItem.Values.Contains(this))
+                    await Root.UnselectAsync(this);
                 else
-                    Root.AddActiveChild(this);
+                    await Root.SelectAsync(this);
             }
             else
             {
-                Root.RemoveAllChildren();
-                Root.AddActiveChild(this);
+                await Root.ClearSelectionAsync();
+                await Root.SelectAsync(this);
             }
         }
-        protected void OnClickEvent(MouseEventArgs e)
+        protected async Task OnClickEventAsync(MouseEventArgs e)
         {
             if (Root == null) return;
-            DoActive(e);
+            await DoActiveAsync(e);
             if (!Root.IsDoubleClickToOpen)
             {
                 IsOpen = !IsOpen;
                 if (OnClick.HasDelegate)
                 {
-                    OnClick.InvokeAsync(e);
+                    await OnClick.InvokeAsync(e);
                 }
             }
         }
-        protected void OnDblClickEvent(MouseEventArgs e)
+        protected async Task OnDblClickEventAsync(MouseEventArgs e)
         {
             if (Root == null) return;
             if (Root.IsDoubleClickToOpen)
@@ -100,7 +120,7 @@ namespace BlazorStrap.Extensions.TreeView
 
                 if (OnClick.HasDelegate)
                 {
-                    OnClick.InvokeAsync(e);
+                    await OnClick.InvokeAsync(e);
                 }
             }
         }
@@ -113,9 +133,15 @@ namespace BlazorStrap.Extensions.TreeView
             return new RenderFragment(builder => builder.AddContent(0, Label));
         }
    
-        public void ChildSet()
+        public async Task ChildSetAsync()
         {
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
+        }
+
+        public void Dispose()
+        {
+            if(Root != null)
+                Root.OnRequest -= OnRequestAsync;
         }
     }
 }

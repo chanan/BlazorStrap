@@ -42,3 +42,17 @@
 ##### Dynamic Example with Multi-Select
 
 {{sample=V5/Extensions/TreeView2}}
+
+#### Methods \<BSTree\>
+:::
+
+| Method					| Return Type	| Parameters    | Remarks/Output				| 
+|---------------------------|---------------|---------------|-------------------------------|
+| SelectAsync				| Task			| string		| Selects item by id			| {.table-striped}  
+| SelectAsync				| Task			| BSTreeItem    | Selects item by BSTreeItem	|
+| UnselectAsync				| Task          | string		| Unselects item by id			|
+| UnselectAsync				| Task          | BSTreeItem    | Unselects item by BSTreeItem	|
+| ClearSelectionAsync    	| Task          | BSTreeItem    | Clears Selection				|
+
+
+::: 

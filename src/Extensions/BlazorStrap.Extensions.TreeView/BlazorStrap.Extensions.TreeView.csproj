@@ -5,7 +5,7 @@
 	  <Nullable>enable</Nullable>
     <TargetFrameworks>net5.0;net6.0;net7.0</TargetFrameworks>
     <PackageId>BlazorStrap.Extensions.TreeView</PackageId>
-    <Version>5.1.101-Preview1</Version>
+    <Version>5.1.101-Preview1a</Version>
     <Authors>Chanan Braunstein; John Bomhold</Authors>
     <Title>BlazorStrap Extension for TreeView</Title>
     <Description>A treeview component library for BlazorStrap</Description>
