@@ -2,7 +2,7 @@
     <BSTreeNode>
         @foreach (var item in Data)
         {
-            <BSTreeItem TextLabel="@item.Label" Id="@item.id">
+            <BSTreeItem TextLabel="@item.Label" Id="@item.id" IsAlwaysActive="@item.IsAlwaysActive" IsDefaultActive="@item.IsDefaultActive">
                 <Action>@item.ActionLinks</Action>
                 <ChildContent>
                     @if (item.Children != null)
@@ -68,8 +68,8 @@
             }
             }
         }} ,
-        new TreeContentExample() {id = "1-b", Label="Level 1-b"},
-        new TreeContentExample() {id = "1-c", Label="Level 1-c"}
+        new TreeContentExample() {id = "1-b", Label="Level 1-b", IsAlwaysActive = true},
+        new TreeContentExample() {id = "1-c", Label="Level 1-c", IsDefaultActive = true}
     };
 
     public class TreeContentExample
@@ -77,6 +77,8 @@
         public string id { get; set; }
         public string Label { get; set; }
         public string? ActionLinks { get; set; }
+        public bool IsAlwaysActive {get; set; }
+        public bool IsDefaultActive { get; set; }
         public List<TreeContentExample>? Children { get; set; }
     }
     }

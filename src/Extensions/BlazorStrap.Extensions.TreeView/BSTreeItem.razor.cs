@@ -15,32 +15,48 @@ namespace BlazorStrap.Extensions.TreeView
         [Parameter] public string? Class { get; set; }
         [Parameter] public RenderFragment? ChildContent { get; set; }
         [Parameter] public RenderFragment? Action { get; set; }
-        private bool _active;
-        [Parameter] public bool IsActive { get
-            {
-                if(Root != null)
-                {
-                    if (Root.ActiveTreeItem.Contains(this))
-                        return true;
-                }
-                return _active;
-            } 
-            set => _active = value; 
-        }
+        [Parameter] public bool IsDefaultActive { get; set; }
+        public bool IsActive { get; set; }
+        [Parameter] public bool IsAlwaysActive { get; set; }
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public EventCallback<MouseEventArgs> OnDblClick { get; set; }
         [CascadingParameter] public BSTree? Root { get; set; }
-
+        private bool _defaultSet { get; set; }
         public BSTreeNode? Child { get; set; }
-        [Parameter] public bool IsOpen {
+        
+        [Parameter]
+        public bool IsOpen
+        {
             get { return _isOpen; }
-            set { _isOpen = value; if(Child != null) Child.IsOpen = value; StateHasChanged(); } 
+            set { _isOpen = value; if (Child != null) Child.IsOpen = value; StateHasChanged(); }
         }
         private bool _isOpen { get; set; }
-
+        protected override void OnParametersSet()
+        {
+            if (IsAlwaysActive)
+            {
+                IsActive = true;
+                if(!_defaultSet)
+                {
+                    DoActive(new MouseEventArgs() { CtrlKey = true });
+                }    
+                _defaultSet = true;
+            }
+            else if (IsDefaultActive && !_defaultSet)
+            {
+                _defaultSet = true;
+                IsActive = true;
+                DoActive(new MouseEventArgs() { CtrlKey = true });
+            }
+            else if (Root != null)
+            {
+                IsActive = Root.ActiveTreeItem.Contains(this);
+            }
+       
+        }
         protected override void OnInitialized()
         {
-            if (Root?.IsExpanded ?? false) 
+            if (Root?.IsExpanded ?? false)
             {
                 IsOpen = true;
             }
@@ -96,6 +112,7 @@ namespace BlazorStrap.Extensions.TreeView
             }
             return new RenderFragment(builder => builder.AddContent(0, Label));
         }
+   
         public void ChildSet()
         {
             StateHasChanged();

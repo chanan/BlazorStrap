@@ -1,13 +1,13 @@
 ﻿<BSTree IsExpanded="true">
     <BSTreeNode>
         <BSTreeItem>
-            <Label>Level 1-a <b>With HTML Label</b></Label>
+            <Label>Level 1-a</Label>
             <ChildContent>
                 <BSTreeNode>
                     <BSTreeItem>
                         <Label>Level 2-a</Label>
                     </BSTreeItem>
-                    <BSTreeItem IsActive="true">
+                    <BSTreeItem IsDefaultActive="true">
                         <Label>Level 2-b</Label>
                     </BSTreeItem>
                     <BSTreeItem TextLabel="Level 2-c">

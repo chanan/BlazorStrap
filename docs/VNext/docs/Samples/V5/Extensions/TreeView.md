@@ -7,7 +7,7 @@
                     <BSTreeItem>
                         <Label>Level 2-a</Label>
                     </BSTreeItem>
-                    <BSTreeItem IsActive="true">
+                    <BSTreeItem IsDefaultActive="true">
                         <Label>Level 2-b</Label>
                     </BSTreeItem>
                     <BSTreeItem TextLabel="Level 2-c">
