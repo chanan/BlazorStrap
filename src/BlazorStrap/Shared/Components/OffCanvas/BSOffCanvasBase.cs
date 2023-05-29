@@ -92,6 +92,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
         #endregion
 
         protected bool ShouldRenderContent { get; set; } = true;
+        private string _style = string.Empty;
 
         protected override void OnInitialized()
         {
@@ -108,7 +109,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
             var func = async () =>
             {
                 CanRefresh = false;
-
+                _shown = false;
                 // Used to hide popovers
                 BlazorStrapService.ForwardToggle("", this);
                 //await BlazorStrapService.Interop.HideModalAsync(_objectRef, DataId, MyRef, !_leaveBodyAlone);
@@ -116,15 +117,15 @@ namespace BlazorStrap.Shared.Components.OffCanvas
                 //await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
                 //await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
 
-                //if (ShowBackdrop)
-                //{
-                //    if (!AllowScroll)
-                //    {
-                //        var scrollWidth = await BlazorStrapService.Interop.GetScrollBarWidth();
-                //        await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "");
-                //        await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", "");
-                //    }
-                //}
+                if (ShowBackdrop)
+                {
+                    if (!AllowScroll)
+                    {
+                        var scrollWidth = await BlazorStrapService.Interop.GetScrollBarWidth();
+                        await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "");
+                        await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", "");
+                    }
+                }
 
                 //// Used to hide popovers
                 //BlazorStrapService.ForwardToggle("", this);
@@ -142,7 +143,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
                 if (BackdropRef != null)
                     await BackdropRef.HideAsync();
 
-                _shown = false;
+               
                 _leaveBodyAlone = false;
                 ShouldRenderContent = ContentAlwaysRendered;
                 await InvokeAsync(StateHasChanged);
@@ -177,8 +178,10 @@ namespace BlazorStrap.Shared.Components.OffCanvas
                     ShouldRenderContent = true;
                     await InvokeAsync(StateHasChanged);
                 }
+                _shown = true;
                 CanRefresh = false;
                 await BlazorStrapService.Interop.ShowOffcanvasAsync(_objectRef, DataId, MyRef, !AllowScroll, ShowBackdrop);
+                await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
                 //await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
                 //await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Click);
 
@@ -204,7 +207,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
                 //catch //Animation failed cleaning up
                 //{
                 //}
-                _shown = true;
+               
                 await InvokeAsync(StateHasChanged);
                 _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
                 taskSource.SetResult(true);
