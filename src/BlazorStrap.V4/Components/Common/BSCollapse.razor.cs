@@ -16,7 +16,13 @@ namespace BlazorStrap.V4
                 .AddClass("navbar-collapse", IsInNavbar)
                 .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
                 .AddClass(Class, !string.IsNullOrEmpty(Class))
-                .Build().ToNullString();
+                .AddClass(SyncClass)
+                .Build().RemoveClassDoubles().ToNullString();
+
+        protected override string? StyleBuilder => new StyleBuilder()
+             .AddStyle(SyncStyle)
+             .AddStyle(Style)
+             .Build().RemoveStyleDoubles().ToNullString();
 
         protected override async Task OnResize(int width)
         {

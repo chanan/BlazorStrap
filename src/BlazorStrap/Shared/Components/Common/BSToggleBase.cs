@@ -95,12 +95,12 @@ namespace BlazorStrap.Shared.Components.Common
         {
             if (DropDownParent != null)
             {
-                await BlazorStrapService.Interop.AddAttributeAsync(MyRef, "aria-expanded", (!Show()).ToString().ToLower());
+             //   await BlazorStrapService.Interop.AddAttributeAsync(MyRef, "aria-expanded", (!Show()).ToString().ToLower());
                 await DropDownParent.ToggleAsync();
             }
             else if (CollapseParent != null)
             {
-                await BlazorStrapService.Interop.AddAttributeAsync(MyRef, "aria-expanded", (!Show()).ToString().ToLower());
+              //  await BlazorStrapService.Interop.AddAttributeAsync(MyRef, "aria-expanded", (!Show()).ToString().ToLower());
                 await CollapseParent.ToggleAsync();
             }
             else

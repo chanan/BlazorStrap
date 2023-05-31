@@ -58,5 +58,19 @@ namespace BlazorStrap.Extensions
         {
             return string.IsNullOrEmpty(value) ? null : value;
         }
+        public static string RemoveClassDoubles(this string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return string.Empty;
+            var classes = value.Split(' ').Distinct().ToArray();
+            return string.Join(' ', classes);
+        }
+        public static string RemoveStyleDoubles(this string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return string.Empty;
+            var styles = value.Split(';').Distinct().ToArray();
+            return string.Join(';', styles);
+        }
     }
 }

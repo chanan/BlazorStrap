@@ -2,6 +2,7 @@
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
 
 namespace BlazorStrap.Shared.Components.Common
 {
@@ -58,56 +59,42 @@ namespace BlazorStrap.Shared.Components.Common
         [Parameter] public RenderFragment? Toggler { get; set; }
 
         [Parameter] public bool IsHorizontal { get; set; }
+        [Parameter] public string Style { get; set; } = string.Empty;
 
         private bool _defaultShown;
 
         //Prevents the default state from overriding current state
         private bool _hasRendered;
-
-        
-
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
+        protected abstract string? StyleBuilder { get; }
 
         protected ElementReference? MyRef { get; set; }
-        protected override bool ShouldRender()
-        {
-            return CanRefresh;
-        }
+        protected override bool ShouldRender() => CanRefresh;
         public override async Task ShowAsync()
         {
+            if (MyRef is null) throw new NullReferenceException("ElementReference is null");
             if (_shown) return ;
-            _ = Task.Run(() => { _ = OnShow.InvokeAsync(this); });
-            //Kick off to event que
             var taskSource = new TaskCompletionSource<bool>();
+
+            if (OnShow.HasDelegate)
+                await OnShow.InvokeAsync(this); 
+
+            // Que Event
             var func = async () =>
             {
-                CanRefresh = false;
-                
-                try
-                {
-                    if (!NoAnimations)
-                    {
-                        if(IsHorizontal)
-                        {
-                            await BlazorStrapService.Interop.AnimateHorizontalCollapseAsync(_objectRef, MyRef, DataId, true);
-                        }
-                        else
-                        {
-                            await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, true);
-                        }
-                        await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 500);
-                        await BlazorStrapService.Interop.SetStyleAsync(MyRef, "height", "");
-                    }
-                }
-                catch //Animation failed cleaning up
-                {
-                }
                 _shown = true;
+                //Lock Rendering
+                CanRefresh = false;
+                var syncResult = await BlazorStrapService.NewInterop.ShowCollapseAsync(MyRef.Value, IsHorizontal);
+                if(syncResult is not null)
+                    Sync(syncResult);
+
+                //Unlock Rendering
                 CanRefresh = true;
                 await InvokeAsync(StateHasChanged);
-                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
                 taskSource.SetResult(true);
+                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
             };
             _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func});
 
@@ -121,39 +108,25 @@ namespace BlazorStrap.Shared.Components.Common
         
         public override async Task HideAsync()
         {
+            if (MyRef is null) throw new NullReferenceException("ElementReference is null");
             if (!_shown) return ;
             _ = Task.Run(() => { _ = OnHide.InvokeAsync(this); });
             //Kick off to event que
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
             {
+                _shown = false;
+                //Lock Rendering
                 CanRefresh = false;
 
-                try
-                {
-                    if (!NoAnimations)
-                    {
-                        if (IsHorizontal)
-                        {
-                            await BlazorStrapService.Interop.AnimateHorizontalCollapseAsync(_objectRef, MyRef, DataId, false);
-                            await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 500);
-                        }
-                        else
-                        {
-                            await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, false);
-                            await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 500);
-                        }
-                    }
-                }
-                catch //Animation failed cleaning up
-                {
-                }
+                var syncResult = await BlazorStrapService.NewInterop.HideCollapseAsync(MyRef.Value, IsHorizontal);
+                if (syncResult is not null)
+                    Sync(syncResult);
 
                 CanRefresh = true;
-                _shown = false;
                 await InvokeAsync(StateHasChanged);
-                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
                 taskSource.SetResult(true);
+                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
             };
 
             _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
