@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.Text.Json;
 
 namespace BlazorStrap.Service
 {
@@ -53,7 +54,7 @@ namespace BlazorStrap.Service
             if(showBackdrop)
                 await RequestBackdropAsync(true);
             var module = await GetModuleAsync() ?? throw new NullReferenceException("Unable to load module.");
-            return await module.InvokeAsync<InteropSyncResult>("showModal", cancellationToken ?? CancellationToken.None, elementReference, _objectReference);
+            return JsonSerializer.Deserialize<InteropSyncResult>(await module.InvokeAsync<string>("showModal", cancellationToken ?? CancellationToken.None, elementReference, _objectReference));
         }
         /// <summary>
         /// This method will hide the modal and return a list of classes, styles, and ARIA attributes for the given element reference.

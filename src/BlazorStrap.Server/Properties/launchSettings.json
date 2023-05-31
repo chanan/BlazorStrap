@@ -11,9 +11,9 @@
     "BlazorStrap5.Server": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
 
-      "applicationUrl": "https://localhost:7267;http://localhost:5267",
+      "applicationUrl": "http://localhost:5267",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -1,5 +1,5 @@
 export async function showModal(modal, dotnet) {
-    console.log(dotnet);
+    var start = new Date();
     var backdrop = document.querySelector('.modal-backdrop');
     if (backdrop)
     {
@@ -11,15 +11,19 @@ export async function showModal(modal, dotnet) {
     modal.setAttribute("aria-modal", "true");
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("modal-open");
-    
-    await waitForTransitionEnd(modal);
+    await waitForNextFrame(); 
     modal.classList.add("show");
+ 
+    await waitForTransitionEnd(modal);
 
-    return {
+    var end = new Date();
+    var time = end - start;
+    console.log('Execution time: ' + time);
+    return JSON.stringify({
         ClassList: modal.classList.value,
         Styles: modal.style.cssText,
         Aria: getAriaAttributes(modal),
-    };
+    });
 }
 export async function hideModal(modal, dotnet) {
 
@@ -137,14 +141,15 @@ export async function hideCollapse(collapse, horizontal, dotnet) {
 function waitForTransitionEnd(element) {
     return new Promise((resolve) => {
         const duration = getTransitionDuration(element);
-        const timeout = Math.max(duration, 300); // Minimum transition duration of 350ms
+        const timeout = 250; // Minimum transition duration of 350ms
         const transitionEndHandler = () => {
-            waitForNextFrame().then(setTimeout(resolve, 50));
             element.removeEventListener("transitionend", transitionEndHandler);
+            resolve();
+            clearTimeout(timeoutTimer);
         };
 
         element.addEventListener("transitionend", transitionEndHandler);
-        setTimeout(resolve, timeout);
+        var timeoutTimer = setTimeout(resolve, timeout);
     });
 }
 
@@ -157,7 +162,7 @@ function getTransitionDuration(element) {
 
 // Helper function to wait for the next frame
 function waitForNextFrame() {
-    return new Promise(resolve => setTimeout(requestAnimationFrame(resolve), 10));
+    return new Promise(resolve => setTimeout(resolve, 5));
 }
 function getAriaAttributes(element) {
     const ariaAttributes = Array.from(element.attributes)

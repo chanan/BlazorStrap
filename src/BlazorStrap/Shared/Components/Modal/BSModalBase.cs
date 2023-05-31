@@ -4,6 +4,7 @@ using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
+using System.Collections.Concurrent;
 
 namespace BlazorStrap.Shared.Components.Modal
 {
@@ -17,10 +18,11 @@ namespace BlazorStrap.Shared.Components.Modal
 
         protected Backdrop? BackdropRef { get; set; }
         protected ElementReference? MyRef { get; set; }
-        private IList<EventQue> _eventQue = new List<EventQue>();
+        //private IList<EventQue> _eventQue = new List<EventQue>();
         private DotNetObjectReference<BSModalBase>? _objectRef;
         private bool _shown;
         private bool _leaveBodyAlone;
+        private ConcurrentQueue<EventQue> _eventQue = new();
         [Parameter] public string Style { get; set; } = string.Empty;
 
         #region "Parameters"
@@ -147,8 +149,10 @@ namespace BlazorStrap.Shared.Components.Modal
         protected abstract string? HeaderClassBuilder { get; }
         protected abstract string? FooterClassBuilder { get; }
         #endregion
+        System.Diagnostics.Stopwatch _stopwatch = new();
 
         protected bool ShouldRenderContent { get; set; } = false;
+        private bool _secondRender;
 
         protected override void OnInitialized()
         {
@@ -182,7 +186,7 @@ namespace BlazorStrap.Shared.Components.Modal
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
             };
 
-            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
+            _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
             // Run event que if only item.
             if (_eventQue.Count == 1) {
                 await InvokeAsync(StateHasChanged);
@@ -192,6 +196,7 @@ namespace BlazorStrap.Shared.Components.Modal
         /// <inheritdoc/>
         public override async Task ShowAsync()
         {
+            _stopwatch.Restart();
             if (_shown) return ;
             ShouldRenderContent = true;
             _ = Task.Run(() => { _ = OnShow.InvokeAsync(this); });
@@ -201,7 +206,7 @@ namespace BlazorStrap.Shared.Components.Modal
             {
                 _shown = true;
                 CanRefresh = false;
-
+           
                 if (MyRef is not null)
                 {
                     var syncResult = await BlazorStrapService.JavaScript.ShowModalAsync(MyRef.Value, ShowBackdrop);
@@ -214,7 +219,8 @@ namespace BlazorStrap.Shared.Components.Modal
                 taskSource.SetResult(true);
                 _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
             };
-            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func});
+            
+            _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func});
 
             // Run event que if only item.
             if (_eventQue.Count == 1)
@@ -231,20 +237,32 @@ namespace BlazorStrap.Shared.Components.Modal
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (!firstRender)
+            if (!firstRender && _secondRender)
             {
-                if (_eventQue.Count > 0)
+                if (_eventQue.TryDequeue(out var eventItem))
                 {
-                    var eventItem = _eventQue.First();
-                    if (eventItem != null)
-                    {
-                        _eventQue.Remove(eventItem);
-                        await eventItem.Func.Invoke();
-                    }
+                    _stopwatch.Stop();
+                    Console.WriteLine($"ShowAsync Took: {_stopwatch.ElapsedMilliseconds}");
+                    var stopwatch = new System.Diagnostics.Stopwatch();
+                    stopwatch.Start();
+                    await eventItem.Func.Invoke();
+                    stopwatch.Stop();
+                    Console.WriteLine($"OnAfterRenderAsync Took: {stopwatch.ElapsedMilliseconds}");
                 }
+                //if (_eventQue.Count > 0)
+                //{
+                //    var eventItem = _eventQue.First();
+                //    if (eventItem != null)
+                //    {
+
+                //        _eventQue.Remove(eventItem);
+                //        await eventItem.Func.Invoke();
+                //    }
+                //}
             }
             else
             {
+                _secondRender = true;
                 _objectRef = DotNetObjectReference.Create(this);
                 BlazorStrapService.OnEventForward += InteropEventCallback;
                 BlazorStrapService.ModalChange += OnModalChange;
