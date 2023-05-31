@@ -1,36 +1,55 @@
-//export async function showModal(modal) {
-//    modal.classList.add("show");
-//    modal.style.display = "block";
-//    modal.setAttribute("aria-modal", "true");
-//    modal.setAttribute("aria-hidden", "false");
-//    document.body.classList.add("modal-open");
+export async function showModal(modal, dotnet) {
+    console.log(dotnet);
+    var backdrop = document.querySelector('.modal-backdrop');
+    if (backdrop)
+    {
+        await waitForNextFrame();
+        backdrop.classList.add("show");
+    }
 
-//    await waitForTransitionEnd(modal);
-//    return {
-//        classList: modal.classList,
-//        styles: modal.style,
-//        ariaModal: modal.getAttribute("aria-modal"),
-//        ariaHidden: modal.getAttribute("aria-hidden")
-//    };
-//}
-//export async function hideModal(modal) {
-//    modal.classList.remove("show");
-//    modal.setAttribute("aria-modal", "false");
-//    modal.setAttribute("aria-hidden", "true");
-//    document.body.classList.remove("modal-open");
+    modal.style.display = "block";
+    modal.setAttribute("aria-modal", "true");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    
+    await waitForTransitionEnd(modal);
+    modal.classList.add("show");
 
-//    await waitForTransitionEnd(modal);
-//    modal.style.display = "none";
-//    return {
-//        classList: modal.classList,
-//        styles: modal.style,
-//        ariaModal: modal.getAttribute("aria-modal"),
-//        ariaHidden: modal.getAttribute("aria-hidden")
-//    };
-//}
+    return {
+        ClassList: modal.classList.value,
+        Styles: modal.style.cssText,
+        Aria: getAriaAttributes(modal),
+    };
+}
+export async function hideModal(modal, dotnet) {
+
+    modal.classList.remove("show");
+    modal.setAttribute("aria-modal", "false");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    
+    await waitForTransitionEnd(modal);
+    modal.style.display = "none";
+
+    var backdrop = document.querySelector('.modal-backdrop');
+    if (backdrop) {
+        var openModals = document.querySelectorAll('.modal.show:not([data-blazorstrap-backdrop="false"])');
+        //Checks to see if any other modal is open if so do not remove the backdrop
+        if (openModals.length == 0) {
+            backdrop.classList.remove("show");
+            await waitForTransitionEnd(backdrop);
+            await dotnet.invokeMethodAsync('RemoveBackdropAsync');
+        }
+    }
+    return {
+        ClassList: modal.classList.value,
+        Styles: modal.style.cssText,
+        Aria: getAriaAttributes(modal),
+    };
+}
 
 // Show the collapse content with animation
-export async function showCollapse(collapse, horizontal) {
+export async function showCollapse(collapse, horizontal, dotnet) {
     document.querySelectorAll('[data-blazorstrap-target="' + collapse.getAttribute('data-blazorstrap') + '"]').forEach(caller => {
         if (caller) {
             caller.setAttribute('aria-expanded', true);
@@ -45,7 +64,7 @@ export async function showCollapse(collapse, horizontal) {
         collapse.style.height = "0";
     }
   //  collapse.style.display = "block";
-    await waitForNextFrame(); // Wait for the next frame to ensure the DOM updates
+    await waitForNextFrame(); 
     collapse.classList.remove("collapse");
     collapse.classList.add("collapsing");
 
@@ -66,12 +85,12 @@ export async function showCollapse(collapse, horizontal) {
     return {
         ClassList: collapse.classList.value,
         Styles: collapse.style.cssText,
-        AriaExpanded: true
+        Aria: getAriaAttributes(collapse),
     };
 }
 
 // Hide the collapse content with animation
-export async function hideCollapse(collapse, horizontal) {
+export async function hideCollapse(collapse, horizontal, dotnet) {
     document.querySelectorAll('[data-blazorstrap-target="' + collapse.getAttribute('data-blazorstrap') + '"]').forEach(caller => {
         if (caller) {
             caller.setAttribute('aria-expanded', false);
@@ -109,7 +128,7 @@ export async function hideCollapse(collapse, horizontal) {
     return {
         ClassList: collapse.classList.value,
         Styles: collapse.style.cssText,
-        AriaExpanded: false
+        Aria: getAriaAttributes(collapse),
     };
 }
 
@@ -118,10 +137,9 @@ export async function hideCollapse(collapse, horizontal) {
 function waitForTransitionEnd(element) {
     return new Promise((resolve) => {
         const duration = getTransitionDuration(element);
-        const timeout = Math.max(duration, 300); // Minimum transition duration of 300ms
-
+        const timeout = Math.max(duration, 300); // Minimum transition duration of 350ms
         const transitionEndHandler = () => {
-            resolve();
+            waitForNextFrame().then(setTimeout(resolve, 50));
             element.removeEventListener("transitionend", transitionEndHandler);
         };
 
@@ -139,8 +157,13 @@ function getTransitionDuration(element) {
 
 // Helper function to wait for the next frame
 function waitForNextFrame() {
-    return new Promise(resolve => requestAnimationFrame(resolve));
-    //return new Promise(resolve => {
-    //    setTimeout(resolve, 100);
-    //});
+    return new Promise(resolve => setTimeout(requestAnimationFrame(resolve), 10));
+}
+function getAriaAttributes(element) {
+    const ariaAttributes = Array.from(element.attributes)
+        .filter(attribute => attribute.name.startsWith('aria'))
+        .map(attribute => `${attribute.name} = "${attribute.value}"`)
+        .join(', ');
+
+    return ariaAttributes;
 }

@@ -1,7 +1,10 @@
-﻿namespace BlazorStrap
+﻿using BlazorStrap.Service;
+
+namespace BlazorStrap
 {
     public interface IBlazorStrap
     {
+        BSInterop JavaScript { get; }
         bool ShowDebugMessages { get; }
         Toaster Toaster { get; }
         public T CurrentTheme<T>() where T : Enum;

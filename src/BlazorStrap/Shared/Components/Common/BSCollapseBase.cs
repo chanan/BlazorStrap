@@ -86,7 +86,7 @@ namespace BlazorStrap.Shared.Components.Common
                 _shown = true;
                 //Lock Rendering
                 CanRefresh = false;
-                var syncResult = await BlazorStrapService.NewInterop.ShowCollapseAsync(MyRef.Value, IsHorizontal);
+                var syncResult = await BlazorStrapService.JavaScript.ShowCollapseAsync(MyRef.Value, IsHorizontal);
                 if(syncResult is not null)
                     Sync(syncResult);
 
@@ -119,7 +119,7 @@ namespace BlazorStrap.Shared.Components.Common
                 //Lock Rendering
                 CanRefresh = false;
 
-                var syncResult = await BlazorStrapService.NewInterop.HideCollapseAsync(MyRef.Value, IsHorizontal);
+                var syncResult = await BlazorStrapService.JavaScript.HideCollapseAsync(MyRef.Value, IsHorizontal);
                 if (syncResult is not null)
                     Sync(syncResult);
 

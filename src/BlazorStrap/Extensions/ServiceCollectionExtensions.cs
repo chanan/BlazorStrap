@@ -10,8 +10,8 @@ namespace BlazorStrap
         public static IServiceCollection AddBlazorStrap(this IServiceCollection serviceCollection, Action<BlazorStrapOptions>? options = null)
         {
             serviceCollection.AddScoped<BlazorStrapInterop>();
-            serviceCollection.AddScoped<Interop>();
-            serviceCollection.AddScoped<IBlazorStrap>(x => new BlazorStrapCore(x.GetRequiredService<BlazorStrapInterop>(), options, x.GetRequiredService<Interop>()));
+            serviceCollection.AddScoped<BSInterop>();
+            serviceCollection.AddScoped<IBlazorStrap>(x => new BlazorStrapCore(x.GetRequiredService<BlazorStrapInterop>(), options, x.GetRequiredService<BSInterop>()));
             serviceCollection.AddScoped<ISvgLoader, SvgLoader>();
             return serviceCollection;
         }

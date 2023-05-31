@@ -49,8 +49,9 @@ namespace BlazorStrap_Docs.Helper
             if (_init is false || _lastSource != Source)
             {
                 if (Source == null ) return;
+                Console.WriteLine(Source + "?" + Guid.NewGuid().ToString());
                 using var httpClient = new HttpClient() { BaseAddress = new Uri(NavigationManager.BaseUri)};
-                    using var response = await httpClient.GetAsync(Source + "?" + Guid.NewGuid().ToString());
+                    using var response = await httpClient.GetAsync(Source + "?" + Guid.NewGuid().ToString().Replace("-",""));
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     _rawData = await response.Content.ReadAsStringAsync();

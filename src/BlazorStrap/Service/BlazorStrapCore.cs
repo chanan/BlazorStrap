@@ -1,12 +1,14 @@
 ﻿using BlazorStrap.Extensions;
 using BlazorStrap.Shared.Components.Modal;
+using BlazorStrap.Shared.Components.OffCanvas;
 
 namespace BlazorStrap.Service
 {
     public class BlazorStrapCore : IBlazorStrap
     {
         public readonly BlazorStrapInterop Interop;
-        public readonly Interop NewInterop;
+        public BSInterop JavaScript { get; }
+        
         public bool ShowDebugMessages { get; private set; }
         internal Func<string, CallerName, EventType, Task>? OnEventForward;
         
@@ -18,14 +20,14 @@ namespace BlazorStrap.Service
             return (T) Enum.Parse(typeof(T), _currentTheme, true);
         }
 
-        public BlazorStrapCore(BlazorStrapInterop? interop,  string basepath, Interop newInterop)
+        public BlazorStrapCore(BlazorStrapInterop? interop,  string basepath, BSInterop javascript)
         {
             if (interop == null)
                 throw new ArgumentNullException(nameof(interop));
             Interop = interop;
-            NewInterop = newInterop;
+            JavaScript = javascript;
         }
-        public BlazorStrapCore(BlazorStrapInterop interop, Action<BlazorStrapOptions>? buildOptions, Interop newInterop)
+        public BlazorStrapCore(BlazorStrapInterop interop, Action<BlazorStrapOptions>? buildOptions, BSInterop javascript)
         {
             var options = new BlazorStrapOptions();
             if (buildOptions != null)
@@ -33,7 +35,7 @@ namespace BlazorStrap.Service
                 buildOptions.Invoke(options);
             }
             Interop = interop;
-            NewInterop = newInterop;
+            JavaScript = javascript;
             ShowDebugMessages = options.ShowDebugMessages;
         }
         public Task SetBootstrapCss()
