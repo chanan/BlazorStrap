@@ -4,8 +4,7 @@
 <BSToaster/>
 @inject IBlazorStrap blazorStrap
 
-@* OnShow="@(() => NewEmployee(new Employee()))" *@
-<BSModal DataId="model9" OnShow="@(() => Console.WriteLine("Hi"))"  HideOnValidSubmit="true" IsStaticBackdrop="true">
+<BSModal DataId="model9" OnShow="@(() => NewEmployee(new Employee()))" HideOnValidSubmit="true" IsStaticBackdrop="true">
     <BSForm Model="model" OnValidSubmit="@Update">
         <DataAnnotationsValidator/>
         <BSModalHeader>New Employee Form</BSModalHeader>
@@ -36,7 +35,7 @@
     private Employee model = new Employee();
     private async Task NewEmployee(Employee e)
     {
-    //    model = e; 
+        model = e; 
     }
     private async Task Update()
     {
