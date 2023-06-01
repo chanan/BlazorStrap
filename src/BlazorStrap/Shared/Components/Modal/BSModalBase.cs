@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 
 namespace BlazorStrap.Shared.Components.Modal
 {
@@ -149,9 +150,9 @@ namespace BlazorStrap.Shared.Components.Modal
         protected abstract string? HeaderClassBuilder { get; }
         protected abstract string? FooterClassBuilder { get; }
         #endregion
-        System.Diagnostics.Stopwatch _stopwatch = new();
 
         protected bool ShouldRenderContent { get; set; } = false;
+        System.Diagnostics.Stopwatch _stopwatch = new();
         private bool _secondRender;
 
         protected override void OnInitialized()
@@ -242,23 +243,9 @@ namespace BlazorStrap.Shared.Components.Modal
                 if (_eventQue.TryDequeue(out var eventItem))
                 {
                     _stopwatch.Stop();
-                    Console.WriteLine($"ShowAsync Took: {_stopwatch.ElapsedMilliseconds}");
-                    var stopwatch = new System.Diagnostics.Stopwatch();
-                    stopwatch.Start();
+                    Console.WriteLine($"Modal {_stopwatch.ElapsedMilliseconds}");
                     await eventItem.Func.Invoke();
-                    stopwatch.Stop();
-                    Console.WriteLine($"OnAfterRenderAsync Took: {stopwatch.ElapsedMilliseconds}");
                 }
-                //if (_eventQue.Count > 0)
-                //{
-                //    var eventItem = _eventQue.First();
-                //    if (eventItem != null)
-                //    {
-
-                //        _eventQue.Remove(eventItem);
-                //        await eventItem.Func.Invoke();
-                //    }
-                //}
             }
             else
             {
