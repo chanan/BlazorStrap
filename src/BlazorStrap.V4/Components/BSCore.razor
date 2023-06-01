@@ -4,3 +4,11 @@
 {
     <BSToaster/>   
 }
+@if (_modalBackdropRendered)
+{
+    <div class="modal-backdrop fade@(_backdropShown ? "show" : "")" data-blazorstrap="backdrop"></div>
+}
+@if (_offcanvasBackdropRendered)
+{
+    <div class="offcanvas-backdrop fade@(_backdropShown ? "show" : "")" data-blazorstrap="offcanvas-backdrop"></div>
+}

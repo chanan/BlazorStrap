@@ -15,7 +15,9 @@ namespace BlazorStrap
         TransitionEnd, 
         Keyup,
         Resize,
-        Click
+        Click,
+        Hide,
+        Show
 
     }
 }

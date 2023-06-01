@@ -5,7 +5,7 @@
 {
     if (Content == null)
     {
-        <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="@Style" @ref="MyRef" data-blazorstrap="@DataId" data-blazorstrap-backdrop="@(ShowBackdrop ? "true" : "false")">
+        <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="@Style" @ref="MyRef" data-blazorstrap="@DataId" data-bs-backdrop="@Backdrop" data-bs-keyboard="@((!DisableEscapeKey && !IsManual) ? "true" : "false")" data-bs-allowscroll="@(AllowScroll ? "true" : "false")" data-bs-manual="@(IsManual ? "true" : "false")">
 
             <div class="@DialogClassBuilder">
                 <div class="@ContentClassBuilder">
@@ -19,7 +19,7 @@
     }
     else
     {
-        <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="@Style" @ref="MyRef" data-blazorstrap="@DataId" data-blazorstrap-backdrop="@(ShowBackdrop ? "true" : "false")">
+        <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="@Style" @ref="MyRef" data-blazorstrap="@DataId" data-bs-backdrop="@Backdrop" data-bs-keyboard="@((!DisableEscapeKey && !IsManual) ? "true" : "false")" data-bs-allowscroll="@(AllowScroll ? "true" : "false")" data-bs-manual="@(IsManual ? "true" : "false")">
             @if (ShouldRenderContent)
             {
                 <div class="@DialogClassBuilder">

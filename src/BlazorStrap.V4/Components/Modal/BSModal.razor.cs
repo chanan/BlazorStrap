@@ -34,6 +34,8 @@ namespace BlazorStrap.V4
             .AddStyle(SyncStyle)
             .AddStyle(Style)
             .Build().RemoveStyleDoubles().ToNullString();
+
+        protected string Backdrop => ShowBackdrop ? (IsStaticBackdrop ? "static" : "true") : "false";
         protected override string? BodyClassBuilder => new CssBuilder("modal-body")
                 .AddClass(BodyClass)
                 .Build().ToNullString();

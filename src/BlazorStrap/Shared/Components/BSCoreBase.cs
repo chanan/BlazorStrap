@@ -6,15 +6,36 @@ namespace BlazorStrap.Shared.Components
     {
         [Inject] protected IBlazorStrap? BlazorStrapService { get; set; } = default!;
         [Parameter] public bool HasToaster { get; set; } = true;
+
         protected bool _modalBackdropRendered;
+        protected bool _offcanvasBackdropRendered;
         protected bool _backdropShown;
+        protected bool _offcanvasBackdropShown;
         protected override void OnInitialized()
         {
             if (BlazorStrapService is not null)
             {
-                BlazorStrapService.JavaScript.SetRenderModalBackdrop += SetRenderModalBackdrop;
-                BlazorStrapService.JavaScript.OnModalBackdropShown += OnModalBackdropShown;
+                BlazorStrapService.JavaScriptInterop.OnOffCanvasBackdropShown += OnOffCanvasBackdropShown;
+                BlazorStrapService.JavaScriptInterop.SetRenderOffCanvasBackdrop += SetRenderOffcanvasBackdrop;
+                BlazorStrapService.JavaScriptInterop.SetRenderModalBackdrop += SetRenderModalBackdrop;
+                BlazorStrapService.JavaScriptInterop.OnModalBackdropShown += OnModalBackdropShown;
             }
+        }
+
+        private async Task SetRenderOffcanvasBackdrop(bool value)
+        {
+            _offcanvasBackdropRendered = value;
+            if (_offcanvasBackdropShown && !value)
+            {
+                _offcanvasBackdropShown = false;
+            }
+            await InvokeAsync(StateHasChanged);
+        }
+
+        private async Task OnOffCanvasBackdropShown()
+        {
+            _offcanvasBackdropShown = true;
+            await InvokeAsync(StateHasChanged);
         }
 
         private async Task OnModalBackdropShown()
@@ -40,7 +61,7 @@ namespace BlazorStrap.Shared.Components
             if (firstRender)
             {
                 if (BlazorStrapService is null) throw new ArgumentNullException(nameof(BlazorStrapService));
-                await BlazorStrapService.JavaScript.PreloadModuleAsync();
+                await BlazorStrapService.JavaScriptInterop.PreloadModuleAsync();
             }
         }
 
@@ -48,8 +69,10 @@ namespace BlazorStrap.Shared.Components
         {
             if (BlazorStrapService is not null)
             {
-                BlazorStrapService.JavaScript.SetRenderModalBackdrop -= SetRenderModalBackdrop;
-                BlazorStrapService.JavaScript.OnModalBackdropShown -= OnModalBackdropShown;
+                BlazorStrapService.JavaScriptInterop.OnOffCanvasBackdropShown -= OnOffCanvasBackdropShown;
+                BlazorStrapService.JavaScriptInterop.SetRenderOffCanvasBackdrop -= SetRenderOffcanvasBackdrop;
+                BlazorStrapService.JavaScriptInterop.SetRenderModalBackdrop -= SetRenderModalBackdrop;
+                BlazorStrapService.JavaScriptInterop.OnModalBackdropShown -= OnModalBackdropShown;
             }
         }
     }

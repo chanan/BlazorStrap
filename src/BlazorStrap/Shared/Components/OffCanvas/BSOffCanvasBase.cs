@@ -5,6 +5,7 @@ using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
+using System.Collections.Concurrent;
 
 namespace BlazorStrap.Shared.Components.OffCanvas
 {
@@ -19,8 +20,9 @@ namespace BlazorStrap.Shared.Components.OffCanvas
 
         protected Backdrop? BackdropRef { get; set; }
         protected ElementReference? MyRef { get; set; }
-        
-        private IList<EventQue> _eventQue = new List<EventQue>();
+
+        private ConcurrentQueue<EventQue> _eventQue = new();
+        private bool _secondRender;
         private DotNetObjectReference<BSOffCanvasBase>? _objectRef;
         private bool _shown;
         private bool _leaveBodyAlone;
@@ -29,6 +31,11 @@ namespace BlazorStrap.Shared.Components.OffCanvas
         /// Allows the page body to be scrolled while the OffCanvas is being shown.
         /// </summary>
         [Parameter] public bool AllowScroll { get; set; }
+
+        /// <summary>
+        /// Disables the escape key from closing the OffCanvas.
+        /// </summary>
+        [Parameter] public bool DisableEscapeKey { get; set; } = false;
 
         /// <summary>
         /// CSS classes to be added to the OffCanvas body.
@@ -83,7 +90,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
         /// <summary>
         /// Setting this to false will hide the content of the offvanvas when it is hidden.
         /// </summary>
-        [Parameter] public bool ContentAlwaysRendered { get; set; } = true;
+        [Parameter] public bool ContentAlwaysRendered { get; set; } = false;
         #region Render props
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
@@ -96,6 +103,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
 
         protected override void OnInitialized()
         {
+            BlazorStrapService.OnEvent += OnEventAsync;
             ShouldRenderContent = ContentAlwaysRendered;
             CanRefresh = true;
         }
@@ -108,52 +116,26 @@ namespace BlazorStrap.Shared.Components.OffCanvas
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
             {
-                CanRefresh = false;
                 _shown = false;
-                // Used to hide popovers
-                BlazorStrapService.ForwardToggle("", this);
-                //await BlazorStrapService.Interop.HideModalAsync(_objectRef, DataId, MyRef, !_leaveBodyAlone);
+                CanRefresh = false;
 
-                //await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
-                //await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
-
-                if (ShowBackdrop)
+                if (MyRef is not null)
                 {
-                    if (!AllowScroll)
-                    {
-                        var scrollWidth = await BlazorStrapService.Interop.GetScrollBarWidth();
-                        await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "");
-                        await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", "");
-                    }
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.HideOffCanvasAsync(MyRef.Value);
+                    if (syncResult is not null)
+                        Sync(syncResult);
                 }
 
-                //// Used to hide popovers
-                //BlazorStrapService.ForwardToggle("", this);
 
-                //try
-                //{
-                //    await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "show");
-                //    await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 300);
-                //}
-
-                //catch //Animation failed cleaning up
-                //{
-                //}
-
-                if (BackdropRef != null)
-                    await BackdropRef.HideAsync();
-
-               
-                _leaveBodyAlone = false;
-                ShouldRenderContent = ContentAlwaysRendered;
-                await InvokeAsync(StateHasChanged);
-                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
-                taskSource.SetResult(true);
                 CanRefresh = true;
+                ShouldRenderContent = false;
+                await InvokeAsync(StateHasChanged);
 
+                taskSource.SetResult(true);
+                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
             };
 
-            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
+            _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
             // Run event que if only item.
             if (_eventQue.Count == 1) {
                 await InvokeAsync(StateHasChanged);
@@ -164,6 +146,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
         public override async Task ShowAsync()
         {
             if (_shown) return ;
+            ShouldRenderContent = true;
             _ = Task.Run(() => { _ = OnShow.InvokeAsync(this); });
             
             // Used to hide popovers
@@ -173,47 +156,22 @@ namespace BlazorStrap.Shared.Components.OffCanvas
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
             {
-                if (!ContentAlwaysRendered)
-                {
-                    ShouldRenderContent = true;
-                    await InvokeAsync(StateHasChanged);
-                }
                 _shown = true;
                 CanRefresh = false;
-                await BlazorStrapService.Interop.ShowOffcanvasAsync(_objectRef, DataId, MyRef, !AllowScroll, ShowBackdrop);
-                await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
-                //await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Keyup);
-                //await BlazorStrapService.Interop.AddDocumentEventAsync(_objectRef, DataId, EventType.Click);
 
-                //if (BackdropRef != null)
-                //    await BackdropRef.ShowAsync();
+                if (MyRef is not null)
+                {
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowOffCanvasAsync(MyRef.Value, ShowBackdrop);
+                    if (syncResult is not null)
+                        Sync(syncResult);
+                }
 
-                //if (ShowBackdrop)
-                //{
-                //    if (!AllowScroll)
-                //    {
-                //        var scrollWidth = await BlazorStrapService.Interop.GetScrollBarWidth();
-                //        await BlazorStrapService.Interop.SetBodyStyleAsync("overflow", "hidden");
-                //        await BlazorStrapService.Interop.SetBodyStyleAsync("paddingRight", $"{scrollWidth}px");
-                //    }
-                //}
-
-                //try
-                //{
-                //    await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
-                //    await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 300);
-
-                //}
-                //catch //Animation failed cleaning up
-                //{
-                //}
-               
-                await InvokeAsync(StateHasChanged);
-                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
-                taskSource.SetResult(true);
                 CanRefresh = true;
+                await InvokeAsync(StateHasChanged);
+                taskSource.SetResult(true);
+                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
             };
-            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func});
+            _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
 
             // Run event que if only item.
             if (_eventQue.Count == 1)
@@ -230,20 +188,16 @@ namespace BlazorStrap.Shared.Components.OffCanvas
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (!firstRender)
+            if (!firstRender && _secondRender)
             {
-                if (_eventQue.Count > 0)
+                if (_eventQue.TryDequeue(out var eventItem))
                 {
-                    var eventItem = _eventQue.First();
-                    if (eventItem != null)
-                    {
-                        _eventQue.Remove(eventItem);
-                        await eventItem.Func.Invoke();
-                    }
+                    await eventItem.Func.Invoke();
                 }
             }
             else
             {
+                _secondRender = true;
                 _objectRef = DotNetObjectReference.Create(this);
                 BlazorStrapService.OnEventForward += InteropEventCallback;
             }
@@ -257,6 +211,23 @@ namespace BlazorStrap.Shared.Components.OffCanvas
                 await ToggleAsync();
             }
         }
+
+        public override async Task OnEventAsync(string sender, string target, EventType type, object data)
+        {
+            if (sender == "javascript" && target == DataId && type == EventType.Hide)
+            {
+                await HideAsync();
+            }
+            else if (sender == "javascript" && target == DataId && type == EventType.Show)
+            {
+                await ShowAsync();
+            }
+            else if (sender == "javascript" && target == DataId && type == EventType.Toggle)
+            {
+                await ToggleAsync();
+            }
+        }
+
         [JSInvokable]
         public async Task ToggleBackdropAndModalChange()
         {
@@ -292,6 +263,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
 
         public async ValueTask DisposeAsync()
         {
+            BlazorStrapService.OnEvent -= OnEventAsync;
             try
             {
                 await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);

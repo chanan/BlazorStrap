@@ -4,7 +4,8 @@ namespace BlazorStrap
 {
     public interface IBlazorStrap
     {
-        BSInterop JavaScript { get; }
+
+        BSInterop JavaScriptInterop { get; }
         bool ShowDebugMessages { get; }
         Toaster Toaster { get; }
         public T CurrentTheme<T>() where T : Enum;
@@ -13,5 +14,6 @@ namespace BlazorStrap
         Task SetBootstrapCss(string theme, string version);
         Task SetBootstrapCss<T>(T theme, string version) where T : Enum;
         void ForwardClick(string id);
+        Task InvokeEvent(string sender, string target, EventType type, object data);
     }
 }

@@ -33,6 +33,11 @@ namespace BlazorStrap.Shared.Components.Modal
         [Parameter] public BSColor ModalColor { get; set; } = BSColor.Default;
 
         /// <summary>
+        /// Disables the escape key from closing the modal.
+        /// </summary>
+        [Parameter] public bool DisableEscapeKey { get; set; } = false;
+
+        /// <summary>
         /// Allows the page to be scrolled while the Modal is being shown.
         /// </summary>
         [Parameter] public bool AllowScroll { get; set; }
@@ -152,11 +157,11 @@ namespace BlazorStrap.Shared.Components.Modal
         #endregion
 
         protected bool ShouldRenderContent { get; set; } = false;
-        System.Diagnostics.Stopwatch _stopwatch = new();
         private bool _secondRender;
 
         protected override void OnInitialized()
         {
+            BlazorStrapService.OnEvent += OnEventAsync;
             ShouldRenderContent = ContentAlwaysRendered;
             CanRefresh = true;
         }
@@ -174,7 +179,7 @@ namespace BlazorStrap.Shared.Components.Modal
 
                 if (MyRef is not null)
                 {
-                    var syncResult = await BlazorStrapService.JavaScript.HideModalAsync(MyRef.Value);
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.HideModalAsync(MyRef.Value);
                     if (syncResult is not null)
                         Sync(syncResult);
                 }
@@ -197,7 +202,6 @@ namespace BlazorStrap.Shared.Components.Modal
         /// <inheritdoc/>
         public override async Task ShowAsync()
         {
-            _stopwatch.Restart();
             if (_shown) return ;
             ShouldRenderContent = true;
             _ = Task.Run(() => { _ = OnShow.InvokeAsync(this); });
@@ -210,7 +214,7 @@ namespace BlazorStrap.Shared.Components.Modal
            
                 if (MyRef is not null)
                 {
-                    var syncResult = await BlazorStrapService.JavaScript.ShowModalAsync(MyRef.Value, ShowBackdrop);
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowModalAsync(MyRef.Value, ShowBackdrop);
                     if (syncResult is not null)
                         Sync(syncResult);
                 }
@@ -242,8 +246,6 @@ namespace BlazorStrap.Shared.Components.Modal
             {
                 if (_eventQue.TryDequeue(out var eventItem))
                 {
-                    _stopwatch.Stop();
-                    Console.WriteLine($"Modal {_stopwatch.ElapsedMilliseconds}");
                     await eventItem.Func.Invoke();
                 }
             }
@@ -260,6 +262,23 @@ namespace BlazorStrap.Shared.Components.Modal
         public override async Task InteropEventCallback(string id, CallerName name, EventType type)
         {
             if (DataId == id && name.Equals(typeof(ClickForward)) && type == EventType.Click && !IsManual)
+            {
+                await ToggleAsync();
+            }
+        }
+
+
+        public override async Task OnEventAsync(string sender, string target, EventType type, object data)
+        {
+            if(sender == "javascript" && target == DataId && type == EventType.Hide)
+            {
+                await HideAsync();
+            }
+            else if (sender == "javascript" && target == DataId && type == EventType.Show)
+            {
+                await ShowAsync();
+            }
+            else if (sender == "javascript" && target == DataId && type == EventType.Toggle)
             {
                 await ToggleAsync();
             }
@@ -335,6 +354,7 @@ namespace BlazorStrap.Shared.Components.Modal
 
         public async ValueTask DisposeAsync()
         {
+            BlazorStrapService.OnEvent -= OnEventAsync;
             try
             {
                 await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);

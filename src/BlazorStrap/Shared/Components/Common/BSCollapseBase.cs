@@ -71,8 +71,10 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected ElementReference? MyRef { get; set; }
         protected override bool ShouldRender() => CanRefresh;
+        System.Diagnostics.Stopwatch _stopwatch = new();
         public override async Task ShowAsync()
         {
+            _stopwatch.Restart();
             if (MyRef is null) throw new NullReferenceException("ElementReference is null");
             if (_shown) return ;
             var taskSource = new TaskCompletionSource<bool>();
@@ -86,7 +88,7 @@ namespace BlazorStrap.Shared.Components.Common
                 _shown = true;
                 //Lock Rendering
                 CanRefresh = false;
-                var syncResult = await BlazorStrapService.JavaScript.ShowCollapseAsync(MyRef.Value, IsHorizontal);
+                var syncResult = await BlazorStrapService.JavaScriptInterop.ShowCollapseAsync(MyRef.Value, IsHorizontal);
                 if(syncResult is not null)
                     Sync(syncResult);
 
@@ -119,7 +121,7 @@ namespace BlazorStrap.Shared.Components.Common
                 //Lock Rendering
                 CanRefresh = false;
 
-                var syncResult = await BlazorStrapService.JavaScript.HideCollapseAsync(MyRef.Value, IsHorizontal);
+                var syncResult = await BlazorStrapService.JavaScriptInterop.HideCollapseAsync(MyRef.Value, IsHorizontal);
                 if (syncResult is not null)
                     Sync(syncResult);
 
@@ -165,6 +167,8 @@ namespace BlazorStrap.Shared.Components.Common
                         _eventQue.Remove(eventItem);
                         await eventItem.Func.Invoke();
                     }
+                    _stopwatch.Stop();
+                    Console.WriteLine($"Time to render: {_stopwatch.ElapsedMilliseconds}ms");
                 }
             }
             else

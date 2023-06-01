@@ -1,15 +1,18 @@
 ﻿using BlazorStrap.Extensions;
 using BlazorStrap.Shared.Components.Modal;
 using BlazorStrap.Shared.Components.OffCanvas;
+using Microsoft.JSInterop;
 
 namespace BlazorStrap.Service
 {
     public class BlazorStrapCore : IBlazorStrap
     {
         public readonly BlazorStrapInterop Interop;
-        public BSInterop JavaScript { get; }
+        public BSInterop JavaScriptInterop { get; }
         
         public bool ShowDebugMessages { get; private set; }
+        public Func<string, string, EventType, object, Task>? OnEvent { get; set; }
+
         internal Func<string, CallerName, EventType, Task>? OnEventForward;
         
         //private readonly CurrentTheme _currentTheme;
@@ -20,14 +23,14 @@ namespace BlazorStrap.Service
             return (T) Enum.Parse(typeof(T), _currentTheme, true);
         }
 
-        public BlazorStrapCore(BlazorStrapInterop? interop,  string basepath, BSInterop javascript)
+        public BlazorStrapCore(BlazorStrapInterop? interop,  string basepath, IJSRuntime jSRuntime)
         {
             if (interop == null)
                 throw new ArgumentNullException(nameof(interop));
             Interop = interop;
-            JavaScript = javascript;
+            JavaScriptInterop = new BSInterop(jSRuntime, this);
         }
-        public BlazorStrapCore(BlazorStrapInterop interop, Action<BlazorStrapOptions>? buildOptions, BSInterop javascript)
+        public BlazorStrapCore(BlazorStrapInterop interop, Action<BlazorStrapOptions>? buildOptions, IJSRuntime jSRuntime)
         {
             var options = new BlazorStrapOptions();
             if (buildOptions != null)
@@ -35,7 +38,7 @@ namespace BlazorStrap.Service
                 buildOptions.Invoke(options);
             }
             Interop = interop;
-            JavaScript = javascript;
+            JavaScriptInterop = new BSInterop(jSRuntime, this);
             ShowDebugMessages = options.ShowDebugMessages;
         }
         public Task SetBootstrapCss()
@@ -73,6 +76,12 @@ namespace BlazorStrap.Service
         public void ModalChanged(BSModalBase obj)
         {
             ModalChange?.Invoke(obj, false);
+        }
+
+        public async Task InvokeEvent(string sender, string target, EventType type, object data)
+        {
+            if(OnEvent is not null)
+                await OnEvent.Invoke(sender, target, type, data);
         }
 
         public void ForwardClick(string id)
