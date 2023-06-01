@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Collections.Concurrent;
 
 namespace BlazorStrap.Shared.Components.Common
 {
-    public abstract class BSAccordionBase : BlazorStrapBase, IDisposable
+    public abstract class BSAccordionBase : BlazorStrapBase
     {
         /// <summary>
         /// Adds the accordian-flush class. See 
@@ -10,49 +11,21 @@ namespace BlazorStrap.Shared.Components.Common
         /// for details
         /// </summary>
         [Parameter] public bool IsFlushed { get; set; }
-
-        [CascadingParameter] public BSAccordionItemBase? Parent { get; set; }
-
-        [CascadingParameter] public BSCollapseBase? CollapseParent { get; set; }
-
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
+        internal ConcurrentDictionary<string, BSAccordionItemBase> Children = new();
 
-
-        protected override void OnInitialized()
+        public bool UpdateChild(BSAccordionItemBase accordionItemBase)
         {
-            // if (Parent != null)
-            //     Parent.NestedHandler += NestedHandler;
-            // if (CollapseParent != null)
-            //     CollapseParent.NestedHandler += NestedHandler;
+            return Children.TryGetValue(DataId, out var child) && Children.TryUpdate(DataId, accordionItemBase, child);
         }
-
-        // private void NestedHandler()
-        // {
-        //     ChildHandler?.Invoke(null);
-        // }
-
-        public bool FirstChild()
+        public void AddChild(BSAccordionItemBase child)
         {
-            return ChildHandler == null;
+            Children.TryAdd(child.DataId, child);
         }
-
-        public void Invoke(BSAccordionItemBase sender)
+        public void RemoveChild(BSAccordionItemBase child)
         {
-            if (ChildHandler != null)
-                ChildHandler(sender);
-
+            Children.TryRemove(child.DataId, out _);
         }
-
-        public void Dispose()
-        {
-            // if (Parent?.NestedHandler != null)
-            //     Parent.NestedHandler -= NestedHandler;
-            // if (CollapseParent != null)
-            //     CollapseParent.NestedHandler -= NestedHandler;
-        }
-
-
-        internal Action<BSAccordionItemBase?>? ChildHandler;
     }
 }

@@ -72,8 +72,9 @@ namespace BlazorStrap.Shared.Components
             return Task.CompletedTask;
         }
 
-        public void Sync(InteropSyncResult interopSyncResult)
+        public void Sync(InteropSyncResult? interopSyncResult)
         {
+            if(interopSyncResult is null) return;
             string SyncClassList = interopSyncResult.ClassList;
             string SyncStyles = interopSyncResult.Styles;
             //TODO: Aria stuff

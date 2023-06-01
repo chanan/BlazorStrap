@@ -17,7 +17,8 @@ namespace BlazorStrap
         Resize,
         Click,
         Hide,
-        Show
+        Show,
+        Sync
 
     }
 }

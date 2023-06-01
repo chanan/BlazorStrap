@@ -11,7 +11,7 @@ namespace BlazorStrap.Service
         public BSInterop JavaScriptInterop { get; }
         
         public bool ShowDebugMessages { get; private set; }
-        public Func<string, string, EventType, object, Task>? OnEvent { get; set; }
+        public Func<string, string, EventType, object?, Task>? OnEvent { get; set; }
 
         internal Func<string, CallerName, EventType, Task>? OnEventForward;
         
@@ -78,7 +78,7 @@ namespace BlazorStrap.Service
             ModalChange?.Invoke(obj, false);
         }
 
-        public async Task InvokeEvent(string sender, string target, EventType type, object data)
+        public async Task InvokeEvent(string sender, string target, EventType type, object? data)
         {
             if(OnEvent is not null)
                 await OnEvent.Invoke(sender, target, type, data);

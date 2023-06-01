@@ -103,6 +103,20 @@ namespace BlazorStrap.Service
             var module = await GetModuleAsync() ?? throw new NullReferenceException("Unable to load module.");
             return await module.InvokeAsync<InteropSyncResult>("hideOffcanvas", cancellationToken ?? CancellationToken.None, elementReference, _objectReference);
         }
+        
+        /// <summary>
+        /// This method will show the active accordion and hide the old one. Then return a list of classes, styles, and ARIA attributes for the given element reference.
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="closeElement"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask<List<InteropSyncResult?>> ShowAccordionAsync(ElementReference elementReference, ElementReference? closeElement, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync() ?? throw new NullReferenceException("Unable to load module.");
+            return await module.InvokeAsync<List<InteropSyncResult?>>("showAccordion", cancellationToken ?? CancellationToken.None, elementReference, closeElement, _objectReference);
+        }
 
         /// <summary>
         /// Sanitity check for the backdrop.

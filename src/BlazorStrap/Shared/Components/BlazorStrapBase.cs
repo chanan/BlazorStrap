@@ -34,7 +34,7 @@ namespace BlazorStrap.Shared.Components
         /// <param name="type"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public virtual Task OnEventAsync(string sender, string target, EventType type, object data) => Task.CompletedTask;
+        public virtual Task OnEventAsync(string sender, string target, EventType type, object? data) => Task.CompletedTask;
 
         /// <summary>
         /// Add [JSInvokable] above your override

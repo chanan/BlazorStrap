@@ -3,6 +3,7 @@ using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
+using System.Collections.Concurrent;
 
 namespace BlazorStrap.Shared.Components.Common
 {
@@ -15,8 +16,8 @@ namespace BlazorStrap.Shared.Components.Common
         }
 
         private bool _shown;
-        private IList<EventQue> _eventQue = new List<EventQue>();
-                
+        private ConcurrentQueue<EventQue> _eventQue = new();
+
         private DotNetObjectReference<BSCollapseBase>? _objectRef;
         [CascadingParameter] BSCollapseBase? Parent { get; set; }
         [CascadingParameter] BSAccordionItemBase? AccordionParent { get; set; }
@@ -71,11 +72,9 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected ElementReference? MyRef { get; set; }
         protected override bool ShouldRender() => CanRefresh;
-        System.Diagnostics.Stopwatch _stopwatch = new();
+        private bool _secondRender;
         public override async Task ShowAsync()
         {
-            _stopwatch.Restart();
-            if (MyRef is null) throw new NullReferenceException("ElementReference is null");
             if (_shown) return ;
             var taskSource = new TaskCompletionSource<bool>();
 
@@ -88,17 +87,19 @@ namespace BlazorStrap.Shared.Components.Common
                 _shown = true;
                 //Lock Rendering
                 CanRefresh = false;
-                var syncResult = await BlazorStrapService.JavaScriptInterop.ShowCollapseAsync(MyRef.Value, IsHorizontal);
-                if(syncResult is not null)
-                    Sync(syncResult);
-
+                if (MyRef is not null)
+                {
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowCollapseAsync(MyRef.Value, IsHorizontal);
+                    if (syncResult is not null)
+                        Sync(syncResult);
+                }
                 //Unlock Rendering
                 CanRefresh = true;
                 await InvokeAsync(StateHasChanged);
                 taskSource.SetResult(true);
                 await OnShown.InvokeAsync(this);
             };
-            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func});
+            _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func});
 
             // Run event que if only item.
             if (_eventQue.Count == 1)
@@ -110,7 +111,6 @@ namespace BlazorStrap.Shared.Components.Common
         
         public override async Task HideAsync()
         {
-            if (MyRef is null) throw new NullReferenceException("ElementReference is null");
             if (!_shown) return ;
             await OnHide.InvokeAsync(this); 
             //Kick off to event que
@@ -121,9 +121,12 @@ namespace BlazorStrap.Shared.Components.Common
                 //Lock Rendering
                 CanRefresh = false;
 
-                var syncResult = await BlazorStrapService.JavaScriptInterop.HideCollapseAsync(MyRef.Value, IsHorizontal);
-                if (syncResult is not null)
-                    Sync(syncResult);
+                if (MyRef is not null)
+                {
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.HideCollapseAsync(MyRef.Value, IsHorizontal);
+                    if (syncResult is not null)
+                        Sync(syncResult);
+                }
 
                 CanRefresh = true;
                 await InvokeAsync(StateHasChanged);
@@ -131,7 +134,7 @@ namespace BlazorStrap.Shared.Components.Common
                 await OnHidden.InvokeAsync(this);
             };
 
-            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
+            _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
             // Run event que if only item.
             if (_eventQue.Count == 1) {
                 await InvokeAsync(StateHasChanged);
@@ -157,22 +160,16 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (!firstRender)
+            if (!firstRender && _secondRender)
             {
-                if (_eventQue.Count > 0)
+                if (_eventQue.TryDequeue(out var eventItem))
                 {
-                    var eventItem = _eventQue.First();
-                    if (eventItem != null)
-                    {
-                        _eventQue.Remove(eventItem);
-                        await eventItem.Func.Invoke();
-                    }
-                    _stopwatch.Stop();
-                    Console.WriteLine($"Time to render: {_stopwatch.ElapsedMilliseconds}ms");
+                    await eventItem.Func.Invoke();
                 }
             }
             else
             {
+                _secondRender = true;
                 _hasRendered = true;
                 _objectRef = DotNetObjectReference.Create(this);
             }

@@ -11,7 +11,13 @@ namespace BlazorStrap.V4
         protected override string? ClassBuilder => new CssBuilder("accordion-collapse collapse")
                 .AddClass("show", Shown)
                 .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
-                .AddClass(Class, !string.IsNullOrEmpty(Class))
-                .Build().ToNullString();
+                .AddClass(SyncClass)
+                .Build().RemoveClassDoubles().ToNullString();
+
+        protected override string? StyleBuilder => new StyleBuilder()
+                .AddStyle(SyncStyle)
+                .AddStyle(Style)
+                .Build().RemoveStyleDoubles().ToNullString();
+
     }
 }

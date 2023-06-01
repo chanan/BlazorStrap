@@ -241,7 +241,16 @@ export async function hideOffcanvas(offcanvas, dotnet) {
 
 //Popover
 
-
+export async function showAccordion(accordion, accordionToHide, dotnet) {
+    let hideResult = null;
+    if (!accordion) return null;
+    let showResult = showCollapse(accordion, false, dotnet);
+    if (accordionToHide) {
+        hideResult = hideCollapse(accordionToHide, false, dotnet);
+    }
+    await Promise.all([showResult, hideResult]);
+    return [showResult, hideResult];
+}
 
 //Collapses
 export async function showCollapse(collapse, horizontal, dotnet) {

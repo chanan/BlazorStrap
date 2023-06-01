@@ -211,7 +211,6 @@ namespace BlazorStrap.Shared.Components.Modal
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
             {
-                Console.WriteLine("Retrying");
                 if (!ShouldRenderContent)
                 {
                     ShouldRenderContent = true;
@@ -279,7 +278,7 @@ namespace BlazorStrap.Shared.Components.Modal
         }
 
 
-        public override async Task OnEventAsync(string sender, string target, EventType type, object data)
+        public override async Task OnEventAsync(string sender, string target, EventType type, object? data)
         {
             if(sender == "javascript" && target == DataId && type == EventType.Hide)
             {
