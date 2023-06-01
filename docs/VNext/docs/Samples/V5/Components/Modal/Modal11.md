@@ -1,5 +1,5 @@
 ﻿
-<BSModal DataId="modal11" ContentAlwaysRendered="false" IsCentered="true" Size="Size.ExtraLarge" IsManual="true" @ref="FirstModal" style="height:600px">
+<BSModal DataId="modal11" ContentAlwaysRendered="false" IsCentered="true" Size="Size.ExtraLarge" IsManual="true" @ref="FirstModal">
     <Header>First Modal</Header>
     <Content>
         <div style="height:500px">Display two modals are one time</div>
@@ -47,8 +47,12 @@
     private BSModal? ChildModal { get; set; }
     private async Task ShowFirstModalAsync()
     {
+        var stopwatch = new System.Diagnostics.Stopwatch();
+        stopwatch.Start();
         if (FirstModal != null)
             await FirstModal.ShowAsync();
+        stopwatch.Stop();
+        Console.WriteLine($"ShowFirstModalAsync: {stopwatch.ElapsedMilliseconds}ms");
     }
     private async Task ShowSecondModalAsync()
     {
