@@ -131,8 +131,9 @@ namespace BlazorStrap.Shared.Components.OffCanvas
                 ShouldRenderContent = false;
                 await InvokeAsync(StateHasChanged);
 
-                taskSource.SetResult(true);
                 _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
+                await BlazorStrapService.JavaScriptInterop.CheckBackdropsAsync();
+                taskSource.SetResult(true);
             };
 
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
@@ -156,6 +157,14 @@ namespace BlazorStrap.Shared.Components.OffCanvas
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
             {
+                if (!ShouldRenderContent)
+                {
+                    ShouldRenderContent = true;
+                    _shown = false;
+                    await ShowAsync();
+                    return;
+                }
+
                 _shown = true;
                 CanRefresh = false;
 
@@ -168,6 +177,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
 
                 CanRefresh = true;
                 await InvokeAsync(StateHasChanged);
+                
                 taskSource.SetResult(true);
                 _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
             };

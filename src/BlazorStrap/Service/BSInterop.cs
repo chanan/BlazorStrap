@@ -105,6 +105,17 @@ namespace BlazorStrap.Service
         }
 
         /// <summary>
+        /// Sanitity check for the backdrop.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask CheckBackdropsAsync(CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync() ?? throw new NullReferenceException("Unable to load module.");
+            await module.InvokeVoidAsync("checkBackdrops", cancellationToken ?? CancellationToken.None, _objectReference);
+        }
+        /// <summary>
         /// This method preloads the module and sets the module reference.
         /// </summary>
         /// <param name="cancellationToken"></param>

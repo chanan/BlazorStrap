@@ -1,5 +1,29 @@
+export async function checkBackdrops(dotnet) {
+    var backdrop = document.querySelector('.modal-backdrop');
+    if (backdrop) {
+        var openModals = document.querySelectorAll('.modal.show');
+        //Checks to see if any other modal is open if so do not remove the backdrop
+        if (openModals.length == 0) {
+            backdrop.classList.remove("show");
+            await waitForTransitionEnd(backdrop);
+            await dotnet.invokeMethodAsync('RemoveBackdropAsync');
+        }
+    }
+    backdrop = document.querySelector('.offcanvas-backdrop');
+    if (backdrop) {
+        var openOffcanvas = document.querySelectorAll('.offcanvas.show');
+        //Checks to see if any other offcanvas is open if so do not remove the backdrop
+        if (openOffcanvas.length == 0) {
+            backdrop.classList.remove("show");
+            await waitForTransitionEnd(backdrop);
+            await dotnet.invokeMethodAsync('RemoveOffCanvasBackdropAsync');
+        }
+    }
+}
+
 //Modals
 export async function showModal(modal, dotnet) {
+    if (!modal) return null;
     var backdrop = document.querySelector('.modal-backdrop');
     if (backdrop) {
         await waitForNextFrame();
@@ -76,7 +100,7 @@ export async function showModal(modal, dotnet) {
     }
 }
 export async function hideModal(modal, dotnet) {
-
+    if (!modal) return null;
     modal.classList.remove("show");
     modal.setAttribute("aria-modal", "false");
     modal.setAttribute("aria-hidden", "true");
@@ -109,6 +133,7 @@ export async function hideModal(modal, dotnet) {
 
 //Offcanvas
 export async function showOffcanvas(offcanvas, dotnet) {
+    if (!offcanvas) return null;
     var backdrop = document.querySelector('.offcanvas-backdrop');
     if (backdrop) {
         await waitForNextFrame();
@@ -183,6 +208,7 @@ export async function showOffcanvas(offcanvas, dotnet) {
     }
 }
 export async function hideOffcanvas(offcanvas, dotnet) {
+    if (!offcanvas) return null;
     offcanvas.classList.remove("show");
     offcanvas.setAttribute("aria-modal", "false");
     offcanvas.setAttribute("aria-hidden", "true");
@@ -219,6 +245,7 @@ export async function hideOffcanvas(offcanvas, dotnet) {
 
 //Collapses
 export async function showCollapse(collapse, horizontal, dotnet) {
+    if (!collapse) return null;
     document.querySelectorAll('[data-blazorstrap-target="' + collapse.getAttribute('data-blazorstrap') + '"]').forEach(caller => {
         if (caller) {
             caller.setAttribute('aria-expanded', true);
@@ -258,6 +285,7 @@ export async function showCollapse(collapse, horizontal, dotnet) {
     };
 }
 export async function hideCollapse(collapse, horizontal, dotnet) {
+    if (!collapse) return null;
     document.querySelectorAll('[data-blazorstrap-target="' + collapse.getAttribute('data-blazorstrap') + '"]').forEach(caller => {
         if (caller) {
             caller.setAttribute('aria-expanded', false);
