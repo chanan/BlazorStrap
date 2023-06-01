@@ -96,7 +96,7 @@ namespace BlazorStrap.Shared.Components.Common
                 CanRefresh = true;
                 await InvokeAsync(StateHasChanged);
                 taskSource.SetResult(true);
-                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
+                await OnShown.InvokeAsync(this);
             };
             _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func});
 
@@ -112,7 +112,7 @@ namespace BlazorStrap.Shared.Components.Common
         {
             if (MyRef is null) throw new NullReferenceException("ElementReference is null");
             if (!_shown) return ;
-            _ = Task.Run(() => { _ = OnHide.InvokeAsync(this); });
+            await OnHide.InvokeAsync(this); 
             //Kick off to event que
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
@@ -128,7 +128,7 @@ namespace BlazorStrap.Shared.Components.Common
                 CanRefresh = true;
                 await InvokeAsync(StateHasChanged);
                 taskSource.SetResult(true);
-                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
+                await OnHidden.InvokeAsync(this);
             };
 
             _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });

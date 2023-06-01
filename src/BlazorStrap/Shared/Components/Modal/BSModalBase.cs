@@ -169,7 +169,7 @@ namespace BlazorStrap.Shared.Components.Modal
         public override async Task HideAsync()
         {
             if (!_shown) return ;
-            _ = Task.Run(() => { _ = OnHide.InvokeAsync(this); });
+            await OnHide.InvokeAsync(this);
             //Kick off to event que
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
@@ -189,7 +189,7 @@ namespace BlazorStrap.Shared.Components.Modal
 
                 
                 await InvokeAsync(StateHasChanged);
-                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
+                await OnHidden.InvokeAsync(this);
                 await BlazorStrapService.JavaScriptInterop.CheckBackdropsAsync();
                 taskSource.SetResult(true);
             };
@@ -206,12 +206,13 @@ namespace BlazorStrap.Shared.Components.Modal
         {
             if (_shown) return ;
             ShouldRenderContent = true;
-            _ = Task.Run(() => { _ = OnShow.InvokeAsync(this); });
+            await OnShow.InvokeAsync(this);
             //Kick off to event que
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
             {
-                if(!ShouldRenderContent)
+                Console.WriteLine("Retrying");
+                if (!ShouldRenderContent)
                 {
                     ShouldRenderContent = true;
                     _shown = false;
@@ -232,7 +233,7 @@ namespace BlazorStrap.Shared.Components.Modal
                 CanRefresh = true;
                 await InvokeAsync(StateHasChanged);
                 taskSource.SetResult(true);
-                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
+                await OnShown.InvokeAsync(this);
             };
             
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func});

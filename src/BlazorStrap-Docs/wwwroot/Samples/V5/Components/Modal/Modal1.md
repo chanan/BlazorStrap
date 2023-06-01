@@ -8,7 +8,7 @@
 </BSModal>
 <BSButton Color="BSColor.Primary" Target="modal1">Launch demo modal</BSButton>
 
-
+<div>This will be removed however is here to show the improments of the interop. The unsafe would have had a high chance of breaking before.</div>
 <BSModal @ref="_spamModal">
     <Header>Modal Title</Header>
     <Content>Woohoo, you're reading this text in a modal!</Content>
@@ -17,8 +17,9 @@
         <BSButton Color="BSColor.Primary">Save changes</BSButton>
     </Footer>
 </BSModal>
-<BSButton Color="BSColor.Primary" OnClick="SpamModelAsync">Spam demo modal</BSButton>
-<BSButton Color="BSColor.Primary" OnClick="UnSafeSpamModelAsync">Spam the unsafe way</BSButton>
+
+<BSButton Color="BSColor.Warning" OnClick="SpamModelAsync" >Spam demo modal</BSButton>
+<BSButton Color="BSColor.Danger" OnClick="UnSafeSpamModelAsync">Spam the unsafe way</BSButton>
 
 @code{
     private BSModal? _spamModal;
@@ -26,7 +27,7 @@
     {
         if(_spamModal != null)
         {
-            for(var i =0; i < 40; ++i)
+            for(var i =0; i < 50; ++i)
             {
                 await _spamModal.ToggleAsync();
                 Console.WriteLine($"Safe Spam {i}");
@@ -38,7 +39,7 @@
     {
         if (_spamModal != null)
         {
-            for (var i = 0; i < 30; ++i)
+            for (var i = 0; i < 50; ++i)
             {
                 _= _spamModal.ToggleAsync();
                 Console.WriteLine($"Unsafe Spam {i}");

@@ -111,7 +111,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
         public override async Task HideAsync()
         {
             if(!_shown) return ;
-            _ = Task.Run(() => { _ = OnHide.InvokeAsync(this); });
+            await OnHide.InvokeAsync(this);
             //Kick off to event que
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
@@ -131,7 +131,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
                 ShouldRenderContent = false;
                 await InvokeAsync(StateHasChanged);
 
-                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
+                await OnHidden.InvokeAsync(this);
                 await BlazorStrapService.JavaScriptInterop.CheckBackdropsAsync();
                 taskSource.SetResult(true);
             };
@@ -148,7 +148,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
         {
             if (_shown) return ;
             ShouldRenderContent = true;
-            _ = Task.Run(() => { _ = OnShow.InvokeAsync(this); });
+            await OnShow.InvokeAsync(this);
             
             // Used to hide popovers
             BlazorStrapService.ForwardToggle("", this);
@@ -179,7 +179,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
                 await InvokeAsync(StateHasChanged);
                 
                 taskSource.SetResult(true);
-                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
+                await OnShown.InvokeAsync(this);
             };
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
 
