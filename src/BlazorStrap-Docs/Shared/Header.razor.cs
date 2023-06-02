@@ -37,7 +37,16 @@ namespace BlazorStrap_Docs.Shared
                 _themes = Enum.GetNames(typeof(BlazorStrap.V5.Theme)).ToList();
             }
             _version = Settings.Versions[version];
-            await _blazorStrap.SetBootstrapCss(_version);
+            if (_version == "4.6.1")
+            {
+                var theme = Enum.Parse<BlazorStrap.V4.Theme>(Selected);
+                await _blazorStrap.SetBootstrapCss(theme);
+            }
+            else
+            {
+                var theme = Enum.Parse<BlazorStrap.V5.Theme>(Selected);
+                await _blazorStrap.SetBootstrapCss(theme);
+            }
             StateHasChanged();
         }
 
@@ -45,7 +54,16 @@ namespace BlazorStrap_Docs.Shared
         {
             if (firstrun)
             {
-                await _blazorStrap.SetBootstrapCss(_version);
+                if (_version == "4.6.1")
+                {
+                    var theme = Enum.Parse<BlazorStrap.V4.Theme>(Selected);
+                    await _blazorStrap.SetBootstrapCss(theme);
+                }
+                else
+                {
+                    var theme = Enum.Parse<BlazorStrap.V5.Theme>(Selected);
+                    await _blazorStrap.SetBootstrapCss(theme);
+                }
             }
         }
         private void VersionChanged(string version)
@@ -54,8 +72,18 @@ namespace BlazorStrap_Docs.Shared
         }
         private async Task SelectedChanged(string value)
         {
-            Selected = value;
-            await _blazorStrap.SetBootstrapCss(value, _version);
+            if (_version == "4.6.1")
+            {
+                var theme = Enum.Parse<BlazorStrap.V4.Theme>(value);
+                Selected = value;
+                await _blazorStrap.SetBootstrapCss(theme);
+            }
+            else
+            {
+                var theme = Enum.Parse<BlazorStrap.V5.Theme>(value);
+                Selected = value;
+                await _blazorStrap.SetBootstrapCss(theme);
+            }
         }
         private async Task OnSideBarShown(bool state)
         {

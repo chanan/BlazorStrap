@@ -111,7 +111,10 @@ namespace BlazorStrap.Shared.Components.Common
                 await Parent.ToggleAsync();
             }
             if (OnClick.HasDelegate)
+            {
                 await OnClick.InvokeAsync();
+            }
+                
         }
 
         public void Dispose()

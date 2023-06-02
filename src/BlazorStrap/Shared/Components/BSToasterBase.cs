@@ -31,6 +31,7 @@ namespace BlazorStrap.Shared.Components
 
         protected abstract string GetClass(Toast pos);
 
+ 
         public void Dispose()
         {
             if (BlazorStrapService == null) throw new ArgumentNullException(nameof(BlazorStrapService));

@@ -1,5 +1,6 @@
 using BlazorComponentUtilities;
 using BlazorStrap.Extensions;
+using BlazorStrap.InternalComponents;
 using BlazorStrap.Shared.Components.Modal;
 using Microsoft.AspNetCore.Components;
 
@@ -27,7 +28,15 @@ namespace BlazorStrap.V5
                 //     .AddClass($"modal-{Size.ToDescriptionString()}", Size != Size.None)
                 .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
                 .AddClass(Class, !string.IsNullOrEmpty(Class))
+                .AddClass(SyncClass)
                 .Build().ToNullString();
+
+        protected override string? StyleBuilder => new StyleBuilder()
+            .AddStyle(SyncStyle)
+            .AddStyle(Style)
+            .Build().RemoveStyleDoubles().ToNullString();
+
+        protected string Backdrop => ShowBackdrop ? (IsStaticBackdrop ? "static" : "true") : "false";
 
         protected override string? BodyClassBuilder => new CssBuilder("modal-body")
                 .AddClass(BodyClass)

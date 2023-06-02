@@ -1,37 +1,32 @@
 ﻿@namespace BlazorStrap.V4
 @inherits BlazorStrap.Shared.Components.OffCanvas.BSOffCanvasBase
 
-@if (Content == null)
+@if (ShouldRenderContent)
 {
-    <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="visibility:visible;" @ref="MyRef" data-blazorstrap="@DataId">
-        @if (ShouldRenderContent)
-        {
+    @if (Content == null)
+    {
+        <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="visibility:visible;" @ref="MyRef" data-blazorstrap="@DataId" data-bs-backdrop="@ShowBackdrop" data-bs-keyboard="@((!DisableEscapeKey) ? "true" : "false")" data-bs-allowscroll="@(AllowScroll ? "true" : "false")">
+
             <CascadingValue Value="this">
                 @ChildContent
-        </CascadingValue>
-        }
-    </div>
+            </CascadingValue>
 
-}
-else
-{
-    <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="visibility:visible;" @ref="MyRef" data-blazorstrap="@DataId">
-        @if (ShouldRenderContent)
-        {
+        </div>
+
+    }
+    else
+    {
+        <div class="@ClassBuilder" tabindex="-1" @attributes="Attributes" style="visibility:visible;" @ref="MyRef" data-blazorstrap="@DataId" data-bs-backdrop="@ShowBackdrop" data-bs-keyboard="@((!DisableEscapeKey) ? "true" : "false")" data-bs-allowscroll="@(AllowScroll ? "true" : "false")">
             @if (Header != null)
             {
                 <div class="@HeaderClassBuilder">
                     @Header
-                    <BSCloseButton Class="@($"ml-auto {@ButtonClass}")" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)" data-bs-dismiss="modal" aria-label="Close"/>
+                    <BSCloseButton Class="@($"ml-auto {@ButtonClass}")" @onclick="EventUtil.AsNonRenderingEventHandler(ClickEvent)" data-bs-dismiss="modal" aria-label="Close" />
                 </div>
             }
             <div class="@BodyClassBuilder">
-            @Content
+                @Content
+            </div>
         </div>
-        }
-    </div>
-} 
-@if (ShowBackdrop)
-{
-    <BlazorStrap.InternalComponents.Backdrop @ref="BackdropRef" IsOffcanvas="true"/>
+    }
 }

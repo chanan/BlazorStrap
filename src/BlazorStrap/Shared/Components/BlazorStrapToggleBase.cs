@@ -31,7 +31,9 @@ namespace BlazorStrap.Shared.Components
         /// Whether or not element is shown.
         /// </summary>
         public abstract bool Shown { get; protected set; }
-
+        public string SyncClass { get; set; } = string.Empty;
+        public string SyncStyle { get; set; } = string.Empty;
+        public string SyncAria { get; set; } = string.Empty;
         /// <summary>
         /// Triggers a StateHasChanged Event on the component. 
         /// Important! Use Only after OnShown is fired to avoid odd behaviour with transitions.
@@ -68,6 +70,14 @@ namespace BlazorStrap.Shared.Components
         public virtual Task ToggleAsync()
         {
             return Task.CompletedTask;
+        }
+
+        public void Sync(InteropSyncResult? interopSyncResult)
+        {
+            if(interopSyncResult is null) return;
+            string SyncClassList = interopSyncResult.ClassList;
+            string SyncStyles = interopSyncResult.Styles;
+            //TODO: Aria stuff
         }
     }
 }

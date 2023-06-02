@@ -92,12 +92,12 @@ namespace BlazorStrap.Shared.Components.Common
 
                     if (self?.Timer?.Enabled == false && CloseAfter != 0)
                     {
-                        await BlazorStrapService.Interop.ToastTimerAsync(MyRef, CloseAfter, 0, self.Rendered);
+                        await BlazorStrapService.JavaScriptInterop.ToastTimerAsync(MyRef, CloseAfter, 0, self.Rendered);
                         self.Timer.Start();
                     }
                     else
                     {
-                        await BlazorStrapService.Interop.ToastTimerAsync(MyRef, CloseAfter, Convert.ToInt32(self?.Timer?.TimeLeft ?? 0), self?.Rendered ?? true);
+                        await BlazorStrapService.JavaScriptInterop.ToastTimerAsync(MyRef, CloseAfter, Convert.ToInt32(self?.Timer?.TimeLeft ?? 0), self?.Rendered ?? true);
                     }
                     if (self != null)
                         self.Rendered = true;
@@ -110,7 +110,8 @@ namespace BlazorStrap.Shared.Components.Common
             // If this fails the only thing that will happen, the smooth closing animation wont be shown this is completely safe to keep in try catch.
             try
             {
-                await BlazorStrapService.Interop.AddClassAsync(MyRef, "showing");
+                if(MyRef is not null)
+                    await BlazorStrapService.JavaScriptInterop.AddClassAsync(MyRef.Value, "showing");
             }
             catch
             { }
@@ -122,7 +123,8 @@ namespace BlazorStrap.Shared.Components.Common
         protected async Task ClickEvent()
         {
             // Delay for animation .15 seconds = 150 ms move this to transition end later
-            await BlazorStrapService.Interop.AddClassAsync(MyRef, "showing");
+            if(MyRef is not null)
+                await BlazorStrapService.JavaScriptInterop.AddClassAsync(MyRef.Value, "showing");
             await Task.Delay(150);
 
             BlazorStrapService.Toaster.RemoveChild(ToasterId);

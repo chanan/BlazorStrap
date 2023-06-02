@@ -1,5 +1,5 @@
 ﻿
-<BSModal DataId="modal11" ContentAlwaysRendered="false" IsCentered="true" Size="Size.ExtraLarge" IsManual="true" @ref="FirstModal" style="height:600px">
+<BSModal DataId="modal11" ContentAlwaysRendered="false" IsCentered="true" Size="Size.ExtraLarge" IsManual="true" @ref="FirstModal">
     <Header>First Modal</Header>
     <Content>
         <div style="height:500px">Display two modals are one time</div>

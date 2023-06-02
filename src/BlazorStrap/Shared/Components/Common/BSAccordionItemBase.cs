@@ -2,6 +2,7 @@
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.Collections.Concurrent;
 
 namespace BlazorStrap.Shared.Components.Common
 {
@@ -15,12 +16,7 @@ namespace BlazorStrap.Shared.Components.Common
 
         private bool _shown;
 
-        private IList<EventQue> _eventQue = new List<EventQue>();
-
-        //TODO: This should not be needed
-        // This is for nesting allows the child to jump to 
-        /// Accordion item content.transition end if the parent is hidden or shown while in transition.
-        // internal Action? NestedHandler { get; set; }
+        private ConcurrentQueue<EventQue> _eventQue = new();
 
         private DotNetObjectReference<BSAccordionItemBase>? _objectRef;
 
@@ -46,20 +42,7 @@ namespace BlazorStrap.Shared.Components.Common
         /// Accordion item is shown by default.
         /// </summary>
         [Parameter]
-        public bool DefaultShown
-        {
-            get => _defaultShown;
-            set
-            {
-                _defaultShown = value;
-                _isDefaultShownSet = true;
-            }
-        }
-
-        protected override void OnInitialized()
-        {
-            _shown = DefaultShown;
-        }
+        public bool? DefaultShown { get; set; } = null;
 
         /// <summary>
         /// Accordion item header content.
@@ -67,59 +50,75 @@ namespace BlazorStrap.Shared.Components.Common
         [Parameter]
         public RenderFragment? Header { get; set; }
 
-        private bool _defaultShown;
-        private bool _isDefaultShownSet;
+        /// <summary>
+        /// Sets the style of the accordion item collapse
+        /// </summary>
+        [Parameter]
+        public string Style { get; set; } = string.Empty;
 
         [CascadingParameter] public BSAccordionBase? Parent { get; set; }
         protected ElementReference? ButtonRef { get; set; }
 
-        private bool HasRendered { get; set; }
-
-        protected ElementReference? MyRef { get; set; }
+        public ElementReference? MyRef { get; set; }
 
         /// <summary>
         /// Returns whether or not the accordion item is shown.
         /// </summary>
         /// <remarks>Can be accessed using @ref</remarks>
         protected abstract string? LayoutClass { get; }
-
+        protected abstract string? StyleBuilder { get; }
         protected abstract string? ClassBuilder { get; }
+        private bool _secondRender;
+
+        protected override void OnInitialized()
+        {
+            BlazorStrapService.OnEvent += OnEventAsync;
+            if (Parent is not null)
+            {
+                if (Parent.Children.Count == 0)
+                {
+                    if (DefaultShown is null)
+                        _shown = true;
+                }
+                else
+                {
+                    if (DefaultShown is not null)
+                        _shown = DefaultShown.Value;
+                }
+                Parent.AddChild(this);
+            }
+        }
 
         /// <inheritdoc/>
         public override async Task ShowAsync()
         {
             if (_shown) return;
-            _ = Task.Run(() => { _ = OnShow.InvokeAsync(this); });
+            await OnShow.InvokeAsync(this);
             //Kick off to event que
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
             {
+                _shown = true;
                 CanRefresh = false;
-
-                try
+                if (MyRef is not null && Parent is not null)
                 {
-                    await BlazorStrapService.Interop.RemoveClassAsync(ButtonRef, "collapsed");
-                    await BlazorStrapService.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
-                    Parent?.Invoke(this);
-                    if (!NoAnimations)
+                    Parent.UpdateChild(this);
+                    var toClose = Parent.Children.Values.FirstOrDefault(x => x != this && x.Shown && x.AlwaysOpen == false);
+                    var syncResults = await BlazorStrapService.JavaScriptInterop.ShowAccordionAsync(MyRef.Value, toClose?.MyRef ?? null);
+                    if (syncResults.Count > 1)
                     {
-                        await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, true);
-                        await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 400);
-                        await Task.Delay(50);
-                        await BlazorStrapService.Interop.SetStyleAsync(MyRef, "height", "");
+                        Sync(syncResults[0]);
+                        if (toClose is not null)
+                            await BlazorStrapService.InvokeEvent(this.DataId, toClose.DataId, EventType.Sync, syncResults[1]);
                     }
                 }
-                catch //Animation failed cleaning up
-                {
-                }
 
-                _shown = true;
-                await InvokeAsync(StateHasChanged);
-                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
-                taskSource.SetResult(true);
                 CanRefresh = true;
+                await InvokeAsync(StateHasChanged);
+                taskSource.SetResult(true);
+                await OnShown.InvokeAsync(this);
             };
-            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
+            _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
 
             // Run event que if only item.
             if (_eventQue.Count == 1)
@@ -139,30 +138,24 @@ namespace BlazorStrap.Shared.Components.Common
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
             {
+                _shown = false;
+                //Lock Rendering
                 CanRefresh = false;
 
-                try
+                if (MyRef is not null)
                 {
-                    await BlazorStrapService.Interop.AddClassAsync(ButtonRef, "collapsed");
-                    await BlazorStrapService.Interop.AddAttributeAsync(ButtonRef, "aria-expanded", (!Shown).ToString().ToLower());
-                    if (!NoAnimations)
-                    {
-                        await BlazorStrapService.Interop.AnimateCollapseAsync(_objectRef, MyRef, DataId, false);
-                        await BlazorStrapService.Interop.WaitForTransitionEnd(MyRef, 400);
-                    }
-                }
-                catch //Animation failed cleaning up
-                {
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.HideCollapseAsync(MyRef.Value, false);
+                    if (syncResult is not null)
+                        Sync(syncResult);
                 }
 
-                _shown = false;
-                await InvokeAsync(StateHasChanged);
-                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
-                taskSource.SetResult(true);
                 CanRefresh = true;
+                await InvokeAsync(StateHasChanged);
+                taskSource.SetResult(true);
+                await OnHidden.InvokeAsync(this);
             };
 
-            _eventQue.Add(new EventQue { TaskSource = taskSource, Func = func });
+            _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
             // Run event que if only item.
             if (_eventQue.Count == 1)
             {
@@ -172,6 +165,7 @@ namespace BlazorStrap.Shared.Components.Common
             await taskSource.Task;
         }
 
+
         /// <inheritdoc/>
         public override Task ToggleAsync()
         {
@@ -180,35 +174,45 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (!firstRender)
+            if (!firstRender && _secondRender)
             {
-                if (_eventQue.Count > 0)
+                if (_eventQue.TryDequeue(out var eventItem))
                 {
-                    var eventItem = _eventQue.First();
-                    if (eventItem != null)
-                    {
-                        _eventQue.Remove(eventItem);
-                        await eventItem.Func.Invoke();
-                    }
+                    await eventItem.Func.Invoke();
                 }
             }
             else
             {
+                _secondRender = true;
                 _objectRef = DotNetObjectReference.Create(this);
             }
         }
 
-        protected override void OnParametersSet()
+        public override async Task OnEventAsync(string sender, string target, EventType type, object? data)
         {
-            if (Parent != null)
+            if (sender == "javascript" && target == DataId && type == EventType.Hide)
             {
-                if (!_isDefaultShownSet && Parent.FirstChild())
+                await HideAsync();
+            }
+            else if (sender == "javascript" && target == DataId && type == EventType.Show)
+            {
+                await ShowAsync();
+            }
+            else if (sender == "javascript" && target == DataId && type == EventType.Toggle)
+            {
+                await ToggleAsync();
+            }
+            else if(target == DataId && type == EventType.Sync)
+            {
+                if (data is InteropSyncResult syncResult)
                 {
-                    DefaultShown = true;
-                    Shown = true;
+                    if (!syncResult.ClassList.Contains("open"))
+                        _shown = false;
+                    Sync(syncResult);
+                    if(Parent is not null)
+                        Parent.UpdateChild(this);
+                    await InvokeAsync(StateHasChanged);
                 }
-
-                Parent.ChildHandler += Parent_ChildHandler;
             }
         }
 
@@ -218,21 +222,12 @@ namespace BlazorStrap.Shared.Components.Common
         {
         }
 
-        private async void Parent_ChildHandler(BSAccordionItemBase? sender)
-        {
-            if (sender != null)
-            {
-                if (sender != this && !AlwaysOpen && !sender.AlwaysOpen)
-                {
-                    await HideAsync();
-                }
-            }
-        }
-
         public void Dispose()
         {
+            BlazorStrapService.OnEvent -= OnEventAsync;
+            if (Parent is not null)
+                Parent.RemoveChild(this);
             _objectRef?.Dispose();
-            if (Parent != null) Parent.ChildHandler -= Parent_ChildHandler;
         }
     }
 }

@@ -8,7 +8,7 @@ See [shared](layout/shared) for additional parameters
 |-----------------------|----------------|----------------|------------------------------------------------------------------|
 | Placement             | Enum           | Placement      | Placement													     | {.table-striped}
 | Target                | string		 | string         | DataIdOfTarget												     |   
-| ContentAlwaysRendered | bool           | bool           | default=true. Hides content for component when not show if false |
+| ContentAlwaysRendered | bool           | bool           | default=false. Hides content for component when not show if false |
 :::
 
 ### Examples

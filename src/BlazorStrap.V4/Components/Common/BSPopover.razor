@@ -9,33 +9,28 @@
 
     return;
 }
-<CascadingValue Value="this">
-    @if (IsDropdown)
-    {
-        if (IsNavItemList)
+@if (ShouldRenderContent)
+{
+    <CascadingValue Value="this">
+        @if (IsDropdown)
         {
-            <ul class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap">
-                @if (ShouldRenderContent)
-                {
+            if (IsNavItemList)
+            {
+                <ul class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap">
                     @Content
-                }
-            </ul>
+                </ul>
+            }
+            else
+            {
+                <div class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap">
+                    @Content
+                </div>
+            }
         }
         else
         {
             <div class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap">
-                @if (ShouldRenderContent)
-                {
-                    @Content
-                }
-            </div>
-        }
-    }
-    else
-    {
-        <div class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap">
-            @if (ShouldRenderContent)
-            {
+
                 <div class="arrow"></div>
                 @if (Header != null)
                 {
@@ -45,8 +40,9 @@
                 }
                 <div class="popover-body">
                     @Content
+                </div>
+
             </div>
-            }
-        </div>
-    }
-</CascadingValue>
+        }
+    </CascadingValue>
+}

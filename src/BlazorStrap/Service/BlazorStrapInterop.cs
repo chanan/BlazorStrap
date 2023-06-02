@@ -1,559 +1,478 @@
-﻿using BlazorStrap.Extensions;
-using BlazorStrap.Utilities;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace BlazorStrap.Service
 {
-    public class BlazorStrapInterop : IDisposable
+    public class BlazorStrapInterop
     {
-        public Action<string, string, string, Dictionary<string, string>?, JavascriptEvent?>? EventHandler { get; set; }
+        //Backdrop Events
+        public Func<bool,Task>? SetRenderModalBackdrop { get; set; }
+        public Func<Task>? OnModalBackdropShown { get; set; }
+        public Func<bool, Task>? SetRenderOffCanvasBackdrop { get; set; }
+        public Func<Task>? OnOffCanvasBackdropShown { get; set; }
 
-        private readonly IJSRuntime _jsRuntime;
-        private readonly IJSInProcessRuntime? _jSInProcessRuntime;
-        private bool _disposedValue;
-        public BlazorStrapInterop(IJSRuntime jsRuntime)
+        private IJSRuntime JsRuntime { get; }
+        private IBlazorStrap BlazorStrap { get; }
+        private IJSObjectReference? Module { get; set; }
+
+        private DotNetObjectReference<BlazorStrapInterop>? _objectReference;
+        public BlazorStrapInterop(IJSRuntime jsRuntime, IBlazorStrap blazorStrap)
         {
-            _jsRuntime = jsRuntime;
-            _jSInProcessRuntime = jsRuntime as IJSInProcessRuntime;
-
+            BlazorStrap = blazorStrap;
+            _objectReference = DotNetObjectReference.Create(this);
+            JsRuntime = jsRuntime;
         }
-
-
-        public ValueTask HideModalAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, ElementReference? elementReference, bool bodyAffected = true, CancellationToken? cancellationToken = null) where T : class
-        {
-            if (elementReference == null) throw new ArgumentNullException(nameof(elementReference));
-            var name = typeof(T).Name.ToLower();
-            return _jsRuntime.InvokeVoidAsync("blazorStrap.HideModal", cancellationToken ?? CancellationToken.None, id, name, elementReference, bodyAffected);
-        }
-        public ValueTask ShowOffcanvasAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, ElementReference? elementReference, bool bodyAffected = true, bool showBackdrop = true, CancellationToken? cancellationToken = null) where T : class
-        {
-            if (dotNetObjectReference == null)
-                throw new ArgumentNullException(nameof(dotNetObjectReference));
-
-            if (elementReference == null) throw new ArgumentNullException(nameof(elementReference));
-            var name = typeof(T).Name.ToLower();
-            return _jsRuntime.InvokeVoidAsync("blazorStrap.ShowOffcanvas", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, name, elementReference, bodyAffected, showBackdrop);
-        }
-        public ValueTask ShowModalAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, ElementReference? elementReference, bool bodyAffected = true, CancellationToken? cancellationToken = null) where T : class
-        {
-            if (dotNetObjectReference == null)
-                throw new ArgumentNullException(nameof(dotNetObjectReference));
-
-            if (elementReference == null) throw new ArgumentNullException(nameof(elementReference));
-            var name = typeof(T).Name.ToLower();
-            return _jsRuntime.InvokeVoidAsync("blazorStrap.ShowModal", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, name, elementReference, bodyAffected);
-        }
-
         /// <summary>
-        /// Hides the Popover
+        /// This method will add a document event to the document.
         /// </summary>
+        /// <param name="eventName"></param>
         /// <param name="elementReference"></param>
-        /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public ValueTask HidePopoverAsync(ElementReference? elementReference, string id, CancellationToken? cancellationToken = null)
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask AddDocumentEventAsync(EventType eventType, string creatorId, bool ignoreChildren = false, CancellationToken? cancellationToken = null)
         {
-            return elementReference == null
-              ? throw new ArgumentNullException(nameof(elementReference))
-              : _jsRuntime.InvokeVoidAsync("blazorStrap.HidePopover", cancellationToken ?? CancellationToken.None, elementReference, id);
+            var eventName = Enum.GetName(typeof(EventType), eventType)?.ToLower() ?? "";
+            
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("addDocumentEvent", cancellationToken ?? CancellationToken.None, eventName, creatorId, _objectReference, ignoreChildren);
         }
 
+        /// <summary>
+        /// This method will remove a document event from the document.
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <param name="elementReference"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask RemoveDocumentEventAsync(EventType eventType, string creatorId, CancellationToken? cancellationToken = null)
+        {
+            var eventName = Enum.GetName(typeof(EventType), eventType)?.ToLower() ?? "";
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("removeDocumentEvent", cancellationToken ?? CancellationToken.None, eventName, creatorId);
+        }
 
         /// <summary>
-        /// Shows a Popover
+        /// This method will add an event to the given targetId on behalf of the creator.
+        /// </summary>
+        /// <param name="targetId"></param>
+        /// <param name="creator"></param>
+        /// <param name="eventName"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask AddEventAsync(string targetId, string creatorId, EventType eventType, bool ignoreChildren = false, CancellationToken? cancellationToken = null)
+        {
+            var eventName = Enum.GetName(typeof(EventType), eventType)?.ToLower() ?? "";
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("addEvent", cancellationToken ?? CancellationToken.None, targetId, creatorId, eventName, _objectReference, ignoreChildren);
+        }
+
+        /// <summary>
+        /// This method will remove an event from the given targetId on behalf of the creator.
+        /// </summary>
+        /// <param name="targetId"></param>
+        /// <param name="creator"></param>
+        /// <param name="eventName"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask RemoveEventAsync(string targetId, string creatorId, EventType eventType, CancellationToken? cancellationToken = null)
+        {
+            var eventName = Enum.GetName(typeof(EventType), eventType)?.ToLower() ?? "";
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("removeEvent", cancellationToken ?? CancellationToken.None, targetId, creatorId, eventName);
+        }
+        
+        /// <summary>
+        /// This method will show the tooltip and return a list of classes, styles, and ARIA attributes for the given element reference.
         /// </summary>
         /// <param name="elementReference"></param>
         /// <param name="placement"></param>
-        /// <param name="target"></param>
-        /// <param name="offset"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>the ElementReference style list</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public ValueTask<string> ShowPopoverAsync(ElementReference? elementReference, Placement placement, string target, string offset = "none", CancellationToken? cancellationToken = null)
-        {
-            return elementReference == null
-                ? throw new ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeAsync<string>("blazorStrap.ShowPopover", CancellationToken.None, elementReference, placement.Name().ToDashSeperated(), target, offset);
-        }
-
-        /// <summary>
-        /// Waits for transition to end
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="timeoutLength"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask WaitForTransitionEnd(ElementReference? elementReference,int timeoutLength, CancellationToken? cancellationToken = null) =>
-                 elementReference == null
-                ? throw new ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeVoidAsync("blazorStrap.WaitForTransitionEnd", cancellationToken ?? CancellationToken.None, elementReference, timeoutLength);
-
-        public ValueTask BlurAllAsync(CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.BlurAll", cancellationToken ?? CancellationToken.None);
-
-        /// <summary>
-        /// Adds Attribute to ElementReference
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask AddAttributeAsync(ElementReference? elementReference, string name, string value, CancellationToken? cancellationToken = null) =>
-            elementReference == null
-                ? throw new ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeVoidAsync("blazorStrap.AddAttribute", cancellationToken ?? CancellationToken.None, elementReference, name, value);
-
-
-        /// <summary>
-        /// Adds a class to the body.
-        /// </summary>
-        /// <param name="className"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask AddBodyClassAsync(string className, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.AddBodyClass", cancellationToken ?? CancellationToken.None, className);
-
-        /// <summary>
-        /// Adds a class to the ElementReference
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="className"></param>
-        /// <param name="delay"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask AddClassAsync(ElementReference? elementReference, string className, int delay = 0, CancellationToken? cancellationToken = null)
-        {
-            return elementReference == null
-                ? throw new ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeVoidAsync("blazorStrap.AddClass", cancellationToken ?? CancellationToken.None, elementReference, className, delay);
-        }
-
-        /// <summary>
-        /// Adds event to ElementReference
-        /// </summary>
-        /// <param name="dotNetObjectReference"></param>
-        /// <param name="id"></param>
-        /// <param name="type"></param>
-        /// <param name="ignoreChildren"></param>
-        /// <param name="classFilter">Likely to be removed.</param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask AddEventAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, EventType type, bool ignoreChildren = false, string classFilter = "", CancellationToken? cancellationToken = null) where T : class
-        {
-            if (dotNetObjectReference == null)
-                throw new ArgumentNullException(nameof(dotNetObjectReference));
-            var name = typeof(T).Name.ToLower();
-            return _jsRuntime.InvokeVoidAsync("blazorStrap.AddEvent", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, name, type.NameToLower(), ignoreChildren, classFilter);
-        }
-
-
-        /// <summary>
-        /// Adds event to the document
-        /// </summary>
-        /// <param name="dotNetObjectReference"></param>
-        /// <param name="id"></param>
-        /// <param name="type"></param>
-        /// <param name="ignoreChildren"></param>
-        /// <param name="classFilter"></param>
+        /// <param name="targetId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public ValueTask AddDocumentEventAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, EventType type, bool ignoreChildren = false, string classFilter = "", CancellationToken? cancellationToken = null) where T : class
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask<InteropSyncResult?> ShowTooltipAsync(ElementReference elementReference, Placement placement, string targetId, CancellationToken? cancellationToken = null)
         {
-            if (dotNetObjectReference == null)
-                throw new ArgumentNullException(nameof(dotNetObjectReference));
-            var name = typeof(T).Name.ToLower();
-            return _jsRuntime.InvokeVoidAsync("blazorStrap.AddDocumentEvent", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, name, type.NameToLower(), ignoreChildren, classFilter);
+            var placementString = TranslatePlacementForPopperJs(placement);
+            var module = await GetModuleAsync();
+            return module is not null
+                ? await module.InvokeAsync<InteropSyncResult?>("showTooltip", cancellationToken ?? CancellationToken.None, elementReference, placementString, targetId, _objectReference)
+                : null;
         }
-
 
         /// <summary>
-        /// Adds a Popover to ElementReference
+        /// This method will hide the tooltip and return a list of classes, styles, and ARIA attributes for the given element reference.
         /// </summary>
         /// <param name="elementReference"></param>
-        /// <param name="placement"></param>
-        /// <param name="target"></param>
-        /// <param name="offset"></param>
         /// <param name="cancellationToken"></param>
-
-        public ValueTask AddPopoverAsync(ElementReference? elementReference, Placement placement, string target, string offset = "none", CancellationToken? cancellationToken = null)
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask<InteropSyncResult?> HideTooltipAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
         {
-            return elementReference == null
-                ? throw new ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeVoidAsync("blazorStrap.AddPopover", cancellationToken ?? CancellationToken.None, elementReference, placement.Name().ToDashSeperated(), target, offset);
+            var module = await GetModuleAsync();
+            return module is not null
+                ? await module.InvokeAsync<InteropSyncResult?>("hideTooltip", cancellationToken ?? CancellationToken.None, elementReference, _objectReference)
+                : null;
         }
 
+        /// <summary>
+        /// This method will show the collapse and return a list of classes, styles, and ARIA attributes for the given element reference.
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask<InteropSyncResult?> ShowCollapseAsync(ElementReference elementReference, bool IsHorizontal = false,  CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            return module is not null
+                ? await module.InvokeAsync<InteropSyncResult>("showCollapse", cancellationToken ?? CancellationToken.None, elementReference, IsHorizontal, _objectReference)
+                : null;
+        }
+        /// <summary>
+        /// This method will hide the collapse and return a list of classes, styles, and ARIA attributes for the given element reference.
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask<InteropSyncResult?> HideCollapseAsync(ElementReference elementReference, bool IsHorizontal = false, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            return module is not null
+                ? await module.InvokeAsync<InteropSyncResult>("hideCollapse", cancellationToken ?? CancellationToken.None, elementReference, IsHorizontal, _objectReference)
+                : null;
+        }
 
+        /// <summary>
+        /// This method will show the modal and return a list of classes, styles, and ARIA attributes for the given element reference.
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask<InteropSyncResult?> ShowModalAsync(ElementReference elementReference, bool showBackdrop, CancellationToken? cancellationToken = null)
+        {
+            if(showBackdrop)
+                await RequestBackdropAsync(true);
+            var module = await GetModuleAsync();
+            return module is not null
+                ? await module.InvokeAsync<InteropSyncResult>("showModal", cancellationToken ?? CancellationToken.None, elementReference, _objectReference)
+                : null;
+        }
+        /// <summary>
+        /// This method will hide the modal and return a list of classes, styles, and ARIA attributes for the given element reference.
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask<InteropSyncResult?> HideModalAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            return module is not null
+                ? await module.InvokeAsync<InteropSyncResult>("hideModal", cancellationToken ?? CancellationToken.None, elementReference, _objectReference)
+                : null;
+        }
+
+        /// <summary>
+        /// This method will show the offcanvas and return a list of classes, styles, and ARIA attributes for the given element reference.
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="showBackdrop"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask<InteropSyncResult?> ShowOffCanvasAsync(ElementReference elementReference, bool showBackdrop, CancellationToken? cancellationToken = null)
+        {
+            if (showBackdrop)
+                await RequestOffCanvasBackdropAsync(true);
+            var module = await GetModuleAsync();
+            return module is not null
+                ? await module.InvokeAsync<InteropSyncResult>("showOffcanvas", cancellationToken ?? CancellationToken.None, elementReference, _objectReference)
+                : null;
+        }
+
+        /// <summary>
+        /// This method will hide the offcanvas and return a list of classes, styles, and ARIA attributes for the given element reference.
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask<InteropSyncResult?> HideOffCanvasAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            return module is not null
+                ? await module.InvokeAsync<InteropSyncResult>("hideOffcanvas", cancellationToken ?? CancellationToken.None, elementReference, _objectReference)
+                : null;
+        }
+
+        /// <summary>
+        /// This method will show the active accordion and hide the old one. Then return a list of classes, styles, and ARIA attributes for the given element reference.
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="closeElement"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask<List<InteropSyncResult?>> ShowAccordionAsync(ElementReference elementReference, ElementReference? closeElement, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            return module is not null
+                ? await module.InvokeAsync<List<InteropSyncResult?>>("showAccordion", cancellationToken ?? CancellationToken.None, elementReference, closeElement, _objectReference)
+                : new();
+        }
+
+       
+
+        /// <summary>
+        /// Adds the toast timer to ElementReference
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="time"></param>
+        /// <param name="timeRemaining"></param>
+        /// <param name="rendered"></param>
+        /// <param name="cancellationToken"></param>
+        public async ValueTask ToastTimerAsync(ElementReference? elementReference, int time, int timeRemaining, bool rendered, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            if (elementReference is null || module is null) return;
+                await module.InvokeVoidAsync("toastTimer", cancellationToken ?? CancellationToken.None, elementReference, time, timeRemaining, rendered);
+        }
+        //TODO: Direct Points from old JS
         /// <summary>
         /// Triggers Carousel to animate
         /// </summary>
-        /// <param name="dotNetObjectReference"></param>
         /// <param name="id"></param>
         /// <param name="showElementReference"></param>
         /// <param name="hideElementReference"></param>
         /// <param name="back"></param>
         /// <param name="cancellationToken"></param>
         /// /// <returns>bool</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>")]
-        public ValueTask<bool> AnimateCarouselAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, ElementReference? showElementReference, ElementReference? hideElementReference, bool back, CancellationToken? cancellationToken = null) where T : class
+        public async ValueTask<bool> AnimateCarouselAsync(string id, ElementReference? showElementReference, ElementReference? hideElementReference, bool back, bool v4, CancellationToken? cancellationToken = null)
         {
-            if (dotNetObjectReference == null)
-                throw new ArgumentNullException(nameof(dotNetObjectReference));
+            var module = await GetModuleAsync();
+            if (module is null)
+                throw new NullReferenceException("Unable to load module.");
             if (showElementReference == null)
                 throw new ArgumentNullException(nameof(showElementReference));
             if (hideElementReference == null)
                 throw new ArgumentNullException(nameof(hideElementReference));
 
-            return _jsRuntime.InvokeAsync<bool>("blazorStrap.AnimateCarousel", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, showElementReference, hideElementReference, back);
-        }
-        /// <summary>
-        /// Triggers V4 Carousel to animate
-        /// </summary>
-        /// <param name="dotNetObjectReference"></param>
-        /// <param name="id"></param>
-        /// <param name="showElementReference"></param>
-        /// <param name="hideElementReference"></param>
-        /// <param name="back"></param>
-        /// <param name="cancellationToken"></param>
-        /// /// <returns>bool</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>")]
-        public ValueTask<bool> AnimateCarouselV4Async<T>(DotNetObjectReference<T>? dotNetObjectReference, string id, ElementReference? showElementReference, ElementReference? hideElementReference, bool back, CancellationToken? cancellationToken = null) where T : class
-        {
-            if (dotNetObjectReference == null)
-                throw new ArgumentNullException(nameof(dotNetObjectReference));
-            if (showElementReference == null)
-                throw new ArgumentNullException(nameof(showElementReference));
-            if (hideElementReference == null)
-                throw new ArgumentNullException(nameof(hideElementReference));
-
-            return _jsRuntime.InvokeAsync<bool>("blazorStrap.AnimateCarouselV4", cancellationToken ?? CancellationToken.None, dotNetObjectReference, id, showElementReference, hideElementReference, back);
+            return await module.InvokeAsync<bool>("animateCarousel", cancellationToken ?? CancellationToken.None, id, showElementReference, hideElementReference, back, v4, _objectReference);
         }
 
-        /// <summary>
-        /// Triggers Collapse to animate
-        /// </summary>
-        /// <param name="dotNetObjectReference"></param>
-        /// <param name="elementReference"></param>
-        /// <param name="id"></param>
-        /// <param name="shown"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask AnimateCollapseAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, ElementReference? elementReference, string id, bool shown, CancellationToken? cancellationToken = null) where T : class
-        {
-            if (dotNetObjectReference == null)
-                throw new ArgumentNullException(nameof(dotNetObjectReference));
-            if (elementReference == null)
-                throw new ArgumentNullException(nameof(elementReference));
-            var name = typeof(T).Name.ToLower();
-            return _jsRuntime.InvokeVoidAsync("blazorStrap.AnimateCollapse", cancellationToken ?? CancellationToken.None, dotNetObjectReference, elementReference, id, shown, name);
-        }
 
         /// <summary>
-        /// Triggers Collapse to animate
+        /// This method preloads the module and sets the module reference.
         /// </summary>
-        /// <param name="dotNetObjectReference"></param>
-        /// <param name="elementReference"></param>
-        /// <param name="id"></param>
-        /// <param name="shown"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask AnimateHorizontalCollapseAsync<T>(DotNetObjectReference<T>? dotNetObjectReference, ElementReference? elementReference, string id, bool shown, CancellationToken? cancellationToken = null) where T : class
-        {
-            if (dotNetObjectReference == null)
-                throw new ArgumentNullException(nameof(dotNetObjectReference));
-            if (elementReference == null)
-                throw new ArgumentNullException(nameof(elementReference));
-            var name = typeof(T).Name.ToLower();
-            return _jsRuntime.InvokeVoidAsync("blazorStrap.AnimateHorizontalCollapse", cancellationToken ?? CancellationToken.None, dotNetObjectReference, elementReference, id, shown, name);
-        }
-
-        /// <summary>
-        /// Returns a string array of all child data-blazorstrap ids
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>string[]</returns>
-        public ValueTask<string[]> GetChildrenIdsAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
-         => _jsRuntime.InvokeAsync<string[]>("blazorStrap.GetChildrenIds", CancellationToken.None, elementReference);
-
-        /// <summary>
-        /// Returns the height of the ElementReference
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>int</returns>
-        public ValueTask<int> GetHeightAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeAsync<int>("blazorStrap.GetHeight", CancellationToken.None, elementReference);
-
-        /// <summary>
-        /// Returns the width of the ElementReference
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>int</returns>
-        public ValueTask<int> GetWidthAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeAsync<int>("blazorStrap.GetWidth", CancellationToken.None, elementReference);
-
-        /// <summary>
-        /// Returns the windows inner height
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns>int</returns>
-        public ValueTask<int> GetWindowInnerHeightAsync(CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeAsync<int>("blazorStrap.GetWindowInnerHeight", CancellationToken.None);
-
-        /// <summary>
-        /// Gets the body's scrollbar width
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns>int</returns>
-        public ValueTask<int> GetScrollBarWidth(CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeAsync<int>("blazorStrap.GetScrollBarWidth", CancellationToken.None);
-
-        /// <summary>
-        /// returns the ElementReference style list
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>string</returns>
-        public ValueTask<string> GetStyleAsync(ElementReference? elementReference, CancellationToken? cancellationToken = null)
-        {
-            return elementReference == null
-                ? throw new ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeAsync<string>("blazorStrap.GetStyle", CancellationToken.None, elementReference);
-        }
-
-        /// <summary>
-        /// returns the ElementReference height. By setting display block, visibility hidden, position absolute for a moment.
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>int</returns>
-        public ValueTask<int> PeakHeightAsync(ElementReference? elementReference, CancellationToken? cancellationToken = null)
-        {
-            return elementReference == null
-                ? throw new ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeAsync<int>("blazorStrap.PeakHeight", CancellationToken.None, elementReference);
-        }
-
-        /// <summary>
-        /// Removes Attribute from the ElementReference
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="name"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask RemoveAttributeAsync(ElementReference? elementReference, string name, CancellationToken? cancellationToken = null)
-        {
-            return elementReference == null
-                ? throw new System.ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveAttribute", CancellationToken.None, elementReference, name);
-        }
-
-        /// <summary>
-        /// Remove a class from the body
-        /// </summary>
-        /// <param name="className"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask RemoveBodyClassAsync(string className, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveBodyClass", CancellationToken.None, className);
-
-        /// <summary>
-        /// Removes a class from the ElementReference
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="className"></param>
-        /// <param name="delay"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public ValueTask RemoveClassAsync(ElementReference? elementReference, string className, int delay = 0, CancellationToken? cancellationToken = null)
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask PreloadModuleAsync(CancellationToken? cancellationToken = null)
         {
-            return elementReference == null
-                ? throw new ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveClass", CancellationToken.None, elementReference, className, delay);
+            _ = await GetModuleAsync() ?? throw new NullReferenceException("Unable to load module.");
         }
 
         /// <summary>
-        /// Removes an event from an element matching the id.
+        /// Sanitity checks javascritps eventCallback array
         /// </summary>
-        /// <param name="caller"></param>
-        /// <param name="id"></param>
-        /// <param name="type"></param>
         /// <param name="cancellationToken"></param>
-        /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public async ValueTask RemoveEventAsync<T>(T caller, string id, EventType type, CancellationToken? cancellationToken = null) where T : class
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask RemoveRougeEventsAsync(CancellationToken? cancellationToken = null)
         {
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("removeRougeEvents", cancellationToken ?? CancellationToken.None);
+        }
+        /// <summary>
+        /// Sanitity check for the backdrop.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask CheckBackdropsAsync(CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("checkBackdrops", cancellationToken ?? CancellationToken.None, _objectReference);
+        }
+
+        //////////////////////
+        // Utility Methods //
+        ////////////////////
+        public async ValueTask AddBodyClassAsync(string className, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("addBodyClass", cancellationToken ?? CancellationToken.None, className);
+        }
+
+        public async ValueTask RemoveBodyClassAsync(string className, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("removeBodyClass", cancellationToken ?? CancellationToken.None, className);
+        }
+        public async ValueTask SetBodyStyleAsync(string style, string value, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("setBodyStyle", cancellationToken ?? CancellationToken.None, style, value);
+        }
+
+        public async ValueTask AddClassAsync(ElementReference elementReference, string className, int delay = 0, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("addClass", cancellationToken ?? CancellationToken.None, elementReference, className, delay);
+        }
+
+        public async ValueTask RemoveClassAsync(ElementReference elementReference, string className, int delay = 0, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("removeClass", cancellationToken ?? CancellationToken.None, elementReference, className, delay);
+        }
+        public async ValueTask SetStyleAsync(ElementReference elementReference, string style, string value, int delay = 0 , CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("setStyle", cancellationToken ?? CancellationToken.None, elementReference, style, value, delay);
+        }
+        public async ValueTask BlurAllAsync(CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("blurAll", cancellationToken ?? CancellationToken.None);
+        }
+
+        public async ValueTask AddAttributeAsync(ElementReference elementReference, string name, string value, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("addAttribute", cancellationToken ?? CancellationToken.None, elementReference, name, value);
+        }
+
+        public async ValueTask RemoveAttributeAsync(ElementReference elementReference, string name, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            if (module is not null)
+                await module.InvokeVoidAsync("removeAttribute", cancellationToken ?? CancellationToken.None, elementReference, name);
+        }
+       
+        public async ValueTask<int?> GetHeightAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            return module is not null ? await module.InvokeAsync<int?>("getHeight", CancellationToken.None, elementReference) : null;
+        }
+        public async ValueTask<int?> GetWidthAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            return module is not null ? await module.InvokeAsync<int?>("getWidth", CancellationToken.None, elementReference) : null;
+        }
+        public async ValueTask<bool> SetBootstrapCssAsync(string? themeUrl, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            return module is not null && await module.InvokeAsync<bool>("setBootstrapCss", cancellationToken ?? CancellationToken.None, themeUrl);
+        }
+
+
+
+
+
+        [JSInvokable]
+        public async Task RemoveBackdropAsync()
+        {
+            if (SetRenderModalBackdrop is null) return;
+            await SetRenderModalBackdrop.Invoke(false);
+        }
+
+        [JSInvokable]
+        public async Task RemoveOffCanvasBackdropAsync()
+        {
+            if (SetRenderOffCanvasBackdrop is null) return;
+            await SetRenderOffCanvasBackdrop.Invoke(false);
+        }
+        [JSInvokable]
+        public async Task BackdropShownAsync()
+        {
+            if (SetRenderModalBackdrop is null) return;
+            await SetRenderModalBackdrop.Invoke(true);
+        }
+        [JSInvokable]
+        public async Task OffCanvasBackdropShownAsync()
+        {
+            if (SetRenderOffCanvasBackdrop is null) return;
+            await SetRenderOffCanvasBackdrop.Invoke(true);
+        }
+        [JSInvokable]
+        public async Task InvokeEventAsync(string sender, string target, EventType type, object data)
+        {
+            await BlazorStrap.InvokeEvent(sender, target, type, data);   
+        }
+        private async Task RequestBackdropAsync(bool value)
+        {
+            if (SetRenderModalBackdrop is null) return;
+            var instances = SetRenderModalBackdrop.GetInvocationList();
+            
+            var tasks = new List<Task>();
+            foreach (var instance in instances)
+            {
+                if(instance is Func<bool, Task> func)
+                    tasks.Add(func.Invoke(value));
+            }
+            await Task.WhenAll(tasks);
+        }
+
+        private async Task RequestOffCanvasBackdropAsync(bool value)
+        {
+            if (SetRenderOffCanvasBackdrop is null) return;
+            var instances = SetRenderOffCanvasBackdrop.GetInvocationList();
+
+            var tasks = new List<Task>();
+            foreach (var instance in instances)
+            {
+                if (instance is Func<bool, Task> func)
+                    tasks.Add(func.Invoke(value));
+            }
+            await Task.WhenAll(tasks);
+        }
+
+        private async Task<IJSObjectReference?> GetModuleAsync()
+        {
+            if (Module is not null)
+            {
+                return Module;
+            }
             try
             {
-                var name = typeof(T).Name.ToLower();
-                await _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveEvent", CancellationToken.None, id, name, type.NameToLower());
+                Module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlazorStrap/blazorstrapinterop.js");
+                return Module;
             }
-            catch { }
-        }
-
-        /// <summary>
-        /// Removes an event from the document matching the id.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="type"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public async ValueTask RemoveDocumentEventAsync<T>(T caller, string id, EventType type, CancellationToken? cancellationToken = null)
-        {
-            try
+            catch
             {
-                var name = typeof(T).Name.ToLower();
-                await _jsRuntime.InvokeVoidAsync("blazorStrap.RemoveDocumentEvent", CancellationToken.None, id, name, type.NameToLower());
-            }
-            catch { }
-        }
-
-
-        /// <summary>
-        /// Removes a Popover 
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="id"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask RemovePopoverAsync(ElementReference? elementReference, string id, CancellationToken? cancellationToken = null)
-        {
-            return elementReference == null
-                ? throw new ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeVoidAsync("blazorStrap.RemovePopover", CancellationToken.None, elementReference, id);
-        }
-
-        /// <summary>
-        /// Sets a body style
-        /// </summary>
-        /// <param name="style"></param>
-        /// <param name="value"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask SetBodyStyleAsync(string style, string value, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.SetBodyStyle", CancellationToken.None, style, value);
-
-        /// <summary>
-        /// Sets set css link for the theme switcher
-        /// </summary>
-        /// <param name="theme"></param>
-        /// <param name="version"></param>
-        public ValueTask<bool> SetBootstrapCssAsync(string? theme, string version)
-            => _jsRuntime.InvokeAsync<bool>("blazorStrap.SetBootstrapCss", theme, version);
-
-        [Obsolete]
-        public ValueTask<bool> SetBootstrapCss(string? theme, string version)
-        {
-            return _jsRuntime.InvokeAsync<bool>("blazorStrap.setBootstrapCss", theme, version);
-        }
-
-        /// <summary>
-        /// Sets a style for the ElementReference
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="style"></param>
-        /// <param name="value"></param>
-        /// <param name="delay"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask SetStyleAsync(ElementReference? elementReference, string style, string value, int delay = 0, CancellationToken? cancellationToken = null)
-        {
-            return elementReference == null
-                ? throw new ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeVoidAsync("blazorStrap.SetStyle", CancellationToken.None, elementReference, style, value, delay);
-        }
-
-        /// <summary>
-        /// Adds the toast timer to ElementReference
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="time"></param>
-        /// <param name="timeRemaining"></param>
-        /// <param name="rendered"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask ToastTimerAsync(ElementReference? elementReference, int time, int timeRemaining, bool rendered, CancellationToken? cancellationToken = null)
-        {
-            return elementReference == null
-                ? throw new ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeVoidAsync("blazorStrap.ToastTimer", cancellationToken ?? CancellationToken.None, elementReference, time, timeRemaining, rendered);
-        }
-
-        /// <summary>
-        /// Returns true if no transition starts after given delay
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>bool</returns>
-        public ValueTask<bool> TransitionDidNotStartAsync(ElementReference? elementReference, CancellationToken? cancellationToken = null)
-        {
-            return elementReference == null
-                ? throw new ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeAsync<bool>("blazorStrap.TransitionDidNotStart", CancellationToken.None, elementReference);
-        }
-
-        /// <summary>
-        /// Calls Update on the popover
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask UpdatePopoverAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
-            => _jsRuntime.InvokeVoidAsync("blazorStrap.UpdatePopover", CancellationToken.None, elementReference);
-
-        /// <summary>
-        /// Updates the placement of the popovers arrows
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="placement"></param>
-        /// <param name="tooltip"></param>
-        /// <param name="cancellationToken"></param>
-        public ValueTask UpdatePopoverArrowAsync(ElementReference? elementReference, Placement placement, bool tooltip, CancellationToken? cancellationToken = null)
-        {
-            return elementReference == null
-                ? throw new ArgumentNullException(nameof(elementReference))
-                : _jsRuntime.InvokeVoidAsync("blazorStrap.UpdatePopoverArrow", CancellationToken.None, elementReference, placement.Name().ToDashSeperated(), tooltip);
-        }
-
-
-
-
-
-
-        // Sync Methods
-
-        /// <summary>
-        /// Returns a string array of all child data-blazorstrap ids
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <exception cref="InvalidOperationException"></exception>
-        public void GetChildrenIds(ElementReference elementReference)
-        {
-            if (_jSInProcessRuntime == null) throw InProcessError();
-            _jSInProcessRuntime.Invoke<string[]>("blazorStrap.GetChildrenIds", elementReference);
-        }
-
-        /// <summary>
-        /// Adds the toast timer to ElementReference
-        /// </summary>
-        /// <param name="elementReference"></param>
-        /// <param name="time"></param>
-        /// <param name="timeRemaining"></param>
-        /// <param name="rendered"></param>
-        /// <exception cref="InvalidOperationException"></exception>
-        public void ToastTimer(ElementReference elementReference, int time, int timeRemaining, bool rendered)
-        {
-            if (_jSInProcessRuntime == null) throw InProcessError();
-            _jSInProcessRuntime.InvokeVoid("blazorStrap.ToastTimer", elementReference, time, timeRemaining, rendered);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposedValue)
-            {
-                if (disposing)
-                {
-                }
-                _disposedValue = true;
+                return null;
             }
         }
-        private InvalidOperationException InProcessError()
-            => new InvalidOperationException("Javascript in process interop not available");
-        public void Dispose()
+        private static string TranslatePlacementForPopperJs(Placement value)
         {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
+            var result = Enum.GetName(typeof(Placement), value);
+            //Add dash between Pasle cased workds example BottomLeft to Bottom-Left
+            if (result is not null)
+                result = Regex.Replace(result, "([a-z])([A-Z])", "$1-$2");
+            return result?.ToLower() ?? "";
         }
     }
 }
+   

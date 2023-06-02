@@ -1,66 +1,58 @@
 ﻿using BlazorStrap.Extensions;
 using BlazorStrap.Shared.Components.Modal;
+using BlazorStrap.Shared.Components.OffCanvas;
+using Microsoft.JSInterop;
+using static System.Net.WebRequestMethods;
 
 namespace BlazorStrap.Service
 {
     public class BlazorStrapCore : IBlazorStrap
     {
-        public readonly BlazorStrapInterop Interop;
+        public BlazorStrapInterop JavaScriptInterop { get; }
+        
         public bool ShowDebugMessages { get; private set; }
+        public Func<string, string, EventType, object?, Task>? OnEvent { get; set; }
+
         internal Func<string, CallerName, EventType, Task>? OnEventForward;
         
         //private readonly CurrentTheme _currentTheme;
         public Toaster Toaster { get;} = new Toaster();
-        private string _currentTheme  = "bootstrap";
+        private string _currentTheme  = "https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css";
         public T CurrentTheme<T>() where T : Enum
         {
             return (T) Enum.Parse(typeof(T), _currentTheme, true);
         }
 
-        public BlazorStrapCore(BlazorStrapInterop? interop, string basepath)
-        {
-            if(interop == null)
-                throw new ArgumentNullException(nameof(interop));
-            Interop = interop;
-        }
-        public BlazorStrapCore(BlazorStrapInterop interop, Action<BlazorStrapOptions>? buildOptions)
+        public BlazorStrapCore(IJSRuntime jSRuntime, Action<BlazorStrapOptions>? buildOptions)
         {
             var options = new BlazorStrapOptions();
             if (buildOptions != null)
             {
                 buildOptions.Invoke(options);
             }
-            Interop = interop;
+            JavaScriptInterop = new BlazorStrapInterop(jSRuntime, this);
             ShowDebugMessages = options.ShowDebugMessages;
         }
         public Task SetBootstrapCss()
         {
-            _currentTheme = "bootstrap";
-            return SetBootstrapCss("bootstrap", "latest");
+            _currentTheme = "https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css";
+            return SetBootstrapCss(_currentTheme);
         }
 
-        public Task SetBootstrapCss(string version)
+        public async Task SetBootstrapCss(string? themeUrl)
         {
-            _currentTheme = "bootstrap";
-            return SetBootstrapCss("bootstrap", version);
-        }
-
-        public async Task SetBootstrapCss(string? theme, string version)
-        {
-            theme = theme.FirstCharToUpper();
-            if (theme == null) return;
-            _currentTheme = theme.ToLowerInvariant();
             try
             {
-                await Interop.SetBootstrapCssAsync(theme.ToLowerInvariant(), version);
+                await JavaScriptInterop.SetBootstrapCssAsync(themeUrl);
             }
             catch { }
         }
 
-        public Task SetBootstrapCss<T>(T theme, string version) where T : Enum
+        public Task SetBootstrapCss<T>(T theme) where T : Enum
         {
-            _currentTheme = theme.NameToLower();
-            return SetBootstrapCss(theme.ToString().ToLowerInvariant(), version);
+            var themeUrl = theme.ToDescriptionString();
+            _currentTheme = themeUrl;
+            return SetBootstrapCss(themeUrl);
         }
         
         internal event Action<BSModalBase?, bool>? ModalChange;
@@ -68,6 +60,12 @@ namespace BlazorStrap.Service
         public void ModalChanged(BSModalBase obj)
         {
             ModalChange?.Invoke(obj, false);
+        }
+
+        public async Task InvokeEvent(string sender, string target, EventType type, object? data)
+        {
+            if(OnEvent is not null)
+                await OnEvent.Invoke(sender, target, type, data);
         }
 
         public void ForwardClick(string id)
