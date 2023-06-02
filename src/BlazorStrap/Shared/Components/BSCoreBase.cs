@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 
 namespace BlazorStrap.Shared.Components
 {
     public class BSCoreBase : ComponentBase, IDisposable
     {
         [Inject] protected IBlazorStrap? BlazorStrapService { get; set; } = default!;
+        [Inject] NavigationManager? NavigationManager { get; set; }
         [Parameter] public bool HasToaster { get; set; } = true;
 
         protected bool _modalBackdropRendered;
@@ -12,9 +14,14 @@ namespace BlazorStrap.Shared.Components
         protected bool _backdropShown;
         protected bool _offcanvasBackdropShown;
         private bool _secondRender;
+        private bool _locationChanged;
         private TaskCompletionSource<bool> TaskCompletionSource { get; set; } = new TaskCompletionSource<bool>();
         protected override void OnInitialized()
         {
+            if(NavigationManager is not null)
+            {
+                NavigationManager.LocationChanged += OnLocationChanged;
+            }
             if (BlazorStrapService is not null)
             {
                 BlazorStrapService.JavaScriptInterop.OnOffCanvasBackdropShown += OnOffCanvasBackdropShown;
@@ -22,6 +29,12 @@ namespace BlazorStrap.Shared.Components
                 BlazorStrapService.JavaScriptInterop.SetRenderModalBackdrop += SetRenderModalBackdrop;
                 BlazorStrapService.JavaScriptInterop.OnModalBackdropShown += OnModalBackdropShown;
             }
+        }
+
+        private async void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+        {
+            _locationChanged = true;
+            await InvokeAsync(StateHasChanged);
         }
 
         private async Task SetRenderOffcanvasBackdrop(bool value)
@@ -79,10 +92,20 @@ namespace BlazorStrap.Shared.Components
                 catch { }
                 //Stops hotreload from crying
             }
+            if (_locationChanged && _secondRender)
+            {
+                _locationChanged = false;
+                if(BlazorStrapService is not null)
+                    await BlazorStrapService.JavaScriptInterop.RemoveRougeEventsAsync();
+            }
         }
 
         public void Dispose()
         {
+            if (NavigationManager is not null)
+            {
+                NavigationManager.LocationChanged -= OnLocationChanged;
+            }
             if (BlazorStrapService is not null)
             {
                 BlazorStrapService.JavaScriptInterop.OnOffCanvasBackdropShown -= OnOffCanvasBackdropShown;

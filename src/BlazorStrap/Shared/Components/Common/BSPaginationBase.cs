@@ -5,9 +5,8 @@ using Microsoft.JSInterop;
 
 namespace BlazorStrap.Shared.Components.Common
 {
-    public abstract class BSPaginationBase<TSize> : BlazorStrapBase
+    public abstract class BSPaginationBase<TSize> : BlazorStrapBase, IDisposable
     {
-        private DotNetObjectReference<BSPaginationBase<TSize>>? _objectRef;
         protected string MyId { get; set; } = Guid.NewGuid().ToString();
 
         /// <summary>
@@ -71,19 +70,21 @@ namespace BlazorStrap.Shared.Components.Common
                 PageWidth = 82;
             if (Pages > 99999)
                 PageWidth = 98;
-
-            _objectRef = DotNetObjectReference.Create<BSPaginationBase<TSize>>(this);
+            BlazorStrapService.OnEvent += OnEventAsync;
             BlazorStrapService.OnEventForward += InteropEventCallback;
         }
 
         private async Task GetMaxItems()
         {
-            var navWidth = await BlazorStrapService.Interop.GetWidthAsync(NavReference) - 140;
-            var max = (navWidth / PageWidth / 2);
-            if (MaxItems != max)
+            var navWidth = await BlazorStrapService.JavaScriptInterop.GetWidthAsync(NavReference) - 140;
+            if (navWidth is not null)
             {
-                MaxItems = max;
+                var max = (navWidth / PageWidth / 2);
+                if (MaxItems != max.Value)
+                {
+                    MaxItems = max.Value;
 
+                }
             }
         }
 
@@ -94,7 +95,7 @@ namespace BlazorStrap.Shared.Components.Common
             CurrentValue = page;
             try
             {
-                BlazorStrapService.Interop.BlurAllAsync();
+                _ = BlazorStrapService.JavaScriptInterop.BlurAllAsync();
             }
             catch { }
         }
@@ -120,7 +121,7 @@ namespace BlazorStrap.Shared.Components.Common
             if (firstRender && Pages != -1)
             {
                 var _objectRef = DotNetObjectReference.Create<BSPaginationBase<TSize>>(this);
-                await BlazorStrapService.Interop.AddEventAsync(_objectRef, MyId, EventType.Resize);
+                await BlazorStrapService.JavaScriptInterop.AddEventAsync(MyId, MyId, EventType.Resize);
                 // await BlazorStrap.Interop.AddEventAsync(_objectRef, MyId, EventType.Resize);
                 await GetMaxItems();
                 await InvokeAsync(StateHasChanged);
@@ -133,15 +134,20 @@ namespace BlazorStrap.Shared.Components.Common
             }
         }
 
-        [JSInvokable]
-        public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
+        public override async Task OnEventAsync(string sender, string target, EventType type, object? data)
         {
-            if (id == MyId && name.Equals(this) && type == EventType.Resize)
+            if(sender == MyId && type == EventType.Resize)
             {
                 _resized = true;
                 await InvokeAsync(StateHasChanged);
             }
         }
+
+        public void Dispose()
+        {
+            BlazorStrapService.OnEvent -= OnEventAsync;
+        }
+
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
     }

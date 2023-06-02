@@ -1,3 +1,10 @@
+// { id = [{ creating element, eventtype, func}] }
+let eventCallbacks = [];
+let documentEventsSet = false;
+let docuemntEventId = [];
+let link;
+// Common
+
 export async function checkBackdrops(dotnet) {
     var backdrop = document.querySelector('.modal-backdrop');
     if (backdrop) {
@@ -17,6 +24,67 @@ export async function checkBackdrops(dotnet) {
             backdrop.classList.remove("show");
             await waitForTransitionEnd(backdrop);
             await dotnet.invokeMethodAsync('RemoveOffCanvasBackdropAsync');
+        }
+    }
+}
+export async function removeRougeEvents() {
+    // remove any event and event handler that no longer exists you will have to loop because we need to unregister the event
+    var documentCallbacks = eventCallbacks.find(x => x.id == "document");
+    if (documentCallbacks) {
+        docuemntEventId.forEach(function (event) {
+            if (!document.querySelector('[data-blazorstrap="' + event.creator + '"]')) {
+                docuemntEventId = docuemntEventId.filter(x => x.creator !== event.creator);
+            }
+        });
+        documentCallbacks.events = documentCallbacks.events.filter(x => x.creator !== event.creator);
+    }
+    //remove any event that id no longer exists
+    eventCallbacks = eventCallbacks.filter(x => document.querySelector('[data-blazorstrap="' + x.id + '"]'));
+}
+export async function addDocumentEvent(eventName, creator, dotnet, ignoreChildren) {
+    if (!documentEventsSet) setupDocumentEvents(dotnet);
+    if (eventName == "" || eventName == "sync" || eventName == "hide" || eventName == "show") return;
+    docuemntEventId.push({ eventtype: eventName, creator: creator });
+}
+
+export async function removeDocumentEvent(eventName, creator) {
+    docuemntEventId = docuemntEventId.filter(x => x.creator !== creator && x.eventtype !== eventName);
+}
+export async function addEvent(targetId, creator, eventName, dotnet, ignoreChildren) {
+    if (eventName == "" || eventName == "sync" || eventName == "hide" || eventName == "show") return;
+    var target = document.querySelector('[data-blazorstrap="' + targetId + '"]');
+    if (target) {
+        let eventFunc = function (e) {
+            if (ignoreChildren && e.target.getAttribute("data-blazorstrap") != targetId) return;
+            dotnet.invokeMethodAsync('InvokeEventAsync', "javascript", targetId, eventName, null);
+        };
+        //add the eventfunc to eventcallbacks so we can remove it later
+        let callback = eventCallbacks.find(x => x.id == targetId);
+        if (callback)
+            callback.events.push({ creator: creator, eventtype: eventName, func: eventFunc });
+        else
+            eventCallbacks.push({ id: targetId, events: [{ creator: creator, eventtype: eventName, func: eventFunc }] });
+
+        //observe the element so we can remove the event if it is removed
+        onElementRemoved(target, function () {
+            target.removeEventListener(eventName, eventFunc);
+            eventCallbacks = eventCallbacks.filter(x => x.id !== targetId);
+        });
+
+        target.addEventListener(eventName, eventFunc);
+    }
+    //remove any event that id no longer exists
+    eventCallbacks = eventCallbacks.filter(x => document.querySelector('[data-blazorstrap="' + x.id + '"]'));
+}
+export async function removeEvent(targetId, creator, eventName) {
+    var target = document.querySelector('[data-blazorstrap="' + targetId + '"]');
+    //get the eventfunc from eventcallbacks
+    let callback = eventCallbacks.find(x => x.id == targetId);
+    if (callback) {
+        let eventFunc = callback.events.find(x => x.creator == creator && x.eventtype == eventName);
+        callback.events = callback.events.filter(x => x.creator !== creator && x.eventtype !== eventName);
+        if (target) {
+            target.removeEventListener(eventName, eventFunc);
         }
     }
 }
@@ -232,6 +300,14 @@ export async function hideOffcanvas(offcanvas, dotnet) {
             await dotnet.invokeMethodAsync('RemoveOffCanvasBackdropAsync');
         }
     }
+    //grab add child .tooltip and .popover elements and remove them
+    var childElements = offcanvas.querySelectorAll(".tooltip,.popover");
+    if (childElements) {
+        childElements.forEach(function (childElement) {
+            var id = childElement.getAttribute("data-blazorstrap");
+            dotnet.invokeMethodAsync('InvokeEventAsync', 'javascript', id, "hide", null);
+        });
+    }
     return {
         ClassList: offcanvas.classList.value,
         Styles: offcanvas.style.cssText,
@@ -239,7 +315,63 @@ export async function hideOffcanvas(offcanvas, dotnet) {
     };
 }
 
-//Popover
+//Tooltips
+export async function showTooltip(tooltip, placement, targetId, dotnet) {
+    if (!tooltip) return null;
+    //using popper.js setup the tooltip
+    //get the arrow element
+    var arrow = tooltip.querySelector(".tooltip-arrow");
+    var offset = [0, 0];
+    if (tooltip.classList.contains("popover")) {
+        arrow = tooltip.querySelector(".popover-arrow");
+        // if placement contains top or bottom
+        if (placement.indexOf("top") > -1 || placement.indexOf("bottom") > -1) {
+            offset = [0, arrow.offsetHeight];
+        }
+        else {
+            offset = [0, arrow.offsetWidth];
+        }
+    }
+    var target = document.querySelector('[data-blazorstrap="' + targetId + '"]');
+    if (target) {
+        var popper = Popper.createPopper(target, tooltip, {
+            placement: placement,
+            modifiers: [
+                {
+                    name: 'arrow',
+                    options: {
+                        element: arrow,
+                    },
+                },
+                {
+                    name: 'offset',
+                    options: {
+                        offset: offset,
+                    },
+                }
+            ],
+        });
+
+        tooltip.classList.add("show");
+        await waitForTransitionEnd(tooltip);
+    }
+    return {
+        ClassList: tooltip.classList.value,
+        Styles: tooltip.style.cssText,
+        Aria: getAriaAttributes(tooltip),
+    };
+}
+
+export async function hideTooltip(tooltip, dotnet) {
+    if (!tooltip) return null;
+    tooltip.classList.remove("show");
+    await waitForTransitionEnd(tooltip);
+    return {
+        ClassList: tooltip.classList.value,
+        Styles: tooltip.style.cssText,
+        Aria: getAriaAttributes(tooltip),
+    };
+}
 
 export async function showAccordion(accordion, accordionToHide, dotnet) {
     let hideResult = null;
@@ -286,7 +418,7 @@ export async function showCollapse(collapse, horizontal, dotnet) {
     collapse.classList.remove("collapsing");
     collapse.classList.add("collapse");
     collapse.classList.add("show");
-
+    collapse.style.height = "";
     return {
         ClassList: collapse.classList.value,
         Styles: collapse.style.cssText,
@@ -328,6 +460,7 @@ export async function hideCollapse(collapse, horizontal, dotnet) {
     collapse.classList.remove("collapsing");
     collapse.classList.remove("show");
     collapse.classList.add("collapse");
+    collapse.style.height = "";
 
     return {
         ClassList: collapse.classList.value,
@@ -336,6 +469,166 @@ export async function hideCollapse(collapse, horizontal, dotnet) {
     };
 }
 
+//Toaster
+export async function toastTimer(element, time, timeRemaining, rendered) {
+    if (rendered === false) {
+        element.classList.add("showing");
+    }
+
+    if (time === 0) {
+
+        await new Promise(resolve => setTimeout(function () {
+            element.classList.remove("showing");
+            resolve();
+        }, 100));
+    }
+
+    if (time !== 0) {
+        const dflex = element.querySelector(".d-flex");
+        const wrapper = document.createElement("div");
+        wrapper.className = "w-100 p-0 m-0 position-relative border-bottom-1 border-dark";
+        wrapper.style.top = "-1px";
+        const timeEl = document.createElement("div");
+        wrapper.appendChild(timeEl);
+        element.insertBefore(wrapper, dflex);
+        timeEl.classList.add("bg-dark");
+        timeEl.style.height = "4px";
+        timeEl.style.opacity = ".4";
+
+        if (timeRemaining === 0) {
+            timeEl.style.width = "0";
+            timeEl.style["transition"] = "linear " + (time - timeRemaining) / 1000 + "s";
+            timeEl.style["-webkit-transition"] = "linear " + (time - timeRemaining) / 1000 + "s";
+        } else {
+            timeRemaining = time - timeRemaining;
+            timeEl.style.width = timeRemaining / time * 100 + "%";
+            timeEl.style["transition"] = "linear" + (time - timeRemaining) / 1000 + "s";
+            timeEl.style["-webkit-transition"] = "linear " + (time - timeRemaining) / 1000 + "s";
+        }
+        await new Promise(resolve => setTimeout(function () {
+            element.classList.remove("showing");
+            timeEl.style.width = "100%";
+            resolve();
+        }, 100));
+    }
+}
+//TODO: Update these direct ports
+
+export async function animateCarousel(id, showEl, hideEl, back, v4, dotnet) {
+    await blazorStrap.CleanupCarousel(showEl, hideEl);
+
+    let callback = function () {
+        dotnet.invokeMethodAsync("InvokeEventAsync", "javascript", id, "transitionend", null);
+    };
+
+    return new Promise(function (resolve) {
+        if (back) {
+            showEl.classList.add("carousel-item-prev");
+            setTimeout(async function () {
+                if (v4) {
+                    showEl.classList.add("carousel-item-right");
+                    hideEl.classList.add("carousel-item-right");
+                }
+                else {
+                    showEl.classList.add("carousel-item-end");
+                    hideEl.classList.add("carousel-item-end");
+                }
+                hideEl.addEventListener("transitionend", callback, {
+                    once: true
+                });
+                resolve((await waitForTransitionEnd(showEl)));
+            }, 10);
+        } else {
+            showEl.classList.add("carousel-item-next");
+            setTimeout(async function () {
+                if (v4) {
+                    showEl.classList.add("carousel-item-left");
+                    hideEl.classList.add("carousel-item-left");
+                }
+                else {
+                    showEl.classList.add("carousel-item-start");
+                    hideEl.classList.add("carousel-item-start");
+                }
+                hideEl.addEventListener("transitionend", callback, {
+                    once: true
+                });
+                resolve((await waitForTransitionEnd(showEl)));
+            }, 10);
+        }
+    });
+}
+// END Direct ports
+
+//Utility functions
+
+//Body
+export function addBodyClass(className) {
+    document.body.classList.add(className);
+}
+export function removeBodyClass(className) {
+    document.body.classList.remove(className);
+}
+export function setBodyStyle(style, value) {
+    document.body.style[style] = value;
+}
+
+export function blurAll() {
+    var tmp = document.createElement("input");
+    tmp.position = "absolute";
+    tmp.top = -500;
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);
+}
+
+export async function addClass(element, className, delay = 0) {
+    if (element === null || element === undefined) return;
+    element.classList.add(className);
+    await new Promise(resolve => setTimeout(resolve, delay));
+}
+export async function removeClass(element, className, delay = 0) {
+    if (element === null || element === undefined) return;
+    element.classList.remove(className);
+    await new Promise(resolve => setTimeout(resolve, delay));
+}
+
+export async function setStyle(element, style, value, delay = 0) {
+    if (element === null || element === undefined) return;
+    element.style[style] = value;
+    await new Promise(resolve => setTimeout(resolve, delay));
+}
+export function addAttribute(element, name, value) {
+    if (element === null || element === undefined) return;
+    element.setAttribute(name, value);
+}
+
+export function removeAttribute(element, name) {
+    if (element === null || element === undefined) return;
+    element.removeAttribute(name);
+}
+
+export function getHeight(element) {
+    if (element === null || element === undefined) null;
+    return element.offsetHeight;
+}
+
+export function getWidth(element) {
+    if (element === null || element === undefined) null;
+    return element.offsetWidth;
+}
+export function setBootstrapCss(themeUrl) {
+    if (link === undefined) {
+        let existing = document.querySelectorAll('link[href$="bootstrap.min.css"]')[0];
+
+        if (existing === undefined) {
+            link = document.createElement('link');
+            document.head.insertBefore(link, document.head.firstChild);
+            link.type = 'text/css';
+            link.rel = 'stylesheet';
+        } else link = existing;
+    }
+    link.href = themeUrl;
+}
 
 // Helper function to wait for transition end or timeout
 function waitForTransitionEnd(element) {
@@ -344,12 +637,14 @@ function waitForTransitionEnd(element) {
         const timeout = 250; // Minimum transition duration of 350ms
         const transitionEndHandler = () => {
             element.removeEventListener("transitionend", transitionEndHandler);
-            resolve();
+            resolve(true);
             clearTimeout(timeoutTimer);
         };
 
         element.addEventListener("transitionend", transitionEndHandler);
-        var timeoutTimer = setTimeout(resolve, timeout);
+        var timeoutTimer = setTimeout(function () {
+            resolve(false);
+        }, timeout);
     });
 }
 
@@ -380,4 +675,88 @@ function onElementRemoved(element, callback) {
             this.disconnect();
         }
     }).observe(element.parentElement, { childList: true });
+}
+
+function setupDocumentEvents(dotnet) {
+    // add commonly used event listeners to the window
+    var resizeFunc = debounce(function (event) {
+        var related = docuemntEventId.find(x => x.eventtype == "resize");
+        if (related > 0) {
+            var relatedIds = events.map(event => event.creator);
+            var relatedstring = relatedIds.join(',');
+            dotnet.invokeMethodAsync("InvokeEventAsync", "jsdocument", relatedstring, "resize", window.innerWidth);
+        }
+    }, 200);
+
+    var keydownFunc = debounce(function (event) {
+        var related = docuemntEventId.filter(x => x.eventtype == "keydown");
+        if (related.length > 0) {
+            var relatedIds = related.map(x => x.creator);
+            //check if its a child of a related element
+
+            const relatedShown = Array.from(document.querySelectorAll('[data-blazorstrap]'))
+                .filter(element => relatedIds.includes(element.getAttribute('data-blazorstrap')))
+                .filter(element => element.classList.contains('show'))
+                .map(element => element);
+            var canInvoke = true;
+            relatedIds = [];
+            if (relatedShown.length > 0) {
+                relatedShown.forEach(x => {
+                    relatedIds.push(x.getAttribute('data-blazorstrap'));
+                    //if its a child of of relatedShown or relatedShown return
+                    if (x.contains(event.target)) {
+                        canInvoke = false;
+                    }
+                });
+                if (canInvoke) {
+                    var relatedstring = relatedIds.join(',');
+                    dotnet.invokeMethodAsync("InvokeEventAsync", "jsdocument", relatedstring, "keydown", event.target.getAttribute("data-blazorstrap"));
+                }
+            }
+        }
+    }, 50);
+
+    var clickFunc = debounce(function (event) {
+        var related = docuemntEventId.filter(x => x.eventtype == "click");
+        if (related.length > 0) {
+            var relatedIds = related.map(x => x.creator);
+            //check if its a child of a related element
+            
+            const relatedShown = Array.from(document.querySelectorAll('[data-blazorstrap]'))
+                .filter(element => relatedIds.includes(element.getAttribute('data-blazorstrap')))
+                .filter(element => element.classList.contains('show'))
+                .map(element => element);
+            var canInvoke = true;
+            relatedIds = [];
+            if (relatedShown.length > 0) {
+                relatedShown.forEach(x => {
+                    relatedIds.push(x.getAttribute('data-blazorstrap'));
+                    //if its a child of of relatedShown or relatedShown return
+                    if (x.contains(event.target)) {
+                        canInvoke = false;
+                    }
+                });
+                if (canInvoke) {
+                    var relatedstring = relatedIds.join(',');
+                    dotnet.invokeMethodAsync("InvokeEventAsync", "jsdocument", relatedstring, "click", event.target.getAttribute("data-blazorstrap"));
+                }
+            }
+        }
+    }, 50);
+    window.addEventListener('keydown', keydownFunc);
+    window.addEventListener('resize', resizeFunc);
+    window.addEventListener('click', clickFunc);
+    documentEventsSet = true;
+}
+
+function debounce(func, delay) {
+    let timeoutId;
+    return function (...args) {
+        clearTimeout(timeoutId);
+
+        timeoutId = setTimeout(() => {
+            func.apply(this, args);
+            timeoutId = null; // Reset timeoutId after function execution
+        }, delay);
+    };
 }

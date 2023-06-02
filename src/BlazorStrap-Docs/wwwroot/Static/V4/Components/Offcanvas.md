@@ -22,7 +22,7 @@ See [shared](layout/shared) for additional parameters
 | Header                | RenderFragment			| RenderFragment | Nested Content													|
 | Content               | RenderFragment			| RenderFragment | Nested Content													|
 | OnClick               | EventCallback				| EventCallback  | EventCallback													|
-| ContentAlwaysRendered | bool                      | bool           | default=true. Hides content for component when not show if false |
+| ContentAlwaysRendered | bool                      | bool           | default=false. Hides content for component when not show if false |
 
 :::
 

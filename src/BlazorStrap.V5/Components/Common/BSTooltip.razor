@@ -1,11 +1,10 @@
 ﻿@inherits BlazorStrap.Shared.Components.Common.BSTooltipBase
 @namespace BlazorStrap.V5
 
-
-<div class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated().ToLower()" data-blazorstrap="@DataId">
-    @if (ShouldRenderContent)
-    {
+@if (ShouldRenderContent)
+{
+    <div class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated().ToLower()" data-blazorstrap="@DataId">
         <div class="tooltip-arrow"></div>
         <div class="tooltip-inner">@ChildContent</div>
-    }
-</div>
+    </div>
+}

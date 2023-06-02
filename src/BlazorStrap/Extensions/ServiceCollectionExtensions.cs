@@ -11,7 +11,7 @@ namespace BlazorStrap
         public static IServiceCollection AddBlazorStrap(this IServiceCollection serviceCollection, Action<BlazorStrapOptions>? options = null)
         {
             serviceCollection.AddScoped<BlazorStrapInterop>();
-            serviceCollection.AddScoped<IBlazorStrap>(x => new BlazorStrapCore(x.GetRequiredService<BlazorStrapInterop>(), options, x.GetRequiredService<IJSRuntime>()));
+            serviceCollection.AddScoped<IBlazorStrap>(x => new BlazorStrapCore(x.GetRequiredService<IJSRuntime>(), options));
             serviceCollection.AddScoped<ISvgLoader, SvgLoader>();
             return serviceCollection;
         }

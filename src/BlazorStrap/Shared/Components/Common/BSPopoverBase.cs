@@ -4,6 +4,7 @@ using BlazorStrap.Shared.Components.OffCanvas;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.Collections.Concurrent;
 
 namespace BlazorStrap.Shared.Components.Common
 {
@@ -11,7 +12,13 @@ namespace BlazorStrap.Shared.Components.Common
     {
         private Func<Task>? _callback;
         private DotNetObjectReference<BSPopoverBase>? _objectRef;
-
+        public override bool Shown
+        {
+            get => _shown;
+            protected set => _shown = value;
+        }
+        private bool _shown;
+        private ConcurrentQueue<EventQue> _eventQue = new();
         /// <summary>
         /// Popover content.
         /// </summary>
@@ -82,124 +89,97 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected ElementReference? MyRef { get; set; }
 
-        /// <summary>
-        /// Whether or not the popover is shown.
-        /// </summary>
-        public override bool Shown { get; protected set; }
-
-        protected string Style { get; set; } = "display:none;";
+        [Parameter]
+        public string Style { get; set; } = string.Empty;
 
         protected bool ShouldRenderContent { get; set; } = true;
-
+        private bool _secondRender;
         protected override void OnInitialized()
         {
+            BlazorStrapService.OnEvent += OnEventAsync;
             ShouldRenderContent = ContentAlwaysRendered;
         }
-        private async Task TryCallback(bool renderOnFail = true)
-        {
-            try
-            {
-                // Check if objectRef set if not callback will be handled after render.
-                // If anything fails callback will will be handled after render.
-                if (_objectRef != null)
-                {
-                    if (_callback != null)
-                    {
-                        await _callback();
-                        _callback = null;
-                    }
-                }
-                else
-                {
-                    throw new InvalidOperationException("No object ref");
-                }
-            }
-            catch
-            {
-                if (renderOnFail)
-                    await InvokeAsync(StateHasChanged);
-            }
-        }
-
         /// <inheritdoc/>
-        public override Task HideAsync()
+        public override async Task HideAsync()
         {
-            _callback = async () =>
+            if (!_shown) return;
+            await OnHide.InvokeAsync(this);
+            //Kick off to event que
+            var taskSource = new TaskCompletionSource<bool>();
+            var func = async () =>
             {
-                await HideActionsAsync();
+                _shown = false;
+                CanRefresh = false;
+
+                if (MyRef is not null)
+                {
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.HideTooltipAsync(MyRef.Value);
+                    if (syncResult is not null)
+                        Sync(syncResult);
+                }
+
+                CanRefresh = true;
+                ShouldRenderContent = false;
+
+                await InvokeAsync(StateHasChanged);
+                await OnHidden.InvokeAsync(this);
+                taskSource.SetResult(true);
             };
-            return TryCallback();
-        }
 
-        private async Task HideActionsAsync()
-        {
-            if (!Shown) return;
-            if (OnHide.HasDelegate)
-                await OnHide.InvokeAsync(this);
-            _called = true;
-            Shown = false;
-            await BlazorStrapService.Interop.HidePopoverAsync(MyRef, DataId);
-            //await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "show", 100);
-            //await BlazorStrapService.Interop.SetStyleAsync(MyRef, "display", "none");
-            //await BlazorStrapService.Interop.RemovePopoverAsync(MyRef, DataId);
-            Style = "display:none;";
-            ShouldRenderContent = ContentAlwaysRendered;
-            await InvokeAsync(StateHasChanged);
-        }
-
-        /// <inheritdoc/>
-        public override Task ShowAsync()
-        {
-            _callback = async () =>
+            _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
+            // Run event que if only item.
+            if (_eventQue.Count == 1)
             {
-                await ShowActionsAsync();
-            };
-            return TryCallback();
-        }
-
-        private async Task ShowActionsAsync()
-        {
-            if (Target == null)
-            {
-                throw new NullReferenceException("Target cannot be null");
-            }
-
-            if (Shown) return;
-
-            if (!ContentAlwaysRendered)
-            {
-                ShouldRenderContent = true;
                 await InvokeAsync(StateHasChanged);
             }
-
-            _called = true;
-            if (OnShow.HasDelegate)
-                await OnShow.InvokeAsync(this);
-            Shown = true;
-            //await BlazorStrapService.Interop.SetStyleAsync(MyRef, "display", "");
-            if (!MyRef.Equals(null))
-            {
-                //await BlazorStrapService.Interop.SetStyleAsync(MyRef, "visibility", "hidden");
-                //await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
-                //if (!string.IsNullOrEmpty(DropdownOffset))
-                //    await BlazorStrapService.Interop.AddPopoverAsync(MyRef, Placement, Target, DropdownOffset);
-                //else
-                //    await BlazorStrapService.Interop.AddPopoverAsync(MyRef, Placement, Target);
-
-                //if (!IsDropdown)
-                //    await BlazorStrapService.Interop.UpdatePopoverArrowAsync(MyRef, Placement, false);
-                //await BlazorStrapService.Interop.SetStyleAsync(MyRef, "visibility", "");
-                //Style = await BlazorStrapService.Interop.GetStyleAsync(MyRef);
-                if (!string.IsNullOrEmpty(DropdownOffset))
-                    Style = await BlazorStrapService.Interop.ShowPopoverAsync(MyRef, Placement, Target, DropdownOffset);
-                else
-                    Style = await BlazorStrapService.Interop.ShowPopoverAsync(MyRef, Placement, Target);
-                EventsSet = true;
-            }
-
-            await InvokeAsync(StateHasChanged);
+            await taskSource.Task;
         }
 
+
+        /// <inheritdoc/>
+        public override async Task ShowAsync()
+        {
+            if (Target is null) throw new InvalidOperationException("A taget is required to show the tooltip");
+            if (_shown) return;
+            ShouldRenderContent = true;
+            await OnShow.InvokeAsync(this);
+            //Kick off to event que
+            var taskSource = new TaskCompletionSource<bool>();
+            var func = async () =>
+            {
+                if (!ShouldRenderContent)
+                {
+                    ShouldRenderContent = true;
+                    _shown = false;
+                    await ShowAsync();
+                    return;
+                }
+
+                _shown = true;
+                CanRefresh = false;
+
+                if (MyRef is not null)
+                {
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowTooltipAsync(MyRef.Value, Placement, Target);
+                    if (syncResult is not null)
+                        Sync(syncResult);
+                }
+
+                CanRefresh = true;
+                await InvokeAsync(StateHasChanged);
+                taskSource.SetResult(true);
+                await OnShown.InvokeAsync(this);
+            };
+
+            _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
+
+            // Run event que if only item.
+            if (_eventQue.Count == 1)
+            {
+                await InvokeAsync(StateHasChanged);
+            }
+            await taskSource.Task;
+        }
         /// <summary>
         /// Method used to dynamically create and show popover element.
         /// </summary>
@@ -251,8 +231,16 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (firstRender)
+            if (!firstRender && _secondRender)
             {
+                if (_eventQue.TryDequeue(out var eventItem))
+                {
+                    await eventItem.Func.Invoke();
+                }
+            }
+            else
+            {
+                _secondRender = true;
                 _objectRef = DotNetObjectReference.Create<BSPopoverBase>(this);
                 BlazorStrapService.OnEventForward += InteropEventCallback;
                 HasRender = true;
@@ -260,40 +248,46 @@ namespace BlazorStrap.Shared.Components.Common
                 {
                     if (!IsDropdown)
                     {
-                        if(!NoClickEvent)
-                            await BlazorStrapService.Interop.AddEventAsync(_objectRef, Target, EventType.Click);
+                        if (!NoClickEvent)
+                            await BlazorStrapService.JavaScriptInterop.AddEventAsync(Target, DataId, EventType.Click);
                     }
                     if (MouseOver)
                     {
-                        await BlazorStrapService.Interop.AddEventAsync(_objectRef, Target, EventType.Mouseenter);
-                        await BlazorStrapService.Interop.AddEventAsync(_objectRef, Target, EventType.Mouseleave);
+                        await BlazorStrapService.JavaScriptInterop.AddEventAsync(Target, DataId, EventType.Mouseenter);
+                        await BlazorStrapService.JavaScriptInterop.AddEventAsync(Target, DataId, EventType.Mouseleave);
                     }
-
-                    EventsSet = true;
                 }
             }
-            else
+        }
+        public override async Task OnEventAsync(string sender, string target, EventType type, object? data)
+        {
+            if (sender == "javascript" && target == Target && type == EventType.Mouseenter)
             {
-                if (!_called) return;
-                _called = false;
-                // Since there is no transition without a we run into a issue where rapid calls break the popover.
-                // The delay allows the popover time to clean up
-                await Task.Delay(100);
-                if (Shown)
-                {
-                    if (OnShown.HasDelegate)
-                        await OnShown.InvokeAsync(this);
-                }
-                else
-                {
-                    if (OnHidden.HasDelegate)
-                        await OnHidden.InvokeAsync(this);
-                }
+                await ShowAsync();
             }
-            if (_callback != null)
+            else if (sender == "javascript" && target == Target && type == EventType.Mouseleave)
             {
-                await _callback.Invoke();
-                _callback = null;
+                await HideAsync();
+            }
+            else if(sender == "javascript" && target == Target && type == EventType.Click)
+            {
+                await ToggleAsync();
+            }
+            else if (sender == "javascript" && target == DataId && type == EventType.Hide)
+            {
+                await HideAsync();
+            }
+            else if (sender == "javascript" && target == DataId && type == EventType.Show)
+            {
+                await ShowAsync();
+            }
+            else if (sender == "javascript" && target == DataId && type == EventType.Sync)
+            {
+                if (data is InteropSyncResult syncResult)
+                {
+                    Sync(syncResult);
+                    await InvokeAsync(StateHasChanged);
+                }
             }
         }
 
@@ -335,42 +329,25 @@ namespace BlazorStrap.Shared.Components.Common
 
         public async ValueTask DisposeAsync()
         {
-            _objectRef?.Dispose();
-            BlazorStrapService.OnEventForward -= InteropEventCallback;
-            if (Target != null)
+            try
             {
-                if (MouseOver)
+                BlazorStrapService.OnEvent -= OnEventAsync;
+                if (Target is not null)
                 {
-                    try
+                    if (!IsDropdown)
                     {
-                        await BlazorStrapService.Interop.RemoveEventAsync(this, Target, EventType.Mouseenter);
-                        await BlazorStrapService.Interop.RemoveEventAsync(this, Target, EventType.Mouseleave);
+                        if (!NoClickEvent)
+                            await BlazorStrapService.JavaScriptInterop.RemoveEventAsync(Target, DataId, EventType.Click);
                     }
-                    catch { }
+                    if (MouseOver)
+                    {
+                        await BlazorStrapService.JavaScriptInterop.RemoveEventAsync(Target, DataId, EventType.Mouseenter);
+                        await BlazorStrapService.JavaScriptInterop.RemoveEventAsync(Target, DataId, EventType.Mouseleave);
+                    }
                 }
             }
-
-            // Prerendering error suppression 
-            if (HasRender)
-                try
-                {
-                    if (Target != null)
-                    {
-                        try
-                        {
-                            await BlazorStrapService.Interop.RemovePopoverAsync(MyRef, DataId);
-                            if (EventsSet)
-                            {
-                                if (!IsDropdown)
-                                    await BlazorStrapService.Interop.RemoveEventAsync(this, Target, EventType.Click);
-                            }
-                        }
-                        catch { }
-                    }
-                }
-                catch (Exception ex) when (ex.GetType().Name == "JSDisconnectedException")
-                {
-                }
+            catch { }
+            GC.SuppressFinalize(this);
         }
         private RenderFragment CreateFragment(string value) => (builder) => builder.AddMarkupContent(0, value);
         #endregion

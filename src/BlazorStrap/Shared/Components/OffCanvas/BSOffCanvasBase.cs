@@ -9,7 +9,7 @@ using System.Collections.Concurrent;
 
 namespace BlazorStrap.Shared.Components.OffCanvas
 {
-    public abstract class BSOffCanvasBase : BlazorStrapToggleBase<BSOffCanvasBase>
+    public abstract class BSOffCanvasBase : BlazorStrapToggleBase<BSOffCanvasBase> , IDisposable
     {
         
         public override bool Shown
@@ -18,12 +18,10 @@ namespace BlazorStrap.Shared.Components.OffCanvas
             protected set => _shown = value;
         }
 
-        protected Backdrop? BackdropRef { get; set; }
         protected ElementReference? MyRef { get; set; }
 
         private ConcurrentQueue<EventQue> _eventQue = new();
         private bool _secondRender;
-        private DotNetObjectReference<BSOffCanvasBase>? _objectRef;
         private bool _shown;
         private bool _leaveBodyAlone;
         
@@ -208,7 +206,6 @@ namespace BlazorStrap.Shared.Components.OffCanvas
             else
             {
                 _secondRender = true;
-                _objectRef = DotNetObjectReference.Create(this);
                 BlazorStrapService.OnEventForward += InteropEventCallback;
             }
         }
@@ -238,29 +235,22 @@ namespace BlazorStrap.Shared.Components.OffCanvas
             }
         }
 
-        [JSInvokable]
-        public async Task ToggleBackdropAndModalChange()
-        {
-            if (BackdropRef != null)
-                await BackdropRef.ShowAsync();
-        }
-
-        [JSInvokable]
-        public override async Task InteropEventCallback(string id, CallerName name, EventType type,
-            Dictionary<string, string>? classList, JavascriptEvent? e)
-        {
-            if (MyRef == null)
-                return;
-            else if (DataId == id && name.Equals(this) && type == EventType.Keyup && e?.Key == "Escape")
-            {
-                await HideAsync();
-            }
-            else if (DataId == id && name.Equals(this) && type == EventType.Click &&
-                     e?.Target.ClassList.Any(q => q.Value == "offcanvas-backdrop") == true)
-            {
-                await HideAsync();
-            }
-        }
+        //[JSInvokable]
+        //public override async Task InteropEventCallback(string id, CallerName name, EventType type,
+        //    Dictionary<string, string>? classList, JavascriptEvent? e)
+        //{
+        //    if (MyRef == null)
+        //        return;
+        //    else if (DataId == id && name.Equals(this) && type == EventType.Keyup && e?.Key == "Escape")
+        //    {
+        //        await HideAsync();
+        //    }
+        //    else if (DataId == id && name.Equals(this) && type == EventType.Click &&
+        //             e?.Target.ClassList.Any(q => q.Value == "offcanvas-backdrop") == true)
+        //    {
+        //        await HideAsync();
+        //    }
+        //}
 
         protected void ClickEvent()
         {
@@ -271,19 +261,10 @@ namespace BlazorStrap.Shared.Components.OffCanvas
             EventUtil.AsNonRenderingEventHandler(ToggleAsync).Invoke();
         }
 
-        public async ValueTask DisposeAsync()
+        public void Dispose()
         {
             BlazorStrapService.OnEvent -= OnEventAsync;
-            try
-            {
-                await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
-                await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
-                if (EventsSet)
-                    await BlazorStrapService.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);
-            }
-            catch { }
             BlazorStrapService.OnEventForward -= InteropEventCallback;
-            _objectRef?.Dispose();
             GC.SuppressFinalize(this);
         }
     }

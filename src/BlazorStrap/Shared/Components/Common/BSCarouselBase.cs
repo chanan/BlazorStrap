@@ -46,6 +46,10 @@ namespace BlazorStrap.Shared.Components.Common
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
 
+        protected override void OnInitialized()
+        {
+            BlazorStrapService.OnEvent += OnEventAsync;
+        }
         protected override bool ShouldRender()
         {
             return !ClickLocked;
@@ -60,6 +64,15 @@ namespace BlazorStrap.Shared.Components.Common
         {
             return GotoChildSlide(slide == Children.First() ? Children.Last() : Children.First());
         }
+
+        public override async Task OnEventAsync(string sender, string target, EventType type, object? data)
+        {
+            if (sender == "javascript" && target == DataId && type == EventType.TransitionEnd)
+            {
+                await TransitionEndAsync();
+            }
+        }
+
 
         [JSInvokable]
         public override async Task InteropEventCallback(string id, CallerName name, EventType type)
@@ -173,7 +186,7 @@ namespace BlazorStrap.Shared.Components.Common
         protected async Task DoAnimationsV5(bool back)
         {
             if (!_hasRendered) return;
-            if (await BlazorStrapService.Interop.AnimateCarouselAsync(_objectRef, DataId, Children[_active].MyRef, Children[_last].MyRef, back))
+            if (await BlazorStrapService.JavaScriptInterop.AnimateCarouselAsync(DataId, Children[_active].MyRef, Children[_last].MyRef, back, false))
             {
                 ClickLocked = false;
                 await Children[_active].Refresh();
@@ -184,7 +197,7 @@ namespace BlazorStrap.Shared.Components.Common
         protected async Task DoAnimationsV4(bool back)
         {
             if (!_hasRendered) return;
-            if (await BlazorStrapService.Interop.AnimateCarouselV4Async(_objectRef, DataId, Children[_active].MyRef, Children[_last].MyRef, back))
+            if (await BlazorStrapService.JavaScriptInterop.AnimateCarouselAsync(DataId, Children[_active].MyRef, Children[_last].MyRef, back, true))
             {
                 ClickLocked = false;
                 await Children[_active].Refresh();
@@ -259,6 +272,7 @@ namespace BlazorStrap.Shared.Components.Common
 
         public void Dispose()
         {
+            BlazorStrapService.OnEvent -= OnEventAsync;
             _objectRef?.Dispose();
             _transitionTimer?.Stop();
             _transitionTimer?.Dispose();

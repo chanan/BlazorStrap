@@ -1,32 +1,60 @@
-﻿namespace BlazorStrap.V5
+﻿using System.ComponentModel;
+
+namespace BlazorStrap.V5
 {
     public enum Theme
     {
+        [Description("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css")]
         Bootstrap,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/cerulean/bootstrap.min.css")]
         Cerulean,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/cosmo/bootstrap.min.css")]
         Cosmo,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/cyborg/bootstrap.min.css")]
         Cyborg,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/darkly/bootstrap.min.css")]
         Darkly,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/flatly/bootstrap.min.css")]
         Flatly,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/journal/bootstrap.min.css")]
         Journal,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/litera/bootstrap.min.css")]
         Litera,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/lumen/bootstrap.min.css")]
         Lumen,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/lux/bootstrap.min.css")]
         Lux,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/materia/bootstrap.min.css")]
         Materia,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/morph/bootstrap.min.css")]
         Morph,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/minty/bootstrap.min.css")]
         Minty,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/pulse/bootstrap.min.css")]
         Pulse,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/quartz/bootstrap.min.css")]
         Quartz,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/sandstone/bootstrap.min.css")]
         Sandstone,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/simplex/bootstrap.min.css")]
         Simplex,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/sketchy/bootstrap.min.css")]
         Sketchy,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/slate/bootstrap.min.css")]
         Slate,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/solar/bootstrap.min.css")]
         Solar,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/spacelab/bootstrap.min.css")]
         Spacelab,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/superhero/bootstrap.min.css")]
         Superhero,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/united/bootstrap.min.css")]
         United,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/vapor/bootstrap.min.css")]
         Vapor,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/yeti/bootstrap.min.css")]
         Yeti,
+        [Description("https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/zephyr/bootstrap.min.css")]
         Zephyr
     }
 }

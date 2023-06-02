@@ -152,10 +152,7 @@ namespace BlazorStrap.Shared.Components.Common
         {
             CanRefresh = true;
             BlazorStrapService.OnEventForward += InteropEventCallback;
-            // if (Parent?.NestedHandler != null)
-            //     Parent.NestedHandler += NestedHandlerEvent;
-            // if (AccordionParent?.NestedHandler != null)
-            //     AccordionParent.NestedHandler += NestedHandlerEvent;
+            BlazorStrapService.OnEvent += OnEventAsync;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -169,23 +166,26 @@ namespace BlazorStrap.Shared.Components.Common
             }
             else
             {
+                if (IsInNavbar)
+                {
+                    await BlazorStrapService.JavaScriptInterop.AddDocumentEventAsync(EventType.Resize, DataId);
+                }
                 _secondRender = true;
                 _hasRendered = true;
                 _objectRef = DotNetObjectReference.Create(this);
             }
         }
         
-        /// <summary>
-        /// TODO Test
-        /// </summary>
-        private async void NestedHandlerEvent()
+        protected abstract Task OnResizeAsync(int width);
+
+        public override async Task OnEventAsync(string sender, string target, EventType type, object? data)
         {
-          //  if (!_lock) return;
-           // await TransitionEndAsync();
+            if(sender == "jsdocument" && target.Contains(DataId) && type == EventType.Resize)
+            {
+                if(data is int width)
+                    await OnResizeAsync(width);
+            }
         }
-
-        protected abstract Task OnResize(int width);
-
         public override async Task InteropEventCallback(string id, CallerName name, EventType type)
         {
             if (id.Contains(",") && name.Equals(typeof(ClickForward)) && type == EventType.Click)
@@ -202,30 +202,17 @@ namespace BlazorStrap.Shared.Components.Common
             }
         }
 
-        [JSInvokable]
-        public override async Task InteropEventCallback(string id, CallerName name, EventType type, Dictionary<string, string>? classList, JavascriptEvent? e)
-        {
-            if (id == DataId && name.Equals(this) && type == EventType.Resize)
-            {
-                await OnResize(e?.ClientWidth ?? 0);
-            }
-        }
-
         public async ValueTask DisposeAsync()
         {
+            BlazorStrapService.OnEvent -= OnEventAsync;
             if (IsInNavbar)
             {
                 try
                 {
-                    await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Resize);
+                    await BlazorStrapService.JavaScriptInterop.RemoveDocumentEventAsync(EventType.Resize, DataId);
                 }
                 catch { }
             }
-            
-            // if (Parent?.NestedHandler != null)
-            //     Parent.NestedHandler -= NestedHandlerEvent;
-            // if (AccordionParent?.NestedHandler != null)
-            //     AccordionParent.NestedHandler -= NestedHandlerEvent;
 
             BlazorStrapService.OnEventForward -= InteropEventCallback;
             _objectRef?.Dispose();

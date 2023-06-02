@@ -1,26 +1,20 @@
 ﻿using BlazorStrap.Extensions;
-using BlazorStrap.InternalComponents;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
 using System.Collections.Concurrent;
-using System.Diagnostics;
 
 namespace BlazorStrap.Shared.Components.Modal
 {
-    public abstract class BSModalBase : BlazorStrapToggleBase<BSModalBase>, IAsyncDisposable
+    public abstract class BSModalBase : BlazorStrapToggleBase<BSModalBase>, IDisposable
     {
         public override bool Shown
         {
             get => _shown;
             protected set => _shown = value;
         }
-
-        protected Backdrop? BackdropRef { get; set; }
         protected ElementReference? MyRef { get; set; }
         //private IList<EventQue> _eventQue = new List<EventQue>();
-        private DotNetObjectReference<BSModalBase>? _objectRef;
         private bool _shown;
         private bool _leaveBodyAlone;
         private ConcurrentQueue<EventQue> _eventQue = new();
@@ -262,7 +256,6 @@ namespace BlazorStrap.Shared.Components.Modal
             else
             {
                 _secondRender = true;
-                _objectRef = DotNetObjectReference.Create(this);
                 BlazorStrapService.OnEventForward += InteropEventCallback;
                 BlazorStrapService.ModalChange += OnModalChange;
             }
@@ -294,49 +287,41 @@ namespace BlazorStrap.Shared.Components.Modal
             }
         }
 
-        [JSInvokable]
-        public async Task ToggleBackdropAndModalChange()
-        {
-            BlazorStrapService.ModalChanged(this);
+        //[JSInvokable]
+        //public override async Task InteropEventCallback(string id, CallerName name, EventType type,
+        //    Dictionary<string, string>? classList, JavascriptEvent? e)
+        //{
+        //    if (MyRef == null)
+        //        return;
+        //    if (DataId == id && name.Equals(this) && type == EventType.TransitionEnd)
+        //    {
+        //        //await TransitionEndAsync();
+        //    }
+        //    else if (DataId == id && name.Equals(this) && type == EventType.Keyup && e?.Key == "Escape" && !IsManual)
+        //    {
+        //        if (IsStaticBackdrop)
+        //        {
+        //            await BlazorStrapService.Interop.AddClassAsync(MyRef, "modal-static", 250);
+        //            await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "modal-static");
+        //            return;
+        //        }
 
-            if (BackdropRef != null)
-                await BackdropRef.ShowAsync();
-        }
-        [JSInvokable]
-        public override async Task InteropEventCallback(string id, CallerName name, EventType type,
-            Dictionary<string, string>? classList, JavascriptEvent? e)
-        {
-            if (MyRef == null)
-                return;
-            if (DataId == id && name.Equals(this) && type == EventType.TransitionEnd)
-            {
-                //await TransitionEndAsync();
-            }
-            else if (DataId == id && name.Equals(this) && type == EventType.Keyup && e?.Key == "Escape" && !IsManual)
-            {
-                if (IsStaticBackdrop)
-                {
-                    await BlazorStrapService.Interop.AddClassAsync(MyRef, "modal-static", 250);
-                    await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "modal-static");
-                    return;
-                }
+        //        await HideAsync();
+        //    }
+        //    else if (DataId == id && name.Equals(this) && type == EventType.Click &&
+        //             e?.Target.ClassList.Any(q => q.Value == "modal") == true && !IsManual)
+        //    {
+        //        if (IsStaticBackdrop)
+        //        {
 
-                await HideAsync();
-            }
-            else if (DataId == id && name.Equals(this) && type == EventType.Click &&
-                     e?.Target.ClassList.Any(q => q.Value == "modal") == true && !IsManual)
-            {
-                if (IsStaticBackdrop)
-                {
+        //            await BlazorStrapService.Interop.AddClassAsync(MyRef, "modal-static", 250);
+        //            await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "modal-static");
+        //            return;
+        //        }
 
-                    await BlazorStrapService.Interop.AddClassAsync(MyRef, "modal-static", 250);
-                    await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "modal-static");
-                    return;
-                }
-
-                await HideAsync();
-            }
-        }
+        //        await HideAsync();
+        //    }
+        //}
 
         private async void OnModalChange(BSModalBase? model, bool fromJs)
         {
@@ -362,20 +347,11 @@ namespace BlazorStrap.Shared.Components.Modal
             EventUtil.AsNonRenderingEventHandler(ToggleAsync).Invoke();
         }
 
-        public async ValueTask DisposeAsync()
+        public void Dispose()
         {
             BlazorStrapService.OnEvent -= OnEventAsync;
-            try
-            {
-                await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Keyup);
-                await BlazorStrapService.Interop.RemoveDocumentEventAsync(this, DataId, EventType.Click);
-                if (EventsSet)
-                    await BlazorStrapService.Interop.RemoveEventAsync(this, DataId, EventType.TransitionEnd);
-            }
-            catch { }
             BlazorStrapService.OnEventForward -= InteropEventCallback;
             BlazorStrapService.ModalChange -= OnModalChange;
-            _objectRef?.Dispose();
             GC.SuppressFinalize(this);
         }
     }

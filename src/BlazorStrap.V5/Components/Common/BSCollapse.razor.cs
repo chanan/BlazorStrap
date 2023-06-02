@@ -24,7 +24,7 @@ namespace BlazorStrap.V5
                 .AddStyle(Style)
                 .Build().RemoveStyleDoubles().ToNullString();
 
-        protected override async Task OnResize(int width)
+        protected override async Task OnResizeAsync(int width)
         {
             if (!IsInNavbar) return;
             if (width > 576 && NavbarParent?.Expand == Size.ExtraSmall ||

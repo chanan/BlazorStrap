@@ -2,13 +2,20 @@
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
+using System.Collections.Concurrent;
 
 namespace BlazorStrap.Shared.Components.Common
 {
     public abstract class BSTooltipBase : BlazorStrapToggleBase<BSTooltipBase>, IAsyncDisposable
     {
-        private Func<Task>? _callback;
-
+        public override bool Shown
+        {
+            get => _shown;
+            protected set => _shown = value;
+        }
+        private bool _shown;
+        private ConcurrentQueue<EventQue> _eventQue = new();
         /// <summary>
         /// Tooltip placement.
         /// </summary>
@@ -30,91 +37,97 @@ namespace BlazorStrap.Shared.Components.Common
         private bool HasRender { get; set; }
 
         protected ElementReference? MyRef { get; set; }
-        public override bool Shown { get; protected set; }
-        protected string Style { get; set; } = "display:none";
-        protected bool ShouldRenderContent { get; set; } = true;
+        [Parameter]
+        public string Style { get; set; } = string.Empty;
+        protected bool ShouldRenderContent { get; set; } = false;
+        private bool _secondRender;
         protected override void OnInitialized()
         {
+            BlazorStrapService.OnEvent += OnEventAsync;
             ShouldRenderContent = ContentAlwaysRendered;
         }
-        private async Task TryCallback(bool renderOnFail = true)
+        
+        /// <inheritdoc/>
+        public override async Task HideAsync()
         {
-            try
+            if (!_shown) return;
+            await OnHide.InvokeAsync(this);
+            //Kick off to event que
+            var taskSource = new TaskCompletionSource<bool>();
+            var func = async () =>
             {
-                // If anything fails callback will will be handled after render.
-                if (_callback != null)
+                _shown = false;
+                CanRefresh = false;
+
+                if (MyRef is not null)
                 {
-                    await _callback();
-                    _callback = null;
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.HideTooltipAsync(MyRef.Value);
+                    if (syncResult is not null)
+                        Sync(syncResult);
                 }
-            }
-            catch
-            {
-                if (renderOnFail)
-                    await InvokeAsync(StateHasChanged);
-            }
-        }
 
-        /// <inheritdoc/>
-        public override Task HideAsync()
-        {
-            if (!Shown) return Task.CompletedTask;
-            _callback = async () =>
-            {
-                await HideActionsAsync();
-            };
-            return TryCallback();
-        }
-
-        private async Task HideActionsAsync()
-        {
-            if (OnHide.HasDelegate)
-                await OnHide.InvokeAsync(this);
-            Shown = false;
-            await BlazorStrapService.Interop.SetStyleAsync(MyRef, "display", "none");
-            await BlazorStrapService.Interop.RemoveClassAsync(MyRef, "show");
-            await BlazorStrapService.Interop.RemovePopoverAsync(MyRef, DataId);
-
-            if (OnHidden.HasDelegate)
-                _ = Task.Run(() => { _ = OnHidden.InvokeAsync(this); });
-            if (!ContentAlwaysRendered)
-            {
+                CanRefresh = true;
                 ShouldRenderContent = false;
+
+                await InvokeAsync(StateHasChanged);
+                await OnHidden.InvokeAsync(this);
+                taskSource.SetResult(true);
+            };
+
+            _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
+            // Run event que if only item.
+            if (_eventQue.Count == 1)
+            {
                 await InvokeAsync(StateHasChanged);
             }
+            await taskSource.Task;
         }
 
         /// <inheritdoc/>
-        public override Task ShowAsync()
+        public override async Task ShowAsync()
         {
-            if (Shown) return Task.CompletedTask;
-            _callback = async () =>
+            if (Target is null) throw new InvalidOperationException("A taget is required to show the tooltip");
+            if (_shown) return;
+            ShouldRenderContent = true;
+            await OnShow.InvokeAsync(this);
+            //Kick off to event que
+            var taskSource = new TaskCompletionSource<bool>();
+            var func = async () =>
             {
-                await ShowActionsAsync();
+                if (!ShouldRenderContent)
+                {
+                    ShouldRenderContent = true;
+                    _shown = false;
+                    await ShowAsync();
+                    return;
+                }
+
+                _shown = true;
+                CanRefresh = false;
+
+                if (MyRef is not null)
+                {
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowTooltipAsync(MyRef.Value, Placement, Target);
+                    if (syncResult is not null)
+                        Sync(syncResult);
+                }
+
+                CanRefresh = true;
+                await InvokeAsync(StateHasChanged);
+                taskSource.SetResult(true);
+                await OnShown.InvokeAsync(this);
             };
-            return TryCallback();
-        }
-        private async Task ShowActionsAsync()
-        {
-            if (!ContentAlwaysRendered)
+
+            _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
+
+            // Run event que if only item.
+            if (_eventQue.Count == 1)
             {
-                ShouldRenderContent = true;
                 await InvokeAsync(StateHasChanged);
             }
-            if (OnShow.HasDelegate)
-                await OnShow.InvokeAsync(this);
-            Shown = true;
-            await BlazorStrapService.Interop.SetStyleAsync(MyRef, "display", "block");
-
-            if (Target != null)
-                await BlazorStrapService.Interop.AddPopoverAsync(MyRef, Placement, Target);
-            await BlazorStrapService.Interop.UpdatePopoverArrowAsync(MyRef, Placement, true);
-
-            await BlazorStrapService.Interop.AddClassAsync(MyRef, "show");
-            if (OnShown.HasDelegate)
-                _ = Task.Run(() => { _ = OnShown.InvokeAsync(this); });
+            await taskSource.Task;
         }
-
+       
         /// <inheritdoc/>
         public override Task ToggleAsync()
         {
@@ -123,22 +136,49 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (firstRender)
+            if (!firstRender && _secondRender)
             {
-                HasRender = true;
-                if (Target != null)
+                if (_eventQue.TryDequeue(out var eventItem))
                 {
-                    await BlazorStrapService.Interop.AddEventAsync(DotNetObjectReference.Create(this), Target,
-                        EventType.Mouseenter);
-                    await BlazorStrapService.Interop.AddEventAsync(DotNetObjectReference.Create(this), Target,
-                        EventType.Mouseleave);
-                    EventsSet = true;
+                    await eventItem.Func.Invoke();
                 }
             }
-            if (_callback != null)
+            else
             {
-                await _callback.Invoke();
-                _callback = null;
+                _secondRender = true;
+                HasRender = true;
+                if (Target is not null)
+                {
+                    await BlazorStrapService.JavaScriptInterop.AddEventAsync(Target, DataId, EventType.Mouseenter);
+                    await BlazorStrapService.JavaScriptInterop.AddEventAsync(Target, DataId, EventType.Mouseleave);
+                }
+            }
+        }
+        public override async Task OnEventAsync(string sender, string target, EventType type, object? data)
+        {
+            if (sender == "javascript" && target == Target && type == EventType.Mouseenter)
+            {
+                await ShowAsync();
+            }
+            else if (sender == "javascript" && target == Target && type == EventType.Mouseleave)
+            {
+                await HideAsync();
+            }
+            else if (sender == "javascript" && target == DataId && type == EventType.Hide)
+            {
+                await HideAsync();
+            }
+            else if (sender == "javascript" && target == DataId && type == EventType.Show)
+            {
+                await ShowAsync();
+            }
+            else if (sender == "javascript" && target == DataId && type == EventType.Sync)
+            {
+                if(data is InteropSyncResult syncResult)
+                {
+                    Sync(syncResult);
+                    await InvokeAsync(StateHasChanged);
+                }
             }
         }
 
@@ -158,23 +198,16 @@ namespace BlazorStrap.Shared.Components.Common
 
         public async ValueTask DisposeAsync()
         {
-            // Prerendering error suppression 
             try
             {
-                if (HasRender)
-                    await BlazorStrapService.Interop.RemovePopoverAsync(MyRef, DataId);
-
-                if (Target != null)
+                BlazorStrapService.OnEvent -= OnEventAsync;
+                if (Target is not null)
                 {
-                    if (EventsSet)
-                    {
-                        await BlazorStrapService.Interop.RemoveEventAsync(this, Target, EventType.Mouseenter);
-                        await BlazorStrapService.Interop.RemoveEventAsync(this, Target, EventType.Mouseleave);
-                    }
+                    await BlazorStrapService.JavaScriptInterop.RemoveEventAsync(Target, DataId, EventType.Mouseenter);
+                    await BlazorStrapService.JavaScriptInterop.RemoveEventAsync(Target, DataId, EventType.Mouseleave);
                 }
             }
             catch { }
-
             GC.SuppressFinalize(this);
         }
     }

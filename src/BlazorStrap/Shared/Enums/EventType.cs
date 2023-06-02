@@ -7,6 +7,7 @@ namespace BlazorStrap
     public enum EventType
     {
         Default,
+        Focusout,
         Toggle,
         Mouseover,
         Mouseout,
