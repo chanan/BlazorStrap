@@ -92,7 +92,7 @@ namespace BlazorStrap.Shared.Components.Common
         [CascadingParameter] public BSDropdownBase? Parent { get; set; }
         public bool Active { get; private set; }
         internal int ChildCount { get; set; }
-        protected string DataRefId => (PopoverRef != null) ? PopoverRef.DataId : DataId;
+        public string DataRefId => (PopoverRef != null) ? PopoverRef.DataId : DataId;
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
         protected abstract string? GroupClassBuilder { get; }

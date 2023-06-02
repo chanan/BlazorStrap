@@ -57,8 +57,8 @@ namespace BlazorStrap.Shared.Components.Common
         {
             get
             {
-                if (CollapseParent != null) return CollapseParent.DataId;
-                return DropDownParent != null ? DropDownParent.DataId : "";
+                if(DropDownParent != null) return DropDownParent.DataRefId;
+                return (CollapseParent != null) ? CollapseParent.DataId : "";
             }
         }
 

@@ -727,7 +727,6 @@ function setupDocumentEvents(dotnet) {
                 .filter(element => element.classList.contains('show'))
                 .map(element => element);
             var canInvoke = true;
-            
             relatedIds = [];
             if (relatedShown.length > 0) {
                 relatedShown.forEach(x => {
