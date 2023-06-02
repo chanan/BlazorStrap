@@ -47,12 +47,8 @@
     private BSModal? ChildModal { get; set; }
     private async Task ShowFirstModalAsync()
     {
-        var stopwatch = new System.Diagnostics.Stopwatch();
-        stopwatch.Start();
         if (FirstModal != null)
             await FirstModal.ShowAsync();
-        stopwatch.Stop();
-        Console.WriteLine($"ShowFirstModalAsync: {stopwatch.ElapsedMilliseconds}ms");
     }
     private async Task ShowSecondModalAsync()
     {

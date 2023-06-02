@@ -98,7 +98,6 @@ namespace BlazorStrap.Shared.Components.Common
         protected abstract string? GroupClassBuilder { get; }
         protected abstract string? IsDivClassBuilder { get; }
 
-
         protected ElementReference? MyRef { get; set; }
         internal Action<bool, BSDropdownItemBase>? OnSetActive { get; set; }
         protected BSPopoverBase? PopoverRef { get; set; }
@@ -274,7 +273,8 @@ namespace BlazorStrap.Shared.Components.Common
             }
             else
             {
-                await BlazorStrapService.JavaScriptInterop.AddDocumentEventAsync(EventType.Click, DataRefId);
+                if(!IsManual && !Demo && !AllowOutsideClick)
+                    await BlazorStrapService.JavaScriptInterop.AddDocumentEventAsync(EventType.Click, DataRefId);
                 _secondRender = true;
                 _objectRef = DotNetObjectReference.Create<BSDropdownBase>(this);
                 BlazorStrapService.OnEventForward += InteropEventCallback;

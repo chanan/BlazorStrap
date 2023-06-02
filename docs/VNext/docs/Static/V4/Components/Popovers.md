@@ -15,7 +15,7 @@ See [shared](layout/shared) for additional parameters
 | Header                | RenderFragment | RenderFragment | Nested Content                                                   |
 | Target                | string		   | string       | DataIdOfTarget                                                   |   
 | Content               | RenderFragment | RenderFragment | Nested Content                                                   |   
-| ContentAlwaysRendered | bool           | bool           | default=true. Hides content for component when not show if false |
+| ContentAlwaysRendered | bool           | bool           | default=false. Hides content for component when not show if false |
 
 :::
 

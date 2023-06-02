@@ -716,7 +716,7 @@ function setupDocumentEvents(dotnet) {
         }
     }, 50);
 
-    var clickFunc = debounce(function (event) {
+    var clickFunc = debounce(async function (event) {
         var related = docuemntEventId.filter(x => x.eventtype == "click");
         if (related.length > 0) {
             var relatedIds = related.map(x => x.creator);
@@ -727,12 +727,17 @@ function setupDocumentEvents(dotnet) {
                 .filter(element => element.classList.contains('show'))
                 .map(element => element);
             var canInvoke = true;
+            
             relatedIds = [];
             if (relatedShown.length > 0) {
                 relatedShown.forEach(x => {
-                    relatedIds.push(x.getAttribute('data-blazorstrap'));
-                    //if its a child of of relatedShown or relatedShown return
+                    let id = x.getAttribute('data-blazorstrap');
+                    relatedIds.push(id);
+                    if (event.target.getAttribute('data-blazorstrap-target') == id) {
+                        canInvoke = false;
+                    }
                     if (x.contains(event.target)) {
+                      
                         canInvoke = false;
                     }
                 });

@@ -26,7 +26,7 @@ See [shared](layout/shared) for additional parameters
 | Footer				| RenderFragment\<BSModal\> | RenderFragment | Nested Content BSModal is assigned by a self reference you do not need to pass it. |
 | HideOnSubmit			| bool                      | true/false     | Hides modal on BSForm submit.                                                      |
 | HideOnValidSubmit		| bool                      | true/false     | Hides modal on Valid BSForm submit.                                                |
-| ContentAlwaysRendered | bool                      | bool           | default=true. Hides content for component when not show if false                   |
+| ContentAlwaysRendered | bool                      | bool           | default=false. Hides content for component when not show if false                   |
 | IsManual				| bool                      | true/false     | default=false. If true you must control the show and hide of the modal yourself    |
 :::
 
