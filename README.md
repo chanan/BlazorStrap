@@ -11,6 +11,24 @@
 ## Bootstrap 5 [![NuGet Pre Release](https://img.shields.io/nuget/v/BlazorStrap.V5.svg)](https://www.nuget.org/packages/BlazorStrap.V5/)
 `We do not include bootstrap.min.css in the package. This already exists in the blazor wasm and blazor server side templates.`
 
+### Packages 
+- Core Package handles all the logic / JSInterop
+  - [![NuGet Pre Release](https://img.shields.io/nuget/v/BlazorStrap.svg)](https://www.nuget.org/packages/BlazorStrap/)
+- Display packages. These packages so the rendered components. V5 is for Bootstrap 5. V4 is for Bootstrap 4
+  - [![NuGet Pre Release](https://img.shields.io/nuget/v/BlazorStrap.V5.svg)](https://www.nuget.org/packages/BlazorStrap.V5/)
+[![NuGet Pre Release](https://img.shields.io/nuget/v/BlazorStrap.V4.svg)](https://www.nuget.org/packages/BlazorStrap.V4/)
+
+- Pre Release
+  - [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/BlazorStrap?color=orange)](https://www.nuget.org/packages/BlazorStrap/)
+[![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/BlazorStrap.V5?color=orange)](https://www.nuget.org/packages/BlazorStrap.V5/)
+[![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/BlazorStrap.V4?color=orange)](https://www.nuget.org/packages/BlazorStrap.V4/)
+  - Beta. Not recommended for production use.
+    - Minor fixes a-z. Example 5.2.100-Beta1a
+  - Preview. Test to make sure it meets your requirements before production use.
+    - Minor fixes a-z. Example 5.2.100-Preview1a
+  - Release. Safe for production. 
+    - Minor fixes .MMDDYY. Example 5.2.100.60323
+ 
 ### Install
 ##### Blazor WebAssembly
 1. - Download BlazorStrap package from nuget: [![nuget](https://img.shields.io/badge/nuget-Download%205.1.x-blue)](https://www.nuget.org/packages/BlazorStrap)
