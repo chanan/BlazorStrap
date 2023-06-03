@@ -12,6 +12,7 @@ See [shared](layout/shared) for additional parameters
 | Parameter             | Type						| Valid          | Remarks/Output													| 
 |-----------------------|---------------------------|----------------|------------------------------------------------------------------|
 | Color                 | Enum						| BSColor        | `.bg-[]`															| { .table-striped}
+| DisableEscapeKey      | bool                      | true/false     | Disables the escape key from closing the offcanvas               |
 | BodyClass             | Enum						| BSColor        | `.alert-[]`														|
 | Placement             | Enum						| Placement      | `.offcanvas-[]`													|
 | DisableBackdropClick  | bool						| true/false     |																	|

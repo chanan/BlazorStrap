@@ -261,6 +261,7 @@ namespace BlazorStrap.Shared.Components.Common
         }
         public override async Task OnEventAsync(string sender, string target, EventType type, object? data)
         {
+            if (target != DataId && target != Target) return;
             if (sender == "javascript" && target == Target && type == EventType.Mouseenter)
             {
                 await ShowAsync();

@@ -4,7 +4,7 @@ namespace BlazorStrap
 {
     public interface IBlazorStrap
     {
-
+        Func<int, Task>? OnResized { get; set; }
         BlazorStrapInterop JavaScriptInterop { get; }
         bool ShowDebugMessages { get; }
         Toaster Toaster { get; }
@@ -14,5 +14,6 @@ namespace BlazorStrap
         Task SetBootstrapCss<T>(T theme) where T : Enum;
         void ForwardClick(string id);
         Task InvokeEvent(string sender, string target, EventType type, object data);
+        Task InvokeResize(int width);
     }
 }

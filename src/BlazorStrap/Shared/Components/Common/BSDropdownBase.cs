@@ -8,10 +8,15 @@ using System.Collections.Concurrent;
 
 namespace BlazorStrap.Shared.Components.Common
 {
-    public abstract class BSDropdownBase : BlazorStrapBase, IAsyncDisposable
+    public abstract class BSDropdownBase : BlazorStrapToggleBase<BSDropdownBase>, IAsyncDisposable
     {
         private ConcurrentQueue<EventQue> _eventQue = new();
 
+        /// <summary>
+        /// Allows the dropdown to be opened when mouse is over it.
+        /// </summary>
+        [Parameter] public bool IsMouseover { get; set; }
+        [Parameter] public string Style { get; set; } = string.Empty;
         /// <summary>
         /// Clicking inside the dropdown menu will not close it.
         /// </summary>
@@ -84,7 +89,6 @@ namespace BlazorStrap.Shared.Components.Common
         [Parameter] public RenderFragment? Toggler { get; set; }
 
         private bool _lastIsNavPopper;
-        private DotNetObjectReference<BSDropdownBase>? _objectRef;
         [CascadingParameter] public BSNavItemBase? DropdownItem { get; set; }
         [CascadingParameter] public BSButtonGroupBase? Group { get; set; }
         [CascadingParameter] public BSInputGroupBase? InputGroup { get; set; }
@@ -95,6 +99,7 @@ namespace BlazorStrap.Shared.Components.Common
         public string DataRefId => (PopoverRef != null) ? PopoverRef.DataId : DataId;
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
+        protected abstract string? StyleBuilder { get; }
         protected abstract string? GroupClassBuilder { get; }
         protected abstract string? IsDivClassBuilder { get; }
 
@@ -105,22 +110,33 @@ namespace BlazorStrap.Shared.Components.Common
         /// <summary>
         /// Whether or not the dropdown is shown.
         /// </summary>
-        public bool Shown
+        public override bool Shown
         {
             get => _shown;
             protected set => _shown = value;
         }
 
         private bool _shown;
-        public async Task ShowAsync()
+        public override async Task ShowAsync()
         {
             if (_shown) return;
+            await OnShow.InvokeAsync(this);
+            var isPopper = ((Group != null || InputGroup != null) && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper);
             var taskSource = new TaskCompletionSource<bool>();
 
             var func = async () =>
             {
-                await ShowActionsAsync();
+                _shown = true;
+                if (MyRef is not null)
+                {
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowDropdownAsync(MyRef.Value, isPopper, Placement, Target);
+                    if (syncResult is not null)
+                        Sync(syncResult);
+                }
+
+                await InvokeAsync(StateHasChanged);
                 taskSource.SetResult(true);
+                await OnShown.InvokeAsync(this);
             };
 
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
@@ -131,34 +147,30 @@ namespace BlazorStrap.Shared.Components.Common
                 await InvokeAsync(StateHasChanged);
             }
             await taskSource.Task;
-        }
-
-        private async Task ShowActionsAsync()
-        {
-            _shown = true;
-
-            if (((Group != null || InputGroup != null) && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper))
-            {
-                if (PopoverRef != null) await PopoverRef.ShowAsync();
-            }
-            await InvokeAsync(StateHasChanged);
         }
 
         /// <summary>
         /// Hide the dropdown
         /// </summary>
         /// <returns>Completed task once hide is complete.</returns>
-        // ReSharper disable once MemberCanBePrivate.Global
-        public async Task HideAsync()
+        public override async Task HideAsync()
         {
             if (!_shown) return;
+            await OnHide.InvokeAsync(this);
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
             {
-                await HideActionsAsync();
+                _shown = false;
+                if (MyRef is not null)
+                {
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.HideDropdownAsync(MyRef.Value);
+                    if (syncResult is not null)
+                        Sync(syncResult);
+                }
+
+                await InvokeAsync(StateHasChanged);
+                await OnHidden.InvokeAsync(this);
                 taskSource.SetResult(true);
-                if (Parent != null)
-                    await Parent.HideActionsAsync();
             };
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
 
@@ -169,20 +181,6 @@ namespace BlazorStrap.Shared.Components.Common
             }
             await taskSource.Task;
         }
-
-        private async Task HideActionsAsync()
-        {
-            _shown = false;
-
-            if (((Group != null || InputGroup != null) && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper))
-            {
-                if (PopoverRef != null)
-                    await PopoverRef.HideAsync();
-            }
-            await InvokeAsync(StateHasChanged);
-            
-        }
-
    
         public override async Task InteropEventCallback(string id, CallerName name, EventType type)
         {
@@ -192,41 +190,11 @@ namespace BlazorStrap.Shared.Components.Common
             }
         }
 
-        //[JSInvokable]
-        //public override async Task InteropEventCallback(string id, CallerName name, EventType type,
-        //    Dictionary<string, string>? classList, JavascriptEvent? e)
-        //{
-        //    if (Demo) return;
-        //    // The if statement was getting hard to read so split into parts 
-        //    if (id == DataRefId && name.Equals(this) && type == EventType.Click)
-        //    {
-        //        // Prevent Dropdown from closing with this. If it's a dropdown item.
-        //        if (e?.Target.ClassList.Any(q => q.Value == "dropdown-item") == true)
-        //            return;
-        //        // If this dropdown toggle return
-        //        if (e?.Target.ClassList.Any(q => q.Value == "dropdown-toggle") == true &&
-        //            e.Target.TargetId == DataId) return;
-
-        //        // If click element is inside this dropdown return
-        //        // if (e?.Target.ChildrenId?.Any(q => q == DataId) == true && AllowItemClick) return;
-        //        // If is Manual Return
-        //        if (IsManual) return;
-        //        await HideAsync();
-        //    }
-        //}
-
-        /// <summary>
-        /// Show the dropdown.
-        /// </summary>
-        /// <returns>Completed task when the dropdown is shown.</returns>
-        // ReSharper disable once MemberCanBePrivate.Global
-        
-
         /// <summary>
         /// Toggles dropdown open or closed.yuo
         /// </summary>
         /// <returns>Completed task once dropdown is open or closed.</returns>
-        public Task ToggleAsync()
+        public override Task ToggleAsync()
         {
             return _shown ? HideAsync() : ShowAsync();
         }
@@ -264,6 +232,7 @@ namespace BlazorStrap.Shared.Components.Common
         }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+     
             if (!firstRender && _secondRender)
             {
                 if (_eventQue.TryDequeue(out var eventItem))
@@ -273,21 +242,31 @@ namespace BlazorStrap.Shared.Components.Common
             }
             else
             {
-                if(!IsManual && !Demo && !AllowOutsideClick)
-                    await BlazorStrapService.JavaScriptInterop.AddDocumentEventAsync(EventType.Click, DataRefId);
+                if (IsMouseover && Toggler == null)
+                {
+                    await BlazorStrapService.JavaScriptInterop.AddEventAsync(Target, DataId, EventType.Mouseenter);
+                    await BlazorStrapService.JavaScriptInterop.AddEventAsync(Target, DataId, EventType.Mouseleave);
+                }
                 _secondRender = true;
-                _objectRef = DotNetObjectReference.Create<BSDropdownBase>(this);
                 BlazorStrapService.OnEventForward += InteropEventCallback;
             }
             
         }
-
         public override async Task OnEventAsync(string sender, string target, EventType type, object? data)
         {
+            if(target != DataId && target != Target) return;
             if (Demo) return;
             if (IsManual) return;
 
-            if (type == EventType.Click && target.Contains(DataRefId) && sender == "jsdocument" )
+            if (type == EventType.Click && target == DataRefId && sender == "javascript")
+            {
+                await HideAsync();
+            }
+            if(IsMouseover && sender == "javascript" && target == Target && type == EventType.Mouseenter)
+            {
+                await ShowAsync();
+            }
+            if (IsMouseover && sender == "javascript" && target == Target && type == EventType.Mouseleave  )
             {
                 await HideAsync();
             }
@@ -301,7 +280,6 @@ namespace BlazorStrap.Shared.Components.Common
             }
             catch { }
             BlazorStrapService.OnEvent -= OnEventAsync;
-            _objectRef?.Dispose();
             BlazorStrapService.OnEventForward -= InteropEventCallback;
             GC.SuppressFinalize(this);
         }

@@ -13,7 +13,13 @@ namespace BlazorStrap.V4
                 .AddClass("show", Shown)
                 .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))
                 .AddClass(Class, !string.IsNullOrEmpty(Class))
-                .Build().ToNullString();
+                .AddClass(SyncClass)
+                .Build().RemoveClassDoubles().ToNullString();
+
+        protected override string? StyleBuilder => new StyleBuilder()
+                .AddStyle(SyncStyle)
+                .AddStyle(Style)
+                .Build().RemoveStyleDoubles().ToNullString();
 
         protected override string? GroupClassBuilder => new CssBuilder()
                 .AddClass(LayoutClass, !string.IsNullOrEmpty(LayoutClass))

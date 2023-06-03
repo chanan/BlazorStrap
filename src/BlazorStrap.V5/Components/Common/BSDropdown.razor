@@ -15,60 +15,52 @@
         if (IsNavPopper)
         {
             @Toggler
-            <BSPopover IsNavItemList="true" DropdownOffset="@Offset" Placement="@Placement" IsDropdown="true" Class="@Class" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
-                <Content>
-                    @Content
-                </Content>
-            </BSPopover>
+            <ul class="@ClassBuilder" style="@StyleBuilder" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap" data-bs-auto-close="@((IsManual || AllowOutsideClick || Demo) ? "false" : "true")">
+                @Content
+            </ul>
         }
         else
         {
             @Toggler
-            <ul class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-bs-popper="blazorstrap" data-blazorstrap="@DataId">
+            <ul class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-bs-popper="blazorstrap" data-blazorstrap="@DataId" data-bs-auto-close="@((IsManual || AllowOutsideClick || Demo) ? "false" : "true")">
                 @Content
             </ul>
         }
     }
     else if (Demo)
     {
-        <ul class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId">
+        <ul class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-blazorstrap="@DataId" data-bs-auto-close="@((IsManual || AllowOutsideClick || Demo) ? "false" : "true")">
             @Content
         </ul>
     }
     else if (Group != null && !IsStatic)
     {
         @Toggler
-        <BSPopover DropdownOffset="@Offset" Placement="@Group.DropdownPlacement" IsDropdown="true" Class="@GroupClassBuilder" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
-            <Content>
-                @Content
-            </Content>
-        </BSPopover>
+        <div class="@ClassBuilder" style="@StyleBuilder" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap" data-bs-auto-close="@((IsManual || AllowOutsideClick || Demo) ? "false" : "true")">
+            @Content
+        </div>
     }
     else if (InputGroup != null && !IsStatic)
     {
         @Toggler
-        <BSPopover DropdownOffset="@Offset" Placement="@Placement" IsDropdown="true" Class="@GroupClassBuilder" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
-            <Content>
-                @Content
-            </Content>
-        </BSPopover>
+        <div class="@ClassBuilder" style="@StyleBuilder" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap" data-bs-auto-close="@((IsManual || AllowOutsideClick || Demo) ? "false" : "true")">
+            @Content
+        </div>
     }
     else if (IsDiv)
     {
         <div class="@IsDivClassBuilder">
             @Toggler
-            <BSPopover DropdownOffset="@Offset" Placement="@Placement" IsDropdown="true" Class="@GroupClassBuilder" Attributes="@Attributes" Target="@Target" @ref="PopoverRef">
-                <Content>
-                    @Content
-                </Content>
-            </BSPopover>
+            <div class="@ClassBuilder" style="@StyleBuilder" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap" data-bs-auto-close="@((IsManual || AllowOutsideClick || Demo) ? "false" : "true")">
+                @Content
+            </div>
         </div>
     }
     else
     {
         <div class="dropdown">
             @Toggler
-            <ul class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-bs-popper="blazorstrap" data-blazorstrap="@DataId">
+            <ul class="@ClassBuilder" @attributes="Attributes" @ref="MyRef" data-bs-popper="blazorstrap" data-blazorstrap="@DataId" data-bs-auto-close="@((IsManual || AllowOutsideClick || Demo) ? "false" : "true")">
                 @Content
             </ul>
         </div>

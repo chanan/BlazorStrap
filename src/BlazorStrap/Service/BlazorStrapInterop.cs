@@ -23,6 +23,8 @@ namespace BlazorStrap.Service
             _objectReference = DotNetObjectReference.Create(this);
             JsRuntime = jsRuntime;
         }
+
+
         /// <summary>
         /// This method will add a document event to the document.
         /// </summary>
@@ -31,6 +33,7 @@ namespace BlazorStrap.Service
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="NullReferenceException"></exception>
+        [Obsolete("Do not use will be removed in next version, Use IBlazorStrap.OnResize event instead")]
         public async ValueTask AddDocumentEventAsync(EventType eventType, string creatorId, bool ignoreChildren = false, CancellationToken? cancellationToken = null)
         {
             var eventName = Enum.GetName(typeof(EventType), eventType)?.ToLower() ?? "";
@@ -48,6 +51,7 @@ namespace BlazorStrap.Service
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="NullReferenceException"></exception>
+        [Obsolete("Do not use will be removed in next version, Use IBlazorStrap.OnResize event instead")]
         public async ValueTask RemoveDocumentEventAsync(EventType eventType, string creatorId, CancellationToken? cancellationToken = null)
         {
             var eventName = Enum.GetName(typeof(EventType), eventType)?.ToLower() ?? "";
@@ -89,7 +93,41 @@ namespace BlazorStrap.Service
             if (module is not null)
                 await module.InvokeVoidAsync("removeEvent", cancellationToken ?? CancellationToken.None, targetId, creatorId, eventName);
         }
-        
+
+        /// <summary>
+        /// This method will show the tooltip and return a list of classes, styles, and ARIA attributes for the given element reference.
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="isPopper"></param>
+        /// <param name="placement"></param>
+        /// <param name="targetId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask<InteropSyncResult?> ShowDropdownAsync(ElementReference elementReference,bool isPopper, Placement placement, string targetId, CancellationToken? cancellationToken = null)
+        {
+            var placementString = TranslatePlacementForPopperJs(placement);
+            var module = await GetModuleAsync();
+            return module is not null
+                ? await module.InvokeAsync<InteropSyncResult?>("showDropdown", cancellationToken ?? CancellationToken.None, elementReference, isPopper, placementString, targetId, _objectReference)
+                : null;
+        }
+
+        /// <summary>
+        /// This method will hide the tooltip and return a list of classes, styles, and ARIA attributes for the given element reference.
+        /// </summary>
+        /// <param name="elementReference"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public async ValueTask<InteropSyncResult?> HideDropdownAsync(ElementReference elementReference, CancellationToken? cancellationToken = null)
+        {
+            var module = await GetModuleAsync();
+            return module is not null
+                ? await module.InvokeAsync<InteropSyncResult?>("hideDropdown", cancellationToken ?? CancellationToken.None, elementReference, _objectReference)
+                : null;
+        }
+
         /// <summary>
         /// This method will show the tooltip and return a list of classes, styles, and ARIA attributes for the given element reference.
         /// </summary>
@@ -419,6 +457,8 @@ namespace BlazorStrap.Service
         [JSInvokable]
         public async Task InvokeEventAsync(string sender, string target, EventType type, object data)
         {
+            if(sender == "jsdocument" && type == EventType.Resize && data is int width)
+                await BlazorStrap.InvokeResize(width);
             await BlazorStrap.InvokeEvent(sender, target, type, data);   
         }
         private async Task RequestBackdropAsync(bool value)

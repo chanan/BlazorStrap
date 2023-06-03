@@ -9,7 +9,7 @@ namespace BlazorStrap.Service
     public class BlazorStrapCore : IBlazorStrap
     {
         public BlazorStrapInterop JavaScriptInterop { get; }
-        
+        public Func<int, Task>? OnResized { get; set; }
         public bool ShowDebugMessages { get; private set; }
         public Func<string, string, EventType, object?, Task>? OnEvent { get; set; }
 
@@ -60,6 +60,12 @@ namespace BlazorStrap.Service
         public void ModalChanged(BSModalBase obj)
         {
             ModalChange?.Invoke(obj, false);
+        }
+
+        public async Task InvokeResize(int width)
+        {
+            if (OnResized is not null)
+                await OnResized.Invoke(width);
         }
 
         public async Task InvokeEvent(string sender, string target, EventType type, object? data)

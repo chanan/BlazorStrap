@@ -106,7 +106,7 @@ namespace BlazorStrap.Shared.Components.Common
 
         protected async Task ClickEvent()
         {
-            if (Parent is { AllowItemClick: false })
+            if (Parent is { AllowItemClick: false } && Parent is { IsManual: false})
             {
                 await Parent.ToggleAsync();
             }

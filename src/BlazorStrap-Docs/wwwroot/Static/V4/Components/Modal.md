@@ -5,7 +5,8 @@ See [shared](layout/shared) for additional parameters
 
 | Parameter				| Type                      | Valid          | Remarks/Output                                                                     | 
 |-----------------------|---------------------------|----------------|------------------------------------------------------------------------------------|
-| FullScreenSize		| Enum                      | Side           | `.modal-fullscreen-[]-down`                                                        | {.table-striped}
+| DisableEscapeKey      | bool                      | true/false     | Disables the escape key from closing the modal	   						          | {.table-striped}
+| FullScreenSize		| Enum                      | Side           | `.modal-fullscreen-[]-down`                                                        | 
 | AllowScroll			| bool                      | true/false     | Allows Body Scrolling                                                              | 
 | ModalColor			| BSColor                   | BSColor        |                                                                                    |
 | Size					| Enum                      | Size           | `.modal-[]`                                                                        |

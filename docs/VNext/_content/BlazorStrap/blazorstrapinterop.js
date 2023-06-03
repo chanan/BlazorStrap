@@ -4,7 +4,6 @@ let documentEventsSet = false;
 let docuemntEventId = [];
 let link;
 // Common
-
 export async function checkBackdrops(dotnet) {
     var backdrop = document.querySelector('.modal-backdrop');
     if (backdrop) {
@@ -54,10 +53,10 @@ export async function addEvent(targetId, creator, eventName, dotnet, ignoreChild
     if (eventName == "" || eventName == "sync" || eventName == "hide" || eventName == "show") return;
     var target = document.querySelector('[data-blazorstrap="' + targetId + '"]');
     if (target) {
-        let eventFunc = function (e) {
+        let eventFunc = debounce(function (e) {
             if (ignoreChildren && e.target.getAttribute("data-blazorstrap") != targetId) return;
             dotnet.invokeMethodAsync('InvokeEventAsync', "javascript", targetId, eventName, null);
-        };
+        },150);
         //add the eventfunc to eventcallbacks so we can remove it later
         let callback = eventCallbacks.find(x => x.id == targetId);
         if (callback)
@@ -312,6 +311,52 @@ export async function hideOffcanvas(offcanvas, dotnet) {
         ClassList: offcanvas.classList.value,
         Styles: offcanvas.style.cssText,
         Aria: getAriaAttributes(offcanvas),
+    };
+}
+
+//Dropdowns
+export async function showDropdown(dropdown, isPopper, targetId, placement, dotnet) {
+    if (!dropdown) return null;
+
+    if (isPopper) {
+        //using popper.js setup the tooltip
+        var target = document.querySelector('[data-blazorstrap="' + targetId + '"]');
+        if (target) {
+            var popper = Popper.createPopper(target, tooltip, {
+                placement: placement,
+                modifiers: [
+                ],
+            });
+        }
+    }
+
+    let documentClick = function (e) {
+        if (!dropdown.contains(e.target)) {
+            dotnet.invokeMethodAsync('InvokeEventAsync', "javascript", dropdown.getAttribute("data-blazorstrap"), "click", "");
+        }
+    };
+    onShowClassRemoved(dropdown, function () {
+        document.removeEventListener('click', documentClick);
+    });
+    dropdown.classList.add("show");
+    await waitForTransitionEnd(dropdown);
+    
+    document.addEventListener('click', documentClick);
+    return {
+        ClassList: dropdown.classList.value,
+        Styles: dropdown.style.cssText,
+        Aria: getAriaAttributes(dropdown),
+    };
+}
+
+export async function hideDropdown(dropdown, dotnet) {
+    if (!dropdown) return null;
+    dropdown.classList.remove("show");
+    await waitForTransitionEnd(dropdown);
+    return {
+        ClassList: dropdown.classList.value,
+        Styles: dropdown.style.cssText,
+        Aria: getAriaAttributes(dropdown),
     };
 }
 
@@ -668,6 +713,15 @@ function getAriaAttributes(element) {
     return ariaAttributes;
 }
 
+function onShowClassRemoved(element, callback) {
+    new MutationObserver(function (mutations) {
+        if (!element.classList.contains("show")) {
+            callback();
+            this.disconnect();
+        }
+    }).observe(element, { attributes: true, attributeFilter: ["class"] });
+}
+
 function onElementRemoved(element, callback) {
     new MutationObserver(function (mutations) {
         if (!document.body.contains(element)) {
@@ -687,69 +741,8 @@ function setupDocumentEvents(dotnet) {
             dotnet.invokeMethodAsync("InvokeEventAsync", "jsdocument", relatedstring, "resize", window.innerWidth);
         }
     }, 200);
-
-    var keydownFunc = debounce(function (event) {
-        var related = docuemntEventId.filter(x => x.eventtype == "keydown");
-        if (related.length > 0) {
-            var relatedIds = related.map(x => x.creator);
-            //check if its a child of a related element
-
-            const relatedShown = Array.from(document.querySelectorAll('[data-blazorstrap]'))
-                .filter(element => relatedIds.includes(element.getAttribute('data-blazorstrap')))
-                .filter(element => element.classList.contains('show'))
-                .map(element => element);
-            var canInvoke = true;
-            relatedIds = [];
-            if (relatedShown.length > 0) {
-                relatedShown.forEach(x => {
-                    relatedIds.push(x.getAttribute('data-blazorstrap'));
-                    //if its a child of of relatedShown or relatedShown return
-                    if (x.contains(event.target)) {
-                        canInvoke = false;
-                    }
-                });
-                if (canInvoke) {
-                    var relatedstring = relatedIds.join(',');
-                    dotnet.invokeMethodAsync("InvokeEventAsync", "jsdocument", relatedstring, "keydown", event.target.getAttribute("data-blazorstrap"));
-                }
-            }
-        }
-    }, 50);
-
-    var clickFunc = debounce(async function (event) {
-        var related = docuemntEventId.filter(x => x.eventtype == "click");
-        if (related.length > 0) {
-            var relatedIds = related.map(x => x.creator);
-            //check if its a child of a related element
-            
-            const relatedShown = Array.from(document.querySelectorAll('[data-blazorstrap]'))
-                .filter(element => relatedIds.includes(element.getAttribute('data-blazorstrap')))
-                .filter(element => element.classList.contains('show'))
-                .map(element => element);
-            var canInvoke = true;
-            relatedIds = [];
-            if (relatedShown.length > 0) {
-                relatedShown.forEach(x => {
-                    let id = x.getAttribute('data-blazorstrap');
-                    relatedIds.push(id);
-                    if (event.target.getAttribute('data-blazorstrap-target') == id) {
-                        canInvoke = false;
-                    }
-                    if (x.contains(event.target)) {
-                      
-                        canInvoke = false;
-                    }
-                });
-                if (canInvoke) {
-                    var relatedstring = relatedIds.join(',');
-                    dotnet.invokeMethodAsync("InvokeEventAsync", "jsdocument", relatedstring, "click", event.target.getAttribute("data-blazorstrap"));
-                }
-            }
-        }
-    }, 50);
-    window.addEventListener('keydown', keydownFunc);
+    
     window.addEventListener('resize', resizeFunc);
-    window.addEventListener('click', clickFunc);
     documentEventsSet = true;
 }
 

@@ -57,7 +57,7 @@ namespace BlazorStrap.Shared.Components.Common
         {
             get
             {
-                if(DropDownParent != null) return DropDownParent.DataRefId;
+                if(DropDownParent != null) return DropDownParent.DataId;
                 return (CollapseParent != null) ? CollapseParent.DataId : "";
             }
         }
@@ -69,7 +69,7 @@ namespace BlazorStrap.Shared.Components.Common
                 _canHandleActive = true;
             if (DropDownParent == null) return;
             DropDownParent.OnSetActive += OnSetActive;
-            if (DropDownParent.Group != null || DropDownParent.IsDiv || DropDownParent.IsNavPopper || DropDownParent.Parent != null)
+            if (DropDownParent is not null)
                 DataId = DropDownParent.Target;
         }
 
@@ -118,6 +118,18 @@ namespace BlazorStrap.Shared.Components.Common
             return false;
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if(firstRender)
+            {
+                if(DropDownParent is not null)
+                if (DropDownParent.IsMouseover)
+                {
+                    await BlazorStrapService.JavaScriptInterop.AddEventAsync(DataId, DropDownParent.DataId, EventType.Mouseenter);
+                    await BlazorStrapService.JavaScriptInterop.AddEventAsync(DataId, DropDownParent.DataId, EventType.Mouseleave);
+                }
+            }
+        }
         public void Dispose()
         {
             if (DropDownParent != null)
