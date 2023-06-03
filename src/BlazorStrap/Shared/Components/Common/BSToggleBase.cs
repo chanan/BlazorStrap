@@ -126,7 +126,7 @@ namespace BlazorStrap.Shared.Components.Common
                 if (DropDownParent.IsMouseover)
                 {
                     await BlazorStrapService.JavaScriptInterop.AddEventAsync(DataId, DropDownParent.DataId, EventType.Mouseenter);
-                    await BlazorStrapService.JavaScriptInterop.AddEventAsync(DataId, DropDownParent.DataId, EventType.Mouseleave);
+                    await BlazorStrapService.JavaScriptInterop.AddEventAsync(DropDownParent.DataId, DropDownParent.DataId, EventType.Mouseleave);
                 }
             }
         }

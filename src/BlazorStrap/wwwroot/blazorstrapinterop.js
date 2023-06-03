@@ -463,7 +463,12 @@ export async function showCollapse(collapse, horizontal, dotnet) {
     collapse.classList.remove("collapsing");
     collapse.classList.add("collapse");
     collapse.classList.add("show");
-    collapse.style.height = "";
+    if (horizontal) {
+        collapse.style.width = "";
+    }
+    else {
+        collapse.style.height = "";
+    }
     return {
         ClassList: collapse.classList.value,
         Styles: collapse.style.cssText,
@@ -494,9 +499,9 @@ export async function hideCollapse(collapse, horizontal, dotnet) {
     await waitForNextFrame(); // Wait for the next frame to ensure the DOM updates
 
     if (horizontal) {
-        collapse.style.width = "0";
+        collapse.style.width = "";
     } else {
-        collapse.style.height = "0";
+        collapse.style.height = "";
     }
 
     await waitForTransitionEnd(collapse);

@@ -245,7 +245,7 @@ namespace BlazorStrap.Shared.Components.Common
                 if (IsMouseover && Toggler == null)
                 {
                     await BlazorStrapService.JavaScriptInterop.AddEventAsync(Target, DataId, EventType.Mouseenter);
-                    await BlazorStrapService.JavaScriptInterop.AddEventAsync(Target, DataId, EventType.Mouseleave);
+                    await BlazorStrapService.JavaScriptInterop.AddEventAsync(DataId, DataId, EventType.Mouseleave);
                 }
                 _secondRender = true;
                 BlazorStrapService.OnEventForward += InteropEventCallback;
@@ -266,7 +266,7 @@ namespace BlazorStrap.Shared.Components.Common
             {
                 await ShowAsync();
             }
-            if (IsMouseover && sender == "javascript" && target == Target && type == EventType.Mouseleave  )
+            if (IsMouseover && sender == "javascript" && target == DataId && type == EventType.Mouseleave  )
             {
                 await HideAsync();
             }
@@ -274,11 +274,6 @@ namespace BlazorStrap.Shared.Components.Common
 
         public async ValueTask DisposeAsync()
         {
-            try
-            {
-                await BlazorStrapService.JavaScriptInterop.RemoveDocumentEventAsync(EventType.Click, DataId);
-            }
-            catch { }
             BlazorStrapService.OnEvent -= OnEventAsync;
             BlazorStrapService.OnEventForward -= InteropEventCallback;
             GC.SuppressFinalize(this);
