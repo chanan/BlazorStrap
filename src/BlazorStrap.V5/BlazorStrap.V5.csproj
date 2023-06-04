@@ -24,5 +24,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.*" />
 		<PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
 	</ItemGroup>
-
+	<ItemGroup>
+		<ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
+	</ItemGroup>
 </Project>
