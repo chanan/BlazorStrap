@@ -122,6 +122,12 @@ namespace BlazorStrap.Shared.Components.Common
             if (_shown) return;
             await OnShow.InvokeAsync(this);
             var isPopper = ((Group != null || InputGroup != null) && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper);
+            if(isPopper && Group != null && Placement == Placement.RightStart)
+            {
+                Console.WriteLine($"Group.DropdownPlacement {Group.DropdownPlacement}");
+                Placement = Group.DropdownPlacement;
+            }
+            Console.WriteLine($"IsPopper {isPopper}");
             var taskSource = new TaskCompletionSource<bool>();
 
             var func = async () =>
@@ -129,7 +135,7 @@ namespace BlazorStrap.Shared.Components.Common
                 _shown = true;
                 if (MyRef is not null)
                 {
-                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowDropdownAsync(MyRef.Value, isPopper, Placement, Target);
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowDropdownAsync(MyRef.Value, isPopper, Target, Placement);
                     if (syncResult is not null)
                         Sync(syncResult);
                 }

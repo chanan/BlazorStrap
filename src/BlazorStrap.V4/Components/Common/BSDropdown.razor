@@ -33,6 +33,13 @@
             @Content
         </ul>
     }
+    else if (Group != null && !IsStatic && IsDiv)
+    {
+        @Toggler
+        <div class="@ClassBuilder" style="@StyleBuilder" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap" data-bs-auto-close="@((IsManual || AllowOutsideClick || Demo) ? "false" : "true")">
+            @Content
+        </div>
+    }
     else if (Group != null && !IsStatic)
     {
         @Toggler

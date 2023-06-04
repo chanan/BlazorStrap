@@ -322,7 +322,7 @@ export async function showDropdown(dropdown, isPopper, targetId, placement, dotn
         //using popper.js setup the tooltip
         var target = document.querySelector('[data-blazorstrap="' + targetId + '"]');
         if (target) {
-            var popper = Popper.createPopper(target, tooltip, {
+            var popper = Popper.createPopper(target, dropdown, {
                 placement: placement,
                 modifiers: [
                 ],

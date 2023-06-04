@@ -104,12 +104,12 @@ namespace BlazorStrap.Service
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="NullReferenceException"></exception>
-        public async ValueTask<InteropSyncResult?> ShowDropdownAsync(ElementReference elementReference,bool isPopper, Placement placement, string targetId, CancellationToken? cancellationToken = null)
+        public async ValueTask<InteropSyncResult?> ShowDropdownAsync(ElementReference elementReference,bool isPopper, string targetId, Placement placement, CancellationToken? cancellationToken = null)
         {
             var placementString = TranslatePlacementForPopperJs(placement);
             var module = await GetModuleAsync();
             return module is not null
-                ? await module.InvokeAsync<InteropSyncResult?>("showDropdown", cancellationToken ?? CancellationToken.None, elementReference, isPopper, placementString, targetId, _objectReference)
+                ? await module.InvokeAsync<InteropSyncResult?>("showDropdown", cancellationToken ?? CancellationToken.None, elementReference, isPopper, targetId, placementString, _objectReference)
                 : null;
         }
 
