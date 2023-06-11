@@ -315,14 +315,15 @@ export async function hideOffcanvas(offcanvas, dotnet) {
 }
 
 //Dropdowns
-export async function showDropdown(dropdown, isPopper, targetId, placement, dotnet) {
+export async function showDropdown(dropdown, isPopper, targetId, placement, dotnet, options = {}) {
     if (!dropdown) return null;
 
     if (isPopper) {
         //using popper.js setup the tooltip
         var target = document.querySelector('[data-blazorstrap="' + targetId + '"]');
         if (target) {
-            var popper = Popper.createPopper(target, tooltip, {
+            var popper = Popper.createPopper(target, dropdown, {
+                ...options,
                 placement: placement,
                 modifiers: [
                 ],
@@ -361,7 +362,7 @@ export async function hideDropdown(dropdown, dotnet) {
 }
 
 //Tooltips
-export async function showTooltip(tooltip, placement, targetId, dotnet) {
+export async function showTooltip(tooltip, placement, targetId, dotnet, options = {}) {
     if (!tooltip) return null;
     //using popper.js setup the tooltip
     //get the arrow element
@@ -380,6 +381,7 @@ export async function showTooltip(tooltip, placement, targetId, dotnet) {
     var target = document.querySelector('[data-blazorstrap="' + targetId + '"]');
     if (target) {
         var popper = Popper.createPopper(target, tooltip, {
+            ...options,
             placement: placement,
             modifiers: [
                 {
@@ -463,7 +465,12 @@ export async function showCollapse(collapse, horizontal, dotnet) {
     collapse.classList.remove("collapsing");
     collapse.classList.add("collapse");
     collapse.classList.add("show");
-    collapse.style.height = "";
+    if (horizontal) {
+        collapse.style.width = "";
+    }
+    else {
+        collapse.style.height = "";
+    }
     return {
         ClassList: collapse.classList.value,
         Styles: collapse.style.cssText,
@@ -494,9 +501,9 @@ export async function hideCollapse(collapse, horizontal, dotnet) {
     await waitForNextFrame(); // Wait for the next frame to ensure the DOM updates
 
     if (horizontal) {
-        collapse.style.width = "0";
+        collapse.style.width = "";
     } else {
-        collapse.style.height = "0";
+        collapse.style.height = "";
     }
 
     await waitForTransitionEnd(collapse);

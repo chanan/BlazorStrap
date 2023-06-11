@@ -30,6 +30,10 @@ namespace BlazorStrap.Shared.Components.Common
         /// Setting this to false will hide the content of the tooltip when it is hidden.
         /// </summary>
         [Parameter] public bool ContentAlwaysRendered { get; set; } = true;
+        /// <summary>
+        /// Sets additional popper.js options.
+        /// </summary>
+        [Parameter] public object? PopperOptions { get; set; } = null;
 
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
@@ -107,7 +111,7 @@ namespace BlazorStrap.Shared.Components.Common
 
                 if (MyRef is not null)
                 {
-                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowTooltipAsync(MyRef.Value, Placement, Target);
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowTooltipAsync(MyRef.Value, Placement, Target, options: PopperOptions);
                     if (syncResult is not null)
                         Sync(syncResult);
                 }

@@ -4,15 +4,16 @@
 See [shared](layout/shared) for additional parameters    
 :::
 
-| Parameter             | Type           | Valid          | Remarks/Output                                                   | 
-|-----------------------|----------------|----------------|------------------------------------------------------------------|
-| HeaderColor           | Enum           | `BSColor`      | `.bg-[]`                                                         | {.table-striped}
-| Placement             | Enum           | Placement      | Placement                                                        |
-| MouseOver             | bool           | true/false     |                                                                  |
-| Header                | RenderFragment | RenderFragment | Nested Content                                                   |
-| Target                | string		   | string       | DataIdOfTarget                                                   |   
-| Content               | RenderFragment | RenderFragment | Nested Content                                                   |   
-| ContentAlwaysRendered | bool           | bool           | default=false. Hides content for component when not show if false |
+| Parameter             | Type           | Valid          | Remarks/Output														| 
+|-----------------------|----------------|----------------|---------------------------------------------------------------------|
+| HeaderColor           | Enum           | `BSColor`      | `.bg-[]`															| {.table-striped}
+| Placement             | Enum           | Placement      | Placement															|
+| MouseOver             | bool           | true/false     |																		|
+| Header                | RenderFragment | RenderFragment | Nested Content														|
+| Target                | string		   | string       | DataIdOfTarget														|   
+| Content               | RenderFragment | RenderFragment | Nested Content														|   
+| ContentAlwaysRendered | bool           | bool           | default=false. Hides content for component when not show if false	|
+| PopperOptions         | object         | dynamic object | Sets additional popper.js options.									|
 
 :::
 

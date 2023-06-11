@@ -1,5 +1,5 @@
-﻿<BSButton IsOutlined="true" Color="BSColor.Primary" DataId="popoverLeft">Left</BSButton>
-<BSPopover Placement="Placement.Left" Target="popoverLeft">
+﻿<BSButton IsOutlined="true" Color="BSColor.Primary" DataId="popoverLeft" >Left</BSButton>
+<BSPopover Placement="Placement.Left" Target="popoverLeft" PopperOptions="@(new { strategy  = "fixed"})">
     <Header>Left</Header>
     <Content>To the left</Content>
 </BSPopover>

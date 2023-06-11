@@ -315,7 +315,7 @@ export async function hideOffcanvas(offcanvas, dotnet) {
 }
 
 //Dropdowns
-export async function showDropdown(dropdown, isPopper, targetId, placement, dotnet) {
+export async function showDropdown(dropdown, isPopper, targetId, placement, dotnet, options = {}) {
     if (!dropdown) return null;
 
     if (isPopper) {
@@ -323,6 +323,7 @@ export async function showDropdown(dropdown, isPopper, targetId, placement, dotn
         var target = document.querySelector('[data-blazorstrap="' + targetId + '"]');
         if (target) {
             var popper = Popper.createPopper(target, dropdown, {
+                ...options,
                 placement: placement,
                 modifiers: [
                 ],
@@ -361,7 +362,7 @@ export async function hideDropdown(dropdown, dotnet) {
 }
 
 //Tooltips
-export async function showTooltip(tooltip, placement, targetId, dotnet) {
+export async function showTooltip(tooltip, placement, targetId, dotnet, options = {}) {
     if (!tooltip) return null;
     //using popper.js setup the tooltip
     //get the arrow element
@@ -380,6 +381,7 @@ export async function showTooltip(tooltip, placement, targetId, dotnet) {
     var target = document.querySelector('[data-blazorstrap="' + targetId + '"]');
     if (target) {
         var popper = Popper.createPopper(target, tooltip, {
+            ...options,
             placement: placement,
             modifiers: [
                 {

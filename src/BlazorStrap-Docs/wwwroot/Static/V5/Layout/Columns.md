@@ -12,17 +12,19 @@ See [shared](layout/shared) for additional parameters
 | ColumnSmall  | int   | 1-12       | .col-sm-#      |
 | ColumnMedium | int   | 1-12       | .col-md-#      |
 | ColumnLarge  | int   | 1-12       | .col-lg-#      |
-| ColumnLarge  | int   | 1-12       | .col-lg-#      |
+| ColumnXL     | int   | 1-12       | .col-xl-#      |
 | OrderFirst   | bool  | true/false | .order-first   |
 | OrderLast    | bool  | true/false | .order-last    |
 | Order        | int   | 1-12       | .order-#       |
 | OrderSmall   | int   | 1-12       | .order-sm-#    |
 | OrderMedium  | int   | 1-12       | .order-md-#    |
 | OrderLarge   | int   | 1-12       | .order-lg-#    |
+| OrderXL      | int   | 1-12       | .order-xl-#    |
 | Offset       | int   | 0-12       | .offset-#      |
 | OffsetSmall  | int   | 0-12       | .offset-sm-#   |
 | OffsetMedium | int   | 0-12       | .offset-md-#   |
 | OffsetLarge  | int   | 0-12       | .offset-lg-#   |
+| OffsetXL     | int   | 0-12       | .offset-xl-#   |
 
 :::
 

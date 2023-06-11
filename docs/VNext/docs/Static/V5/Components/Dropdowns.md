@@ -18,6 +18,7 @@ See [shared](layout/shared) for additional parameters
 | Target            | string         | string         | `data-blazorstrap` of target                 |
 | Toggler           | RenderFragment | RenderFragment | Nested Content                               |
 | Content           | RenderFragment | RenderFragment | Nested Content                               |
+| PopperOptions     | object         | dynamic object | Sets additional popper.js options.			 |
 
 :::
 

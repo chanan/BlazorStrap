@@ -4,11 +4,12 @@
 See [shared](layout/shared) for additional parameters    
 :::
 
-| Parameter             | Type           | Valid          | Remarks/Output												     | 
-|-----------------------|----------------|----------------|------------------------------------------------------------------|
-| Placement             | Enum           | Placement      | Placement													     | {.table-striped}
-| Target                | string		 | string         | DataIdOfTarget												     |   
-| ContentAlwaysRendered | bool           | bool           | default=false. Hides content for component when not show if false |
+| Parameter             | Type           | Valid          | Remarks/Output												        | 
+|-----------------------|----------------|----------------|---------------------------------------------------------------------|
+| Placement             | Enum           | Placement      | Placement														    | {.table-striped}
+| Target                | string		 | string         | DataIdOfTarget													    |   
+| ContentAlwaysRendered | bool           | bool           | default=false. Hides content for component when not show if false	|
+| PopperOptions         | object         | dynamic object | Sets additional popper.js options.									|
 :::
 
 ### Examples

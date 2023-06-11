@@ -88,6 +88,12 @@ namespace BlazorStrap.Shared.Components.Common
         /// </summary>
         [Parameter] public RenderFragment? Toggler { get; set; }
 
+        /// <summary>
+        /// Sets additional popper.js options.
+        /// </summary>
+        [Parameter] public object? PopperOptions { get; set; } = null;
+
+
         private bool _lastIsNavPopper;
         [CascadingParameter] public BSNavItemBase? DropdownItem { get; set; }
         [CascadingParameter] public BSButtonGroupBase? Group { get; set; }
@@ -124,10 +130,8 @@ namespace BlazorStrap.Shared.Components.Common
             var isPopper = ((Group != null || InputGroup != null) && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper);
             if(isPopper && Group != null && Placement == Placement.RightStart)
             {
-                Console.WriteLine($"Group.DropdownPlacement {Group.DropdownPlacement}");
                 Placement = Group.DropdownPlacement;
             }
-            Console.WriteLine($"IsPopper {isPopper}");
             var taskSource = new TaskCompletionSource<bool>();
 
             var func = async () =>
@@ -135,7 +139,7 @@ namespace BlazorStrap.Shared.Components.Common
                 _shown = true;
                 if (MyRef is not null)
                 {
-                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowDropdownAsync(MyRef.Value, isPopper, Target, Placement);
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowDropdownAsync(MyRef.Value, isPopper, Target, Placement,options: PopperOptions);
                     if (syncResult is not null)
                         Sync(syncResult);
                 }

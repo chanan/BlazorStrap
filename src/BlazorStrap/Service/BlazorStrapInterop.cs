@@ -104,12 +104,14 @@ namespace BlazorStrap.Service
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="NullReferenceException"></exception>
-        public async ValueTask<InteropSyncResult?> ShowDropdownAsync(ElementReference elementReference,bool isPopper, string targetId, Placement placement, CancellationToken? cancellationToken = null)
+        public async ValueTask<InteropSyncResult?> ShowDropdownAsync(ElementReference elementReference, bool isPopper, string targetId, Placement placement, CancellationToken? cancellationToken = null, object? options = null)
         {
             var placementString = TranslatePlacementForPopperJs(placement);
             var module = await GetModuleAsync();
             return module is not null
-                ? await module.InvokeAsync<InteropSyncResult?>("showDropdown", cancellationToken ?? CancellationToken.None, elementReference, isPopper, targetId, placementString, _objectReference)
+                ? options is not null 
+                    ? await module.InvokeAsync<InteropSyncResult?>("showDropdown", cancellationToken ?? CancellationToken.None, elementReference, isPopper, targetId, placementString, _objectReference, options) 
+                    : await module.InvokeAsync<InteropSyncResult?>("showDropdown", cancellationToken ?? CancellationToken.None, elementReference, isPopper, targetId, placementString, _objectReference)
                 : null;
         }
 
@@ -137,12 +139,14 @@ namespace BlazorStrap.Service
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="NullReferenceException"></exception>
-        public async ValueTask<InteropSyncResult?> ShowTooltipAsync(ElementReference elementReference, Placement placement, string targetId, CancellationToken? cancellationToken = null)
+        public async ValueTask<InteropSyncResult?> ShowTooltipAsync(ElementReference elementReference, Placement placement, string targetId, CancellationToken? cancellationToken = null, object? options = null)
         {
             var placementString = TranslatePlacementForPopperJs(placement);
             var module = await GetModuleAsync();
             return module is not null
-                ? await module.InvokeAsync<InteropSyncResult?>("showTooltip", cancellationToken ?? CancellationToken.None, elementReference, placementString, targetId, _objectReference)
+                ? options is not null 
+                    ? await module.InvokeAsync<InteropSyncResult?>("showTooltip", cancellationToken ?? CancellationToken.None, elementReference, placementString, targetId, _objectReference, options) 
+                    : await module.InvokeAsync<InteropSyncResult?>("showTooltip", cancellationToken ?? CancellationToken.None, elementReference, placementString, targetId, _objectReference)
                 : null;
         }
 
