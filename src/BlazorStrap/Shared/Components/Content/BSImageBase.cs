@@ -45,7 +45,7 @@ namespace BlazorStrap.Shared.Components.Content
         protected override void OnParametersSet()
         {
             if (Source == null) return;
-            if (!IsPlaceholder && !Source.ToLower().Contains("x")) return;
+            if (!IsPlaceholder) return;
             var data = Source.Split("x");
             PlaceHolderHeight = Convert.ToInt32(data[1]);
             PlaceHolderWidth = Convert.ToInt32(data[0]);
