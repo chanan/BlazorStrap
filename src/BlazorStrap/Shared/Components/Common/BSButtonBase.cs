@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorStrap.Shared.Components.Common
 {
     public abstract class BSButtonBase<TSize> : BlazorStrapActionBase<TSize> where TSize : Enum
     {
+        [DisallowNull] public ElementReference? Element { get; protected set; }
         /// <summary>
         /// Whether or not the button type is Reset.
         /// </summary>

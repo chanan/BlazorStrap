@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorStrap.Shared.Components.Common
 {
     public abstract class BSLinkBase<TSize> : BlazorStrapActionBase<TSize> where TSize : Enum
     {
+        [DisallowNull] public ElementReference? Element { get; protected set; }
         [Inject] private NavigationManager NavigationManager { get; set; } = default!;
 
         /// <summary>

@@ -43,6 +43,7 @@ namespace BlazorStrap.V5
             builder.AddAttribute(7, "onclick", ClickEvent);
             builder.AddMultipleAttributes(8, Attributes);
             builder.AddContent(9, @ChildContent);
+            builder.AddElementReferenceCapture(10, elReference => Element = elReference);
             builder.CloseElement();
         }
     }
