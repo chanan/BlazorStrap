@@ -2,8 +2,19 @@
 #### Component \<FluentValidator\>
 [BlazorStrap.Extensions.FluentValidation](https://www.nuget.org/packages/BlazorStrap.Extensions.FluentValidation/)    
 
+:::
+
+| Parameter			  | Type						| Valid          | Remarks/Output                                           | 
+|---------------------|-----------------------------|----------------|----------------------------------------------------------|
+| RuleSets (`>.Net5`) | string						| string         | If set allows you to select what rulesets you are using  | {.table-striped}  
+| ValidateAll		  | bool						| true/false     | If true any field change will validate the entire form   |
+
+:::
 
 {{sample=V5/Extensions/FluentValidation}}
+
+### RuleSets
+{{sample=V5/Extensions/FluentValidationRuleSets}}
 
 #### Component \<FluentValidatorInjectable\>
 

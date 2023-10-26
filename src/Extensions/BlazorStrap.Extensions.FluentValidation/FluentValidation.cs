@@ -46,7 +46,8 @@ namespace BlazorStrap.Extensions.FluentValidation
     public abstract class BaseFluentValidator : ComponentBase, IDisposable
     {
         private readonly static char[] _separators = new[] { '.', '[' };
-
+        [Parameter] public string RuleSets { get; set; } = "*";
+        private string[] _ruleSets;
         [Parameter] public bool ValidateAll { get; set; }
 
         [CascadingParameter] protected EditContext _editContext { get; set; }
@@ -88,10 +89,11 @@ namespace BlazorStrap.Extensions.FluentValidation
 
         private void ValidateModel(EditContext editContext, ValidationMessageStore messages)
         {
+            _ruleSets = RuleSets.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
 #if NET5_0_OR_GREATER
             var validationResult =
                 _validator.Validate(ValidationContext<object>.CreateWithOptions(editContext.Model,
-                    options => options.IncludeAllRuleSets()));
+                    options => options.IncludeRuleSets(_ruleSets)));
 #else
             var validationResult = _validator.Validate(editContext.Model);
 #endif
@@ -108,11 +110,12 @@ namespace BlazorStrap.Extensions.FluentValidation
         private void ValidateModelField(EditContext editContext, ValidationMessageStore messages,
             FieldChangedEventArgs fieldChangedEventArgs)
         {
+            _ruleSets = RuleSets.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
             var type = editContext.Model.GetType();
 #if NET5_0_OR_GREATER
             var validationResult =
                 _validator.Validate(ValidationContext<object>.CreateWithOptions(editContext.Model,
-                    options => options.IncludeAllRuleSets()));
+                    options => options.IncludeRuleSets(_ruleSets)));
 #else
             var validationResult = _validator.Validate(editContext.Model);
 #endif

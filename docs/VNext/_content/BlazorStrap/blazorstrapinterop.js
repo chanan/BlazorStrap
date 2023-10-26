@@ -565,9 +565,22 @@ export async function toastTimer(element, time, timeRemaining, rendered) {
     }
 }
 //TODO: Update these direct ports
-
+async function cleanupCarousel(showEl, hideEl) {
+    //Cleans up any rogue calls
+    return new Promise(function (resolve) {
+        hideEl.classList.remove("carousel-item-end");
+        hideEl.classList.remove("carousel-item-prev");
+        hideEl.classList.remove("carousel-item-next");
+        hideEl.classList.remove("carousel-item-start");
+        showEl.classList.remove("carousel-item-end");
+        showEl.classList.remove("carousel-item-prev");
+        showEl.classList.remove("carousel-item-next");
+        showEl.classList.remove("carousel-item-start");
+        resolve();
+    });
+}
 export async function animateCarousel(id, showEl, hideEl, back, v4, dotnet) {
-    await blazorStrap.CleanupCarousel(showEl, hideEl);
+    await cleanupCarousel(showEl, hideEl);
 
     let callback = function () {
         dotnet.invokeMethodAsync("InvokeEventAsync", "javascript", id, "transitionend", null);
