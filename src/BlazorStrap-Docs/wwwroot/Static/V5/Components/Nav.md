@@ -106,3 +106,7 @@ Use `IsNav` to output as a non list
 ### Submenu Example
 
 {{sample=V5/Components/Nav/Nav14}}
+
+### Programmatically changing active tab
+
+{{sample=V5/Components/Nav/Nav17}}

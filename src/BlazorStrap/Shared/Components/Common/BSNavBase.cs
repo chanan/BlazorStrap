@@ -90,6 +90,12 @@ namespace BlazorStrap.Shared.Components.Common
         }
 
         public event Action<BSNavItemBase>? ChildHandler;
+        public event Action<string> ChildHandlerString;
+
+        public void SetActiveTab(string tabId)
+        {
+            ChildHandlerString?.Invoke(tabId);
+        }
 
         internal void Rerender()
         {

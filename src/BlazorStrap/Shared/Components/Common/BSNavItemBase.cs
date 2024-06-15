@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,7 +113,14 @@ namespace BlazorStrap.Shared.Components.Common
                 if(Parent.ActiveChild == null)
                     IsActive = Parent.SetFirstChild(this);
             }
+            Parent.ChildHandlerString += Parent_ChildHandlerString;
             Parent.ChildHandler += Parent_ChildHandler;
+        }
+
+        private async void Parent_ChildHandlerString(string name)
+        {
+            if(name == DataId)
+                Parent?.Invoke(this);
         }
 
         protected async Task ClickEvent()
@@ -132,7 +140,7 @@ namespace BlazorStrap.Shared.Components.Common
         private async void Parent_ChildHandler(BSNavItemBase sender)
         {
             if (Parent != null)
-                IsActive = Parent.ActiveChild == this;
+                    IsActive = Parent.ActiveChild == this;
             await ChildHandler(sender);
             await InvokeAsync(StateHasChanged);
         }
@@ -150,6 +158,7 @@ namespace BlazorStrap.Shared.Components.Common
             if (Parent.ActiveChild == this)
                 Parent.ActiveChild = null;
             Parent.ChildHandler -= Parent_ChildHandler;
+            Parent.ChildHandlerString -= Parent_ChildHandlerString;
         }
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
