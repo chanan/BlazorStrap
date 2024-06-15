@@ -40,7 +40,6 @@
       2. ```<link href="path_to_bootstrap.min.css" rel="stylesheet" integrity="if_needed" />"```
    2. At the end of the ```<body>``` add
       1. ```<script src="_content/BlazorStrap/popper.min.js"></script>```
-      2. ```<script src="_content/BlazorStrap/blazorstrap.js"></script>```
 3. In ```Program.cs``` add
    1. ```builder.Services.AddBlazorStrap();```
 4. In ```_Imports.razor``` add
@@ -57,7 +56,6 @@
       2. ```<link href="path_to_bootstrap.min.css" rel="stylesheet" integrity="if_needed" />"```
    2. At the end of the ```<body>``` add
       1. ```<script src="_content/BlazorStrap/popper.min.js"></script>```
-      2. ```<script src="_content/BlazorStrap/blazorstrap.js"></script>```
 3. In ```Program.cs``` or ```Startup.cs``` add
    1. ```Services.AddBlazorStrap();``` to your build pipeline
 4. In ```_Imports.razor``` add
@@ -77,7 +75,6 @@
       2. ```<link href="path_to_bootstrap.min.css" rel="stylesheet" integrity="if_needed" />"```
    2. At the end of the ```<body>``` add
       1. ```<script src="_content/BlazorStrap/popper.min.js"></script>```
-      2. ```<script src="_content/BlazorStrap/blazorstrap.js"></script>```
 3. In ```Program.cs``` add
    1. ```builder.Services.AddBlazorStrap();```
 4. In ```_Imports.razor``` add
@@ -93,7 +90,6 @@
       2. ```<link href="path_to_bootstrap.min.css" rel="stylesheet" integrity="if_needed" />"```
    2. At the end of the ```<body>``` add
       1. ```<script src="_content/BlazorStrap/popper.min.js"></script>```
-      2. ```<script src="_content/BlazorStrap/blazorstrap.js"></script>```
 3. In ```Program.cs``` or ```Startup.cs``` add
    1. ```Services.AddBlazorStrap();``` to your build pipeline
 4. In ```_Imports.razor``` add
