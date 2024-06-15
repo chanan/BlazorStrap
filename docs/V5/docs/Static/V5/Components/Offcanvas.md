@@ -3,19 +3,21 @@
 See [shared](layout/shared) for additional parameters    
 :::
 
-| Parameter            | Type           | Valid          | Remarks/Output                  | 
-|----------------------|----------------|----------------|---------------------------------|
-| Color                | Enum           | BSColor        | `.bg-[]`                        | { .table-striped}
-| BodyClass            | Enum           | BSColor        | `.alert-[]`                     |
-| Placement            | Enum           | Placement      | `.offcanvas-[]`                 |
-| DisableBackdropClick | bool           | true/false     |                                 |
-| HeaderClass          | bool           | true/false     | `.d-flex` `.align-items-center` |
-| ShowBackdrop         | bool           | true/false     |                                 |
-| AllowScroll          | bool           | true/false     |                                 |
-| ButtonClass          | int            | 1-6            |                                 |
-| Header               | RenderFragment | RenderFragment | Nested Content                  |
-| Content              | RenderFragment | RenderFragment | Nested Content                  |
-| OnClick              | EventCallback  | EventCallback  | EventCallback                   |
+| Parameter             | Type						| Valid          | Remarks/Output													| 
+|-----------------------|---------------------------|----------------|------------------------------------------------------------------|
+| Color                 | Enum						| BSColor        | `.bg-[]`															| { .table-striped}
+| DisableEscapeKey      | bool                      | true/false     | Disables the escape key from closing the offcanvas               |
+| BodyClass             | Enum						| BSColor        | `.alert-[]`														|
+| Placement             | Enum						| Placement      | `.offcanvas-[]`													|
+| DisableBackdropClick  | bool						| true/false     |																	|
+| HeaderClass           | bool						| true/false     | `.d-flex` `.align-items-center`									|
+| ShowBackdrop          | bool						| true/false     |																	|
+| AllowScroll           | bool						| true/false     |																	|
+| ButtonClass           | int						| 1-6            |																	|
+| Header                | RenderFragment			| RenderFragment | Nested Content													|
+| Content               | RenderFragment			| RenderFragment | Nested Content													|
+| OnClick               | EventCallback				| EventCallback  | EventCallback													|
+| ContentAlwaysRendered | bool                      | bool           | default=false. Hides content for component when not show if false |
 
 :::
 
@@ -41,6 +43,10 @@ See [shared](layout/shared) for additional parameters
 
 {{sample=V5/Components/OffCanvas/OffCanvas6}}
 
+### HtmlAlwaysRendered false
+By default content html for componets is always rendered to limit the rendering required when showing. If you want to hide the html when not shown set HtmlAlwaysRendered to false. This will cause the content html of component to be rendered when shown and removed when hidden. This may cause a slight delay when showing.
+
+{{sample=V5/Components/OffCanvas/OffCanvas7}}
 ### Methods / Events
 TValue = BSOffCanvas
 :::

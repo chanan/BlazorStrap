@@ -3,30 +3,32 @@
 See [shared](layout/shared) for additional parameters    
 :::
 
-| Parameter         | Type                      | Valid          | Remarks/Output                                                                     | 
-|-------------------|---------------------------|----------------|------------------------------------------------------------------------------------|
-| FullScreenSize    | Enum                      | Side           | `.modal-fullscreen-[]-down`                                                        | {.table-striped}
-| AllowScroll       | bool                      | true/false     | Allows Body Scrolling                                                              | 
-| ModalColor        | BSColor                   | BSColor        |                                                                                    |
-| Size              | Enum                      | Size           | `.modal-[]`                                                                        |
-| IsCentered        | bool                      | true/false     | `.modal-dialog-centered`                                                           |
-| IsFullScreen      | bool                      | true/false     | `.modal-fullscreen`                                                                |
-| IsScrollable      | bool                      | true/false     | `.modal-dialog-scrollable`                                                         |
-| HasCloseButton    | bool                      | true/false     | Includes `.btn-close`                                                              |
-| ShowBackdrop      | bool                      | true/false     |                                                                                    |
-| ButtonClass       | string                    | string         | custom class for the close button                                                  |
-| ContentClass      | string                    | string         | custom class for `modal-body` - obsolete: use BodyClass                            |
-| BodyClass         | string                    | string         | custom class for `modal-body`                                                      |
-| DialogClass       | string                    | string         | custom class for `modal-dialog`                                                    |
-| HeaderClass       | string                    | string         | custom class for `modal-header`                                                    |
-| ModalContentClass | string                    |                | custom class for `modal-content`                                                   |
-| IsStaticBackdrop  | bool                      | true/false     | Ignores backdrop clicks                                                            |
-| Header            | RenderFragment            | RenderFragment | Nested Content                                                                     |
-| Content           | RenderFragment            | RenderFragment | Nested Content                                                                     |
-| Footer            | RenderFragment\<BSModal\> | RenderFragment | Nested Content BSModal is assigned by a self reference you do not need to pass it. |
-| HideOnSubmit      | bool                      | true/false     | Hides modal on BSForm submit.                                                      |
-| HideOnValidSubmit | bool                      | true/false     | Hides modal on Valid BSForm submit.                                                |
-
+| Parameter				| Type                      | Valid          | Remarks/Output                                                                     | 
+|-----------------------|---------------------------|----------------|------------------------------------------------------------------------------------|
+| DisableEscapeKey      | bool                      | true/false     | Disables the escape key from closing the modal                                     | {.table-striped}
+| FullScreenSize		| Enum                      | Side           | `.modal-fullscreen-[]-down`                                                        | 
+| AllowScroll			| bool                      | true/false     | Allows Body Scrolling                                                              | 
+| ModalColor			| BSColor                   | BSColor        |                                                                                    |
+| Size					| Enum                      | Size           | `.modal-[]`                                                                        |
+| IsCentered			| bool                      | true/false     | `.modal-dialog-centered`                                                           |
+| IsFullScreen			| bool                      | true/false     | `.modal-fullscreen`                                                                |
+| IsScrollable			| bool                      | true/false     | `.modal-dialog-scrollable`                                                         |
+| HasCloseButton		| bool                      | true/false     | Includes `.btn-close`                                                              |
+| ShowBackdrop			| bool                      | true/false     |                                                                                    |
+| ButtonClass			| string                    | string         | custom class for the close button                                                  |
+| ContentClass			| string                    | string         | custom class for `modal-body` - obsolete: use BodyClass                            |
+| BodyClass				| string                    | string         | custom class for `modal-body`                                                      |
+| DialogClass			| string                    | string         | custom class for `modal-dialog`                                                    |
+| HeaderClass			| string                    | string         | custom class for `modal-header`                                                    |
+| ModalContentClass		| string                    |                | custom class for `modal-content`                                                   |
+| IsStaticBackdrop		| bool                      | true/false     | Ignores backdrop clicks                                                            |
+| Header				| RenderFragment            | RenderFragment | Nested Content                                                                     |
+| Content				| RenderFragment            | RenderFragment | Nested Content                                                                     |
+| Footer				| RenderFragment\<BSModal\> | RenderFragment | Nested Content BSModal is assigned by a self reference you do not need to pass it. |
+| HideOnSubmit			| bool                      | true/false     | Hides modal on BSForm submit.                                                      |
+| HideOnValidSubmit		| bool                      | true/false     | Hides modal on Valid BSForm submit.                                                |
+| ContentAlwaysRendered | bool                      | bool           | default=false. Hides content for component when not show if false                   |
+| IsManual				| bool                      | true/false     | default=false. If true you must control the show and hide of the modal yourself    |
 :::
 
 :::{.bd-callout .bd-callout-info}
@@ -69,6 +71,16 @@ You can also scroll content in the modals body
 ### Model requiring more complex content
 
 {{sample=V5/Components/Modal/Modal9}}
+
+### HtmlAlwaysRendered false
+By default content html for componets is always rendered to limit the rendering required when showing. If you want to hide the html when not shown set HtmlAlwaysRendered to false. This will cause the content html of component to be rendered when shown and removed when hidden. This may cause a slight delay when showing.
+
+{{sample=V5/Components/Modal/Modal10}}
+
+### IsManual
+If you want to control the show and hide of the modal yourself set IsManual to true. This will prevent the modal from being shown or hidden automatically. You can then use the ToggleAsync, ShowAsync and HideAsync methods to control the modal.
+
+{{sample=V5/Components/Modal/Modal11}}
 
 ### Methods / Events
 TValue = BSModal

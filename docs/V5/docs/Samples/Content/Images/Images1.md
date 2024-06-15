@@ -1,1 +1,0 @@
-﻿<BSImage Source="1200x250xResponsive image" IsFluid="true"  IsPlaceholder="true"/>

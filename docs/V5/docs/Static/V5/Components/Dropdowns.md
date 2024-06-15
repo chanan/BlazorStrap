@@ -12,11 +12,13 @@ See [shared](layout/shared) for additional parameters
 | IsManual          | bool           | true/false     | Manual Close                                 |
 | IsDiv             | bool           | true/false     | Makes the dropdown menu a div and use popper |
 | IsStatic          | bool           | true/false     | Disables dynamic positioning                 |
+| IsMouseOver       | bool           | true/false     | Opens and closes when mouse is over          |
 | Offset            | string         | #,#            | Dropdown offset                              |
 | ShownAttribute    | string         | string         | Adds attribute when shown                    |
 | Target            | string         | string         | `data-blazorstrap` of target                 |
 | Toggler           | RenderFragment | RenderFragment | Nested Content                               |
 | Content           | RenderFragment | RenderFragment | Nested Content                               |
+| PopperOptions     | object         | dynamic object | Sets additional popper.js options.			 |
 
 :::
 
@@ -43,6 +45,8 @@ Dropdown Items
 ### Single button
 
 {{sample=V5/Components/Dropdowns/Dropdowns1}}
+
+{{sample=V5/Components/Dropdowns/Dropdowns1a}}
 
 {{sample=V5/Components/Dropdowns/Dropdowns2}}
 
