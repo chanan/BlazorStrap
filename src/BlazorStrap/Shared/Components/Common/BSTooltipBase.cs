@@ -206,7 +206,7 @@ namespace BlazorStrap.Shared.Components.Common
             try
             {
                 BlazorStrapService.OnEvent -= OnEventAsync;
-                if (Target is not null)
+                if (HasRender && Target is not null)
                 {
                     await BlazorStrapService.JavaScriptInterop.RemoveEventAsync(Target, DataId, EventType.Mouseenter);
                     await BlazorStrapService.JavaScriptInterop.RemoveEventAsync(Target, DataId, EventType.Mouseleave);
