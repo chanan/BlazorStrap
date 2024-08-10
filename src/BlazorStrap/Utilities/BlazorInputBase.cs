@@ -19,6 +19,12 @@ namespace BlazorStrap.Utilities;
 /// integrates with an <see cref="Microsoft.AspNetCore.Components.Forms.EditContext"/>, which must be supplied
 /// as a cascading parameter.
 /// </summary>
+
+#if NET8_0
+public abstract class BlazorInputBase<TValue> : InputBase<TValue>
+{
+}
+#else
 public abstract class BlazorInputBase<TValue> : ComponentBase, IDisposable
 {
 
@@ -305,3 +311,4 @@ public abstract class BlazorInputBase<TValue> : ComponentBase, IDisposable
         Dispose(disposing: true);
     }
 }
+#endif

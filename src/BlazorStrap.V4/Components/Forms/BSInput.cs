@@ -48,6 +48,9 @@ namespace BlazorStrap.V4
             builder.AddAttribute(9, "onfocus", OnFocusEvent);
             builder.AddMultipleAttributes(8, AdditionalAttributes);
             builder.AddAttribute(10, "multiple", IsMultipleSelect);
+#if NET8_0_OR_GREATER
+            builder.AddAttribute(11, "name",NameAttributeValue );
+#endif
             if (Helper?.Id != null)
             {
                 builder.AddAttribute(11, "id", Helper.Id);

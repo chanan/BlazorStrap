@@ -68,6 +68,8 @@ namespace BlazorStrap.V5
                     formBuilder.AddEventPreventDefaultAttribute(8, "onreset", true);
                 }
                 formBuilder.AddAttribute(9, "ChildContent", EditFormChildContent);
+                formBuilder.AddAttribute(10, "FormName", FormName);
+                formBuilder.AddAttribute(11, "Enhance", Enhance);
                 formBuilder.CloseComponent();
             };
           

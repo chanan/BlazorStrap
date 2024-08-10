@@ -53,6 +53,9 @@ namespace BlazorStrap.V4
                 builder.AddAttribute(10, "id", Helper.Id);
             }
             builder.AddAttribute(11, "disabled", IsDisabled);
+#if NET8_0_OR_GREATER
+            builder.AddAttribute(12, "name",NameAttributeValue );
+#endif
             builder.AddMultipleAttributes(13, AdditionalAttributes);
             builder.AddElementReferenceCapture(14, elReference => Element = elReference);
             builder.CloseElement();

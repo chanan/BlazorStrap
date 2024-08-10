@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
 		<LangVersion>10.0</LangVersion>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -14,7 +14,7 @@
 		<PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
 		<RootNamespace>BlazorStrap.V4</RootNamespace>
-		<PackageVersion>5.2.101</PackageVersion><!--Next Use 5.2.200-Preview1-->
+		<PackageVersion>5.2.102-Preview1</PackageVersion><!--Next Use 5.2.200-Preview1-->
 	</PropertyGroup>
 
 	<ItemGroup Condition="  '$(TargetFramework)' == 'net6.0'  ">
@@ -23,6 +23,10 @@
 	</ItemGroup>
 	<ItemGroup Condition="  '$(TargetFramework)' == 'net7.0'  ">
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.*" />
+		<PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
+	</ItemGroup>
+	<ItemGroup Condition="  '$(TargetFramework)' == 'net8.0'  ">
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.*" />
 		<PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
 	</ItemGroup>
 	<ItemGroup>

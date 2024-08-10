@@ -83,10 +83,10 @@ namespace BlazorStrap.Shared.Components.Forms
                 CultureInfo @cultureInfo => BindConverter.FormatValue(@cultureInfo.Name),
                 DateTime @dateTimeValue => BindConverter.FormatValue(@dateTimeValue, _dateFormat, CultureInfo.InvariantCulture),
                 DateTimeOffset @dateTimeOffsetValue => BindConverter.FormatValue(@dateTimeOffsetValue, _dateFormat, CultureInfo.InvariantCulture),
-                #if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
                 DateOnly dateOnlyValue => BindConverter.FormatValue(dateOnlyValue, _dateFormat, CultureInfo.InvariantCulture),
                 TimeOnly timeOnlyValue => BindConverter.FormatValue(timeOnlyValue, _dateFormat, CultureInfo.InvariantCulture),
-                #endif
+#endif
                 _ => base.FormatValueAsString(value),
             };
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
+using System.Globalization;
 using System.Linq.Expressions;
 
 namespace BlazorStrap.Shared.Components.Forms
@@ -124,6 +125,7 @@ namespace BlazorStrap.Shared.Components.Forms
             var filechangevent = new InputFileChangeEventArgs(Array.Empty<IBrowserFile>());
             return OnFileChange(filechangevent);
         }
+ 
 
         private void DoValidation()
         {

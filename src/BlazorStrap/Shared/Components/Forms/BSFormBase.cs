@@ -7,6 +7,16 @@ namespace BlazorStrap.Shared.Components.Forms
     public abstract class BSFormBase<TValue, TJustify> : BlazorStrapBase, IBSForm where TJustify : Enum
     {
         public event Action? OnResetEventHandler;
+
+        /// <summary>
+        /// If enabled, form submission is performed without fully reloading the page. This is
+        /// equivalent to adding <code>data-enhance</code> to the form.
+        ///
+        /// This flag is only relevant in server-side rendering (SSR) scenarios. For interactive
+        /// rendering, the flag has no effect since there is no full-page reload on submit anyway.
+        /// </summary>
+        [Parameter] public bool Enhance { get; set; }
+
         /// <summary>
         /// Form alignment.
         /// </summary>
@@ -16,6 +26,12 @@ namespace BlazorStrap.Shared.Components.Forms
         /// Form editcontext.
         /// </summary>
         [Parameter] public EditContext? EditContext { get; set; }
+
+        /// <summary>
+        /// Gets or sets the form handler name. This is required for posting it to a server-side endpoint.
+        /// It is not used during interactive rendering.
+        /// </summary>
+        [Parameter] public string? FormName { get; set; }
 
         /// <summary>
         /// Gutters

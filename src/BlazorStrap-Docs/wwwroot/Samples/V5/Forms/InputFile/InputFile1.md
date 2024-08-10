@@ -4,6 +4,7 @@
     <BSFeedback For="() => Modal.HasFile"/>
 </div>
 
+
 @code {
     private ModalClass Modal { get; set; } = new ModalClass();
     private void OnFileChange(InputFileChangeEventArgs e)
