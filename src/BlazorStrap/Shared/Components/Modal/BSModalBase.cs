@@ -137,7 +137,7 @@ namespace BlazorStrap.Shared.Components.Modal
         /// <summary>
         /// Using this will allow you to manually control the modal show/hide state. It ignores all forwarded events and only responds to the Show/Hide methods.
         /// </summary>
-        [Parameter] public bool IsManual { get; set; } 
+        [Parameter] public bool IsManual { get; set; }
 
         #region Render props
         protected abstract string? LayoutClass { get; }
@@ -179,7 +179,8 @@ namespace BlazorStrap.Shared.Components.Modal
                 }
 
                 CanRefresh = true;
-                ShouldRenderContent = false;
+                if(!ContentAlwaysRendered)
+                    ShouldRenderContent = false;
 
                 
                 await InvokeAsync(StateHasChanged);
@@ -227,6 +228,7 @@ namespace BlazorStrap.Shared.Components.Modal
                 await InvokeAsync(StateHasChanged);
                 taskSource.SetResult(true);
                 await OnShown.InvokeAsync(this);
+
             };
             
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func});
