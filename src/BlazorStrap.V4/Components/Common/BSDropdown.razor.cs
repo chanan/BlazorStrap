@@ -31,6 +31,7 @@ namespace BlazorStrap.V4
                 .AddClass("dropup", Placement is Placement.Top or Placement.TopEnd or Placement.TopStart)
                 .AddClass("dropstart", Placement is Placement.Left or Placement.LeftEnd or Placement.LeftStart)
                 .AddClass("dropend", Placement is Placement.Right or Placement.RightEnd or Placement.RightStart)
+                .AddClass(IsDivClass)
                 .Build().ToNullString();
     }
 }

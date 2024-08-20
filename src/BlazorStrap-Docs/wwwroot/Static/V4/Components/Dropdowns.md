@@ -19,6 +19,7 @@ See [shared](layout/shared) for additional parameters
 | Toggler           | RenderFragment | RenderFragment | Nested Content                               |
 | Content           | RenderFragment | RenderFragment | Nested Content                               |
 | PopperOptions     | object         | dynamic object | Sets additional popper.js options.			 |
+| IsDivClass		| string         | string         | Adds extra classes to outer div when using   |
 
 :::
 

@@ -64,6 +64,10 @@ namespace BlazorStrap.Shared.Components.Common
         [Parameter] public bool IsStatic { get; set; }
 
         /// <summary>
+        /// Adds extra classes to outer div when using <see cref="IsDiv"/>.
+        /// </summary>
+        [Parameter] public string? IsDivClass { get; set; }
+        /// <summary>
         /// Dropdown offset.
         /// </summary>
         [Parameter] public string? Offset { get; set; }
