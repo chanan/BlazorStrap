@@ -56,7 +56,7 @@ export async function addEvent(targetId, creator, eventName, dotnet, ignoreChild
         let eventFunc = debounce(function (e) {
             if (ignoreChildren && e.target.getAttribute("data-blazorstrap") != targetId) return;
             dotnet.invokeMethodAsync('InvokeEventAsync', "javascript", targetId, eventName, null);
-        },150);
+        }, 150);
         //add the eventfunc to eventcallbacks so we can remove it later
         let callback = eventCallbacks.find(x => x.id == targetId);
         if (callback)
@@ -140,7 +140,7 @@ export async function showModal(modal, dotnet) {
         await openModals.forEach(async openModal => {
             //if data-bs-manual is true then do not hide the modal 
             if (openModal.getAttribute("data-bs-manual") != "true") {
-                if (openModal.getAttribute("data-blazorstrap") != model.getAttribute("data-blazorstrap") ) {
+                if (openModal.getAttribute("data-blazorstrap") != model.getAttribute("data-blazorstrap")) {
                     dotnet.invokeMethodAsync('InvokeEventAsync', "javascript", openModal.getAttribute("data-blazorstrap"), "hide", "");
                     openModal.classList.remove("show");
                 }
@@ -317,7 +317,7 @@ export async function hideOffcanvas(offcanvas, dotnet) {
 }
 
 //Dropdowns
-export async function showDropdown(dropdown, isPopper, targetId, placement, dotnet, options = {}) {
+export async function showDropdown(dropdown, isPopper, targetId, placement, dotnet, offsetX, offsetY, options = {}) {
     if (!dropdown) return null;
 
     if (isPopper) {
@@ -325,10 +325,17 @@ export async function showDropdown(dropdown, isPopper, targetId, placement, dotn
         var target = document.querySelector('[data-blazorstrap="' + targetId + '"]');
         if (target) {
             var popper = Popper.createPopper(target, dropdown, {
-                ...options,
+
                 placement: placement,
                 modifiers: [
+                    {
+                        name: 'offset',
+                        options: {
+                            offset: [offsetX, offsetY],
+                        },
+                    }
                 ],
+                ...options
             });
         }
     }
@@ -343,7 +350,7 @@ export async function showDropdown(dropdown, isPopper, targetId, placement, dotn
     });
     dropdown.classList.add("show");
     await waitForTransitionEnd(dropdown);
-    
+
     document.addEventListener('click', documentClick);
     return {
         ClassList: dropdown.classList.value,
@@ -763,7 +770,7 @@ function setupDocumentEvents(dotnet) {
             dotnet.invokeMethodAsync("InvokeEventAsync", "jsdocument", relatedstring, "resize", window.innerWidth);
         }
     }, 200);
-    
+
     window.addEventListener('resize', resizeFunc);
     documentEventsSet = true;
 }

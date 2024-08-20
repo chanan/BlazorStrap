@@ -131,7 +131,7 @@ namespace BlazorStrap.Shared.Components.Common
         {
             if (_shown) return;
             await OnShow.InvokeAsync(this);
-            var isPopper = ((Group != null || InputGroup != null) && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper);
+            var isPopper = ((Group != null || InputGroup != null ) && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper || Offset != null);
             if(isPopper && Group != null && Placement == Placement.RightStart)
             {
                 Placement = Group.DropdownPlacement;
@@ -143,7 +143,14 @@ namespace BlazorStrap.Shared.Components.Common
                 _shown = true;
                 if (MyRef is not null)
                 {
-                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowDropdownAsync(MyRef.Value, isPopper, Target, Placement,options: PopperOptions);
+                    var offsetX = 0;
+                    var offsetY = 0;
+                    if (Offset is not null)
+                    {
+                        offsetX = Convert.ToInt16(Offset.Split(",")[1]);
+                        offsetY = Convert.ToInt16(Offset.Split(",")[0]);
+                    }
+                    var syncResult = await BlazorStrapService.JavaScriptInterop.ShowDropdownAsync(MyRef.Value, isPopper, Target, Placement, offsetX, offsetY,  options: PopperOptions);
                     if (syncResult is not null)
                         Sync(syncResult);
                 }
