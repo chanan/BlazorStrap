@@ -140,7 +140,7 @@ export async function showModal(modal, dotnet) {
         await openModals.forEach(async openModal => {
             //if data-bs-manual is true then do not hide the modal 
             if (openModal.getAttribute("data-bs-manual") != "true") {
-                if (openModal.getAttribute("data-blazorstrap") != model.getAttribute("data-blazorstrap")) {
+                if (openModal.getAttribute("data-blazorstrap") != modal.getAttribute("data-blazorstrap")) {
                     dotnet.invokeMethodAsync('InvokeEventAsync', "javascript", openModal.getAttribute("data-blazorstrap"), "hide", "");
                     openModal.classList.remove("show");
                 }

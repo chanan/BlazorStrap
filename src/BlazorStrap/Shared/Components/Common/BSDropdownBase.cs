@@ -104,6 +104,7 @@ namespace BlazorStrap.Shared.Components.Common
         [CascadingParameter] public BSInputGroupBase? InputGroup { get; set; }
         [CascadingParameter] public BSNavItemBase? NavItem { get; set; }
         [CascadingParameter] public BSDropdownBase? Parent { get; set; }
+        [CascadingParameter] public BSCollapseBase? Collapse { get; set; }
         public bool Active { get; private set; }
         internal int ChildCount { get; set; }
         public string DataRefId => (PopoverRef != null) ? PopoverRef.DataId : DataId;
@@ -132,6 +133,9 @@ namespace BlazorStrap.Shared.Components.Common
             if (_shown) return;
             await OnShow.InvokeAsync(this);
             var isPopper = ((Group != null || InputGroup != null ) && PopoverRef != null && !IsStatic) || (IsDiv || Parent != null || IsNavPopper || Offset != null);
+            if(Collapse is not null)
+                if(isPopper && (Collapse.IsInNavbar && Collapse.Shown)) isPopper = false;
+
             if(isPopper && Group != null && Placement == Placement.RightStart)
             {
                 Placement = Group.DropdownPlacement;
