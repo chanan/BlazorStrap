@@ -53,6 +53,14 @@ namespace BlazorStrap.Shared.Components
         {
             return Task.CompletedTask;
         }
+        /// <summary>
+        /// Hides the item.
+        /// </summary>
+        /// <returns>Completed task when hide is complete.</returns>
+        public virtual Task HideAsync(bool confirmationValue = false)
+        {
+            return Task.CompletedTask;
+        }
 
         /// <summary>
         /// Shows the item.
@@ -63,6 +71,15 @@ namespace BlazorStrap.Shared.Components
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Shows the item. Holds result until closed with confirmation.
+        /// </summary>
+        /// <param name="showshowAsConfirmation"></param>
+        /// <returns></returns>
+        public virtual Task ShowAsync(bool showshowAsConfirmation)
+        {
+            return Task.CompletedTask;
+        }
         /// <summary>
         /// Toggles item open or closed
         /// </summary>

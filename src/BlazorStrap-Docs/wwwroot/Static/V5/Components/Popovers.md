@@ -33,6 +33,14 @@ By default content html for componets is always rendered to limit the rendering 
 
 {{sample=V5/Components/Popover/Popover3}}
 
+### Confirmation Popover
+
+:::{.bd-callout .bd-callout-warning}
+** Note: Added in 5.2.102-Preview3
+:::
+
+{{sample=V5/Components/Popover/Popover4}}
+
 ### Methods / Events
 TValue = BSPopover
 :::

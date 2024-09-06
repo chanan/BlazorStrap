@@ -139,6 +139,8 @@ namespace BlazorStrap.Shared.Components.Modal
         /// </summary>
         [Parameter] public bool IsManual { get; set; }
 
+      
+    
         #region Render props
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
@@ -150,7 +152,11 @@ namespace BlazorStrap.Shared.Components.Modal
         protected abstract string? FooterClassBuilder { get; }
         #endregion
 
+        private bool _showAsConfirmation { get; set; }
+        private TaskCompletionSource<bool> ConfirmationdTask;
+        
         protected bool ShouldRenderContent { get; set; } = false;
+        
         private bool _secondRender;
 
         protected override void OnInitialized()
@@ -159,8 +165,15 @@ namespace BlazorStrap.Shared.Components.Modal
             ShouldRenderContent = ContentAlwaysRendered;
             CanRefresh = true;
         }
+
         /// <inheritdoc/>
-        public override async Task HideAsync()
+        public override Task HideAsync()
+        {
+            return HideAsync(false);
+        }
+
+        /// <inheritdoc/>
+        public override async Task HideAsync(bool confirmationValue = false)
         {
             if (!_shown) return ;
             await OnHide.InvokeAsync(this);
@@ -187,6 +200,8 @@ namespace BlazorStrap.Shared.Components.Modal
                 await OnHidden.InvokeAsync(this);
                 await BlazorStrapService.JavaScriptInterop.CheckBackdropsAsync();
                 taskSource.SetResult(true);
+                if(_showAsConfirmation)
+                    ConfirmationdTask.SetResult(confirmationValue);
             };
 
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
@@ -196,6 +211,19 @@ namespace BlazorStrap.Shared.Components.Modal
             }
             await taskSource.Task;
         }
+        /// <inheritdoc/>
+        public override async Task<bool> ShowAsync(bool showAsConfirmation)
+        {
+            ConfirmationdTask = new TaskCompletionSource<bool>();
+            _showAsConfirmation = showAsConfirmation;
+
+            await ShowAsync();
+            if (_showAsConfirmation)
+                return await ConfirmationdTask.Task;
+
+            return false;
+        }
+
         /// <inheritdoc/>
         public override async Task ShowAsync()
         {
@@ -239,6 +267,7 @@ namespace BlazorStrap.Shared.Components.Modal
                 await InvokeAsync(StateHasChanged);
             }
             await taskSource.Task;
+            // Hold result if needed
         }
         /// <inheritdoc/>
         public override Task ToggleAsync()

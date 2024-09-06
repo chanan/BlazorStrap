@@ -8,7 +8,7 @@
         <a href="javascript:void(0);" data-blazorstrap="tooltip1">This link</a> and <a href="javascript:void(0);" data-blazorstrap="tooltip2">that link</a> have tooltips on hover
         <BSPopover Placement="Placement.Top" Target="popover1">
             <Header>Popover title</Header>
-            <Content>Popover body content is set in this attribute.</Content>
+            <Content Context="popover">Popover body content is set in this attribute.</Content>
         </BSPopover>
         <BSTooltip Target="tooltip1">Tooltip</BSTooltip>
         <BSTooltip Target="tooltip2">Tooltip</BSTooltip>

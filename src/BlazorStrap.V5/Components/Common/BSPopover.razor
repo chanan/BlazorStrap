@@ -17,13 +17,19 @@
             if (IsNavItemList)
             {
                 <ul class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap">
-                    @Content
+                    @if (Content != null)
+                    {
+                        @Content(this)
+                    }
                 </ul>
             }
             else
             {
                 <div class="@ClassBuilder" style="@Style" @attributes="Attributes" @ref="MyRef" data-popper-placement="@Placement.Name().ToDashSeperated()" data-blazorstrap="@DataId" data-bs-popper="blazorstrap">
-                    @Content
+                    @if (Content != null)
+                    {
+                        @Content(this)
+                    }
                 </div>
             }
         }
@@ -38,7 +44,10 @@
                     </div>
                 }
                 <div class="popover-body">
-                    @Content
+                    @if(Content != null)
+                    {
+                        @Content(this);
+                    }
                 </div>
             </div>
         }

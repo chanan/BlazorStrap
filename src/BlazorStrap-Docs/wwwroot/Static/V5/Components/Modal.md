@@ -39,6 +39,14 @@ See [shared](layout/shared) for additional parameters
 
 {{sample=V5/Components/Modal/Modal1}}
 
+### Confirmation Model 
+
+:::{.bd-callout .bd-callout-warning}
+** Note: Added in 5.2.102-Preview3
+:::
+
+{{sample=V5/Components/Modal/Modal1b}}
+
 ### Static backdrop
 
 {{sample=V5/Components/Modal/Modal2}}

@@ -51,10 +51,10 @@
     private bool HasIcon { get; set; }
     private Toast ToastPlacement { get; set; }
     private int ZIndex { get; set; } = 1025;
-    private Position ToastPosition { get; set; } = Position.Fixed;
+    private Position ToastPosition { get; set; } = Position.Absolute;
     private BSColor Color { get; set; }
     private int Time { get; set; } = 0;
-    private int i = 0;
+    private int i = 0; 
 
     private void Show()
     {

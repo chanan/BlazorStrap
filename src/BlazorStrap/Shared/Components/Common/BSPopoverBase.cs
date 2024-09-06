@@ -23,7 +23,7 @@ namespace BlazorStrap.Shared.Components.Common
         /// Popover content.
         /// </summary>
         [Parameter]
-        public RenderFragment? Content { get; set; }
+        public RenderFragment<BSPopoverBase>? Content { get; set; }
 
         private bool _called;
 
@@ -96,6 +96,8 @@ namespace BlazorStrap.Shared.Components.Common
         [Parameter]
         public string Style { get; set; } = string.Empty;
 
+        private bool _showAsConfirmation { get; set; }
+        private TaskCompletionSource<bool> ConfirmationdTask;
         protected bool ShouldRenderContent { get; set; } = true;
         private bool _secondRender;
         protected override void OnInitialized()
@@ -103,8 +105,15 @@ namespace BlazorStrap.Shared.Components.Common
             BlazorStrapService.OnEvent += OnEventAsync;
             ShouldRenderContent = ContentAlwaysRendered;
         }
+
         /// <inheritdoc/>
-        public override async Task HideAsync()
+        public override Task HideAsync()
+        {
+            return HideAsync(false);
+        }
+
+        /// <inheritdoc/>
+        public override async Task HideAsync(bool confirmationValue = false)
         {
             if (!_shown) return;
             await OnHide.InvokeAsync(this);
@@ -128,6 +137,8 @@ namespace BlazorStrap.Shared.Components.Common
                 await InvokeAsync(StateHasChanged);
                 await OnHidden.InvokeAsync(this);
                 taskSource.SetResult(true);
+                if (_showAsConfirmation)
+                    ConfirmationdTask.SetResult(confirmationValue);
             };
 
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
@@ -139,6 +150,18 @@ namespace BlazorStrap.Shared.Components.Common
             await taskSource.Task;
         }
 
+        /// <inheritdoc/>
+        public override async Task<bool> ShowAsync(bool showAsConfirmation)
+        {
+            ConfirmationdTask = new TaskCompletionSource<bool>();
+            _showAsConfirmation = showAsConfirmation;
+
+            await ShowAsync();
+            if (_showAsConfirmation)
+                return await ConfirmationdTask.Task;
+
+            return false;
+        }
 
         /// <inheritdoc/>
         public override async Task ShowAsync()
@@ -195,16 +218,23 @@ namespace BlazorStrap.Shared.Components.Common
         /// <exception cref="NullReferenceException">When <paramref name="target"/> or <paramref name="content"/> is null</exception>
         public async Task ShowAsync(string? target, string? content, Placement placement, string? header = null)
         {
-
-            if (target == null || content == null)
+            if (target == null || (content == null && Content == null))
             {
                 throw new NullReferenceException("Target and Content cannot be null");
             }
             Placement = placement;
             Target = target;
-            Content = CreateFragment(content);
+            //add content as markupstring and invoke this
+            if (content != null)
+            {
+                Content = data => builder =>
+                {
+                    builder.AddMarkupContent(0, content);
+                };
+            }
             if (header != null)
-                Header = CreateFragment(header);
+                Header = builder => builder.AddContent(0, header);
+
 
             //Hides the old pop up. Placed here allows sizing to work properly don't move
             if (Shown)
@@ -212,6 +242,28 @@ namespace BlazorStrap.Shared.Components.Common
             else
                 await InvokeAsync(StateHasChanged);
             await ShowAsync();
+        }
+
+        /// <summary>
+        /// Method used to dynamically create and show popover element.
+        /// </summary>
+        /// <param name="target">Data-Blazorstrap attribute value to target.</param>
+        /// <param name="content">Popover content.</param>
+        /// <param name="placement">Popover placement. See <see cref="Placement"/></param>
+        /// <param name="header">Header content</param>
+        /// <returns>Completed task when popover is shown.</returns>
+        /// <exception cref="NullReferenceException">When <paramref name="target"/> or <paramref name="content"/> is null</exception>
+        public async Task<bool> ShowAsync(bool showAsConfirmation, string? target, string? content, Placement placement, string? header = null)
+        {
+            ConfirmationdTask = new TaskCompletionSource<bool>();
+            _showAsConfirmation = showAsConfirmation;
+
+            await ShowAsync(target, content, placement, header);
+            if (_showAsConfirmation)
+                return await ConfirmationdTask.Task;
+
+            return false;
+            
         }
 
         /// <inheritdoc/>
@@ -274,7 +326,7 @@ namespace BlazorStrap.Shared.Components.Common
             {
                 await HideAsync();
             }
-            else if(sender == "javascript" && target == Target && type == EventType.Click)
+            else if (sender == "javascript" && target == Target && type == EventType.Click)
             {
                 await ToggleAsync();
             }
@@ -354,7 +406,6 @@ namespace BlazorStrap.Shared.Components.Common
             catch { }
             GC.SuppressFinalize(this);
         }
-        private RenderFragment CreateFragment(string value) => (builder) => builder.AddMarkupContent(0, value);
         #endregion
     }
 }
