@@ -17,6 +17,7 @@ See [shared](layout/shared) for additional parameters
 | Content               | RenderFragment | RenderFragment | Nested Content														|   
 | ContentAlwaysRendered | bool           | bool           | default=false. Hides content for component when not show if false	|
 | PopperOptions         | object         | dynamic object | Sets additional popper.js options.									|
+| NoClickEvent          | bool           | true/false     | default=false. Disables click event on target                       |
 
 :::
 
@@ -35,6 +36,14 @@ Note `MouseOver` parameter will not work here
 By default content html for componets is always rendered to limit the rendering required when showing. If you want to hide the html when not shown set HtmlAlwaysRendered to false. This will cause the content html of component to be rendered when shown and removed when hidden. This may cause a slight delay when showing. 
 
 {{sample=V5/Components/Popover/Popover3}}
+
+### Confirmation Popover
+
+:::{.bd-callout .bd-callout-warning}
+** Note: Added in 5.2.102-Preview3
+:::
+
+{{sample=V4/Components/Popover/Popover4}}
 
 ### Methods / Events
 TValue = BSPopover
