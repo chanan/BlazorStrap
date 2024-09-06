@@ -14,7 +14,7 @@ See [shared](layout/shared) for additional parameters
 | Content               | RenderFragment | RenderFragment | Nested Content														|   
 | ContentAlwaysRendered | bool           | bool           | default=false. Hides content for component when not show if false	|
 | PopperOptions         | object         | dynamic object | Sets additional popper.js options.									|
-
+| NoClickEvent          | bool           | true/false     | default=false. Disables click event on target                       |
 :::
 
 ### Example
