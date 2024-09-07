@@ -9,18 +9,22 @@ namespace BlazorStrap
         public Action? OnChange;
         public ConcurrentDictionary<Guid, Toasts> Children { get; } = new ConcurrentDictionary<Guid, Toasts>();
 
-        public void Add(string? header, string? content)
+        public void Add(string? header, string? content, BSColor color = BSColor.Primary, bool hasIcon = false, int closeAfter = 0)
         {
             AddChild(header, content, o =>
             {
-                o.Color = BSColor.Primary;
+                o.Color = color;
+                o.HasIcon = hasIcon;
+                o.CloseAfter = closeAfter;
             });
         }
-        public void Add(string? content)
+        public void Add(string? content, BSColor color = BSColor.Primary, bool hasIcon = false, int closeAfter = 0)
         {
             AddChild(null, content, o =>
             {
-                o.Color = BSColor.Primary;
+                o.Color = color;
+                o.HasIcon = hasIcon;
+                o.CloseAfter = closeAfter;
             });
         }
         public void Add(string? content, Action<Options>? options)
