@@ -23,6 +23,18 @@ namespace BlazorStrap.Utilities;
 #if NET8_0
 public abstract class BlazorInputBase<TValue> : InputBase<TValue>
 {
+    [CascadingParameter] private EditContext? CascadeEditContext { get; set; }
+    private TValue? _value => Value;
+
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        if (CascadeEditContext == null && ValueExpression == null)
+        {
+            ValueExpression = () => _value;
+        }
+
+        return base.SetParametersAsync(parameters);
+    }
 }
 #else
 public abstract class BlazorInputBase<TValue> : ComponentBase, IDisposable

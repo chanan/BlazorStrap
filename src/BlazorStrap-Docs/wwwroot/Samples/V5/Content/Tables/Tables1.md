@@ -93,7 +93,7 @@
     <BSInputCheckbox @bind-Value="OIsActive" IsToggle="true" IsOutlined="true" Color="BSColor.Primary" CheckedValue="true" UnCheckedValue="false">TRIsActive</BSInputCheckbox>
 </div>
 <!--//-->
-<!-- Options Form not shown
+<!-- Options Form not shown-->
 @code {
     // BSTable Parameters
     private BSColor OTableColor { get; set; } = BSColor.Default; // Not Set

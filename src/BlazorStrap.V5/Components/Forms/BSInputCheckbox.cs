@@ -57,13 +57,13 @@ namespace BlazorStrap.V5
                 builder.AddAttribute(10, "id", Helper.Id);
             }
             builder.AddAttribute(11, "disabled", IsDisabled);
+#if NET8_0_OR_GREATER
+            builder.AddAttribute(19, "name", NameAttributeValue );
+#endif
             if (IsToggle)
                 builder.AddAttribute(12, "id", id);
             builder.AddMultipleAttributes(13, AdditionalAttributes);
             builder.AddElementReferenceCapture(14, elReference => Element = elReference);
-#if NET8_0_OR_GREATER
-            builder.AddAttribute(15, "name",NameAttributeValue );
-#endif
             builder.CloseElement();
             if (IsToggle)
             {

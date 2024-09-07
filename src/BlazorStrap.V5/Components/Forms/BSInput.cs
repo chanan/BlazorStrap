@@ -45,6 +45,7 @@ namespace BlazorStrap.V5
                 builder.AddAttribute(4, "onchange", EventCallback.Factory.CreateBinder<string?>(this, OnChangeEvent, CurrentValueAsString));
                 builder.AddAttribute(5, "oninput", EventCallback.Factory.CreateBinder<string?>(this, OnInputEvent, CurrentValueAsString));
             }
+            
             builder.AddAttribute(6, "disabled", IsDisabled);
             builder.AddAttribute(7, "readonly", IsReadonly);
             builder.AddAttribute(8, "onblur", OnBlurEvent);

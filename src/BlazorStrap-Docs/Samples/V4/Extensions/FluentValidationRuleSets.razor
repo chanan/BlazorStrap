@@ -30,7 +30,7 @@
 </BSForm>
 <!--//-->
 @code {
-    <!--\\-->
+    //<!--\\-->
     private Customer customer = new Customer();
 
     void SaveCustomer()
@@ -53,7 +53,7 @@
         public string Postcode { get; set; }
     }
 
-    <!--//-->
+    //<!--//-->
     public class CustomerValidator : AbstractValidator<Customer>
     {
         public CustomerValidator()
