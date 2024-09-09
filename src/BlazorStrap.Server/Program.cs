@@ -1,3 +1,4 @@
+using BlazorStrap_Docs;
 using BlazorStrap;
 using BlazorStrap_Docs.Service;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -9,6 +10,7 @@ builder.Services.AddBlazorStrap();
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddScoped<Core>();
 var app = builder.Build();
 app.UseForwardedHeaders(new ForwardedHeadersOptions()

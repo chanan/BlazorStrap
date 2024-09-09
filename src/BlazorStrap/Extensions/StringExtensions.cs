@@ -56,6 +56,8 @@ namespace BlazorStrap.Extensions
 
         public static string? ToNullString(this string value)
         {
+            //If the value is a space, make it null
+            if (value == " ") value = "";
             return string.IsNullOrEmpty(value) ? null : value;
         }
         public static string RemoveClassDoubles(this string value)

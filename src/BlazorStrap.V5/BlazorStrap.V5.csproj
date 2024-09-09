@@ -13,9 +13,13 @@
 		<PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
 		<RootNamespace>BlazorStrap.V5</RootNamespace>
-		<PackageVersion>5.2.102-Preview3</PackageVersion><!--Next Use 5.2.200-Preview1-->
+		<PackageVersion>5.2.102-Preview3c</PackageVersion><!--Next Use 5.2.200-Preview1-->
 	</PropertyGroup>
 
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+		<_CurrentProjectDiscoveredScopedCssFiles Include="@(ThemeCssFiles)" RelativePath="%(Identity)" BasePath="_content/$(AssemblyName)" />
+	</ItemGroup>
 	<ItemGroup Condition="  '$(TargetFramework)' == 'net6.0'  ">
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.*" />
 		<PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
@@ -24,7 +28,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.*" />
 		<PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
 	</ItemGroup>
-	<ItemGroup Condition="  '$(TargetFramework)' == 'net87.0'  ">
+	<ItemGroup Condition="  '$(TargetFramework)' == 'net8.0'  ">
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.*" />
 		<PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
 	</ItemGroup>

@@ -1,5 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-
+  <PropertyGroup>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -15,46 +18,26 @@
 
   <ItemGroup>
     <PackageReference Include="Markdig.SyntaxHighlighting" Version="1.0.0-custom" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.*" />
 	<PackageReference Include="Markdig" Version="0.26.0" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.8" />
 	  
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorStrap.V5\BlazorStrap.V5.csproj" />
 	<ProjectReference Include="..\BlazorStrap.V4\BlazorStrap.V4.csproj" />
-    <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />
+<!--    <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />-->
     <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj" />
     <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.TreeView\BlazorStrap.Extensions.TreeView.csproj" />
     <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.Wizard\BlazorStrap.Extensions.Wizard.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="Samples\V4\Components\Navbar\Navbar10.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Samples\V4\Components\Nav\Nav17.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Samples\V5\Components\Nav\Nav17.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Shared\MainLayout.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\Static\V5\Test\Modal.md" />
-  </ItemGroup>
-
-
-	<Target Name="BeforeBuildStep" BeforeTargets="Build">
-		<ItemGroup>
-			<ANTLR Include=".\Samples\**\*.*" />
-		</ItemGroup>
-		<Copy SourceFiles="@(ANTLR)" DestinationFiles=".\wwwroot\Samples\%(RecursiveDir)%(Filename).md" SkipUnchangedFiles="true" />
-	</Target>
-	
+    
+<!--	<Target Name="BeforeBuildStep" BeforeTargets="Build">-->
+<!--		<ItemGroup>-->
+<!--			<ANTLR Include=".\Samples\**\*.*" />-->
+<!--		</ItemGroup>-->
+<!--		<Copy SourceFiles="@(ANTLR)" DestinationFiles=".\wwwroot\Samples\%(RecursiveDir)%(Filename).md" SkipUnchangedFiles="true" />-->
+<!--	</Target>-->
+<!--	-->
 
 </Project>

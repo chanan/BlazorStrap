@@ -16,6 +16,12 @@ namespace BlazorStrap_Docs.SamplesHelpers.Content.Tables
                 {
                     Id = (i + 1000).ToString(),
                     Name = name,
+                    NameObject = new Name()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        FirstName = name.Split(' ')[0],
+                        LastName = name.Split(' ')[1]
+                    },
                     Email = name.Replace(" ", ".") + "@" + email[rd.Next(0, email.Length - 1)],
                     RowColor = Table2Model.GetRandomColor()
                 });

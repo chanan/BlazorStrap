@@ -1,0 +1,23 @@
+﻿.datagrid {
+    /*height: 25rem !important;*/
+    overflow-y: auto;
+}
+
+.datagrid ::deep table {
+}
+
+.datagrid ::deep thead {
+    position: sticky;
+    top:0;
+    z-index: 1;
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+}
+
+.datagrid ::deep tr {
+    height: 30px;
+}
+
+.datagrid ::deep tbody td {
+   
+}

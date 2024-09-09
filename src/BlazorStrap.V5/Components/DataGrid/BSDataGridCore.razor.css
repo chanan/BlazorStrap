@@ -1,0 +1,79 @@
+﻿.grid-header-button {
+    font-weight: inherit;
+    background: none;
+    color: inherit;
+    border: none;
+    text-align: inherit;
+    margin: 0;
+    padding: 0;
+}
+th button.sort-by {
+    padding-right: 18px;
+    position: relative;
+}
+
+button.sort-by:before,
+button.sort-by:after {
+    border: 4px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 5px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+
+button.sort-by:before {
+    border-bottom-color: #666;
+    margin-top: -9px;
+}
+
+button.sort-by:after {
+    border-top-color: #666;
+    margin-top: 1px;
+}
+
+th button.sort {
+    padding-right: 18px;
+    position: relative;
+}
+
+button.sort:before,
+button.sort:after {
+    border: 4px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 5px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+
+button.sort:before {
+    border-bottom-color: #666;
+    margin-top: -9px;
+}
+
+th button.sort-desc {
+    padding-right: 18px;
+    position: relative;
+}
+
+button.sort-desc:before,
+button.sort-desc:after {
+    border: 4px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 5px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+
+button.sort-desc:after {
+    border-top-color: #666;
+    margin-top: 1px;
+}

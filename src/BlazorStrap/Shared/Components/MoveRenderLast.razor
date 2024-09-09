@@ -1,0 +1,9 @@
+﻿@namespace BlazorStrap
+@ChildContent
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    public Task RefreshAsync()
+    {
+        return InvokeAsync(StateHasChanged);
+    }
+}

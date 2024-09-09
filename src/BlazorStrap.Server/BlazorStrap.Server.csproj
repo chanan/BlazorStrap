@@ -8,7 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorStrap-Docs\BlazorStrap-Docs.csproj" />
+    <ProjectReference Include="..\BlazorStrap.Docs\BlazorStrap.Docs.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Watch Include="../BlazorStrap/**/*.razor" />
+    <Watch Include="../BlazorStrap/**/*.razor.css" />
+    <Watch Include="../BlazorStrap.V5/**/*.razor" />
+    <Watch Include="../BlazorStrap.V5/**/*.razor.css" />
+    <Watch Include="../BlazorStrap.V4/**/*.razor" />
+    <Watch Include="../BlazorStrap.V4/**/*.razor.css" />
+  </ItemGroup>
+  
 </Project>

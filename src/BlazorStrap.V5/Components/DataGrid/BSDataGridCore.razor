@@ -1,0 +1,150 @@
+﻿@namespace BlazorStrap.V5.Internal.Do.Not.Use
+@typeparam TGridItem
+@using BlazorComponentUtilities
+@using BlazorStrap.Shared.Components.DataGrid
+@using Microsoft.AspNetCore.Components.Rendering
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@inherits BlazorStrap.Shared.Components.DataGrid.BSDataGridCoreBase<TGridItem>
+@if (IsResponsive)
+{
+    <div class="@WrapperClassBuilder">
+        <table class="@ClassBuilder">
+            <thead>
+            <tr>
+                @HeaderTemplate
+            </tr>
+            </thead>
+            <tbody>
+            @if (IsVirtualized)
+            {
+                <Virtualize
+                    TItem="(int rowIndex, TGridItem data)"
+                    ItemContent="@(item => builder => RenderRow(builder, item.rowIndex, item.data))"
+                    ItemsProvider="VirtualizedProvider"
+                    ItemSize="30"
+                    OverscanCount="10"
+                    @ref="VirtualizeRef"/>
+            }
+            else
+            {
+                @BodyTemplate
+            }
+            </tbody>
+            <tfoot>
+            @FooterTemplate
+            </tfoot>
+        </table>
+    </div>
+}
+else
+{
+    <table class="@ClassBuilder">
+        <thead>
+        <tr>
+            @HeaderTemplate
+        </tr>
+        </thead>
+        <tbody>
+        @if (IsVirtualized)
+        {
+            <Virtualize
+                TItem="(int rowIndex, TGridItem data)"
+                ItemContent="@(item => builder => RenderRow(builder, item.rowIndex, item.data))"
+                ItemsProvider="VirtualizedProvider"
+                ItemSize="30"
+                OverscanCount="10"
+                @ref="VirtualizeRef"/>
+        }
+        else
+        {
+            @BodyTemplate
+        }
+        </tbody>
+        <tfoot>
+        @FooterTemplate
+        </tfoot>
+    </table>
+}
+
+@{ /*This looks odd but remember razor allows mixed html and C#.*/ }
+
+@code
+{
+    protected override void RenderHeader(RenderTreeBuilder __builder)
+    {
+        @foreach (var column in ColumnState.Columns)
+        {
+            if (column.Header != null)
+            {
+                <th @key="column" style="@(column.SortOrder > 0 ? $"--sortOrder:{column.SortOrder};" : "")">
+                    @{ __builder.AddContent(0, column.Header); }
+                </th>
+            }
+            else
+            {
+                <th @key="column" style="@(column.SortOrder > 0 ? $"--sortOrder:{column.SortOrder};" : "")">
+                    @if (column.IsSortable)
+                    {
+                        <div class="d-flex">
+
+                            <button class="me-auto @column.SortClassBuilder flex-grow-1" @onclick="(e) => ApplySortAsync(e, column.Id)">
+                                @column.Title
+                            </button>
+                            @if (column.SortOrder > 0 && ColumnState.SortColumns.Count(x => x.Sorted) > 1)
+                            {
+                                <div>
+                                    <span class="@MultiSortClass">@column.SortOrder</span>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        @column.Title
+                    }
+                </th>
+            }
+        }
+    }
+
+    protected override void RenderBody(RenderTreeBuilder __builder)
+    {
+        var ariaIndex = 2;
+
+        @foreach (var item in DisplayedItems ?? new List<TGridItem>())
+        {
+            RenderRow(__builder, ariaIndex++, item);
+        }
+    }
+
+    protected override void RenderRow(RenderTreeBuilder __builder, int rowIndex, TGridItem item)
+    {
+        var rowClass = "";
+        var rowStyle = "";
+        if (RowClassFunc != null) rowClass = RowClassFunc(item);
+        if (RowStyleFunc != null) rowStyle = RowStyleFunc(item);
+        <tr @key="item" aria-rowindex="@rowIndex" class="@(new CssBuilder().AddClass(rowClass).AddClass(rowStyle).NullIfEmpty())" style="@($"{rowStyle} {RowStyle}".ToNullString())">
+            @foreach (var column in ColumnState.Columns)
+            {
+                if (column.ClassFunc != null) column.Class = column.ClassFunc(item);
+                if (column.StyleFunc != null) column.Style = column.StyleFunc(item);
+
+                <td @key="column" class="@column.ClassBuilder" style="@column.Style">
+                    @{ column.CellContent(__builder, item); }
+                </td>
+            }
+        </tr>
+    }
+
+    protected override void RenderFooter(RenderTreeBuilder __builder)
+    {
+        @foreach (var column in ColumnState.Columns)
+        {
+            if (column.Footer != null)
+            {
+                __builder.AddContent(0, column.Footer);
+            }
+        }
+    }
+
+}

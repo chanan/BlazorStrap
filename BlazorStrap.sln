@@ -6,9 +6,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap", "src\BlazorSt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Server", "src\BlazorStrap.Server\BlazorStrap.Server.csproj", "{4D1CD190-DA57-410E-8B80-99BC55E071E5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap-Docs", "src\BlazorStrap-Docs\BlazorStrap-Docs.csproj", "{FD2823C0-8B9F-4BE6-8973-D2D0DA5946F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Docs", "src\BlazorStrap.Docs\BlazorStrap.Docs.csproj", "{FD2823C0-8B9F-4BE6-8973-D2D0DA5946F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.WASM", "src\BlazorStrap-WASM\BlazorStrap.WASM.csproj", "{87EC6C53-E1FC-4E3F-A089-F4D20FF19E70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.WASM", "src\BlazorStrap.WASM\BlazorStrap.WASM.csproj", "{87EC6C53-E1FC-4E3F-A089-F4D20FF19E70}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStrap.Tests", "src\BlazorStrap.Tests\BlazorStrap.Tests.csproj", "{63E96825-F8C9-4505-B2BB-89A4F8A54A36}"
 EndProject
