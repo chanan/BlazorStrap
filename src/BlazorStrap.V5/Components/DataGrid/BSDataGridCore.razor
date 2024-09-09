@@ -5,9 +5,45 @@
 @using Microsoft.AspNetCore.Components.Rendering
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 @inherits BlazorStrap.Shared.Components.DataGrid.BSDataGridCoreBase<TGridItem>
-@if (IsResponsive)
-{
-    <div class="@WrapperClassBuilder">
+
+<div class="d-flex flex-column">
+    @if (Pagination != null && !IsVirtualized && Pagination.PlacementIsTop)
+    {
+        <BSPagination Pages="Pagination.TotalPages" Value="Pagination.CurrentPage" ValueChanged="PageChangedAsync" Class="@Pagination.PlacementClass"/>
+    }
+    @if (IsResponsive)
+    {
+        <div class="@WrapperClassBuilder">
+            <table class="@ClassBuilder">
+                <thead>
+                <tr>
+                    @HeaderTemplate
+                </tr>
+                </thead>
+                <tbody>
+                @if (IsVirtualized)
+                {
+                    <Virtualize
+                        TItem="(int rowIndex, TGridItem data)"
+                        ItemContent="@(item => builder => RenderRow(builder, item.rowIndex, item.data))"
+                        ItemsProvider="VirtualizedProvider"
+                        ItemSize="30"
+                        OverscanCount="10"
+                        @ref="VirtualizeRef"/>
+                }
+                else
+                {
+                    @BodyTemplate
+                }
+                </tbody>
+                <tfoot>
+                @FooterTemplate
+                </tfoot>
+            </table>
+        </div>
+    }
+    else
+    {
         <table class="@ClassBuilder">
             <thead>
             <tr>
@@ -34,38 +70,12 @@
             @FooterTemplate
             </tfoot>
         </table>
-    </div>
-}
-else
-{
-    <table class="@ClassBuilder">
-        <thead>
-        <tr>
-            @HeaderTemplate
-        </tr>
-        </thead>
-        <tbody>
-        @if (IsVirtualized)
-        {
-            <Virtualize
-                TItem="(int rowIndex, TGridItem data)"
-                ItemContent="@(item => builder => RenderRow(builder, item.rowIndex, item.data))"
-                ItemsProvider="VirtualizedProvider"
-                ItemSize="30"
-                OverscanCount="10"
-                @ref="VirtualizeRef"/>
-        }
-        else
-        {
-            @BodyTemplate
-        }
-        </tbody>
-        <tfoot>
-        @FooterTemplate
-        </tfoot>
-    </table>
-}
-
+    }
+    @if (Pagination != null && !IsVirtualized && Pagination.PlacementIsBottom)
+    {
+        <BSPagination Pages="Pagination.TotalPages" Value="Pagination.CurrentPage" ValueChanged="PageChangedAsync" Class="@Pagination.PlacementClass"/>
+    }
+</div>
 @{ /*This looks odd but remember razor allows mixed html and C#.*/ }
 
 @code

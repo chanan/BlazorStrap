@@ -1,4 +1,6 @@
-﻿namespace BlazorStrap.Shared.Components.DataGrid.Models;
+﻿using BlazorStrap.Shared.Components.DataGrid;
+
+namespace BlazorStrap;
 
 public record FilterColumn<TGridItem>(Guid Id, string Value, string PropertyPath, ColumnBase<TGridItem> Column)
 {

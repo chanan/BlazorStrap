@@ -1,5 +1,4 @@
 ﻿using BlazorStrap.Shared.Components.Content;
-using BlazorStrap.Shared.Components.DataGrid.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
@@ -17,7 +16,6 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
     [Parameter] public GridItemsProvider<TGridItem>? ItemsProvider { get; set; }
     [Parameter] public bool IsVirtualized { get; set; } = false;
     [Parameter] public IQueryable<TGridItem>? Items { get; set; }
-    [Parameter] public bool Paginated { get; set; } = false;
 
     [Parameter] public string? RowClass { get; set; }
 
@@ -30,7 +28,8 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
     [Parameter] public bool IsMultiSort { get; set; } = false;
     [Parameter] public ColumnState<TGridItem> ColumnState { get; set; } = null!;
     [Parameter] public string MultiSortClass { get; set; } = "badge bg-info text-dark";
-    
+    [Parameter] public PaginationState? Pagination { get; set; } 
+    [Parameter] public IAsyncProvider AsyncProvider { get; set; } = new FakeAsyncProvider();
     protected RenderFragment? BodyTemplate { get; set; }
     protected RenderFragment? FooterTemplate { get; set; }
     protected RenderFragment? HeaderTemplate { get; set; }
@@ -50,8 +49,14 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
 
     protected override Task OnParametersSetAsync()
     {
+        if(Pagination is not null)
+        {
+            Pagination.OnStateChange = async state =>
+            {
+                await RefreshDataAsync();
+            };
+        }
         if(Items is not null && ItemsProvider is not null) throw new NullReferenceException("Both Items and ItemsProvider cannot be set. Only one can be set");
-
         var newItemsProvider = Items ?? (object?)ItemsProvider;
         var itemsProviderChanged = newItemsProvider != _lastItemsProvider;
         if (itemsProviderChanged)
@@ -92,7 +97,6 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
                 sortColumns.Column.SortOrder = count + 1;
                 sortColumns.Descending = sortColumns.Column.InitialSortDescending;
             }
-            //TODO: Set class so user knows it is sorted
             
             sortColumns.Descending = !sortColumns.Descending;
             sortColumns.Sorted = true;
@@ -119,8 +123,8 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
                 else
                 {
                     sortColumn.Sorted = false;
-                    sortColumn.Column.SortOrder = 1;
-                    sortColumn.Order = 1;
+                    sortColumn.Column.SortOrder = 0;
+                    sortColumn.Order = 0;
                     sortColumn.Descending = sortColumn.Column.InitialSortDescending;
                 }
             }
@@ -150,13 +154,28 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
         }
         else
         {
-            var request = new DataGridRequest<TGridItem>(
-                startIndex: 0,
-                count: null,
-                sortColumns: ColumnState.SortColumns,
-                filterColumns: ColumnState.FilterColumns,
-                cancellationToken: currentCancellationTokenSource.Token
-            );
+            DataGridRequest<TGridItem> request;
+            if (Pagination is not null)
+            {
+                request = new DataGridRequest<TGridItem>(
+                    startIndex: (Pagination.CurrentPage - 1) * Pagination.ItemsPerPage,
+                    count: Pagination.ItemsPerPage,
+                    sortColumns: ColumnState.SortColumns,
+                    filterColumns: ColumnState.FilterColumns,
+                    cancellationToken: currentCancellationTokenSource.Token
+                );
+            }
+            else
+            {
+                request = new DataGridRequest<TGridItem>(
+                    startIndex: 0,
+                    count: null,
+                    sortColumns: ColumnState.SortColumns,
+                    filterColumns: ColumnState.FilterColumns,
+                    cancellationToken: currentCancellationTokenSource.Token
+                );
+            }
+
             var responce = await FetchItemsAsync(request);
             if(!currentCancellationTokenSource.IsCancellationRequested)
             {
@@ -175,7 +194,11 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
         }
         else if (Items is not null)
         {
-            var totalItemCount = Items.Count();
+            var totalItemCount = await AsyncProvider.CountAsync(Items);
+            if(Pagination is not null && !Pagination.TotalItems.HasValue)
+            {
+                Pagination.TotalItems = totalItemCount;
+            }
             //TODO: Apply filters here
             var responce = request.ApplySort(Items, ColumnState.SortColumns).Skip(request.StartIndex);
             if(request.Count.HasValue)
@@ -183,7 +206,7 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
                 responce = responce.Take(request.Count.Value);
             }
 
-            var responceItems = responce.ToArray();
+            var responceItems = await AsyncProvider.ToArrayAsync(responce);
             return DataGridResponce.Create(responceItems, totalItemCount);
         }
 
@@ -209,6 +232,13 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
         }
 
         return default;
+    }
+    
+    protected async Task PageChangedAsync(int page)
+    {
+        if(Pagination is null) return;
+        await Pagination.GoToPageAsync(page);
+        await RefreshDataAsync();
     }
     #region Abstract Methods
 

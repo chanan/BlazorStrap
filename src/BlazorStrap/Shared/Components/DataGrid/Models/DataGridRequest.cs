@@ -1,6 +1,6 @@
 ﻿using BlazorStrap.Shared.Components.DataGrid.BSDataGirdHelpers;
 
-namespace BlazorStrap.Shared.Components.DataGrid.Models;
+namespace BlazorStrap;
 
 public readonly struct DataGridRequest<TGridItem>
 {

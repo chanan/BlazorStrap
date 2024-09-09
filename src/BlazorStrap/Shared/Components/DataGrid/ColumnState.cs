@@ -1,7 +1,4 @@
-﻿using BlazorStrap.Shared.Components.DataGrid.Models;
-using BlazorStrap.Utilities;
-
-namespace BlazorStrap.Shared.Components.DataGrid;
+﻿namespace BlazorStrap.Shared.Components.DataGrid;
 
 public class ColumnState<TGridItem>
 {

@@ -1,4 +1,4 @@
-﻿namespace BlazorStrap.Shared.Components.DataGrid.Models;
+﻿namespace BlazorStrap;
 
 public struct DataGridResponce<TGridItem>
 {

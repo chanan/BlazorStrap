@@ -1,7 +1,5 @@
-﻿using System.Linq.Expressions;
-using BlazorComponentUtilities;
+﻿using BlazorComponentUtilities;
 using BlazorStrap.Extensions;
-using BlazorStrap.Shared.Components.DataGrid.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 

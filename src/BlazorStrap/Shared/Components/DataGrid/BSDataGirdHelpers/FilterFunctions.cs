@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using BlazorStrap.Shared.Components.DataGrid.Models;
 
 namespace BlazorStrap.Shared.Components.DataGrid.BSDataGirdHelpers;
 

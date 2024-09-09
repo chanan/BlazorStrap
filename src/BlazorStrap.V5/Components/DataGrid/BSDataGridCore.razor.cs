@@ -12,7 +12,6 @@ public partial class BSDataGridCore<TGridItem> : BSDataGridCoreBase<TGridItem>
     /// </summary>
     [Parameter] public Size ResponsiveSize { get; set; } = Size.None;
     protected override string? LayoutClass => LayoutClassBuilder.Build(this);
-
     protected override string? ClassBuilder => new CssBuilder("table")
         .AddClass("table-striped", IsStriped)
         .AddClass("table-dark", IsDark)

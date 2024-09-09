@@ -1,43 +1,44 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-  <PropertyGroup>
-    <WarningLevel>0</WarningLevel>
-  </PropertyGroup>
-  
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>BlazorStrap_Docs</RootNamespace>
-	 <StaticWebAssetBasePath Condition="$(StaticWebAssetBasePath) == ''">/docs</StaticWebAssetBasePath>
-  </PropertyGroup>
+    <PropertyGroup>
+        <WarningLevel>0</WarningLevel>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>BlazorStrap_Docs</RootNamespace>
+        <StaticWebAssetBasePath Condition="$(StaticWebAssetBasePath) == ''">/docs</StaticWebAssetBasePath>
+    </PropertyGroup>
 
 
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
+    <ItemGroup>
+        <SupportedPlatform Include="browser"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Markdig.SyntaxHighlighting" Version="1.0.0-custom" />
-	<PackageReference Include="Markdig" Version="0.26.0" />
-	<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.8" />
-	  
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Markdig.SyntaxHighlighting" Version="1.0.0-custom"/>
+        <PackageReference Include="Markdig" Version="0.26.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.8"/>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BlazorStrap.V5\BlazorStrap.V5.csproj" />
-	<ProjectReference Include="..\BlazorStrap.V4\BlazorStrap.V4.csproj" />
-<!--    <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />-->
-    <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj" />
-    <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.TreeView\BlazorStrap.Extensions.TreeView.csproj" />
-    <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.Wizard\BlazorStrap.Extensions.Wizard.csproj" />
-  </ItemGroup>
-    
-<!--	<Target Name="BeforeBuildStep" BeforeTargets="Build">-->
-<!--		<ItemGroup>-->
-<!--			<ANTLR Include=".\Samples\**\*.*" />-->
-<!--		</ItemGroup>-->
-<!--		<Copy SourceFiles="@(ANTLR)" DestinationFiles=".\wwwroot\Samples\%(RecursiveDir)%(Filename).md" SkipUnchangedFiles="true" />-->
-<!--	</Target>-->
-<!--	-->
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BlazorStrap.V5\BlazorStrap.V5.csproj"/>
+        <ProjectReference Include="..\BlazorStrap.V4\BlazorStrap.V4.csproj"/>
+        <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj"/>
+        <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj"/>
+        <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.TreeView\BlazorStrap.Extensions.TreeView.csproj"/>
+        <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.Wizard\BlazorStrap.Extensions.Wizard.csproj"/>
+    </ItemGroup>
+
+
+    <Target Name="BeforeBuildStep" BeforeTargets="Build">
+        <ItemGroup>
+            <ANTLR Include=".\Samples\**\*.*"/>
+        </ItemGroup>
+        <Copy SourceFiles="@(ANTLR)" DestinationFiles=".\wwwroot\Samples\%(RecursiveDir)%(Filename).md" SkipUnchangedFiles="true"/>
+    </Target>
+
 
 </Project>
