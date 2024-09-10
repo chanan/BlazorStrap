@@ -1,4 +1,5 @@
 ﻿using BlazorStrap.Shared.Components.Content;
+using BlazorStrap.Shared.Components.DataGrid.Columns;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap.Shared.Components.DataGrid;

@@ -1,14 +1,12 @@
-﻿namespace BlazorStrap.Shared.Components.DataGrid;
+﻿namespace BlazorStrap.Shared.Components.DataGrid.Columns;
 
 public class ColumnState<TGridItem>
 {
     private readonly List<ColumnBase<TGridItem>> _columns = new();
     private readonly List<SortColumn<TGridItem>> _sortColumns = new();
-    private readonly List<FilterColumn<TGridItem>> _filterColumns = new();
     
     public ICollection<ColumnBase<TGridItem>> Columns => _columns;
     public ICollection<SortColumn<TGridItem>> SortColumns => _sortColumns;
-    public ICollection<FilterColumn<TGridItem>> FilterColumns => _filterColumns;
     public int SortOrder(Guid id) => _sortColumns.FirstOrDefault(x => x.Id == id)?.Order ?? 0;
     public bool IsSorted(Guid id) => _sortColumns.Any(x => x.Id == id && x.Sorted);
     public bool IsSortedDescending(Guid id) => _sortColumns.Any(x => x.Id == id && x.Descending);
@@ -35,4 +33,5 @@ public class ColumnState<TGridItem>
     {
         DataGrid = dataGrid;
     }
+    internal Func<Task>? OnStateChange { get; set; }
 }

@@ -3,9 +3,9 @@ using BlazorStrap.Extensions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace BlazorStrap.Shared.Components.DataGrid;
+namespace BlazorStrap.Shared.Components.DataGrid.Columns;
 
-public abstract partial class ColumnBase<TGridItem> : ComponentBase, IDisposable
+public abstract partial class ColumnBase<TGridItem> : ComponentBase, IDisposable, IColumnBase<TGridItem>
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     
@@ -23,7 +23,20 @@ public abstract partial class ColumnBase<TGridItem> : ComponentBase, IDisposable
     [Parameter] public string? Style { get; set; } = string.Empty;
     [Parameter] public Func<TGridItem, string>? ClassFunc { get; set; }
     [Parameter] public Func<TGridItem, string>? StyleFunc { get; set; }
-    
+    [Parameter] public RenderFragment<IColumnBase<TGridItem>>? ColumnOptions { get; set; }
+    [Parameter] public int FilterOrder { get; set; }
+
+    private string _filter = string.Empty;
+    public string Filter
+    {
+        get => _filter;
+        set
+        {
+            if (_filter == value) return;
+                _filter = value;
+            ColumnState?.OnStateChange?.Invoke();
+        }
+    }
     public int SortOrder { get; set; }
 
     //public delegate Func<SortData<TItem>, Task<SortData<TItem>>> SortData();

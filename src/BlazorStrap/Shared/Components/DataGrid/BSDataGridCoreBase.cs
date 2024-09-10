@@ -1,4 +1,5 @@
 ﻿using BlazorStrap.Shared.Components.Content;
+using BlazorStrap.Shared.Components.DataGrid.Columns;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
@@ -56,6 +57,9 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
                 await RefreshDataAsync();
             };
         }
+        
+        ColumnState.OnStateChange ??= async () => { await RefreshDataAsync(); };
+        
         if(Items is not null && ItemsProvider is not null) throw new NullReferenceException("Both Items and ItemsProvider cannot be set. Only one can be set");
         var newItemsProvider = Items ?? (object?)ItemsProvider;
         var itemsProviderChanged = newItemsProvider != _lastItemsProvider;
@@ -75,6 +79,7 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
     /// Do not modify this property. It is used to store the items that are displayed in the grid.
     /// </summary>
     protected ICollection<TGridItem> DisplayedItems = new List<TGridItem>();
+    public ICollection<ColumnFilter> ColumnFilters = new List<ColumnFilter>();
     private CancellationTokenSource? _pendingDataLoadCancellationTokenSource;
     public void ClearSort(Guid id)
     {
@@ -133,7 +138,7 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
         return RefreshDataAsync();
     }
 
-    private async Task RefreshDataAsync()
+    public async Task RefreshDataAsync()
     {
         await RefreshDataCoreAsync();
         await InvokeAsync(StateHasChanged);
@@ -161,7 +166,7 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
                     startIndex: (Pagination.CurrentPage - 1) * Pagination.ItemsPerPage,
                     count: Pagination.ItemsPerPage,
                     sortColumns: ColumnState.SortColumns,
-                    filterColumns: ColumnState.FilterColumns,
+                    filterColumns: ColumnFilters,
                     cancellationToken: currentCancellationTokenSource.Token
                 );
             }
@@ -171,7 +176,7 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
                     startIndex: 0,
                     count: null,
                     sortColumns: ColumnState.SortColumns,
-                    filterColumns: ColumnState.FilterColumns,
+                    filterColumns: ColumnFilters,
                     cancellationToken: currentCancellationTokenSource.Token
                 );
             }
@@ -199,7 +204,7 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
             {
                 Pagination.TotalItems = totalItemCount;
             }
-            //TODO: Apply filters here
+            //TODO: Apply filters here+
             var responce = request.ApplySort(Items, ColumnState.SortColumns).Skip(request.StartIndex);
             if(request.Count.HasValue)
             {

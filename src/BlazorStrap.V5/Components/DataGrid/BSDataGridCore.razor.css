@@ -7,6 +7,15 @@
     margin: 0;
     padding: 0;
 }
+::deep .grid-header-link{
+    font-weight: inherit;
+    background: none;
+    color: inherit;
+    border: none;
+    text-align: inherit;
+    margin: 0 .25rem 0 0;
+    padding: 0;
+}
 th button.sort-by {
     padding-right: 18px;
     position: relative;
@@ -76,4 +85,18 @@ button.sort-desc:after {
 button.sort-desc:after {
     border-top-color: #666;
     margin-top: 1px;
+}
+
+.system-uicons--filter {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 21 21'%3E%3Cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' d='M4.5 7.5h12m-10 3h8m-6 3h4'/%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
 }

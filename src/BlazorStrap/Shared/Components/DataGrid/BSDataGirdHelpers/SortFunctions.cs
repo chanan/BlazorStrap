@@ -44,7 +44,6 @@ internal static class SortFunctions
     
     private static Expression<Func<TItem, TKey>> OrderByPredicate<TItem, TKey>(string columnPropertyPath)
     {
-        Console.WriteLine(columnPropertyPath);
         var parameter = Expression.Parameter(typeof(TItem), "x");
         Expression property = parameter;
 

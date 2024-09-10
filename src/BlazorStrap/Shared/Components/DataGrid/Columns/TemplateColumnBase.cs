@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace BlazorStrap.Shared.Components.DataGrid;
+namespace BlazorStrap.Shared.Components.DataGrid.Columns;
 
 public abstract class TemplateColumnBase<TGridItem> : ColumnBase<TGridItem>
 {
@@ -12,14 +12,14 @@ public abstract class TemplateColumnBase<TGridItem> : ColumnBase<TGridItem>
     [Parameter] public override RenderFragment? Footer { get; set; }
     
     [Parameter]
-    public Expression<Func<TGridItem, object>>? SortField { get; set;}
-    private Expression<Func<TGridItem, object>>? _sortField;
+    public Expression<Func<TGridItem, object>>? SortByField { get; set;}
+    private Expression<Func<TGridItem, object>>? _sortByField;
     protected override void OnParametersSet()
     {
-        if (!Equals(_sortField,SortField) && SortField != null)
+        if (!Equals(_sortByField,SortByField) && SortByField != null)
         {   
-            _sortField = SortField;
-            PropertyPath = ExpressionHelper.GetPropertyPath(_sortField);
+            _sortByField = SortByField;
+            PropertyPath = ExpressionHelper.GetPropertyPath(_sortByField);
         }
     }
     public override void CellContent(RenderTreeBuilder builder, TGridItem item)

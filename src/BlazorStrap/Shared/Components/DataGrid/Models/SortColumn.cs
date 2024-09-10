@@ -1,4 +1,4 @@
-﻿using BlazorStrap.Shared.Components.DataGrid;
+﻿using BlazorStrap.Shared.Components.DataGrid.Columns;
 
 namespace BlazorStrap;
 

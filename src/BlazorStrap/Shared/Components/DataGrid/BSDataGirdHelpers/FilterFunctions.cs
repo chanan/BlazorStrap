@@ -4,37 +4,58 @@ namespace BlazorStrap.Shared.Components.DataGrid.BSDataGirdHelpers;
 
 internal static class FilterFunctions
 {
-    internal static void SetFilter<TItem>(this Guid id, string value, List<FilterColumn<TItem>> filterColumns)
-    {
-        var column = filterColumns.FirstOrDefault(x => x.Id == id);
-        if (column == null) return;
-        column.Value = value;
-    }
-    
-    internal static IQueryable<TGridItem> GetFilters<TGridItem>(this IQueryable<TGridItem> items, List<FilterColumn<TGridItem>> filterColumns)
+    internal static IQueryable<TGridItem> FiltersColumns<TGridItem>(this IQueryable<TGridItem> items, ICollection<ColumnFilter> columnFilters)
     {
         var filteredItems = items;
-        foreach (var column in filterColumns)
+        foreach (var filter in columnFilters)
         {
-            if (string.IsNullOrWhiteSpace(column.Value)) continue;
-            filteredItems = filteredItems.Where(WherePredicate<TGridItem>(column.PropertyPath, column.Value));
-        }
+            if (filter.Value is not null || filter.Operator == Operator.IsNotEmpty || filter.Operator == Operator.IsEmpty)
+            {
+                //if value is typeof string or nullable string continue
+                if (filter.Value is string or null && (filter.Operator is Operator.GreaterThan or Operator.GreaterThanOrEqual or Operator.LessThan or Operator.LessThanOrEqual )) continue;
+               
+             
+                var propertyExpression = ExpressionHelper.GetExpression<TGridItem>(filter.Property);
+                var property = propertyExpression.Body;
+                var propertyType = ExpressionHelper.GetPropertyType<TGridItem>(filter.Property);
+                
+                // Convert the filter value to the correct type
+                var constant = Expression.Constant(Convert.ChangeType(filter.Value, propertyType), propertyType);
+                var castedProperty = Expression.Convert(property, propertyType);
+                Expression body = filter.Operator switch
+                {
+                    Operator.Equal => Expression.Equal(castedProperty, constant),
+                    Operator.NotEqual => Expression.NotEqual(castedProperty, constant),
+                    Operator.StartsWith => Expression.Call(castedProperty, typeof(string).GetMethod("StartsWith", new[] { typeof(string) })!, constant),
+                    Operator.EndsWith => Expression.Call(castedProperty, typeof(string).GetMethod("EndsWith", new[] { typeof(string) })!, constant),
+                    Operator.Contains => Expression.Call(castedProperty, typeof(string).GetMethod("Contains", new[] { typeof(string) })!, constant),
+                    Operator.NotContains => Expression.Not(Expression.Call(castedProperty, typeof(string).GetMethod("Contains", new[] { typeof(string) })!, constant)),
+                    Operator.IsEmpty => Expression.OrElse(
+                        Expression.Equal(castedProperty, Expression.Constant(null, propertyType)),
+                        Expression.Equal(castedProperty, Expression.Constant(string.Empty, propertyType))
+                    ),
+                    Operator.IsNotEmpty => Expression.AndAlso(
+                        Expression.NotEqual(castedProperty, Expression.Constant(null, propertyType)),
+                        Expression.NotEqual(castedProperty, Expression.Constant(string.Empty, propertyType))
+                    ),
+                    Operator.GreaterThan => Expression.GreaterThan(castedProperty, constant),
+                    Operator.GreaterThanOrEqual => Expression.GreaterThanOrEqual(castedProperty, constant),
+                    Operator.LessThan => Expression.LessThan(castedProperty, constant),
+                    Operator.LessThanOrEqual => Expression.LessThanOrEqual(castedProperty, constant),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+                var lambda = Expression.Lambda<Func<TGridItem, bool>>(body, propertyExpression.Parameters);
+                filteredItems = filteredItems.Where(lambda);               
+            }
+        }     
         return filteredItems;
     }
-    
-    private static Expression<Func<TItem, bool>> WherePredicate<TItem>(string propertyPath, string filterValue)
+}
+// Move this later to do more unit testing on internal functions
+public static class UnitTest
+{
+    public static IQueryable<TGridItem> FilterFunctions_FiltersColumns<TGridItem>(this IQueryable<TGridItem> items, ICollection<ColumnFilter> columnFilters)
     {
-        var parameter = Expression.Parameter(typeof(TItem), "x");
-        Expression property = parameter;
-    
-        foreach (var member in propertyPath.Split('.'))
-        {
-            property = Expression.Property(property, member);
-        }
-    
-        var constant = Expression.Constant(filterValue);
-        var body = Expression.Equal(property, constant);
-        var lambda = Expression.Lambda<Func<TItem, bool>>(body, parameter);
-        return lambda;
+        return FilterFunctions.FiltersColumns(items, columnFilters);
     }
 }

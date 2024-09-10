@@ -7,9 +7,9 @@ public readonly struct DataGridRequest<TGridItem>
     public int StartIndex { get; init; }
     public int? Count { get; init; }
     public ICollection<SortColumn<TGridItem>> SortColumns { get; init; }
-    public ICollection<FilterColumn<TGridItem>> FilterColumns { get; init; }
+    public ICollection<ColumnFilter> FilterColumns { get; init; }
     public CancellationToken CancellationToken { get; init; }
-    internal DataGridRequest(int startIndex, int? count, ICollection<SortColumn<TGridItem>> sortColumns, ICollection<FilterColumn<TGridItem>> filterColumns, CancellationToken cancellationToken)
+    internal DataGridRequest(int startIndex, int? count, ICollection<SortColumn<TGridItem>> sortColumns, ICollection<ColumnFilter> filterColumns, CancellationToken cancellationToken)
     {
         StartIndex = startIndex;
         Count = count;
@@ -23,5 +23,9 @@ internal static class DataGridRequest
     internal static IQueryable<TItem> ApplySort<TItem>(this DataGridRequest<TItem> request, IQueryable<TItem> items, ICollection<SortColumn<TItem>> columns)
     {
         return items.SortColumns(columns) ?? items;
+    }
+    internal static IQueryable<TItem> ApplyFilters<TItem>(this DataGridRequest<TItem> request, IQueryable<TItem> items, ICollection<ColumnFilter> columns)
+    {
+        return items.FiltersColumns(columns) ?? items;
     }
 }

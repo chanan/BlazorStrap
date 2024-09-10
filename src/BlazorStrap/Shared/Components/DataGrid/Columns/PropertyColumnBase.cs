@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace BlazorStrap.Shared.Components.DataGrid;
+namespace BlazorStrap.Shared.Components.DataGrid.Columns;
 
 public abstract class PropertyColumnBase<TGridItem, TProp> : ColumnBase<TGridItem>
 {

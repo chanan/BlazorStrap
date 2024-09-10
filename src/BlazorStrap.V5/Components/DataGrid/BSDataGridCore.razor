@@ -4,8 +4,9 @@
 @using BlazorStrap.Shared.Components.DataGrid
 @using Microsoft.AspNetCore.Components.Rendering
 @using Microsoft.AspNetCore.Components.Web.Virtualization
+@using BlazorStrap.V5.Components.DataGrid
 @inherits BlazorStrap.Shared.Components.DataGrid.BSDataGridCoreBase<TGridItem>
-
+<FilterBuilder TGridItem="TGridItem" DataGrid="this"/>
 <div class="d-flex flex-column">
     @if (Pagination != null && !IsVirtualized && Pagination.PlacementIsTop)
     {
@@ -87,16 +88,42 @@
             if (column.Header != null)
             {
                 <th @key="column" style="@(column.SortOrder > 0 ? $"--sortOrder:{column.SortOrder};" : "")">
-                    @{ __builder.AddContent(0, column.Header); }
+                    <div class="d-flex">
+                        @if (column.ColumnOptions is not null)
+                        {
+                            <BSLink Class="grid-header-link" Target="@column.Id.ToString()">
+                                <span class="system-uicons--filter"></span>
+                            </BSLink>
+                        }
+                        <div>
+                            @{ __builder.AddContent(0, column.Header); }
+                        </div>
+                    </div>
+                    @if (column.ColumnOptions is not null)
+                    {
+                    <BSDropdown DataId="@column.Id.ToString()" Target="@column.Id.ToString()">
+                        <Content>
+                            @if (column.ColumnOptions is not null)
+                            {
+                            @(column.ColumnOptions(column))
+                            }
+                        </Content>
+                    </BSDropdown>
+                    }
                 </th>
             }
             else
             {
                 <th @key="column" style="@(column.SortOrder > 0 ? $"--sortOrder:{column.SortOrder};" : "")">
-                    @if (column.IsSortable)
-                    {
-                        <div class="d-flex">
-
+                    <div class="d-flex">
+                        @if (column.ColumnOptions is not null)
+                        {
+                            <BSLink Class="grid-header-link" Target="@column.Id.ToString()">
+                                <span class="system-uicons--filter"></span>
+                            </BSLink>
+                        }
+                        @if (column.IsSortable)
+                        {
                             <button class="me-auto @column.SortClassBuilder flex-grow-1" @onclick="(e) => ApplySortAsync(e, column.Id)">
                                 @column.Title
                             </button>
@@ -106,11 +133,22 @@
                                     <span class="@MultiSortClass">@column.SortOrder</span>
                                 </div>
                             }
-                        </div>
-                    }
-                    else
+                        }
+                        else
+                        {
+                            @column.Title
+                        }
+                    </div>
+                    @if (column.ColumnOptions is not null)
                     {
-                        @column.Title
+                        <BSDropdown DataId="@column.Id.ToString()" Target="@column.Id.ToString()">
+                            <Content>
+                                @if (column.ColumnOptions is not null)
+                                {
+                                    @(column.ColumnOptions(column))
+                                }
+                            </Content>
+                        </BSDropdown>
                     }
                 </th>
             }
