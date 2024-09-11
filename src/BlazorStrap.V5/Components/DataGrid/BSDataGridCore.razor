@@ -6,7 +6,7 @@
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 @using BlazorStrap.V5.Components.DataGrid
 @inherits BlazorStrap.Shared.Components.DataGrid.BSDataGridCoreBase<TGridItem>
-<FilterBuilder TGridItem="TGridItem" DataGrid="this"/>
+
 <div class="d-flex flex-column">
     @if (Pagination != null && !IsVirtualized && Pagination.PlacementIsTop)
     {
@@ -50,6 +50,8 @@
             <tr>
                 @HeaderTemplate
             </tr>
+
+            <FilterBuilder TGridItem="TGridItem" DataGrid="this"/>
             </thead>
             <tbody>
             @if (IsVirtualized)
@@ -92,23 +94,29 @@
                         @if (column.ColumnOptions is not null)
                         {
                             <BSLink Class="grid-header-link" Target="@column.Id.ToString()">
-                                <span class="system-uicons--filter"></span>
+                                <span class="@_menuClass"></span>
                             </BSLink>
                         }
                         <div>
                             @{ __builder.AddContent(0, column.Header); }
                         </div>
+                        @if (column.ColumnOptions is not null)
+                        {
+                            <BSLink Class="grid-header-link" OnClick="() => ColumnFilterClicked(column)">
+                                <span class="@(ColumnFilters.Any(x => x.Property == column.PropertyPath) ? @_filterClass : @_filterClass + "-empty" )"></span>
+                            </BSLink>
+                        }
                     </div>
                     @if (column.ColumnOptions is not null)
                     {
-                    <BSDropdown DataId="@column.Id.ToString()" Target="@column.Id.ToString()">
-                        <Content>
-                            @if (column.ColumnOptions is not null)
-                            {
-                            @(column.ColumnOptions(column))
-                            }
-                        </Content>
-                    </BSDropdown>
+                        <BSDropdown DataId="@column.Id.ToString()" Target="@column.Id.ToString()">
+                            <Content>
+                                @if (column.ColumnOptions is not null)
+                                {
+                                    @(column.ColumnOptions(column))
+                                }
+                            </Content>
+                        </BSDropdown>
                     }
                 </th>
             }
@@ -119,7 +127,7 @@
                         @if (column.ColumnOptions is not null)
                         {
                             <BSLink Class="grid-header-link" Target="@column.Id.ToString()">
-                                <span class="system-uicons--filter"></span>
+                                <span class="@_menuClass"></span>
                             </BSLink>
                         }
                         @if (column.IsSortable)
@@ -137,6 +145,12 @@
                         else
                         {
                             @column.Title
+                        }
+                        @if (column.ColumnOptions is not null)
+                        {
+                            <BSLink Class="grid-header-link" OnClick="() => ColumnFilterClicked(column)">
+                                <span class="@(ColumnFilters.Any(x => x.Property == column.PropertyPath) ? @_filterClass : @_filterClass + "-empty" )"></span>
+                            </BSLink>
                         }
                     </div>
                     @if (column.ColumnOptions is not null)

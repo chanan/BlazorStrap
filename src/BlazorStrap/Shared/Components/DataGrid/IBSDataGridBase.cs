@@ -13,7 +13,10 @@ public interface IBSDataGridBase<TGridItem>
     string? RowStyle { get; set; }
     Func<TGridItem, string>? RowStyleFunc { get; set; }
     bool IsMultiSort { get; set; }
-    string MultiSortClass { get; set; }
+    bool IsFilterable { get; set; }
+    string? MultiSortClass { get; set; }
+    string? FilterClass { get; set; }
+    string? MenuClass { get; set; }
     PaginationState? Pagination { get; set; }
     IAsyncProvider AsyncProvider { get; set; }
 }

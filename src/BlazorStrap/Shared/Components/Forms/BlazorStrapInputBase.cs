@@ -108,6 +108,7 @@ namespace BlazorStrap.Shared.Components.Forms
         protected void OnChangeEvent(string? e)
         {
             CurrentValueAsString = e;
+            Console.WriteLine(OnValueChange.HasDelegate);
             if(OnValueChange.HasDelegate)
                 OnValueChange.InvokeAsync(Value);
 

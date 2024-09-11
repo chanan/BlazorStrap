@@ -31,6 +31,16 @@ public partial class BSDataGridCore<TGridItem> : BSDataGridCoreBase<TGridItem>
         .AddClass(ResponsiveWrapperClass, !string.IsNullOrEmpty(ResponsiveWrapperClass))
         .Build().ToNullString();
     
+    private string? _filterClass => new CssBuilder()
+        .AddClass("system-uicons--filter", FilterClass == null)
+        .AddClass("system-uicons--filter", FilterClass != null)
+        .AddClass(FilterClass)
+        .Build().ToNullString();
+    
+    private string? _menuClass => new CssBuilder()
+        .AddClass("system-uicons--menu", MenuClass == null)
+        .AddClass(MenuClass)
+        .Build().ToNullString();
     protected override void OnInitialized()
     {
         

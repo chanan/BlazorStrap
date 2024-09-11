@@ -27,10 +27,14 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
     [Parameter] public Func<TGridItem, string>? RowStyleFunc { get; set; }
     
     [Parameter] public bool IsMultiSort { get; set; } = false;
+    [Parameter] public bool IsFilterable { get; set; } = false;
     [Parameter] public ColumnState<TGridItem> ColumnState { get; set; } = null!;
     [Parameter] public string MultiSortClass { get; set; } = "badge bg-info text-dark";
     [Parameter] public PaginationState? Pagination { get; set; } 
     [Parameter] public IAsyncProvider AsyncProvider { get; set; } = new FakeAsyncProvider();
+    [Parameter] public string? FilterClass { get; set; }
+    [Parameter] public string? MenuClass { get; set; }
+    
     protected RenderFragment? BodyTemplate { get; set; }
     protected RenderFragment? FooterTemplate { get; set; }
     protected RenderFragment? HeaderTemplate { get; set; }
@@ -50,6 +54,11 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
 
     protected override Task OnParametersSetAsync()
     {
+        if(PropertyPaths.Count == 0)
+        {
+            PropertyPaths = GetPropertyPaths<TGridItem>();
+        }
+        
         if(Pagination is not null)
         {
             Pagination.OnStateChange = async state =>
@@ -79,7 +88,10 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
     /// Do not modify this property. It is used to store the items that are displayed in the grid.
     /// </summary>
     protected ICollection<TGridItem> DisplayedItems = new List<TGridItem>();
-    public ICollection<ColumnFilter> ColumnFilters = new List<ColumnFilter>();
+    public ICollection<string> PropertyPaths = new List<string>();
+    public ICollection<IColumnFilterInternal<TGridItem>> ColumnFilters = new List<IColumnFilterInternal<TGridItem>>();
+    public Func<Task> OnColumnFilterClicked { get; set; }
+    
     private CancellationTokenSource? _pendingDataLoadCancellationTokenSource;
     public void ClearSort(Guid id)
     {
@@ -166,7 +178,7 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
                     startIndex: (Pagination.CurrentPage - 1) * Pagination.ItemsPerPage,
                     count: Pagination.ItemsPerPage,
                     sortColumns: ColumnState.SortColumns,
-                    filterColumns: ColumnFilters,
+                    filterColumns: ColumnFilters.ToList<IColumnFilter<TGridItem>>(),
                     cancellationToken: currentCancellationTokenSource.Token
                 );
             }
@@ -176,7 +188,7 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
                     startIndex: 0,
                     count: null,
                     sortColumns: ColumnState.SortColumns,
-                    filterColumns: ColumnFilters,
+                    filterColumns: ColumnFilters.ToList<IColumnFilter<TGridItem>>(),
                     cancellationToken: currentCancellationTokenSource.Token
                 );
             }
@@ -205,13 +217,13 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
                 Pagination.TotalItems = totalItemCount;
             }
             //TODO: Apply filters here+
-            var responce = request.ApplySort(Items, ColumnState.SortColumns).Skip(request.StartIndex);
+            var response = request.ApplyFilters(Items, ColumnFilters).ApplySort(ColumnState.SortColumns).Skip(request.StartIndex);
             if(request.Count.HasValue)
             {
-                responce = responce.Take(request.Count.Value);
+                response = response.Take(request.Count.Value);
             }
 
-            var responceItems = await AsyncProvider.ToArrayAsync(responce);
+            var responceItems = await AsyncProvider.ToArrayAsync(response);
             return DataGridResponce.Create(responceItems, totalItemCount);
         }
 
@@ -238,13 +250,40 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
 
         return default;
     }
-    
+    protected Task ColumnFilterClicked(ColumnBase<TGridItem> column)
+    {
+        if (ColumnFilters.All(q => q.Property != column.PropertyPath))
+        {
+            var columnFilter = new ColumnFilter<TGridItem>(column.PropertyPath, Operator.Contains, null);
+            ColumnFilters.Add(columnFilter);
+        }
+
+        return OnColumnFilterClicked?.Invoke();
+    }
+    public Task AddFilterAsync()
+    {
+        var filter = new ColumnFilter<TGridItem>("", Operator.Contains, null);
+        ColumnFilters.Add(filter);
+        return Task.CompletedTask;
+    }
     protected async Task PageChangedAsync(int page)
     {
         if(Pagination is null) return;
         await Pagination.GoToPageAsync(page);
         await RefreshDataAsync();
     }
+    
+    //recursively get all properties
+    private static ICollection<string> GetPropertyPaths<TGridItem>()
+    {
+        //check to see if the type is a primitive type
+        if (typeof(TGridItem).IsPrimitive || typeof(TGridItem) == typeof(string))
+        {
+            return new List<string>();
+        }
+        return ExpressionHelper.GetPropertyPaths<TGridItem>();
+    }
+    
     #region Abstract Methods
 
     protected abstract void RenderBody(RenderTreeBuilder __builder);

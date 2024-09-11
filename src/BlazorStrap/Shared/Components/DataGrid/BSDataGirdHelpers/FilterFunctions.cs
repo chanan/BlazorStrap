@@ -4,15 +4,16 @@ namespace BlazorStrap.Shared.Components.DataGrid.BSDataGirdHelpers;
 
 internal static class FilterFunctions
 {
-    internal static IQueryable<TGridItem> FiltersColumns<TGridItem>(this IQueryable<TGridItem> items, ICollection<ColumnFilter> columnFilters)
+    internal static IQueryable<TGridItem> FiltersColumns<TGridItem>(this IQueryable<TGridItem> items, ICollection<IColumnFilter<TGridItem>> columnFilters)
     {
         var filteredItems = items;
         foreach (var filter in columnFilters)
         {
-            if (filter.Value is not null || filter.Operator == Operator.IsNotEmpty || filter.Operator == Operator.IsEmpty)
+            var filterValue = filter.Value;
+            if (filterValue is not null || filter.Operator == Operator.IsNotEmpty || filter.Operator == Operator.IsEmpty)
             {
                 //if value is typeof string or nullable string continue
-                if (filter.Value is string or null && (filter.Operator is Operator.GreaterThan or Operator.GreaterThanOrEqual or Operator.LessThan or Operator.LessThanOrEqual )) continue;
+                if (filterValue is string or null && (filter.Operator is Operator.GreaterThan or Operator.GreaterThanOrEqual or Operator.LessThan or Operator.LessThanOrEqual )) continue;
                
              
                 var propertyExpression = ExpressionHelper.GetExpression<TGridItem>(filter.Property);
@@ -20,7 +21,7 @@ internal static class FilterFunctions
                 var propertyType = ExpressionHelper.GetPropertyType<TGridItem>(filter.Property);
                 
                 // Convert the filter value to the correct type
-                var constant = Expression.Constant(Convert.ChangeType(filter.Value, propertyType), propertyType);
+                var constant = Expression.Constant(Convert.ChangeType(filterValue, propertyType), propertyType);
                 var castedProperty = Expression.Convert(property, propertyType);
                 Expression body = filter.Operator switch
                 {
@@ -45,7 +46,7 @@ internal static class FilterFunctions
                     _ => throw new ArgumentOutOfRangeException()
                 };
                 var lambda = Expression.Lambda<Func<TGridItem, bool>>(body, propertyExpression.Parameters);
-                filteredItems = filteredItems.Where(lambda);               
+                filteredItems = filteredItems.Where(lambda);   
             }
         }     
         return filteredItems;
@@ -54,7 +55,7 @@ internal static class FilterFunctions
 // Move this later to do more unit testing on internal functions
 public static class UnitTest
 {
-    public static IQueryable<TGridItem> FilterFunctions_FiltersColumns<TGridItem>(this IQueryable<TGridItem> items, ICollection<ColumnFilter> columnFilters)
+    public static IQueryable<TGridItem> FilterFunctions_FiltersColumns<TGridItem>(this IQueryable<TGridItem> items, ICollection<IColumnFilter<TGridItem>> columnFilters)
     {
         return FilterFunctions.FiltersColumns(items, columnFilters);
     }

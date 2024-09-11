@@ -87,11 +87,12 @@ button.sort-desc:after {
     margin-top: 1px;
 }
 
+
 .system-uicons--filter {
     display: inline-block;
     width: 1em;
     height: 1em;
-    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 21 21'%3E%3Cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' d='M4.5 7.5h12m-10 3h8m-6 3h4'/%3E%3C/svg%3E");
+    --svg: url("data:image/svg+xml,%3Csvg height='21' viewBox='0 0 21 21' width='21' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m.5.5h12l-4 7v3l-3 3v-6z' fill='currentColor' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' transform='translate(4 4)'/%3E%3C/svg%3E");
     background-color: currentColor;
     -webkit-mask-image: var(--svg);
     mask-image: var(--svg);
@@ -100,3 +101,30 @@ button.sort-desc:after {
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
 }
+.system-uicons--filter-empty {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    --svg: url("data:image/svg+xml,%3Csvg height='21' viewBox='0 0 21 21' width='21' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m.5.5h12l-4 7v3l-3 3v-6z' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' transform='translate(4 4)'/%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
+.system-uicons--menu {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    --svg: url("data:image/svg+xml,%3Csvg height='21' viewBox='0 0 21 21' width='21' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4.5 6.5h12'/%3E%3Cpath d='m4.498 10.5h11.997'/%3E%3Cpath d='m4.5 14.5h11.995'/%3E%3C/g%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
+

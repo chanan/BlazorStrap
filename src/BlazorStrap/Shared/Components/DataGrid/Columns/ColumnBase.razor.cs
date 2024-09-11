@@ -46,7 +46,7 @@ public abstract partial class ColumnBase<TGridItem> : ComponentBase, IDisposable
     public virtual RenderFragment<TGridItem>? Content { get; set; }
     public virtual RenderFragment? Footer { get; set; }
     
-    internal string PropertyPath = string.Empty;
+    public string PropertyPath { get; internal set; }= string.Empty;
     
     public string? SortClassBuilder => new CssBuilder()
         .AddClass("sort-multi", ColumnState!.SortOrder(Id) > 0)

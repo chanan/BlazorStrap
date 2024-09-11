@@ -1,23 +1,70 @@
-﻿using BlazorStrap.Shared.Components.DataGrid.Columns;
-using BlazorStrap.V5.Internal.Do.Not.Use;
+﻿using BlazorStrap.V5.Internal.Do.Not.Use;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap.V5.Components.DataGrid;
 
-public partial class FilterBuilder<TGridItem>
+public partial class FilterBuilder<TGridItem> : IDisposable
 {
-    private EventCallback<object> OnValueChangedCallback => EventCallback.Factory.Create<object>(this, OnValueChange);
     [Parameter] public BSDataGridCore<TGridItem> DataGrid { get; set; }
+    private BSCollapse _ref;
+    private bool _shown;
     protected override void OnInitialized()
     {
-        DataGrid.ColumnFilters.Add(Filter);
+        DataGrid.OnColumnFilterClicked += OnColumnFilterClicked;
     }
 
-    public ColumnFilter<int> Filter { get; set; } = new ColumnFilter<int>("Id", Operator.Contains, 1001);
-
-    private async Task OnValueChange(object o)
+    private Task OnColumnFilterClicked()
     {
-        await InvokeAsync(StateHasChanged);
-        await DataGrid.RefreshDataAsync();;
+        return _ref.ShowAsync();
+    }
+
+
+    // private Task OnValueChange(string value)
+    // {
+    //     Filter.ValueAsString = value;
+    //   //  return DataGrid.RefreshDataAsync();;
+    // }
+
+   
+    private ICollection<string> EnumToCollection<T>()
+    {
+        return Enum.GetNames(typeof(T)).ToList();
+    }
+    public void Dispose()
+    {
+        DataGrid.OnColumnFilterClicked -= OnColumnFilterClicked;
+    }
+
+    private Task AddFilter()
+    {
+        return DataGrid.AddFilterAsync();
+    }
+    private Task RemoveFilter(IColumnFilterInternal<TGridItem> filter)
+    {
+        DataGrid.ColumnFilters.Remove(filter);
+        return DataGrid.RefreshDataAsync();
+    }
+    private Task ClearFilters()
+    {
+        DataGrid.ColumnFilters.Clear();
+        return Task.CompletedTask;
+    }
+    
+    private Task OnValueChange<T>(IColumnFilterInternal<T> filter, string value)
+    {
+        filter.ValueAsString = value;
+        return DataGrid.RefreshDataAsync();
+    }
+
+    private Task OnOperatorChange<T>(IColumnFilterInternal<T> filter,Operator @operator)
+    {
+        filter.Operator = @operator;
+        return DataGrid.RefreshDataAsync();
+    }
+
+    private Task OnPropertyChange<T>(IColumnFilterInternal<T> filter, string property)
+    {
+        filter.Property = property;
+        return DataGrid.RefreshDataAsync();
     }
 }

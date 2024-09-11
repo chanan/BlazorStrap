@@ -18,6 +18,8 @@ public abstract partial class BSDataGridBase<TGridItem> : BSTableBase, IBSDataGr
     [Parameter] public string MultiSortClass { get; set; } = "badge bg-info text-dark";
     [Parameter] public IAsyncProvider AsyncProvider { get; set; } = new FakeAsyncProvider();
     [Parameter] public PaginationState? Pagination { get; set; }
+    [Parameter] public string? FilterClass { get; set; }
+    [Parameter] public string? MenuClass { get; set; } 
     /// <summary>
     /// Set the row style based on the item.
     /// </summary>
@@ -25,6 +27,7 @@ public abstract partial class BSDataGridBase<TGridItem> : BSTableBase, IBSDataGr
     [Parameter] public Func<TGridItem, string>? RowStyleFunc { get; set; }
     
     [Parameter] public bool IsMultiSort { get; set; } = false;
+    [Parameter] public bool IsFilterable { get; set; } = false;
     
     #endregion
 
