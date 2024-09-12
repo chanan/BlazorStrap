@@ -34,6 +34,6 @@ public abstract partial class BSDataGridBase<TGridItem> : BSTableBase, IBSDataGr
     protected ColumnState<TGridItem> ColumnState;
     protected BSDataGridBase()
     {
-        ColumnState = new ColumnState<TGridItem>(this);
+        ColumnState = new ColumnState<TGridItem>();
     }
 }

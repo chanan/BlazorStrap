@@ -44,10 +44,11 @@ public partial class FilterBuilder<TGridItem> : IDisposable
         DataGrid.ColumnFilters.Remove(filter);
         return DataGrid.RefreshDataAsync();
     }
-    private Task ClearFilters()
+    private async Task ClearFilters()
     {
         DataGrid.ColumnFilters.Clear();
-        return Task.CompletedTask;
+        await _ref.HideAsync();
+        await  DataGrid.RefreshDataAsync();
     }
     
     private Task OnValueChange<T>(IColumnFilterInternal<T> filter, string value)

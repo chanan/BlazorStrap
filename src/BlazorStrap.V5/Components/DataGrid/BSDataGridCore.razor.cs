@@ -33,7 +33,6 @@ public partial class BSDataGridCore<TGridItem> : BSDataGridCoreBase<TGridItem>
     
     private string? _filterClass => new CssBuilder()
         .AddClass("system-uicons--filter", FilterClass == null)
-        .AddClass("system-uicons--filter", FilterClass != null)
         .AddClass(FilterClass)
         .Build().ToNullString();
     

@@ -28,10 +28,7 @@ public class ColumnState<TGridItem>
         _columns.Remove(column);
     }
 
-    public BSDataGridBase<TGridItem> DataGrid { get; set; }
-    public ColumnState(BSDataGridBase<TGridItem> dataGrid)
-    {
-        DataGrid = dataGrid;
-    }
+    public BSDataGridCoreBase<TGridItem>? DataGrid { get; set; }
+
     internal Func<Task>? OnStateChange { get; set; }
 }

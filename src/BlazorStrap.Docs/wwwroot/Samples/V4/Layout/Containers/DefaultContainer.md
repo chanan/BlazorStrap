@@ -1,3 +1,0 @@
-﻿<BSContainer>
-     <!-- Content here -->
-</BSContainer>

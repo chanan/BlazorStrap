@@ -1,18 +1,12 @@
-﻿using ColorCode;
-using Markdig;
+﻿using Markdig;
 using Markdig.SyntaxHighlighting;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Rendering;
-using BlazorStrap;
+using BlazorStrap.V5;
+
 namespace BlazorStrap_Docs.Helper
 { 
     public class MarkdownToComponent : ComponentBase
@@ -98,6 +92,7 @@ namespace BlazorStrap_Docs.Helper
                         if (typeName.Contains(";"))
                         {
                             classList += " " + typeName.Substring(typeName.IndexOf(";") +1);
+                            Console.WriteLine(classList);
                             typeName = typeName.Substring(0, typeName.IndexOf(";"));
                             if (classList.StartsWith(" "))
                                 classList = classList.Substring(1);
@@ -113,13 +108,21 @@ namespace BlazorStrap_Docs.Helper
                         {
                             builder.OpenElement(x++, "div");
                             builder.AddAttribute(x++, "class", classList);
-                            builder.OpenComponent(x++, type);
-                            builder.CloseComponent();
+                                builder.OpenComponent<BSNav>(x++);
+                                builder.AddAttribute(x++, "IsTabs", true);
+                                builder.AddAttribute(x++, "ChildContent", (RenderFragment)((tabBuilder) =>
+                                {
+                                    tabBuilder.AddContent(x++, CreateTab("Example", type, TabType.Example));
+                                    tabBuilder.AddContent(x++, CreateTab("Code", typeof(CodeBlock), TabType.Code, $"{WebRoot}{typeName.Replace(".", "/")}"));
+                                    if (hasCss)
+                                        tabBuilder.AddContent(x++, CreateTab("CSS",typeof(CodeBlock), TabType.Css,$"{WebRoot}{typeName.Replace(".", "/")}"));
+                                }));
+                                builder.CloseComponent();
                             builder.CloseElement();
-                            builder.OpenComponent(x++, typeof(CodeBlock));
-                            builder.AddAttribute(x++, "Source", $"{WebRoot}{typeName.Replace(".", "/")}");
-                            builder.AddAttribute(x++, "CSS", hasCss);
-                            builder.CloseComponent();
+                            // builder.OpenComponent(x++, typeof(CodeBlock));
+                            // builder.AddAttribute(x++, "Source", $"{WebRoot}{typeName.Replace(".", "/")}");
+                            // builder.AddAttribute(x++, "CSS", hasCss);
+                            // builder.CloseComponent();
                         }
                     }
                     ++i;
@@ -128,7 +131,59 @@ namespace BlazorStrap_Docs.Helper
                
             }
         }
-  
+
+        public static RenderFragment CreateTab(string label, Type type, TabType tabType, string source = "")
+        {
+            var x = 0;
+            return builder =>
+            {
+                builder.OpenComponent<BSNavItem>(x++);
+                builder.AddAttribute(x++, "TabLabel", (RenderFragment)((tabLabelBuilder) =>
+                    {
+                    
+                            tabLabelBuilder.AddContent(x++, label);
+                     }));
+                builder.AddAttribute(x++, "TabContent", (RenderFragment)((tabContentBuilder) =>
+                {
+                    tabContentBuilder.AddContent(0, tabType switch
+                    {
+                        TabType.Code => CodeTab(type, source),
+                        TabType.Css => CssTab(type, source),
+                        _ => ExampleTab(type)
+                    });
+                }));
+                builder.CloseComponent();
+            };
+        }
+        private static RenderFragment ExampleTab(Type type)
+        {
+            return builder =>
+            {
+                builder.OpenComponent(0, type);
+                builder.CloseComponent();
+            };
+        }
+        private static RenderFragment CodeTab(Type type, string source)
+        {
+            return builder =>
+            {
+                builder.OpenComponent(0, typeof(CodeBlock));
+                builder.AddAttribute(1, "Source", source);
+                builder.AddAttribute(2, "Css", false);
+                builder.CloseComponent();
+            };
+        }
+        private static RenderFragment CssTab(Type type, string source)
+        {
+            return builder =>
+            {
+                builder.OpenComponent(0, typeof(CodeBlock));
+                builder.AddAttribute(1, "Source", source);
+                builder.AddAttribute(2, "Css", true);
+                builder.CloseComponent();
+            };
+        }
+        
         public static MatchCollection GetSamples(string data)
         {
             return Regex.Matches(data, @"{{sample=(.*?)}}");
@@ -166,5 +221,12 @@ namespace BlazorStrap_Docs.Helper
 
             return result;
         }
+   
+    }
+    public enum TabType
+    {
+        Example,
+        Code,
+        Css
     }
 }

@@ -1,1 +1,0 @@
-﻿<BSSvg Source="docs/Sample.svg" IsFluid="true"/>

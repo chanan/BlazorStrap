@@ -87,37 +87,13 @@
     {
         @foreach (var column in ColumnState.Columns)
         {
+            if(column.ColumnHeaderAccessor is null)
+                column.CreateColumnHeaderAccessor();
+            
             if (column.Header != null)
             {
                 <th @key="column" style="@(column.SortOrder > 0 ? $"--sortOrder:{column.SortOrder};" : "")">
-                    <div class="d-flex">
-                        @if (column.ColumnOptions is not null)
-                        {
-                            <BSLink Class="grid-header-link" Target="@column.Id.ToString()">
-                                <span class="@_menuClass"></span>
-                            </BSLink>
-                        }
-                        <div>
-                            @{ __builder.AddContent(0, column.Header); }
-                        </div>
-                        @if (column.ColumnOptions is not null)
-                        {
-                            <BSLink Class="grid-header-link" OnClick="() => ColumnFilterClicked(column)">
-                                <span class="@(ColumnFilters.Any(x => x.Property == column.PropertyPath) ? @_filterClass : @_filterClass + "-empty" )"></span>
-                            </BSLink>
-                        }
-                    </div>
-                    @if (column.ColumnOptions is not null)
-                    {
-                        <BSDropdown DataId="@column.Id.ToString()" Target="@column.Id.ToString()">
-                            <Content>
-                                @if (column.ColumnOptions is not null)
-                                {
-                                    @(column.ColumnOptions(column))
-                                }
-                            </Content>
-                        </BSDropdown>
-                    }
+                    @{ column.BuildHeader(__builder, column.ColumnHeaderAccessor ?? throw new NullReferenceException("Column Header Accessor is not set")); }
                 </th>
             }
             else
@@ -149,7 +125,7 @@
                         @if (column.ColumnOptions is not null)
                         {
                             <BSLink Class="grid-header-link" OnClick="() => ColumnFilterClicked(column)">
-                                <span class="@(ColumnFilters.Any(x => x.Property == column.PropertyPath) ? @_filterClass : @_filterClass + "-empty" )"></span>
+                                <span class="@(ColumnFilters.Any(x => x.Property == column.PropertyPath) ? @_filterClass : @_filterClass + "-empty")"></span>
                             </BSLink>
                         }
                     </div>
@@ -157,10 +133,7 @@
                     {
                         <BSDropdown DataId="@column.Id.ToString()" Target="@column.Id.ToString()">
                             <Content>
-                                @if (column.ColumnOptions is not null)
-                                {
-                                    @(column.ColumnOptions(column))
-                                }
+                                @(column.ColumnOptions(column.ColumnHeaderAccessor ?? throw new NullReferenceException("Column Header Accessor is not set")));
                             </Content>
                         </BSDropdown>
                     }

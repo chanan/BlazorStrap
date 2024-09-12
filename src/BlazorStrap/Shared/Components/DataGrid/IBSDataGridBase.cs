@@ -18,5 +18,4 @@ public interface IBSDataGridBase<TGridItem>
     string? FilterClass { get; set; }
     string? MenuClass { get; set; }
     PaginationState? Pagination { get; set; }
-    IAsyncProvider AsyncProvider { get; set; }
 }

@@ -1,14 +1,16 @@
-﻿using BlazorStrap.Shared.Components.Content;
+﻿using BlazorStrap.Shared.Components.Common;
+using BlazorStrap.Shared.Components.Content;
 using BlazorStrap.Shared.Components.DataGrid.Columns;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 namespace BlazorStrap.Shared.Components.DataGrid;
 
 [CascadingTypeParameter(nameof(TGridItem))]
-public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridBase<TGridItem>
+public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridBase<TGridItem>, IDisposable
 {
     #region Blazor Properties
     protected MoveRenderLast MoveRenderLastRef = null!;
@@ -31,10 +33,11 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
     [Parameter] public ColumnState<TGridItem> ColumnState { get; set; } = null!;
     [Parameter] public string MultiSortClass { get; set; } = "badge bg-info text-dark";
     [Parameter] public PaginationState? Pagination { get; set; } 
-    [Parameter] public IAsyncProvider AsyncProvider { get; set; } = new FakeAsyncProvider();
     [Parameter] public string? FilterClass { get; set; }
     [Parameter] public string? MenuClass { get; set; }
-    
+    [Inject] public NavigationManager NavigationManager { get; set; } = null!;
+    [Inject] public IServiceProvider ServiceProvider { get; set; }
+    private IAsyncProvider? _asyncProvider;
     protected RenderFragment? BodyTemplate { get; set; }
     protected RenderFragment? FooterTemplate { get; set; }
     protected RenderFragment? HeaderTemplate { get; set; }
@@ -54,6 +57,13 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
 
     protected override Task OnParametersSetAsync()
     {
+        
+        if (!_initialized)
+        {
+            NavigationManager.LocationChanged += NavigationManagerOnLocationChanged();
+            ColumnState.DataGrid = this;
+            _initialized = true;
+        }
         if(PropertyPaths.Count == 0)
         {
             PropertyPaths = GetPropertyPaths<TGridItem>();
@@ -75,11 +85,20 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
         if (itemsProviderChanged)
         {
             _lastItemsProvider = newItemsProvider;
+            _asyncProvider = AsyncProviderSupplier.GetAsyncQueryExecutor(ServiceProvider, Items);
         }
         var mustRefresh = itemsProviderChanged;
         return (ColumnState.Columns.Any() && mustRefresh) ? 
             RefreshDataCoreAsync() :
             Task.CompletedTask;
+    }
+
+    private EventHandler<LocationChangedEventArgs> NavigationManagerOnLocationChanged()
+    {
+        return async (sender, args) =>
+        {
+            _pendingDataLoadCancellationTokenSource?.Cancel();
+        };
     }
 
     #endregion
@@ -204,26 +223,26 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
 
     private async ValueTask<DataGridResponce<TGridItem>> FetchItemsAsync(DataGridRequest<TGridItem> request)
     {
-        
         if (ItemsProvider is not null)
         {
             return await ItemsProvider(request);
         }
-        else if (Items is not null)
+
+        if (Items is not null)
         {
-            var totalItemCount = await AsyncProvider.CountAsync(Items);
+            var totalItemCount = (_asyncProvider is not null) ? await _asyncProvider.CountAsync(Items) : Items.Count();
+            
             if(Pagination is not null && !Pagination.TotalItems.HasValue)
             {
                 Pagination.TotalItems = totalItemCount;
             }
-            //TODO: Apply filters here+
             var response = request.ApplyFilters(Items, ColumnFilters).ApplySort(ColumnState.SortColumns).Skip(request.StartIndex);
             if(request.Count.HasValue)
             {
                 response = response.Take(request.Count.Value);
             }
 
-            var responceItems = await AsyncProvider.ToArrayAsync(response);
+            var responceItems = (_asyncProvider is not null) ? await _asyncProvider.ToArrayAsync(response) : Items.ToArray();
             return DataGridResponce.Create(responceItems, totalItemCount);
         }
 
@@ -234,17 +253,32 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
     {
         await Task.Delay(100);
         
-        if(Items == null && ItemsProvider == null) throw new NullReferenceException("Both Items and ItemsProvider cannot be null. One or the other must be set");
-        if(ItemsProvider != null && Items != null) throw new NullReferenceException("Both Items and ItemsProvider cannot be set. Only one can be set");
+        var startIndex = request.StartIndex;
+        var count = request.Count;
+        if(request.CancellationToken.IsCancellationRequested)
+        {
+            return default;
+        }
+        if(Pagination is not null)
+        {
+            startIndex = (Pagination.CurrentPage - 1) * Pagination.ItemsPerPage;
+            count = Math.Min(request.Count, Pagination.ItemsPerPage - request.Count);
+        }
+        var itemsRequest = new DataGridRequest<TGridItem>(
+            startIndex: request.StartIndex,
+            count: request.Count,
+            sortColumns: ColumnState.SortColumns,
+            filterColumns: ColumnFilters.ToList<IColumnFilter<TGridItem>>(),
+            cancellationToken: request.CancellationToken
+        );
+        
+        var responce = await FetchItemsAsync(itemsRequest);
+        var items = responce.Items;
         if (ItemsProvider != null)
         {
-            //TODO: Get items here
-            //TODO: Remove gobal Items call
-            if (Items is null) throw new NullReferenceException("Items cannot be null");
-            var items = Items.Skip(request.StartIndex).Take(request.Count).ToList();
             return new ItemsProviderResult<(int, TGridItem)>(
-                items: items.Select((x, i) => (request.StartIndex + i, x)),
-                totalItemCount: Items.Count()
+                items: items.Select((x, i) => (request.StartIndex + i + 2, x)),
+                totalItemCount: Pagination?.ItemsPerPage ?? responce.TotalCount
             );
         }
 
@@ -293,4 +327,8 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase , IBSDataGridB
 
     #endregion
 
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged();
+    }
 }

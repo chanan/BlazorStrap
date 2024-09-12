@@ -1,9 +1,0 @@
-﻿<BSButton Color="BSColor.Primary">Primary</BSButton>
-<BSButton Color="BSColor.Secondary">Primary</BSButton>
-<BSButton Color="BSColor.Success">Success</BSButton>
-<BSButton Color="BSColor.Danger">Danger</BSButton>
-<BSButton Color="BSColor.Warning">Warning</BSButton>
-<BSButton Color="BSColor.Info">Info</BSButton>
-<BSButton Color="BSColor.Light">Light</BSButton>
-<BSButton Color="BSColor.Dark">Dark</BSButton>
-<BSButton IsLink="true">Posing as link</BSButton>

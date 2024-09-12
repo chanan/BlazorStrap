@@ -1,0 +1,61 @@
+﻿@using BlazorStrap.V5
+
+@if (_notFound)
+{
+    @ChildContent
+}
+else
+{
+    @foreach (var sample in Samples ?? [])
+    {
+        @sample.Content
+        @if (sample.Component is not null)
+        {
+            <BSNav IsTabs="true">
+                <BSNavItem>
+                    <TabLabel>Example</TabLabel>
+                    <TabContent>
+                        <div class="@DefaultClass @sample.Class mt-0">
+                            <DynamicComponent Type="@sample.Component"/>
+                        </div>
+                    </TabContent>
+                </BSNavItem>
+                <BSNavItem>
+                    <TabLabel>Markup</TabLabel>
+                    <TabContent>
+                        <div class="@DefaultClass mt-0">
+                            @ToSourceMarkupString(RemoveCode(@_files[sample.MarkupFile]))
+                        </div>
+                    </TabContent>
+                </BSNavItem>
+                <BSNavItem>
+                    <TabLabel>Code</TabLabel>
+                    <TabContent>
+                        <div class="@DefaultClass mt-0">
+                            @if (!sample.CodeFile.EndsWith(".cs"))
+                            {
+                                @ToCodeMarkupString(RemoveMarkup(_files[sample.CodeFile], _files[sample.MarkupFile]))
+                            }
+                            else
+                            {
+                                @ToCodeMarkupString(RemoveMarkup(_files[sample.MarkupFile], _files[sample.MarkupFile]))
+                                @ToCodeMarkupString(_files[sample.CodeFile])
+                            }
+                        </div>
+                    </TabContent>
+                </BSNavItem>
+                @if (sample.HasCss)
+                {
+                    <BSNavItem>
+                        <TabLabel>Css</TabLabel>
+                        <TabContent>
+                            <div class="@DefaultClass mt-0">
+                                <pre>@_files[sample.CssFile]</pre>
+                            </div>
+                        </TabContent>
+                    </BSNavItem>
+                }
+            </BSNav>
+        }
+    }
+}
