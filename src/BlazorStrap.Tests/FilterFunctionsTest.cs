@@ -9,7 +9,7 @@ namespace BlazorStrap.Tests;
 
 public class FilterFunctionsTests
 {
-    
+ //TODO: Fix tests to work with new FilterFunctions   
     [Fact]
     public void Operator_Equal_FiltersCorrectly()
     {

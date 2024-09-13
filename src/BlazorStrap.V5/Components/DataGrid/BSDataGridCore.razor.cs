@@ -44,10 +44,8 @@ public partial class BSDataGridCore<TGridItem> : BSDataGridCoreBase<TGridItem>
     {
         
     }
-
     protected override async Task OnParametersSetAsync()
     {
-        Console.WriteLine("This should happend 2nd");
         await base.OnParametersSetAsync();
     }
 }

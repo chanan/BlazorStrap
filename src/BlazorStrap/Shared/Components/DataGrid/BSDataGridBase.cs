@@ -28,9 +28,17 @@ public abstract partial class BSDataGridBase<TGridItem> : BSTableBase, IBSDataGr
     
     [Parameter] public bool IsMultiSort { get; set; } = false;
     [Parameter] public bool IsFilterable { get; set; } = false;
+    [Parameter] public string? DataGridClass { get; set; } = "bs-datagrid";
+    [Parameter] public float VirtualItemHeight { get; set; } = 30;
+    [Parameter] public int VirtualOverscanCount { get; set; } = 5;
     
+    internal Func<Task>? RefreshItemsAsyncFunc { get; set; }
     #endregion
 
+    public Task RefreshItemsAsync()
+    {
+        return RefreshItemsAsyncFunc?.Invoke() ?? Task.CompletedTask;
+    }
     protected ColumnState<TGridItem> ColumnState;
     protected BSDataGridBase()
     {

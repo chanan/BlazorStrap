@@ -4,18 +4,44 @@ namespace BlazorStrap;
 
 public class PaginationState
 {
-    public int CurrentPage { get; set; } = 0;
+    public int CurrentPage { get; set; } = 1;
     private int _itemsPerPage;
+    private int _lastItemsPerPage;
     public int ItemsPerPage
     {
         get => _itemsPerPage;
         set
         {
             _itemsPerPage = value;
+            if(_lastItemsPerPage != value)
+            {
+                CurrentPage = TryToKeepUserOnRightPage(value, _lastItemsPerPage, CurrentPage, TotalItems ?? 0, TotalPages);
+                _lastItemsPerPage = value;
+            }
+            
             if(ItemPerPageChanged.HasDelegate)
                 _= ItemPerPageChanged.InvokeAsync(value);
             _= OnStateChange?.Invoke(this);
         }
+    }
+
+    private static int TryToKeepUserOnRightPage(int newItemsPerPage, int lastItemsPerPage, int currentPage, int totalItems, int totalPages)
+    {
+        if (totalItems <= 0) return 1;
+        
+        var percentageThroughItems = (currentPage * lastItemsPerPage) / (double)totalItems;
+        currentPage = (int)Math.Ceiling((percentageThroughItems * (double)totalItems / newItemsPerPage));
+
+        //Keep the current page within the bounds of the new total pages
+        if (currentPage > totalPages)
+        {
+            return totalPages;
+        }
+        else if (currentPage < 1)
+        {
+            return 1;
+        }
+        return currentPage;
     }
 
     public EventCallback<int> ItemPerPageChanged { get; set; }

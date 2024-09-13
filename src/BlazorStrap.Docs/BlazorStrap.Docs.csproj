@@ -20,7 +20,6 @@
         <PackageReference Include="Markdig.SyntaxHighlighting" Version="1.0.0-custom"/>
         <PackageReference Include="Markdig" Version="0.26.0"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.8"/>
-
     </ItemGroup>
 
     <ItemGroup>
@@ -32,6 +31,11 @@
         <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.Wizard\BlazorStrap.Extensions.Wizard.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <AdditionalFiles Include="Samples\V4\Components\DataGrid\DataGrid1.razor" />
+      <AdditionalFiles Include="Samples\V4\Components\DataGrid\DataGrid2.razor" />
+      <AdditionalFiles Include="Samples\V4\Components\DataGrid\DataGrid3.razor" />
+    </ItemGroup>
 
     <Target Name="BeforeBuildStep" BeforeTargets="Build">
         <ItemGroup>

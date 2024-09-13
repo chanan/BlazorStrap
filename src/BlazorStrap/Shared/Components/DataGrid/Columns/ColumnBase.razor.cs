@@ -3,6 +3,7 @@ using BlazorStrap.Extensions;
 using BlazorStrap.Shared.Components.Common;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 namespace BlazorStrap.Shared.Components.DataGrid.Columns;
 
@@ -14,23 +15,22 @@ public abstract partial class ColumnBase<TGridItem> : ComponentBase, IDisposable
     
     //Not used but keeps hot reload from breaking
     [Parameter] public RenderFragment? ChildContent { get; set; } 
+    [Parameter] public RenderFragment<PlaceholderContext>? VirtualPlaceholder { get; set; }
     [Parameter] public bool IsSortable { get; set; }
     [Parameter] public string? Title { get; set; } 
     [Parameter] public Func<SortData<TGridItem>, SortData<TGridItem>>? CustomSort { get; set; }
-    [Parameter] public bool DefaultSort { get; set; } = false;
     [Parameter] public bool InitialSortDescending { get; set; } = false;
     [Parameter] public string? Class { get; set; } = string.Empty;
     [Parameter] public string? Style { get; set; } = string.Empty;
     [Parameter] public Func<TGridItem, string>? ClassFunc { get; set; }
     [Parameter] public Func<TGridItem, string>? StyleFunc { get; set; }
     
-    [Parameter] public int FilterOrder { get; set; }
     [Parameter] public bool IsFilterable { get; set; }
+    [Parameter] public int MaxTextWidth { get; set; }
     public virtual RenderFragment<IColumnHeaderAccessor>? ColumnOptions { get; set; }
     public int SortOrder { get; set; }
     public IColumnHeaderAccessor? ColumnHeaderAccessor;
-    //public delegate Func<SortData<TItem>, Task<SortData<TItem>>> SortData();
-  //  [Parameter] public SortData CustomSort { get; set; }
+    
     public string PropertyPath { get; internal set; }= string.Empty;
     
     public virtual RenderFragment<TGridItem>? Content { get; set; }
@@ -48,10 +48,17 @@ public abstract partial class ColumnBase<TGridItem> : ComponentBase, IDisposable
             columnHeaderAccessor.IsSortedDescendingFunc = () => ColumnState.IsSortedDescending(Id);
             columnHeaderAccessor.RefreshDataTableAsync = ColumnState.DataGrid.RefreshDataAsync;
             columnHeaderAccessor.FilterButtonClickedAsync = FilterButtonClickedAsync;
+            var columnFilter = ColumnState.DataGrid.ColumnFilters.FirstOrDefault(x => x.Property == PropertyPath);
             columnHeaderAccessor.GetFilterFunc = () => ColumnState.DataGrid.ColumnFilters.FirstOrDefault(x => x.Property == PropertyPath)?.Value ?? string.Empty;
             columnHeaderAccessor.SetFilterFunc = (x) =>
             {
+                if (ColumnState.DataGrid.ColumnFilters.All(q => q.Property != PropertyPath))
+                {
+                    var newColumnFilter = new ColumnFilter<TGridItem>(PropertyPath, Operator.Contains, null);
+                    ColumnState.DataGrid.ColumnFilters.Add(newColumnFilter);
+                }
                 var columnFilter = ColumnState.DataGrid.ColumnFilters.FirstOrDefault(x => x.Property == PropertyPath);
+          
                 if (columnFilter is not null)
                 {
                     columnFilter.Value = x;
@@ -76,7 +83,6 @@ public abstract partial class ColumnBase<TGridItem> : ComponentBase, IDisposable
         return Task.CompletedTask;
     }
     
-    
     public string? SortClassBuilder => new CssBuilder()
         .AddClass("sort-multi", ColumnState!.SortOrder(Id) > 0)
         .AddClass("grid-header-button")
@@ -90,7 +96,6 @@ public abstract partial class ColumnBase<TGridItem> : ComponentBase, IDisposable
         .Build().ToNullString();
     
     public void Dispose() => ColumnState?.RemoveColumn(this);
-
     public abstract void CellContent(RenderTreeBuilder __builder, TGridItem gridItem);
     public abstract void BuildHeader(RenderTreeBuilder __builder, IColumnHeaderAccessor columnHeaderAccessor);
     

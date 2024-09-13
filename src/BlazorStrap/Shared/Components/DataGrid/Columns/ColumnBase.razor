@@ -1,3 +1,16 @@
 ﻿@typeparam TGridItem
+@using Microsoft.AspNetCore.Components.Rendering
+@using Microsoft.AspNetCore.Components.Web.Virtualization
 @implements IDisposable
-@{ColumnState!.AddColumn(this);}
+@{ ColumnState!.AddColumn(this); }
+
+@code{
+
+    public void RenderPlaceholder(RenderTreeBuilder __builder, PlaceholderContext context)
+    {
+        if (VirtualPlaceholder is not null)
+        {
+            @VirtualPlaceholder(context)
+        }
+    }
+}

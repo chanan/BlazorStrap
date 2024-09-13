@@ -1,0 +1,60 @@
+﻿@namespace BlazorStrap.V4
+@typeparam TGridItem
+
+@inherits BlazorStrap.Shared.Components.DataGrid.BSDataGridBase<TGridItem>
+@{ /*Renders all column components in the grid. Output from this will be blank as it is just a container for the columns.*/ }
+
+<CascadingValue Value="ColumnState" IsFixed="true">
+    @Columns
+    @ChildContent
+    <MoveRenderLast>
+        <BlazorStrap.V4.Internal.Do.Not.Use.BSDataGridCore TGridItem="TGridItem"
+                                                           Columns="Columns"
+                                                           ItemsProvider="ItemsProvider"
+                                                           IsVirtualized="IsVirtualized"
+                                                           Items="Items"
+                                                           RowClass="@(RowClass)"
+                                                           RowClassFunc="RowClassFunc"
+                                                           RowStyle="@(RowStyle)"
+                                                           RowStyleFunc="RowClassFunc"
+                                                           Color="Color"
+                                                           IsDark="IsDark"
+                                                           IsHoverable="IsHoverable"
+                                                           IsResponsive="IsResponsive"
+                                                           ResponsiveWrapperClass="@(ResponsiveWrapperClass)"
+                                                           IsSmall="IsSmall"
+                                                           IsBordered="IsBordered"
+                                                           IsBorderLess="IsBorderLess"
+                                                           IsCaptionTop="IsCaptionTop"
+                                                           IsStriped="IsStriped"
+                                                           Class="@(Class)"
+                                                           DataId="@(DataId)"
+                                                           Margin="Margin"
+                                                           MarginBottom="MarginBottom"
+                                                           MarginEnd="MarginEnd"
+                                                           MarginStart="MarginStart"
+                                                           MarginTop="MarginTop"
+                                                           MarginTopAndBottom="MarginTopAndBottom"
+                                                           MarginLeftAndRight="MarginLeftAndRight"
+                                                           Padding="Padding"
+                                                           PaddingBottom="PaddingBottom"
+                                                           PaddingLeftAndRight="PaddingLeftAndRight"
+                                                           PaddingStart="PaddingStart"
+                                                           PaddingTop="PaddingTop"
+                                                           PaddingTopAndBottom="PaddingTopAndBottom"
+                                                           Position="Position"
+                                                           ColumnState="ColumnState"
+                                                           IsMultiSort="@(IsMultiSort)"
+                                                           MultiSortClass="@(MultiSortClass)"
+                                                           Pagination="Pagination"
+                                                           PaddingEnd="PaddingEnd"
+                                                           IsFilterable="IsFilterable"
+                                                           FilterClass="@(FilterClass)"
+                                                           MenuClass="@(MenuClass)"
+                                                           DataGridClass="@(DataGridClass)"
+                                                           VirtualItemHeight="VirtualItemHeight"
+                                                           VirtualOverscanCount="VirtualOverscanCount"
+                                                           Parent="this"
+                                                           />
+    </MoveRenderLast>
+</CascadingValue>

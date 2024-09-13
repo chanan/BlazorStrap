@@ -37,9 +37,14 @@
     <BSInput InputType="InputType.Time" @bind-Value="TimeOnlyValue"/>
     <span class="input-group-text">Value = @TimeOnlyValue</span>
 </div>
-
+<div class="input-group mb-4">
+    <span class="input-group-text">On Input</span>
+    <BSInput InputType="InputType.Text" @bind-Value="OnInputValue" UpdateOnInput="true"/>
+    <span class="input-group-text">Value = @OnInputValue</span>
+</div>
 @code{
     private string? TextValue { get; set; }
+    private string? OnInputValue { get; set; }
     private DateTime DateValue { get; set; }
     private DateTimeOffset DateOffsetValue { get; set; }
     private TimeOnly TimeOnlyValue { get; set; }

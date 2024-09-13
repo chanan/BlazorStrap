@@ -122,7 +122,7 @@ public partial class MarkdownToDocsV5 : ComponentBase
         // Trim sample indexs to only related items
         foreach (var sample in result)
         {
-            if (sample.Index != null)
+            if (sample.Index != null && sample.Component != null)
             {
                 var lines = sample.Index.Split("\n");
                 sample.Index = lines.Where(line => line.Contains(sample.Component.Name)).Aggregate("", (current, line) => current + (line + ";"));
@@ -163,17 +163,17 @@ public partial class MarkdownToDocsV5 : ComponentBase
     
     public static string RemoveCode(string content)
     {
+        content = Regex.Replace(content, @"^@using.*$\n", "", RegexOptions.Multiline);
+        content = Regex.Replace(content, @"^@inject.*$\n", "", RegexOptions.Multiline);
         return Regex.Replace(content, @"@code\s*\{((?<Curly>\{)|(?<-Curly>\})|[^{}]+)*(?(Curly)(?!))\}", "", RegexOptions.Singleline);
     }
-    public static string RemoveMarkup(string content, string markup)
+    public static string RemoveMarkup(string content)
     {   
-        var codeLessMarkup = RemoveCode(markup);
-        return content.Replace(codeLessMarkup, "");
+        return Regex.Match(content,@"@code\s*\{((?<Curly>\{)|(?<-Curly>\})|[^{}]+)*(?(Curly)(?!))\}", RegexOptions.Singleline).Value;
     }
     public static MarkupString ToSourceMarkupString(string sample)
     {
         sample = Regex.Replace(sample,@"<!--\\\\-->(.*?)<!--//-->", "" , RegexOptions.Singleline);
-        
         return new MarkupString(Markdown.ToHtml("```html\n" + sample + "\n```",SourcePipeline));
     }
 
@@ -190,17 +190,3 @@ public partial class MarkdownToDocsV5 : ComponentBase
         return new MarkupString(Markdown.ToHtml("```css\n" + sample + "\n```", SourcePipeline));
     }
 }
-
-public class Sample
-    {
-        public MarkupString Content { get; set; }
-        public Type? Component { get; set; }
-        public string? Class { get; set; }
-        public string? Index { get; set; }
-        public string? IndexPath { get; set; }
-        public bool HasCss => Index.Split(";").Any(x => x.Contains(".css"));
-        public string? CssFile => Index.Split(";").FirstOrDefault(x => x.Contains(".css"));
-        public string? CodeFile => Index.Split(";").FirstOrDefault(x => (x.Contains(".razor") && !x.Contains(".css")) || (x.Contains(".cs") && !x.Contains(".css")));
-        public string? MarkupFile => Index.Split(";").FirstOrDefault(x => x.Contains(".razor") && !x.Contains(".css"));        
-        
-    }

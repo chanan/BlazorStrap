@@ -8,7 +8,7 @@
 @inherits BlazorStrap.Shared.Components.DataGrid.BSDataGridCoreBase<TGridItem>
 
 <div class="d-flex flex-column">
-    @if (Pagination != null && !IsVirtualized && Pagination.PlacementIsTop)
+    @if (Pagination != null && Pagination.PlacementIsTop)
     {
         <BSPagination Pages="Pagination.TotalPages" Value="Pagination.CurrentPage" ValueChanged="PageChangedAsync" Class="@Pagination.PlacementClass"/>
     }
@@ -28,8 +28,9 @@
                         TItem="(int rowIndex, TGridItem data)"
                         ItemContent="@(item => builder => RenderRow(builder, item.rowIndex, item.data))"
                         ItemsProvider="VirtualizedProvider"
-                        ItemSize="30"
-                        OverscanCount="10"
+                        ItemSize="@VirtualItemHeight"
+                        OverscanCount="@VirtualOverscanCount"
+                        Placeholder="@(placeholderContext => builder => RenderPlaceholderRow(builder, placeholderContext))"
                         @ref="VirtualizeRef"/>
                 }
                 else
@@ -45,36 +46,39 @@
     }
     else
     {
-        <table class="@ClassBuilder">
-            <thead>
-            <tr>
-                @HeaderTemplate
-            </tr>
+        <div class="@DataGridClass">
+            <table class="@ClassBuilder">
+                <thead>
+                <tr>
+                    @HeaderTemplate
+                </tr>
 
-            <FilterBuilder TGridItem="TGridItem" DataGrid="this"/>
-            </thead>
-            <tbody>
-            @if (IsVirtualized)
-            {
-                <Virtualize
-                    TItem="(int rowIndex, TGridItem data)"
-                    ItemContent="@(item => builder => RenderRow(builder, item.rowIndex, item.data))"
-                    ItemsProvider="VirtualizedProvider"
-                    ItemSize="30"
-                    OverscanCount="10"
-                    @ref="VirtualizeRef"/>
-            }
-            else
-            {
-                @BodyTemplate
-            }
-            </tbody>
-            <tfoot>
-            @FooterTemplate
-            </tfoot>
-        </table>
+                <FilterBuilder TGridItem="TGridItem" DataGrid="this"/>
+                </thead>
+                <tbody>
+                @if (IsVirtualized)
+                {
+                    <Virtualize
+                        TItem="(int rowIndex, TGridItem data)"
+                        ItemContent="@(item => builder => RenderRow(builder, item.rowIndex, item.data))"
+                        ItemsProvider="VirtualizedProvider"
+                        ItemSize="@VirtualItemHeight"
+                        OverscanCount="@VirtualOverscanCount"
+                        Placeholder="@(placeholderContext => builder => RenderPlaceholderRow(builder, placeholderContext))"
+                        @ref="VirtualizeRef"/>
+                }
+                else
+                {
+                    @BodyTemplate
+                }
+                </tbody>
+                <tfoot>
+                @FooterTemplate
+                </tfoot>
+            </table>
+        </div>
     }
-    @if (Pagination != null && !IsVirtualized && Pagination.PlacementIsBottom)
+    @if (Pagination != null && Pagination.PlacementIsBottom)
     {
         <BSPagination Pages="Pagination.TotalPages" Value="Pagination.CurrentPage" ValueChanged="PageChangedAsync" Class="@Pagination.PlacementClass"/>
     }
@@ -122,7 +126,7 @@
                         {
                             @column.Title
                         }
-                        @if (column.ColumnOptions is not null)
+                        @if (column.IsFilterable)
                         {
                             <BSLink Class="grid-header-link" OnClick="() => ColumnFilterClicked(column)">
                                 <span class="@(ColumnFilters.Any(x => x.Property == column.PropertyPath) ? @_filterClass : @_filterClass + "-empty")"></span>
@@ -133,7 +137,7 @@
                     {
                         <BSDropdown DataId="@column.Id.ToString()" Target="@column.Id.ToString()">
                             <Content>
-                                @(column.ColumnOptions(column.ColumnHeaderAccessor ?? throw new NullReferenceException("Column Header Accessor is not set")));
+                                @(column.ColumnOptions(column.ColumnHeaderAccessor ?? throw new NullReferenceException("Column Header Accessor is not set")))
                             </Content>
                         </BSDropdown>
                     }
@@ -165,8 +169,18 @@
                 if (column.StyleFunc != null) column.Style = column.StyleFunc(item);
 
                 <td @key="column" class="@column.ClassBuilder" style="@column.Style">
-                    @{ column.CellContent(__builder, item); }
+                        @{ column.CellContent(__builder, item); }
                 </td>
+            }
+        </tr>
+    }
+    
+    private void RenderPlaceholderRow(RenderTreeBuilder __builder, PlaceholderContext placeholderContext)
+    {
+        <tr aria-rowindex="@(placeholderContext.Index + 1)">
+            @foreach (var column in ColumnState.Columns)
+            {
+                <td class="bs-datagrid-placeholder" @key="@column">@{ column.RenderPlaceholder(__builder, placeholderContext); }</td>
             }
         </tr>
     }

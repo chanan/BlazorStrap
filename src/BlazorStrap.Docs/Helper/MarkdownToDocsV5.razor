@@ -32,13 +32,10 @@ else
                     <TabLabel>Code</TabLabel>
                     <TabContent>
                         <div class="@DefaultClass mt-0">
-                            @if (!sample.CodeFile.EndsWith(".cs"))
+                            @ToCodeMarkupString(RemoveMarkup(_files[sample.MarkupFile]))
+                            @if (sample.HasCode)
                             {
-                                @ToCodeMarkupString(RemoveMarkup(_files[sample.CodeFile], _files[sample.MarkupFile]))
-                            }
-                            else
-                            {
-                                @ToCodeMarkupString(RemoveMarkup(_files[sample.MarkupFile], _files[sample.MarkupFile]))
+                                <h5>Code Behind</h5>
                                 @ToCodeMarkupString(_files[sample.CodeFile])
                             }
                         </div>

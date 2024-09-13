@@ -1,9 +1,7 @@
-﻿<!--\\-->
-@implements IDisposable
+﻿@using BlazorComponentUtilities
 @using BlazorStrap_Docs.SamplesHelpers.Content.Tables
-@using Microsoft.EntityFrameworkCore
-@inject IDbContextFactory<AppDbContext> dbFactory
-
+@using BlazorStrap.Extensions
+@using BlazorStrap.V5
 <div class="input-group">
     <span class="input-group-text">Items per page</span>
     <select class="form-select" aria-label="Items Per Page" @bind="@_pagination.ItemsPerPage">
@@ -24,66 +22,18 @@
     </select>
 
 </div>
-<div class="datagrid">
-    <!--//-->
-    <BSDataGrid IsStriped="true" IsSmall="true" Items="@_db.Employees" IsMultiSort="true" Pagination="_pagination" IsVirtualized="true">
-        <Columns>
-            <PropertyColumn Property="e => e.Id" IsSortable="true">
-                <ColumnOptions>
-                    @{ context.FilterButtonClickedAsync(); }
-                    <div class="mx-2">
-                        <BSInput InputType="InputType.Text" bind-Value="context.Filter" DebounceInterval="200" UpdateOnInput="true" placeholder="Filter..." TValue="string"/>
-                    </div>
-                </ColumnOptions>
-            </PropertyColumn>
-            <PropertyColumn Property="e => e.NameObject.FirstName" IsSortable="true">
-                <ColumnOptions>
-                    <div class="mx-2">
-                        <BSInput InputType="InputType.Text" bind-Value="context.Filter" placeholder="Filter..." TValue="string"/>
-                    </div>
-                </ColumnOptions>
-            </PropertyColumn>
-            <PropertyColumn Property="e => e.NameObject.LastName" IsSortable="true"/>
-            <PropertyColumn Property="e => e.Email" IsSortable="true"/>
-        </Columns>
-    </BSDataGrid>
-    <!--\\-->
+<div>
+<BSDataGrid IsStriped="true" IsSmall="true" Items="_employees.AsQueryable()" IsMultiSort="true" @ref="_dataGrid" Pagination="_pagination" IsVirtualized="true">
+    <Columns>
+        <TemplateColumn IsSortable="true" Property="employee => employee.Id">
+            <Header>
+                <button class="grid-header-button">Id</button>
+            </Header>
+            <Content>@context.Id</Content>
+        </TemplateColumn>
+        <PropertyColumn Property="e => e.NameObject.FirstName" IsSortable="true"/>
+        <PropertyColumn Property="e => e.NameObject.LastName" IsSortable="true"/>
+        <PropertyColumn Property="e => e.Email" IsSortable="true"/>
+    </Columns>
+</BSDataGrid>
 </div>
-<!--//-->
-
-@code {
-    private PaginationState _pagination = new PaginationState() { ItemsPerPage = 10 };
-    private AppDbContext? _db;
-    <!--\\-->
-
-    //This is just a auto fill class for the table for sample data.
-    private readonly Table2Model _sampleData = new Table2Model();
-    private bool _isLoaded;
-    <!--//-->
-
-    private Func<SortData<Employee>, SortData<Employee>> _nameSort = data =>
-    {
-        data.Ordered = data.Descending ? data.Query.OrderByDescending(q => q.Name) : data.Query.OrderBy(q => q.Name);
-        return data;
-    };
-
-    <!--\\-->
-
-    protected override void OnInitialized()
-    {
-        _db = dbFactory.CreateDbContext();
-        if (!_db.Employees.Any() && !_isLoaded)
-        {
-            _db.Employees.AddRange(_sampleData.DataSet);
-            _db.SaveChanges();
-            _isLoaded = true;
-        }
-    }
-
-    public void Dispose()
-    {
-        _db?.Dispose();
-    }
-
-    <!--//-->
-}
