@@ -100,7 +100,7 @@ public partial class MarkdownToDocsV4 : ComponentBase
                 else
                 {
                     using var httpClient = new HttpClient() { BaseAddress = new Uri(NavigationManager.BaseUri) };
-                    using var response = await httpClient.GetAsync("/docs/Samples/" + sample.IndexPath + "?" + Guid.NewGuid().ToString().Replace("-", ""));
+                    using var response = await httpClient.GetAsync("docs/Samples/" + sample.IndexPath + "?" + Guid.NewGuid().ToString().Replace("-", ""));
                     if (response.StatusCode == HttpStatusCode.OK)
                     {
                         sample.Index = await response.Content.ReadAsStringAsync();
@@ -142,7 +142,7 @@ public partial class MarkdownToDocsV4 : ComponentBase
             {
                 if (!_files.ContainsKey(line))
                 {
-                    using var response = await httpClient.GetAsync("/docs/Samples/" + path + "/" + line + "/?" + Guid.NewGuid().ToString().Replace("-", ""));
+                    using var response = await httpClient.GetAsync("docs/Samples/" + path + "/" + line + "/?" + Guid.NewGuid().ToString().Replace("-", ""));
                     if (response.StatusCode == HttpStatusCode.OK)
                     {
                         _files.Add(line, await response.Content.ReadAsStringAsync());
