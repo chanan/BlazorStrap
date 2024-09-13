@@ -142,7 +142,7 @@ public partial class MarkdownToDocsV5 : ComponentBase
             {
                 if (!_files.ContainsKey(line))
                 {
-                    using var response = await httpClient.GetAsync("docs/Samples/" + path + "/" + line + "/?" + Guid.NewGuid().ToString().Replace("-", ""));
+                    using var response = await httpClient.GetAsync("docs/Samples/" + path + "/" + line + "?" + Guid.NewGuid().ToString().Replace("-", ""));
                     if (response.StatusCode == HttpStatusCode.OK)
                     {
                         _files.Add(line, await response.Content.ReadAsStringAsync());
