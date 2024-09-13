@@ -1,14 +1,21 @@
 ﻿<div class="highlight">
-    @if (_hasMarkup)
+    @if (!Css)
     {
-        @_markup
+        @if (_hasMarkup)
+        {
+            @_markup
+        }
+
+        @if (_hasCode)
+        {
+            @_code
+        }
     }
-    @if (_hasCode)
+    else
     {
-        @_code
-    }
-    @if (_hasCss)
-    {
-        @_css
+        @if (_hasCss)
+        {
+            @_css
+        }
     }
 </div>

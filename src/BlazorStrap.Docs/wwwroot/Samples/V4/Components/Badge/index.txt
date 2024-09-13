@@ -1,0 +1,6 @@
+﻿Badge1.razor.md
+Badge2.razor.md
+Badge3.razor.md
+Badge4.razor.md
+Badge5.razor.md
+index.txt

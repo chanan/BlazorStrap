@@ -1,43 +1,81 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-  <PropertyGroup>
-    <WarningLevel>0</WarningLevel>
-  </PropertyGroup>
-  
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>BlazorStrap_Docs</RootNamespace>
-	 <StaticWebAssetBasePath Condition="$(StaticWebAssetBasePath) == ''">/docs</StaticWebAssetBasePath>
-  </PropertyGroup>
+    <PropertyGroup>
+        <WarningLevel>0</WarningLevel>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>BlazorStrap_Docs</RootNamespace>
+        <StaticWebAssetBasePath Condition="$(StaticWebAssetBasePath) == ''">/docs</StaticWebAssetBasePath>
+    </PropertyGroup>
 
 
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
+    <ItemGroup>
+        <SupportedPlatform Include="browser"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Markdig.SyntaxHighlighting" Version="1.0.0-custom" />
-	<PackageReference Include="Markdig" Version="0.26.0" />
-	<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.8" />
-	  
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Markdig.SyntaxHighlighting" Version="1.0.0-custom"/>
+        <PackageReference Include="Markdig" Version="0.26.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.8"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BlazorStrap.V5\BlazorStrap.V5.csproj" />
-	<ProjectReference Include="..\BlazorStrap.V4\BlazorStrap.V4.csproj" />
-<!--    <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj" />-->
-    <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj" />
-    <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.TreeView\BlazorStrap.Extensions.TreeView.csproj" />
-    <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.Wizard\BlazorStrap.Extensions.Wizard.csproj" />
-  </ItemGroup>
-    
-<!--	<Target Name="BeforeBuildStep" BeforeTargets="Build">-->
-<!--		<ItemGroup>-->
-<!--			<ANTLR Include=".\Samples\**\*.*" />-->
-<!--		</ItemGroup>-->
-<!--		<Copy SourceFiles="@(ANTLR)" DestinationFiles=".\wwwroot\Samples\%(RecursiveDir)%(Filename).md" SkipUnchangedFiles="true" />-->
-<!--	</Target>-->
-<!--	-->
+    <ItemGroup>
+        <ProjectReference Include="..\BlazorStrap.V5\BlazorStrap.V5.csproj"/>
+        <ProjectReference Include="..\BlazorStrap.V4\BlazorStrap.V4.csproj"/>
+        <ProjectReference Include="..\BlazorStrap\BlazorStrap.csproj"/>
+        <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.FluentValidation\BlazorStrap.Extensions.FluentValidation.csproj"/>
+        <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.TreeView\BlazorStrap.Extensions.TreeView.csproj"/>
+        <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.Wizard\BlazorStrap.Extensions.Wizard.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Samples\V4\Components\DataGrid\DataGrid1.razor" />
+      <AdditionalFiles Include="Samples\V4\Components\DataGrid\DataGrid2.razor" />
+      <AdditionalFiles Include="Samples\V4\Components\DataGrid\DataGrid3.razor" />
+    </ItemGroup>
+
+    <Target Name="BeforeBuildStep" BeforeTargets="Build">
+        <ItemGroup>
+            <ANTLR Include=".\Samples\**\*.*"/>
+        </ItemGroup>
+
+        <!-- Conditionally perform cleanup and setup tasks only on full rebuilds -->
+        <RemoveDir Directories=".\wwwroot\Samples" Condition="'$(Rebuild)' == 'true'" />
+        <MakeDir Directories=".\wwwroot\Samples" Condition="'$(Rebuild)' == 'true'" />
+
+        <!-- Copy files to the wwwroot/Samples directory, appending .md to the original file extensions -->
+        <Copy SourceFiles="@(ANTLR)"
+              DestinationFiles=".\wwwroot\Samples\%(RecursiveDir)%(Filename)%(Extension).md"
+              SkipUnchangedFiles="true"/>
+
+        <!-- Prepare item group for index file generation -->
+        <ItemGroup>
+            <FilesToIndex Include=".\wwwroot\Samples\**\*.*"/>
+        </ItemGroup>
+
+        <!-- Generate index files in each directory -->
+        <MSBuild Projects="$(MSBuildProjectFile)"
+                 Targets="WriteIndexFile"
+                 Properties="FolderPath=%(FilesToIndex.RecursiveDir)">
+        </MSBuild>
+    </Target>
+
+    <Target Name="WriteIndexFile">
+        <ItemGroup>
+            <!-- Include files for the current folder path -->
+            <FilesInFolder Include=".\wwwroot\Samples\$(FolderPath)\*.*"/>
+        </ItemGroup>
+
+        <!-- Write the file names to an index.txt in the folder -->
+        <WriteLinesToFile
+                File=".\wwwroot\Samples\$(FolderPath)index.txt"
+                Lines="@(FilesInFolder->'%(Filename)%(Extension)')"
+                Overwrite="true"
+                Encoding="UTF-8"/>
+    </Target>
+
 
 </Project>

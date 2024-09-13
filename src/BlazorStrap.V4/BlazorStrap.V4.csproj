@@ -14,7 +14,7 @@
 		<PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
 		<RootNamespace>BlazorStrap.V4</RootNamespace>
-		<PackageVersion>5.2.102-Preview3</PackageVersion><!--Next Use 5.2.200-Preview1-->
+		<PackageVersion>5.2.103-Beta1</PackageVersion><!--Next Use 5.2.200-Preview5-->
 	</PropertyGroup>
 
 	<ItemGroup Condition="  '$(TargetFramework)' == 'net6.0'  ">
@@ -36,5 +36,10 @@
 	  <None Update="Components\Common\BSCollapse.razor.css">
 	    <SubType>Code</SubType>
 	  </None>
+	</ItemGroup>
+	<ItemGroup>
+	  <AdditionalFiles Include="Components\DataGrid\BSDataGrid.razor" />
+	  <AdditionalFiles Include="Components\DataGrid\BSDataGridCore.razor" />
+	  <AdditionalFiles Include="Components\DataGrid\FilterBuilder.razor" />
 	</ItemGroup>
 </Project>

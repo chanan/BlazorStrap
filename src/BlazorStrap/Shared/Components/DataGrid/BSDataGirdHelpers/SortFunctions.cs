@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using BlazorStrap.Shared.Components.DataGrid.Models;
 
 namespace BlazorStrap.Shared.Components.DataGrid.BSDataGirdHelpers;
 
@@ -45,7 +44,6 @@ internal static class SortFunctions
     
     private static Expression<Func<TItem, TKey>> OrderByPredicate<TItem, TKey>(string columnPropertyPath)
     {
-        Console.WriteLine(columnPropertyPath);
         var parameter = Expression.Parameter(typeof(TItem), "x");
         Expression property = parameter;
 

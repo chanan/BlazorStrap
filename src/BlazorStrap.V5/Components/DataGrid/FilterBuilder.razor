@@ -1,0 +1,38 @@
+﻿@typeparam TGridItem
+<BSCollapse @ref="_ref" Class="position-absolute" Style="z-index: 5;">
+    <div class="card p-2 mx-0 mt-1 mb-0 bg-light">
+        @foreach (var filter in DataGrid.ColumnFilters)
+        {
+            <div class="input-group">
+                <BSButton Color="BSColor.Danger" OnClick="() => RemoveFilter(filter)">X</BSButton>
+                <span class="input-group-text">Column</span>
+                <BSInput InputType="InputType.Select" Value="filter.Property" InputSize="Size.Small" ValueChanged="(string o) => OnPropertyChange(filter,o)">
+                    @foreach (var column in DataGrid.ColumnState.Columns)
+                    {
+                        if (!string.IsNullOrEmpty(column.PropertyPath) && column.IsFilterable)
+                        {
+                            <option value="@column.PropertyPath">@column.PropertyPath</option>
+                        }
+                    }
+                </BSInput>
+                <span class="input-group-text">Operator</span>
+                <BSInput InputType="InputType.Select" Value="filter.Operator" InputSize="Size.Small" ValueChanged="(Operator o) => OnOperatorChange(filter,o)">
+                    @foreach (var op in EnumToCollection<Operator>())
+                    {
+                        <option value="@op">@op.CamelToHumanReadable()</option>
+                    }
+                </BSInput>
+                @if (filter.Operator != Operator.IsEmpty && filter.Operator != Operator.IsNotEmpty)
+                {
+                    <span class="input-group-text">Value</span>
+                    <BSInput InputSize="Size.Small" InputType="InputType.Text" Value="filter.ValueAsString" ValueChanged="(string value) => OnValueChange(filter, value)" DebounceInterval="250" UpdateOnInput="true"/>
+                }
+            </div>
+        }
+        <div class="d-flex mt-1">
+            <BSButton IsLink="true" OnClick="AddFilter">Add Filter</BSButton>
+            <BSButton IsLink="true" OnClick="ClearFilters" Class="me-auto">Clear</BSButton>
+            <BSButton Size="Size.Small" OnClick="() => _ref.HideAsync()" Color="BSColor.Info">Hide</BSButton>
+        </div>
+    </div>
+</BSCollapse>

@@ -61,7 +61,7 @@ namespace BlazorStrap.Shared.Components.Common
 
         [Parameter] public bool IsHorizontal { get; set; }
         [Parameter] public string Style { get; set; } = string.Empty;
-
+        
         private bool _defaultShown;
 
         //Prevents the default state from overriding current state

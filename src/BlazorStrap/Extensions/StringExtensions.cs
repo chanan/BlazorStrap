@@ -32,6 +32,23 @@ namespace BlazorStrap.Extensions
             }
             return sb.ToString();
         }
+        
+        public static string CamelToHumanReadable(this string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return string.Empty;
+            var sb = new StringBuilder();
+            foreach (var c in value)
+            {
+                if (char.IsUpper(c))
+                {
+                    sb.Append(' ');
+                }
+                sb.Append(c);
+            }
+            return sb.ToString();
+        }
+        
         public static string LeftRightToStartEnd(this string value)
         {
             if (value == "left")

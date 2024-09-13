@@ -12,7 +12,6 @@ public partial class BSDataGridCore<TGridItem> : BSDataGridCoreBase<TGridItem>
     /// </summary>
     [Parameter] public Size ResponsiveSize { get; set; } = Size.None;
     protected override string? LayoutClass => LayoutClassBuilder.Build(this);
-
     protected override string? ClassBuilder => new CssBuilder("table")
         .AddClass("table-striped", IsStriped)
         .AddClass("table-dark", IsDark)
@@ -32,14 +31,21 @@ public partial class BSDataGridCore<TGridItem> : BSDataGridCoreBase<TGridItem>
         .AddClass(ResponsiveWrapperClass, !string.IsNullOrEmpty(ResponsiveWrapperClass))
         .Build().ToNullString();
     
+    private string? _filterClass => new CssBuilder()
+        .AddClass("system-uicons--filter", FilterClass == null)
+        .AddClass(FilterClass)
+        .Build().ToNullString();
+    
+    private string? _menuClass => new CssBuilder()
+        .AddClass("system-uicons--menu", MenuClass == null)
+        .AddClass(MenuClass)
+        .Build().ToNullString();
     protected override void OnInitialized()
     {
         
     }
-
     protected override async Task OnParametersSetAsync()
     {
-        Console.WriteLine("This should happend 2nd");
         await base.OnParametersSetAsync();
     }
 }

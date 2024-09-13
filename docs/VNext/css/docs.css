@@ -819,7 +819,7 @@ text#svg-text  {
 }
 
 .bd-content > ul li, .bd-content > ol li {
-    margin-bottom: .25rem
+    margin-bottom: 0;
 }
 
     .bd-content > ul li > p ~ ul, .bd-content > ol li > p ~ ul {
@@ -1187,7 +1187,10 @@ text#svg-text  {
     padding: 1rem;
     margin: 1rem -.75rem 0;
     border: solid #dee2e6;
-    border-width: 1px 0 0
+    border-width: 1px 0 0;
+    border-top: 0;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
 }
 
     .bd-example::after {

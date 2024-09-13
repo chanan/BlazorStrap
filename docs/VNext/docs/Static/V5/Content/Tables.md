@@ -3,19 +3,19 @@
 See [shared](layout/shared) for additional parameters    
 :::
 
-| Parameter		         | Type   | Valid      | Remarks/Output        | 
+| Parameter              | Type   | Valid      | Remarks/Output        | 
 |------------------------|--------|------------|-----------------------|
-| Color			         | Enum   | BSColor    | `.table-[]`           | {.table-striped .p-2}  
-| IsBordered	         | bool   | true/false | `.table-bordered`     |
-| IsBorderLess	         | bool   | true/false | `.table-borderless`   |
-| IsHoverable	         | bool   | true/false | `.table-hover`        |
-| IsCaptionTop	         | bool   | true/false | `.caption-top`        |
-| IsDark		         | bool   | true/false | `.table-dark`         |
-| IsSmall		         | bool   | true/false | `.table-sm`           |
-| IsStriped		         | bool   | true/false | `.table-striped`      |
+| Color                  | Enum   | BSColor    | `.table-[]`           | {.table-striped .p-2}  
+| IsBordered             | bool   | true/false | `.table-bordered`     |
+| IsBorderLess	          | bool   | true/false | `.table-borderless`   |
+| IsHoverable            | bool   | true/false | `.table-hover`        |
+| IsCaptionTop	          | bool   | true/false | `.caption-top`        |
+| IsDark                 | bool   | true/false | `.table-dark`         |
+| IsSmall                | bool   | true/false | `.table-sm`           |
+| IsStriped              | bool   | true/false | `.table-striped`      |
 | IsResponsive           | bool   | true/false | `.table-responsive`   |
 | ResponsiveSize         | bool   | true/false | `.table-responsive-#` |
-| ResponsiveWrapperClass | string |	string     | Adds string to class  |
+| ResponsiveWrapperClass | string | string     | Adds string to class  |
 
 :::
 #### Component \<BSTR\>

@@ -108,6 +108,7 @@ namespace BlazorStrap.Shared.Components.Forms
         protected void OnChangeEvent(string? e)
         {
             CurrentValueAsString = e;
+            
             if(OnValueChange.HasDelegate)
                 OnValueChange.InvokeAsync(Value);
 
@@ -155,7 +156,7 @@ namespace BlazorStrap.Shared.Components.Forms
 
         protected void OnInputEvent(string? e)
         {
-
+           // CurrentValueAsString = e;
             if (ValidateOnInput && EditContext != null)
                 RateLimitingExceptionForObject.Debounce(e, DebounceInterval,
                     (_) => { InvokeAsync(() => OnChangeEvent(e)); });

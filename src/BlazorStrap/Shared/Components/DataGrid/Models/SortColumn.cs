@@ -1,4 +1,6 @@
-﻿namespace BlazorStrap.Shared.Components.DataGrid.Models;
+﻿using BlazorStrap.Shared.Components.DataGrid.Columns;
+
+namespace BlazorStrap;
 
 public record SortColumn<TGridItem>(Guid Id, bool Descending, int Order, bool Sorted, string PropertyPath, ColumnBase<TGridItem> Column)
 {

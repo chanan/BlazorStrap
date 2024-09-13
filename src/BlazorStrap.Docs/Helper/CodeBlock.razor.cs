@@ -1,15 +1,8 @@
-﻿using ColorCode;
-using Markdig;
+﻿using Markdig;
 using Markdig.SyntaxHighlighting;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace BlazorStrap_Docs.Helper
 { 
@@ -17,7 +10,7 @@ namespace BlazorStrap_Docs.Helper
     {
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Parameter] public string? Source { get; set; }
-        [Parameter] public bool CSS { get; set; }
+        [Parameter] public bool Css { get; set; }
         private bool _hasMarkup = false;
         private bool _hasCss = false;
         private bool _hasCode = false;
@@ -36,16 +29,22 @@ namespace BlazorStrap_Docs.Helper
             string css = "";
             using var httpClient = new HttpClient() { BaseAddress = new Uri(NavigationManager.BaseUri) };
             if (Source == null || httpClient == null) return;
-            using var response = await httpClient.GetAsync(Source + ".md" + "?" + Guid.NewGuid().ToString());
-            if (CSS)
+            
+            if (Css)
             {
                 using var cssResponse =
                     await httpClient.GetAsync(Source + ".razor.md" + "?" + Guid.NewGuid().ToString());
                 if (cssResponse.StatusCode != HttpStatusCode.OK)
                     return;
                 css = await cssResponse.Content.ReadAsStringAsync();
+                if (!string.IsNullOrWhiteSpace(css))
+                    _hasCss = true;
+                
+                css = "```css\n" + css + "\n```";
+                _css = new MarkupString(Markdown.ToHtml(css, Pipeline));
+                return;
             }
-
+            using var response = await httpClient.GetAsync(Source + ".md" + "?" + Guid.NewGuid().ToString());
             if (response.StatusCode != HttpStatusCode.OK)
                 return;
            
@@ -70,19 +69,13 @@ namespace BlazorStrap_Docs.Helper
                 _hasMarkup = true;
             if (!string.IsNullOrWhiteSpace(code))
                 _hasCode = true;
-            if (!string.IsNullOrWhiteSpace(css))
-                _hasCss = true;
+       
             
             html = "```html\n" + html + "\n```";
-            if(CSS)
-                css = "```css\n" + css + "\n```";
             if(!string.IsNullOrEmpty(code))
                 code = "```C#\n" + code + "\n```";
-            
             _markup = new MarkupString(Markdown.ToHtml(html, Pipeline));
             _code = new MarkupString(Markdown.ToHtml(code, Pipeline));
-            _css = new MarkupString(Markdown.ToHtml(css, Pipeline));
-       
             await base.OnParametersSetAsync();
         }
         

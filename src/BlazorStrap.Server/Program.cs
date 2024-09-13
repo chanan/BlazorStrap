@@ -10,8 +10,9 @@ builder.Services.AddBlazorStrap();
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddDbContextFactory<AppDbContext>();
 builder.Services.AddScoped<Core>();
+builder.Services.AddScoped<IAsyncProvider, AsyncProvider>();
 var app = builder.Build();
 app.UseForwardedHeaders(new ForwardedHeadersOptions()
 {
