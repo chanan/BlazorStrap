@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap.V4.Components.DataGrid;
 
-public partial class FilterBuilder<TGridItem> : IDisposable
+public partial class FilterBuilder<TGridItem> : ComponentBase, IDisposable
 {
     [Parameter] public BSDataGridCore<TGridItem> DataGrid { get; set; }
     private BSCollapse _ref;

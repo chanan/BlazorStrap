@@ -3,10 +3,11 @@ using System.Text.RegularExpressions;
 using Markdig;
 using Markdig.SyntaxHighlighting;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 
 namespace BlazorStrap_Docs.Helper;
 
-public partial class MarkdownToDocsV4 : ComponentBase
+public partial class MarkdownToDocsV4 : ComponentBase, IDisposable
 {
     [Inject] public NavigationManager NavigationManager { get; set; }
     [Parameter] public string? NamespaceRoot { get; set; }
@@ -19,7 +20,8 @@ public partial class MarkdownToDocsV4 : ComponentBase
     private bool _notFound;
     private List<Sample>? Samples { get; set; } = null;
     private string _indexPath = "index.txt";
-    private Dictionary<string,string> _files = new Dictionary<string, string>();
+    private Dictionary<string, string?> _files = new Dictionary<string, string?>();
+
     private static MarkdownPipeline Pipeline => new MarkdownPipelineBuilder()
         .UseBootstrap()
         .UseEmojiAndSmiley()
@@ -32,15 +34,11 @@ public partial class MarkdownToDocsV4 : ComponentBase
         .UseCitations()
         .Build();
 
-    private static MarkdownPipeline SourcePipeline => new MarkdownPipelineBuilder()
-        .UseBootstrap()
-        .UseSyntaxHighlighting(new DefaultStyleSheet())
-        .Build();
-
     protected override async Task OnParametersSetAsync()
     {
         if (!_initialized || _lastSource != Source)
         {
+            NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
             if (Source == null) return;
             using var httpClient = new HttpClient() { BaseAddress = new Uri(NavigationManager.BaseUri) };
             using var response = await httpClient.GetAsync(Source + "?" + Guid.NewGuid().ToString().Replace("-", ""));
@@ -57,6 +55,11 @@ public partial class MarkdownToDocsV4 : ComponentBase
                 _notFound = true;
             }
         }
+    }
+
+    private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        _files.Clear();
     }
 
     public static MatchCollection GetSamples(string data)
@@ -77,6 +80,7 @@ public partial class MarkdownToDocsV4 : ComponentBase
             result.Add(new Sample { Content = ToMarkupString(source) });
             return result;
         }
+
         // Adds the first part of the content before the first sample
         foreach (var match in matchs)
         {
@@ -85,17 +89,20 @@ public partial class MarkdownToDocsV4 : ComponentBase
             {
                 var sample = new Sample();
                 var typeName = match.ToString().Replace("/", ".").Replace("{{sample=", "").Replace("}}", "");
-                if(typeName.Contains(";"))
+                if (typeName.Contains(";"))
                 {
                     var parts = typeName.Split(";");
                     sample.Class = parts[1];
                     typeName = parts[0];
                 }
 
+                sample.Component = StringToType($"{namespaceRoot}.{typeName}");
                 sample.IndexPath = string.Join("/", typeName.Split(".").SkipLast(1)) + "/" + "index.txt";
-                if(result.Any(x => x.IndexPath == sample.IndexPath))
+
+                //Load the index file if it's not already loaded
+                if (_files.ContainsKey(sample.IndexPath))
                 {
-                    sample.Index = result.First(x => x.IndexPath == sample.IndexPath).Index;
+                    sample.Index = _files[sample.IndexPath];
                 }
                 else
                 {
@@ -103,90 +110,66 @@ public partial class MarkdownToDocsV4 : ComponentBase
                     using var response = await httpClient.GetAsync("docs/Samples/" + sample.IndexPath + "?" + Guid.NewGuid().ToString().Replace("-", ""));
                     if (response.StatusCode == HttpStatusCode.OK)
                     {
-                        sample.Index = await response.Content.ReadAsStringAsync();
+                        _files.TryAdd(sample.IndexPath, await response.Content.ReadAsStringAsync());
                     }
                 }
 
-                sample.Component = StringToType($"{namespaceRoot}.{typeName}");
-                var content = source.Substring(0, left + match.ToString().Length);
-                source = source.Substring(left + match.ToString().Length);
-                content = content.Replace(match.ToString(), "");
-                sample.Content = ToMarkupString(content);
-                result.Add(sample);
-                
-                // Removes the content from the source
-            }
-        }
-    
-        
-        // Trim sample indexs to only related items
-        foreach (var sample in result)
-        {
-            if (sample.Index != null && sample.Component != null)
-            {
+                //Parse the index file to get the css and code files related to the sample
+                sample.Index = _files[sample.IndexPath];
                 var lines = sample.Index.Split("\n");
                 sample.Index = lines.Where(line => line.Contains(sample.Component.Name)).Aggregate("", (current, line) => current + (line + ";"));
                 sample.Index = sample.Index.Replace("\r", "").Replace("\n", "");
                 sample.Index = Regex.Replace(sample.Index, @"[^a-zA-Z0-9;:.,\s]", "");
-            }
-        }
-        
-        //Finally load and cache all the files
 
-        foreach (var sample in result)
-        {
-            using var httpClient = new HttpClient() { BaseAddress = new Uri(NavigationManager.BaseUri) };
-            var lines = sample.Index.Split(";");
-            var path = sample.IndexPath.Replace("/index.txt", "");
-            foreach (var line in lines)
-            {
-                if (!_files.ContainsKey(line))
+                if (sample.Index.Contains(';'))
                 {
-                    using var response = await httpClient.GetAsync("docs/Samples/" + path + "/" + line + "?" + Guid.NewGuid().ToString().Replace("-", ""));
-                    if (response.StatusCode == HttpStatusCode.OK)
-                    {
-                        _files.Add(line, await response.Content.ReadAsStringAsync());
-                    }
+                    var items = sample.Index.Split(";");
+                    var path = sample.IndexPath.Replace("/index.txt", "");
+                    sample.HasCss = items.Any(x => x.EndsWith(".css.md"));
+                    sample.HasCode = items.Any(x => x.EndsWith(".cs.md"));
+                    sample.CssFile = $"{path}/{items.FirstOrDefault(x => x.EndsWith(".css.md"))}";
+                    sample.CodeFile = $"{path}/{items.FirstOrDefault(x => x.EndsWith(".cs.md"))}";
+                    sample.MarkupFile = $"{path}/{items.FirstOrDefault(x => x.EndsWith(".razor.md"))}";
+                    if (sample.HasCode) _files.TryAdd(sample.CodeFile, null);
+                    if (sample.HasCss) _files.TryAdd(sample.CssFile, null);
+                    _files.TryAdd(sample.MarkupFile, null);
                 }
+
+
+                var content = source.Substring(0, left + match.ToString().Length);
+                // Removes the content from the source
+                source = source.Substring(left + match.ToString().Length);
+                content = content.Replace(match.ToString(), "");
+                sample.Content = ToMarkupString(content);
+                result.Add(sample);
             }
         }
-    
+
         // Adds the last part of the content after the last sample
         result.Add(new Sample { Content = ToMarkupString(source) });
         return result;
+    }
+
+    public async Task<string?> LoadFile(string filePath)
+    {
+        if (_files.TryGetValue(filePath, out var value)) return value;
+        using var httpClient = new HttpClient() { BaseAddress = new Uri(NavigationManager.BaseUri) };
+        using var response = await httpClient.GetAsync("docs/Samples/" + filePath + "?" + Guid.NewGuid().ToString().Replace("-", ""));
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            _files.Add(filePath, await response.Content.ReadAsStringAsync());
+        }
+
+        return _files[filePath];
     }
 
     public static MarkupString ToMarkupString(string sample)
     {
         return new MarkupString(Markdown.ToHtml(sample, Pipeline));
     }
-    
-    public static string RemoveCode(string content)
-    {
-        content = Regex.Replace(content, @"^@using.*$\n", "", RegexOptions.Multiline);
-        content = Regex.Replace(content, @"^@inject.*$\n", "", RegexOptions.Multiline);
-        return Regex.Replace(content, @"@code\s*\{((?<Curly>\{)|(?<-Curly>\})|[^{}]+)*(?(Curly)(?!))\}", "", RegexOptions.Singleline);
-    }
-    public static string RemoveMarkup(string content)
-    {   
-        return Regex.Match(content,@"@code\s*\{((?<Curly>\{)|(?<-Curly>\})|[^{}]+)*(?(Curly)(?!))\}", RegexOptions.Singleline).Value;
-    }
-    public static MarkupString ToSourceMarkupString(string sample)
-    {
-        sample = Regex.Replace(sample,@"<!--\\\\-->(.*?)<!--//-->", "" , RegexOptions.Singleline);
-        return new MarkupString(Markdown.ToHtml("```html\n" + sample + "\n```",SourcePipeline));
-    }
 
-    public static MarkupString ToCodeMarkupString(string sample)
+    public void Dispose()
     {
-        sample = Regex.Replace(sample, @"<!--\\\\-->(.*?)<!--//-->", "", RegexOptions.Singleline);
-        //trim all lines that are empty
-        sample = string.Join("\n", sample.Split("\n").Where(x => !string.IsNullOrWhiteSpace(x)));
-        return new MarkupString(Markdown.ToHtml("```C#\n" + sample + "\n```", SourcePipeline));
-    }
-
-    public static MarkupString ToCssMarkupString(string sample)
-    {
-        return new MarkupString(Markdown.ToHtml("```css\n" + sample + "\n```", SourcePipeline));
+        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
     }
 }

@@ -3,10 +3,11 @@ using BlazorStrap_Docs.SamplesHelpers.Content.Tables;
 using BlazorStrap;
 using BlazorStrap.Extensions;
 using BlazorStrap.V4;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap_Docs.Samples.V4.Components.DataGrid;
 
-public partial class DataGrid1
+public partial class DataGrid1 : ComponentBase
 {
     private PaginationState _pagination = new PaginationState() { ItemsPerPage = 10 };
     private BSDataGrid<Employee> _dataGrid;
