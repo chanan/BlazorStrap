@@ -132,25 +132,33 @@ namespace BlazorStrap.Shared.Components.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0045:Convert to conditional expression", Justification = "<Pending>")]
         public async Task BackAsync()
         {
-            if (ClickLocked) return;
-            ClickLocked = true;
+            try
+            {
+                if (ClickLocked) return;
+                ClickLocked = true;
 
-            var last = _active;
-            _active--;
+                var last = _active;
+                _active--;
 
-            if (_active < 0)
-                _active = Children.Count - 1;
-            if (last == 0)
-                _last = last;
+                if (_active < 0)
+                    _active = Children.Count - 1;
+                if (last == 0)
+                    _last = last;
 
-            else
-                _last = _active + 1;
-            await Children[_last].InternalHide();
-            await Children[_active].InternalShow();
-            await DoAnimations(true);
+                else
+                    _last = _active + 1;
+                await Children[_last].InternalHide();
+                await Children[_active].InternalShow();
+                await DoAnimations(true);
 
-            await InvokeAsync(() => { IndicatorsRef?.Refresh(Children.Count, _active); });
-            ResetTransitionTimer(Children[_active].Interval);
+                await InvokeAsync(() => { IndicatorsRef?.Refresh(Children.Count, _active); });
+                ResetTransitionTimer(Children[_active].Interval);
+            }
+            catch (Exception e)
+            {
+                // When navigating to a different page, the carousel Children are removed from the DOM, causing an exception this can be ignored.
+                // The timer can tick just as this happens. This is why we need to catch the exception.
+            }
         }
 
         /// <summary>
@@ -160,25 +168,34 @@ namespace BlazorStrap.Shared.Components.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0045:Convert to conditional expression", Justification = "<Pending>")]
         public async Task NextAsync()
         {
-            if (ClickLocked) return;
-            ClickLocked = true;
-            _active++;
-            if (_active > Children.Count - 1)
-                _active = 0;
+            try
+            {
+                if (ClickLocked) return;
+                ClickLocked = true;
+                _active++;
+                if (_active > Children.Count - 1)
+                    _active = 0;
 
-            if (_active == 0)
-                _last = Children.Count - 1;
+                if (_active == 0)
+                    _last = Children.Count - 1;
 
-            else
-                _last = _active - 1;
-            await Children[_last].InternalHide();
-            await Children[_active].InternalShow();
+                else
+                    _last = _active - 1;
+                await Children[_last].InternalHide();
+                await Children[_active].InternalShow();
 
-            await DoAnimations(false);
+                await DoAnimations(false);
 
 
-            await InvokeAsync(() => { IndicatorsRef?.Refresh(Children.Count, _active); });
-            ResetTransitionTimer(Children[_active].Interval);
+                await InvokeAsync(() => { IndicatorsRef?.Refresh(Children.Count, _active); });
+                if (Children.Count > _active)
+                    ResetTransitionTimer(Children[_active].Interval);
+            }
+            catch (Exception e)
+            {
+              // When navigating to a different page, the carousel Children are removed from the DOM, causing an exception this can be ignored.
+              // The timer can tick just as this happens. This is why we need to catch the exception.
+            }
         }
 
         protected abstract Task DoAnimations(bool back);

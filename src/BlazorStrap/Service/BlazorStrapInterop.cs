@@ -290,7 +290,6 @@ namespace BlazorStrap.Service
             if (elementReference is null || module is null) return;
                 await module.InvokeVoidAsync("toastTimer", cancellationToken ?? CancellationToken.None, elementReference, time, timeRemaining, rendered);
         }
-        //TODO: Direct Points from old JS
         /// <summary>
         /// Triggers Carousel to animate
         /// </summary>
@@ -303,12 +302,9 @@ namespace BlazorStrap.Service
         public async ValueTask<bool> AnimateCarouselAsync(string id, ElementReference? showElementReference, ElementReference? hideElementReference, bool back, bool v4, CancellationToken? cancellationToken = null)
         {
             var module = await GetModuleAsync();
-            if (module is null)
-                throw new NullReferenceException("Unable to load module.");
-            if (showElementReference == null)
-                throw new ArgumentNullException(nameof(showElementReference));
-            if (hideElementReference == null)
-                throw new ArgumentNullException(nameof(hideElementReference));
+            //If anything is null just return true. Animation will not trigger but the slide will still change.
+            if(module is null || showElementReference is null || hideElementReference is null)
+                return true;
 
             return await module.InvokeAsync<bool>("animateCarousel", cancellationToken ?? CancellationToken.None, id, showElementReference, hideElementReference, back, v4, _objectReference);
         }
@@ -322,7 +318,8 @@ namespace BlazorStrap.Service
         /// <exception cref="NullReferenceException"></exception>
         public async ValueTask PreloadModuleAsync(CancellationToken? cancellationToken = null)
         {
-            _ = await GetModuleAsync() ?? throw new NullReferenceException("Unable to load module.");
+            //This might return null if this method is called be JS interop is ready. Since we are only preloading here we can ignore this. 
+            _ = await GetModuleAsync();
         }
 
         /// <summary>
