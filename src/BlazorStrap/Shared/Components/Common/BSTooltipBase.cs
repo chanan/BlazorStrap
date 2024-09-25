@@ -9,11 +9,7 @@ namespace BlazorStrap.Shared.Components.Common
 {
     public abstract class BSTooltipBase : BlazorStrapToggleBase<BSTooltipBase>, IAsyncDisposable
     {
-        public override bool Shown
-        {
-            get => _shown;
-            protected set => _shown = value;
-        }
+        public override bool Shown { get; protected set; }
         private bool _shown;
         private ConcurrentQueue<EventQue> _eventQue = new();
         /// <summary>
@@ -26,10 +22,6 @@ namespace BlazorStrap.Shared.Components.Common
         /// </summary>
         [Parameter] public string? Target { get; set; }
 
-        /// <summary>
-        /// Setting this to false will hide the content of the tooltip when it is hidden.
-        /// </summary>
-        [Parameter] public bool ContentAlwaysRendered { get; set; } = true;
         /// <summary>
         /// Sets additional popper.js options.
         /// </summary>
@@ -48,7 +40,6 @@ namespace BlazorStrap.Shared.Components.Common
         protected override void OnInitialized()
         {
             BlazorStrapService.OnEvent += OnEventAsync;
-            ShouldRenderContent = ContentAlwaysRendered;
         }
         
         /// <inheritdoc/>
@@ -76,6 +67,7 @@ namespace BlazorStrap.Shared.Components.Common
                 await InvokeAsync(StateHasChanged);
                 await OnHidden.InvokeAsync(this);
                 taskSource.SetResult(true);
+                Shown = false;
             };
 
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
@@ -120,6 +112,7 @@ namespace BlazorStrap.Shared.Components.Common
                 await InvokeAsync(StateHasChanged);
                 taskSource.SetResult(true);
                 await OnShown.InvokeAsync(this);
+                Shown = true;
             };
 
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });

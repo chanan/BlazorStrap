@@ -43,8 +43,8 @@ See [shared](layout/shared) for additional parameters
 
 {{sample=V5/Components/OffCanvas/OffCanvas6}}
 
-### HtmlAlwaysRendered false
-By default content html for componets is always rendered to limit the rendering required when showing. If you want to hide the html when not shown set HtmlAlwaysRendered to false. This will cause the content html of component to be rendered when shown and removed when hidden. This may cause a slight delay when showing.
+### HtmlAlwaysRendered true
+By default content html for componets is not rendered when the element isn't shown. If you want to show the html when not shown set HtmlAlwaysRendered to true. This will cause the content html of component to be rendered when shown and hidden.
 
 {{sample=V5/Components/OffCanvas/OffCanvas7}}
 ### Methods / Events

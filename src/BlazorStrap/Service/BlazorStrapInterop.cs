@@ -501,8 +501,12 @@ namespace BlazorStrap.Service
                 Module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlazorStrap/blazorstrapinterop.js");
                 return Module;
             }
-            catch
+            catch(Exception e)
             {
+                //Console.WriteLine("BlazorStrapInterop Module Load Failed" + e.Message);
+                //Console.WriteLine(e.StackTrace);
+                //Console.WriteLine(e.InnerException?.Message);
+                //Console.WriteLine(e.InnerException?.StackTrace);
                 return null;
             }
         }

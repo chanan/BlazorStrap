@@ -1,4 +1,4 @@
-﻿<BSModal DataId="modal10" ContentAlwaysRendered="false">
+﻿<BSModal DataId="modal10" ContentAlwaysRendered="true">
     <Header>Modal Title</Header>
     <Content>Woohoo, you're reading this text in a modal!</Content>
     <Footer Context="modal">

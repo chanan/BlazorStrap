@@ -3,16 +3,13 @@ using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 
 namespace BlazorStrap.Shared.Components.Modal
 {
     public abstract class BSModalBase : BlazorStrapToggleBase<BSModalBase>, IDisposable
     {
-        public override bool Shown
-        {
-            get => _shown;
-            protected set => _shown = value;
-        }
+        public override bool Shown { get; protected set; }
         protected ElementReference? MyRef { get; set; }
         //private IList<EventQue> _eventQue = new List<EventQue>();
         private bool _shown;
@@ -139,8 +136,6 @@ namespace BlazorStrap.Shared.Components.Modal
         /// </summary>
         [Parameter] public bool IsManual { get; set; }
 
-      
-    
         #region Render props
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
@@ -156,13 +151,16 @@ namespace BlazorStrap.Shared.Components.Modal
         private TaskCompletionSource<bool> ConfirmationdTask;
         
         protected bool ShouldRenderContent { get; set; } = false;
-        
         private bool _secondRender;
+        private bool _initialized;
 
         protected override void OnInitialized()
         {
             BlazorStrapService.OnEvent += OnEventAsync;
             ShouldRenderContent = ContentAlwaysRendered;
+            if(ShouldRenderContent != ContentAlwaysRendered)
+                StateHasChanged();
+
             CanRefresh = true;
         }
 
@@ -202,6 +200,8 @@ namespace BlazorStrap.Shared.Components.Modal
                 taskSource.SetResult(true);
                 if(_showAsConfirmation)
                     ConfirmationdTask.SetResult(confirmationValue);
+
+                Shown = false;
             };
 
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
@@ -256,7 +256,7 @@ namespace BlazorStrap.Shared.Components.Modal
                 await InvokeAsync(StateHasChanged);
                 taskSource.SetResult(true);
                 await OnShown.InvokeAsync(this);
-
+                Shown = true;
             };
             
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func});

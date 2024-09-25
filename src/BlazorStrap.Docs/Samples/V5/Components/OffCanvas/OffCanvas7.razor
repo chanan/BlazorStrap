@@ -1,6 +1,6 @@
 ﻿<a class="btn btn-primary" href="javascript:void(0);" @onclick="OpenCanvas">Link</a>
 <BSButton Color="BSColor.Primary" @onclick="OpenCanvas">Button</BSButton>
-<BSOffCanvas @ref="_offCanvas" ContentAlwaysRendered="false">
+<BSOffCanvas @ref="_offCanvas" ContentAlwaysRendered="true">
     <Header>Offcanvas</Header>
     <Content>
         <div>

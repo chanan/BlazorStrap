@@ -12,11 +12,7 @@ namespace BlazorStrap.Shared.Components.Common
     {
         private Func<Task>? _callback;
         private DotNetObjectReference<BSPopoverBase>? _objectRef;
-        public override bool Shown
-        {
-            get => _shown;
-            protected set => _shown = value;
-        }
+        public override bool Shown { get; protected set; }
         private bool _shown;
         private ConcurrentQueue<EventQue> _eventQue = new();
         /// <summary>
@@ -77,10 +73,6 @@ namespace BlazorStrap.Shared.Components.Common
         [Parameter] public bool NoClickEvent { get; set; }
 
         /// <summary>
-        /// Setting this to false will hide the content of the popover when it is hidden.
-        /// </summary>
-        [Parameter] public bool ContentAlwaysRendered { get; set; } = true;
-        /// <summary>
         /// Sets additional popper.js options.
         /// </summary>
         [Parameter] public object? PopperOptions { get; set; } = null;
@@ -98,12 +90,11 @@ namespace BlazorStrap.Shared.Components.Common
 
         private bool _showAsConfirmation { get; set; }
         private TaskCompletionSource<bool> ConfirmationdTask;
-        protected bool ShouldRenderContent { get; set; } = true;
+        protected bool ShouldRenderContent { get; set; } = false;
         private bool _secondRender;
         protected override void OnInitialized()
         {
             BlazorStrapService.OnEvent += OnEventAsync;
-            ShouldRenderContent = ContentAlwaysRendered;
         }
 
         /// <inheritdoc/>
@@ -139,6 +130,7 @@ namespace BlazorStrap.Shared.Components.Common
                 taskSource.SetResult(true);
                 if (_showAsConfirmation)
                     ConfirmationdTask.SetResult(confirmationValue);
+                Shown = false;
             };
 
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
@@ -196,6 +188,7 @@ namespace BlazorStrap.Shared.Components.Common
                 await InvokeAsync(StateHasChanged);
                 taskSource.SetResult(true);
                 await OnShown.InvokeAsync(this);
+                Shown = true;
             };
 
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });

@@ -31,11 +31,6 @@
         <ProjectReference Include="..\Extensions\BlazorStrap.Extensions.Wizard\BlazorStrap.Extensions.Wizard.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-      <AdditionalFiles Include="Samples\V4\Components\DataGrid\DataGrid1.razor" />
-      <AdditionalFiles Include="Samples\V4\Components\DataGrid\DataGrid2.razor" />
-      <AdditionalFiles Include="Samples\V4\Components\DataGrid\DataGrid3.razor" />
-    </ItemGroup>
 
     <Target Name="BeforeBuildStep" BeforeTargets="Build">
         <ItemGroup>

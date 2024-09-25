@@ -1,10 +1,7 @@
 ﻿using BlazorStrap.Extensions;
-using BlazorStrap.InternalComponents;
-using BlazorStrap.Shared.Components.Modal;
 using BlazorStrap.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
 using System.Collections.Concurrent;
 
 namespace BlazorStrap.Shared.Components.OffCanvas
@@ -12,11 +9,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
     public abstract class BSOffCanvasBase : BlazorStrapToggleBase<BSOffCanvasBase> , IDisposable
     {
         
-        public override bool Shown
-        {
-            get => _shown;
-            protected set => _shown = value;
-        }
+        public override bool Shown { get; protected set; }
 
         protected ElementReference? MyRef { get; set; }
 
@@ -132,6 +125,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
                 await OnHidden.InvokeAsync(this);
                 await BlazorStrapService.JavaScriptInterop.CheckBackdropsAsync();
                 taskSource.SetResult(true);
+                Shown = false;
             };
 
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
@@ -178,6 +172,7 @@ namespace BlazorStrap.Shared.Components.OffCanvas
                 
                 taskSource.SetResult(true);
                 await OnShown.InvokeAsync(this);
+                Shown = true;
             };
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
 

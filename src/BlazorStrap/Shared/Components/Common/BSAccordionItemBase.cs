@@ -8,11 +8,8 @@ namespace BlazorStrap.Shared.Components.Common
 {
     public abstract class BSAccordionItemBase : BlazorStrapToggleBase<BSAccordionItemBase>, IDisposable
     {
-        public override bool Shown
-        {
-            get => _shown;
-            protected set => _shown = value;
-        }
+        public override bool Shown { get; protected set; }
+     
 
         private bool _shown;
 
@@ -117,6 +114,7 @@ namespace BlazorStrap.Shared.Components.Common
                 await InvokeAsync(StateHasChanged);
                 taskSource.SetResult(true);
                 await OnShown.InvokeAsync(this);
+                Shown = true;
             };
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
 
@@ -153,6 +151,7 @@ namespace BlazorStrap.Shared.Components.Common
                 await InvokeAsync(StateHasChanged);
                 taskSource.SetResult(true);
                 await OnHidden.InvokeAsync(this);
+                Shown = false;
             };
 
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });

@@ -28,7 +28,7 @@ namespace BlazorStrap.Shared.Components
         [Parameter] public EventCallback<TValue> OnHide { get; set; }
 
         /// <summary>
-        /// Whether or not element is shown.
+        /// Whether or not element is shown. Do not use this to show or hide the element, use the Show and Hide methods instead.
         /// </summary>
         public abstract bool Shown { get; protected set; }
         public string SyncClass { get; set; } = string.Empty;

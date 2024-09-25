@@ -4,17 +4,9 @@
     height: auto;
     transition: width .35s ease;
 }
-/* _content/BlazorStrap.V5/Components/Common/BSPopover.razor.rz.scp.css */
-.popover:not(.show)[b-jitnwoparl] {
-    visibility: hidden;
-}
 /* _content/BlazorStrap.V5/Components/Common/BSToast.razor.rz.scp.css */
 .toast-icon[b-rmszuegdcu]{
     color: rgba(255,255,255, .7);
-}
-/* _content/BlazorStrap.V5/Components/Common/BSTooltip.razor.rz.scp.css */
-.tooltip:not(.show)[b-t15xljjw7v] {
-    visibility: hidden;
 }
 /* _content/BlazorStrap.V5/Components/DataGrid/BSDataGridCore.razor.rz.scp.css */
 .grid-header-button[b-9i00a6f8qh] {
