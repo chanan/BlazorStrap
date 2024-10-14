@@ -57,15 +57,19 @@ public static class ExpressionHelper
         return GetPropertyPathRecursive(typeof(TGridItem));
     }
     // Recursive method that handles property path generation
-    private static ICollection<string> GetPropertyPathRecursive(Type type, string parentPath = "", bool isRoot = true)
+    private static ICollection<string> GetPropertyPathRecursive(Type type, string parentPath = "", bool isRoot = true, int depth = 0, Type? parentType = null)
     {
+        if (parentType == type) depth++;
+        if(depth > 3) return new List<string>();
         List<string> propertyPaths = new List<string>();
         // Reflect only public instance properties
         PropertyInfo[] properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
         foreach (PropertyInfo property in properties)
         {
+            
             string propertyPath = isRoot ? property.Name : $"{parentPath}.{property.Name}";
+            
             propertyPaths.Add(propertyPath);
 
             // Check if the property is a class but not string, or a struct (non-primitive)
@@ -78,7 +82,8 @@ public static class ExpressionHelper
                     continue;
                 }
                 // Use reflection to invoke the method recursively with the property type
-                ICollection<string> nestedPaths = GetPropertyPathRecursive(property.PropertyType, propertyPath, false);
+                parentType = type;
+                ICollection<string> nestedPaths = GetPropertyPathRecursive(property.PropertyType, propertyPath, false, depth, parentType);
                 propertyPaths.AddRange(nestedPaths);
             }
         }
