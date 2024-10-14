@@ -60,6 +60,7 @@ public static class ExpressionHelper
     private static ICollection<string> GetPropertyPathRecursive(Type type, string parentPath = "", bool isRoot = true, int depth = 0, Type? parentType = null)
     {
         if (parentType == type) depth++;
+        else depth = 0;
         if(depth > 3) return new List<string>();
         List<string> propertyPaths = new List<string>();
         // Reflect only public instance properties
