@@ -46,8 +46,9 @@ namespace BlazorStrap.Shared.Components.Common
         {
             if (Parent == null) return;
             CanRefresh = false;
-            if (OnShow.HasDelegate)
-                await OnShow.InvokeAsync(this);
+            // Double fire bug fix remove after testing
+            // if (OnShow.HasDelegate)
+            //     await OnShow.InvokeAsync(this);
             await Parent.GotoChildSlide(this);
         }
 
