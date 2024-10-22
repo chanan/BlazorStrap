@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "BlazorStrap.WASM",
   "resources": {
-    "hash": "sha256-8ZA6RSxhpDDMmfxensQacR0wQTsTd8lR2XjzOW5etaA=",
+    "hash": "sha256-i4nRCgSJEIU/mhctcuZFCbykLQeOiXUYUX5hfheZlsE=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-QVxMlY7ohmjgde/bZMA0dlWDAeuUP+tEfkiSdg4DFcE="
     },
@@ -19,14 +19,14 @@
     "coreAssembly": {},
     "assembly": {
       "BlazorComponentUtilities.wasm": "sha256-7qa+C6Zt8hJgUpiGcE1MHWuwfOGMUMVd8ayItqmtQp0=",
-      "BlazorStrap.Docs.wasm": "sha256-MpRll7pu16XR52F6aU43HqT60M54dOdJl4RHPjPuLGY=",
-      "BlazorStrap.Extensions.FluentValidation.wasm": "sha256-JIdObOGh4AMoBA/4cXTPArg5XjpGL5iCv/HRJVN/uDU=",
-      "BlazorStrap.Extensions.TreeView.wasm": "sha256-HvbdPGB6EafgtyltlF7sPfCqczOxxwNVhtyygW9Ar+E=",
-      "BlazorStrap.Extensions.Wizard.wasm": "sha256-fWALH5uNSYHC8MLe6nDBJ50gfUBzR6/uycAGmYp75OQ=",
-      "BlazorStrap.V4.wasm": "sha256-9Rj1bHtcJ6+RgADj/XlK0QOCd//2bLM3mOtlYDm3Ods=",
-      "BlazorStrap.V5.wasm": "sha256-cnBQ3llBVotksdPM+sVqBQzsE2yPZz078HZFVqQa1NA=",
-      "BlazorStrap.wasm": "sha256-7n7wCEEmqLePtu4Yi53z2EjSLRinlhSm801W82Jwgb4=",
-      "BlazorStrap.WASM.wasm": "sha256-gxARpLObkRn8UzUmGCtLp1PbRqcPpA4NqHbvDX0uvvA=",
+      "BlazorStrap.Docs.wasm": "sha256-xws9a6Z58PFWV43FpGtdoi3oAKKdki3tP+EaIFxkr3g=",
+      "BlazorStrap.Extensions.FluentValidation.wasm": "sha256-ls3U6Aa2rwVZcQhGsDi3n1YPnT3Z0PRQsLv23E8b+iI=",
+      "BlazorStrap.Extensions.TreeView.wasm": "sha256-B0O0a/c8Md3B9+qj/MioWWmaM9HigmMHHe7hJEHF2ZA=",
+      "BlazorStrap.Extensions.Wizard.wasm": "sha256-H5u9OB050Or4gYEFeTmf4fKWFHz5Nti+cVxW3cWNry8=",
+      "BlazorStrap.V4.wasm": "sha256-bP+5Ba67DG8hsEcTf8oeacT1CX+oFwRRjQMPUXcZJxs=",
+      "BlazorStrap.V5.wasm": "sha256-SMpLih3V04+kzpI7W9yRxcDJciLGPQtSOQxhdP2/heQ=",
+      "BlazorStrap.wasm": "sha256-gWDifRMmOYXI64j7OsQifMK6aHY6KRaghfTAEGlEvN8=",
+      "BlazorStrap.WASM.wasm": "sha256-0mYn8a8+K7e39Zm+xSvJSDGW0Wyvtsuinga3JYGN4Po=",
       "ColorCode.wasm": "sha256-Mz8W+iFHEtIXuTOac2VcI5RUaHwtcUTIC2fBfuvodVE=",
       "FluentValidation.wasm": "sha256-FvsjqyJeVfoCs1v2ywx3Q1mEKXXI4uKcTOdMF+cAH98=",
       "Markdig.SyntaxHighlighting.wasm": "sha256-X826lDfQCYyN/vrEQxxfipczU0w7acPz0NyOCyk45yg=",

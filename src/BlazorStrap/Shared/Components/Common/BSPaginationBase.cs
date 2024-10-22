@@ -93,11 +93,12 @@ namespace BlazorStrap.Shared.Components.Common
             if (page < 1) page = 1;
             if (page > Pages) page = Pages;
             CurrentValue = page;
-            try
-            {
-                _ = BlazorStrapService.JavaScriptInterop.BlurAllAsync();
-            }
-            catch { }
+            // Why was this here? It causes the page to scroll to the bottom
+            // try
+            // {
+            //     _ = BlazorStrapService.JavaScriptInterop.BlurAllAsync();
+            // }
+            // catch { }
         }
         protected int GetPreviousPages()
         {
