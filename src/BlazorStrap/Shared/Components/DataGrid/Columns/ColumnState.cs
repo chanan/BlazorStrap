@@ -17,7 +17,18 @@ public class ColumnState<TGridItem>
         if(_columns.Any(x => x.Id == column.Id)) return;
         if (column.IsSortable || column.CustomSort != null)
         {
-            _sortColumns.Add(new SortColumn<TGridItem>(column.Id, false, _sortColumns.Count, false, column.PropertyPath, column));
+            var sortColumn = new SortColumn<TGridItem>(column.Id, false, _sortColumns.Count, false, column.PropertyPath, column);
+            _sortColumns.Add(sortColumn);
+            
+            // Assigns the initial sort column based on Parameter only one column can be initially sorted
+            if (column.InitialSorted)
+            {
+                foreach (var otherColumns in (_sortColumns.Where(x => x.Column.IsSortable)))
+                {
+                    otherColumns.Sorted = false;
+                }
+                sortColumn.Sorted = true;
+            }
         }
         _columns.Add(column);
     }

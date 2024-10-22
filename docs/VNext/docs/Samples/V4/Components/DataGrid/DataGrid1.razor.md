@@ -25,7 +25,7 @@
 <div>
 <BSDataGrid IsStriped="true" IsSmall="true" Items="_employees.AsQueryable()" IsMultiSort="true" @ref="_dataGrid" Pagination="_pagination" IsVirtualized="true">
     <Columns>
-        <TemplateColumn IsSortable="true" Property="employee => employee.Id" Title="Id">
+        <TemplateColumn IsSortable="true" Property="employee => employee.Id" Title="Id" InitialSorted="true">
             <Content>@context.Id</Content>
         </TemplateColumn>
         <PropertyColumn Property="e => e.NameObject.FirstName" IsSortable="true"/>

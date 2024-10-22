@@ -41,6 +41,7 @@ See [Tables](V4/content/tables) for additional parameters
 | IsFilterable          | bool                                           | true/false                                     | Enables filtering on the column          |
 | Title                 | string                                         | string                                         | Title of the column                      |
 | CustomSort            | Func<SortData<TGridItem>, SortData<TGridItem>> | Func<SortData<TGridItem>, SortData<TGridItem>> | Custom sort function                     |
+| InitialSorted         | bool                                           | true/false                                     | Initial sorted column. Only one is valid |
 | InitialSortDescending | bool                                           | true/false                                     | Initial sort direction                   |
 | Class                 | string                                         | string                                         | Class for the column                     |
 | Style                 | string                                         | string                                         | Style for the column                     |

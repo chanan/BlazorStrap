@@ -19,6 +19,7 @@ public abstract partial class ColumnBase<TGridItem> : ComponentBase, IDisposable
     [Parameter] public bool IsSortable { get; set; }
     [Parameter] public string? Title { get; set; } 
     [Parameter] public Func<SortData<TGridItem>, SortData<TGridItem>>? CustomSort { get; set; }
+    [Parameter] public bool InitialSorted { get; set; }
     [Parameter] public bool InitialSortDescending { get; set; } = false;
     [Parameter] public string? Class { get; set; } = string.Empty;
     [Parameter] public string? Style { get; set; } = string.Empty;
@@ -27,6 +28,7 @@ public abstract partial class ColumnBase<TGridItem> : ComponentBase, IDisposable
     
     [Parameter] public bool IsFilterable { get; set; }
     [Parameter] public int MaxTextWidth { get; set; }
+    
     public virtual RenderFragment<IColumnHeaderAccessor>? ColumnOptions { get; set; }
     public int SortOrder { get; set; }
     public IColumnHeaderAccessor? ColumnHeaderAccessor;
