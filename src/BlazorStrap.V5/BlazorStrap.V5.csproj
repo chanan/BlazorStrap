@@ -13,7 +13,7 @@
 		<PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
 		<RootNamespace>BlazorStrap.V5</RootNamespace>
-		<PackageVersion>5.2.103-Beta2</PackageVersion><!--Next Use 5.2.200-Preview5-->
+		<PackageVersion>5.2.103-RC1</PackageVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
