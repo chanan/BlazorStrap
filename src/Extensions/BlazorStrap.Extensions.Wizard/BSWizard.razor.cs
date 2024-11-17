@@ -14,6 +14,9 @@ public partial class BSWizard : ComponentBase
     [Parameter] public string? CardBodyClass { get; set; }
     [Parameter] public string? CardBodyFooterClass { get; set; }
     [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public RenderFragment<BSWizard>? Header { get; set; }
+    [Parameter] public RenderFragment<BSWizard>? HeaderAfterNavItems { get; set; }
+    
     [Parameter] public RenderFragment<BSWizard>? NextButton { get; set; }
     [Parameter] public RenderFragment<BSWizard>? BackButton { get; set; }
     [Parameter] public EventCallback<string> OnError { get; set; }
@@ -61,7 +64,11 @@ public partial class BSWizard : ComponentBase
             ChildHandler?.Invoke(sender);
             if (_wizardRender != null) await _wizardRender.RefreshAsync();
         }
-
+        
+        public async Task RefreshAsync()
+        {
+            await InvokeAsync(StateHasChanged);
+        }
         public event Action<BSWizardItem>? ChildHandler;
         
 }

@@ -3,7 +3,7 @@
   <PropertyGroup>
 	<LangVersion>10.0</LangVersion>
 	  <Nullable>enable</Nullable>
-    <TargetFrameworks>net5.0;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net7.0;net8.0;net9.0</TargetFrameworks>
     <PackageId>BlazorStrap.Extensions.TreeView</PackageId>
     <Version>5.1.101-Preview1a</Version>
     <Authors>Chanan Braunstein; John Bomhold</Authors>
@@ -18,11 +18,11 @@
     <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.*" />
     </ItemGroup>
-	<ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.*" />
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.*" />
 	</ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
-	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.*" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net9.0' ">
+	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.*" />
   </ItemGroup>
 
 </Project>

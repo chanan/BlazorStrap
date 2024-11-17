@@ -2,10 +2,11 @@
 <CascadingValue Value="this">
     <div class="card text-center @CardClass">
         <div class="card-header @CardHeaderClass">
+            @Header?.Invoke(this)
             <ul class="@ClassBuilder">
-
                 @ChildContent
             </ul>
+            @HeaderAfterNavItems?.Invoke(this)
         </div>
         <div class="card-body @CardBodyClass">
             <BSWizardRender @ref="_wizardRender"/>

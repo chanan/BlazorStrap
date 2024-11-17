@@ -4,9 +4,9 @@
         <LangVersion>10.0</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+        <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
         <PackageId>BlazorStrap.Extensions.Wizard</PackageId>
-        <Version>5.1.100-Beta1</Version>
+        <Version>5.2.103-RC2</Version>
         <Authors>John Bomhold</Authors>
         <Title>BlazorStrap Extension for Wizards</Title>
         <Description>A treeview component library for BlazorStrap</Description>
@@ -25,9 +25,8 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.*" />
         <PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
     </ItemGroup>
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.*" />
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.*" />
         <PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
     </ItemGroup>
-    
 </Project>

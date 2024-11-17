@@ -20,7 +20,7 @@ namespace BlazorStrap.Utilities;
 /// as a cascading parameter.
 /// </summary>
 
-#if NET8_0
+#if NET8_0_OR_GREATER
 public abstract class BlazorInputBase<TValue> : InputBase<TValue>
 {
     [CascadingParameter] private EditContext? CascadeEditContext { get; set; }

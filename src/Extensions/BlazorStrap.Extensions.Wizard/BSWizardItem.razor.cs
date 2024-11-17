@@ -83,7 +83,7 @@ public partial class BSWizardItem : ComponentBase, IDisposable
     /// Label.
     /// </summary>
     [Parameter]
-    public RenderFragment? Label { get; set; }
+    public RenderFragment<BSWizardItem>? Label { get; set; }
 
     /// <summary>
     /// Url for nav link.

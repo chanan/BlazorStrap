@@ -4,7 +4,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>BlazorStrap_Docs</RootNamespace>
@@ -19,7 +19,7 @@
     <ItemGroup>
         <PackageReference Include="Markdig.SyntaxHighlighting" Version="1.0.0-custom"/>
         <PackageReference Include="Markdig" Version="0.26.0"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.8"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.*"/>
     </ItemGroup>
 
     <ItemGroup>
