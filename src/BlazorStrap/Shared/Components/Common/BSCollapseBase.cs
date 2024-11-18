@@ -38,7 +38,15 @@ namespace BlazorStrap.Shared.Components.Common
         public bool DefaultShown
         {
             get => _defaultShown;
-            set { _defaultShown = value; if (!_hasRendered) Shown = value; }
+            set
+            {
+                _defaultShown = value;
+                if (!_hasRendered)
+                {
+                    Shown = value;
+                    _shown = value;
+                }
+            }
         }
 
         /// <summary>
