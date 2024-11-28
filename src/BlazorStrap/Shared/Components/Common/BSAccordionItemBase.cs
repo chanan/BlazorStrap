@@ -75,12 +75,18 @@ namespace BlazorStrap.Shared.Components.Common
                 if (Parent.Children.Count == 0)
                 {
                     if (DefaultShown is null)
+                    {
                         _shown = true;
+                        Shown = true;
+                    }
                 }
                 else
                 {
                     if (DefaultShown is not null)
+                    {
                         _shown = DefaultShown.Value;
+                        Shown = DefaultShown.Value;
+                    }
                 }
                 Parent.AddChild(this);
             }
@@ -90,7 +96,8 @@ namespace BlazorStrap.Shared.Components.Common
         public override async Task ShowAsync()
         {
             if (_shown) return;
-            await OnShow.InvokeAsync(this);
+            if(OnShow.HasDelegate)
+                await OnShow.InvokeAsync(this);
             //Kick off to event que
             var taskSource = new TaskCompletionSource<bool>();
             var func = async () =>
@@ -113,7 +120,8 @@ namespace BlazorStrap.Shared.Components.Common
                 CanRefresh = true;
                 await InvokeAsync(StateHasChanged);
                 taskSource.SetResult(true);
-                await OnShown.InvokeAsync(this);
+                if(OnShown.HasDelegate)
+                    await OnShown.InvokeAsync(this);
                 Shown = true;
             };
             _eventQue.Enqueue(new EventQue { TaskSource = taskSource, Func = func });
@@ -206,7 +214,11 @@ namespace BlazorStrap.Shared.Components.Common
                 if (data is InteropSyncResult syncResult)
                 {
                     if (!syncResult.ClassList.Contains("open"))
+                    {
                         _shown = false;
+                        Shown = false;
+                    }
+
                     Sync(syncResult);
                     if(Parent is not null)
                         Parent.UpdateChild(this);

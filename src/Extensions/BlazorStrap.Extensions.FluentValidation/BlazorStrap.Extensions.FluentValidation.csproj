@@ -7,7 +7,7 @@
     <RazorLangVersion>3.0</RazorLangVersion>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <PackageId>BlazorStrap.Extensions.FluentValidation</PackageId>
-    <Version>2.0.1</Version>
+    <Version>2.0.2-RC1</Version>
     <Authors>Chanan Braunstein; John Bomhold</Authors>
     <Title>Blazor BootStrap Extensions FluentValidation</Title>
     <Description>A FluentValidation component library for BlazorStrap</Description>

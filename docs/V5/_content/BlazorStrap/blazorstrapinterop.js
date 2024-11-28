@@ -10,8 +10,10 @@ export async function checkBackdrops(dotnet) {
         var openModals = document.querySelectorAll('.modal.show');
         //Checks to see if any other modal is open if so do not remove the backdrop
         if (openModals.length == 0) {
-            backdrop.classList.remove("show");
-            await waitForTransitionEnd(backdrop);
+
+            await waitForTransitionEnd(backdrop, function () {
+                backdrop.classList.remove("show");
+            });
             await dotnet.invokeMethodAsync('RemoveBackdropAsync');
         }
     }
@@ -20,8 +22,9 @@ export async function checkBackdrops(dotnet) {
         var openOffcanvas = document.querySelectorAll('.offcanvas.show');
         //Checks to see if any other offcanvas is open if so do not remove the backdrop
         if (openOffcanvas.length == 0) {
-            backdrop.classList.remove("show");
-            await waitForTransitionEnd(backdrop);
+            await waitForTransitionEnd(backdrop, function () {
+                backdrop.classList.remove("show");
+            });
             await dotnet.invokeMethodAsync('RemoveOffCanvasBackdropAsync');
         }
     }
@@ -45,7 +48,6 @@ export async function addDocumentEvent(eventName, creator, dotnet, ignoreChildre
     if (eventName == "" || eventName == "sync" || eventName == "hide" || eventName == "show") return;
     docuemntEventId.push({ eventtype: eventName, creator: creator });
 }
-
 export async function removeDocumentEvent(eventName, creator) {
     docuemntEventId = docuemntEventId.filter(x => x.creator !== creator && x.eventtype !== eventName);
 }
@@ -56,7 +58,7 @@ export async function addEvent(targetId, creator, eventName, dotnet, ignoreChild
         let eventFunc = debounce(function (e) {
             if (ignoreChildren && e.target.getAttribute("data-blazorstrap") != targetId) return;
             dotnet.invokeMethodAsync('InvokeEventAsync', "javascript", targetId, eventName, null);
-        },150);
+        }, 150);
         //add the eventfunc to eventcallbacks so we can remove it later
         let callback = eventCallbacks.find(x => x.id == targetId);
         if (callback)
@@ -140,15 +142,20 @@ export async function showModal(modal, dotnet) {
         await openModals.forEach(async openModal => {
             //if data-bs-manual is true then do not hide the modal 
             if (openModal.getAttribute("data-bs-manual") != "true") {
-                dotnet.invokeMethodAsync('InvokeEventAsync', "javascript", openModal.getAttribute("data-blazorstrap"), "hide", "");
-                openModal.classList.remove("show");
+                if (openModal.getAttribute("data-blazorstrap") != modal.getAttribute("data-blazorstrap")) {
+                    dotnet.invokeMethodAsync('InvokeEventAsync', "javascript", openModal.getAttribute("data-blazorstrap"), "hide", "");
+                    openModal.classList.remove("show");
+                }
             }
         });
         await new Promise(resolve => setTimeout(resolve, 75));
     }
-    modal.classList.add("show");
+
+    await waitForTransitionEnd(modal, function () {
+        modal.classList.add("show");
+    });
     modal.focus();
-    await waitForTransitionEnd(modal);
+
     return {
         ClassList: modal.classList.value,
         Styles: modal.style.cssText,
@@ -157,8 +164,9 @@ export async function showModal(modal, dotnet) {
 
     async function hideModalEvents() {
         if (modal.getAttribute("data-bs-backdrop") == "static") {
-            modal.classList.add("modal-static");
-            await waitForTransitionEnd(modal);
+            await waitForTransitionEnd(modal, function () {
+                modal.classList.add("modal-static");
+            });
             modal.classList.remove("modal-static");
         }
         else {
@@ -168,12 +176,15 @@ export async function showModal(modal, dotnet) {
 }
 export async function hideModal(modal, dotnet) {
     if (!modal) return null;
-    modal.classList.remove("show");
-    modal.setAttribute("aria-modal", "false");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("modal-open");
 
-    await waitForTransitionEnd(modal);
+    await waitForTransitionEnd(modal, function () {
+        modal.classList.remove("show");
+        modal.setAttribute("aria-modal", "false");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+
+    }, 150);
+
     modal.style.display = "none";
 
     var openModals = document.querySelectorAll('.modal.show');
@@ -186,8 +197,10 @@ export async function hideModal(modal, dotnet) {
         var openModals = document.querySelectorAll('.modal.show:not([data-bs-backdrop="false"])');
         //Checks to see if any other modal is open if so do not remove the backdrop
         if (openModals.length == 0) {
-            backdrop.classList.remove("show");
-            await waitForTransitionEnd(backdrop);
+            await waitForTransitionEnd(backdrop, function () {
+                backdrop.classList.remove("show");
+            }, 150);
+
             await dotnet.invokeMethodAsync('RemoveBackdropAsync');
         }
     }
@@ -254,9 +267,12 @@ export async function showOffcanvas(offcanvas, dotnet) {
         });
         await new Promise(resolve => setTimeout(resolve, 75));
     }
-    offcanvas.classList.add("show");
+
+    await waitForTransitionEnd(offcanvas, function () {
+        offcanvas.classList.add("show");
+    });
+
     offcanvas.focus();
-    await waitForTransitionEnd(offcanvas);
     return {
         ClassList: offcanvas.classList.value,
         Styles: offcanvas.style.cssText,
@@ -265,8 +281,9 @@ export async function showOffcanvas(offcanvas, dotnet) {
 
     async function hideOffcanvasEvents() {
         if (offcanvas.getAttribute("data-bs-backdrop") == "static") {
-            offcanvas.classList.add("offcanvas-static");
-            await waitForTransitionEnd(offcanvas);
+            await waitForTransitionEnd(offcanvas, function () {
+                offcanvas.classList.add("offcanvas-static");
+            });
             offcanvas.classList.remove("offcanvas-static");
         }
         else {
@@ -276,12 +293,12 @@ export async function showOffcanvas(offcanvas, dotnet) {
 }
 export async function hideOffcanvas(offcanvas, dotnet) {
     if (!offcanvas) return null;
-    offcanvas.classList.remove("show");
-    offcanvas.setAttribute("aria-modal", "false");
-    offcanvas.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("offcanvas-open");
-
-    await waitForTransitionEnd(offcanvas);
+    await waitForTransitionEnd(offcanvas, function () {
+        offcanvas.classList.remove("show");
+        offcanvas.setAttribute("aria-modal", "false");
+        offcanvas.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("offcanvas-open");
+    });
     offcanvas.style.visibility = "hidden";
 
     var openOffcanvas = document.querySelectorAll('.offcanvas.show');
@@ -294,8 +311,9 @@ export async function hideOffcanvas(offcanvas, dotnet) {
         var openOffcanvas = document.querySelectorAll('.offcanvas.show:not([data-bs-backdrop="false"])');
         //Checks to see if any other offcanvas is open if so do not remove the backdrop
         if (openOffcanvas.length == 0) {
-            backdrop.classList.remove("show");
-            await waitForTransitionEnd(backdrop);
+            await waitForTransitionEnd(backdrop, function () {
+                backdrop.classList.remove("show");
+            },150);
             await dotnet.invokeMethodAsync('RemoveOffCanvasBackdropAsync');
         }
     }
@@ -315,7 +333,7 @@ export async function hideOffcanvas(offcanvas, dotnet) {
 }
 
 //Dropdowns
-export async function showDropdown(dropdown, isPopper, targetId, placement, dotnet, options = {}) {
+export async function showDropdown(dropdown, isPopper, targetId, placement, dotnet, offsetX, offsetY, options = {}) {
     if (!dropdown) return null;
 
     if (isPopper) {
@@ -323,10 +341,17 @@ export async function showDropdown(dropdown, isPopper, targetId, placement, dotn
         var target = document.querySelector('[data-blazorstrap="' + targetId + '"]');
         if (target) {
             var popper = Popper.createPopper(target, dropdown, {
-                ...options,
+
                 placement: placement,
                 modifiers: [
+                    {
+                        name: 'offset',
+                        options: {
+                            offset: [offsetX, offsetY],
+                        },
+                    }
                 ],
+                ...options
             });
         }
     }
@@ -339,9 +364,10 @@ export async function showDropdown(dropdown, isPopper, targetId, placement, dotn
     onShowClassRemoved(dropdown, function () {
         document.removeEventListener('click', documentClick);
     });
-    dropdown.classList.add("show");
-    await waitForTransitionEnd(dropdown);
-    
+    await waitForTransitionEnd(dropdown, function () {
+        dropdown.classList.add("show");
+    });
+
     document.addEventListener('click', documentClick);
     return {
         ClassList: dropdown.classList.value,
@@ -349,11 +375,11 @@ export async function showDropdown(dropdown, isPopper, targetId, placement, dotn
         Aria: getAriaAttributes(dropdown),
     };
 }
-
 export async function hideDropdown(dropdown, dotnet) {
     if (!dropdown) return null;
-    dropdown.classList.remove("show");
-    await waitForTransitionEnd(dropdown);
+    await waitForTransitionEnd(dropdown, function () {
+        dropdown.classList.remove("show");
+    });
     return {
         ClassList: dropdown.classList.value,
         Styles: dropdown.style.cssText,
@@ -398,9 +424,9 @@ export async function showTooltip(tooltip, placement, targetId, dotnet, options 
                 }
             ],
         });
-
-        tooltip.classList.add("show");
-        await waitForTransitionEnd(tooltip);
+        await waitForTransitionEnd(tooltip, function () {
+            tooltip.classList.add("show");
+        });
     }
     return {
         ClassList: tooltip.classList.value,
@@ -408,11 +434,11 @@ export async function showTooltip(tooltip, placement, targetId, dotnet, options 
         Aria: getAriaAttributes(tooltip),
     };
 }
-
 export async function hideTooltip(tooltip, dotnet) {
     if (!tooltip) return null;
-    tooltip.classList.remove("show");
-    await waitForTransitionEnd(tooltip);
+    await waitForTransitionEnd(tooltip, function () {
+        tooltip.classList.remove("show");
+    }, 150);
     return {
         ClassList: tooltip.classList.value,
         Styles: tooltip.style.cssText,
@@ -450,17 +476,17 @@ export async function showCollapse(collapse, horizontal, dotnet) {
     //  collapse.style.display = "block";
     await waitForNextFrame();
     collapse.classList.remove("collapse");
-    collapse.classList.add("collapsing");
+    await waitForTransitionEnd(collapse, function () {
+        collapse.classList.add("collapsing");
 
-    var actualSize = (horizontal ? collapse.scrollWidth : collapse.scrollHeight) + "px";
+        let actualSize = (horizontal ? collapse.scrollWidth : collapse.scrollHeight) + "px";
 
-    if (horizontal) {
-        collapse.style.width = actualSize;
-    } else {
-        collapse.style.height = actualSize;
-    }
-
-    await waitForTransitionEnd(collapse);
+        if (horizontal) {
+            collapse.style.width = actualSize;
+        } else {
+            collapse.style.height = actualSize;
+        }
+    });
 
     collapse.classList.remove("collapsing");
     collapse.classList.add("collapse");
@@ -496,17 +522,18 @@ export async function hideCollapse(collapse, horizontal, dotnet) {
 
     await waitForNextFrame(); // Wait for the next frame to ensure the DOM updates
     collapse.classList.remove("collapse");
-    collapse.classList.add("collapsing");
 
-    await waitForNextFrame(); // Wait for the next frame to ensure the DOM updates
+    await waitForTransitionEnd(collapse, async function () {
+        collapse.classList.add("collapsing");
 
-    if (horizontal) {
-        collapse.style.width = "";
-    } else {
-        collapse.style.height = "";
-    }
+        await waitForNextFrame(); // Wait for the next frame to ensure the DOM updates
 
-    await waitForTransitionEnd(collapse);
+        if (horizontal) {
+            collapse.style.width = "";
+        } else {
+            collapse.style.height = "";
+        }
+    });
 
     collapse.style.display = "";
     collapse.classList.remove("collapsing");
@@ -590,34 +617,36 @@ export async function animateCarousel(id, showEl, hideEl, back, v4, dotnet) {
         if (back) {
             showEl.classList.add("carousel-item-prev");
             setTimeout(async function () {
-                if (v4) {
-                    showEl.classList.add("carousel-item-right");
-                    hideEl.classList.add("carousel-item-right");
-                }
-                else {
-                    showEl.classList.add("carousel-item-end");
-                    hideEl.classList.add("carousel-item-end");
-                }
-                hideEl.addEventListener("transitionend", callback, {
-                    once: true
-                });
-                resolve((await waitForTransitionEnd(showEl)));
+                resolve((await waitForTransitionEnd(showEl, function () {
+                    if (v4) {
+                        showEl.classList.add("carousel-item-right");
+                        hideEl.classList.add("carousel-item-right");
+                    }
+                    else {
+                        showEl.classList.add("carousel-item-end");
+                        hideEl.classList.add("carousel-item-end");
+                    }
+                    hideEl.addEventListener("transitionend", callback, {
+                        once: true
+                    });
+                })));
             }, 10);
         } else {
             showEl.classList.add("carousel-item-next");
             setTimeout(async function () {
-                if (v4) {
-                    showEl.classList.add("carousel-item-left");
-                    hideEl.classList.add("carousel-item-left");
-                }
-                else {
-                    showEl.classList.add("carousel-item-start");
-                    hideEl.classList.add("carousel-item-start");
-                }
-                hideEl.addEventListener("transitionend", callback, {
-                    once: true
-                });
-                resolve((await waitForTransitionEnd(showEl)));
+                resolve((await waitForTransitionEnd(showEl, function () {
+                    if (v4) {
+                        showEl.classList.add("carousel-item-left");
+                        hideEl.classList.add("carousel-item-left");
+                    }
+                    else {
+                        showEl.classList.add("carousel-item-start");
+                        hideEl.classList.add("carousel-item-start");
+                    }
+                    hideEl.addEventListener("transitionend", callback, {
+                        once: true
+                    });
+                })));
             }, 10);
         }
     });
@@ -696,17 +725,20 @@ export function setBootstrapCss(themeUrl) {
 }
 
 // Helper function to wait for transition end or timeout
-function waitForTransitionEnd(element) {
+function waitForTransitionEnd(element, trigger, extraDelay = 1) {
     return new Promise((resolve) => {
         const duration = getTransitionDuration(element);
-        const timeout = 250; // Minimum transition duration of 350ms
+        const timeout = 450; // Minimum transition duration of 450ms any animations that take longer will be interrupted
         const transitionEndHandler = () => {
-            element.removeEventListener("transitionend", transitionEndHandler);
-            resolve(true);
-            clearTimeout(timeoutTimer);
+            setTimeout(async function () {
+                element.removeEventListener("transitionend", transitionEndHandler);
+                resolve(true);
+                clearTimeout(timeoutTimer);
+            }, extraDelay);
         };
 
         element.addEventListener("transitionend", transitionEndHandler);
+        trigger();
         var timeoutTimer = setTimeout(function () {
             resolve(false);
         }, timeout);
@@ -723,6 +755,9 @@ function getTransitionDuration(element) {
 // Helper function to wait for the next frame
 function waitForNextFrame() {
     return new Promise(resolve => setTimeout(resolve, 5));
+}
+function setTimeoutAsync(func, time) {
+    return new Promise(resolve => setTimeout(async function () { await func(); resolve(); }, time));
 }
 function getAriaAttributes(element) {
     const ariaAttributes = Array.from(element.attributes)
@@ -761,7 +796,7 @@ function setupDocumentEvents(dotnet) {
             dotnet.invokeMethodAsync("InvokeEventAsync", "jsdocument", relatedstring, "resize", window.innerWidth);
         }
     }, 200);
-    
+
     window.addEventListener('resize', resizeFunc);
     documentEventsSet = true;
 }

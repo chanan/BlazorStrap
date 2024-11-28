@@ -14,7 +14,7 @@
 		<PackageProjectUrl>https://blazorstrap.io/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/chanan/BlazorStrap</RepositoryUrl>
 		<RootNamespace>BlazorStrap.V4</RootNamespace>
-		<PackageVersion>5.2.103-RC2</PackageVersion>
+		<PackageVersion>5.2.103</PackageVersion>
 	</PropertyGroup>
 
 	<ItemGroup Condition="  '$(TargetFramework)' == 'net7.0'  ">

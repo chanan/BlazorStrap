@@ -479,7 +479,7 @@ export async function showCollapse(collapse, horizontal, dotnet) {
     await waitForTransitionEnd(collapse, function () {
         collapse.classList.add("collapsing");
 
-        var actualSize = (horizontal ? collapse.scrollWidth : collapse.scrollHeight) + "px";
+        let actualSize = (horizontal ? collapse.scrollWidth : collapse.scrollHeight) + "px";
 
         if (horizontal) {
             collapse.style.width = actualSize;

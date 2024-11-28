@@ -1,1 +1,0 @@
-﻿<BSCloseButton IsDisabled="true"/>

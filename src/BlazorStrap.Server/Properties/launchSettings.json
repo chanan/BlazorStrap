@@ -11,6 +11,7 @@
     "BlazorStrap5.Server": {
       "commandName": "Project",
       "dotnetRunMessages": true,
+      "hotReloadEnabled": true,
       "launchBrowser": false,
 
       "applicationUrl": "http://localhost:5267",

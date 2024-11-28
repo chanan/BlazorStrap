@@ -6,7 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
         <PackageId>BlazorStrap.Extensions.Wizard</PackageId>
-        <Version>5.2.103-RC2</Version>
+        <Version>5.2.103-RC3</Version>
         <Authors>John Bomhold</Authors>
         <Title>BlazorStrap Extension for Wizards</Title>
         <Description>A treeview component library for BlazorStrap</Description>
