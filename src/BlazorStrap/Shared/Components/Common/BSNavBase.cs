@@ -73,7 +73,7 @@ namespace BlazorStrap.Shared.Components.Common
 
             if (OnTabChange.HasDelegate)
             {
-                _ = InvokeAsync(async () => await OnTabChange.InvokeAsync(ActiveChild.TabContent));
+                OnTabChange.InvokeAsync(ActiveChild.TabContent);
             }
 
             return true;
@@ -89,7 +89,7 @@ namespace BlazorStrap.Shared.Components.Common
 
             ChildHandler?.Invoke(sender);
             if (OnTabChange.HasDelegate)
-                _ = InvokeAsync(async () => await OnTabChange.InvokeAsync(ActiveChild.TabContent));
+                OnTabChange.InvokeAsync(ActiveChild.TabContent);
         }
 
         public event Action<BSNavItemBase>? ChildHandler;
