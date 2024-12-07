@@ -96,9 +96,9 @@ namespace BlazorStrap.Shared.Components.Common
                 Callback.Remove(Callback.First());
             }
             if (Children[_active].OnShown.HasDelegate)
-                _ = Task.Run(() => { _ = Children[_active].OnHidden.InvokeAsync(Children[_active]); });
+                await Children[_active].OnHidden.InvokeAsync(Children[_active]);
             if (Children[_last].OnHidden.HasDelegate)
-                _ = Task.Run(() => { _ = Children[_last].OnHidden.InvokeAsync(Children[_last]); });
+                await Children[_last].OnHidden.InvokeAsync(Children[_last]); 
         }
 
         internal async Task GotoChildSlide(BSCarouselItemBase item)
