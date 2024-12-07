@@ -96,7 +96,7 @@ namespace BlazorStrap.Shared.Components.Common
                 Callback.Remove(Callback.First());
             }
             if (Children[_active].OnShown.HasDelegate)
-                await Children[_active].OnHidden.InvokeAsync(Children[_active]);
+                await Children[_active].OnShown.InvokeAsync(Children[_active]);
             if (Children[_last].OnHidden.HasDelegate)
                 await Children[_last].OnHidden.InvokeAsync(Children[_last]); 
         }
