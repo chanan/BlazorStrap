@@ -31,7 +31,7 @@ namespace BlazorStrap.Shared.Components.Common
         protected abstract string? ClassBuilder { get; }
 
         protected Dictionary<string, string> Tree { get; set; } = new();
-        protected int Skip { get; set; }
+        protected int Skip { get; set; } = 0;
        
         protected override void OnInitialized()
         {
@@ -41,7 +41,8 @@ namespace BlazorStrap.Shared.Components.Common
 
             //Tree = GetPath(NavigationManager.Uri, BasePath, Labels, "https://localhost:7262/V5/" ?? "");
             Tree = GetPath(NavigationManager.Uri, BasePath, Labels, NavigationManager?.BaseUri ?? "");
-            Skip = Tree.Count - MaxItems;
+            if(MaxItems > 0 && Tree.Count > MaxItems)
+                Skip = Tree.Count - MaxItems;
         }
 
         private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -49,7 +50,8 @@ namespace BlazorStrap.Shared.Components.Common
             if (string.IsNullOrEmpty(BasePath)) return;
             if (NavigationManager == null) return;
             Tree = GetPath(NavigationManager.Uri, BasePath, Labels, NavigationManager?.BaseUri ?? "");
-            Skip = Tree.Count - MaxItems;
+            if(MaxItems > 0 && Tree.Count > MaxItems)
+                Skip = Tree.Count - MaxItems;
             StateHasChanged();
         }
 
