@@ -22,6 +22,11 @@ namespace BlazorStrap.Shared.Components.Common
         /// Custom labels for paths. The key is the path and the value is the custom label.
         /// </summary>
         [Parameter] public Dictionary<string, string> Labels { get; set; } = new();
+        
+        /// <summary>
+        /// Will only show the last x items in the breadcrumb tree. Starts from the end of the tree. Home will shown as ... if there are more items than MaxItems.
+        /// </summary>
+        [Parameter] public int MaxItems { get; set; } = 0;
         protected abstract string? LayoutClass { get; }
         protected abstract string? ClassBuilder { get; }
 

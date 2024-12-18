@@ -13,12 +13,27 @@ else
 {
     <nav style="--bs-breadcrumb-divider: @Divider;" aria-label="breadcrumb">
         <ol class="@ClassBuilder" @attributes="Attributes">
-            @foreach(var item in Tree)
+            @if (Tree.Count > MaxItems)
             {
-                if (NavigationManager?.Uri == item.Key )
+                if (NavigationManager?.Uri == Tree.First().Key)
                 {
-                    <li class="breadcrumb-item active" >
-                    @item.Value
+                    <li class="breadcrumb-item active">
+                        @Tree.First().Value
+                    </li>
+                }
+                else
+                {
+                    <li class="breadcrumb-item">
+                        <a href="Tree.First().Key">...</a>
+                    </li>
+                }
+            }
+            @foreach (var item in Tree.Skip(_skip))
+            {
+                if (NavigationManager?.Uri == item.Key)
+                {
+                    <li class="breadcrumb-item active">
+                        @item.Value
                     </li>
                 }
                 else
