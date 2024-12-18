@@ -28,7 +28,7 @@ else
                     </li>
                 }
             }
-            @foreach (var item in Tree.Skip(_skip))
+            @foreach (var item in Tree.Skip(Skip))
             {
                 if (NavigationManager?.Uri == item.Key)
                 {
