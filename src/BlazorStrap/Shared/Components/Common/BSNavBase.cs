@@ -64,9 +64,13 @@ namespace BlazorStrap.Shared.Components.Common
             if (TabWrapper != null) TabWrapper.Nav = this;
         }
 
-        public bool SetFirstChild(BSNavItemBase sender)
+        public bool SetFirstChild(BSNavItemBase sender, bool overrideActive = false)
         {
-            if (ActiveChild != null) return false;
+            if (ActiveChild != null && !overrideActive) return false;
+
+            if (ActiveChild is not null && ActiveChild != sender)
+                ActiveChild.Deactivate();
+            
             ActiveChild = sender;
             
             ChildHandler?.Invoke(sender);
