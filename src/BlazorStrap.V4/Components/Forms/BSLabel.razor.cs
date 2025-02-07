@@ -16,7 +16,7 @@ namespace BlazorStrap.V4
                 .AddClass("col", Column == null && ColumnSmall == null && ColumnMedium == null && ColumnLarge == null && ColumnXL == null && IsColumn)
                 .AddClass($"col-{Column}", Column.VaildGridSize() && IsColumn)
                 .AddClass($"col-sm-{ColumnSmall}", ColumnSmall.VaildGridSize() && IsColumn)
-                .AddClass($"col-md-{ColumnMedium}", ColumnSmall.VaildGridSize() && IsColumn)
+                .AddClass($"col-md-{ColumnMedium}", ColumnMedium.VaildGridSize() && IsColumn)
                 .AddClass($"col-lg-{ColumnLarge}", ColumnLarge.VaildGridSize() && IsColumn)
                 .AddClass($"col-xl-{ColumnXL}", ColumnXL.VaildGridSize() && IsColumn)
                 .AddClass($"order-{Order}", Order.VaildGridSize())
