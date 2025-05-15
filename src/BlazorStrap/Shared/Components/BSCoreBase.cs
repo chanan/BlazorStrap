@@ -85,12 +85,7 @@ namespace BlazorStrap.Shared.Components
             }
             else if(!firstRender && _secondRender)
             {
-                try
-                {
-                    TaskCompletionSource.SetResult(true);
-                }
-                catch { }
-                //Stops hotreload from crying
+                TaskCompletionSource.TrySetResult(true);
             }
             if (_locationChanged && _secondRender)
             {
