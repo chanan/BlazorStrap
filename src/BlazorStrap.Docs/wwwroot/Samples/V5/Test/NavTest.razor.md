@@ -1,4 +1,4 @@
-﻿<BSNav IsTabs="@true">
+﻿<BSNav IsTabs="true">
     <BSNavItem IsInitiallyActive="false">Test 1</BSNavItem>
     <BSNavItem IsInitiallyActive="false">Test 2</BSNavItem>
     <BSNavItem IsInitiallyActive="false">Test 3</BSNavItem>

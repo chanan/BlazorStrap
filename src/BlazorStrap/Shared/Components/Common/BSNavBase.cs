@@ -74,12 +74,6 @@ namespace BlazorStrap.Shared.Components.Common
             ActiveChild = sender;
             
             ChildHandler?.Invoke(sender);
-
-            if (OnTabChange.HasDelegate)
-            {
-                OnTabChange.InvokeAsync(ActiveChild.TabContent);
-            }
-
             return true;
         }
 
