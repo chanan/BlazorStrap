@@ -1,5 +1,12 @@
 ﻿## Accordion
 #### Component \<BSAccordion\>
+:::
+
+| Parameter | Type           | Valid          | Remarks/Output      |
+|-----------|----------------|----------------|---------------------|
+| Flush     | bool           | true/false     | Removes Side Border | {.table-striped}
+
+:::  
 See [shared](layout/shared) for additional parameters
 
 #### Component \<BSAccordionItem\>
@@ -11,6 +18,8 @@ See [shared](layout/shared) for additional parameters
 | DefaultShown | bool           | true/false     | `.alert-dismissible`            |
 | Header       | RenderFragment | RenderFragment | Nested Content                  |               
 | Content      | RenderFragment | RenderFragment | Nested Content                  |
+| HeaderClass  | string         | CSS Class      | Additional CSS Classes          |
+| ContextClass | string         | CSS Class      | Additional CSS Classes          |
 
 :::
 

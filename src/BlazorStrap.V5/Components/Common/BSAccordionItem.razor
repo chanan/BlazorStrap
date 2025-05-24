@@ -11,11 +11,11 @@
 }
 <CascadingValue Value="this">
 <div class="accordion-item">
-    <h2 class="accordion-header">
+    <h2 class="@HeaderClassBuilder">
             <button type="button" aria-expanded="@Shown.ToString().ToLower()" data-bs-toggle="collapse" class="accordion-button @(Shown ? "" : "collapsed")" @onclick="EventUtil.AsNonRenderingEventHandler(ToggleAsync)" @ref="ButtonRef" data-blazorstrap-target="@DataId">@Header</button>
     </h2>
     <div class="@ClassBuilder" style="@StyleBuilder" @ref="MyRef" data-blazorstrap="@DataId">
-        <div class="accordion-body">
+        <div class="@ContentClassBuilder">
             @Content
         </div>
     </div>

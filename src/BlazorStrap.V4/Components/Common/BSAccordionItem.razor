@@ -11,11 +11,11 @@
 }
 <CascadingValue Value="this">
 <div class="card">
-    <h2 class="card-header">
+    <h2 class="@HeaderClassBuilder">
             <button type="button" aria-expanded="@Shown.ToString().ToLower()" data-bs-toggle="collapse" class="btn btn-link btn-block text-left @(Shown ? "" : "collapsed")" @onclick="EventUtil.AsNonRenderingEventHandler(ToggleAsync)" @ref="ButtonRef" data-blazorstrap-target="@DataId">@Header</button>
     </h2>
     <div class="@ClassBuilder" style="@StyleBuilder" @ref="MyRef" data-blazorstrap="@DataId">
-        <div class="card-body">
+        <div class="@ContentClassBuilder">
             @Content
         </div>
     </div>

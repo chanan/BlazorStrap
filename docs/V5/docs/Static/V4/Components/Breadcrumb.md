@@ -3,11 +3,12 @@
 See [shared](layout/shared) for additional parameters    
 :::
 
-| Parameter | Type                       | Valid                      | Remarks/Output                                  | 
-|-----------|----------------------------|----------------------------|-------------------------------------------------|
-| Divider   | string                     | string                     |                                                 | {.table-striped}  
-| BasePath  | string                     | string                     | Turns on auto generate using supplied base path |
-| Labels    | Dictionary<string, string> | Dictionary<string, string> | Custom Labels for your paths see example        |
+| Parameter | Type                       | Valid                      | Remarks/Output                                     | 
+|-----------|----------------------------|----------------------------|----------------------------------------------------|
+| Divider   | string                     | string                     |                                                    | {.table-striped}  
+| BasePath  | string                     | string                     | Turns on auto generate using supplied base path    |
+| Labels    | Dictionary<string, string> | Dictionary<string, string> | Custom Labels for your paths see example           |
+| MaxItems  | int                        | int                        | Maximum number of items to show in the breadcrumb. |
 
 :::
 

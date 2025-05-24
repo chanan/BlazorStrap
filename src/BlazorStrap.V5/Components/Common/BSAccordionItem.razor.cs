@@ -6,6 +6,13 @@ namespace BlazorStrap.V5
 {
     public partial class BSAccordionItem : BSAccordionItemBase
     {
+        protected override string? HeaderClassBuilder => new CssBuilder("accordion-header")
+                .AddClass(HeaderClass)
+                .Build().RemoveClassDoubles().ToNullString();
+        
+        protected override string? ContentClassBuilder => new CssBuilder("accordion-body")
+                .AddClass(ContentClass)
+                .Build().RemoveClassDoubles().ToNullString();
         protected override string? LayoutClass => LayoutClassBuilder.Build(this);
 
         protected override string? ClassBuilder => new CssBuilder("accordion-collapse collapse")

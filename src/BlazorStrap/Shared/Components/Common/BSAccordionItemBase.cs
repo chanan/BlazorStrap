@@ -58,6 +58,11 @@ namespace BlazorStrap.Shared.Components.Common
 
         public ElementReference? MyRef { get; set; }
 
+        public string? HeaderClass { get; set; }
+        public string? ContentClass { get; set; } 
+        
+        protected abstract string? HeaderClassBuilder { get; }
+        protected abstract string? ContentClassBuilder { get; }
         /// <summary>
         /// Returns whether or not the accordion item is shown.
         /// </summary>
