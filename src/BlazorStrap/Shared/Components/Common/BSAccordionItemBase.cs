@@ -58,7 +58,16 @@ namespace BlazorStrap.Shared.Components.Common
 
         public ElementReference? MyRef { get; set; }
 
+        /// <summary>
+        /// Header class to be applied to the accordion item header.
+        /// </summary>
+        [Parameter]
         public string? HeaderClass { get; set; }
+        
+        /// <summary>
+        /// Content class to be applied to the accordion item content.
+        /// </summary>
+        [Parameter]
         public string? ContentClass { get; set; } 
         
         protected abstract string? HeaderClassBuilder { get; }
