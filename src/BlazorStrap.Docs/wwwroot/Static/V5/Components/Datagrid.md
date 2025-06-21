@@ -97,6 +97,10 @@ See [Tables](V5/content/tables) for additional parameters
 
 {{sample=V5/Components/DataGrid/DataGrid4}}
 
+### Type Test
+
+{{sample=V5/Components/DataGrid/DataGrid5}}
+
 ### Methods / Events
 :::
 

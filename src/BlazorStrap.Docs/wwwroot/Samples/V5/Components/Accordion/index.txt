@@ -3,3 +3,4 @@ Accordion2.razor.md
 Accordion3.razor.md
 Accordion4.razor.md
 index.txt
+_imports.razor.md

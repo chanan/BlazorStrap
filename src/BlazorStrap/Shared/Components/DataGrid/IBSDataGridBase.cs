@@ -16,7 +16,7 @@ public interface IBSDataGridBase<TGridItem>
     string? MultiSortClass { get; set; }
     string? FilterClass { get; set; }
     string? MenuClass { get; set; }
-    PaginationState? Pagination { get; set; }
+    PaginationStateBase? Pagination { get; set; }
     string? DataGridClass { get; set; }
     float VirtualItemHeight { get; set; }
     int VirtualOverscanCount { get; set; }

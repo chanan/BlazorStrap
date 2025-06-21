@@ -1,7 +1,7 @@
 ﻿using BlazorStrap.Shared.Components.DataGrid;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorStrap.V4;
+namespace BlazorStrap.V4.DataGrid;
 [CascadingTypeParameter(nameof(TGridItem))]
 #warning "This component is not ready for use"
 public partial class BSDataGrid<TGridItem> : BSDataGridBase<TGridItem>

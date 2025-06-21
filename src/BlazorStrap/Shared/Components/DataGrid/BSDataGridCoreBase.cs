@@ -31,7 +31,7 @@ public abstract class BSDataGridCoreBase<TGridItem> : BSTableBase, IBSDataGridBa
     [Parameter] public bool IsMultiSort { get; set; } = false;
     [Parameter] public ColumnState<TGridItem> ColumnState { get; set; } = null!;
     [Parameter] public string MultiSortClass { get; set; } = "badge bg-info text-dark";
-    [Parameter] public PaginationState? Pagination { get; set; }
+    [Parameter] public PaginationStateBase? Pagination { get; set; }
     [Parameter] public string? FilterClass { get; set; }
     [Parameter] public string? MenuClass { get; set; }
     [Parameter] public string? DataGridClass { get; set; }

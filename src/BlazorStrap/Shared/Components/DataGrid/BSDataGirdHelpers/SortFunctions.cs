@@ -52,6 +52,12 @@ internal static class SortFunctions
             property = Expression.Property(property, member);
         }
 
+        // Convert the property expression to the target type if they don't match
+        if (property.Type != typeof(TKey))
+        {
+            property = Expression.Convert(property, typeof(TKey));
+        }
+
         var lambda = Expression.Lambda<Func<TItem, TKey>>(property, parameter);
         return lambda;
     }

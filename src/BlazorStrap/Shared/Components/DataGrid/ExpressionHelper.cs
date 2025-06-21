@@ -7,10 +7,20 @@ public static class ExpressionHelper
 {
     public static string GetPropertyPath<TGridItem, TProperty>(Expression<Func<TGridItem, TProperty>> expression)
     {
-        var memberExpression = expression.Body as MemberExpression;
+        var body = expression.Body;
+        
+        // Handle UnaryExpression (Convert/ConvertChecked) which wraps the MemberExpression
+        if (body is UnaryExpression unaryExpression && 
+            (unaryExpression.NodeType == ExpressionType.Convert || 
+             unaryExpression.NodeType == ExpressionType.ConvertChecked))
+        {
+            body = unaryExpression.Operand;
+        }
+        
+        var memberExpression = body as MemberExpression;
         if (memberExpression == null)
         {
-            throw new ArgumentException("Expression must be a member expression");
+            throw new ArgumentException($"Expression must be a member expression. Received: {body?.GetType().Name ?? "null"} with NodeType: {body?.NodeType}");
         }
 
         var propertyPath = new Stack<string>();

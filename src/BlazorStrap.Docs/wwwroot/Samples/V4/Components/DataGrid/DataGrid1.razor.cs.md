@@ -3,6 +3,7 @@ using BlazorStrap_Docs.SamplesHelpers.Content.Tables;
 using BlazorStrap;
 using BlazorStrap.Extensions;
 using BlazorStrap.V4;
+using BlazorStrap.V4.DataGrid;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorStrap_Docs.Samples.V4.Components.DataGrid;

@@ -2,7 +2,7 @@
 
 namespace BlazorStrap;
 
-public class PaginationState
+public abstract class PaginationStateBase
 {
     public int CurrentPage { get; set; } = 1;
     private int _itemsPerPage;
@@ -100,5 +100,5 @@ public class PaginationState
         CurrentPage = TotalPages;
         return OnStateChange?.Invoke(this) ?? Task.CompletedTask;
     }
-    internal Func<PaginationState, Task>? OnStateChange { get; set; }
+    internal Func<PaginationStateBase, Task>? OnStateChange { get; set; }
 }

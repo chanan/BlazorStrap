@@ -17,7 +17,7 @@ public abstract partial class BSDataGridBase<TGridItem> : BSTableBase, IBSDataGr
     [Parameter] public string? RowStyle { get; set; }
     [Parameter] public string MultiSortClass { get; set; } = "badge bg-info text-dark";
     [Parameter] public IAsyncProvider AsyncProvider { get; set; } = new FakeAsyncProvider();
-    [Parameter] public PaginationState? Pagination { get; set; }
+    [Parameter] public PaginationStateBase? Pagination { get; set; }
     [Parameter] public string? FilterClass { get; set; }
     [Parameter] public string? MenuClass { get; set; } 
     /// <summary>
