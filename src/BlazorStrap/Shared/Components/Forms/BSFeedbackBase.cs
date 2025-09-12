@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace BlazorStrap.Shared.Components.Forms
 {
-    public abstract class BSFeedbackBase<TValue> : BlazorStrapBase
+    public abstract class BSFeedbackBase<TValue> : BlazorStrapBase, IDisposable
     {
         private bool _hasInitialized;
         [CascadingParameter] private EditContext? CascadedEditContext { get; set; }
@@ -104,7 +104,7 @@ namespace BlazorStrap.Shared.Components.Forms
             }
             StateHasChanged();
         }
-        
+
         public void Dispose()
         {
             if (EditContext is null) return;
