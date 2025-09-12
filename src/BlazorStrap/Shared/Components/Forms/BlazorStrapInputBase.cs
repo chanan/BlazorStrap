@@ -207,6 +207,7 @@ namespace BlazorStrap.Shared.Components.Forms
             if (EditContext is not null)
             {
                 EditContext.OnValidationStateChanged -= OnValidationStateChanged;
+                EditContext.OnValidationRequested -= EditContext_OnValidationRequested;
             }
         }
 
