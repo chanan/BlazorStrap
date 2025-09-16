@@ -6,10 +6,13 @@
 
         public TimerPlus() => Elapsed += this.ElapsedAction;
 
-        protected new void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            Elapsed -= this.ElapsedAction;
-            base.Dispose();
+            if (disposing)
+            {
+                Elapsed -= ElapsedAction;
+            }
+            base.Dispose(disposing);
         }
 
         public double TimeLeft => (m_dueTime - DateTime.Now).TotalMilliseconds.RemoveNegative();
