@@ -106,7 +106,7 @@ namespace BlazorStrap.Shared.Components.Forms
         protected void OnChangeEvent(string? e)
         {
             CurrentValueAsString = e;
-            
+
             if(OnValueChange.HasDelegate)
                 OnValueChange.InvokeAsync(Value);
 
@@ -121,13 +121,13 @@ namespace BlazorStrap.Shared.Components.Forms
                 OnFocus.InvokeAsync(e);
         }
 
-        
+
         protected override void OnInitialized()
         {
             _startValue = Value;
             if(BSForm != null)
             {
-                BSForm.OnResetEventHandler += BSForm_OnResetEventHandler; 
+                BSForm.OnResetEventHandler += BSForm_OnResetEventHandler;
             }
             if (EditContext is not null)
             {
@@ -197,13 +197,17 @@ namespace BlazorStrap.Shared.Components.Forms
 
         #region Dispose
 
-        private void Dispose()
+        protected override void Dispose(bool disposing)
         {
             if(BSForm != null)
+            {
                 BSForm.OnResetEventHandler -= BSForm_OnResetEventHandler;
+            }
+
             if (EditContext is not null)
             {
                 EditContext.OnValidationStateChanged -= OnValidationStateChanged;
+                EditContext.OnValidationRequested -= EditContext_OnValidationRequested;
             }
         }
 
