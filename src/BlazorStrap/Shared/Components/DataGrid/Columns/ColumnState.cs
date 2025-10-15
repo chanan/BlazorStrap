@@ -1,4 +1,6 @@
-﻿namespace BlazorStrap.Shared.Components.DataGrid.Columns;
+﻿using System.Diagnostics;
+
+namespace BlazorStrap.Shared.Components.DataGrid.Columns;
 
 public class ColumnState<TGridItem>
 {
@@ -14,6 +16,11 @@ public class ColumnState<TGridItem>
     
     public void AddColumn(ColumnBase<TGridItem> column)
     {
+        if (column.InitialSortDescending && !column.InitialSorted)
+        {
+            Debug.WriteLine("Warning: Column set to InitialSortDescending without being set to InitialSorted. Ignoring InitialSortDescending.");
+        }
+
         if(_columns.Any(x => x.Id == column.Id)) return;
         if (column.IsSortable || column.CustomSort != null)
         {
@@ -27,6 +34,7 @@ public class ColumnState<TGridItem>
                 {
                     otherColumns.Sorted = false;
                 }
+                sortColumn.Descending = column.InitialSortDescending;
                 sortColumn.Sorted = true;
             }
         }

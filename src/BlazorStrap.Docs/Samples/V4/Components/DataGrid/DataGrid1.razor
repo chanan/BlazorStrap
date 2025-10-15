@@ -25,10 +25,10 @@
 <div>
 <BSDataGrid IsStriped="true" IsSmall="true" Items="_employees.AsQueryable()" IsMultiSort="true" @ref="_dataGrid" Pagination="_pagination" IsVirtualized="true">
     <Columns>
-        <TemplateColumn IsSortable="true" Property="employee => employee.Id" Title="Id" InitialSorted="true">
+        <TemplateColumn IsSortable="true" Property="employee => employee.Id" Title="Id">
             <Content>@context.Id</Content>
         </TemplateColumn>
-        <PropertyColumn Property="e => e.NameObject.FirstName" IsSortable="true"/>
+        <PropertyColumn Property="e => e.NameObject.FirstName" IsSortable="true" InitialSorted="true" InitialSortDescending="true"/>
         <PropertyColumn Property="e => e.NameObject.LastName" IsSortable="true"/>
         <PropertyColumn Property="e => e.Email" IsSortable="true"/>
     </Columns>
