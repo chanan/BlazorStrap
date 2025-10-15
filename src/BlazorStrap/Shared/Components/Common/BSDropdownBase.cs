@@ -136,6 +136,13 @@ namespace BlazorStrap.Shared.Components.Common
             {
                 Placement = Group.DropdownPlacement;
             }
+            
+            //TODO: This is a workaround not to break existing functionality. When BottomEnd ise used for placement in the group. Place in the line above in the next major release.
+            if(Group != null && Placement == Placement.RightStart && Group.DropdownPlacement == Placement.BottomEnd)
+            {
+                Placement = Group.DropdownPlacement;
+            }
+            
             var taskSource = new TaskCompletionSource<bool>();
 
             var func = async () =>
