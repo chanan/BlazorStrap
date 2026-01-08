@@ -1,3 +1,5 @@
+using BlazorComponentUtilities;
+using BlazorStrap.Extensions;
 using BlazorStrap.Shared.Components.Common;
 
 namespace BlazorStrap.V4
@@ -6,6 +8,8 @@ namespace BlazorStrap.V4
     {
         protected override string? LayoutClass => LayoutClassBuilder.Build(this);
 
-        protected override string? ClassBuilder => null;
+        protected override string? ClassBuilder => new CssBuilder("alert-link")
+            .AddClass(Class, !string.IsNullOrEmpty(Class))
+            .Build().ToNullString();
     }
 }
