@@ -1,5 +1,6 @@
 ﻿namespace BlazorStrap.Utilities
 {
+    [Obsolete("Uses one static timer shared by every caller (and every Blazor Server circuit), so calls cancel each other. BlazorStrap no longer uses it; it will be removed in a future version.")]
     public static class RateLimitingExceptionForObject
     {
         #region Private Properties

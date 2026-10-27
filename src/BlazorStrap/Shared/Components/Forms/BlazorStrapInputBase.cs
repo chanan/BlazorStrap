@@ -11,6 +11,7 @@ namespace BlazorStrap.Shared.Components.Forms
     public abstract class BlazorStrapInputBase<TValue> : BlazorInputBase<TValue>, IBlazorStrapBase, IDisposable
     {
         private string _dateFormat = "yyyy-MM-dd";
+        private readonly Debouncer _inputDebouncer = new();
         /// <summary>
         /// Debounce interval in ms to filter input. Default is 500ms.
         /// </summary>
@@ -105,6 +106,13 @@ namespace BlazorStrap.Shared.Components.Forms
 
         protected void OnChangeEvent(string? e)
         {
+            // This value is the latest; a debounced update still pending from oninput would overwrite it with older text.
+            _inputDebouncer.Cancel();
+            ApplyValue(e);
+        }
+
+        private void ApplyValue(string? e)
+        {
             CurrentValueAsString = e;
 
             if(OnValueChange.HasDelegate)
@@ -138,6 +146,7 @@ namespace BlazorStrap.Shared.Components.Forms
 
         private void BSForm_OnResetEventHandler()
         {
+            _inputDebouncer.Cancel();
             IsInvalid = false;
             IsValid = false;
             Value = _startValue;
@@ -148,6 +157,8 @@ namespace BlazorStrap.Shared.Components.Forms
 
         private void EditContext_OnValidationRequested(object? sender, ValidationRequestedEventArgs e)
         {
+            // The form is submitting with the model as it is; don't let a pending update change it afterwards.
+            _inputDebouncer.Cancel();
             if (sender != null)
                 ((EditContext)sender).NotifyFieldChanged(FieldIdentifier);
         }
@@ -155,12 +166,8 @@ namespace BlazorStrap.Shared.Components.Forms
         protected void OnInputEvent(string? e)
         {
            // CurrentValueAsString = e;
-            if (ValidateOnInput && EditContext != null)
-                RateLimitingExceptionForObject.Debounce(e, DebounceInterval,
-                    (_) => { InvokeAsync(() => OnChangeEvent(e)); });
-            if (UpdateOnInput)
-                RateLimitingExceptionForObject.Debounce(e, DebounceInterval,
-                    (_) => { InvokeAsync(() => OnChangeEvent(e)); });
+            if (UpdateOnInput || (ValidateOnInput && EditContext != null))
+                _inputDebouncer.Debounce(DebounceInterval, () => InvokeAsync(() => ApplyValue(e)));
         }
 
         private void DoValidation()
@@ -199,6 +206,8 @@ namespace BlazorStrap.Shared.Components.Forms
 
         protected override void Dispose(bool disposing)
         {
+            _inputDebouncer.Dispose();
+
             if(BSForm != null)
             {
                 BSForm.OnResetEventHandler -= BSForm_OnResetEventHandler;

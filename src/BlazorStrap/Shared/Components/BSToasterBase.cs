@@ -6,6 +6,7 @@ namespace BlazorStrap.Shared.Components
     public abstract class BSToasterBase : ComponentBase, IDisposable
     {
         [Inject] protected IBlazorStrap? BlazorStrapService { get; set; } = default!;
+        private readonly Debouncer _changeDebouncer = new();
 
         /// <summary>
         /// Sets the wrapper class for the toaster.
@@ -23,8 +24,7 @@ namespace BlazorStrap.Shared.Components
 
         protected void OnChange()
         {
-            RateLimitingExceptionForObject.Debounce("", 50,
-                (CurrentValueAsString) => { InvokeAsync(StateHasChanged); });
+            _ = InvokeAsync(() => _changeDebouncer.Debounce(50, () => InvokeAsync(StateHasChanged)));
         }
 
         protected abstract RenderFragment GetFragment(Toasts? Toast);
@@ -34,6 +34,7 @@ namespace BlazorStrap.Shared.Components
  
         public void Dispose()
         {
+            _changeDebouncer.Dispose();
             if (BlazorStrapService == null) throw new ArgumentNullException(nameof(BlazorStrapService));
             if (BlazorStrapService.Toaster == null) throw new ArgumentNullException(nameof(BlazorStrapService.Toaster));
             BlazorStrapService.Toaster.OnChange -= OnChange;
